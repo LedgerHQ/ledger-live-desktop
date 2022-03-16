@@ -64,7 +64,7 @@ const colors = {
   positiveGreen: "rgba(102, 190, 84, 1)",
   greenPill: "#41ccb4",
   smoke: "#666666",
-  wallet: "#8a80db",
+  wallet: "#8b80db",
   blueTransparentBackground: "rgba(138, 128, 219, 0.15)",
   pillActiveBackground: "rgba(138, 128, 219, 0.1)",
   lightGreen: "rgba(102, 190, 84, 0.1)",

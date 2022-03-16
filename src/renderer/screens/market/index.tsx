@@ -1,5 +1,5 @@
 import React, { useMemo, useCallback } from "react";
-import { Flex, Button as BaseButton, Text, SearchInput } from "@ledgerhq/react-ui";
+import { Flex, Button as BaseButton, Text, SearchInput, Dropdown } from "@ledgerhq/react-ui";
 import { useSelector } from "react-redux";
 import { starredMarketCoinsSelector } from "~/renderer/reducers/settings";
 import { useTranslation } from "react-i18next";
@@ -7,7 +7,7 @@ import { useMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvid
 import styled from "styled-components";
 import CounterValueSelect from "./CountervalueSelect";
 import MarketList from "./MarketList";
-import Dropdown from "./DropDown";
+import SideDrawerFilter from "./SideDrawerFilter";
 import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
 import Track from "~/renderer/analytics/Track";
 
@@ -21,7 +21,7 @@ const Container = styled(Flex).attrs({
   mx: -1,
 })``;
 
-const SearchContainer = styled(Flex).attrs({ flex: "0.8" })`
+const SearchContainer = styled(Flex).attrs({ flexShrink: "1" })`
   > div {
     width: 100%;
   }
@@ -49,6 +49,10 @@ export const Button = styled(BaseButton)<{ big?: boolean }>`
 const Title = styled(Text).attrs({ variant: "h3" })`
   font-size: 28px;
   line-height: 33px;
+`;
+
+const SelectBarContainer = styled(Flex)`
+  font-size: 13px;
 `;
 
 export default function Market() {
@@ -85,6 +89,10 @@ export default function Market() {
     }
   }, [refresh, starFilterOn, starredMarketCoins]);
 
+  const toggleLiveCompatible = useCallback(() => {
+    refresh({ liveCompatible: !liveCompatible });
+  }, [liveCompatible, refresh]);
+
   const timeRanges = useMemo(
     () =>
       Object.keys(rangeDataTable)
@@ -108,27 +116,55 @@ export default function Market() {
       <Title>{t("market.title")}</Title>
       <Flex flexDirection="row" pr="6px" my={2} alignItems="center" justifyContent="space-between">
         <SearchContainer>
-          <SearchInput value={search} onChange={updateSearch} placeholder={t("common.search")} />
+          <SearchInput
+            data-test-id="market-search-input"
+            value={search}
+            onChange={updateSearch}
+            placeholder={t("common.search")}
+            clearable
+          />
         </SearchContainer>
-        <Flex flexDirection="row" alignItems="center" justifyContent="flex-end">
-          <Flex width="290px" justifyContent="flex-end" ml={3}>
+        <SelectBarContainer flexDirection="row" alignItems="center" justifyContent="flex-end">
+          <Flex data-test-id="market-countervalue-select" justifyContent="flex-end" mx={4}>
             <CounterValueSelect
               counterCurrency={counterCurrency}
               setCounterCurrency={setCounterCurrency}
               supportedCounterCurrencies={supportedCounterCurrencies}
             />
           </Flex>
-          <Flex mx={3}>
+          <Flex data-test-id="market-range-select" mx={2}>
             <Dropdown
-              label={t("market.rangeLabel")}
+              label={t("common.range")}
               menuPortalTarget={document.body}
               onChange={updateTimeRange}
               options={timeRanges}
               value={timeRangeValue}
-              searchable={false}
+              styles={{
+                control: () => ({
+                  display: "flex",
+                  padding: 0,
+                }),
+              }}
             />
           </Flex>
-        </Flex>
+          <Flex ml={4} mr={3}>
+            <SideDrawerFilter
+              refresh={refresh}
+              filters={{
+                starred: {
+                  toggle: toggleFilterByStarredAccounts,
+                  value: starFilterOn,
+                  disabled: !starredMarketCoins?.length,
+                },
+                liveCompatible: {
+                  toggle: toggleLiveCompatible,
+                  value: liveCompatible,
+                },
+              }}
+              t={t}
+            />
+          </Flex>
+        </SelectBarContainer>
       </Flex>
       <MarketList
         starredMarketCoins={starredMarketCoins}
