@@ -52,6 +52,7 @@ const Exchange = () => {
 
   const location = useLocation();
   const [provider] = useExchangeProvider();
+  // $FlowFixMe no clue what's up
   const state: QueryParams = location.state;
 
   const defaultMode = state?.mode || "onRamp";
