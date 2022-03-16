@@ -197,6 +197,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
         // eslint-disable-next-line no-duplicate-case, no-fallthrough
         case "ethereum":
         case "polygon":
+        case "bsc":
           actions.push({
             key: "WalletConnect",
             onClick: onWalletConnect,
