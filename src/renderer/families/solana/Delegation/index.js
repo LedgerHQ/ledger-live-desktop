@@ -100,10 +100,16 @@ const Delegation = ({ account }: Props) => {
   const explorerView = getDefaultExplorerView(account.currency);
 
   const onExternalLink = useCallback(
-    (address: string) => {
-      const URL = explorerView && getAddressExplorer(explorerView, address);
+    ({ meta, stake }: SolanaStakeWithMeta) => {
+      const url =
+        meta.validator?.url ??
+        (stake.delegation?.voteAccAddr &&
+          explorerView &&
+          getAddressExplorer(explorerView, stake.delegation.voteAccAddr));
 
-      if (URL) openURL(URL);
+      if (url) {
+        openURL(url);
+      }
     },
     [explorerView],
   );
@@ -187,19 +193,6 @@ const Delegation = ({ account }: Props) => {
           </Wrapper>
         )}
       </TableContainer>
-      {/*hasUnbondings ? (
-        <TableContainer mb={6}>
-          <TableHeader
-            title={<Trans i18nKey="cosmos.undelegation.header" />}
-            titleProps={{ "data-e2e": "title_Undelegation" }}
-            tooltip={<Trans i18nKey="cosmos.undelegation.headerTooltip" />}
-          />
-          <UnbondingHeader />
-          {mappedUnbondings.map((delegation, index) => (
-            <UnbondingRow key={index} delegation={delegation} onExternalLink={onExternalLink} />
-          ))}
-        </TableContainer>
-          ) : null*/}
     </>
   );
 };

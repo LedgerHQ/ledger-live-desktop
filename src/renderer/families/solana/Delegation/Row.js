@@ -9,7 +9,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
 import { stakeActions as solanaStakeActions } from "@ledgerhq/live-common/lib/families/solana/logic";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import { formatCurrencyUnit, getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
 
 import { TableLine } from "./Header";
 import DropDown, { DropDownItem } from "~/renderer/components/DropDownSelector";
@@ -23,6 +23,8 @@ import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { BigNumber } from "bignumber.js";
+import { useSolanaPreloadData } from "@ledgerhq/live-common/lib/families/solana/react";
+import Image from "~/renderer/components/Image";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -71,7 +73,6 @@ const ManageDropDownItem = ({
 }) => {
   return (
     <>
-      {item.key === "MODAL_COSMOS_CLAIM_REWARDS" && <Divider />}
       <ToolTip content={item.tooltip} containerStyle={{ width: "100%" }}>
         <DropDownItem disabled={item.disabled} isActive={isActive}>
           <Box horizontal alignItems="center" justifyContent="center">
@@ -98,74 +99,13 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
     [onManageAction],
   );
 
-  //const _canUndelegate = canUndelegate(account);
-  //const _canRedelegate = canRedelegate(account, delegation);
-  //const _canUndelegate = false;
-  //const _canRedelegate = false;
-
-  //const redelegationDate = !_canRedelegate && getRedelegationCompletionDate(account, delegation);
-  //const formattedRedelegationDate = redelegationDate ? moment(redelegationDate).fromNow() : "";
-  //
-
   const { stake, meta } = stakeWithMeta;
 
   const stakeActions = solanaStakeActions(stake).map(toStakeDropDownItem);
 
-  /*
-  const dropDownItems = useMemo(
-    () => [
-      {
-        key: "MODAL_COSMOS_REDELEGATE",
-        label: <Trans i18nKey="cosmos.delegation.redelegate" />,
-        disabled: !_canRedelegate,
-        tooltip: !_canRedelegate ? (
-          formattedRedelegationDate ? (
-            <Trans
-              i18nKey="cosmos.delegation.redelegateDisabledTooltip"
-              values={{ days: formattedRedelegationDate }}
-            >
-              <b></b>
-            </Trans>
-          ) : (
-            <Trans i18nKey="cosmos.delegation.redelegateMaxDisabledTooltip">
-              <b></b>
-            </Trans>
-          )
-        ) : null,
-      },
-      {
-        key: "MODAL_COSMOS_UNDELEGATE",
-        label: <Trans i18nKey="cosmos.delegation.undelegate" />,
-        disabled: !_canUndelegate,
-        tooltip: !_canUndelegate ? (
-          <Trans i18nKey="cosmos.delegation.undelegateDisabledTooltip">
-            <b></b>
-          </Trans>
-        ) : null,
-      },
-      ...(pendingRewards.gt(0)
-        ? [
-            {
-              key: "MODAL_COSMOS_CLAIM_REWARDS",
-              label: <Trans i18nKey="cosmos.delegation.reward" />,
-            },
-          ]
-        : []),
-    ],
-    [pendingRewards, _canRedelegate, _canUndelegate, formattedRedelegationDate],
-  );
-  */
-  //const name = validator?.name ?? validatorAddress;
-  const isDelegated = stake.delegation !== undefined;
+  const validatorName = meta.validator?.name ?? stake.delegation?.voteAccAddr ?? "-";
 
-  const validatorName = isDelegated ? meta.validator?.name ?? stake.delegation.voteAccAddr : "N/A";
-
-  /*
-  const onExternalLinkClick = useCallback(() => onExternalLink(validatorAddress), [
-    onExternalLink,
-    validatorAddress,
-  ]);
-  */
+  const onExternalLinkClick = () => onExternalLink(stakeWithMeta);
 
   const formatAmount = (amount: number) => {
     const unit = getAccountUnit(account);
@@ -178,27 +118,30 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
 
   return (
     <Wrapper>
-      <Column strong clickable onClick={null}>
-        <Box mr={2}>
-          <FirstLetterIcon label={stake.delegation?.voteAddr ?? "-"} />
+      <Column strong clickable onClick={onExternalLinkClick}>
+        <Box mr={1}>
+          {meta.validator?.img !== undefined && (
+            <Image resource={meta.validator.img} height={32} width={32} alt="" />
+          )}
+          {meta.validator?.img === undefined && <FirstLetterIcon label={validatorName ?? "-"} />}
         </Box>
         <Ellipsis>{validatorName}</Ellipsis>
       </Column>
       <Column>
         {stake.activation.state === "active" || stake.activation.state === "activating" ? (
-          <Box color="positiveGreen" pl={2}>
+          <Box color="positiveGreen">
             <ToolTip content={<Trans i18nKey="cosmos.delegation.activeTooltip" />}>
               <CheckCircle size={14} />
             </ToolTip>
           </Box>
         ) : (
-          <Box color="alertRed" pl={2}>
+          <Box color="alertRed">
             <ToolTip content={<Trans i18nKey="cosmos.delegation.inactiveTooltip" />}>
               <ExclamationCircleThin size={14} />
             </ToolTip>
           </Box>
         )}
-        <div>{stake.activation.state}</div>
+        <Box ml={1}>{stake.activation.state}</Box>
       </Column>
       <Column>
         {formatAmount(stake.activation.state === "inactive" ? 0 : stake.delegation?.stake ?? 0)}
@@ -254,44 +197,3 @@ function toStakeDropDownItem(stakeAction: string) {
       throw new Error(`unsupported stake action: ${stakeAction}`);
   }
 }
-
-/*
-type UnbondingRowProps = {
-  delegation: CosmosMappedUnbonding,
-  onExternalLink: (address: string) => void,
-};
-
-export function UnbondingRow({
-  delegation: { validator, formattedAmount, validatorAddress, completionDate },
-  onExternalLink,
-}: UnbondingRowProps) {
-  const date = useMemo(() => (completionDate ? moment(completionDate).fromNow() : "N/A"), [
-    completionDate,
-  ]);
-  const name = validator?.name ?? validatorAddress;
-
-  const onExternalLinkClick = useCallback(() => onExternalLink(validatorAddress), [
-    onExternalLink,
-    validatorAddress,
-  ]);
-  return (
-    <Wrapper>
-      <Column strong clickable onClick={onExternalLinkClick}>
-        <Box mr={2}>
-          <FirstLetterIcon label={name} />
-        </Box>
-        <Ellipsis>{name}</Ellipsis>
-      </Column>
-      <Column>
-        <Box color="alertRed" pl={2}>
-          <ToolTip content={<Trans i18nKey="cosmos.undelegation.inactiveTooltip" />}>
-            <ExclamationCircleThin size={14} />
-          </ToolTip>
-        </Box>
-      </Column>
-      <Column>{formattedAmount}</Column>
-      <Column>{date}</Column>
-    </Wrapper>
-  );
-}
-*/
