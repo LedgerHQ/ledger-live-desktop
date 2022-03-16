@@ -21,7 +21,7 @@ import Track from "~/renderer/analytics/Track";
 import { getAvailableAccountsById } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { openModal } from "~/renderer/actions/modals";
-import { filterRampCatalogEntries } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import { getAllSupportedCryptoCurrencyTickers } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 
 const CryptoCurrencyIconWrapper = styled.div`
@@ -111,24 +111,15 @@ export default function MarketCoinScreen() {
     chartData,
   } = currency || {};
 
-  const [availableOnBuy, availableOnSell, availableOnSwap] = useMemo(() => {
-    if (!rampCatalog.value || !currency) {
-      return [false, false, false];
+  const [onRampAvailableTickers] = useMemo(() => {
+    if (!rampCatalog.value) {
+      return [[], []];
     }
+    return [getAllSupportedCryptoCurrencyTickers(rampCatalog.value.onRamp)];
+  }, [rampCatalog.value]);
 
-    const onRampProviders = filterRampCatalogEntries(rampCatalog.value.onRamp, {
-      tickers: [currency.ticker],
-    });
-    const offRampProviders = filterRampCatalogEntries(rampCatalog.value.offRamp, {
-      tickers: [currency.ticker],
-    });
-
-    return [
-      onRampProviders.length > 0,
-      offRampProviders.length > 0,
-      internalCurrency && swapAvailableIds.includes(internalCurrency.id),
-    ];
-  }, [rampCatalog.value, currency, internalCurrency, swapAvailableIds]);
+  const availableOnBuy = currency && onRampAvailableTickers.includes(currency.ticker.toUpperCase());
+  const availableOnSwap = internalCurrency && swapAvailableIds.includes(internalCurrency.id);
 
   useEffect(() => {
     return () => {

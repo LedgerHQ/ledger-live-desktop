@@ -284,8 +284,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
         <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
       )}
       <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-      {availableOnBuy ? BuyHeader : null}
-      {availableOnSwap ? SwapHeader : null}
       {manageActions.length > 0 && ManageActionsHeader}
     </FadeInButtonsContainer>
   );
