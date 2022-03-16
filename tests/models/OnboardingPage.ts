@@ -1,4 +1,4 @@
-import { Page, Locator } from "@playwright/test";
+import { Locator, Page } from "@playwright/test";
 
 export class OnboardingPage {
   readonly page: Page;
@@ -38,7 +38,8 @@ export class OnboardingPage {
     this.getStartedButton = page.locator("data-test-id=onboarding-get-started-button");
     this.termsCheckbox = page.locator("data-test-id=onboarding-terms-checkbox");
     this.termsSubmitButton = page.locator("data-test-id=onboarding-terms-submit");
-    this.selectDeviceButton = (device: "nanoS" | "nanoX" | "nanoSP"): Locator => page.locator(`data-test-id=device-${device}`);
+    this.selectDeviceButton = (device: "nanoS" | "nanoX" | "nanoSP"): Locator =>
+      page.locator(`data-test-id=device-${device}`);
     this.checkMyNanoButton = page.locator('button:has-text("Check my Nano")');
     this.continueButton = page.locator('button:has-text("Continue")');
     this.newDeviceButton = page.locator("data-test-id=onboarding-new-device");
