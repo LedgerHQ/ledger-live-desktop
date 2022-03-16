@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const babelPlugins = require("./babel.plugins");
 const UnusedWebpackPlugin = require("unused-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 const packagesToTranspile = [
   /@polkadot[\\/]api/,
@@ -100,6 +101,12 @@ const babelTsConfig = {
   ],
 };
 
+const dotenvPath = process.env.STAGING
+  ? ".env.staging"
+  : process.env.NODE_ENV === "production"
+  ? ".env.production"
+  : ".env";
+
 module.exports = {
   target: "electron-renderer",
   entry: ["./src/renderer/index.js"],
@@ -111,6 +118,9 @@ module.exports = {
     minimize: false,
   },
   plugins: [
+    new Dotenv({
+      path: dotenvPath,
+    }),
     new HtmlWebpackPlugin({
       template: "./src/renderer/index.html",
       filename: "index.html",
