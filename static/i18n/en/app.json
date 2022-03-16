@@ -2301,6 +2301,11 @@
       }
     }
   },
+  "osmosis": {
+    "memo": "Memo",
+    "memoPlaceholder": "Optional",
+    "memoWarningText": "When using a memo, carefully check the information with the recipient"
+  },
   "polkadot": {
     "lockedBalance": "Bonded",
     "lockedTooltip": "Assets must be bonded to nominated validators before earning rewards.",
