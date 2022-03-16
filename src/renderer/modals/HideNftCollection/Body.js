@@ -9,12 +9,12 @@ import Footer from "~/renderer/modals/HideNftCollection/Footer";
 
 const Body = ({
   onClose,
-  collectionAddress,
-  collectionName
+  collectionId,
+  collectionName,
 }: {
   onClose: () => void,
-  collectionAddress: string,
-  collectionName?: string,
+  collectionId: string,
+  collectionName: string,
 }) => {
   const { t } = useTranslation();
 
@@ -33,15 +33,11 @@ const Body = ({
             mb={2}
             mt={3}
           >
-            <Trans
-              i18nKey="hideNftCollection.desc"
-              parent="div"
-              values={{ collectionName: collectionName ?? collectionAddress }}
-            >
+            <Trans i18nKey="hideNftCollection.desc" parent="div" values={{ collectionName }}>
               {"This action will hide all NFTs from the "}
               {/* $FlowFixMe */}
               <Text ff="Inter|SemiBold" color="palette.text.shade100">
-                {{ collectionName: collectionName ?? collectionAddress }}
+                {{ collectionName }}
               </Text>
               {" collection, you can show them again using "}
               <Text ff="Inter|SemiBold" color="palette.text.shade100">
@@ -51,7 +47,7 @@ const Body = ({
           </Box>
         </Box>
       )}
-      renderFooter={() => <Footer collectionAddress={collectionAddress} onClose={onClose} />}
+      renderFooter={() => <Footer collectionId={collectionId} onClose={onClose} />}
     />
   );
 };

@@ -6,7 +6,7 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
+import type { Currency, NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
 import NFTCollectionContextMenu from "~/renderer/components/ContextMenu/NFTCollectionContextMenu";
 import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
@@ -31,6 +31,7 @@ type Props = {
   contract: string,
   currencyId: string,
   onClick: string => void,
+  currency: Currency,
 };
 
 const Row = ({ nfts, contract, currencyId, onClick }: Props) => {
@@ -39,7 +40,11 @@ const Row = ({ nfts, contract, currencyId, onClick }: Props) => {
   const show = useMemo(() => status === "loading", [status]);
 
   return (
-    <NFTCollectionContextMenu collectionName={tokenName} collectionAddress={contract}>
+    <NFTCollectionContextMenu
+      collectionName={tokenName}
+      collectionAddress={contract}
+      currency={currencyId}
+    >
       <Container
         className={show || process.env.ALWAYS_SHOW_SKELETONS ? "disabled" : ""}
         justifyContent="center"
