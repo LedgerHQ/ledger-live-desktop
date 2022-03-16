@@ -55,7 +55,7 @@ const Collections = ({ account }: Props) => {
 
   const visibleCollection = collections
     .slice(0, numberOfVisibleCollection)
-    .filter(({ contract }) => !hiddenNftCollections.includes(contract));
+    .filter(({ contract }) => !hiddenNftCollections.includes(`${account.currency.id}:${contract}`));
 
   useEffect(() => {
     track("View NFT Collections (Account Page)");
@@ -82,6 +82,7 @@ const Collections = ({ account }: Props) => {
               key={contract}
               contract={contract}
               nfts={nfts}
+              currency={account.currency}
             />
           ))
         ) : (
