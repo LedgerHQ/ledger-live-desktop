@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
@@ -10,8 +10,6 @@ import {
   useMarketData,
 } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import styled, { useTheme } from "styled-components";
-import CounterValueSelect from "../CountervalueSelect";
-import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { addStarredMarketCoins, removeStarredMarketCoins } from "~/renderer/actions/settings";
@@ -23,6 +21,8 @@ import Track from "~/renderer/analytics/Track";
 import { getAvailableAccountsById } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { openModal } from "~/renderer/actions/modals";
+import { filterRampCatalogEntries } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 56px;
@@ -66,12 +66,13 @@ export default function MarketCoinScreen() {
   const locale = useSelector(localeSelector);
   const allAccounts = useSelector(accountsSelector);
   const { providers, storedProviders } = useProviders();
-  const swapAvailableIds =
-    providers || storedProviders
+  const swapAvailableIds = useMemo(() => {
+    return providers || storedProviders
       ? (providers || storedProviders)
           .map(({ pairs }) => pairs.map(({ from, to }) => [from, to]))
           .flat(2)
       : [];
+  }, [providers, storedProviders]);
 
   const {
     selectedCoinData: currency,
@@ -84,8 +85,7 @@ export default function MarketCoinScreen() {
     supportedCounterCurrencies,
   } = useSingleCoinMarketData(currencyId);
 
-  const availableOnBuy = currency && isCurrencySupported("BUY", currency);
-  const availableOnSwap = currency && swapAvailableIds.includes(currency.id);
+  const rampCatalog = useRampCatalog();
 
   const {
     id,
@@ -110,6 +110,25 @@ export default function MarketCoinScreen() {
     internalCurrency,
     chartData,
   } = currency || {};
+
+  const [availableOnBuy, availableOnSell, availableOnSwap] = useMemo(() => {
+    if (!rampCatalog.value || !currency) {
+      return [false, false, false];
+    }
+
+    const onRampProviders = filterRampCatalogEntries(rampCatalog.value.onRamp, {
+      tickers: [currency.ticker],
+    });
+    const offRampProviders = filterRampCatalogEntries(rampCatalog.value.offRamp, {
+      tickers: [currency.ticker],
+    });
+
+    return [
+      onRampProviders.length > 0,
+      offRampProviders.length > 0,
+      internalCurrency && swapAvailableIds.includes(internalCurrency.id),
+    ];
+  }, [rampCatalog.value, currency, internalCurrency, swapAvailableIds]);
 
   useEffect(() => {
     return () => {
@@ -222,7 +241,7 @@ export default function MarketCoinScreen() {
               {availableOnBuy && (
                 <Button
                   data-test-id="market-coin-buy-button"
-                  variant="shade"
+                  variant="color"
                   mr={1}
                   onClick={onBuy}
                 >
@@ -230,20 +249,12 @@ export default function MarketCoinScreen() {
                 </Button>
               )}
               {availableOnSwap && (
-                <Button data-test-id="market-coin-swap-button" variant="shade" onClick={onSwap}>
+                <Button data-test-id="market-coin-swap-button" variant="color" onClick={onSwap}>
                   {t("accounts.contextMenu.swap")}
                 </Button>
               )}
             </>
           )}
-          <Flex justifyContent="flex-end" ml={4}>
-            <CounterValueSelect
-              data-test-id="market-coin-counter-value-select"
-              counterCurrency={counterCurrency}
-              setCounterCurrency={setCounterCurrency}
-              supportedCounterCurrencies={supportedCounterCurrencies}
-            />
-          </Flex>
         </Flex>
       </Flex>
       <MarketCoinChart
@@ -256,6 +267,8 @@ export default function MarketCoinScreen() {
         t={t}
         locale={locale}
         loading={loadingChart}
+        setCounterCurrency={setCounterCurrency}
+        supportedCounterCurrencies={supportedCounterCurrencies}
       />
       <MarketInfo
         marketcap={marketcap}

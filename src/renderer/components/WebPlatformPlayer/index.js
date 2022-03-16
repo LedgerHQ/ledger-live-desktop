@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import TrackPage from "~/renderer/analytics/TrackPage";
 
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import type { AppManifest } from "@ledgerhq/live-common/lib/platform/types";
@@ -515,6 +516,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
 
   return (
     <Container>
+      <TrackPage category="Platform" name="App" appId={manifest.id} params={inputs} />
       <TopBar
         manifest={manifest}
         onReload={handleReload}
