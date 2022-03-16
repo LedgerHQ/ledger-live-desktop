@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
@@ -84,6 +84,7 @@ type Props = {
 } & OwnProps;
 
 const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) => {
+  const isAccountHasToken = useMemo(() => !isAccountEmpty(account), [account.id]);
   const mainAccount = getMainAccount(account, parentAccount);
   const contrastText = useTheme("colors.palette.text.shade60");
 
@@ -243,21 +244,18 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
 
   const ManageActionsHeader = manageActions.map(item => renderAction(item));
 
-  const NonEmptyAccountHeader = (
-    <FadeInButtonsContainer data-test-id="account-buttons-group" show={showButtons}>
-      {canSend(account, parentAccount) && (
-        <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
-      )}
-      <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-      {availableOnBuy && BuyHeader}
-      {availableOnSwap && SwapHeader}
-      {manageActions.length > 0 && ManageActionsHeader}
-    </FadeInButtonsContainer>
-  );
-
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
-      {!isAccountEmpty(account) ? NonEmptyAccountHeader : null}
+      <FadeInButtonsContainer data-test-id="account-buttons-group" show={showButtons}>
+        {isAccountHasToken && canSend(account, parentAccount) && (
+          <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
+        )}
+        <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
+        {availableOnBuy && BuyHeader}
+        {isAccountHasToken && availableOnSwap && SwapHeader}
+        {manageActions.length > 0 && ManageActionsHeader}
+      </FadeInButtonsContainer>
+
       <Tooltip content={t("stars.tooltip")}>
         <Star
           accountId={account.id}
