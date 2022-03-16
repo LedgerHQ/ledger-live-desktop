@@ -3,7 +3,7 @@ import { expect } from "@playwright/test";
 import { OnboardingPage } from "../../models/OnboardingPage";
 import { DeviceAction } from "../../models/DeviceAction";
 
-const nanos = ["Nano X", "Nano S", "Blue"];
+const nanos = ["Nano X", "Nano S Plus", "Nano S"];
 
 test.describe.parallel("Onboarding", () => {
   for (const nano of nanos) {

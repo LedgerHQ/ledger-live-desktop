@@ -77,7 +77,7 @@ export class OnboardingPage {
     await this.termsSubmitButton.click();
   }
 
-  async selectDevice(device: "Nano S" | "Nano X" | "Blue" | string) {
+  async selectDevice(device: "Nano S" | "Nano S Plus" | "Nano X" | string) {
     await this.selectDeviceButton(device).click();
   }
 
