@@ -23,7 +23,6 @@ import type { StepProps } from "../";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 
 import Animation from "~/renderer/animations";
-import FlashMCU from "~/renderer/components/FlashMCU";
 import { getDeviceAnimation } from "~/renderer/components/DeviceAction/animations";
 import { AnimationWrapper } from "~/renderer/components/DeviceAction/rendering";
 import useTheme from "~/renderer/hooks/useTheme";
