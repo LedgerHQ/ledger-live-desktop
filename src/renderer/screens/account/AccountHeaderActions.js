@@ -127,7 +127,7 @@ const AccountHeaderSettingsButtonComponent = ({ account, parentAccount, openModa
   );
 };
 
-const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) => {
+const AccountHeaderActions = ({ account, parentAccount, openModal }: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
   const contrastText = useTheme("colors.palette.text.shade60");
 
@@ -176,6 +176,11 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
     });
 
   const history = useHistory();
+
+  const onWalletConnect = useCallback(() => {
+    setTrackingSource("account header actions");
+    openModal("MODAL_WALLETCONNECT_PASTE_LINK", { account });
+  }, [openModal, account]);
 
   const onBuy = useCallback(() => {
     setTrackingSource("account header actions");
@@ -252,6 +257,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
         // eslint-disable-next-line no-duplicate-case, no-fallthrough
         case "ethereum":
         case "polygon":
+        case "bsc":
           actions.push({
             key: "WalletConnect",
             onClick: onWalletConnect,
