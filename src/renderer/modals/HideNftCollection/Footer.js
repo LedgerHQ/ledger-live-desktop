@@ -7,17 +7,11 @@ import Box from "~/renderer/components/Box";
 import { useDispatch } from "react-redux";
 import { hideNftCollection } from "~/renderer/actions/settings";
 
-const Footer = ({
-  onClose,
-  collectionAddress,
-}: {
-  onClose: () => void,
-  collectionAddress: string,
-}) => {
+const Footer = ({ onClose, collectionId }: { onClose: () => void, collectionId: string }) => {
   const dispatch = useDispatch();
   const confirmHideNftCollection = useCallback(
-    collectionAddress => {
-      dispatch(hideNftCollection(collectionAddress));
+    collectionId => {
+      dispatch(hideNftCollection(collectionId));
     },
     [dispatch],
   );
@@ -30,7 +24,7 @@ const Footer = ({
       <Button
         data-test-id="modal-confirm-button"
         onClick={() => {
-          confirmHideNftCollection(collectionAddress);
+          confirmHideNftCollection(collectionId);
           onClose();
         }}
         primary

@@ -115,9 +115,9 @@ export const blacklistToken = (tokenId: string) => ({
   payload: tokenId,
 });
 
-export const hideNftCollection = (collectionAddress: string) => ({
+export const hideNftCollection = (collectionId: string) => ({
   type: "HIDE_NFT_COLLECTION",
-  payload: collectionAddress,
+  payload: collectionId,
 });
 
 export const swapAcceptProvider = (providerId: string) => ({
