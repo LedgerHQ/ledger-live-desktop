@@ -60,6 +60,9 @@ if (getEnv("DEVICE_PROXY_URL")) {
     id: "hid",
     open: devicePath => retry(() => TransportNodeHidSingleton.open(), { maxRetry: 4 }),
     disconnect: () => Promise.resolve(),
+    setAllowAutoDisconnect: (transport, _, allow) => {
+      transport.setAllowAutoDisconnect(allow);
+    },
   });
 }
 
