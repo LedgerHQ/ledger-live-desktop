@@ -68,14 +68,7 @@ const Collections = ({ account }: Props) => {
             nfts={nfts}
           />
         )),
-    [
-      account.currency.id,
-      account.id,
-      collections,
-      hiddenNftCollections,
-      numberOfVisibleCollection,
-      onOpenCollection,
-    ],
+    [account, collections, hiddenNftCollections, numberOfVisibleCollection, onOpenCollection],
   );
 
   useEffect(() => {
