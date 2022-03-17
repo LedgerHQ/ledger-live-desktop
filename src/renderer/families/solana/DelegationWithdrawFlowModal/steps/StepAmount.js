@@ -14,9 +14,7 @@ import Alert from "~/renderer/components/Alert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import Label from "~/renderer/components/Label";
-import styled from "styled-components";
-import TranslatedError from "~/renderer/components/TranslatedError";
-import { ErrorContainer } from "~/renderer/components/Input";
+import ErrorDisplay from "../../shared/components/ErrorDisplay";
 
 export default function StepAmount({
   account,
@@ -42,20 +40,10 @@ export default function StepAmount({
       {error && <ErrorBanner error={error} />}
       <Label>{t("send.steps.details.amount")}</Label>
       <AmountField transaction={transaction} account={account} status={status} />
-      {status.errors.fee && (
-        <ErrorContainer hasError={true}>
-          <ErrorDisplay>
-            <TranslatedError error={status.errors.fee} />
-          </ErrorDisplay>
-        </ErrorContainer>
-      )}
+      {status.errors.fee && <ErrorDisplay error={status.errors.fee} />}
     </Box>
   );
 }
-
-const ErrorDisplay = styled(Box)`
-  color: ${p => p.theme.colors.pearl};
-`;
 
 export function StepAmountFooter({
   transitionTo,

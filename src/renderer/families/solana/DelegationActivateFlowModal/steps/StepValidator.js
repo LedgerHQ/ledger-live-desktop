@@ -17,6 +17,7 @@ import type {
   SolanaValidatorWithMeta,
   Transaction,
 } from "@ledgerhq/live-common/lib/families/solana/types";
+import ErrorDisplay from "../../shared/components/ErrorDisplay";
 
 export default function StepValidator({
   account,
@@ -54,6 +55,7 @@ export default function StepValidator({
     <Box flow={1}>
       <TrackPage category="Delegation Flow" name="Step 1" />
       {error && <ErrorBanner error={error} />}
+      {status.errors.fee && <ErrorDisplay error={status.errors.fee} />}
       <ValidatorsField
         account={account}
         chosenVoteAccAddr={chosenVoteAccAddr}
@@ -76,7 +78,8 @@ export function StepValidatorFooter({
 }: StepProps) {
   invariant(account, "account required");
   const { errors } = status;
-  const canNext = !bridgePending && !errors.voteAccAddr;
+  const hasErrors = Object.keys(errors).length > 0;
+  const canNext = !bridgePending && !hasErrors;
 
   return (
     <>
