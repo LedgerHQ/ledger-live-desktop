@@ -4,9 +4,16 @@ import { OnboardingPage } from "../../models/OnboardingPage";
 import { DeviceAction } from "../../models/DeviceAction";
 
 const nanos = ["Nano X", "Nano S Plus", "Nano S"];
+const deviceId = { "Nano S": "nanoS", "Nano S Plus": "nanoSP", "Nano X": "nanoX" };
 
 test.describe.parallel("Onboarding", () => {
   for (const nano of nanos) {
+    const deviceId = {
+      "Nano S": "device-nanoS",
+      "Nano S Plus": "device-nanoSP",
+      "Nano X": "device-nanoX",
+    }[nano];
+
     test(`[${nano}] Onboarding flow already set up`, async ({ page }) => {
       const onboardingPage = new OnboardingPage(page);
       const deviceAction = new DeviceAction(page);
@@ -21,7 +28,7 @@ test.describe.parallel("Onboarding", () => {
       });
 
       await test.step(`[${nano}] Select Device`, async () => {
-        await onboardingPage.selectDevice(nano);
+        await onboardingPage.selectDevice(deviceId);
       });
 
       await test.step(`[${nano}] Already set up`, async () => {
