@@ -274,6 +274,13 @@ const handlers: Object = {
       blacklistedTokenIds: [...ids, tokenId],
     };
   },
+  UNHIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionId }) => {
+    const ids = state.hiddenNftCollections;
+    return {
+      ...state,
+      hiddenNftCollections: ids.filter(id => id !== collectionId),
+    };
+  },
   HIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionAddress }) => {
     const collections = state.hiddenNftCollections;
     return {
