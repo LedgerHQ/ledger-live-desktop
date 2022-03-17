@@ -79,7 +79,7 @@
     "selectCurrencyNoOption": "Криптоактив \"{{currencyName}}\" не найден",
     "selectValidatorNoOption": "Валидатор с \"{{accountName}}\" в названии не найден",
     "selectNoResults": "Ничего не найдено по запросу \"{{query}}\"",
-    "sortBy": "Сортировать по",
+    "sortBy": "Сортировка",
     "save": "Сохранить",
     "lock": "Заблокировать",
     "showMore": "Показать больше",
@@ -1566,10 +1566,10 @@
         "not_installed": "Не установлено"
       },
       "sort": {
-        "title": "Сортировать",
+        "title": "Сортировка",
         "name_asc": "Название А-Я",
         "name_desc": "Название Я-А",
-        "marketcap_desc": "Рыночная капитализация"
+        "marketcap_desc": "Рын. капитализация"
       },
       "installSuccess": {
         "title": "Приложение успешно установлено. Теперь вы можете добавлять счета {{app}}",
