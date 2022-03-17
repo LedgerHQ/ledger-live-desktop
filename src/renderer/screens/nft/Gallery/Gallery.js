@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import { openModal } from "~/renderer/actions/modals";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import { hiddenNftCollectionsSelector } from "~/renderer/reducers/settings";
 import styled from "styled-components";
 import IconSend from "~/renderer/icons/Send";
 import CollectionName from "~/renderer/screens/nft/CollectionName";
@@ -48,10 +49,14 @@ const Gallery = () => {
   const { id } = useParams();
   const account = useSelector(state => accountSelector(state, { accountId: id }));
   const history = useHistory();
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
 
-  const collections: { [key: string]: ProtoNFT[] } = useMemo(
-    () => nftsByCollections(account.nfts),
-    [account.nfts],
+  const collections: [string, ProtoNFT[]] = useMemo(
+    () =>
+      Object.entries(nftsByCollections(account.nfts)).filter(
+        ([contract]) => !hiddenNftCollections.includes(`${account.id}|${contract}`),
+      ),
+    [account.id, account.nfts, hiddenNftCollections],
   );
 
   const onSend = useCallback(() => {
@@ -79,13 +84,14 @@ const Gallery = () => {
     const collectionsRender = [];
     let isLoading = false;
     let displayedNFTs = 0;
-    Object.entries(collections).forEach(([contract, nfts]: any) => {
+
+    collections.forEach(([contract, nfts]: [string, ProtoNFT[]]) => {
       if (displayedNFTs > maxVisibleNFTs) return;
       collectionsRender.push(
         <div key={contract}>
           <Box mb={2} onClick={() => onSelectCollection(contract)}>
             <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-              <CollectionName nft={nfts[0]} fallback={contract} />
+              <CollectionName nft={nfts[0]} fallback={contract} showHideMenu />
             </Text>
           </Box>
           <TokensList account={account} nfts={nfts.slice(0, maxVisibleNFTs - displayedNFTs)} />
