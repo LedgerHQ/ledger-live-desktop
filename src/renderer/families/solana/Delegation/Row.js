@@ -143,9 +143,7 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
         )}
         <Box ml={1}>{stake.activation.state}</Box>
       </Column>
-      <Column>
-        {formatAmount(stake.activation.state === "inactive" ? 0 : stake.delegation?.stake ?? 0)}
-      </Column>
+      <Column>{formatAmount(stake.delegation?.stake ?? 0)}</Column>
       <Column>
         {stake.delegation === undefined
           ? 0
