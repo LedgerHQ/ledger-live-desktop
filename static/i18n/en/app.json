@@ -2849,6 +2849,12 @@
         "count": "{{count}} token",
         "count_plural": "{{count}} tokens"
       },
+      "hiddenNftCollections": {
+        "title": "Hidden NFT Collections",
+        "desc": "You can hide NFT Collections by going to the parent account then right-clicking on the collection and selecting 'Hide NFT Collection'.",
+        "count": "{{count}} collection",
+        "count_plural": "{{count}} collections"
+      },
       "fullNode": {
         "title": "Connect Bitcoin full node",
         "desc": "Set up your Bitcoin full node to synchronize and send transactions without using Ledger’s explorers."

@@ -6,7 +6,7 @@ import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { Currency, NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
+import type { Account, NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
 import NFTCollectionContextMenu from "~/renderer/components/ContextMenu/NFTCollectionContextMenu";
 import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
@@ -29,13 +29,13 @@ const Container: ThemedComponent<{}> = styled(Box)`
 type Props = {
   nfts: NFTWithMetadata[],
   contract: string,
-  currencyId: string,
+  currencyId: Account,
   onClick: string => void,
-  currency: Currency,
+  account: Account,
 };
 
-const Row = ({ nfts, contract, currencyId, onClick }: Props) => {
-  const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId, currencyId);
+const Row = ({ nfts, contract, account, onClick }: Props) => {
+  const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId, account.currency.id);
   const { tokenName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
 
@@ -43,7 +43,7 @@ const Row = ({ nfts, contract, currencyId, onClick }: Props) => {
     <NFTCollectionContextMenu
       collectionName={tokenName}
       collectionAddress={contract}
-      currency={currencyId}
+      account={account}
     >
       <Container
         className={show || process.env.ALWAYS_SHOW_SKELETONS ? "disabled" : ""}

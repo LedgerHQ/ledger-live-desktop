@@ -4,10 +4,10 @@ import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { openModal } from "~/renderer/actions/modals";
 import ContextMenuItem from "./ContextMenuItem";
-import type { Currency } from "@ledgerhq/live-common/lib/types";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 
 type Props = {
-  currency: Currency,
+  account: Account,
   collectionAddress: string,
   collectionName?: string,
   children: any,
@@ -15,7 +15,7 @@ type Props = {
 
 export default function NFTCollectionContextMenu({
   children,
-  currency,
+  account,
   collectionAddress,
   collectionName,
 }: Props) {
@@ -31,7 +31,7 @@ export default function NFTCollectionContextMenu({
         dispatch(
           openModal("MODAL_HIDE_NFT_COLLECTION", {
             collectionName: collectionName ?? collectionAddress,
-            collectionId: `${currency.id}:${collectionAddress}`,
+            collectionId: `${account.id}|${collectionAddress}`,
           }),
         ),
     },

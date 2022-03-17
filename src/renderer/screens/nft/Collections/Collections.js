@@ -64,7 +64,7 @@ const Collections = ({ account }: Props) => {
             onClick={() => onOpenCollection(contract)}
             key={contract}
             contract={contract}
-            currencyId={account.currency.id}
+            account={account}
             nfts={nfts}
           />
         )),

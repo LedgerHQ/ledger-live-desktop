@@ -130,6 +130,11 @@ export const showToken = (tokenId: string) => ({
   payload: tokenId,
 });
 
+export const unhideNftCollection = (collectionId: string) => ({
+  type: "UNHIDE_NFT_COLLECTION",
+  payload: collectionId,
+});
+
 type FetchSettings = (*) => (Dispatch<*>) => void;
 export const fetchSettings: FetchSettings = (settings: *) => dispatch => {
   dispatch({
