@@ -8,6 +8,7 @@ import { accountSelector } from "~/renderer/reducers/accounts";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import { hiddenNftCollectionsSelector } from "~/renderer/reducers/settings";
 import styled from "styled-components";
 import IconSend from "~/renderer/icons/Send";
 import CollectionName from "~/renderer/screens/nft/CollectionName";
@@ -46,8 +47,11 @@ const Gallery = () => {
   const { id } = useParams();
   const account = useSelector(state => accountSelector(state, { accountId: id }));
   const history = useHistory();
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
 
-  const collections = nftsByCollections(account.nfts);
+  const collections = nftsByCollections(account.nfts).filter(
+    ({ contract }) => !hiddenNftCollections.includes(`${account.id}|${contract}`),
+  );
 
   const onSend = useCallback(() => {
     dispatch(openModal("MODAL_SEND", { account, isNFTSend: true }));
@@ -84,7 +88,12 @@ const Gallery = () => {
         <div key={collection.contract}>
           <Box mb={2} onClick={() => onSelectCollection(collection.contract)}>
             <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-              <CollectionName collection={collection} fallback={collection.contract} />
+              <CollectionName
+                account={account}
+                collection={collection}
+                fallback={collection.contract}
+                showHideMenu
+              />
             </Text>
           </Box>
           <TokensList

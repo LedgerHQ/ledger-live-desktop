@@ -11,6 +11,7 @@ type Props = {
   collectionAddress: string,
   collectionName?: string,
   children: any,
+  leftClick?: boolean,
 };
 
 export default function NFTCollectionContextMenu({
@@ -18,6 +19,7 @@ export default function NFTCollectionContextMenu({
   account,
   collectionAddress,
   collectionName,
+  leftClick,
 }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -37,5 +39,9 @@ export default function NFTCollectionContextMenu({
     },
   ];
 
-  return <ContextMenuItem items={menuItems}>{children}</ContextMenuItem>;
+  return (
+    <ContextMenuItem items={menuItems} leftClick={leftClick}>
+      {children}
+    </ContextMenuItem>
+  );
 }
