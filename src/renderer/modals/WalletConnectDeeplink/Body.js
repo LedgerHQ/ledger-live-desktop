@@ -67,8 +67,13 @@ const DAppConnectBody = ({
     dispatch(openModal("MODAL_ADD_ACCOUNTS"));
   }, [dispatch, handleReject]);
 
-  const filterAccountSelect = useCallback(a => getAccountCurrency(a).id === "ethereum", []);
-  const ethAccounts = useSelector(accountsSelector).filter(filterAccountSelect);
+  const filterAccountSelect = useCallback(
+    // @dev: only match Ethereum/Polygon or BSC accounts
+    // TODO: The list of the supported networks should be moved to an unique configuration file
+    acc => getAccountCurrency(acc).id.match(/^(ethereum|polygon|bsc)$/),
+    [],
+  );
+  const supportedAccounts = useSelector(accountsSelector).filter(filterAccountSelect);
 
   const { t } = useTranslation();
 
@@ -86,7 +91,7 @@ const DAppConnectBody = ({
       <Text ff="Inter|Bold" fontSize={4} color="palette.text.shade100">
         {wcContext.dappInfo.name}
       </Text>
-      {ethAccounts.length > 0 ? (
+      {supportedAccounts.length > 0 ? (
         <>
           <Text
             mt={20}
@@ -115,10 +120,11 @@ const DAppConnectBody = ({
             fontSize={4}
             color="palette.text.shade50"
           >
-            {t("walletconnect.steps.confirm.noEthAccount")}
+            {t("walletconnect.steps.confirm.noAccount")}
           </Text>
           <Box mt={20}>
             <Button primary onClick={handleAddAccount}>
+              {/* TODO: The user should be able to choose which account among those supported he wants to add  */}
               {t("addAccounts.cta.addAccountName", {
                 currencyName: "Ethereum",
               })}
