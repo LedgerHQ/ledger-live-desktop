@@ -10,7 +10,7 @@ type State = {
 };
 
 const INITIAL_STATE = {
-  stepId: "connectDevice",
+  stepId: "validator",
 };
 
 class DelegationDeactivateModal extends PureComponent<{ name: string }, State> {

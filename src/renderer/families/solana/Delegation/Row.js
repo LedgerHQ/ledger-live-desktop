@@ -87,7 +87,7 @@ const ManageDropDownItem = ({
 type Props = {
   account: Account,
   stakeWithMeta: SolanaStakeWithMeta,
-  onManageAction: (stakeWithMeta: SolanaStakeWithMeta, action: "MODAL_SOLANA_UNSTAKE") => void,
+  onManageAction: (stakeWithMeta: SolanaStakeWithMeta, action: string) => void,
   onExternalLink: (address: string) => void,
 };
 

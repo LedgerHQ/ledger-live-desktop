@@ -32,6 +32,7 @@ import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepCo
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
 import { BigNumber } from "bignumber.js";
+import StepValidator, { StepValidatorFooter } from "./steps/StepValidator";
 
 type OwnProps = {|
   stepId: StepId,
@@ -57,6 +58,12 @@ type StateProps = {|
 type Props = OwnProps & StateProps;
 
 const steps: Array<St> = [
+  {
+    id: "validator",
+    label: <Trans i18nKey="solana.delegation.flow.steps.validator.title" />,
+    component: StepValidator,
+    footer: StepValidatorFooter,
+  },
   {
     id: "connectDevice",
     label: <Trans i18nKey="solana.common.connectDevice.title" />,
