@@ -26,7 +26,7 @@ type Props = {
   bridgePending: boolean,
   t: TFunction,
   initValue?: BigNumber,
-  disabled?: boolean,
+  walletConnectProxy?: boolean,
   resetInitValue?: () => void,
 };
 
@@ -40,7 +40,7 @@ const AmountField = ({
   t,
   initValue,
   resetInitValue,
-  disabled,
+  walletConnectProxy,
 }: Props) => {
   const bridge = getAccountBridge(account, parentAccount);
 
@@ -104,12 +104,12 @@ const AmountField = ({
         ) : null}
       </Box>
       <RequestAmount
-        disabled={!!useAllAmount || disabled}
+        disabled={!!useAllAmount || walletConnectProxy}
         account={account}
         validTransactionError={amountError}
         validTransactionWarning={amountWarning}
         onChange={onChange}
-        value={amount}
+        value={walletConnectProxy ? transaction.amount : amount}
         showCountervalue={false}
         autoFocus={!initValue}
       />
