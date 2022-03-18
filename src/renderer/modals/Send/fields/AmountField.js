@@ -95,11 +95,20 @@ const AmountField = ({
               ff="Inter|Medium"
               fontSize={10}
               style={{ paddingRight: 5 }}
-              onClick={() => onChangeSendMax(!useAllAmount)}
+              onClick={() => {
+                if (!walletConnectProxy) {
+                  onChangeSendMax(!useAllAmount);
+                }
+              }}
             >
               <Trans i18nKey="send.steps.details.useMax" />
             </Text>
-            <Switch small isChecked={useAllAmount} onChange={onChangeSendMax} />
+            <Switch
+              small
+              isChecked={useAllAmount}
+              onChange={onChangeSendMax}
+              disabled={walletConnectProxy}
+            />
           </Box>
         ) : null}
       </Box>
