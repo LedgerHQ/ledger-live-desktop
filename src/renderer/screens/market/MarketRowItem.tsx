@@ -15,6 +15,7 @@ import { Button } from ".";
 import { useTranslation } from "react-i18next";
 import { openModal } from "~/renderer/actions/modals";
 import { getAvailableAccountsById } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 32px;
@@ -76,6 +77,7 @@ function MarketRowItem({
   const { colors } = useTheme();
   const graphColor = colors.neutral.c80;
   const allAccounts = useSelector(accountsSelector);
+  const flattenedAccounts = flattenAccounts(allAccounts);
 
   const onCurrencyClick = useCallback(() => {
     selectCurrency(currency.id);
@@ -108,23 +110,27 @@ function MarketRowItem({
         e.stopPropagation();
         setTrackingSource("Page Market");
 
-        // @ts-expect-error wrong type in live-common
-        const currencyId = currency?.internalCurrency?.parentCurrency
-          ? // @ts-expect-error wrong type in live-common
-            currency?.internalCurrency?.parentCurrency.id
-          : currency?.internalCurrency?.id;
+        const currencyId = currency?.internalCurrency?.id;
 
-        const defaultAccount = getAvailableAccountsById(currencyId, allAccounts).find(Boolean);
+        const defaultAccount = getAvailableAccountsById(currencyId, flattenedAccounts).find(
+          Boolean,
+        );
 
         if (!defaultAccount) return openAddAccounts();
 
         history.push({
           pathname: "/swap",
-          state: { defaultCurrency: currency.internalCurrency, defaultAccount },
+          state: {
+            defaultCurrency: currency.internalCurrency,
+            defaultAccount,
+            defaultParentAccount: defaultAccount?.parentId
+              ? flattenedAccounts.find(a => a.id === defaultAccount.parentId)
+              : null,
+          },
         });
       }
     },
-    [currency, allAccounts, history, openAddAccounts],
+    [currency?.internalCurrency, flattenedAccounts, openAddAccounts, history],
   );
 
   const onStarClick = useCallback(

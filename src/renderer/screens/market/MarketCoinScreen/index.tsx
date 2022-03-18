@@ -23,6 +23,7 @@ import { accountsSelector } from "~/renderer/reducers/accounts";
 import { openModal } from "~/renderer/actions/modals";
 import { getAllSupportedCryptoCurrencyTickers } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import { flattenAccounts } from "@ledgerhq/live-common/lib/account";
 
 const CryptoCurrencyIconWrapper = styled.div`
   height: 56px;
@@ -65,6 +66,7 @@ export default function MarketCoinScreen() {
   const isStarred = starredMarketCoins.includes(currencyId);
   const locale = useSelector(localeSelector);
   const allAccounts = useSelector(accountsSelector);
+  const flattenedAccounts = flattenAccounts(allAccounts);
   const { providers, storedProviders } = useProviders();
   const swapAvailableIds = useMemo(() => {
     return providers || storedProviders
@@ -165,23 +167,27 @@ export default function MarketCoinScreen() {
         e.stopPropagation();
         setTrackingSource("Page Market");
 
-        // @ts-expect-error wrong type in live-common
-        const currencyId = currency?.internalCurrency?.parentCurrency
-          ? // @ts-expect-error wrong type in live-common
-            currency?.internalCurrency?.parentCurrency.id
-          : currency?.internalCurrency?.id;
+        const currencyId = currency?.internalCurrency?.id;
 
-        const defaultAccount = getAvailableAccountsById(currencyId, allAccounts).find(Boolean);
+        const defaultAccount = getAvailableAccountsById(currencyId, flattenedAccounts).find(
+          Boolean,
+        );
 
         if (!defaultAccount) return openAddAccounts();
 
         history.push({
           pathname: "/swap",
-          state: { defaultCurrency: currency.internalCurrency, defaultAccount },
+          state: {
+            defaultCurrency: currency.internalCurrency,
+            defaultAccount,
+            defaultParentAccount: defaultAccount?.parentId
+              ? flattenedAccounts.find(a => a.id === defaultAccount.parentId)
+              : null,
+          },
         });
       }
     },
-    [allAccounts, currency, history, openAddAccounts],
+    [currency?.internalCurrency, flattenedAccounts, history, openAddAccounts],
   );
 
   const toggleStar = useCallback(() => {
