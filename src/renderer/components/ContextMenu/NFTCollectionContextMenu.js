@@ -2,6 +2,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import IconBan from "~/renderer/icons/Ban";
 import { openModal } from "~/renderer/actions/modals";
 import ContextMenuItem from "./ContextMenuItem";
 import type { Account } from "@ledgerhq/live-common/lib/types";
@@ -28,7 +29,7 @@ export default function NFTCollectionContextMenu({
     {
       key: "hide",
       label: t("hideNftCollection.hideCTA"),
-      // Icon: TODO,
+      Icon: IconBan,
       callback: () =>
         dispatch(
           openModal("MODAL_HIDE_NFT_COLLECTION", {
