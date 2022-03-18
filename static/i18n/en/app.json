@@ -2852,7 +2852,7 @@
       },
       "hiddenNftCollections": {
         "title": "Hidden NFT Collections",
-        "desc": "You can hide NFT Collections by going to the parent account then right-clicking on the collection and selecting 'Hide NFT Collection'.",
+        "desc": "You can hide NFT Collections by right-clicking on the collection name and selecting 'Hide NFT Collection'.",
         "count": "{{count}} collection",
         "count_plural": "{{count}} collections"
       },
