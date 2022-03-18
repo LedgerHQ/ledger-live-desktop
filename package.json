@@ -15,6 +15,7 @@
     "start:prod": "electron ./.webpack/main.bundle.js",
     "start": "cross-env NODE_ENV=development node ./tools/main.js",
     "build": "cross-env NODE_ENV=production node ./tools/main.js build",
+    "build:testing": "cross-env NODE_ENV=production TESTING=1 node ./tools/main.js build",
     "lint": "eslint src tools static --ext .js,.json,.ts,.tsx",
     "prettier": "prettier --write \"{src,tools}/**/*.{js,json}\"",
     "prettier:check": "prettier -c \"{src,tools}/**/*.{js,json}\"",
