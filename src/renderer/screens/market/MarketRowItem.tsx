@@ -108,10 +108,13 @@ function MarketRowItem({
         e.stopPropagation();
         setTrackingSource("Page Market");
 
-        const defaultAccount = getAvailableAccountsById(
-          currency?.internalCurrency?.id,
-          allAccounts,
-        ).find(Boolean);
+        // @ts-expect-error wrong type in live-common
+        const currencyId = currency?.internalCurrency?.parentCurrency
+          ? // @ts-expect-error wrong type in live-common
+            currency?.internalCurrency?.parentCurrency.id
+          : currency?.internalCurrency?.id;
+
+        const defaultAccount = getAvailableAccountsById(currencyId, allAccounts).find(Boolean);
 
         if (!defaultAccount) return openAddAccounts();
 
