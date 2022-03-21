@@ -65,7 +65,7 @@
     "reject": "Reddet",
     "cancel": "İptal et",
     "getSupport": "Destek alın",
-    "delete": "Remove account from portfolio",
+    "delete": "Hesabı portföyden kaldır",
     "launch": "Başlat",
     "continue": "Devam",
     "previous": "Geri",
@@ -2816,8 +2816,8 @@
     "removeAccountModal": {
       "title": "Hesabı kaldır",
       "desc": "Bu eylem kripto varlıklarınızı etkilemez. Mevcut hesaplar her zaman tekrar eklenebilir.",
-      "delete": "Remove from Portfolio",
-      "warning": "Removing this account will erase your swap transaction history associated to it."
+      "delete": "Portföyden kaldır",
+      "warning": "Bu hesabın kaldırılması, hesapla ilgili takas işlem geçmişinin de silinmesine neden olacaktır."
     },
     "openUserDataDirectory": {
       "title": "Kullanıcı verilerini görün",
