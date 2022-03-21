@@ -28,7 +28,6 @@ const HiddenNftCollectionRow = ({
   onUnhide: Function,
 }) => {
   const account = useSelector(state => accountSelector(state, { accountId }));
-  if (!account?.nfts) return null;
 
   const firstNft = account?.nfts.find(nft => nft.contract === contractAddress);
 
