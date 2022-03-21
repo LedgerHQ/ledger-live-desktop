@@ -2563,6 +2563,8 @@
       }
     },
     "delegation": {
+      "totalStake": "Total Stake",
+      "commission": "Commission",
       "delegate": "Add",
       "listHeader": "Delegations",
       "availableBalance": "Available balance",
