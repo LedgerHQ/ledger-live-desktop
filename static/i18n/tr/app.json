@@ -3110,7 +3110,7 @@
             },
             "follow": {
               "title": "Yönergeleri uygulayın",
-              "descr": "PIN kodunuzdaki yönergeleri uygulamak için buraya dönün."
+              "descr": "PIN kodunuzla ilgili yönergeleri uygulamak için buraya dönün."
             },
             "buttons": {
               "next": "Sonraki adım",
@@ -3133,7 +3133,7 @@
             },
             "follow": {
               "title": "Yönergeleri uygulayın",
-              "descr": "PIN kodunuzdaki yönergeleri uygulamak için buraya dönün."
+              "descr": "PIN kodunuzla ilgili yönergeleri uygulamak için buraya dönün."
             },
             "buttons": {
               "next": "Sonraki adım",
@@ -3312,7 +3312,7 @@
         },
         "stayOffline": {
           "title": "Çevrim dışı kalın",
-          "description": "Nano'nuz \"soğuk depolama\" cüzdanı olarak çalışır. Bu, uygulamayı kullanırken bile özel anahtarınızı asla çevrim içi olarak açığa çıkarmayacağı anlamına gelir."
+          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
         },
         "validateTransactions": {
           "title": "İşlemleri onaylayın",
@@ -3320,7 +3320,7 @@
         },
         "setUpNanoWallet": {
           "title": "Nano'nuzu kuralım!",
-          "description": "Nano güvenliğinizi kurarak başlayacağız.",
+          "description": "Nano cihazınızın güvenliğini sağlayarak başlayacağız.",
           "CTA": "Haydi yapalım!"
         }
       }
