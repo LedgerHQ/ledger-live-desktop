@@ -65,7 +65,7 @@
     "reject": "Ablehnen",
     "cancel": "Abbrechen",
     "getSupport": "Hilfe",
-    "delete": "Remove account from portfolio",
+    "delete": "Konto aus Portfolio entfernen",
     "launch": "Starten",
     "continue": "Weiter",
     "previous": "Zurück",
@@ -2816,8 +2816,8 @@
     "removeAccountModal": {
       "title": "Konto entfernen",
       "desc": "Ihre Krypto-Vermögenswerte sind davon nicht betroffen. Bestehende Konten können jederzeit wieder hinzugefügt werden.",
-      "delete": "Remove from Portfolio",
-      "warning": "Removing this account will erase your swap transaction history associated to it."
+      "delete": "Aus Portfolio entfernen",
+      "warning": "Das Entfernen dieses Kontos löscht Ihren zugehörigen Swap-Transaktionsverlauf."
     },
     "openUserDataDirectory": {
       "title": "Benutzerdaten anzeigen",
