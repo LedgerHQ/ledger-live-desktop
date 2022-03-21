@@ -48,8 +48,8 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
   const validatorsFiltered = useMemo(() => {
     return validators.filter(validator => {
       return (
-        validator.name?.toLowerCase().startsWith(search) ||
-        validator.voteAccount.toLowerCase().startsWith(search)
+        validator.name?.toLowerCase().includes(search) ||
+        validator.voteAccount.toLowerCase().includes(search)
       );
     });
   }, [validators, search]);
