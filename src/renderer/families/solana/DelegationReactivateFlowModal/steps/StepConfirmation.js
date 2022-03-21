@@ -87,7 +87,6 @@ export function StepConfirmationFooter({
         <Trans i18nKey="common.close" />
       </Button>
       {optimisticOperation ? (
-        // FIXME make a standalone component!
         <Button
           primary
           ml={2}

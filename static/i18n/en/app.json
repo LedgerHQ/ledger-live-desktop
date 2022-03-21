@@ -2563,16 +2563,31 @@
       }
     },
     "delegation": {
+      "delegate": "Add",
+      "listHeader": "Delegations",
       "availableBalance": "Available balance",
       "active": "Active",
+      "activeTooltip": "Active amount generate rewards",
+      "inactiveTooltip": "Inactive amount does not generate rewards",
       "statusUpdateNotice": "The status of the delegation will be updated when the transaction is confirmed.",
+      "emptyState": {
+        "description": "You can earn SOL rewards by delegating your assets.",
+        "info": "How Delegation works",
+        "delegation": "Earn rewards"
+      },
       "flow": {
+        "title": "Delegate",
         "steps": {
           "validator": {
             "title": "Validator"
           },
           "amount": {
             "title": "Amount"
+          },
+          "confirmation": {
+            "success": {
+              "title": "You have successfully delegated your assets"
+            }
           }
         }
       },

@@ -6,7 +6,6 @@ import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-//import { canDelegate } from "@ledgerhq/live-common/lib/families/solana/logic";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import {
   useSolanaPreloadData,
@@ -51,15 +50,7 @@ const Delegation = ({ account }: Props) => {
 
   const stakesWithMeta = useSolanaStakesWithMeta(account.currency, solanaResources.stakes);
 
-  //const delegationEnabled = canDelegate(account);
-  const delegationEnabled = true;
-
-  //const mappedDelegations = useCosmosMappedDelegations(account);
-
-  //const { validators } = useCosmosPreloadData();
   const unit = getAccountUnit(account);
-
-  //const mappedUnbondings = mapUnbondings(unbondings, validators, unit);
 
   const onEarnRewards = useCallback(() => {
     dispatch(
@@ -72,14 +63,6 @@ const Delegation = ({ account }: Props) => {
   const onDelegate = useCallback(() => {
     dispatch(
       openModal("MODAL_SOLANA_DELEGATE", {
-        account,
-      }),
-    );
-  }, [account, dispatch]);
-
-  const onClaimRewards = useCallback(() => {
-    dispatch(
-      openModal("MODAL_COSMOS_CLAIM_REWARDS", {
         account,
       }),
     );
@@ -119,31 +102,21 @@ const Delegation = ({ account }: Props) => {
   return (
     <>
       <TableContainer mb={6}>
-        <TableHeader
-          title={<Trans i18nKey="cosmos.delegation.header" />}
-          titleProps={{ "data-e2e": "title_Delegation" }}
-        >
-          <ToolTip
-            content={
-              !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
-            }
+        <TableHeader title={<Trans i18nKey="solana.delegation.listHeader" />}>
+          <Button
+            id={"account-delegate-button"}
+            mr={2}
+            color="palette.primary.main"
+            small
+            onClick={onDelegate}
           >
-            <Button
-              id={"account-delegate-button"}
-              mr={2}
-              disabled={!delegationEnabled}
-              color="palette.primary.main"
-              small
-              onClick={onDelegate}
-            >
-              <Box horizontal flow={1} alignItems="center">
-                <DelegateIcon size={12} />
-                <Box>
-                  <Trans i18nKey="cosmos.delegation.delegate" />
-                </Box>
+            <Box horizontal flow={1} alignItems="center">
+              <DelegateIcon size={12} />
+              <Box>
+                <Trans i18nKey="solana.delegation.delegate" />
               </Box>
-            </Button>
-          </ToolTip>
+            </Box>
+          </Button>
         </TableHeader>
         {hasStakes ? (
           <>
@@ -163,32 +136,26 @@ const Delegation = ({ account }: Props) => {
             <Box style={{ maxWidth: "65%" }}>
               <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
                 <Trans
-                  i18nKey="cosmos.delegation.emptyState.description"
+                  i18nKey="solana.delegation.emptyState.description"
                   values={{ name: account.currency.name }}
                 />
               </Text>
               <Box mt={2}>
                 <LinkWithExternalIcon
-                  label={<Trans i18nKey="cosmos.delegation.emptyState.info" />}
-                  onClick={() => openURL(urls.stakingCosmos)}
+                  label={<Trans i18nKey="solana.delegation.emptyState.info" />}
+                  onClick={() => openURL(urls.solana.staking)}
                 />
               </Box>
             </Box>
             <Box>
-              <ToolTip
-                content={
-                  !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
-                }
-              >
-                <Button primary small disabled={!delegationEnabled} onClick={onEarnRewards}>
-                  <Box horizontal flow={1} alignItems="center">
-                    <IconChartLine size={12} />
-                    <Box>
-                      <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
-                    </Box>
+              <Button primary small onClick={onEarnRewards}>
+                <Box horizontal flow={1} alignItems="center">
+                  <IconChartLine size={12} />
+                  <Box>
+                    <Trans i18nKey="solana.delegation.emptyState.delegation" />
                   </Box>
-                </Button>
-              </ToolTip>
+                </Box>
+              </Button>
             </Box>
           </Wrapper>
         )}

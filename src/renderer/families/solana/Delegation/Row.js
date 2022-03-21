@@ -130,13 +130,13 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
       <Column>
         {stake.activation.state === "active" || stake.activation.state === "activating" ? (
           <Box color="positiveGreen">
-            <ToolTip content={<Trans i18nKey="cosmos.delegation.activeTooltip" />}>
+            <ToolTip content={<Trans i18nKey="solana.delegation.activeTooltip" />}>
               <CheckCircle size={14} />
             </ToolTip>
           </Box>
         ) : (
           <Box color="alertRed">
-            <ToolTip content={<Trans i18nKey="cosmos.delegation.inactiveTooltip" />}>
+            <ToolTip content={<Trans i18nKey="solana.delegation.inactiveTooltip" />}>
               <ExclamationCircleThin size={14} />
             </ToolTip>
           </Box>

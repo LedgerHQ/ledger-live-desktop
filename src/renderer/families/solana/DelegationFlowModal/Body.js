@@ -184,7 +184,7 @@ const Body = ({
   }
 
   const stepperProps = {
-    title: t("cosmos.delegation.flow.title"),
+    title: t("solana.delegation.flow.title"),
     device,
     account,
     parentAccount,
