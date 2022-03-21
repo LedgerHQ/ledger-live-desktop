@@ -30,7 +30,7 @@ type Props = {
   nfts: NFTWithMetadata[],
   contract: string,
   onClick: string => void,
-  account: Account
+  account: Account,
 };
 
 const Row = ({ nfts, contract, onClick, account }: Props) => {
