@@ -32,7 +32,6 @@ import LinkWithExternalIcon from "../../../components/LinkWithExternalIcon";
 import type { StepProps } from "..";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
-import { urls } from "~/config/urls";
 
 // $FlowFixMe
 const remapTransportError = (err: mixed, appName: string): Error => {
