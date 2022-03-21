@@ -1,38 +1,29 @@
 // @flow
-import invariant from "invariant";
-import React, { useState, useCallback } from "react";
-import { compose } from "redux";
-import { connect, useDispatch } from "react-redux";
-import { Trans, withTranslation } from "react-i18next";
-import { createStructuredSelector } from "reselect";
-import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
-import Track from "~/renderer/analytics/Track";
-
 import { UserRefusedOnDevice } from "@ledgerhq/errors";
-
-import type { AccountBridge } from "@ledgerhq/live-common/lib/types";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
-
-import type { Transaction, StakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
-
-import type { StepId, StepProps, St } from "./types";
-import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
-import type { TFunction } from "react-i18next";
-import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
-
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import { SyncSkipUnderPriority } from "@ledgerhq/live-common/lib/bridge/react";
+import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
+import type { StakeWithMeta, Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
+import type { AccountBridge, Operation, Account } from "@ledgerhq/live-common/lib/types";
+import invariant from "invariant";
+import React, { useCallback, useState } from "react";
+import { Trans, withTranslation } from "react-i18next";
+import { connect, useDispatch } from "react-redux";
+import { compose } from "redux";
+import { createStructuredSelector } from "reselect";
+import logger from "~/logger/logger";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
-
-import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
-
+import Track from "~/renderer/analytics/Track";
 import Stepper from "~/renderer/components/Stepper";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
+import { getCurrentDevice } from "~/renderer/reducers/devices";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
-import logger from "~/logger/logger";
-import { BigNumber } from "bignumber.js";
 import StepValidator, { StepValidatorFooter } from "./steps/StepValidator";
+import type { St, StepId } from "./types";
+import type { TFunction } from "react-i18next";
+import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
 
 type OwnProps = {|
   stepId: StepId,

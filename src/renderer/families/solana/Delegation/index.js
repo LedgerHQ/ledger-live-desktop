@@ -1,34 +1,26 @@
 // @flow
-import React, { useCallback } from "react";
-import invariant from "invariant";
-import { useDispatch } from "react-redux";
-import { Trans } from "react-i18next";
-import styled from "styled-components";
-import type { Account } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
-import {
-  useSolanaPreloadData,
-  useSolanaStakesWithMeta,
-} from "@ledgerhq/live-common/lib/families/solana/react";
-
+import { getAddressExplorer, getDefaultExplorerView } from "@ledgerhq/live-common/lib/explorers";
+import { useSolanaStakesWithMeta } from "@ledgerhq/live-common/lib/families/solana/react";
 import type { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
-
+import type { Account } from "@ledgerhq/live-common/lib/types";
+import invariant from "invariant";
+import React, { useCallback } from "react";
+import { Trans } from "react-i18next";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import { urls } from "~/config/urls";
-import { openURL } from "~/renderer/linking";
 import { openModal } from "~/renderer/actions/modals";
-import Text from "~/renderer/components/Text";
-import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
+import Button from "~/renderer/components/Button";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
-import IconChartLine from "~/renderer/icons/ChartLine";
-import { Header, UnbondingHeader } from "./Header";
-import { Row } from "./Row";
-
-import ToolTip from "~/renderer/components/Tooltip";
-import ClaimRewards from "~/renderer/icons/ClaimReward";
-import DelegateIcon from "~/renderer/icons/Delegate";
 import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
+import Text from "~/renderer/components/Text";
+import IconChartLine from "~/renderer/icons/ChartLine";
+import DelegateIcon from "~/renderer/icons/Delegate";
+import { openURL } from "~/renderer/linking";
+import { Header } from "./Header";
+import { Row } from "./Row";
 
 type Props = {
   account: Account,

@@ -1,22 +1,20 @@
 // @flow
 
+import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
-
-import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { multiline } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
-import Button from "~/renderer/components/Button";
-import RetryButton from "~/renderer/components/RetryButton";
-import ErrorDisplay from "~/renderer/components/ErrorDisplay";
-import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import BroadcastErrorDisclaimer from "~/renderer/components/BroadcastErrorDisclaimer";
+import Button from "~/renderer/components/Button";
+import ErrorDisplay from "~/renderer/components/ErrorDisplay";
+import RetryButton from "~/renderer/components/RetryButton";
+import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import { OperationDetails } from "~/renderer/drawers/OperationDetails";
 import { setDrawer } from "~/renderer/drawers/Provider";
-
+import { multiline } from "~/renderer/styles/helpers";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
 
 const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(() => ({

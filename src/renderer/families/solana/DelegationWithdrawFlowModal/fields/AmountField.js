@@ -1,15 +1,12 @@
 // @flow
 
-import React, { useCallback } from "react";
-import invariant from "invariant";
-import styled from "styled-components";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import type { Account, Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import InputCurrency from "~/renderer/components/InputCurrency";
+import type { Account, Transaction, TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import invariant from "invariant";
+import React from "react";
+import styled from "styled-components";
 import Box from "~/renderer/components/Box";
-import GenericContainer from "~/renderer/components/FeesContainer";
-import { BigNumber } from "bignumber.js";
+import InputCurrency from "~/renderer/components/InputCurrency";
 
 type Props = {
   account: Account,

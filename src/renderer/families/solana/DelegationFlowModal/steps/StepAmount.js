@@ -1,20 +1,14 @@
 // @flow
 
+import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import React, { Fragment, PureComponent } from "react";
 import { Trans } from "react-i18next";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import CurrencyDownStatusAlert from "~/renderer/components/CurrencyDownStatusAlert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import SpendableBanner from "~/renderer/components/SpendableBanner";
-import BuyButton from "~/renderer/components/BuyButton";
-import { NotEnoughGas } from "@ledgerhq/errors";
-import Label from "~/renderer/components/Label";
-import Input from "~/renderer/components/Input";
-import { useSelector } from "react-redux";
-
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import AmountField from "~/renderer/modals/Send/fields/AmountField";
 import type { StepProps } from "../types";

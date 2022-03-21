@@ -1,28 +1,25 @@
 // @flow
-import invariant from "invariant";
-import React, { useCallback, useState, useRef, useEffect, useMemo } from "react";
-import { Trans } from "react-i18next";
-import { BigNumber } from "bignumber.js";
-import type { TFunction } from "react-i18next";
-
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
-import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
-import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import { getAddressExplorer, getDefaultExplorerView } from "@ledgerhq/live-common/lib/explorers";
+import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import type { ValidatorAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
-
-import { openURL } from "~/renderer/linking";
+import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
+import { BigNumber } from "bignumber.js";
+import invariant from "invariant";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import type { TFunction } from "react-i18next";
+import { Trans } from "react-i18next";
 import Box from "~/renderer/components/Box";
 import ValidatorRow, { IconContainer } from "~/renderer/components/Delegation/ValidatorRow";
-import ValidatorListHeader from "~/renderer/components/Delegation/ValidatorListHeader";
-import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
 import ValidatorSearchInput, {
   NoResultPlaceholder,
 } from "~/renderer/components/Delegation/ValidatorSearchInput";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
-import Text from "~/renderer/components/Text";
 import Image from "~/renderer/components/Image";
+import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
+import Text from "~/renderer/components/Text";
+import { openURL } from "~/renderer/linking";
 
 type Props = {
   t: TFunction,
@@ -85,7 +82,6 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
   }, []);
 
   const renderItem = (validator: ValidatorAppValidator) => {
-    //const { validator, meta } = validator;
     return (
       <ValidatorRow
         // HACK: if value > 0 then row is shown as active
@@ -101,7 +97,7 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
             )}
           </IconContainer>
         }
-        title={validator.name ?? validator.voteAccount}
+        title={validator.name || validator.voteAccount}
         subtitle={
           <>
             <Trans i18nKey="solana.delegation.totalStake"></Trans>

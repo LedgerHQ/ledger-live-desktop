@@ -1,11 +1,11 @@
 // @flow
 
 import React from "react";
-import styled from "styled-components";
 import { Trans } from "react-i18next";
+import styled from "styled-components";
 import Box from "~/renderer/components/Box/Box";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { HeaderWrapper } from "~/renderer/components/TableContainer";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 export const TableLine: ThemedComponent<{}> = styled(Box).attrs(() => ({
   ff: "Inter|SemiBold",

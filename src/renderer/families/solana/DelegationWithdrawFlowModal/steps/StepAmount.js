@@ -1,20 +1,16 @@
 // @flow
-import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
-import React, { useCallback, useMemo } from "react";
-import { useTranslation, Trans } from "react-i18next";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import type { StepProps } from "../types";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import AmountField from "../fields/AmountField";
-import Text from "~/renderer/components/Text";
-import Alert from "~/renderer/components/Alert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
-import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import Label from "~/renderer/components/Label";
+import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import ErrorDisplay from "../../shared/components/ErrorDisplay";
+import AmountField from "../fields/AmountField";
+import type { StepProps } from "../types";
 
 export default function StepAmount({
   account,
@@ -24,15 +20,7 @@ export default function StepAmount({
   status,
   error,
 }: StepProps) {
-  //invariant(account && transaction && transaction.validators, "account and transaction required");
-
-  const bridge = getAccountBridge(account);
-
   const { t } = useTranslation();
-
-  const onChangeAmount = useCallback((amount: BigNumber) => {
-    //updateValidator({ amount });
-  }, []);
 
   return (
     <Box flow={1}>

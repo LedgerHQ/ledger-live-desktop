@@ -1,30 +1,25 @@
 // @flow
 
-import React, { useCallback, useMemo } from "react";
-import styled from "styled-components";
-import { Trans } from "react-i18next";
-import moment from "moment";
-
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
-import { stakeActions as solanaStakeActions } from "@ledgerhq/live-common/lib/families/solana/logic";
-import type { Account } from "@ledgerhq/live-common/lib/types";
-import { formatCurrencyUnit, getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
-
-import { TableLine } from "./Header";
-import DropDown, { DropDownItem } from "~/renderer/components/DropDownSelector";
-
-import Box from "~/renderer/components/Box/Box";
-import ChevronRight from "~/renderer/icons/ChevronRight";
-import CheckCircle from "~/renderer/icons/CheckCircle";
-import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
-import ToolTip from "~/renderer/components/Tooltip";
-import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
-import Text from "~/renderer/components/Text";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import { stakeActions as solanaStakeActions } from "@ledgerhq/live-common/lib/families/solana/logic";
+import type { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";
-import { useSolanaPreloadData } from "@ledgerhq/live-common/lib/families/solana/react";
+import React, { useCallback } from "react";
+import { Trans } from "react-i18next";
+import styled from "styled-components";
+import Box from "~/renderer/components/Box/Box";
+import DropDown, { DropDownItem } from "~/renderer/components/DropDownSelector";
+import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Image from "~/renderer/components/Image";
+import Text from "~/renderer/components/Text";
+import ToolTip from "~/renderer/components/Tooltip";
+import CheckCircle from "~/renderer/icons/CheckCircle";
+import ChevronRight from "~/renderer/icons/ChevronRight";
+import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { TableLine } from "./Header";
 
 const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;

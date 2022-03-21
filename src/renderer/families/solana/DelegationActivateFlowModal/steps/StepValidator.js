@@ -1,23 +1,18 @@
 // @flow
-import invariant from "invariant";
-import React, { useCallback, useState } from "react";
-import { Trans } from "react-i18next";
-import type { StepProps } from "../types";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+import type { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
+import type { AccountBridge } from "@ledgerhq/live-common/lib/types";
+import invariant from "invariant";
+import React from "react";
+import { Trans } from "react-i18next";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-
-import ValidatorsField from "../../shared/fields/ValidatorsField";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
-
-import type { AccountBridge } from "@ledgerhq/live-common/lib/types";
-import type {
-  SolanaValidatorWithMeta,
-  Transaction,
-} from "@ledgerhq/live-common/lib/families/solana/types";
 import ErrorDisplay from "../../shared/components/ErrorDisplay";
+import ValidatorsField from "../../shared/fields/ValidatorsField";
+import type { StepProps } from "../types";
 
 export default function StepValidator({
   account,
