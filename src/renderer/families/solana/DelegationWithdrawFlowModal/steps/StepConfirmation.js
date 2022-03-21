@@ -37,7 +37,7 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Delegation Withdraw Solana" name="Step Confirmed" />
+        <TrackPage category="Solana Delegation Withdraw" name="Step Confirmation" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={
@@ -54,7 +54,7 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Delegation Withdraw Solana" name="Step Confirmation Error" />
+        <TrackPage category="Solana Delegation Withdraw" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer title={<Trans i18nKey="solana.common.broadcastError" />} />
         ) : null}
@@ -86,7 +86,7 @@ export function StepConfirmationFooter({
         <Button
           primary
           ml={2}
-          event="Vote Flow Step 3 View OpD Clicked"
+          event="Solana Delegation Withdraw View OpD Clicked"
           onClick={() => {
             onClose();
             if (account && optimisticOperation) {

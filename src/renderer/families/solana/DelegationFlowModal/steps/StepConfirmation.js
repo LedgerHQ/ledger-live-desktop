@@ -37,7 +37,7 @@ function StepConfirmation({
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Delegation Solana" name="Step Confirmed" />
+        <TrackPage category="Solana Delegation" name="Step Confirmation" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="solana.delegation.flow.steps.confirmation.success.title" />}
@@ -82,7 +82,7 @@ export function StepConfirmationFooter({
         <Button
           primary
           ml={2}
-          event="Vote Flow Step 3 View OpD Clicked"
+          event="Solana Delegation View OpD Clicked"
           onClick={() => {
             onClose();
             if (account && optimisticOperation) {

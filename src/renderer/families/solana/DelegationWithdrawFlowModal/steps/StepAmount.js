@@ -24,7 +24,7 @@ export default function StepAmount({
 
   return (
     <Box flow={1}>
-      <TrackPage category="Delegation Withdraw Flow Solana" name="Step 1" />
+      <TrackPage category="Solana Delegation Withdraw" name="Step Amount" />
       {error && <ErrorBanner error={error} />}
       <Label>{t("send.steps.details.amount")}</Label>
       <AmountField transaction={transaction} account={account} status={status} />

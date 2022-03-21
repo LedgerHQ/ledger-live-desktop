@@ -60,7 +60,7 @@ export default function StepValidator({
 
   return (
     <Box flow={1}>
-      <TrackPage category="Delegation Flow" name="Step 1" />
+      <TrackPage category="Solana Delegation Reactivate" name="Step Validator" />
       {error && <ErrorBanner error={error} />}
       <Box horizontal>
         <Box mr={1}>

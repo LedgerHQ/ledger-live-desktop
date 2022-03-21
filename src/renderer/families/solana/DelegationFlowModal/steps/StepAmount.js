@@ -28,7 +28,7 @@ const StepAmount = ({
 
   return (
     <Box flow={4}>
-      <TrackPage category="Solana Delegation Flow" name="Step Amount" />
+      <TrackPage category="Solana Delegation" name="Step Amount" />
       {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       {account && transaction && mainAccount && (
