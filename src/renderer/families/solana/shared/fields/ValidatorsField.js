@@ -8,10 +8,7 @@ import type { TFunction } from "react-i18next";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
-import {
-  useSolanaPreloadData,
-  //useSortedValidators,
-} from "@ledgerhq/live-common/lib/families/solana/react";
+import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import type { ValidatorAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 
@@ -46,16 +43,16 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
 
   const unit = getAccountUnit(account);
 
-  const solanaPreloadData = useSolanaPreloadData(account.currency);
+  const validators = useLedgerFirstShuffledValidators(account.currency);
 
   const validatorsFiltered = useMemo(() => {
-    return (solanaPreloadData?.validators || []).filter(validator => {
+    return validators.filter(validator => {
       return (
         validator.name?.toLowerCase().startsWith(search) ||
         validator.voteAccount.toLowerCase().startsWith(search)
       );
     });
-  }, [solanaPreloadData, search]);
+  }, [validators, search]);
 
   const containerRef = useRef();
 
@@ -63,7 +60,7 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
 
   const onExternalLink = useCallback(
     (address: string) => {
-      const validator = (solanaPreloadData?.validators ?? []).find(v => v.voteAccount === address);
+      const validator = validators.find(v => v.voteAccount === address);
 
       const url =
         (validator && validator.wwwUrl) ||
