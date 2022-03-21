@@ -1085,7 +1085,7 @@
 | Ethereum | AUSCM | 0x1c7BBADc81E18F7177A95eb1593e5f5f35861B10 | Auric Network |  | ethereum/erc20/auric_network |
 | Ethereum | AUR | 0x6E98E5401ADCB0D76F4DEBfc3d794B3031F48790 | Aurix Exchange |  | ethereum/erc20/aurix_exchange |
 | Ethereum | AOA | 0x9ab165D795019b6d8B3e971DdA91071421305e5a | Aurora |  | ethereum/erc20/aurora |
-| Ethereum | URUS | 0x6c5fbc90E4D78F70Cc5025dB005B39B03914fC0c | Aurox Token |  | ethereum/erc20/aurox_token |
+| Ethereum | URUS | 0xc6DdDB5bc6E61e0841C54f3e723Ae1f3A807260b | Aurox Token |  | ethereum/erc20/aurox_token |
 | Ethereum | AWX | 0x54E46cC89588318e3964ca2c1Be94Db9D5cA3dFb | AurusCoin (old) | countervalues disabled | ethereum/erc20/auruscoin_old |
 | Ethereum | AWX | 0xA51Fc71422a30FA7FFa605B360c3B283501b5bf6 | AurusDeFi |  | ethereum/erc20/aurusdefi |
 | Ethereum | AWX | 0x1EFdfC6146cAd8909817284AE99325EF1cAF623e | AurusDeFi (old) | countervalues disabled | ethereum/erc20/aurusdefi_old |
