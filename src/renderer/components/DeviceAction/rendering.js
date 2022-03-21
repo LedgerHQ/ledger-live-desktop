@@ -53,7 +53,7 @@ import { context } from "~/renderer/drawers/Provider";
 import { track } from "~/renderer/analytics/segment";
 import { relaunchOnboarding } from "~/renderer/actions/onboarding";
 
-const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
+export const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
   max-width: 100%;
   height: ${p => (p.modelId === "blue" ? 300 : 200)}px;
