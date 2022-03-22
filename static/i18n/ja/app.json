@@ -1212,7 +1212,7 @@
     "marketList": {
       "crypto": "暗号資産",
       "price": "価格",
-      "change": "変更",
+      "change": "前日比",
       "marketCap": "マーケットキャップ",
       "last7d": "過去7日間"
     },
