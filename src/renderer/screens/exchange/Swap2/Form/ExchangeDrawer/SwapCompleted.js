@@ -26,10 +26,6 @@ const IconWrapper = styled(Box)`
   position: relative;
 `;
 
-const CapitalizedText = styled.span`
-  text-transform: capitalize;
-`;
-
 const Pill = styled(Text)`
   user-select: text;
   border-radius: 4px;
@@ -43,6 +39,7 @@ const SwapIdWrapper: ThemedComponent<{}> = styled(Box).attrs(p => ({
   fontSize: 4,
   relative: true,
 }))`
+  padding-top: 24px;
 
   ${GradientHover} {
     display: none;
@@ -110,10 +107,18 @@ const SwapCompleted = ({
       <Text mt={13} textAlign="center" color="palette.text.shade50" ff="Inter|Regular" fontSize={4}>
         <Trans i18nKey={`swap2.exchangeDrawer.completed.description`} values={{ targetCurrency }} />
       </Text>
-      <Alert type="help" mt={6} right={<SwapPill swapId={swapId} />}>
+      <SwapPill swapId={swapId} />
+      <Alert type="help" mt={6}>
         <Trans i18nKey={`swap2.exchangeDrawer.completed.disclaimer`} values={{ provider }}>
           <FakeLink onClick={openProviderSupport}>
-            <CapitalizedText style={{ marginRight: 4 }}>{provider}</CapitalizedText>
+            <span
+              style={{
+                marginRight: 4,
+                textTransform: provider === "ftx" ? "uppercase" : "capitalized",
+              }}
+            >
+              {provider}
+            </span>
           </FakeLink>
         </Trans>
       </Alert>
