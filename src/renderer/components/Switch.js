@@ -82,7 +82,11 @@ export default function Switch({
       small={small}
       medium={medium}
       isChecked={isChecked}
-      onClick={() => onChange(!isChecked)}
+      onClick={() => {
+        if (!disabled) {
+          onChange(!isChecked);
+        }
+      }}
       className="switch"
       forceBgColor={forceBgColor}
     >
