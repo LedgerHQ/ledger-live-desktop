@@ -718,7 +718,13 @@ export const renderSwapDeviceConfirmationV2 = ({
             provider: (
               <Box horizontal alignItems="center" style={{ gap: "6px" }}>
                 <ProviderIcon size={18} />
-                <Text style={{ textTransform: "capitalize" }}>{exchangeRate.provider}</Text>
+                <Text
+                  style={{
+                    textTransform: exchangeRate.provider === "ftx" ? "uppercase" : "capitalize",
+                  }}
+                >
+                  {exchangeRate.provider}
+                </Text>
               </Box>
             ),
             fees: (
