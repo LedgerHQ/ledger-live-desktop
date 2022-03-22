@@ -139,9 +139,9 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
           </Box>
         )}
         {(stake.activation.state === "activating" || stake.activation.state === "deactivating") && (
-          <Box color="positiveGreen">
-            <ToolTip content={<Trans i18nKey="solana.delegation.activeTooltip" />}>
-              <Loader color="orange" size={14} />
+          <Box color="orange">
+            <ToolTip content={<Trans i18nKey="solana.delegation.inactiveTooltip" />}>
+              <Loader size={14} />
             </ToolTip>
           </Box>
         )}
