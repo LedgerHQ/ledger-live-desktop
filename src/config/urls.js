@@ -176,6 +176,12 @@ export const urls = {
         support: "https://support.sendwyre.com/hc/en-us/requests/new",
         kyc: "https://support.ledger.com/hc/en-us/articles/4404422869265",
       },
+      ftx: {
+        main: "",
+        tos: "",
+        support: "",
+        kyc: "",
+      },
     },
   },
   exchange: {

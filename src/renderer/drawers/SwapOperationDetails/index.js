@@ -225,7 +225,7 @@ const SwapOperationDetails = ({
         <OpDetailsData>
           <LinkWithExternalIcon
             fontSize={12}
-            style={{ textTransform: "capitalize" }}
+            style={{ textTransform: provider === "ftx" ? "uppercase" : "capitalize" }}
             onClick={() => openURL(urls.swap.providers[provider]?.main)}
           >
             {provider}

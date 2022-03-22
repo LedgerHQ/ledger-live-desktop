@@ -61,7 +61,9 @@ const SectionProvider = ({ provider, status }: SectionProviderProps) => {
       <SummaryLabel label={t("swap2.form.details.label.provider")} />
       {(provider && (
         <div style={{ display: "flex", columnGap: "6px", alignItems: "center" }}>
-          <SummaryValue value={provider}>{ProviderIcon && <ProviderIcon size={19} />}</SummaryValue>
+          <SummaryValue value={provider === "ftx" ? provider.toUpperCase() : provider}>
+            {ProviderIcon && <ProviderIcon size={19} />}
+          </SummaryValue>
           {status ? <ProviderStatusTag status={status} /> : null}
         </div>
       )) || (
