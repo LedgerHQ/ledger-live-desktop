@@ -93,7 +93,6 @@ const AccountBalanceSummaryFooter = ({ account, countervalue }: Props) => {
     _delegatedWithdrawableBalance,
     formatConfig,
   );
-  debugger;
 
   return (
     <Wrapper>

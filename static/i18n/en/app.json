@@ -2580,6 +2580,15 @@
         "info": "How Delegation works",
         "delegation": "Earn rewards"
       },
+      "earnRewards": {
+        "description": "You may earn rewards by delegating your SOL assets to a validator.",
+        "bullet": {
+          "0": "You keep ownership of delegated assets",
+          "1": "Delegate using your Ledger device",
+          "2": "Assets will be available after undelegation"
+        },
+        "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+      },
       "flow": {
         "title": "Delegate",
         "steps": {
