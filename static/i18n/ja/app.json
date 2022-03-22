@@ -65,7 +65,7 @@
     "reject": "却下",
     "cancel": "キャンセル",
     "getSupport": "サポートを利用する",
-    "delete": "削除",
+    "delete": "Remove account from portfolio",
     "launch": "開始",
     "continue": "続行",
     "previous": "戻る",
@@ -164,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}} KB",
-    "mbUnit": "{{size}} MB"
+    "kbUnit": "{{size}}KB",
+    "mbUnit": "{{size}}MB"
   },
   "time": {
     "minute": "分",
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "カード",
-    "learn": "Learn",
+    "learn": "学ぶ",
     "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "テスト"
   },
   "fullNode": {
     "status": "ステータス",
@@ -580,7 +580,7 @@
               "fields": {
                 "nodeHost": {
                   "title": "ホスト",
-                  "tooltip": "ノードがこのコンピュータ上で実行されている場合はデフォルトのままにするか、ノードの IP アドレスとポート番号を変更してください。"
+                  "tooltip": "ノードがこのコンピューター上で実行されている場合はデフォルトのままにするか、ノードの IP アドレスとポート番号を変更してください。"
                 },
                 "rpcCredentials": {
                   "title": "RPCクレデンシャル",
@@ -635,12 +635,12 @@
             "notConnected": {
               "header": "Ledger SatStackをダウンロードして起動する",
               "description": "Ledger SatStackは、Ledger Liveがフルノードと通信できるようにするためのアプリケーションです。続行する前にダウンロードして起動してください。",
-              "disclaimer": "SatStackはLedger Liveのフルノード接続に必要です。コンピュータ起動時のSatStackの自動起動設定を検討してください。",
+              "disclaimer": "SatStackはLedger Liveのフルノード接続に必要です。コンピューター起動時のSatStackの自動起動設定を検討してください。",
               "cta": "SatStackをダウンロード"
             },
             "satstack-disconnected": {
               "header": "SatStackに接続ができませんでした。",
-              "description": "このコンピュータでSatStackが起動していることを確認してください。"
+              "description": "このコンピューターでSatStackが起動していることを確認してください。"
             },
             "satstack-outdated": {
               "header": "SatStackをアップグレードしてください。",
@@ -1187,7 +1187,13 @@
     "deviceInBootloader": "Bootloaderモード搭載。<1>続行</1>をクリックしてアップデートしてください。"
   },
   "learn": {
-    "title": "Learn"
+    "title": "学ぶ",
+    "noConnection": "接続なし",
+    "noConnectionDesc": "インターネットにアクセスできません。接続を確認して、もう一度やり直してください。",
+    "sectionShows": "表示",
+    "sectionVideo": "動画",
+    "sectionPodcast": "ポッドキャスト",
+    "sectionArticles": "記事"
   },
   "market": {
     "title": "マーケット",
@@ -1487,6 +1493,7 @@
     "appNotInstalled": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
     "appNotInstalled_plural": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
     "openManager": "「管理」を開く",
+    "openOnboarding": "デバイスをセットアップ",
     "outdated": "アプリのバージョンが最新ではありません。",
     "outdatedDesc": "お使いのデバイス上の{{appName}} アプリに重要なアップデートがあります。「管理」に移動してアップデートしてください。",
     "installApp": "{{appName}}アプリのインストール",
@@ -1604,10 +1611,10 @@
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
         "goToAccounts": "「アカウント」へ移動",
         "intallParentApp": "{{appName}} アプリをインストール",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "アプリに移動する",
+        "swap": "スワップ",
+        "tool": "詳細はこちら",
+        "app": "詳細はこちら"
       },
       "uninstall": {
         "title": "すべてアンインストール",
@@ -2701,7 +2708,9 @@
       "addLocalAppDesc": "ローカルファイルを参照し、ローカルのマニフェストファイルを使用してローカルアプリを追加する",
       "addLocalAppButton": "画面をチェックする",
       "runLocalAppDeleteButton": "削除",
-      "runLocalAppOpenButton": "開く"
+      "runLocalAppOpenButton": "開く",
+      "enableLearnStagingUrl": "学習ページのステージングURL",
+      "enableLearnStagingUrlDesc": "学習ページのステージングURLを有効にする。"
     },
     "currencies": {
       "selectPlaceholder": "暗号資産を選択",
@@ -2751,11 +2760,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "試験的JSの実装",
-          "description": "Algorand and Tezosの試験的JS実装を利用する。"
+          "description": "Tezosに試験的JS実装を使用する。"
         },
         "experimentalCurrencies": {
           "title": "試験的統合",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "利用可能な試験的暗号資産の統合を使用する。"
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
@@ -2782,14 +2791,14 @@
           "description": "プロバイダー管理でアプリプロバイダーを変更すると、Ledgerデバイスにアプリをインストールまたはアンインストールできなくなる場合があります。"
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "Lottieアニメーションのテスト",
+          "description": "Ledger Liveで使用される全アニメーションをテストする"
         }
       }
     },
     "hardResetModal": {
       "title": "Ledger Liveをリセット",
-      "desc": "Ledger Liveをリセットして、コンピュータ上のすべての設定とアカウントを消去します。 その後パスワードを選択し、Ledgerデバイスにアカウントを再度追加することが可能です。 暗号資産へのアクセスを提供する秘密鍵は、引き続きLedgerデバイスに安全に保管され、リカバリフレーズによってバックアップされます。",
+      "desc": "Ledger Liveをリセットして、コンピューター上のすべての設定とアカウントを消去します。 その後パスワードを選択し、Ledgerデバイスにアカウントを再度追加することが可能です。 暗号資産へのアクセスを提供する秘密鍵は、引き続きLedgerデバイスに安全に保管され、リカバリフレーズによってバックアップされます。",
       "warning": "Ledger Liveをリセットすると、すべてのアカウントのスワップ取引履歴が消去されます。"
     },
     "softResetModal": {
@@ -2807,7 +2816,8 @@
     "removeAccountModal": {
       "title": "アカウントの削除",
       "desc": "これは、お客様の暗号資産には影響しません。既存のアカウントは、後からいつでも追加できます。",
-      "warning": "このアカウントを削除すると、このアカウントに関連するスワップ取引履歴が消去されます。"
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "ユーザーデータの閲覧",
@@ -2999,7 +3009,7 @@
         "contactSupportCTA": "サポートへのお問い合わせ",
         "continueCTA": "続行",
         "title": "箱の中身を確認してください。",
-        "description": "{{device}}にPINコードまたはリカバリーフレーズが付属していた場合、そのデバイスは安全ではありません。絶対に使用せず、Ledgerサポートに連絡してください。",
+        "description": "{{device}}に、PINコードまたはリカバリーフレーズが付属していた場合、そのデバイスは安全ではありません。絶対に使用せず、Ledgerサポートに連絡してください。",
         "alert": "デバイスのセットアップ時に表示されたリカバリーフレーズのみを使用してください。"
       }
     },
@@ -3018,7 +3028,7 @@
     "screens": {
       "welcome": {
         "title": "ようこそ、Ledgerへ",
-        "description": "コンピュータで暗号資産を安全に管理しましょう。",
+        "description": "コンピューターで暗号資産を安全に管理しましょう。",
         "cta": "はじめる",
         "noDevice": "デバイスがありませんか？<0>Ledger Nano Xを購入</0>",
         "languageWarning": {
@@ -3088,7 +3098,7 @@
           "deviceHowTo": {
             "turnOn": {
               "title": "Nanoの電源をオンにする",
-              "descr": "USBケーブルを使用して、デバイスをコンピュータに接続する。"
+              "descr": "USBケーブルを使用して、デバイスをコンピューターに接続する。"
             },
             "browse": {
               "title": "デバイスの画面をチェック",
@@ -3111,7 +3121,7 @@
           "deviceHowTo2": {
             "turnOn": {
               "title": "Nanoの電源をオンにする",
-              "descr": "USBケーブルでデバイスをコンピュータに接続する。"
+              "descr": "USBケーブルでデバイスをコンピューターに接続する。"
             },
             "browse": {
               "title": "デバイスの画面をチェック",
@@ -3257,7 +3267,7 @@
           "genuineCheck": {
             "success": {
               "title": "All good!",
-              "desc": "{{deviceName}} は正規品で、Ledger Liveを使う準備が整いました。"
+              "desc": "{{deviceName}} は正規品です。Ledger Liveの準備が整いました。"
             },
             "buttons": {
               "next": "続行",
@@ -3452,7 +3462,7 @@
           }
         },
         "anotherComputer": {
-          "title": "別のコンピュータを試す",
+          "title": "別のコンピューターを試す",
           "bullets": {
             "0": "別のコンピューターで<0>{{link}}</0>にアクセスし、Ledger Liveをダウンロードしてインストールする。",
             "1": "デバイスを接続してロックを解除し、検出されるか確認する。"
@@ -3592,6 +3602,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "特定の設定に必要な{{appName}}アプリが見つかりません。",
+      "description": "管理画面からアプリの再インストールを試す"
+    },
     "countervaluesUnavailable": {
       "title": "現在、この資産のカウンターバリュー（表示通貨）を提供できません。"
     },
@@ -3719,6 +3733,10 @@
     "DeviceHalted": {
       "title": "Ledgerデバイスを再起動し、もう一度やり直してください。",
       "description": "予期しないエラーが発生しました。もう一度お試しください。"
+    },
+    "DeviceNotOnboarded": {
+      "title": "お使いのデバイスはまだ使用できません",
+      "description": "Ledger Liveを使用する前にデバイスを設定する。"
     },
     "DeviceSocketFail": {
       "title": "Ledgerデバイスを再起動し、もう一度やり直してください。",
