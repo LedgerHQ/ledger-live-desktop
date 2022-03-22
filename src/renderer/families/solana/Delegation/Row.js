@@ -18,6 +18,7 @@ import ToolTip from "~/renderer/components/Tooltip";
 import CheckCircle from "~/renderer/icons/CheckCircle";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
+import Loader from "~/renderer/icons/Loader";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { TableLine } from "./Header";
 
@@ -123,16 +124,24 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
         <Ellipsis>{validatorName}</Ellipsis>
       </Column>
       <Column>
-        {stake.activation.state === "active" || stake.activation.state === "activating" ? (
+        {stake.activation.state === "active" && (
           <Box color="positiveGreen">
             <ToolTip content={<Trans i18nKey="solana.delegation.activeTooltip" />}>
               <CheckCircle size={14} />
             </ToolTip>
           </Box>
-        ) : (
+        )}
+        {stake.activation.state === "inactive" && (
           <Box color="alertRed">
             <ToolTip content={<Trans i18nKey="solana.delegation.inactiveTooltip" />}>
               <ExclamationCircleThin size={14} />
+            </ToolTip>
+          </Box>
+        )}
+        {(stake.activation.state === "activating" || stake.activation.state === "deactivating") && (
+          <Box color="orange">
+            <ToolTip content={<Trans i18nKey="solana.delegation.inactiveTooltip" />}>
+              <Loader size={14} />
             </ToolTip>
           </Box>
         )}
