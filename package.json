@@ -47,7 +47,7 @@
     "@ledgerhq/electron-updater": "^4.2.2",
     "@ledgerhq/errors": "6.10.0",
     "@ledgerhq/hw-transport": "6.24.1",
-    "@ledgerhq/hw-transport-http": "6.26.0",
+    "@ledgerhq/hw-transport-http": "6.27.0",
     "@ledgerhq/hw-transport-node-hid-singleton": "6.26.0",
     "@ledgerhq/ledger-core": "6.14.5",
     "@ledgerhq/live-common": "git+https://github.com/LedgerHQ/ledger-live-common.git#feat/LL-7742-marketprovider-updated",
