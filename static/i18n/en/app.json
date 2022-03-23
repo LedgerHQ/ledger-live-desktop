@@ -65,7 +65,7 @@
     "reject": "Reject",
     "cancel": "Cancel",
     "getSupport": "Get support",
-    "delete": "Delete",
+    "delete": "Remove account from portfolio",
     "launch": "Launch",
     "continue": "Continue",
     "previous": "Previous",
@@ -2821,7 +2821,8 @@
     "removeAccountModal": {
       "title": "Remove account",
       "desc": "This will not affect your crypto assets. Existing accounts can always be added again.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "View user data",

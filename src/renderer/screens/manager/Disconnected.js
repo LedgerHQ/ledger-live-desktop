@@ -3,6 +3,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { lastSeenDeviceSelector } from "~/renderer/reducers/settings";
 
+import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import {
   Wrapper,
   Title,
@@ -10,32 +12,55 @@ import {
   renderLoading,
 } from "~/renderer/components/DeviceAction/rendering";
 import { Trans } from "react-i18next";
-import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import { useHistory } from "react-router-dom";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { command } from "~/renderer/commands";
 
-import nanoX from "./assets/nanoX.png";
 import nanoS from "./assets/nanoS.png";
+import blue from "./assets/blue.png";
+import nanoX from "./assets/nanoX.png";
+import nanoSP from "./assets/nanoSP.png";
+import nanoSDark from "./assets/nanoS_dark.png";
+import blueDark from "./assets/blue_dark.png";
+import nanoXDark from "./assets/nanoX_dark.png";
+import nanoSPDark from "./assets/nanoSP_dark.png";
 
-const NanoX = styled.div`
-  background: url(${nanoX}) no-repeat top right;
-  width: 332px;
-  height: 50px;
-  background-size: contain;
-`;
+const illustrations = {
+  nanoX: {
+    light: nanoX,
+    dark: nanoXDark,
+    width: 332,
+  },
+  nanoS: {
+    light: nanoS,
+    dark: nanoSDark,
+    width: 290,
+  },
+  nanoSP: {
+    light: nanoSP,
+    dark: nanoSPDark,
+    width: 332,
+  },
+  blue: {
+    light: blue,
+    dark: blueDark,
+    width: 64,
+  },
+};
 
-const NanoS = styled.div`
-  background: url(${nanoS}) no-repeat top right;
-  width: 290px;
+const Illustration: ThemedComponent<{ modelId: string }> = styled.div`
+  background: url(${p => illustrations[p.modelId][p.theme.colors.palette.type || "light"]})
+    no-repeat top right;
+  width: ${p => illustrations[p.modelId].width}px;
   height: 50px;
   background-size: contain;
 `;
 
 const Disconnected = ({ onTryAgain }: { onTryAgain: boolean => void }) => {
   const lastSeenDevice = useSelector(lastSeenDeviceSelector);
+  const modelId = process.env.OVERRIDE_MODEL_ID || lastSeenDevice?.modelId || "nanoS";
   const [readyToDecide, setReadyToDecide] = useState(false);
   const [showSpinner, setShowSpinner] = useState(true);
   const device = useSelector(getCurrentDevice);
@@ -78,12 +103,12 @@ const Disconnected = ({ onTryAgain }: { onTryAgain: boolean => void }) => {
     };
   }, [readyToDecide, device, onTryAgain]);
 
-  if (showSpinner)
-    return <Wrapper>{renderLoading({ modelId: lastSeenDevice?.modelId || "nanoS" })}</Wrapper>;
+  // $FlowFixMe TODO
+  if (showSpinner) return <Wrapper>{renderLoading({ modelId })}</Wrapper>;
 
   return (
     <Wrapper>
-      {lastSeenDevice?.modelId === "nanoX" ? <NanoX /> : <NanoS />}
+      <Illustration modelId={modelId} />
       <Box mt={60}>
         <Title>
           <Trans i18nKey={"manager.disconnected.title"} />

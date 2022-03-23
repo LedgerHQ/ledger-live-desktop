@@ -150,7 +150,11 @@ function MarkeCoinChartComponent({
             )}
           </Flex>
         </Flex>
-        <Bar onTabChange={setRange} initialActiveIndex={activeRangeIndex}>
+        <Bar
+          data-test-id="market-coin-range-select"
+          onTabChange={setRange}
+          initialActiveIndex={activeRangeIndex}
+        >
           {ranges
             .filter(k => k !== "1h")
             .map(key => (

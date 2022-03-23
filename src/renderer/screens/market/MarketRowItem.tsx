@@ -143,7 +143,7 @@ function MarketRowItem({
           <TableCell loading />
         </TableRow>
       ) : (
-        <TableRow onClick={onCurrencyClick}>
+        <TableRow data-test-id={`market-${currency?.ticker}-row`} onClick={onCurrencyClick}>
           <TableCell>{currency?.marketcapRank ?? "-"}</TableCell>
           <TableCell overflow="hidden" mr={3}>
             <CryptoCurrencyIconWrapper>
@@ -170,12 +170,21 @@ function MarketRowItem({
               {currency.internalCurrency && (
                 <>
                   {availableOnBuy && (
-                    <Button variant="shade" mr={1} onClick={onBuy}>
+                    <Button
+                      data-test-id={`market-${currency?.ticker}-buy-button`}
+                      variant="shade"
+                      mr={1}
+                      onClick={onBuy}
+                    >
                       {t("accounts.contextMenu.buy")}
                     </Button>
                   )}
                   {availableOnSwap && (
-                    <Button variant="shade" onClick={onSwap}>
+                    <Button
+                      data-test-id={`market-${currency?.ticker}-swap-button`}
+                      variant="shade"
+                      onClick={onSwap}
+                    >
                       {t("accounts.contextMenu.swap")}
                     </Button>
                   )}
@@ -189,7 +198,7 @@ function MarketRowItem({
             </Text>
           </TableCell>
           <TableCell>
-            {currency.priceChangePercentage && (
+            {currency.priceChangePercentage ? (
               <FormattedVal
                 isPercent
                 isNegative
@@ -197,6 +206,8 @@ function MarketRowItem({
                 inline
                 withIcon
               />
+            ) : (
+              <Text fontWeight={"medium"}>-</Text>
             )}
           </TableCell>
           {displayMarketCap && (
@@ -218,7 +229,7 @@ function MarketRowItem({
               )}
             </TableCell>
           )}
-          <TableCell onClick={onStarClick}>
+          <TableCell data-test-id={`market-${currency?.ticker}-star-button`} onClick={onStarClick}>
             <Icon name={isStarred ? "StarSolid" : "Star"} size={18} />
           </TableCell>
         </TableRow>

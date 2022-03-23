@@ -28,24 +28,38 @@ type Props = {
   children?: ReactNode;
 };
 
-export const FirebaseRemoteConfigProvider = ({ children }: Props): JSX.Element => {
+export const FirebaseRemoteConfigProvider = ({ children }: Props): JSX.Element | null => {
   const [config, setConfig] = useState<RemoteConfig | null>(null);
+  const [loaded, setLoaded] = useState<boolean>(false);
 
   useEffect(() => {
-    const firebaseConfig = getFirebaseConfig();
-
-    initializeApp(firebaseConfig);
+    try {
+      const firebaseConfig = getFirebaseConfig();
+      initializeApp(firebaseConfig);
+    } catch (error) {
+      console.error(`Failed to initialize Firebase SDK with error: ${error}`);
+      setLoaded(true);
+    }
 
     const fetchConfig = async () => {
-      const remoteConfig = getRemoteConfig();
-      remoteConfig.defaultConfig = {
-        ...formatDefaultFeatures(defaultFeatures),
-      };
-      await fetchAndActivate(remoteConfig);
-      setConfig(remoteConfig);
+      try {
+        const remoteConfig = getRemoteConfig();
+        remoteConfig.defaultConfig = {
+          ...formatDefaultFeatures(defaultFeatures),
+        };
+        await fetchAndActivate(remoteConfig);
+        setConfig(remoteConfig);
+      } catch (error) {
+        console.error(`Failed to fetch Firebase remote config with error: ${error}`);
+      }
+      setLoaded(true);
     };
     fetchConfig();
   }, [setConfig]);
+
+  if (!loaded) {
+    return null;
+  }
 
   return (
     <FirebaseRemoteConfigContext.Provider value={config}>
