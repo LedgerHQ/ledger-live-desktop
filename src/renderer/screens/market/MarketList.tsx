@@ -1,8 +1,5 @@
-import React, { useCallback, useEffect, useState, memo, useMemo } from "react";
-import {
-  MarketDataContextType,
-  useMarketData,
-} from "@ledgerhq/live-common/lib/market/MarketDataProvider";
+import React, { useCallback, memo, useMemo } from "react";
+import { useMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
 import styled from "styled-components";
 import { Flex, Text, Icon } from "@ledgerhq/react-ui";
 import { Trans, useTranslation } from "react-i18next";

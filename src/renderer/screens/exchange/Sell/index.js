@@ -24,8 +24,16 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
   width: 100%;
 `;
 
+type State = {
+  sortedCurrencies: [],
+  isLoading: boolean,
+};
+
 const OffRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatalog }: DProps) => {
-  const [sortedCurrencies, setSortedCurrencies] = useState([]);
+  const [currencyState, setCurrencyState] = useState<State>({
+    sortedCurrencies: [],
+    isLoading: false,
+  });
 
   const allCurrencies = useRampCatalogCurrencies(rampCatalog.value.offRamp);
 
@@ -33,9 +41,16 @@ const OffRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatal
     const filteredCurrencies = defaultTicker
       ? allCurrencies.filter(currency => currency.ticker === defaultTicker)
       : allCurrencies;
+    setCurrencyState(oldState => ({
+      ...oldState,
+      isLoading: true,
+    }));
 
     currenciesByMarketcap(filteredCurrencies).then(sortedCurrencies => {
-      setSortedCurrencies(sortedCurrencies);
+      setCurrencyState({
+        sortedCurrencies,
+        isLoading: false,
+      });
     });
   }, []);
 
@@ -79,7 +94,7 @@ const OffRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatal
   return (
     <BuyContainer>
       <TrackPage category="Multibuy" name="SellPage" />
-      {sortedCurrencies.length === 0 ? (
+      {currencyState.isLoading ? (
         <BigSpinner size={42} />
       ) : account ? (
         <ProviderList
@@ -97,7 +112,7 @@ const OffRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatal
       ) : (
         <SelectAccountAndCurrency
           selectAccount={selectAccount}
-          allCurrencies={sortedCurrencies}
+          allCurrencies={currencyState.sortedCurrencies}
           defaultCurrencyId={defaultCurrencyId}
           defaultAccountId={defaultAccountId}
           confirmCb={confirmButtonTracking}

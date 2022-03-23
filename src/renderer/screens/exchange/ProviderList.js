@@ -30,6 +30,7 @@ import {
 } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 import { languageSelector } from "~/renderer/reducers/settings";
 import { useSelector } from "react-redux";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 
 const assetMap = {
   applepay: applepayLogo,
@@ -167,19 +168,22 @@ type ProviderViewProps = {
   provider: RampLiveAppCatalogEntry,
   onClose: () => void,
   account: AccountLike,
+  parentAccount: Account,
   trade: TradeParams,
 };
 
-function ProviderView({ provider, onClose, trade, account }: ProviderViewProps) {
+function ProviderView({ provider, onClose, trade, account, parentAccount }: ProviderViewProps) {
   const manifest = useRemoteLiveAppManifest(provider.appId);
   const theme = useTheme();
   const language = useSelector(languageSelector);
   const cryptoCurrency = provider.cryptoCurrencies.find(
     crypto => crypto.id === trade.cryptoCurrencyId,
   );
+
+  const mainAccount = getMainAccount(account, parentAccount);
   const inputs = mapQueryParamsForProvider(provider, {
     accountId: account.id,
-    accountAddress: account.freshAddress,
+    accountAddress: mainAccount.freshAddress,
     cryptoCurrencyId: cryptoCurrency ? cryptoCurrency.providerId : undefined,
     fiatCurrencyId: trade.fiatCurrencyId.toLocaleLowerCase(),
     primaryColor: theme.colors.palette.primary.main,
@@ -198,7 +202,7 @@ function ProviderView({ provider, onClose, trade, account }: ProviderViewProps) 
         provider={provider.appId}
         trade={trade}
       />
-      <WebPlatformPlayer onClose={onClose} manifest={manifest} inputs={inputs} />;
+      <WebPlatformPlayer onClose={onClose} manifest={manifest} inputs={inputs} />
     </>
   );
 }
@@ -225,7 +229,6 @@ export function ProviderList({
 
   const filteredProviders = filterRampCatalogEntries(providers, {
     cryptoCurrencies: trade.cryptoCurrencyId ? [trade.cryptoCurrencyId] : undefined,
-    fiatCurrencies: trade.fiatCurrencyId ? [trade.fiatCurrencyId.toLowerCase()] : undefined,
   });
 
   if (selectedProvider) {
@@ -234,6 +237,7 @@ export function ProviderList({
         provider={selectedProvider}
         onClose={() => setSelectedProvider(null)}
         account={account}
+        parentAccount={parentAccount}
         trade={trade}
       />
     );
@@ -243,7 +247,10 @@ export function ProviderList({
     <Container>
       <TrackPage category="Multibuy" name="ProviderList" trade={trade} />
       <Text ff="Inter|Regular" fontSize="13px" lineHeight="15.73px" color="palette.text.shade60">
-        {t("exchange.chooseProviders", { providerCount: filteredProviders.length })}
+        {t(
+          filteredProviders.length === 1 ? "exchange.chooseProvider" : "exchange.chooseProviders",
+          { providerCount: filteredProviders.length },
+        )}
       </Text>
       {filteredProviders.map(provider =>
         provider.type === "LIVE_APP" ? (

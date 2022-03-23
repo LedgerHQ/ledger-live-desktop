@@ -284,7 +284,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
         <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
       )}
       <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-      {manageActions.length > 0 && ManageActionsHeader}
     </FadeInButtonsContainer>
   );
 
