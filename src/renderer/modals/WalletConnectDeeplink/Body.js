@@ -183,7 +183,6 @@ const Body = ({ onClose, link }: BodyProps) => {
       )}
       renderFooter={() => (
         <Footer
-          wcDappName={wcContext.dappInfo?.name}
           wcStatus={wcContext.status}
           account={account}
           onReject={handleReject}

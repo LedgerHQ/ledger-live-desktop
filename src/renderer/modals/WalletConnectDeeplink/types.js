@@ -8,7 +8,6 @@ export type BodyProps = {
 };
 
 export type FooterProps = {
-  wcDappName: ?string,
   account: ?Account,
   wcStatus: STATUS,
   onContinue: Function,
