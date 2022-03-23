@@ -120,7 +120,8 @@ export default function MarketCoinScreen() {
     return [getAllSupportedCryptoCurrencyTickers(rampCatalog.value.onRamp)];
   }, [rampCatalog.value]);
 
-  const availableOnBuy = currency && onRampAvailableTickers.includes(currency.ticker.toUpperCase());
+  const availableOnBuy =
+    currency && currency.ticker && onRampAvailableTickers.includes(currency.ticker.toUpperCase());
   const availableOnSwap = internalCurrency && swapAvailableIds.includes(internalCurrency.id);
 
   useEffect(() => {
@@ -143,11 +144,12 @@ export default function MarketCoinScreen() {
       history.push({
         pathname: "/exchange",
         state: {
-          defaultCurrency: internalCurrency,
+          mode: "onRamp",
+          defaultTicker: currency && currency.ticker ? currency.ticker.toUpperCase() : undefined,
         },
       });
     },
-    [internalCurrency, history],
+    [internalCurrency, history, currency],
   );
 
   const openAddAccounts = useCallback(() => {
