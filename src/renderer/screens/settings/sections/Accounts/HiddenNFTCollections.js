@@ -29,7 +29,12 @@ const HiddenNftCollectionRow = ({
 }) => {
   const account = useSelector(state => accountSelector(state, { accountId }));
 
-  const { metadata, status } = useNftMetadata(contractAddress, account?.nfts[0]?.tokenId);
+  const firstNft = account?.nfts.find(nft => nft.collection.contract === contractAddress);
+
+  const { metadata, status } = useNftMetadata(
+    contractAddress,
+    firstNft?.tokenId,
+  );
   const { tokenName } = metadata || {};
 
   const show = useMemo(() => status === "loading", [status]);
