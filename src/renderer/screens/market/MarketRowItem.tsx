@@ -96,6 +96,7 @@ function MarketRowItem({
       history.push({
         pathname: "/exchange",
         state: {
+          mode: "onRamp",
           defaultTicker: currency.ticker.toUpperCase(),
         },
       });
