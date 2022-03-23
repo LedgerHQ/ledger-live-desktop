@@ -19,8 +19,6 @@ import Tooltip from "~/renderer/components/Tooltip";
 import SelectFeeStrategy from "~/renderer/components/SelectFeeStrategy";
 import CoinControlModal from "./CoinControlModal";
 import { FeesField } from "./FeesField";
-import { PickUnconfirmedRBF } from "./PickUnconfirmedRBF";
-import { RBF } from "./RBF";
 import useBitcoinPickingStrategy from "./useBitcoinPickingStrategy";
 import { useFeesStrategy } from "@ledgerhq/live-common/lib/families/bitcoin/react";
 import SendFeeMode from "~/renderer/components/SendFeeMode";
@@ -41,13 +39,6 @@ const Separator = styled.div`
   height: 1px;
   background-color: ${p => p.theme.colors.palette.text.shade10};
   margin: 20px 0;
-`;
-
-const InputBox = styled(Box)`
-  margin-top: 0;
-  & > * > * {
-    margin-bottom: 12px;
-  }
 `;
 
 const Fields = ({
@@ -128,20 +119,6 @@ const Fields = ({
               </Box>
             </Box>
             <Separator />
-            <InputBox>
-              <RBF
-                transaction={transaction}
-                account={account}
-                onChange={onChange}
-                status={status}
-              />
-              <PickUnconfirmedRBF
-                transaction={transaction}
-                account={account}
-                onChange={onChange}
-                status={status}
-              />
-            </InputBox>
             <CoinControlModal
               transaction={transaction}
               account={account}

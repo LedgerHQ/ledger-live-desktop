@@ -63,7 +63,7 @@ export const CoinControlRow = ({
     input => input.previousOutputIndex === utxo.outputIndex && input.previousTxHash === utxo.hash,
   );
 
-  const unconfirmed = utxoStatus === "pickUnconfirmedRBF" || utxoStatus === "pickPendingNonRBF";
+  const unconfirmed = utxoStatus === "pickPendingUtxo";
   const last = !s.excluded && totalExcludedUTXOS + 1 === account.bitcoinResources?.utxos.length; // make sure that at least one utxo is selected
   const disabled = unconfirmed || last;
 
@@ -87,7 +87,7 @@ export const CoinControlRow = ({
   return (
     <Container disabled={unconfirmed} flow={2} horizontal alignItems="center" onClick={onClick}>
       {unconfirmed ? (
-        <Tooltip content={<Trans i18nKey={"bitcoin.cannotSelect.unconfirmed"} />}>
+        <Tooltip content={<Trans i18nKey={"bitcoin.cannotSelect.pending"} />}>
           <InfoCircle size={16} />
         </Tooltip>
       ) : last ? (
@@ -117,10 +117,6 @@ export const CoinControlRow = ({
         {utxo.blockHeight ? (
           <Text ff="Inter|Medium" fontSize={3} color={"palette.text.shade50"}>
             {account.blockHeight - utxo.blockHeight + " confirmations"}
-          </Text>
-        ) : utxo.rbf ? (
-          <Text ff="Inter|Medium" fontSize={3} color={"alertRed"}>
-            <Trans i18nKey="bitcoin.replaceable" />
           </Text>
         ) : (
           <Text ff="Inter|Medium" fontSize={3} color={"alertRed"}>
