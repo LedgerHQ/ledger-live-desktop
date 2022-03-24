@@ -2775,16 +2775,16 @@
     "@ledgerhq/hw-transport" "^6.24.1"
     bip32-path "0.4.2"
 
-"@ledgerhq/hw-transport-http@6.24.1":
-  version "6.24.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-6.24.1.tgz#f1e3d10d532396b05e230fc0b860443e75f9ac72"
-  integrity sha512-LGKL8Su1VBDiZehoNMCqvFPJGpgKaEv2QHRXUlPK8/vUsC+7ooY+M36esvCQo3PfnFISUIndZBaY/x96ksOp0A==
+"@ledgerhq/hw-transport-http@6.26.0":
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-6.26.0.tgz#3476620e9f4862ffd0da44843876898067c2fcdd"
+  integrity sha512-2kpcj3MteErgqsVK8GUohTxSUKKBUzgfiEl5AyuWYyZ1STxESjIK9UFw223xX6s+iggA3UzolhOV26csVdfYkw==
   dependencies:
     "@ledgerhq/errors" "^6.10.0"
     "@ledgerhq/hw-transport" "^6.24.1"
     "@ledgerhq/logs" "^6.10.0"
-    axios "^0.24.0"
-    ws "7"
+    axios "^0.26.0"
+    ws "8.5.0"
 
 "@ledgerhq/hw-transport-mocker@6.24.1":
   version "6.24.1"
@@ -2805,10 +2805,10 @@
     "@ledgerhq/logs" "^6.10.0"
     node-hid "2.1.1"
 
-"@ledgerhq/hw-transport-node-hid-singleton@6.24.1":
-  version "6.24.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid-singleton/-/hw-transport-node-hid-singleton-6.24.1.tgz#f071a4c6892d5cf0307f64813ed9f130377384b3"
-  integrity sha512-PfhpWCZ0FcCG1xVP/F0x0Va6lR/uaLx8uWXjtvPCJjCcFDHK1wsnzII0PCQWYky3PA9aCgb2qh0ym6gUE6ckUg==
+"@ledgerhq/hw-transport-node-hid-singleton@6.26.0":
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-node-hid-singleton/-/hw-transport-node-hid-singleton-6.26.0.tgz#37e2e3ccb89d00c3d0728660eebb42b5a264cc66"
+  integrity sha512-pvZ2nIE6jNu4Ev7lDh5i7BWGiFAgXcbfaTAMe+2mOVbiwlh804uikUV7k2rVYFZmvZimCYLqc2mk2zTFLWzgJA==
   dependencies:
     "@ledgerhq/devices" "^6.24.1"
     "@ledgerhq/errors" "^6.10.0"
@@ -6504,13 +6504,6 @@ axios@^0.21.1:
   integrity sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==
   dependencies:
     follow-redirects "^1.14.0"
-
-axios@^0.24.0:
-  version "0.24.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
-  integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
-  dependencies:
-    follow-redirects "^1.14.4"
 
 b4a@^1.0.1:
   version "1.3.1"
@@ -11120,7 +11113,7 @@ focus-trap@^6.6.1:
   dependencies:
     tabbable "^5.2.1"
 
-follow-redirects@^1.10.0, follow-redirects@^1.14.0, follow-redirects@^1.14.4, follow-redirects@^1.14.7, follow-redirects@^1.14.8:
+follow-redirects@^1.10.0, follow-redirects@^1.14.0, follow-redirects@^1.14.7, follow-redirects@^1.14.8:
   version "1.14.9"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.9.tgz#dd4ea157de7bfaf9ea9b3fbd85aa16951f78d8d7"
   integrity sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w==
@@ -21580,17 +21573,12 @@ write-json-file@^2.3.0:
     sort-keys "^2.0.0"
     write-file-atomic "^2.0.0"
 
-ws@7, ws@^7, ws@^7.2.0, ws@^7.2.3, ws@^7.4.5, ws@^7.4.6, ws@^7.5.3:
-  version "7.5.6"
-  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.6.tgz#e59fc509fb15ddfb65487ee9765c5a51dec5fe7b"
-  integrity sha512-6GLgCqo2cy2A2rjCNFlxQS6ZljG/coZfZXclldI8FB/1G3CCI36Zd8xy2HrFVACi8tfk5XrgLQEk+P0Tnz9UcA==
-
 ws@7.5.3:
   version "7.5.3"
   resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.3.tgz#160835b63c7d97bfab418fc1b8a9fced2ac01a74"
   integrity sha512-kQ/dHIzuLrS6Je9+uv81ueZomEwH0qVYstcAQ4/Z93K8zeko9gtAbttJWzoC5ukqXY1PpoouV3+VSOqEAFt5wg==
 
-ws@>=7.4.6:
+ws@8.5.0, ws@>=7.4.6:
   version "8.5.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.5.0.tgz#bfb4be96600757fe5382de12c670dab984a1ed4f"
   integrity sha512-BWX0SWVgLPzYwF8lTzEy1egjhS4S4OEAHfsO8o65WOVsrnSRGaSiUaa9e0ggGlkMTtBlmOpEXiie9RUcBO86qg==
@@ -21603,6 +21591,11 @@ ws@^3.0.0:
     async-limiter "~1.0.0"
     safe-buffer "~5.1.0"
     ultron "~1.1.0"
+
+ws@^7, ws@^7.2.0, ws@^7.2.3, ws@^7.4.5, ws@^7.4.6, ws@^7.5.3:
+  version "7.5.6"
+  resolved "https://registry.yarnpkg.com/ws/-/ws-7.5.6.tgz#e59fc509fb15ddfb65487ee9765c5a51dec5fe7b"
+  integrity sha512-6GLgCqo2cy2A2rjCNFlxQS6ZljG/coZfZXclldI8FB/1G3CCI36Zd8xy2HrFVACi8tfk5XrgLQEk+P0Tnz9UcA==
 
 x-is-string@^0.1.0:
   version "0.1.0"
