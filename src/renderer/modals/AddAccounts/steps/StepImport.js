@@ -16,7 +16,6 @@ import uniq from "lodash/uniq";
 import { urls } from "~/config/urls";
 import logger from "~/logger";
 import { prepareCurrency } from "~/renderer/bridge/cache";
-import { openURL } from "~/renderer/linking";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import RetryButton from "~/renderer/components/RetryButton";
 import Box from "~/renderer/components/Box";
@@ -27,11 +26,11 @@ import Spinner from "~/renderer/components/Spinner";
 import Text from "~/renderer/components/Text";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import Switch from "~/renderer/components/Switch";
-import LinkWithExternalIcon from "../../../components/LinkWithExternalIcon";
 
 import type { StepProps } from "..";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
+import byFamily from "~/renderer/generated/NoAssociatedAccounts"
 
 // $FlowFixMe
 const remapTransportError = (err: mixed, appName: string): Error => {
@@ -280,6 +279,7 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
     });
 
     let creatable;
+    const NoAssociatedAccounts = byFamily[currency.family];
     if (alreadyEmptyAccount) {
       creatable = (
         <Trans i18nKey="addAccounts.createNewAccount.noOperationOnLastAccount" parent="div">
@@ -289,31 +289,18 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
           </Text>{" "}
         </Trans>
       );
+    } else if (NoAssociatedAccounts) {
+      // custom family UI for "no associated accounts"
+      creatable = (<NoAssociatedAccounts {...this.props} />);
     } else {
-      // Hedera's "no associated accounts" text
-      const isHedera = mainCurrency.family === t("hedera.name").toString()
-      if (isHedera) {
-        creatable = (
-          <div>
-            <Trans i18nKey="hedera.createHederaAccountHelp.text"></Trans>{" "}
-            <LinkWithExternalIcon
-              fontSize={3}
-              onClick={() => openURL(urls.hedera.supportArticleLink)}
-              label={t("hedera.createHederaAccountHelp.link")}
-            />
-          </div>
-        );
-      } else { // default "no accounts to add" text
-        creatable = (
-          <Trans i18nKey="addAccounts.createNewAccount.noAccountToCreate" parent="div">
-            {" "}
-            <Text ff="Inter|SemiBold" color="palette.text.shade100">
-              {currencyName}
-            </Text>{" "}
-          </Trans>
-        );
-      }
-
+      creatable = (
+        <Trans i18nKey="addAccounts.createNewAccount.noAccountToCreate" parent="div">
+          {" "}
+          <Text ff="Inter|SemiBold" color="palette.text.shade100">
+            {currencyName}
+          </Text>{" "}
+        </Trans>
+      );
     }
 
     const emptyTexts = {
