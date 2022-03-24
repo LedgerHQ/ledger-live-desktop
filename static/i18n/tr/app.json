@@ -65,7 +65,7 @@
     "reject": "Reddet",
     "cancel": "İptal et",
     "getSupport": "Destek alın",
-    "delete": "Remove account from portfolio",
+    "delete": "Hesabı portföyden kaldır",
     "launch": "Başlat",
     "continue": "Devam",
     "previous": "Geri",
@@ -2816,8 +2816,8 @@
     "removeAccountModal": {
       "title": "Hesabı kaldır",
       "desc": "Bu eylem kripto varlıklarınızı etkilemez. Mevcut hesaplar her zaman tekrar eklenebilir.",
-      "delete": "Remove from Portfolio",
-      "warning": "Removing this account will erase your swap transaction history associated to it."
+      "delete": "Portföyden kaldır",
+      "warning": "Bu hesabın kaldırılması, hesapla ilgili takas işlem geçmişinin de silinmesine neden olacaktır."
     },
     "openUserDataDirectory": {
       "title": "Kullanıcı verilerini görün",
@@ -3110,7 +3110,7 @@
             },
             "follow": {
               "title": "Yönergeleri uygulayın",
-              "descr": "PIN kodunuzdaki yönergeleri uygulamak için buraya dönün."
+              "descr": "PIN kodunuzla ilgili yönergeleri uygulamak için buraya dönün."
             },
             "buttons": {
               "next": "Sonraki adım",
@@ -3133,7 +3133,7 @@
             },
             "follow": {
               "title": "Yönergeleri uygulayın",
-              "descr": "PIN kodunuzdaki yönergeleri uygulamak için buraya dönün."
+              "descr": "PIN kodunuzla ilgili yönergeleri uygulamak için buraya dönün."
             },
             "buttons": {
               "next": "Sonraki adım",
@@ -3152,7 +3152,7 @@
             }
           },
           "quizSuccess": {
-            "title": "İşin uzmanı oldunuz bile!",
+            "title": "İşin ustası oldunuz bile!",
             "paragraph": "Kriptonuzu güvenli bir şekilde yönetmeye hazırsınız.\n\nSadece küçük bir adım kaldı!",
             "buttons": {
               "next": "Sonraki adım",
@@ -3161,7 +3161,7 @@
             }
           },
           "quizFailure": {
-            "title": "İşin uzmanı olmanıza az kaldı...",
+            "title": "İşin ustası olmanıza az kaldı...",
             "paragraph": "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz konusunda çok daha rahat hissedeceksiniz.\n\nSadece küçük bir adım kaldı!",
             "buttons": {
               "next": "Sonraki adım",
@@ -3312,7 +3312,7 @@
         },
         "stayOffline": {
           "title": "Çevrim dışı kalın",
-          "description": "Nano'nuz \"soğuk depolama\" cüzdanı olarak çalışır. Bu, uygulamayı kullanırken bile özel anahtarınızı asla çevrim içi olarak açığa çıkarmayacağı anlamına gelir."
+          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
         },
         "validateTransactions": {
           "title": "İşlemleri onaylayın",
@@ -3320,7 +3320,7 @@
         },
         "setUpNanoWallet": {
           "title": "Nano'nuzu kuralım!",
-          "description": "Nano güvenliğinizi kurarak başlayacağız.",
+          "description": "Nano cihazınızın güvenliğini sağlayarak başlayacağız.",
           "CTA": "Haydi yapalım!"
         }
       }

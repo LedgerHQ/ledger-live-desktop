@@ -27,7 +27,7 @@
       "title": "탐색",
       "branch": {
         "soon": "곧 출시 예정",
-        "experimental": "실험적",
+        "experimental": "실험",
         "debug": "디버그"
       },
       "banner": {
@@ -65,7 +65,7 @@
     "reject": "거절",
     "cancel": "취소",
     "getSupport": "지원 받기",
-    "delete": "Remove account from portfolio",
+    "delete": "포트폴리오에서 계정을 제거하세요",
     "launch": "실행",
     "continue": "계속",
     "previous": "이전",
@@ -99,7 +99,7 @@
     "copied": "복사됨",
     "addressCopied": "주소 복사됨",
     "addressCopiedSuspicious": "복사된 주소와 클립보드 주소가 일치하지 않습니다.",
-    "experimentalFeature": "실험적",
+    "experimentalFeature": "실험",
     "information": "정보",
     "search": "검색 중...",
     "searchWithoutEllipsis": "검색",
@@ -1054,7 +1054,7 @@
   },
   "banners": {
     "cleanCache": {
-      "title": "실험적 설정을 변경하려면 캐시 삭제가 필요합니다",
+      "title": "실험 설정을 변경하려면 캐시 삭제가 필요합니다",
       "cta": "캐시 삭제"
     },
     "migrate": "Ledger Live 계정을 업데이트할 수 있습니다",
@@ -2654,7 +2654,7 @@
       "currencies": "암호화폐",
       "help": "도움말",
       "about": "소개",
-      "experimental": "실험적 특징",
+      "experimental": "실험 기능",
       "accounts": "계정",
       "developer": "개발자"
     },
@@ -2698,8 +2698,8 @@
       },
       "debugApps": "디버그 앱 허용",
       "debugAppsDesc": "디버그 태그된 플랫폼 앱 열기를 표시하고 허용하세요.",
-      "experimentalApps": "실험적 앱 허용",
-      "experimentalAppsDesc": "실험적이라 태그 된 플랫폼 앱을 표시하고 허용하세요.",
+      "experimentalApps": "실험 앱 허용",
+      "experimentalAppsDesc": "실험이라 태그 된 플랫폼 앱을 표시하고 허용하세요.",
       "catalogServer": "카탈로그 공급자 설정",
       "catalogServerDesc": "다중 플랫폼 앱 소스 간 전환",
       "enablePlatformDevTools": "플랫폼 개발자 도구 사용",
@@ -2752,19 +2752,19 @@
       "privacyDesc": "당사에서 수집하는 개인 정보, 수집 이유 및 이용 방식에 관한 자세한 내용은 개인 정보 보호 정책을 참고하세요."
     },
     "experimental": {
-      "disclaimer": "이는 기술적 관심과 지식이 풍부한 당사 커뮤니티에 \"있는 그대로\" 제공하는 실험적 기능으로, 언제든지 변경, 중단 또는 제거할 수 있습니다. 기능을 활성화할 경우, 온전히 귀하의 책임 하에 해당 기능을 사용한다는 사실에 동의하게 됩니다.",
+      "disclaimer": "이는 기술적 관심과 지식이 풍부한 당사 커뮤니티에 \"있는 그대로\" 제공하는 실험 기능으로, 언제든지 변경, 중단 또는 제거할 수 있습니다. 기능을 활성화할 경우, 온전히 귀하의 책임 하에 해당 기능을 사용한다는 사실에 동의하게 됩니다.",
       "features": {
         "apiTrongridProxy": {
           "title": "TronGrid.io 사용",
           "description": "원장 프록시 없이 트론 그리드 바로 사용하기"
         },
         "experimentalJSCurrencies": {
-          "title": "실험적 JS 도입",
-          "description": "테조스에 실험적인 JS 구현을 사용합니다."
+          "title": "실험 JS 도입",
+          "description": "테조스에 실험 JS 구현을 사용합니다."
         },
         "experimentalCurrencies": {
-          "title": "실험적 통합",
-          "description": "사용 가능한 실험적 암호화폐 통합을 사용합니다."
+          "title": "실험 통합",
+          "description": "사용 가능한 실험 암호화폐 통합을 사용합니다."
         },
         "experimentalLanguages": {
           "title": "번역 테스팅",
@@ -2779,7 +2779,7 @@
           "description": "잘못된 파생 경로가 있는 계정을 스캔합니다. 잠재적으로 찾은 자산을 일반 계정으로 보내세요."
         },
         "experimentalExplorers": {
-          "title": "실험적 탐색기 API",
+          "title": "실험 탐색기 API",
           "description": "Ledger 블록체인 탐색기 새 버전을 사용해 보세요. 이 설정을 변경하면 계정 잔액과 동기화, 전송 기능이 영향을 받을 수 있습니다.\n(<0></0>)"
         },
         "keychainObservableRange": {
@@ -2816,8 +2816,8 @@
     "removeAccountModal": {
       "title": "계정 제거",
       "desc": "귀하의 암호화폐에는 영향을 주지 않습니다. 기존 계정은 언제든 추가 가능합니다.",
-      "delete": "Remove from Portfolio",
-      "warning": "Removing this account will erase your swap transaction history associated to it."
+      "delete": "포트폴리오에서 제거",
+      "warning": "이 계정을 제거하면 연결된 스왑 거래 내역이 지워집니다."
     },
     "openUserDataDirectory": {
       "title": "사용자 데이터 보기",
