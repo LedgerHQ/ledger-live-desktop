@@ -4127,6 +4127,9 @@
     "NotEnoughBalanceInParentAccount": {
       "title": "Insufficient balance in the parent account"
     },
+    "quantityNeedsToBePositive": {
+      "title": "Quantity needs to be at least 1"
+    },
     "NotEnoughSpendableBalance": {
       "title": "Balance cannot be below {{minimumAmount}}"
     },
