@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo } from "react";
+import React, { useMemo, memo } from "react";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import { getAllNFTs } from "~/renderer/reducers/accounts";
@@ -15,13 +15,13 @@ import { centerEllipsis } from "~/renderer/styles/helpers";
 const Summary = ({ transaction }: { transaction: Transaction }) => {
   const allNfts = useSelector(getAllNFTs);
   const nft = allNfts.find(nft => nft.tokenId === transaction?.tokenIds[0]);
-  const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
+  const { status, metadata } = useNftMetadata(nft.contract, nft.tokenId, nft.currencyId);
   const { nftName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
 
   return (
     <>
-      <Box horizontal justifyContent="space-between" mb={2}>
+      <Box horizontal justifyContent="space-between" maxWi mb={2}>
         <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
           <Trans i18nKey="send.steps.details.nft" />
         </Text>
@@ -44,7 +44,7 @@ const Summary = ({ transaction }: { transaction: Transaction }) => {
           </Skeleton>
         </Box>
       </Box>
-      {nft.collection.standard === "ERC1155" ? (
+      {nft.standard === "ERC1155" ? (
         <Box horizontal justifyContent="space-between" mb={2}>
           <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
             <Trans i18nKey="send.steps.details.nftQuantity" />
@@ -60,4 +60,5 @@ const Summary = ({ transaction }: { transaction: Transaction }) => {
   );
 };
 
-export default Summary;
+// $FlowFixMe
+export default memo(Summary);

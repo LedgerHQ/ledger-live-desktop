@@ -64,7 +64,7 @@ const StepAmount = ({
             />
           ) : null}
           {isNFTSend && nft ? (
-            nft.collection.standard === "ERC1155" ? (
+            nft.standard === "ERC1155" ? (
               <Box mb={2}>
                 <Label>{t("send.steps.amount.nftQuantity")}</Label>
                 <Input
