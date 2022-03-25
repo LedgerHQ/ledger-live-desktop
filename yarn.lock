@@ -2746,13 +2746,6 @@
   dependencies:
     invariant "2"
 
-"@ledgerhq/cryptoassets@^6.26.1":
-  version "6.27.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/cryptoassets/-/cryptoassets-6.27.0.tgz#1a4efdef07858e8cb1b2dd4c1b9e110f1ed60f3f"
-  integrity sha512-fM1tm+xJSkbgEB73RtWeTeogcWRkpAcgZX+hBGbvq7anhbRwF2jD4EL897SRNwDuvCKFfpSMxpSUaSvEmj9Lcw==
-  dependencies:
-    invariant "2"
-
 "@ledgerhq/devices@6.24.1", "@ledgerhq/devices@^6.24.1":
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/@ledgerhq/devices/-/devices-6.24.1.tgz#9696d7831aa1a1a8204cdfa55df13f892b7da162"
@@ -3016,9 +3009,9 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git\\#sunset-libcore":
+"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#1effe19c902a37475d858ef5bb82ff9724ccf7f6":
   version "21.35.0"
-  resolved "https://github.com/LedgerHQ/ledger-live-common.git\\#8425eca243858ef01eea99874541047c0823d5cc"
+  resolved "https://github.com/LedgerHQ/ledger-live-common.git#1effe19c902a37475d858ef5bb82ff9724ccf7f6"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
@@ -3036,7 +3029,6 @@
     "@ledgerhq/errors" "6.10.0"
     "@ledgerhq/hw-app-algorand" "6.24.1"
     "@ledgerhq/hw-app-btc" "6.24.1"
-    "@ledgerhq/hw-app-cosmos" "6.24.1"
     "@ledgerhq/hw-app-eth" "6.27.0"
     "@ledgerhq/hw-app-polkadot" "6.24.1"
     "@ledgerhq/hw-app-solana" "^6.27.0"
