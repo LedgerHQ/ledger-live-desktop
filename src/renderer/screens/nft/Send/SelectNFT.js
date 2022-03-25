@@ -1,6 +1,7 @@
 // @flow
 import React, { useMemo, useEffect, useCallback, useState } from "react";
 import type { NFT } from "@ledgerhq/live-common/lib/types";
+import { nftsByCollections } from "@ledgerhq/live-common/lib/nft/helpers";
 import Select from "~/renderer/components/Select";
 import Option from "./Option";
 
@@ -19,10 +20,7 @@ const SelectNFT = ({
   const getOptionValue = useCallback(item => item, []);
 
   const filteredNFTs = useMemo(
-    () =>
-      maybeNFTCollection
-        ? nfts.filter(nft => nft.collection.contract === maybeNFTCollection)
-        : nfts,
+    () => (maybeNFTCollection ? nftsByCollections(nfts, maybeNFTCollection) : nfts),
     [nfts, maybeNFTCollection],
   );
 
