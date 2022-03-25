@@ -10,6 +10,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { track } from "~/renderer/analytics/segment";
 import type { DProps } from "~/renderer/screens/exchange";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { ProviderList } from "../ProviderList";
 import { useRampCatalogCurrencies } from "../hooks";
 import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
@@ -25,7 +26,7 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
 `;
 
 type State = {
-  sortedCurrencies: [],
+  sortedCurrencies: Array<TokenCurrency | CryptoCurrency>,
   isLoading: boolean,
 };
 

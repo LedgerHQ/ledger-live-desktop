@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 import SelectAccountAndCurrency from "~/renderer/components/SelectAccountAndCurrency";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import { track } from "~/renderer/analytics/segment";
 import type { DProps } from "~/renderer/screens/exchange";
@@ -25,7 +26,7 @@ const BuyContainer: ThemedComponent<{}> = styled.div`
 `;
 
 type State = {
-  sortedCurrencies: [],
+  sortedCurrencies: Array<TokenCurrency | CryptoCurrency>,
   isLoading: boolean,
 };
 
