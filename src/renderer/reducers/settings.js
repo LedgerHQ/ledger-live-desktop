@@ -281,11 +281,11 @@ const handlers: Object = {
       hiddenNftCollections: ids.filter(id => id !== collectionId),
     };
   },
-  HIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionAddress }) => {
+  HIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionId }) => {
     const collections = state.hiddenNftCollections;
     return {
       ...state,
-      hiddenNftCollections: [...collections, collectionAddress],
+      hiddenNftCollections: [...collections, collectionId],
     };
   },
   LAST_SEEN_DEVICE_INFO: (
