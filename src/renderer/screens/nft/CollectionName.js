@@ -1,18 +1,13 @@
 // @flow
-import React from "react";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import React, { memo } from "react";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 
+import type { ProtoNFT } from "@ledgerhq/live-common/lib/types";
+
 // TODO Make me pretty
-const CollectionName = ({
-  collection,
-  fallback,
-}: {
-  collection: { nfts: any[], contract: string, standard: string },
-  fallback?: string,
-}) => {
-  const { nfts } = collection;
-  const { status, metadata } = useNftMetadata(collection.contract, nfts[0]?.tokenId);
+const CollectionName = ({ nft, fallback }: { nft: ProtoNFT, fallback?: string }) => {
+  const { status, metadata } = useNftMetadata(nft.contract, nft.tokenId, nft.currencyId);
   const { tokenName } = metadata || {};
   const loading = status === "loading";
 
@@ -23,4 +18,5 @@ const CollectionName = ({
   );
 };
 
-export default CollectionName;
+// $FlowFixMe
+export default memo(CollectionName);

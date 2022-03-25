@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo } from "react";
+import React, { useMemo, memo } from "react";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -28,11 +28,12 @@ const Container: ThemedComponent<{}> = styled(Box)`
 type Props = {
   nfts: NFTWithMetadata[],
   contract: string,
+  currencyId: string,
   onClick: string => void,
 };
 
-const Row = ({ nfts, contract, onClick }: Props) => {
-  const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId);
+const Row = ({ nfts, contract, currencyId, onClick }: Props) => {
+  const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId, currencyId);
   const { tokenName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
 
@@ -64,4 +65,5 @@ const Row = ({ nfts, contract, onClick }: Props) => {
   );
 };
 
-export default Row;
+// $FlowFixMe
+export default memo(Row);
