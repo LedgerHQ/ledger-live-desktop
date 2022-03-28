@@ -10,6 +10,7 @@ import { rgba } from "~/renderer/styles/helpers";
 import CheckCircleIcon from "~/renderer/icons/CheckCircle";
 import ClockIcon from "~/renderer/icons/Clock";
 import ExclamationCircleIcon from "~/renderer/icons/ExclamationCircle";
+import { getProviderName } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import { iconByProviderName } from "../../utils";
 
@@ -61,7 +62,7 @@ const SectionProvider = ({ provider, status }: SectionProviderProps) => {
       <SummaryLabel label={t("swap2.form.details.label.provider")} />
       {(provider && (
         <div style={{ display: "flex", columnGap: "6px", alignItems: "center" }}>
-          <SummaryValue value={provider === "ftx" ? provider.toUpperCase() : provider}>
+          <SummaryValue value={getProviderName(provider)}>
             {ProviderIcon && <ProviderIcon size={19} />}
           </SummaryValue>
           {status ? <ProviderStatusTag status={status} /> : null}

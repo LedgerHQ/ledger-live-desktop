@@ -12,6 +12,7 @@ import type {
   TransactionStatus,
 } from "@ledgerhq/live-common/lib/types";
 import type { ExchangeRate, Exchange } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import { getProviderName } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import { WrongDeviceForAccount, UpdateYourApp } from "@ledgerhq/errors";
 import { LatestFirmwareVersionRequired } from "@ledgerhq/live-common/lib/errors";
 import type { DeviceModelId } from "@ledgerhq/devices";
@@ -718,13 +719,7 @@ export const renderSwapDeviceConfirmationV2 = ({
             provider: (
               <Box horizontal alignItems="center" style={{ gap: "6px" }}>
                 <ProviderIcon size={18} />
-                <Text
-                  style={{
-                    textTransform: exchangeRate.provider === "ftx" ? "uppercase" : "capitalize",
-                  }}
-                >
-                  {exchangeRate.provider}
-                </Text>
+                <Text>{getProviderName(exchangeRate.provider)}</Text>
               </Box>
             ),
             fees: (
