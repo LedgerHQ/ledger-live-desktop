@@ -79,7 +79,7 @@
     "selectCurrencyNoOption": "Криптоактив \"{{currencyName}}\" не найден",
     "selectValidatorNoOption": "Валидатор с \"{{accountName}}\" в названии не найден",
     "selectNoResults": "Ничего не найдено по запросу \"{{query}}\"",
-    "sortBy": "Сортировать по",
+    "sortBy": "Сортировка",
     "save": "Сохранить",
     "lock": "Заблокировать",
     "showMore": "Показать больше",
@@ -1566,10 +1566,10 @@
         "not_installed": "Не установлено"
       },
       "sort": {
-        "title": "Сортировать",
+        "title": "Сортировка",
         "name_asc": "Название А-Я",
         "name_desc": "Название Я-А",
-        "marketcap_desc": "Рыночная капитализация"
+        "marketcap_desc": "Рын. капитализация"
       },
       "installSuccess": {
         "title": "Приложение успешно установлено. Теперь вы можете добавлять счета {{app}}",
@@ -2326,7 +2326,7 @@
       "elected": "Избирается",
       "nominatorsCount": "Номинаторов: {{nominatorsCount}}",
       "nominatorsTooltip": "Этого валидатора уже выбрали {{count}} номинатора(-ов).",
-      "oversubscribed": "Превышение лимита голосов ({{nominatorsCount}})",
+      "oversubscribed": "Превышен лимит голосов ({{nominatorsCount}})",
       "oversubscribedTooltip": "Вознаграждения получают только ТОП-{{maxNominatorRewardedPerValidator}} номинатора(-ов) с наибольшей заблокированной суммой",
       "hasPendingBondOperation": "Блокировка средств ожидает подтверждения",
       "electionOpen": "Сейчас идёт подбор новых валидаторов. Следовательно, операции в стейкинга доступны не более 15 минут.",
@@ -2570,7 +2570,7 @@
     "howItWorks": "Как работает делегирование",
     "delegationEarn": "Теперь вы можете получать вознаграждение за стейкинг{{name}}, делегировав свой счёт.",
     "earnRewards": "Заработать",
-    "overdelegated": "Превышение лимита делегирования",
+    "overdelegated": "Превышен лимит делегаторов",
     "status": "Статус",
     "flow": {
       "steps": {

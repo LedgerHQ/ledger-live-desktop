@@ -26,6 +26,7 @@ type Props = {
   bridgePending: boolean,
   t: TFunction,
   initValue?: BigNumber,
+  walletConnectProxy?: boolean,
   resetInitValue?: () => void,
 };
 
@@ -39,6 +40,7 @@ const AmountField = ({
   t,
   initValue,
   resetInitValue,
+  walletConnectProxy,
 }: Props) => {
   const bridge = getAccountBridge(account, parentAccount);
 
@@ -93,21 +95,30 @@ const AmountField = ({
               ff="Inter|Medium"
               fontSize={10}
               style={{ paddingRight: 5 }}
-              onClick={() => onChangeSendMax(!useAllAmount)}
+              onClick={() => {
+                if (!walletConnectProxy) {
+                  onChangeSendMax(!useAllAmount);
+                }
+              }}
             >
               <Trans i18nKey="send.steps.details.useMax" />
             </Text>
-            <Switch small isChecked={useAllAmount} onChange={onChangeSendMax} />
+            <Switch
+              small
+              isChecked={useAllAmount}
+              onChange={onChangeSendMax}
+              disabled={walletConnectProxy}
+            />
           </Box>
         ) : null}
       </Box>
       <RequestAmount
-        disabled={!!useAllAmount}
+        disabled={!!useAllAmount || walletConnectProxy}
         account={account}
         validTransactionError={amountError}
         validTransactionWarning={amountWarning}
         onChange={onChange}
-        value={amount}
+        value={walletConnectProxy ? transaction.amount : amount}
         showCountervalue={false}
         autoFocus={!initValue}
       />
