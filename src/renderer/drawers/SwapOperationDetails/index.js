@@ -14,6 +14,7 @@ import {
   getTransactionExplorer,
 } from "@ledgerhq/live-common/lib/explorers";
 import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
+import { getProviderName } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import Box from "~/renderer/components/Box";
@@ -225,10 +226,9 @@ const SwapOperationDetails = ({
         <OpDetailsData>
           <LinkWithExternalIcon
             fontSize={12}
-            style={{ textTransform: provider === "ftx" ? "uppercase" : "capitalize" }}
             onClick={() => openURL(urls.swap.providers[provider]?.main)}
           >
-            {provider}
+            {getProviderName(provider)}
           </LinkWithExternalIcon>
         </OpDetailsData>
       </OpDetailsSection>
