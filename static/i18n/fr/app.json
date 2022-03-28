@@ -65,7 +65,7 @@
     "reject": "Refuser",
     "cancel": "Annuler",
     "getSupport": "Obtenir de l'aide",
-    "delete": "Supprimer",
+    "delete": "Retirer ce compte du Portefeuille",
     "launch": "Lancer",
     "continue": "Continuer",
     "previous": "Précédent",
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "Carte",
-    "learn": "Approfondir",
+    "learn": "Apprendre",
     "menu": "Menu",
     "stars": "Comptes favoris",
     "accounts": "Comptes",
@@ -905,7 +905,7 @@
           "amountToWithdraw": "Montant à retirer",
           "withdrawAll": "Retirer le maximum",
           "placeholder": "Retirer le maximum",
-          "maxWithdrawble": "Le montant maximal à retirer est"
+          "maxWithdrawble": "Montant maximal à retirer :"
         },
         "connectDevice": {
           "title": "Appareil"
@@ -955,7 +955,7 @@
         "amount": {
           "title": "Montant",
           "amountToSupply": "Montant à déposer",
-          "maxSupply": "Le montant maximal disponible est"
+          "maxSupply": "Montant maximal disponible :"
         },
         "device": {
           "title": "Appareil"
@@ -1187,7 +1187,13 @@
     "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
   },
   "learn": {
-    "title": "Approfondir"
+    "title": "Apprendre",
+    "noConnection": "Pas de connexion",
+    "noConnectionDesc": "Aucune connexion Internet détectée. Veuillez vérifier votre connexion et réessayer.",
+    "sectionShows": "Séries",
+    "sectionVideo": "Vidéos",
+    "sectionPodcast": "Podcasts",
+    "sectionArticles": "Articles"
   },
   "market": {
     "title": "Marché",
@@ -1383,7 +1389,7 @@
     "createNewAccount": {
       "noOperationOnLastAccount": "Impossible d'ajouter un nouveau compte avant d'avoir reçu des actifs sur votre compte <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> trouvé",
-      "showAllAddressTypes": "Montrer tous les types d'adresses",
+      "showAllAddressTypes": "Afficher tous les types d'adresses",
       "showAllAddressTypesTooltip": "Ne changez le type d'adresse que si vous avez besoin de recevoir des {{family}} sur d'autres formats d'adresse."
     },
     "supportLinks": {
@@ -1487,6 +1493,7 @@
     "appNotInstalled": "L'application {{appName}} est nécessaire pour terminer cette action. Utilisez le Gestionnaire pour l'installer sur votre appareil.",
     "appNotInstalled_plural": "Les applications {{appName}} sont nécessaires pour terminer cette action. Utilisez le Gestionnaire pour les installer sur votre appareil",
     "openManager": "Ouvrir le Gestionnaire",
+    "openOnboarding": "Configurer un appareil",
     "outdated": "Version de l'application obsolète",
     "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} sur votre appareil. Merci d'aller dans le Gestionnaire pour mettre à jour.",
     "installApp": "Installation de l'application {{appName}}",
@@ -1604,10 +1611,10 @@
         "tokenAppDisclaimerInstalled": "Pour gérer <1>des tokens {{tokenName}} {{tokenType}}</1>, vérifiez que vous avez bien la <1> version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "goToAccounts": "Accéder aux Comptes",
         "intallParentApp": "Installer l'application {{appName}}",
-        "plugin": "Go to app",
+        "plugin": "Accéder à l'application",
         "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "tool": "En savoir plus",
+        "app": "En savoir plus"
       },
       "uninstall": {
         "title": "Tout désinstaller",
@@ -1857,7 +1864,7 @@
       },
       "amount": {
         "title": "Montant",
-        "banner": "Le montant maximal pouvant être envoyé est",
+        "banner": "Montant maximal pouvant être envoyé :",
         "fees": "Frais",
         "standard": "Standard",
         "advanced": "Avancé",
@@ -2701,7 +2708,9 @@
       "addLocalAppDesc": "Parcourez vos fichiers et ajoutez une app locale avec un manifeste local.",
       "addLocalAppButton": "Naviguer",
       "runLocalAppDeleteButton": "Effacer",
-      "runLocalAppOpenButton": "Ouvrir"
+      "runLocalAppOpenButton": "Ouvrir",
+      "enableLearnStagingUrl": "Activer l'URL de test de la page Apprendre",
+      "enableLearnStagingUrlDesc": "Activez l'URL de test de la page Apprendre."
     },
     "currencies": {
       "selectPlaceholder": "Crypto-actif",
@@ -2751,7 +2760,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Implémentations JS expérimentales",
-          "description": "Utilisez des implémentations JS expérimentales pour Algorand et Tezos."
+          "description": "Utilisez une implémentation JS expérimentale pour Tezos."
         },
         "experimentalCurrencies": {
           "title": "Intégrations expérimentales",
@@ -2807,7 +2816,8 @@
     "removeAccountModal": {
       "title": "Supprimer le compte",
       "desc": "Cela n'a pas d'effet sur vos crypto-actifs. Vous pourrez de nouveau ajouter vos comptes existants.",
-      "warning": "La suppression de ce compte effacera l'historique de vos transactions de swap avec ce dernier."
+      "delete": "Retirer du Portefeuille",
+      "warning": "L'historique de vos transactions de swap en lien avec ce compte sera effacé."
     },
     "openUserDataDirectory": {
       "title": "Voir les données utilisateur",
@@ -3592,6 +3602,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "Échec de la localisation de l'application {{appName}} pour votre appareil.",
+      "description": "Veuillez essayer de réinstaller l'application depuis le Gestionnaire."
+    },
     "countervaluesUnavailable": {
       "title": "Actuellement impossible d'afficher une devise de contrepartie pour cet actif"
     },
@@ -3719,6 +3733,10 @@
     "DeviceHalted": {
       "title": "Veuillez redémarrer votre appareil Ledger et réessayer.",
       "description": "Une erreur inattendue s'est produite. Veuillez réessayer."
+    },
+    "DeviceNotOnboarded": {
+      "title": "Votre appareil n'est pas encore prêt à être utilisé.",
+      "description": "Configurez votre appareil avant de l'utiliser avec Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "Veuillez redémarrer votre appareil Ledger et réessayer.",
