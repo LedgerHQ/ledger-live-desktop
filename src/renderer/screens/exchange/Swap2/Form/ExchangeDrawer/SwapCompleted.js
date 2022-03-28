@@ -14,6 +14,7 @@ import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import IconCheck from "~/renderer/icons/Check";
 import IconClock from "~/renderer/icons/Clock";
+import { getProviderName } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 
 const IconWrapper = styled(Box)`
   background: ${colors.lightGreen};
@@ -111,14 +112,7 @@ const SwapCompleted = ({
       <Alert type="help" mt={6}>
         <Trans i18nKey={`swap2.exchangeDrawer.completed.disclaimer`} values={{ provider }}>
           <FakeLink onClick={openProviderSupport}>
-            <span
-              style={{
-                marginRight: 4,
-                textTransform: provider === "ftx" ? "uppercase" : "capitalized",
-              }}
-            >
-              {provider}
-            </span>
+            <span style={{ marginRight: 4 }}>{getProviderName(provider)}</span>
           </FakeLink>
         </Trans>
       </Alert>
