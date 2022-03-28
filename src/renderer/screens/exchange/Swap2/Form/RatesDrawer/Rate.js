@@ -6,6 +6,7 @@ import Text from "~/renderer/components/Text";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import { getProviderName } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import { rgba } from "~/renderer/styles/helpers";
 import type { SwapSelectorStateType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import IconLock from "~/renderer/icons/Lock";
@@ -64,7 +65,7 @@ function Rate({ value, selected, onSelect, fromCurrency, toCurrency }: Props) {
         >
           <Box horizontal alignItems="center">
             <Text capitalize fontSize={4}>
-              {value.provider}
+              {getProviderName(value.provider)}
             </Text>
           </Box>
           <FormattedVal
