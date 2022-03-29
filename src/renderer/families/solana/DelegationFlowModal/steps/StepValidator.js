@@ -1,6 +1,7 @@
 // @flow
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { Transaction } from "@ledgerhq/live-common/lib/families/solana/types";
+import { defaultVoteAccAddrByCurrencyId } from "@ledgerhq/live-common/lib/families/solana/utils";
 import type { AccountBridge } from "@ledgerhq/live-common/lib/types";
 import invariant from "invariant";
 import React from "react";

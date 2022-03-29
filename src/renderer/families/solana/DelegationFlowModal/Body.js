@@ -25,6 +25,7 @@ import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmati
 import StepValidator, { StepValidatorFooter } from "./steps/StepValidator";
 import type { St, StepProps, StepId } from "./types";
 import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import { defaultVoteAccAddrByCurrencyId } from "@ledgerhq/live-common/lib/families/solana/utils";
 
 type OwnProps = {|
   stepId: StepId,
@@ -123,7 +124,7 @@ const Body = ({
         kind: "stake.createAccount",
         uiState: {
           delegate: {
-            voteAccAddress: "",
+            voteAccAddress: defaultVoteAccAddrByCurrencyId(account.currency.id) ?? "",
           },
         },
       },

@@ -20,6 +20,13 @@ import Image from "~/renderer/components/Image";
 import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
 import Text from "~/renderer/components/Text";
 import { openURL } from "~/renderer/linking";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import IconAngleDown from "~/renderer/icons/AngleDown";
+import styled from "styled-components";
+import CollapsibleCard from "~/renderer/components/CollapsibleCard";
+import ListTreeLine from "~/renderer/icons/ListTreeLine";
+import CollapsibleList from "~/renderer/families/polkadot/components/CollapsibleList";
+import Check from "~/renderer/icons/Check";
 
 type Props = {
   t: TFunction,
@@ -37,6 +44,7 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
   const { solanaResources } = account;
 
   const [search, setSearch] = useState("");
+  const [showAll, setShowAll] = useState(false);
 
   const unit = getAccountUnit(account);
 
@@ -81,11 +89,9 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
     }
   }, []);
 
-  const renderItem = (validator: ValidatorAppValidator) => {
+  const renderItem = (validator: ValidatorAppValidator, validatorIdx: number) => {
     return (
-      <ValidatorRow
-        // HACK: if value > 0 then row is shown as active
-        value={chosenVoteAccAddr === validator.voteAccount ? 1 : 0}
+      <SolanaValidatorRow
         onClick={onChangeValidator}
         key={validator.voteAccount}
         validator={{ address: validator.voteAccount }}
@@ -98,39 +104,45 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
           </IconContainer>
         }
         title={validator.name || validator.voteAccount}
-        subtitle={
-          <>
-            <Trans i18nKey="solana.delegation.totalStake"></Trans>
-            <Text style={{ marginLeft: 5 }}>
-              {formatCurrencyUnit(unit, new BigNumber(validator.activeStake), {
-                showCode: true,
-              })}
-            </Text>
-          </>
-        }
         onExternalLink={onExternalLink}
         unit={unit}
+        subtitle={
+          validatorIdx !== 0 ? (
+            <>
+              <Trans i18nKey="solana.delegation.totalStake"></Trans>
+              <Text style={{ marginLeft: 5 }}>
+                {formatCurrencyUnit(unit, new BigNumber(validator.activeStake), {
+                  showCode: true,
+                })}
+              </Text>
+            </>
+          ) : null
+        }
         sideInfo={
-          <Box pr={1}>
-            <Text textAlign="center" ff="Inter|SemiBold" fontSize={2}>
-              {`${validator.commission} %`}
-            </Text>
-            <Text textAlign="center" fontSize={1}>
-              <Trans i18nKey="solana.delegation.commission" />
-            </Text>
+          <Box ml={5} style={{ flexDirection: "row", alignItems: "center" }}>
+            <Box>
+              <Text textAlign="center" ff="Inter|SemiBold" fontSize={2}>
+                {`${validator.commission} %`}
+              </Text>
+              <Text textAlign="center" fontSize={1}>
+                <Trans i18nKey="solana.delegation.commission" />
+              </Text>
+            </Box>
+            <Box ml={3}>
+              <ChosenMark active={chosenVoteAccAddr === validator.voteAccount} />
+            </Box>
           </Box>
         }
-      ></ValidatorRow>
+      ></SolanaValidatorRow>
     );
   };
 
   return (
     <>
-      <ValidatorSearchInput id="delegate-search-bar" search={search} onSearch={onSearch} />
-      <Box ref={containerRef} id="delegate-list">
+      <Box>
         <ScrollLoadingList
-          data={validatorsFiltered}
-          style={{ flex: "1 0 240px" }}
+          data={showAll ? validatorsFiltered : [validatorsFiltered[0]]}
+          style={{ flex: showAll ? "1 0 240px" : "1 0 66px", marginBottom: 0 }}
           renderItem={renderItem}
           noResultPlaceholder={
             validatorsFiltered.length <= 0 &&
@@ -138,8 +150,43 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
           }
         />
       </Box>
+      <SeeAllButton expanded={showAll} onClick={() => setShowAll(shown => !shown)}>
+        <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
+          <Trans i18nKey={showAll ? "distribution.showLess" : "distribution.showAll"} />
+        </Text>
+        <IconAngleDown size={16} />
+      </SeeAllButton>
     </>
   );
 };
+
+const SolanaValidatorRow = styled(ValidatorRow)`
+  border-color: transparent;
+`;
+
+const ChosenMark: ThemedComponent<{ active: boolean }> = styled(Check).attrs(p => ({
+  color: p.active ? p.theme.colors.palette.primary.main : "transparent",
+  size: 14,
+}))``;
+
+const SeeAllButton: ThemedComponent<{ expanded: boolean }> = styled.div`
+  margin-top: 15px;
+  display: flex;
+  color: ${p => p.theme.colors.wallet};
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid ${p => p.theme.colors.palette.divider};
+  height: 40px;
+  cursor: pointer;
+
+  &:hover ${Text} {
+    text-decoration: underline;
+  }
+
+  > :nth-child(2) {
+    margin-left: 8px;
+    transform: rotate(${p => (p.expanded ? "180deg" : "0deg")});
+  }
+`;
 
 export default ValidatorField;
