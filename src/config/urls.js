@@ -211,5 +211,6 @@ export const urls = {
   solana: {
     staking: "https://support.ledger.com",
     recipient_info: "https://support.ledger.com",
+    ledgerByFigmentTC: "https://support.ledger.com",
   },
 };
