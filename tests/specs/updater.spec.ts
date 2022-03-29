@@ -17,11 +17,13 @@ test("Updater", async ({ page }) => {
   await test.step("[idle] state should not be visible", async () => {
     expect(await layout.appUpdateBanner.isHidden()).toBe(true);
 
+
     await page.evaluate(() => {
       document.body.style.overflow = "hidden";
     });
 
     expect.soft(await page.screenshot()).toMatchSnapshot("app-updater-idle.png");
+
   });
 
   await test.step("[checking] state should be visible", async () => {

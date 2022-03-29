@@ -9,16 +9,12 @@ on:
       - develop
       - master
 
-jobs:
-  cancel-previous:
-    name: "cancel previous workflow"
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Cancel Previous Runs
-        run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
+jobs:
   check-if-fork:
-    needs: [cancel-previous]
     runs-on: ubuntu-20.04
     outputs:
       forked: ${{ steps.forked.outputs.forked }}
@@ -60,7 +56,6 @@ jobs:
 
   codecheck:
     name: "[Codecheck] Lint"
-    needs: cancel-previous
     runs-on: ubuntu-20.04
     permissions:
       issues: write
@@ -82,7 +77,17 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
         env:
           JOBS: max
         run: yarn --frozen-lockfile --network-timeout 100000
@@ -138,7 +143,17 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
         env:
           JOBS: max
         run: yarn --frozen-lockfile --network-timeout 100000
@@ -147,7 +162,7 @@ jobs:
       - name: build electron app
         env:
           INSTRUMENT_BUILD: true
-        run: yarn build
+        run: yarn build:testing
       - name: run ui tests (Linux)
         if: always()
         run: xvfb-run --auto-servernum -- yarn playwright
@@ -198,7 +213,17 @@ jobs:
           git config user.name "Team Live"
       - name: install linux dependencies
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
         env:
           JOBS: max
         run: yarn --frozen-lockfile --network-timeout 100000
@@ -237,7 +262,6 @@ jobs:
             tests/artifacts/videos
 
   ui-tests-windows:
-    needs: cancel-previous
     name: "[Windows] UI"
     runs-on: windows-latest
 
@@ -250,7 +274,17 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
         env:
           JOBS: max
         run: yarn --frozen-lockfile --network-timeout 100000
@@ -259,7 +293,7 @@ jobs:
       - name: build electron app
         env:
           INSTRUMENT_BUILD: true
-        run: yarn build
+        run: yarn build:testing
       - name: run ui tests (windows)
         run: yarn playwright
       - name: upload diffs to imgur
@@ -287,7 +321,7 @@ jobs:
             tests/artifacts/coverage
             tests/artifacts/videos
   # ui-tests-macos:
-  #   needs: cancel-previous
+  #
   #   name: "[macOS] UI"
   #   runs-on: [ledger-live, macos]
   #   steps:
@@ -310,7 +344,7 @@ jobs:
   #     - name: build electron app
   #       env:
   #         INSTRUMENT_BUILD: true
-  #       run: yarn build
+  #       run: yarn build:testing
   #     - name: run ui tests (macos)
   #       run: yarn playwright
   #     - name: upload diffs to imgur

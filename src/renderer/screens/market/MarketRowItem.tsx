@@ -39,6 +39,7 @@ type Props = {
   availableOnBuy: boolean;
   availableOnSwap: boolean;
   displayChart: boolean;
+  displayMarketCap: boolean;
 };
 
 function MarketRowItem({
@@ -53,6 +54,7 @@ function MarketRowItem({
   availableOnBuy,
   availableOnSwap,
   displayChart,
+  displayMarketCap,
 }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -141,9 +143,9 @@ function MarketRowItem({
           <TableCell loading />
         </TableRow>
       ) : (
-        <TableRow onClick={onCurrencyClick}>
+        <TableRow data-test-id={`market-${currency?.ticker}-row`} onClick={onCurrencyClick}>
           <TableCell>{currency?.marketcapRank ?? "-"}</TableCell>
-          <TableCell>
+          <TableCell overflow="hidden" mr={3}>
             <CryptoCurrencyIconWrapper>
               {currency.internalCurrency ? (
                 <CryptoCurrencyIcon
@@ -158,7 +160,7 @@ function MarketRowItem({
                 <img width="32px" height="32px" src={currency.image} alt={"currency logo"} />
               )}
             </CryptoCurrencyIconWrapper>
-            <Flex pl={3} flexDirection="row" alignItems="center">
+            <Flex pl={3} flexDirection="row" alignItems="center" overflow="hidden">
               <Flex flexDirection="column" alignItems="left" pr={2}>
                 <Text variant="body">{currency.name}</Text>
                 <Text variant="small" color="neutral.c60">
@@ -168,12 +170,21 @@ function MarketRowItem({
               {currency.internalCurrency && (
                 <>
                   {availableOnBuy && (
-                    <Button variant="shade" mr={1} onClick={onBuy}>
+                    <Button
+                      data-test-id={`market-${currency?.ticker}-buy-button`}
+                      variant="shade"
+                      mr={1}
+                      onClick={onBuy}
+                    >
                       {t("accounts.contextMenu.buy")}
                     </Button>
                   )}
                   {availableOnSwap && (
-                    <Button variant="shade" onClick={onSwap}>
+                    <Button
+                      data-test-id={`market-${currency?.ticker}-swap-button`}
+                      variant="shade"
+                      onClick={onSwap}
+                    >
                       {t("accounts.contextMenu.swap")}
                     </Button>
                   )}
@@ -187,7 +198,7 @@ function MarketRowItem({
             </Text>
           </TableCell>
           <TableCell>
-            {currency.priceChangePercentage && (
+            {currency.priceChangePercentage ? (
               <FormattedVal
                 isPercent
                 isNegative
@@ -195,18 +206,22 @@ function MarketRowItem({
                 inline
                 withIcon
               />
+            ) : (
+              <Text fontWeight={"medium"}>-</Text>
             )}
           </TableCell>
-          <TableCell>
-            <Text>
-              {counterValueFormatter({
-                shorten: true,
-                currency: counterCurrency,
-                value: currency.marketcap,
-                locale,
-              })}
-            </Text>
-          </TableCell>
+          {displayMarketCap && (
+            <TableCell>
+              <Text>
+                {counterValueFormatter({
+                  shorten: true,
+                  currency: counterCurrency,
+                  value: currency.marketcap,
+                  locale,
+                })}
+              </Text>
+            </TableCell>
+          )}
           {displayChart && (
             <TableCell>
               {currency.sparklineIn7d && (
@@ -214,7 +229,7 @@ function MarketRowItem({
               )}
             </TableCell>
           )}
-          <TableCell onClick={onStarClick}>
+          <TableCell data-test-id={`market-${currency?.ticker}-star-button`} onClick={onStarClick}>
             <Icon name={isStarred ? "StarSolid" : "Star"} size={18} />
           </TableCell>
         </TableRow>

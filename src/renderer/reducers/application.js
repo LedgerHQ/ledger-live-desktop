@@ -12,6 +12,7 @@ export type ApplicationState = {
   osDarkMode?: boolean,
   osLanguage?: LangAndRegion,
   navigationLocked?: boolean,
+  notSeededDeviceRelaunch?: boolean,
   debug: {
     alwaysShowSkeletons: boolean,
   },
@@ -30,6 +31,7 @@ const state: ApplicationState = {
   },
   hasPassword: false,
   dismissedCarousel: false,
+  notSeededDeviceRelaunch: false,
   debug: {
     alwaysShowSkeletons: false,
   },
@@ -59,6 +61,9 @@ export const alwaysShowSkeletonsSelector = (state: Object) =>
   state.application.debug.alwaysShowSkeletons;
 
 export const osLangAndRegionSelector = (state: Object) => state.application.osLanguage;
+
+export const notSeededDeviceRelaunchSelector = (state: Object) =>
+  state.application.notSeededDeviceRelaunch;
 
 export const isNavigationLocked = (state: Object) => state.application.navigationLocked;
 

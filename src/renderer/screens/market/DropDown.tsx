@@ -30,12 +30,16 @@ function DropdownControl<O, M extends boolean, G extends GroupBase<O>>(
 
 function DropdownValueContainer<O>(props: ValueContainerProps<O, false>) {
   const ChevronIcon = props.selectProps.menuIsOpen ? ChevronTopMedium : ChevronBottomMedium;
+  const { label } = (props.selectProps as unknown) as Props<O>;
 
   return (
     <ValueContainer
       {...props}
       render={() => (
         <FlexBox alignItems="center" flexDirection="row">
+          <Text fontWeight="semiBold" variant={"paragraph"} color="neutral.c80" mr={2}>
+            {label}
+          </Text>
           <Text fontWeight="semiBold" variant={"paragraph"} mr={2}>
             <FlexBox>{props.children}</FlexBox>
           </Text>

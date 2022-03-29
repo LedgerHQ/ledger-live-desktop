@@ -237,7 +237,7 @@ class AccountSettingRenderBody extends PureComponent<Props, State> {
               onClick={this.handleOpenRemoveAccountModal}
               id="account-settings-delete"
             >
-              {t("common.delete")}
+              {t("settings.removeAccountModal.delete")}
             </Button>
             <Button
               id="account-settings-apply"
