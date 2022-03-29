@@ -1,32 +1,23 @@
 // @flow
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { getAddressExplorer, getDefaultExplorerView } from "@ledgerhq/live-common/lib/explorers";
 import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
+import { swap } from "@ledgerhq/live-common/lib/families/solana/utils";
 import type { ValidatorAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
-import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { TFunction } from "react-i18next";
 import { Trans } from "react-i18next";
+import styled from "styled-components";
 import Box from "~/renderer/components/Box";
-import ValidatorRow, { IconContainer } from "~/renderer/components/Delegation/ValidatorRow";
-import ValidatorSearchInput, {
-  NoResultPlaceholder,
-} from "~/renderer/components/Delegation/ValidatorSearchInput";
-import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
-import Image from "~/renderer/components/Image";
+import { NoResultPlaceholder } from "~/renderer/components/Delegation/ValidatorSearchInput";
 import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
 import Text from "~/renderer/components/Text";
+import IconAngleDown from "~/renderer/icons/AngleDown";
 import { openURL } from "~/renderer/linking";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import IconAngleDown from "~/renderer/icons/AngleDown";
-import styled from "styled-components";
-import CollapsibleCard from "~/renderer/components/CollapsibleCard";
-import ListTreeLine from "~/renderer/icons/ListTreeLine";
-import CollapsibleList from "~/renderer/families/polkadot/components/CollapsibleList";
-import Check from "~/renderer/icons/Check";
+import ValidatorRow from "./ValidatorRow";
 
 type Props = {
   t: TFunction,
@@ -50,6 +41,22 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
 
   const validators = useLedgerFirstShuffledValidators(account.currency);
 
+  const preparedValidators = useMemo(() => {
+    // validators[0] is Ledger's one, but if there is a chosen validator,
+    // we need to move it to the first position
+    if (chosenVoteAccAddr !== null) {
+      const chosenValidatorIdx = validators.findIndex(v => v.voteAccount === chosenVoteAccAddr);
+      if (chosenValidatorIdx !== -1) {
+        const swapedValidators = [...validators];
+        swap(swapedValidators, chosenValidatorIdx, 1);
+        swap(swapedValidators, 0, 1);
+        return swapedValidators;
+      }
+    }
+
+    return validators;
+  }, [validators, chosenVoteAccAddr]);
+
   const validatorsFiltered = useMemo(() => {
     return validators.filter(validator => {
       return (
@@ -60,23 +67,6 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
   }, [validators, search]);
 
   const containerRef = useRef();
-
-  const explorerView = getDefaultExplorerView(account.currency);
-
-  const onExternalLink = useCallback(
-    (address: string) => {
-      const validator = validators.find(v => v.voteAccount === address);
-
-      const url =
-        (validator && validator.wwwUrl) ||
-        (explorerView && getAddressExplorer(explorerView, address));
-
-      if (url) {
-        openURL(url);
-      }
-    },
-    [explorerView],
-  );
 
   const onSearch = (event: SyntheticInputEvent<HTMLInputElement>) => setSearch(event.target.value);
 
@@ -91,49 +81,15 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
 
   const renderItem = (validator: ValidatorAppValidator, validatorIdx: number) => {
     return (
-      <SolanaValidatorRow
+      <ValidatorRow
+        currency={account.currency}
+        active={chosenVoteAccAddr === validator.voteAccount}
+        showStake={validatorIdx !== 0}
         onClick={onChangeValidator}
         key={validator.voteAccount}
-        validator={{ address: validator.voteAccount }}
-        icon={
-          <IconContainer isSR>
-            {validator.avatarUrl === undefined && <FirstLetterIcon label={validator.voteAccount} />}
-            {validator.avatarUrl !== undefined && (
-              <Image resource={validator.avatarUrl} alt="" width={32} height={32} />
-            )}
-          </IconContainer>
-        }
-        title={validator.name || validator.voteAccount}
-        onExternalLink={onExternalLink}
+        validator={validator}
         unit={unit}
-        subtitle={
-          validatorIdx !== 0 ? (
-            <>
-              <Trans i18nKey="solana.delegation.totalStake"></Trans>
-              <Text style={{ marginLeft: 5 }}>
-                {formatCurrencyUnit(unit, new BigNumber(validator.activeStake), {
-                  showCode: true,
-                })}
-              </Text>
-            </>
-          ) : null
-        }
-        sideInfo={
-          <Box ml={5} style={{ flexDirection: "row", alignItems: "center" }}>
-            <Box>
-              <Text textAlign="center" ff="Inter|SemiBold" fontSize={2}>
-                {`${validator.commission} %`}
-              </Text>
-              <Text textAlign="center" fontSize={1}>
-                <Trans i18nKey="solana.delegation.commission" />
-              </Text>
-            </Box>
-            <Box ml={3}>
-              <ChosenMark active={chosenVoteAccAddr === validator.voteAccount} />
-            </Box>
-          </Box>
-        }
-      ></SolanaValidatorRow>
+      ></ValidatorRow>
     );
   };
 
@@ -141,7 +97,7 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
     <>
       <Box>
         <ScrollLoadingList
-          data={showAll ? validatorsFiltered : [validatorsFiltered[0]]}
+          data={showAll ? preparedValidators : [preparedValidators[0]]}
           style={{ flex: showAll ? "1 0 240px" : "1 0 66px", marginBottom: 0 }}
           renderItem={renderItem}
           noResultPlaceholder={
@@ -159,15 +115,6 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
     </>
   );
 };
-
-const SolanaValidatorRow = styled(ValidatorRow)`
-  border-color: transparent;
-`;
-
-const ChosenMark: ThemedComponent<{ active: boolean }> = styled(Check).attrs(p => ({
-  color: p.active ? p.theme.colors.palette.primary.main : "transparent",
-  size: 14,
-}))``;
 
 const SeeAllButton: ThemedComponent<{ expanded: boolean }> = styled.div`
   margin-top: 15px;

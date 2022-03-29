@@ -1,7 +1,10 @@
 // @flow
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { useSolanaStakesWithMeta } from "@ledgerhq/live-common/lib/families/solana/react";
+import {
+  useLedgerFirstShuffledValidators,
+  useSolanaStakesWithMeta,
+} from "@ledgerhq/live-common/lib/families/solana/react";
 import { BigNumber } from "bignumber.js";
 import invariant from "invariant";
 import React from "react";
@@ -15,6 +18,7 @@ import Image from "~/renderer/components/Image";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import { Ellipsis } from "../../shared/components/Ellipsis";
 import ErrorDisplay from "../../shared/components/ErrorDisplay";
+import ValidatorRow from "../../shared/fields/ValidatorRow";
 import type { StepProps } from "../types";
 
 export default function StepValidator({
@@ -49,31 +53,31 @@ export default function StepValidator({
   const { meta, stake } = stakeWithMeta;
   const validatorName = meta.validator?.name ?? stakeAccAddr;
 
+  /*
   const formatAmount = (amount: number) => {
-    const unit = getAccountUnit(account);
+    //const unit = getAccountUnit(account);
     return formatCurrencyUnit(unit, new BigNumber(amount), {
       disableRounding: true,
       alwaysShowSign: false,
       showCode: true,
     });
   };
+  */
+
+  const unit = getAccountUnit(account);
+
+  const validators = useLedgerFirstShuffledValidators(account.currency);
+  const validator = validators.find(v => v.voteAccount === stake.delegation?.voteAccAddr);
+
+  if (validator === undefined) {
+    return null;
+  }
 
   return (
     <Box flow={1}>
       <TrackPage category="Solana Delegation Deactivate" name="Step Validator" />
       {error && <ErrorBanner error={error} />}
-      <Box horizontal>
-        <Box mr={1}>
-          {meta.validator?.img !== undefined && (
-            <Image resource={meta.validator.img} height={32} width={32} alt="" />
-          )}
-          {meta.validator?.img === undefined && <FirstLetterIcon label={validatorName ?? "-"} />}
-        </Box>
-        <Ellipsis>{validatorName}</Ellipsis>
-      </Box>
-      <Box>
-        {t("delegation.delegated")}: {formatAmount(stake.delegation?.stake ?? 0)}
-      </Box>
+      <ValidatorRow currency={account.currency} validator={validator} unit={unit}></ValidatorRow>
       {status.errors.fee && <ErrorDisplay error={status.errors.fee} />}
     </Box>
   );

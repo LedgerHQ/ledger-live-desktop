@@ -171,7 +171,7 @@ const Row: ThemedComponent<{ active: boolean, disabled: boolean }> = styled(Box)
       : ""}
 `;
 
-type ValidatorRowProps = {
+export type ValidatorRowProps = {
   validator: { address: string },
   icon: React$Node,
   title: React$Node,
