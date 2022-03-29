@@ -107,7 +107,7 @@ export class DiscoverPage {
   }
 
   async verifyAddress() {
-    await this.clickWebviewElement("[data-test-id=verify-address-button]]");
+    await this.clickWebviewElement("[data-test-id=verify-address-button]");
   }
 
   async clickWebviewElement(elementName: string) {

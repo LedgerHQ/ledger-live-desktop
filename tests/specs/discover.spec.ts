@@ -2,6 +2,8 @@ import test from "../fixtures/common";
 import { expect } from "@playwright/test";
 import { DiscoverPage } from "../models/DiscoverPage";
 import { Layout } from "../models/Layout";
+import { DeviceAction } from "../models/DeviceAction";
+import { Modal } from "../models/Modal";
 
 // Comment out to disable recorder
 // process.env.PWDEBUG = "1";
@@ -30,6 +32,8 @@ test("Live App", async ({ page }) => {
 
   const discoverPage = new DiscoverPage(page);
   const layout = new Layout(page);
+  const device = new DeviceAction(page);
+  const modal = new Modal(page);
 
   await test.step("Navigate to catalog", async () => {
     await discoverPage.navigateToCatalog();
@@ -89,6 +93,28 @@ test("Live App", async ({ page }) => {
     await discoverPage.letLiveAppLoad();
     expect(await page.screenshot()).toMatchSnapshot({
       name: "live-app-request-single-account-output.png",
+    });
+  });
+
+  await test.step("Verify Address", async () => {
+    await discoverPage.verifyAddress();
+    expect(await page.screenshot()).toMatchSnapshot({
+      name: "live-app-verify-account.png",
+    });
+  });
+
+  await test.step("Verify Address - connect nano", async () => {
+    await device.openApp();
+    expect(await page.screenshot()).toMatchSnapshot({
+      name: "live-app-verify-account-connect-nano.png",
+    });
+    await device.complete(); // so the mock device is shut and doesn't cause issues with later tests
+  });
+
+  await test.step("Verify Address - get address", async () => {
+    await modal.waitForModalToDisappear();
+    expect(await page.screenshot()).toMatchSnapshot({
+      name: "live-app-verify-account-get-address.png",
     });
   });
 });
