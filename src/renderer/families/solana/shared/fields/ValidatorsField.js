@@ -41,20 +41,10 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
 
   const validators = useLedgerFirstShuffledValidators(account.currency);
 
-  const preparedValidators = useMemo(() => {
-    // validators[0] is Ledger's one, but if there is a chosen validator,
-    // we need to move it to the first position
+  const chosenValidator = useMemo(() => {
     if (chosenVoteAccAddr !== null) {
-      const chosenValidatorIdx = validators.findIndex(v => v.voteAccount === chosenVoteAccAddr);
-      if (chosenValidatorIdx !== -1) {
-        const swapedValidators = [...validators];
-        swap(swapedValidators, chosenValidatorIdx, 1);
-        swap(swapedValidators, 0, 1);
-        return swapedValidators;
-      }
+      return validators.find(v => v.voteAccount === chosenVoteAccAddr);
     }
-
-    return validators;
   }, [validators, chosenVoteAccAddr]);
 
   const validatorsFiltered = useMemo(() => {
@@ -94,11 +84,11 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
   };
 
   return (
-    <>
-      <Box>
+    <ValidatorsFieldContainer>
+      <Box p={1}>
         <ScrollLoadingList
-          data={showAll ? preparedValidators : [preparedValidators[0]]}
-          style={{ flex: showAll ? "1 0 240px" : "1 0 66px", marginBottom: 0 }}
+          data={showAll ? validators : [chosenValidator ?? validators[0]]}
+          style={{ flex: showAll ? "1 0 240px" : "1 0 56px", marginBottom: 0, paddingLeft: 0 }}
           renderItem={renderItem}
           noResultPlaceholder={
             validatorsFiltered.length <= 0 &&
@@ -112,12 +102,16 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
         </Text>
         <IconAngleDown size={16} />
       </SeeAllButton>
-    </>
+    </ValidatorsFieldContainer>
   );
 };
 
+const ValidatorsFieldContainer: ThemedComponent<{}> = styled(Box)`
+  border: 1px solid ${p => p.theme.colors.palette.divider};
+  border-radius: 4px;
+`;
+
 const SeeAllButton: ThemedComponent<{ expanded: boolean }> = styled.div`
-  margin-top: 15px;
   display: flex;
   color: ${p => p.theme.colors.wallet};
   align-items: center;

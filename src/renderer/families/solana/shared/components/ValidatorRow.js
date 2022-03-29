@@ -86,6 +86,7 @@ function SolanaValidatorRow({ validator, active, showStake, onClick, unit, curre
 
 const StyledValidatorRow: ThemedComponent<ValidatorRowProps> = styled(ValidatorRow)`
   border-color: transparent;
+  margin-bottom: 0;
 `;
 
 const ChosenMark: ThemedComponent<{ active: boolean }> = styled(Check).attrs(p => ({
