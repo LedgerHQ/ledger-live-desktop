@@ -18,7 +18,7 @@ import Image from "~/renderer/components/Image";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import { Ellipsis } from "../../shared/components/Ellipsis";
 import ErrorDisplay from "../../shared/components/ErrorDisplay";
-import ValidatorRow from "../../shared/fields/ValidatorRow";
+import ValidatorRow from "../../shared/components/ValidatorRow";
 import type { StepProps } from "../types";
 
 export default function StepValidator({
@@ -53,17 +53,6 @@ export default function StepValidator({
   const { meta, stake } = stakeWithMeta;
   const validatorName = meta.validator?.name ?? stakeAccAddr;
 
-  /*
-  const formatAmount = (amount: number) => {
-    //const unit = getAccountUnit(account);
-    return formatCurrencyUnit(unit, new BigNumber(amount), {
-      disableRounding: true,
-      alwaysShowSign: false,
-      showCode: true,
-    });
-  };
-  */
-
   const unit = getAccountUnit(account);
 
   const validators = useLedgerFirstShuffledValidators(account.currency);
@@ -77,7 +66,12 @@ export default function StepValidator({
     <Box flow={1}>
       <TrackPage category="Solana Delegation Deactivate" name="Step Validator" />
       {error && <ErrorBanner error={error} />}
-      <ValidatorRow currency={account.currency} validator={validator} unit={unit}></ValidatorRow>
+      <ValidatorRow
+        active
+        currency={account.currency}
+        validator={validator}
+        unit={unit}
+      ></ValidatorRow>
       {status.errors.fee && <ErrorDisplay error={status.errors.fee} />}
     </Box>
   );

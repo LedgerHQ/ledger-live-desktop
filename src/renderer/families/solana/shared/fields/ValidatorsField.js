@@ -17,7 +17,7 @@ import Text from "~/renderer/components/Text";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 import { openURL } from "~/renderer/linking";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import ValidatorRow from "./ValidatorRow";
+import ValidatorRow from "../components/ValidatorRow";
 
 type Props = {
   t: TFunction,
