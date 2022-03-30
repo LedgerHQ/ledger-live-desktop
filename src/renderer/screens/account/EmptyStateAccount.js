@@ -1,10 +1,9 @@
 // @flow
 
-import React, { PureComponent } from "react";
+import React, { useMemo } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { withTranslation, Trans } from "react-i18next";
-
 import { openModal } from "~/renderer/actions/modals";
 import type { TFunction } from "react-i18next";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
@@ -21,11 +20,13 @@ import darkEmptyStateAccount from "~/renderer/images/dark-empty-state-account.sv
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
 import styled from "styled-components";
 import { withRouter } from "react-router-dom";
-import { isCurrencySupported } from "~/renderer/screens/exchange/config";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account/helpers";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
 
 const mapDispatchToProps = {
   openModal,
@@ -42,93 +43,116 @@ type Props = OwnProps & {
   openModal: Function,
 };
 
-class EmptyStateAccount extends PureComponent<Props, *> {
-  render() {
-    const { t, account, parentAccount, openModal, history } = this.props;
-    const mainAccount = getMainAccount(account, parentAccount);
-    if (!mainAccount) return null;
-    const availableOnExchange = isCurrencySupported("BUY", getAccountCurrency(account));
+function EmptyStateAccount({ t, account, parentAccount, openModal, history }: Props) {
+  const mainAccount = getMainAccount(account, parentAccount);
 
-    const hasTokens =
-      mainAccount.subAccounts &&
-      mainAccount.subAccounts.length &&
-      mainAccount.subAccounts[0].type === "TokenAccount";
+  const currency = getAccountCurrency(account);
+  const rampCatalog = useRampCatalog();
 
-    return (
-      <Box mt={10} alignItems="center" selectable>
-        <Image
-          alt="emptyState Account logo"
-          resource={{
-            light: lightEmptyStateAccount,
-            dark: darkEmptyStateAccount,
-          }}
-          width="400"
-          themeTyped
-        />
-        <Box mt={5} alignItems="center">
-          <Title>{t("account.emptyState.title")}</Title>
-          <Description mt={3} style={{ display: "block" }}>
-            {hasTokens ? (
-              <Trans i18nKey="account.emptyState.descToken">
-                {"Make sure the"}
-                <Text ff="Inter|SemiBold" color="palette.text.shade100">
-                  {mainAccount.currency.managerAppName}
-                </Text>
-                {"app is installed and start receiving"}
-                <Text ff="Inter|SemiBold" color="palette.text.shade100">
-                  {mainAccount.currency.ticker}
-                </Text>
-                {"and"}
-                <Text ff="Inter|SemiBold" color="palette.text.shade100">
-                  {account &&
-                    account.currency &&
-                    // $FlowFixMe
-                    listTokenTypesForCryptoCurrency(account.currency).join(", ")}
-                  {"tokens"}
-                </Text>
-              </Trans>
-            ) : (
-              <Trans i18nKey="account.emptyState.desc">
-                {"Make sure the"}
-                <Text ff="Inter|SemiBold" color="palette.text.shade100">
-                  {mainAccount.currency.managerAppName}
-                </Text>
-                {"app is installed and start receiving"}
-              </Trans>
-            )}
-          </Description>
-          <Box horizontal>
-            {availableOnExchange ? (
-              <Button
-                mt={5}
-                mr={2}
-                primary
-                onClick={() => {
-                  setTrackingSource("empty state account");
-                  history.push({ pathname: "/exchange" });
-                }}
-              >
-                <Box horizontal flow={1} alignItems="center">
-                  <IconExchange size={12} />
-                  <Box>{t("account.emptyState.buttons.buy")}</Box>
-                </Box>
-              </Button>
-            ) : null}
+  // eslint-disable-next-line no-unused-vars
+  const [availableOnBuy, availableOnSell] = useMemo(() => {
+    if (!rampCatalog.value) {
+      return [false, false];
+    }
+
+    const allBuyableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(rampCatalog.value.onRamp);
+    const allSellableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(
+      rampCatalog.value.offRamp,
+    );
+    return [
+      allBuyableCryptoCurrencyIds.includes(currency.id),
+      allSellableCryptoCurrencyIds.includes(currency.id),
+    ];
+  }, [rampCatalog.value, currency.id]);
+
+  const hasTokens =
+    mainAccount.subAccounts &&
+    mainAccount.subAccounts.length &&
+    mainAccount.subAccounts[0].type === "TokenAccount";
+
+  if (!mainAccount) return null;
+
+  return (
+    <Box mt={10} alignItems="center" selectable>
+      <Image
+        alt="emptyState Account logo"
+        resource={{
+          light: lightEmptyStateAccount,
+          dark: darkEmptyStateAccount,
+        }}
+        width="400"
+        themeTyped
+      />
+      <Box mt={5} alignItems="center">
+        <Title>{t("account.emptyState.title")}</Title>
+        <Description mt={3} style={{ display: "block" }}>
+          {hasTokens ? (
+            <Trans i18nKey="account.emptyState.descToken">
+              {"Make sure the"}
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
+                {mainAccount.currency.managerAppName}
+              </Text>
+              {"app is installed and start receiving"}
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
+                {mainAccount.currency.ticker}
+              </Text>
+              {"and"}
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
+                {account &&
+                  account.currency &&
+                  // $FlowFixMe
+                  listTokenTypesForCryptoCurrency(account.currency).join(", ")}
+                {"tokens"}
+              </Text>
+            </Trans>
+          ) : (
+            <Trans i18nKey="account.emptyState.desc">
+              {"Make sure the"}
+              <Text ff="Inter|SemiBold" color="palette.text.shade100">
+                {mainAccount.currency.managerAppName}
+              </Text>
+              {"app is installed and start receiving"}
+            </Trans>
+          )}
+        </Description>
+        <Box horizontal>
+          {availableOnBuy ? (
             <Button
               mt={5}
+              mr={2}
               primary
-              onClick={() => openModal("MODAL_RECEIVE", { account, parentAccount })}
+              onClick={() => {
+                setTrackingSource("empty state account");
+                history.push({
+                  pathname: "/exchange",
+                  state: {
+                    mode: "onRamp",
+                    currencyId: currency.id,
+                    accountId: mainAccount.id,
+                  },
+                });
+              }}
             >
               <Box horizontal flow={1} alignItems="center">
-                <IconReceive size={12} />
-                <Box>{t("account.emptyState.buttons.receiveFunds")}</Box>
+                <IconExchange size={12} />
+                <Box>{t("account.emptyState.buttons.buy")}</Box>
               </Box>
             </Button>
-          </Box>
+          ) : null}
+          <Button
+            mt={5}
+            primary
+            onClick={() => openModal("MODAL_RECEIVE", { account, parentAccount })}
+          >
+            <Box horizontal flow={1} alignItems="center">
+              <IconReceive size={12} />
+              <Box>{t("account.emptyState.buttons.receiveFunds")}</Box>
+            </Box>
+          </Button>
         </Box>
       </Box>
-    );
-  }
+    </Box>
+  );
 }
 
 const Title: ThemedComponent<{}> = styled(Box).attrs(() => ({
