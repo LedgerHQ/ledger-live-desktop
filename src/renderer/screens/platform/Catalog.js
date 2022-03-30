@@ -11,7 +11,6 @@ import {
   dismissedBannersSelector,
 } from "~/renderer/reducers/settings";
 
-import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import { filterPlatformApps } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/helpers";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -24,6 +23,7 @@ import { openPlatformAppDisclaimerDrawer } from "~/renderer/actions/UI";
 import AppCard from "~/renderer/components/Platform/AppCard";
 import CatalogBanner from "./CatalogBanner";
 import TwitterBanner from "./TwitterBanner";
+import { useRemoteLiveAppContext } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
 
 const DAPP_DISCLAIMER_ID = "PlatformAppDisclaimer";
 
@@ -58,7 +58,8 @@ const PlatformCatalog = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { manifests } = usePlatformApp();
+  const { state } = useRemoteLiveAppContext();
+  const manifests = useMemo(() => (state.value ? state.value.liveAppByIndex : []), [state.value]);
   const allowDebugApps = useSelector(allowDebugAppsSelector);
   const allowExperimentalApps = useSelector(allowExperimentalAppsSelector);
 

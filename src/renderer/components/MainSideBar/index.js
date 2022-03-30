@@ -6,7 +6,7 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { Transition } from "react-transition-group";
 import styled from "styled-components";
 import { useManagerBlueDot } from "@ledgerhq/live-common/lib/manager/hooks";
-import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
+import { useRemoteLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
 import { FeatureToggle } from "@ledgerhq/live-common/lib/featureFlags";
 import { Icons } from "@ledgerhq/react-ui";
 
@@ -208,8 +208,8 @@ const MainSideBar = () => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
-  const { manifests } = usePlatformApp();
-  const isCardDisabled = !manifests.has(CARD_APP_ID);
+  const manifest = useRemoteLiveAppManifest(CARD_APP_ID);
+  const isCardDisabled = !manifest;
 
   /** redux navigation locked state */
   const navigationLocked = useSelector(isNavigationLocked);
