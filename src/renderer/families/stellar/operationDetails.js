@@ -18,22 +18,28 @@ type OperationDetailsExtraProps = {
 const OperationDetailsExtra = ({ extra, type, account }: OperationDetailsExtraProps) => {
   return (
     <>
-      {Object.keys(extra).map(key => (
-        <OpDetailsSection key={key}>
-          <OpDetailsTitle>
-            <Trans i18nKey={`families.stellar.${key}`} defaults={key} />
-          </OpDetailsTitle>
-          <OpDetailsData>
-            {key === "assetIssuer" ? (
-              <HashContainer>
-                <SplitAddress value={extra[key]} />
-              </HashContainer>
-            ) : (
-              <Ellipsis>{extra[key]}</Ellipsis>
-            )}
-          </OpDetailsData>
-        </OpDetailsSection>
-      ))}
+      {Object.keys(extra).map(key => {
+        if (key === "pagingToken") {
+          return null;
+        }
+
+        return (
+          <OpDetailsSection key={key}>
+            <OpDetailsTitle>
+              <Trans i18nKey={`families.stellar.${key}`} defaults={key} />
+            </OpDetailsTitle>
+            <OpDetailsData>
+              {key === "assetIssuer" ? (
+                <HashContainer>
+                  <SplitAddress value={extra[key]} />
+                </HashContainer>
+              ) : (
+                <Ellipsis>{extra[key]}</Ellipsis>
+              )}
+            </OpDetailsData>
+          </OpDetailsSection>
+        );
+      })}
     </>
   );
 };

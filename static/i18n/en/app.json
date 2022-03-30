@@ -4106,9 +4106,6 @@
     "StellarMemoRecommended": {
       "title": "A memo may be required when sending to this recipient"
     },
-    "StellarInvalidAddress": {
-      "title": "This is not a valid Stellar address"
-    },
     "StellarAssetNotAccepted": {
       "title": "This recipient doesn't have a trustline to {{assetCode}} yet"
     },
