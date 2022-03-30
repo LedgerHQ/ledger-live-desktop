@@ -16,6 +16,8 @@ import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import { Ellipsis } from "../../shared/components/Ellipsis";
 import ErrorDisplay from "../../shared/components/ErrorDisplay";
 import type { StepProps } from "../types";
+import ValidatorRow from "../../shared/components/ValidatorRow";
+import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 
 export default function StepValidator({
   account,
@@ -47,33 +49,27 @@ export default function StepValidator({
   }
 
   const { meta, stake } = stakeWithMeta;
-  const validatorName = meta.validator?.name ?? stakeAccAddr;
 
-  const formatAmount = (amount: number) => {
-    const unit = getAccountUnit(account);
-    return formatCurrencyUnit(unit, new BigNumber(amount), {
-      disableRounding: true,
-      alwaysShowSign: false,
-      showCode: true,
-    });
-  };
+  const unit = getAccountUnit(account);
+
+  const validators = useLedgerFirstShuffledValidators(account.currency);
+  const validator = validators.find(v => v.voteAccount === stake.delegation?.voteAccAddr);
+
+  if (validator === undefined) {
+    return null;
+  }
 
   return (
     <Box flow={1}>
       <TrackPage category="Solana Delegation Reactivate" name="Step Validator" />
       {error && <ErrorBanner error={error} />}
-      <Box horizontal>
-        <Box mr={1}>
-          {meta.validator?.img !== undefined && (
-            <Image resource={meta.validator.img} height={32} width={32} alt="" />
-          )}
-          {meta.validator?.img === undefined && <FirstLetterIcon label={validatorName ?? "-"} />}
-        </Box>
-        <Ellipsis>{validatorName}</Ellipsis>
-      </Box>
-      <Box>
-        {t("delegation.delegated")}: {formatAmount(stake.delegation?.stake ?? 0)}
-      </Box>
+      <ValidatorRow
+        active
+        currency={account.currency}
+        key={validator.voteAccount}
+        validator={validator}
+        unit={unit}
+      ></ValidatorRow>
       {status.errors.fee && <ErrorDisplay error={status.errors.fee} />}
     </Box>
   );

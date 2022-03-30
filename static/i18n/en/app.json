@@ -2575,6 +2575,7 @@
       "withdrawableInfoTooltip": "Total amount that is withdrawable from delegations.",
       "withdrawableTitle": "Withdrawable",
       "statusUpdateNotice": "The status of the delegation will be updated when the transaction is confirmed.",
+      "ledgerByFigmentTC": "Ledger by Figment T&Cs",
       "emptyState": {
         "description": "You can earn SOL rewards by delegating your assets.",
         "info": "How Delegation works",

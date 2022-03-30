@@ -9,8 +9,8 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
-import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import ErrorDisplay from "../../shared/components/ErrorDisplay";
+import LedgerByFigmentTC from "../../shared/components/LedgerByFigmentTCLink";
 import ValidatorsField from "../../shared/fields/ValidatorsField";
 import type { StepProps } from "../types";
 
@@ -78,7 +78,7 @@ export function StepValidatorFooter({
 
   return (
     <>
-      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
+      <LedgerByFigmentTC />
       <Box horizontal>
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />
