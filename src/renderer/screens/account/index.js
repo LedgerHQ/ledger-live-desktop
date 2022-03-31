@@ -36,6 +36,8 @@ import TokensList from "./TokensList";
 import CompoundBodyHeader from "~/renderer/screens/lend/Account/AccountBodyHeader";
 import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
 
+import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
+
 const mapStateToProps = (
   state,
   {
@@ -87,6 +89,8 @@ const AccountPage = ({
   const bgColor = useTheme("colors.palette.background.paper");
 
   const isCompoundEnabled = useCompoundAccountEnabled(account, parentAccount);
+
+  console.log(3535, { account, mainAccount });
 
   if (!account || !mainAccount) {
     return <Redirect to="/accounts" />;
