@@ -2912,15 +2912,15 @@
     "@ledgerhq/hw-transport" "^6.24.1"
     bip32-path "0.4.2"
 
-"@ledgerhq/hw-transport-http@6.27.0":
-  version "6.27.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-6.27.0.tgz#17e6005b731d01c4c59285f2c7454431b3891dee"
-  integrity sha512-9ZPwo1E7YpLBMbmiRumgBE9CnwlQ7gXmg2K52Y7Lu5U/UVnQ8WoHhYr8GHm9wyC2gu/30XDaJGzgvZYqArdRHA==
+"@ledgerhq/hw-transport-http@6.26.0":
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/hw-transport-http/-/hw-transport-http-6.26.0.tgz#3476620e9f4862ffd0da44843876898067c2fcdd"
+  integrity sha512-2kpcj3MteErgqsVK8GUohTxSUKKBUzgfiEl5AyuWYyZ1STxESjIK9UFw223xX6s+iggA3UzolhOV26csVdfYkw==
   dependencies:
     "@ledgerhq/errors" "^6.10.0"
     "@ledgerhq/hw-transport" "^6.24.1"
     "@ledgerhq/logs" "^6.10.0"
-    axios "^0.26.1"
+    axios "^0.26.0"
     ws "8.5.0"
 
 "@ledgerhq/hw-transport-mocker@6.24.1":
@@ -3016,9 +3016,9 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#082c946830a332f764f3c95c0eb9c0572b493825":
+"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#34d27935aa8e7c3d4e966f30a3cca3e47800d3d6":
   version "21.35.0"
-  resolved "https://github.com/LedgerHQ/ledger-live-common.git#082c946830a332f764f3c95c0eb9c0572b493825"
+  resolved "https://github.com/LedgerHQ/ledger-live-common.git#34d27935aa8e7c3d4e966f30a3cca3e47800d3d6"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
