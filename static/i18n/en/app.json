@@ -2760,10 +2760,6 @@
           "title": "use TronGrid.io",
           "description": "Use trongrid directly without ledger proxy"
         },
-        "experimentalJSCurrencies": {
-          "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Tezos and Cosmos."
-        },
         "experimentalCurrencies": {
           "title": "Experimental integrations",
           "description": "Use available experimental crypto assets integrations."
