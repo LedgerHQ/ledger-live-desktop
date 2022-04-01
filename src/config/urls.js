@@ -209,7 +209,7 @@ export const urls = {
     website: "https://elrond.com",
   },
   solana: {
-    staking: "https://support.ledger.com",
+    staking: "https://support.ledger.com/hc/en-us/articles/4731749170461?docs=true",
     recipient_info: "https://support.ledger.com",
     ledgerByFigmentTC: "https://support.ledger.com",
   },
