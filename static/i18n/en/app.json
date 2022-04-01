@@ -1275,7 +1275,8 @@
         "description": "Description",
         "tokenAddress": "Token Address",
         "tokenId": "Token ID",
-        "quantity": "Quantity"
+        "quantity": "Quantity",
+        "floorPrice": "Collection Floor Price"
       }
     },
     "collections": {
