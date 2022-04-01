@@ -2,7 +2,10 @@
 
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { stakeActions as solanaStakeActions } from "@ledgerhq/live-common/lib/families/solana/logic";
+import {
+  stakeActions as solanaStakeActions,
+  stakeActivePercent,
+} from "@ledgerhq/live-common/lib/families/solana/logic";
 import type { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";
@@ -148,12 +151,7 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
         <Box ml={1}>{stake.activation.state}</Box>
       </Column>
       <Column>{formatAmount(stake.delegation?.stake ?? 0)}</Column>
-      <Column>
-        {stake.delegation === undefined
-          ? 0
-          : (stake.activation.active / stake.delegation.stake) * 100}{" "}
-        %
-      </Column>
+      <Column>{stake.delegation === undefined ? 0 : stakeActivePercent(stake)} %</Column>
       <Column>{formatAmount(stake.withdrawable)}</Column>
       <Column>
         <DropDown items={stakeActions} renderItem={ManageDropDownItem} onChange={onSelect}>
