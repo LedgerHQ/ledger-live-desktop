@@ -43,20 +43,3 @@ export const Header = () => (
     <TableLine />
   </HeaderWrapper>
 );
-
-export const UnbondingHeader = () => (
-  <HeaderWrapper>
-    <TableLine>
-      <Trans i18nKey="delegation.validator" />
-    </TableLine>
-    <TableLine>
-      <Trans i18nKey="delegation.status" />
-    </TableLine>
-    <TableLine>
-      <Trans i18nKey="delegation.delegated" />
-    </TableLine>
-    <TableLine>
-      <Trans i18nKey="delegation.completionDate" />
-    </TableLine>
-  </HeaderWrapper>
-);

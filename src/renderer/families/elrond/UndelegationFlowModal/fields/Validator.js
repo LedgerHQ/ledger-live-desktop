@@ -49,8 +49,13 @@ type OptionRowProps = {
 function OptionRow({ data: { validatorAddress, validator, formattedAmount } }: OptionRowProps) {
   const name = validator?.name ?? validatorAddress;
   return (
-    <Box key={validatorAddress} horizontal alignItems="center" justifyContent="space-between">
-      <Box horizontal alignItems="center">
+    <Box
+      key={validatorAddress}
+      horizontal={true}
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <Box horizontal={true} alignItems="center">
         <FirstLetterIcon label={name} mr={2} />
         <Text ff="Inter|Medium">{name}</Text>
       </Box>

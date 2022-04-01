@@ -21,6 +21,7 @@ export default function StepDelegation({
   bridgePending,
   error,
   validators,
+  delegations,
   t,
 }: StepProps) {
   const bridge = getAccountBridge(account, parentAccount);
@@ -38,9 +39,8 @@ export default function StepDelegation({
       {error && <ErrorBanner error={error} />}
       <ValidatorsField
         account={account}
-        validators={transaction.validators || []}
-        providers={validators}
-        delegations={[]}
+        validators={validators}
+        delegations={delegations}
         bridgePending={bridgePending}
         onChangeDelegations={updateDelegation}
         status={status}

@@ -28,7 +28,7 @@ class DelegationModal extends PureComponent<{ name: string }, State> {
     return (
       <Modal
         name={name}
-        centered
+        centered={true}
         refocusWhenChange={stepId}
         onHide={this.handleReset}
         preventBackdropClick={isModalLocked}

@@ -38,6 +38,7 @@ type OwnProps = {|
     account: Account,
     parentAccount: ?Account,
     validators?: any,
+    delegations?: any,
   },
   name: string,
 |};
@@ -186,12 +187,13 @@ const Body = ({
     t,
     bridgePending,
     validators: params.validators,
+    delegations: params.delegations,
   };
 
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalDelegation" />
+      <Track onUnmount={true} event="CloseModalDelegation" />
     </Stepper>
   );
 };

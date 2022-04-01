@@ -165,7 +165,7 @@ function Body({
   return (
     <Stepper {...stepperProps}>
       <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalUndelegation" />
+      <Track onUnmount={true} event="CloseModalUndelegation" />
     </Stepper>
   );
 }

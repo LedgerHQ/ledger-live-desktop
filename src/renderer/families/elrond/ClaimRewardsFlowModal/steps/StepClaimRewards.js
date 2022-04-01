@@ -1,6 +1,6 @@
 // @flow
 import invariant from "invariant";
-import React, { useCallback } from "react";
+import React, { Fragment, useCallback } from "react";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 
@@ -31,6 +31,9 @@ export default function StepClaimRewards({
   warning,
   error,
   t,
+  validators,
+  delegations,
+  contract,
 }: StepProps) {
   const locale = useSelector(localeSelector);
   invariant(account && account.elrondResources && transaction, "account and transaction required");
@@ -77,7 +80,7 @@ export default function StepClaimRewards({
   return (
     <Box flow={1}>
       <TrackPage category="ClaimRewards Flow" name="Step 1" />
-      {warning && !error ? <ErrorBanner error={warning} warning /> : null}
+      {warning && !error ? <ErrorBanner error={warning} warning={true} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
       <ModeSelectorField mode={transaction.mode} onChange={onChangeMode} />
       {amount && (
@@ -89,8 +92,9 @@ export default function StepClaimRewards({
       )}
 
       <DelegationSelectorField
-        transaction={transaction}
-        account={account}
+        contract={contract}
+        validators={validators}
+        delegations={delegations}
         t={t}
         onChange={onDelegationChange}
       />
@@ -113,16 +117,16 @@ export function StepClaimRewardsFooter({
   const canNext = !bridgePending && !hasErrors;
 
   return (
-    <>
+    <Fragment>
       <AccountFooter parentAccount={parentAccount} account={account} status={status} />
-      <Box horizontal>
-        <Button mr={1} secondary onClick={onClose}>
+      <Box horizontal={true}>
+        <Button mr={1} secondary={true} onClick={onClose}>
           <Trans i18nKey="common.cancel" />
         </Button>
-        <Button disabled={!canNext} primary onClick={() => transitionTo("connectDevice")}>
+        <Button disabled={!canNext} primary={true} onClick={() => transitionTo("connectDevice")}>
           <Trans i18nKey="common.continue" />
         </Button>
       </Box>
-    </>
+    </Fragment>
   );
 }

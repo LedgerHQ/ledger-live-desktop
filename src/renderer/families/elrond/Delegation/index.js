@@ -1,17 +1,9 @@
 // @flow
 import React, { Fragment, useCallback, useState, useEffect } from "react";
-import invariant from "invariant";
 import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import {
-  useCosmosPreloadData,
-  useCosmosMappedDelegations,
-} from "@ledgerhq/live-common/lib/families/cosmos/react";
-import { mapUnbondings, canDelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
-import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
@@ -21,14 +13,15 @@ import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import IconChartLine from "~/renderer/icons/ChartLine";
-import { Header, UnbondingHeader } from "./Header";
-import { Row, UnbondingRow } from "./Row";
 
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 import DelegateIcon from "~/renderer/icons/Delegate";
 import TableContainer, { TableHeader } from "~/renderer/components/TableContainer";
 import axios from "axios";
+
+import Unbondings from "~/renderer/families/elrond/components/Unbondings";
+import Delegations from "~/renderer/families/elrond/components/Delegations";
 
 type Props = {
   account: Account,
@@ -50,8 +43,6 @@ const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
   const delegationEnabled = true;
   const hasRewards = true;
-
-  console.log({ account });
 
   const fetchData = () => {
     const fetchPayload = async (): Promise<void> => {
@@ -117,32 +108,23 @@ const Delegation = ({ account }: Props) => {
         openModal("MODAL_ELROND_DELEGATE", {
           account,
           validators,
+          delegations,
         }),
       );
     }
-  }, [account, dispatch, validators]);
+  }, [account, dispatch, validators, delegations]);
 
   const onClaimRewards = useCallback(() => {
-    dispatch(
-      openModal("MODAL_ELROND_CLAIM_REWARDS", {
-        account,
-      }),
-    );
-  }, [account, dispatch]);
-
-  const onRedirect = useCallback(
-    (contract: string, modalName: string, amount: string) => {
+    if (validators && delegations) {
       dispatch(
-        openModal(modalName, {
+        openModal("MODAL_ELROND_CLAIM_REWARDS", {
           account,
-          contract,
           validators,
-          amount,
+          delegations,
         }),
       );
-    },
-    [account, dispatch, validators],
-  );
+    }
+  }, [account, delegations, validators, dispatch]);
 
   return (
     <Fragment>
@@ -167,7 +149,7 @@ const Delegation = ({ account }: Props) => {
                     small={true}
                     onClick={onDelegate}
                   >
-                    <Box horizontal flow={1} alignItems="center">
+                    <Box horizontal={true} flow={1} alignItems="center">
                       <DelegateIcon size={12} />
                       <Box>
                         <Trans i18nKey="cosmos.delegation.delegate" />
@@ -200,18 +182,7 @@ const Delegation = ({ account }: Props) => {
         </TableHeader>
 
         {delegations ? (
-          <Fragment>
-            <Header />
-
-            {delegations.map((delegation, index) => (
-              <Row
-                key={index}
-                account={account}
-                delegation={delegation}
-                onManageAction={onRedirect}
-              />
-            ))}
-          </Fragment>
+          <Delegations delegations={delegations} validators={validators} account={account} />
         ) : (
           <Wrapper horizontal={true}>
             <Box style={{ maxWidth: "65%" }}>
@@ -221,6 +192,7 @@ const Delegation = ({ account }: Props) => {
                   values={{ name: account.currency.name }}
                 />
               </Text>
+
               <Box mt={2}>
                 <LinkWithExternalIcon
                   label={<Trans i18nKey="cosmos.delegation.emptyState.info" />}
@@ -228,6 +200,7 @@ const Delegation = ({ account }: Props) => {
                 />
               </Box>
             </Box>
+
             <Box>
               <ToolTip
                 content={
@@ -240,8 +213,9 @@ const Delegation = ({ account }: Props) => {
                   disabled={!delegationEnabled}
                   onClick={onEarnRewards}
                 >
-                  <Box horizontal flow={1} alignItems="center">
+                  <Box horizontal={true} flow={1} alignItems="center">
                     <IconChartLine size={12} />
+
                     <Box>
                       <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
                     </Box>
@@ -253,26 +227,12 @@ const Delegation = ({ account }: Props) => {
         )}
       </TableContainer>
 
-      {unbondings && (
-        <TableContainer mb={6}>
-          <TableHeader
-            title={<Trans i18nKey="cosmos.undelegation.header" />}
-            titleProps={{ "data-e2e": "title_Undelegation" }}
-            tooltip={<Trans i18nKey="cosmos.undelegation.headerTooltip" />}
-          />
-
-          <UnbondingHeader />
-
-          {unbondings.map((unbonding, index) => (
-            <UnbondingRow key={`${unbonding.contract}-${index}`} {...unbonding} />
-          ))}
-        </TableContainer>
-      )}
+      {unbondings && <Unbondings unbondings={unbondings} />}
     </Fragment>
   );
 };
 
-const Delegations = (props: Props) =>
+const DelegationsRenderer = (props: Props) =>
   props.account.elrondResources ? <Delegation {...props} /> : null;
 
-export default Delegations;
+export default DelegationsRenderer;

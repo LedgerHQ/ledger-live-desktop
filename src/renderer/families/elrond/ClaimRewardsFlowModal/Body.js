@@ -37,7 +37,9 @@ type OwnProps = {|
   params: {
     account: Account,
     parentAccount: ?Account,
-    validatorAddress: ?string,
+    delegations?: any,
+    validators?: any,
+    contract?: string,
   },
   name: string,
 |};
@@ -112,7 +114,10 @@ const Body = ({
     const bridge = getAccountBridge(params.account, undefined);
     const transaction = bridge.createTransaction(params.account);
 
-    return { account: params.account, transaction };
+    return {
+      account: params.account,
+      transaction: bridge.updateTransaction(transaction, { mode: "claimReward" }),
+    };
   });
 
   const handleCloseModal = useCallback(() => {
@@ -185,6 +190,9 @@ const Body = ({
     onTransactionError: handleTransactionError,
     t,
     bridgePending,
+    delegations: params.delegations,
+    validators: params.validators,
+    contract: params.contract,
   };
 
   return (

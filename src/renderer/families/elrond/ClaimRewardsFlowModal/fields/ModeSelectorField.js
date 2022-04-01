@@ -30,12 +30,17 @@ export default function ModeSelectorField({
   return (
     <Box style={{ width: 300 }} alignSelf="center">
       <ToggleButton value={mode} options={options} onChange={onChange} />
-      <Box horizontal alignItems="center" justifyContent="center" color="palette.text.shade60">
+      <Box
+        horizontal={true}
+        alignItems="center"
+        justifyContent="center"
+        color="palette.text.shade60"
+      >
         <Popover
           position="right"
           content={
-            <Box vertical px={2}>
-              <Box vertical alignItems="start" justifyContent="start" my={2}>
+            <Box vertical={true} px={2}>
+              <Box vertical={true} alignItems="start" justifyContent="start" my={2}>
                 <Text ff="Inter|SemiBold" fontSize={4} color="palette.primary.main">
                   <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.compound" />
                 </Text>
@@ -44,7 +49,7 @@ export default function ModeSelectorField({
                 </Text>
               </Box>
 
-              <Box vertical alignItems="start" justifyContent="start" my={2}>
+              <Box vertical={true} alignItems="start" justifyContent="start" my={2}>
                 <Text ff="Inter|SemiBold" fontSize={4} color="palette.primary.main">
                   <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.claim" />
                 </Text>
@@ -55,7 +60,7 @@ export default function ModeSelectorField({
             </Box>
           }
         >
-          <Box horizontal alignItems="center" p={2} justifyContent="center">
+          <Box horizontal={true} alignItems="center" p={2} justifyContent="center">
             <Text ff="Inter|SemiBold" fontSize={4}>
               <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.compoundOrClaim" />
             </Text>

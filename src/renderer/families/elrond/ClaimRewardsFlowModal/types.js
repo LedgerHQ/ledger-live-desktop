@@ -30,6 +30,9 @@ export type StepProps = {
   onOperationBroadcasted: Operation => void,
   setSigned: boolean => void,
   bridgePending: boolean,
+  contract?: string,
+  validators?: any,
+  delegations?: any,
 };
 
 export type St = Step<StepId, StepProps>;

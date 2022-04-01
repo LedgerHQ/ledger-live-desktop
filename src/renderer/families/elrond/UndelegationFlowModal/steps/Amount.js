@@ -63,7 +63,7 @@ export default function StepAmount({
     <Box flow={1}>
       <TrackPage category="Undelegation Flow" name="Step 1" />
       {error && <ErrorBanner error={error} />}
-      <Box horizontal justifyContent="center" mb={2}>
+      <Box horizontal={true} justifyContent="center" mb={2}>
         <Text ff="Inter|Medium" fontSize={4}>
           <Trans i18nKey="cosmos.undelegation.flow.steps.amount.subtitle">
             <b></b>
