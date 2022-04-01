@@ -117,7 +117,7 @@ jobs:
       - name: install operating system dependencies
         run: npx playwright install-deps
       - name: build electron app
-        run: yarn build
+        run: yarn build:testing
       - name: generate new screenshots (Linux)
         run: xvfb-run --auto-servernum -- yarn playwright-update-snapshots --retries 0
       - name: status
@@ -175,7 +175,7 @@ jobs:
       - name: install operating system dependencies
         run: npx playwright install-deps
       - name: build electron app
-        run: yarn build
+        run: yarn build:testing
       - name: generate new screenshots (windows)
         run: yarn playwright-update-snapshots --retries 0
       - name: status
@@ -218,7 +218,7 @@ jobs:
   #     - name: install operating system dependencies
   #       run: npx playwright install-deps
   #     - name: build electron app
-  #       run: yarn build
+  #       run: yarn build:testing
   #     - name: generate new screenshots (macOS)
   #       run: yarn playwright-update-snapshots --retries 0
   #     - name: status

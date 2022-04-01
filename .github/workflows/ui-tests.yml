@@ -162,7 +162,7 @@ jobs:
       - name: build electron app
         env:
           INSTRUMENT_BUILD: true
-        run: yarn build
+        run: yarn build:testing
       - name: run ui tests (Linux)
         if: always()
         run: xvfb-run --auto-servernum -- yarn playwright
@@ -293,7 +293,7 @@ jobs:
       - name: build electron app
         env:
           INSTRUMENT_BUILD: true
-        run: yarn build
+        run: yarn build:testing
       - name: run ui tests (windows)
         run: yarn playwright
       - name: upload diffs to imgur
@@ -344,7 +344,7 @@ jobs:
   #     - name: build electron app
   #       env:
   #         INSTRUMENT_BUILD: true
-  #       run: yarn build
+  #       run: yarn build:testing
   #     - name: run ui tests (macos)
   #       run: yarn playwright
   #     - name: upload diffs to imgur
