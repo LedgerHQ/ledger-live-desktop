@@ -1,28 +1,31 @@
 // @flow
 
-import React, { useMemo, useCallback, useState, memo } from "react";
-import Box from "~/renderer/components/Box";
-import styled from "styled-components";
-import Text from "~/renderer/components/Text";
-import Button from "~/renderer/components/Button";
-import IconSend from "~/renderer/icons/Send";
-import ZoomInIcon from "~/renderer/icons/ZoomIn";
-
-import type { Account } from "@ledgerhq/live-common/lib/types";
+import React, { useMemo, useCallback, useState, useEffect, memo } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useSelector, useDispatch } from "react-redux";
-import { getNFTById } from "~/renderer/reducers/accounts";
+import { space, layout, position } from "styled-system";
+import network from "@ledgerhq/live-common/lib/network";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { getCryptoCurrencyById } from "@ledgerhq/live-common/lib/currencies";
+
+import type { Account } from "@ledgerhq/live-common/lib/types";
+
+import styled from "styled-components";
+import Box from "~/renderer/components/Box";
+import NftPanAndZoom from "./NftPanAndZoom";
+import IconSend from "~/renderer/icons/Send";
+import Text from "~/renderer/components/Text";
 import { NFTProperties } from "./NFTProperties";
 import { CopiableField } from "./CopiableField";
-import NftPanAndZoom from "./NftPanAndZoom";
-import ExternalViewerButton from "./ExternalViewerButton";
-import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Image from "~/renderer/screens/nft/Image";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
-import { space, layout, position } from "styled-system";
+import ZoomInIcon from "~/renderer/icons/ZoomIn";
+import Button from "~/renderer/components/Button";
 import { openModal } from "~/renderer/actions/modals";
+import Skeleton from "~/renderer/screens/nft/Skeleton";
 import { setDrawer } from "~/renderer/drawers/Provider";
+import { getNFTById } from "~/renderer/reducers/accounts";
+import ExternalViewerButton from "./ExternalViewerButton";
 import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
 
 const NFTViewerDrawerContainer = styled.div`
@@ -115,6 +118,25 @@ const HashContainer = styled.div`
   user-select: none;
 `;
 
+const TickerContainer = styled(Text)`
+  padding-left: 3px;
+  font-weight: 600;
+`;
+
+const FLOOR_PRICE_CURRENCIES = new Set(["ethereum"]);
+const getFloorPrice = async (nft: ProtoNFT): Promise<number | null> => {
+  if (!FLOOR_PRICE_CURRENCIES.has(nft.currencyId)) {
+    return null;
+  }
+
+  const { data } = await network({
+    method: "GET",
+    url: `https://api-opensea.vercel.app/floor?contract=${nft.contract}&currencyId=${nft.currencyId}`,
+  });
+
+  return data?.floor_price ?? null;
+};
+
 const NFTAttribute = memo(
   ({
     title,
@@ -171,6 +193,17 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
   const { status, metadata } = useNftMetadata(nft.contract, nft.tokenId, nft.currencyId);
   const show = useMemo(() => status === "loading", [status]);
   const name = metadata?.nftName || nft.tokenId;
+
+  const currency = useMemo(() => getCryptoCurrencyById(nft.currencyId), [nft.currencyId]);
+
+  const [floorPriceLoading, setFloorPriceLoading] = useState(false);
+  const [floorPrice, setFloorPrice] = useState(null);
+  useEffect(() => {
+    setFloorPriceLoading(true);
+    getFloorPrice(nft)
+      .then(setFloorPrice)
+      .finally(() => setFloorPriceLoading(false));
+  }, [nft]);
 
   const onNFTSend = useCallback(() => {
     setDrawer();
@@ -304,6 +337,19 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
                   value={nft.amount.toString()}
                 />
               </React.Fragment>
+            ) : null}
+            {floorPriceLoading || (!floorPriceLoading && floorPrice) ? (
+              <NFTAttribute
+                separatorTop
+                skeleton={floorPriceLoading}
+                title={t("NFT.viewer.attributes.floorPrice")}
+                value={
+                  <Text mb={1} lineHeight="15.73px" fontSize={4} color="palette.text.shade60">
+                    {floorPrice}
+                    <TickerContainer>{currency.ticker}</TickerContainer>
+                  </Text>
+                }
+              />
             ) : null}
           </NFTAttributes>
         </NFTViewerDrawerContent>
