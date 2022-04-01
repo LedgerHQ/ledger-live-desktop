@@ -93,7 +93,7 @@ function StepConfirmation({
             title={<Trans i18nKey="cosmos.claimRewards.flow.steps.confirmation.broadcastError" />}
           />
         ) : null}
-        <ErrorDisplay error={error} withExportLogs />
+        <ErrorDisplay error={error} withExportLogs={true} />
       </Container>
     );
   }
@@ -118,14 +118,14 @@ export function StepConfirmationFooter({
     : null;
 
   return (
-    <Box horizontal alignItems="right">
+    <Box horizontal={true} alignItems="right">
       <Button ml={2} onClick={onClose}>
         <Trans i18nKey="common.close" />
       </Button>
       {concernedOperation ? (
         // FIXME make a standalone component!
         <Button
-          primary
+          primary={true}
           ml={2}
           event="ClaimRewards Cosmos Flow Step 3 View OpD Clicked"
           onClick={() => {

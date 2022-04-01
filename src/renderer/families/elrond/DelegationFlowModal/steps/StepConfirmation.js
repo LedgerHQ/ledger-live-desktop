@@ -58,7 +58,7 @@ function StepConfirmation({
             title={<Trans i18nKey="cosmos.delegation.flow.steps.confirmation.broadcastError" />}
           />
         ) : null}
-        <ErrorDisplay error={error} withExportLogs />
+        <ErrorDisplay error={error} withExportLogs={true} />
       </Container>
     );
   }

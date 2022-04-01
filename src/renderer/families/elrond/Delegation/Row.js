@@ -1,26 +1,18 @@
 // @flow
 
-import React, { useCallback, useState, useEffect, useMemo, Fragment } from "react";
+import React, { useCallback, useMemo, Fragment } from "react";
 import styled from "styled-components";
 import { Trans } from "react-i18next";
-import moment from "moment";
 import { BigNumber } from "bignumber.js";
 
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type {
-  CosmosMappedDelegation,
-  CosmosMappedUnbonding,
-} from "@ledgerhq/live-common/lib/families/cosmos/types";
-import type { Account } from "@ledgerhq/live-common/lib/types";
-import { canUndelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
+import DropDown, { DropDownItem } from "~/renderer/components/DropDownSelector";
 
 import { TableLine } from "./Header";
-import DropDown, { DropDownItem } from "~/renderer/components/DropDownSelector";
 
 import Box from "~/renderer/components/Box/Box";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import CheckCircle from "~/renderer/icons/CheckCircle";
-import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
 import ToolTip from "~/renderer/components/Tooltip";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
@@ -28,14 +20,14 @@ import Text from "~/renderer/components/Text";
 import { openURL } from "~/renderer/linking";
 import { denominate } from "../helpers";
 
-const Wrapper: ThemedComponent<*> = styled.div`
+export const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 16px 20px;
 `;
 
-const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs(p => ({
+export const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs(p => ({
   ff: "Inter|SemiBold",
   color: p.strong ? "palette.text.shade100" : "palette.text.shade80",
   fontSize: 3,
@@ -51,7 +43,7 @@ const Column: ThemedComponent<{ clickable?: boolean }> = styled(TableLine).attrs
       : ``}
 `;
 
-const Ellipsis: ThemedComponent<{}> = styled.div`
+export const Ellipsis: ThemedComponent<{}> = styled.div`
   flex: 1;
   display: block;
   overflow: hidden;
@@ -105,7 +97,7 @@ export function Row({
     action => {
       onManageAction(contract, action.key, userActiveStake);
     },
-    [onManageAction, contract],
+    [onManageAction, userActiveStake, contract],
   );
 
   const _canUndelegate = true; // || canUndelegate(account);
@@ -175,7 +167,7 @@ export function Row({
       <Column>
         <DropDown items={dropDownItems} renderItem={ManageDropDownItem} onChange={onSelect}>
           {() => (
-            <Box flex horizontal alignItems="center">
+            <Box flex={true} horizontal={true} alignItems="center">
               <Trans i18nKey="common.manage" />
               <div style={{ transform: "rotate(90deg)" }}>
                 <ChevronRight size={16} />
@@ -184,77 +176,6 @@ export function Row({
           )}
         </DropDown>
       </Column>
-    </Wrapper>
-  );
-}
-
-type UnbondingRowProps = {
-  delegation: CosmosMappedUnbonding,
-};
-
-export function UnbondingRow({ contract, seconds, validator, amount }: any) {
-  const [counter, setCounter] = useState<number>(seconds);
-
-  const name = validator?.name ?? contract;
-  const balance = denominate({
-    input: amount,
-    showLastNonZeroDecimal: true,
-  });
-
-  const getTime = useCallback(() => {
-    const duration = moment.duration(counter, "seconds");
-    const formatters = {
-      d: [duration.asDays(), Math.floor(duration.asDays())],
-      h: [duration.asHours(), "H"],
-      m: [duration.asMinutes(), "m"],
-      s: [duration.asSeconds(), "s"],
-    };
-
-    const format = Object.keys(formatters).reduce((total, key) => {
-      const [time, label] = formatters[key];
-
-      if (Math.floor(time) > 0) {
-        return total === "" ? `${label}[${key}]` : `${total} : ${label}[${key}]`;
-      }
-
-      return total;
-    }, "");
-
-    return moment.utc(moment.duration(counter, "seconds").asMilliseconds()).format(format);
-  }, [counter]);
-
-  const handleCounter = () => {
-    const interval = setInterval(() => setCounter(timer => timer - 1), 1000);
-
-    return () => {
-      clearInterval(interval);
-      setCounter(seconds);
-    };
-  };
-
-  useEffect(handleCounter, [seconds]);
-
-  return (
-    <Wrapper>
-      <Column
-        strong={true}
-        clickable={true}
-        onClick={() => openURL(`https://testnet-explorer.elrond.com/providers/${contract}`)}
-      >
-        <Box mr={2}>
-          <FirstLetterIcon label={name} />
-        </Box>
-        <Ellipsis>{name}</Ellipsis>
-      </Column>
-      <Column>
-        <Box color="alertRed" pl={2}>
-          <ToolTip content={<Trans i18nKey="cosmos.undelegation.inactiveTooltip" />}>
-            <ExclamationCircleThin size={14} />
-          </ToolTip>
-        </Box>
-      </Column>
-      <Column>{balance} EGLD</Column>
-      <Column>{counter > 0 ? getTime() : "N/A"}</Column>
     </Wrapper>
   );
 }

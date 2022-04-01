@@ -24,7 +24,7 @@ export default function UndelegationModal({ name }: Props) {
   return (
     <Modal
       name={name}
-      centered
+      centered={true}
       refocusWhenChange={stepId}
       onHide={onHide}
       preventBackdropClick={isModalLocked}

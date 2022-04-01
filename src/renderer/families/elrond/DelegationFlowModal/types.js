@@ -30,6 +30,7 @@ export type StepProps = {
   setSigned: boolean => void,
   bridgePending: boolean,
   validators: any,
+  delegations: any,
 };
 
 export type St = Step<StepId, StepProps>;
