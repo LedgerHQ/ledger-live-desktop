@@ -65,5 +65,4 @@ const Row = ({ nfts, contract, currencyId, onClick }: Props) => {
   );
 };
 
-// $FlowFixMe
-export default memo(Row);
+export default memo<Props>(Row);

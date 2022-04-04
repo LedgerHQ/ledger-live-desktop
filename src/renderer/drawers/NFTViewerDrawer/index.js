@@ -312,5 +312,4 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
   );
 };
 
-// $FlowFixMe
-export default memo(NFTViewerDrawer);
+export default memo<NFTViewerDrawerProps>(NFTViewerDrawer);

@@ -130,5 +130,4 @@ const Collection = () => {
   );
 };
 
-// $FlowFixMe
-export default memo(Collection);
+export default memo<{}>(Collection);

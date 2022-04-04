@@ -115,5 +115,4 @@ const NFTCrumb = () => {
   );
 };
 
-// $FlowFixMe
-export default memo(NFTCrumb);
+export default memo<{}>(NFTCrumb);

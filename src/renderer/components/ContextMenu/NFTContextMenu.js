@@ -30,5 +30,4 @@ const NFTContextMenu = ({ leftClick, children, contract, tokenId, currencyId }: 
   );
 };
 
-// $FlowFixMe
-export default memo(NFTContextMenu);
+export default memo<Props>(NFTContextMenu);

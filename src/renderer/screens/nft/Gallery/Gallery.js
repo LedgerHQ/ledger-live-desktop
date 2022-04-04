@@ -132,5 +132,4 @@ const Gallery = () => {
   );
 };
 
-// $FlowFixMe
-export default memo(Gallery);
+export default memo<{}>(Gallery);

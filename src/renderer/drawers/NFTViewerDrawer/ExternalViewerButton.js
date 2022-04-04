@@ -98,5 +98,4 @@ const ExternalViewerButton = ({
   );
 };
 
-// $FlowFixMe
-export default memo(ExternalViewerButton);
+export default memo<ExternalViewerButtonProps>(ExternalViewerButton);

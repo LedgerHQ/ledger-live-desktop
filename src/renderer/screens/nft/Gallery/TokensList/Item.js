@@ -154,5 +154,4 @@ const NftCard = ({ id, mode, account, withContextMenu = false }: Props) => {
   );
 };
 
-// $FlowFixMe
-export default memo(NftCard);
+export default memo<Props>(NftCard);

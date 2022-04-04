@@ -12,7 +12,11 @@ import Skeleton from "~/renderer/screens/nft/Skeleton";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 
-const Summary = ({ transaction }: { transaction: Transaction }) => {
+type Props = {
+  transaction: Transaction,
+};
+
+const Summary = ({ transaction }: Props) => {
   const allNfts = useSelector(getAllNFTs);
   const [tokenId] = transaction.tokenIds;
   const [contract] = transaction.collections;
@@ -62,5 +66,4 @@ const Summary = ({ transaction }: { transaction: Transaction }) => {
   );
 };
 
-// $FlowFixMe
-export default memo(Summary);
+export default memo<Props>(Summary);

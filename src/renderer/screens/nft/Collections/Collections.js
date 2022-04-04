@@ -110,5 +110,4 @@ const Collections = ({ account }: Props) => {
   );
 };
 
-// $FlowFixMe
-export default memo(Collections);
+export default memo<Props>(Collections);

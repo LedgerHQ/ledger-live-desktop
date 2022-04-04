@@ -33,5 +33,4 @@ const TokensList = ({ account, isLoading, nfts }: Props) => {
   );
 };
 
-// $FlowFixMe
-export default memo(TokensList);
+export default memo<Props>(TokensList);
