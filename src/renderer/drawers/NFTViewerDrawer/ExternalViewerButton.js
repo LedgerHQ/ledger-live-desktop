@@ -1,7 +1,6 @@
 // @flow
 
-import React, { useMemo, memo } from "react";
-import { useTranslation } from "react-i18next";
+import React, { memo } from "react";
 import styled from "styled-components";
 
 import Box from "~/renderer/components/Box";
@@ -9,10 +8,9 @@ import Button from "~/renderer/components/Button";
 import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSelector";
 import IconDots from "~/renderer/icons/Dots";
 import IconExternal from "~/renderer/icons/ExternalLink";
-import nftLinksFactory from "~/helpers/nftLinksFactory";
+import useNftLinks from "~/renderer/hooks/useNftLinks";
 
-import type { NFTMetadataResponse } from "@ledgerhq/live-common/lib/types";
-import type { DropDownItemType } from "~/renderer/components/DropDownSelector";
+import type { Account, ProtoNFT, NFTMetadata } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 const Separator: ThemedComponent<{}> = styled.div`
@@ -33,52 +31,42 @@ const Item: ThemedComponent<{
   display: flex;
 `;
 
-type ExternalViewerButtonProps = {
-  links: $PropertyType<$PropertyType<NFTMetadataResponse, "result">, "links">,
-  contract: string,
-  tokenId: string,
-  currencyId: string,
-};
+const renderItem = ({ item }) => {
+  if (item.type === "separator") {
+    return <Separator />;
+  }
 
-const ExternalViewerButton = ({
-  links,
-  contract,
-  tokenId,
-  currencyId,
-}: ExternalViewerButtonProps) => {
-  const { t } = useTranslation();
+  const Icon = item.Icon ? React.createElement(item.Icon, { size: 16 }) : <></>;
 
-  const items: DropDownItemType[] = useMemo(() => nftLinksFactory(currencyId, t, links), [
-    currencyId,
-    links,
-    t,
-  ]);
-
-  const renderItem = ({ item }) => {
-    if (item.type === "separator") {
-      return <Separator />;
-    }
-
-    const Icon = item.Icon ? React.createElement(item.Icon, { size: 16 }) : <></>;
-
-    return (
-      <Item
-        id={`external-popout-${item.id}`}
-        horizontal
-        flow={2}
-        onClick={item.onClick}
-        disableHover={item.id === "hideEmpty"}
-      >
-        <Box horizontal>
-          {item.Icon ? <Box mr={2}>{Icon}</Box> : null}
-          {item.label}
-        </Box>
+  return (
+    <Item
+      id={`external-popout-${item.id}`}
+      horizontal
+      flow={2}
+      onClick={item.callback}
+      disableHover={item.id === "hideEmpty"}
+    >
+      <Box horizontal>
+        {item.Icon ? <Box mr={2}>{Icon}</Box> : null}
+        {item.label}
+      </Box>
+      {item.type === "external" ? (
         <Box ml={4}>
           <IconExternal size={16} />
         </Box>
-      </Item>
-    );
-  };
+      ) : null}
+    </Item>
+  );
+};
+
+type ExternalViewerButtonProps = {
+  nft: ProtoNFT,
+  account: Account,
+  metadata: NFTMetadata,
+};
+
+const ExternalViewerButton = ({ nft, account, metadata }: ExternalViewerButtonProps) => {
+  const items = useNftLinks(account, nft, metadata);
 
   return (
     <DropDownSelector
