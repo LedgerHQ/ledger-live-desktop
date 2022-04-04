@@ -10,21 +10,23 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import Animation from "~/renderer/animations";
-import NanoSAnim from "../assets/animations/nanoS/power-on.json";
+import NanoSAnimLight from "../assets/animations/nanoS/powerOn/light.json";
+import NanoSAnimDark from "../assets/animations/nanoS/powerOn/dark.json";
 import NanoSPAnimLight from "../assets/animations/nanoSP/powerOn/light.json";
 import NanoSPAnimDark from "../assets/animations/nanoSP/powerOn/dark.json";
-import NanoXAnim from "../assets/animations/nanoX/power-on.json";
+import NanoXAnimLight from "../assets/animations/nanoX/powerOn/light.json";
+import NanoXAnimDark from "../assets/animations/nanoX/powerOn/dark.json";
 import { ContentContainer } from "../shared";
 import useTheme from "~/renderer/hooks/useTheme";
 
 const animations = {
   nanoX: {
-    light: NanoXAnim,
-    dark: NanoXAnim,
+    light: NanoXAnimLight,
+    dark: NanoXAnimDark,
   },
   nanoS: {
-    light: NanoSAnim,
-    dark: NanoSAnim,
+    light: NanoSAnimLight,
+    dark: NanoSAnimDark,
   },
   nanoSP: {
     light: NanoSPAnimLight,

@@ -238,7 +238,6 @@ function MarketInfo({
             <LoadingLabel loading={loading}>
               {counterValueFormatter({
                 value: totalSupply,
-                currency: counterCurrency,
                 locale,
                 shorten: true,
               })}
@@ -249,7 +248,6 @@ function MarketInfo({
             <LoadingLabel loading={loading}>
               {counterValueFormatter({
                 value: maxSupply,
-                currency: counterCurrency,
                 locale,
                 shorten: true,
               })}

@@ -13,12 +13,20 @@ import { getDeviceAnimation } from "~/renderer/components/DeviceAction/animation
 import type { DeviceModelId } from "@ledgerhq/devices";
 
 // All animations used on onboarding
-import NanoSConfirmWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/confirm-words.json";
-import NanoSNumberOfWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/number-of-words.json";
-import NanoSPinCode from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/pin-code.json";
-import NanoSPowerOnRecovery from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/power-on-recovery.json";
-import NanoSPowerOn from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/power-on.json";
-import NanoSRecover from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/recover.json";
+import NanoSConfirmWordsLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/confirmWords/light.json";
+import NanoSConfirmWordsDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/confirmWords/dark.json";
+import NanoSNumberOfWordsLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/numberOfWords/light.json";
+import NanoSNumberOfWordsDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/numberOfWords/dark.json";
+import NanoSPinCodeLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/pinCode/light.json";
+import NanoSPinCodeDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/pinCode/dark.json";
+import NanoSPowerOnRecoveryLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/powerOnRecovery/light.json";
+import NanoSPowerOnRecoveryDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/powerOnRecovery/dark.json";
+import NanoSPowerOnLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/powerOn/light.json";
+import NanoSPowerOnDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/powerOn/dark.json";
+import NanoSRecoverLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/recover/light.json";
+import NanoSRecoverDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/recover/dark.json";
+import NanoSPlugDeviceLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/plugDevice/light.json";
+import NanoSPlugDeviceDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoS/plugDevice/dark.json";
 
 import NanoSPConfirmWordsLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/confirmWords/light.json";
 import NanoSPConfirmWordsDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/confirmWords/dark.json";
@@ -32,13 +40,23 @@ import NanoSPPowerOnLight from "~/renderer/components/Onboarding/Screens/Tutoria
 import NanoSPPowerOnDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/powerOn/dark.json";
 import NanoSPRecoverLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/recover/light.json";
 import NanoSPRecoverDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/recover/dark.json";
+import NanoSPPlugDeviceLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/plugDevice/light.json";
+import NanoSPPlugDeviceDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoSP/plugDevice/dark.json";
 
-import NanoXConfirmWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/confirm-words.json";
-import NanoXNumberOfWords from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/number-of-words.json";
-import NanoXPinCode from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/pin-code.json";
-import NanoXPowerOnRecovery from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/power-on-recovery.json";
-import NanoXPowerOn from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/power-on.json";
-import NanoXRecover from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/recover.json";
+import NanoXConfirmWordsLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/confirmWords/light.json";
+import NanoXConfirmWordsDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/confirmWords/dark.json";
+import NanoXNumberOfWordsLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/numberOfWords/light.json";
+import NanoXNumberOfWordsDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/numberOfWords/dark.json";
+import NanoXPinCodeLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/pinCode/light.json";
+import NanoXPinCodeDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/pinCode/dark.json";
+import NanoXPowerOnRecoveryLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/powerOnRecovery/light.json";
+import NanoXPowerOnRecoveryDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/powerOnRecovery/dark.json";
+import NanoXPowerOnLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/powerOn/light.json";
+import NanoXPowerOnDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/powerOn/dark.json";
+import NanoXRecoverLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/recover/light.json";
+import NanoXRecoverDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/recover/dark.json";
+import NanoXPlugDeviceLight from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/plugDevice/light.json";
+import NanoXPlugDeviceDark from "~/renderer/components/Onboarding/Screens/Tutorial/assets/animations/nanoX/plugDevice/dark.json";
 
 const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
@@ -54,28 +72,32 @@ const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.di
 export const lottieAnimations = {
   nanoS: {
     confirmWords: {
-      light: NanoSConfirmWords,
-      dark: NanoSConfirmWords,
+      light: NanoSConfirmWordsLight,
+      dark: NanoSConfirmWordsDark,
     },
     numberOfWords: {
-      light: NanoSNumberOfWords,
-      dark: NanoSNumberOfWords,
+      light: NanoSNumberOfWordsLight,
+      dark: NanoSNumberOfWordsDark,
     },
     pinCode: {
-      light: NanoSPinCode,
-      dark: NanoSPinCode,
+      light: NanoSPinCodeLight,
+      dark: NanoSPinCodeDark,
     },
     powerOnRecovery: {
-      light: NanoSPowerOnRecovery,
-      dark: NanoSPowerOnRecovery,
+      light: NanoSPowerOnRecoveryLight,
+      dark: NanoSPowerOnRecoveryDark,
     },
     powerOn: {
-      light: NanoSPowerOn,
-      dark: NanoSPowerOn,
+      light: NanoSPowerOnLight,
+      dark: NanoSPowerOnDark,
     },
     recover: {
-      light: NanoSRecover,
-      dark: NanoSRecover,
+      light: NanoSRecoverLight,
+      dark: NanoSRecoverDark,
+    },
+    plugDevice: {
+      light: NanoSPlugDeviceLight,
+      dark: NanoSPlugDeviceDark,
     },
   },
   nanoSP: {
@@ -103,42 +125,67 @@ export const lottieAnimations = {
       light: NanoSPRecoverLight,
       dark: NanoSPRecoverDark,
     },
+    plugDevice: {
+      light: NanoSPPlugDeviceLight,
+      dark: NanoSPPlugDeviceDark,
+    },
   },
   nanoX: {
     confirmWords: {
-      light: NanoXConfirmWords,
-      dark: NanoXConfirmWords,
+      light: NanoXConfirmWordsLight,
+      dark: NanoXConfirmWordsDark,
     },
     numberOfWords: {
-      light: NanoXNumberOfWords,
-      dark: NanoXNumberOfWords,
+      light: NanoXNumberOfWordsLight,
+      dark: NanoXNumberOfWordsDark,
     },
     pinCode: {
-      light: NanoXPinCode,
-      dark: NanoXPinCode,
+      light: NanoXPinCodeLight,
+      dark: NanoXPinCodeDark,
     },
     powerOnRecovery: {
-      light: NanoXPowerOnRecovery,
-      dark: NanoXPowerOnRecovery,
+      light: NanoXPowerOnRecoveryLight,
+      dark: NanoXPowerOnRecoveryDark,
     },
     powerOn: {
-      light: NanoXPowerOn,
-      dark: NanoXPowerOn,
+      light: NanoXPowerOnLight,
+      dark: NanoXPowerOnDark,
     },
     recover: {
-      light: NanoXRecover,
-      dark: NanoXRecover,
+      light: NanoXRecoverLight,
+      dark: NanoXRecoverDark,
+    },
+    plugDevice: {
+      light: NanoXPlugDeviceLight,
+      dark: NanoXPlugDeviceDark,
     },
   },
 };
 
 const LottieDebugger = ({ name }: { name: string }) => {
   const keys = useMemo(
-    () => ["plugAndPinCode", "enterPinCode", "quitApp", "allowManager", "openApp", "validate"],
+    () => [
+      "plugAndPinCode",
+      "enterPinCode",
+      "quitApp",
+      "allowManager",
+      "openApp",
+      "validate",
+      "installLoading",
+      "firmwareUpdating",
+    ],
     [],
   );
   const onBoardingKeys = useMemo(
-    () => ["pinCode", "recover", "confirmWords", "numberOfWords", "powerOn", "powerOnRecovery"],
+    () => [
+      "pinCode",
+      "recover",
+      "confirmWords",
+      "numberOfWords",
+      "powerOn",
+      "powerOnRecovery",
+      "plugDevice",
+    ],
     [],
   );
 
@@ -225,7 +272,10 @@ const LottieDebugger = ({ name }: { name: string }) => {
               <Box>
                 <Select
                   isSearchable={false}
-                  onChange={({ value }) => setKey(value)}
+                  onChange={({ value }) => {
+                    setModelId("nanoS");
+                    setKey(value);
+                  }}
                   value={key}
                   options={allKeys.map(k => ({ label: k, value: k }))}
                   renderOption={({ label }) => label}
