@@ -7,8 +7,6 @@ import NFTCollectionContextMenu from "~/renderer/components/ContextMenu/NFTColle
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import IconDots from "~/renderer/icons/Dots";
 import styled from "styled-components";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { Account } from "@ledgerhq/live-common/lib/types";
 
 const Dots: ThemedComponent<{}> = styled.div`
   justify-content: flex-end;

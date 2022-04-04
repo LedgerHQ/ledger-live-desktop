@@ -20,7 +20,6 @@ import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import GridListToggle from "./GridListToggle";
 
-import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 const SpinnerContainer: ThemedComponent<{}> = styled.div`
@@ -51,7 +50,7 @@ const Gallery = () => {
   const history = useHistory();
   const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
 
-  const collections: [string, ProtoNFT[]] = useMemo(
+  const collections = useMemo(
     () =>
       Object.entries(nftsByCollections(account.nfts)).filter(
         ([contract]) => !hiddenNftCollections.includes(`${account.id}|${contract}`),
@@ -91,7 +90,7 @@ const Gallery = () => {
         <div key={contract}>
           <Box mb={2} onClick={() => onSelectCollection(contract)}>
             <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-              <CollectionName nft={nfts[0]} fallback={contract} showHideMenu />
+              <CollectionName nft={nfts[0]} fallback={contract} account={account} showHideMenu />
             </Text>
           </Box>
           <TokensList account={account} nfts={nfts.slice(0, maxVisibleNFTs - displayedNFTs)} />
