@@ -14,7 +14,9 @@ import { centerEllipsis } from "~/renderer/styles/helpers";
 
 const Summary = ({ transaction }: { transaction: Transaction }) => {
   const allNfts = useSelector(getAllNFTs);
-  const nft = allNfts.find(nft => nft.tokenId === transaction?.tokenIds[0]);
+  const [tokenId] = transaction.tokenIds;
+  const [contract] = transaction.collections;
+  const nft = allNfts.find(nft => nft.tokenId === tokenId && nft.contract === contract);
   const { status, metadata } = useNftMetadata(nft.contract, nft.tokenId, nft.currencyId);
   const { nftName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
