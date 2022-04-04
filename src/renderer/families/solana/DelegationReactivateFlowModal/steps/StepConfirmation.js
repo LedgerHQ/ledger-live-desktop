@@ -54,11 +54,7 @@ function StepConfirmation({
       <Container shouldSpace={signed}>
         <TrackPage category="Solana Delegation Reactivate" name="Step Confirmation Error" />
         {signed ? (
-          <BroadcastErrorDisclaimer
-            title={
-              <Trans i18nKey="solana.delegation.reactivate.flow.steps.confirmation.broadcastError" />
-            }
-          />
+          <BroadcastErrorDisclaimer title={<Trans i18nKey="solana.common.broadcastError" />} />
         ) : null}
         <ErrorDisplay error={error} withExportLogs />
       </Container>
