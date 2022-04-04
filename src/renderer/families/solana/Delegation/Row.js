@@ -151,7 +151,7 @@ export function Row({ account, stakeWithMeta, onManageAction, onExternalLink }: 
         <Box ml={1}>{stake.activation.state}</Box>
       </Column>
       <Column>{formatAmount(stake.delegation?.stake ?? 0)}</Column>
-      <Column>{stake.delegation === undefined ? 0 : stakeActivePercent(stake)} %</Column>
+      <Column>{stake.delegation === undefined ? 0 : stakeActivePercent(stake).toFixed(2)} %</Column>
       <Column>{formatAmount(stake.withdrawable)}</Column>
       <Column>
         <DropDown items={stakeActions} renderItem={ManageDropDownItem} onChange={onSelect}>
