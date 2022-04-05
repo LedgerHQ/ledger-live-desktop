@@ -5,7 +5,7 @@ import Button from "~/renderer/components/Button";
 import { useTranslation } from "react-i18next";
 import { remote } from "electron";
 import { readFile } from "fs";
-import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider/index";
+import { useLocalLiveAppContext } from "@ledgerhq/live-common/lib/platform/providers/LocalLiveAppProvider";
 import { SettingsSectionRow as Row } from "../../SettingsSection";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
@@ -17,7 +17,11 @@ const ButtonContainer = styled.div`
 
 const RunLocalAppButton = () => {
   const { t } = useTranslation();
-  const { addLocalManifest, localManifests, removeLocalManifest } = usePlatformApp();
+  const {
+    addLocalManifest,
+    state: { liveAppByIndex },
+    removeLocalManifestById,
+  } = useLocalLiveAppContext();
   const history = useHistory();
 
   const onBrowseLocalManifest = useCallback(() => {
@@ -58,7 +62,7 @@ const RunLocalAppButton = () => {
           {t("settings.developer.addLocalAppButton")}
         </Button>
       </Row>
-      {[...localManifests.values()].map(manifest => (
+      {liveAppByIndex.map(manifest => (
         <Row key={manifest.id} title={manifest.name} desc={manifest.url}>
           <ButtonContainer>
             <Button small primary onClick={() => history.push(`/platform/${manifest.id}`)}>
@@ -67,7 +71,7 @@ const RunLocalAppButton = () => {
             <Button
               small
               danger
-              onClick={() => removeLocalManifest(manifest.id)}
+              onClick={() => removeLocalManifestById(manifest.id)}
               style={{ marginLeft: 8 }}
             >
               {t("settings.developer.runLocalAppDeleteButton")}

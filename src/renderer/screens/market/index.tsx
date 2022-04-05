@@ -43,7 +43,10 @@ export const Button = styled(BaseButton)<{ big?: boolean }>`
           padding: 0 ${p.big ? 25 : 15}px;
       `}
 
-  ${p => (p.variant === "shade" ? `background-color: transparent!important;` : ``)}
+  ${p =>
+    p.variant === "shade"
+      ? `background-color: transparent!important;border-color: currentColor;`
+      : ``}
 `;
 
 const Title = styled(Text).attrs({ variant: "h3" })`
