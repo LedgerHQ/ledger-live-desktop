@@ -3027,9 +3027,9 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@https://github.com/ledgerhq/ledger-live-common.git\\#family/solana":
-  version "21.35.0"
-  resolved "https://github.com/ledgerhq/ledger-live-common.git\\#d70cf09bca0c84d65e6703f0413b5d34b324ccf9"
+"@ledgerhq/live-common@https://github.com/ledgerhq/ledger-live-common.git#ef3c2b4536742b748f901fc1147d02518ed4d156":
+  version "21.36.0"
+  resolved "https://github.com/ledgerhq/ledger-live-common.git#ef3c2b4536742b748f901fc1147d02518ed4d156"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
