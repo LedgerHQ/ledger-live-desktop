@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation, Trans } from "react-i18next";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
@@ -57,19 +58,12 @@ const ButtonContainer = styled.div`
   align-items: center;
 `;
 
-type Props = {
-  sendEvent: string => void,
-  onboardingRelaunched: boolean,
-};
-
-export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
+export function Welcome() {
+  // const onboardingOrigin = useSelector();
+  const onboardingOrigin = "/settings";
   const { t } = useTranslation();
   const themeType = useTheme("colors.palette.type");
   const welcomeIllustration = themeType === "dark" ? illustrationDark : illustration;
-
-  const handleNext = useCallback(() => {
-    sendEvent("NEXT");
-  }, [sendEvent]);
 
   const buyNanoX = useCallback(() => {
     openURL(urls.noDevice.buyNew);
@@ -95,13 +89,15 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
         {t("onboarding.screens.welcome.description")}
       </Text>
       <ButtonContainer>
-        <Button onClick={handleNext} primary data-test-id="onboarding-get-started-button">
-          {t("onboarding.screens.welcome.cta")}
-        </Button>
-        {onboardingRelaunched && (
-          <Button mt={2} onClick={() => sendEvent("PREV")}>
-            {t("common.previous")}
+        <Link to="/terms">
+          <Button primary data-test-id="onboarding-get-started-button">
+            {t("onboarding.screens.welcome.cta")}
           </Button>
+        </Link>
+        {onboardingOrigin && (
+          <Link to={onboardingOrigin}>
+            <Button mt={2}>{t("common.previous")}</Button>
+          </Link>
         )}
       </ButtonContainer>
       <Text style={{ marginTop: 8 }} color="palette.text.shade100" ff="Inter|SemiBold" fontSize={4}>

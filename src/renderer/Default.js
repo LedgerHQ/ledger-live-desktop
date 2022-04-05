@@ -171,7 +171,8 @@ export default function Default() {
                         <FirmwareUpdateBanner />
                       </TopBannerContainer>
                       <Switch>
-                        <Route path="/" exact render={props => <Dashboard {...props} />} />
+                        <Route exact path="/" render={props => <Dashboard {...props} />} />
+                        <Route path="/dashboard" render={props => <Dashboard {...props} />} />
                         <Route path="/settings" render={props => <Settings {...props} />} />
                         <Route path="/accounts" render={props => <Accounts {...props} />} />
                         <Route path="/card" render={props => <Card {...props} />} />
@@ -211,7 +212,6 @@ export default function Default() {
                           path="/USBTroubleshooting"
                           render={props => <USBTroubleshooting {...props} />}
                         />
-
                         <Route
                           path="/market/:currencyId"
                           render={props => <MarketCoinScreen {...props} />}

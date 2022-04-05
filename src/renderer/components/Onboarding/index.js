@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useEffect, useState } from "react";
+import { Switch, Route } from "react-router-dom";
 import { useMachine } from "@xstate/react";
 import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
@@ -25,6 +26,7 @@ import {
   ConnectSetUpDevice,
   UseRecoveryPhrase,
 } from "~/renderer/components/Onboarding/Screens/Tutorial";
+import Dashboard from "~/renderer/screens/dashboard";
 
 import { pedagogyMachine } from "~/renderer/components/Onboarding/Pedagogy/state";
 
@@ -209,16 +211,6 @@ const onboardingMachine = Machine({
   },
 });
 
-const screens = {
-  welcome: Welcome,
-  terms: Terms,
-  selectDevice: SelectDevice,
-  selectUseCase: SelectUseCase,
-  setupNewDevice: SetupNewDevice,
-  connectSetupDevice: ConnectSetUpDevice,
-  useRecoveryPhrase: UseRecoveryPhrase,
-};
-
 const DURATION = 200;
 
 const ScreenContainer = styled.div`
@@ -241,6 +233,7 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
   const currentDevice = useSelector(getCurrentDevice);
   const notSeededDeviceRelaunch = useSelector(notSeededDeviceRelaunchSelector);
 
+  const isOnboard = true;
   const [imgsLoaded, setImgsLoaded] = useState(false);
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
@@ -273,8 +266,6 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
     preloadAssets().then(() => setImgsLoaded(true));
   }, []);
 
-  const CurrentScreen = screens[state.value];
-
   return (
     <React.Fragment>
       <OnboardingLogoContainer>
@@ -300,11 +291,16 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
       <OnboardingContainer className={imgsLoaded ? "onboarding-imgs-loaded" : ""}>
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">
           <ScreenContainer>
-            <CurrentScreen
-              sendEvent={sendEvent}
-              context={state.context}
-              onboardingRelaunched={onboardingRelaunched}
-            />
+            <Switch>
+              <Route exact path="/" component={isOnboard ? Welcome : Dashboard} />
+              <Route path="/welcome" component={Welcome} />
+              <Route path="/terms" component={Terms} />
+              <Route path="/select-device" component={SelectDevice} />
+              <Route path="/select-use-case/:deviceId" component={SelectUseCase} />
+              <Route path="/setup-device/:deviceId" component={SetupNewDevice} />
+              <Route path="/connect-device/:deviceId" component={ConnectSetUpDevice} />
+              <Route path="/use-recovery-phrase" component={UseRecoveryPhrase} />
+            </Switch>
           </ScreenContainer>
         </CSSTransition>
       </OnboardingContainer>
