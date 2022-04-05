@@ -27,7 +27,7 @@ const Summary = ({ transaction }: Props) => {
 
   return (
     <>
-      <Box horizontal justifyContent="space-between" mb={2}>
+      <Box horizontal justifyContent="space-between" maxWi mb={2}>
         <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
           <Trans i18nKey="send.steps.details.nft" />
         </Text>

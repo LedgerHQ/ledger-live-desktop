@@ -242,12 +242,7 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
               </Text>
             </Button>
 
-            <ExternalViewerButton
-              links={metadata?.links}
-              contract={nft.contract}
-              tokenId={nft.tokenId}
-              currencyId={nft.currencyId}
-            />
+            <ExternalViewerButton nft={nft} account={account} metadata={metadata} />
           </NFTActions>
           <NFTAttributes>
             <NFTProperties nft={nft} metadata={metadata} status={status} />
