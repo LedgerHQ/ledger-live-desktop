@@ -1,7 +1,8 @@
 // @flow
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import { Redirect, Route, Switch, useLocation, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { FeatureToggle } from "@ledgerhq/live-common/lib/featureFlags";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
@@ -27,7 +28,6 @@ import ListenDevices from "~/renderer/components/ListenDevices";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
 import Idler from "~/renderer/components/Idler";
 import IsUnlocked from "~/renderer/components/IsUnlocked";
-import OnboardingOrElse from "~/renderer/components/OnboardingOrElse";
 import AppRegionDrag from "~/renderer/components/AppRegionDrag";
 import IsNewVersion from "~/renderer/components/IsNewVersion";
 import IsSystemLanguageAvailable from "~/renderer/components/IsSystemLanguageAvailable";
@@ -60,6 +60,10 @@ import Market from "~/renderer/screens/market";
 import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
 // $FlowFixMe
 import Learn from "~/renderer/screens/learn";
+import Onboarding from "~/renderer/screens/onboarding";
+
+import { hasCompletedOnboardingSelector } from "~/renderer/reducers/settings";
+import { onboardingRelaunchedSelector } from "~/renderer/reducers/onboarding";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -117,6 +121,9 @@ const NightlyLayer = React.memo(NightlyLayerR);
 export default function Default() {
   const location = useLocation();
   const ref: React$ElementRef<any> = useRef();
+  const history = useHistory();
+  const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
+  const onboardingRelaunched = useSelector(onboardingRelaunchedSelector);
   useDeeplink();
   useUSBTroubleshooting();
 
@@ -126,6 +133,14 @@ export default function Default() {
       ref.current.scrollTo(0, 0);
     }
   }, [location]);
+
+  useEffect(() => {
+    if (!hasCompletedOnboarding || onboardingRelaunched) {
+      history.push("/welcome");
+    } else {
+      history.push("/dashboard");
+    }
+  }, [history, hasCompletedOnboarding, onboardingRelaunched]);
 
   return (
     <>
@@ -147,95 +162,95 @@ export default function Default() {
               {process.env.DEBUG_SKELETONS ? <DebugSkeletons /> : null}
               {process.env.DEBUG_FIRMWARE_UPDATE ? <DebugFirmwareUpdater /> : null}
             </DebugWrapper>
-            <OnboardingOrElse>
-              <Switch>
-                <Route exact path="/walletconnect">
-                  <WalletConnect />
-                </Route>
-                <Route>
-                  <IsNewVersion />
-                  <IsSystemLanguageAvailable />
-                  <SyncNewAccounts priority={2} />
 
-                  <Box
-                    grow
-                    horizontal
-                    bg="palette.background.default"
-                    color="palette.text.shade60"
-                    style={{ width: "100%", height: "100%" }}
-                  >
-                    <MainSideBar />
-                    <Page>
-                      <TopBannerContainer>
-                        <UpdateBanner />
-                        <FirmwareUpdateBanner />
-                      </TopBannerContainer>
-                      <Switch>
-                        <Route exact path="/" render={props => <Dashboard {...props} />} />
-                        <Route path="/dashboard" render={props => <Dashboard {...props} />} />
-                        <Route path="/settings" render={props => <Settings {...props} />} />
-                        <Route path="/accounts" render={props => <Accounts {...props} />} />
-                        <Route path="/card" render={props => <Card {...props} />} />
-                        <Redirect from="/manager/reload" to="/manager" />
-                        <Route path="/manager" render={props => <Manager {...props} />} />
-                        <Route
-                          path="/platform"
-                          render={(props: any) => <PlatformCatalog {...props} />}
-                          exact
-                        />
-                        <Route
-                          path="/platform/:appId"
-                          render={(props: any) => <PlatformApp {...props} />}
-                        />
-                        <Route path="/lend" render={props => <Lend {...props} />} />
-                        <Route path="/exchange" render={props => <Exchange {...props} />} />
-                        <Route
-                          exact
-                          path="/account/:id/nft-collection"
-                          render={props => <NFTGallery {...props} />}
-                        />
-                        <Route
-                          path="/account/:id/nft-collection/:collectionAddress?"
-                          render={props => <NFTCollection {...props} />}
-                        />
-                        <Route
-                          path="/account/:parentId/:id"
-                          render={props => <Account {...props} />}
-                        />
-                        <Route path="/account/:id" render={props => <Account {...props} />} />
-                        <Route
-                          path="/asset/:assetId+"
-                          render={(props: any) => <Asset {...props} />}
-                        />
-                        <Route path="/swap" render={props => <Swap2 {...props} />} />
-                        <Route
-                          path="/USBTroubleshooting"
-                          render={props => <USBTroubleshooting {...props} />}
-                        />
-                        <Route
-                          path="/market/:currencyId"
-                          render={props => <MarketCoinScreen {...props} />}
-                        />
-                        <Route path="/market" render={props => <Market {...props} />} />
-                        <FeatureToggle feature="learn">
-                          <Route path="/learn" render={props => <Learn {...props} />} />
-                        </FeatureToggle>
-                      </Switch>
-                    </Page>
-                    <Drawer />
-                    <ToastOverlay />
-                  </Box>
+            <Onboarding />
 
-                  {__NIGHTLY__ ? <NightlyLayer /> : null}
+            <Switch>
+              <Route exact path="/walletconnect">
+                <WalletConnect />
+              </Route>
+              <Route>
+                <IsNewVersion />
+                <IsSystemLanguageAvailable />
+                <SyncNewAccounts priority={2} />
 
-                  <LibcoreBusyIndicator />
-                  <DeviceBusyIndicator />
-                  <KeyboardContent sequence="BJBJBJ">
-                    <PerfIndicator />
-                  </KeyboardContent>
-                </Route>
-              </Switch>
-            </OnboardingOrElse>
+                <Box
+                  grow
+                  horizontal
+                  bg="palette.background.default"
+                  color="palette.text.shade60"
+                  style={{ width: "100%", height: "100%" }}
+                >
+                  <MainSideBar />
+                  <Page>
+                    <TopBannerContainer>
+                      <UpdateBanner />
+                      <FirmwareUpdateBanner />
+                    </TopBannerContainer>
+                    <Switch>
+                      <Route path="/dashboard" render={props => <Dashboard {...props} />} />
+                      <Route path="/settings" render={props => <Settings {...props} />} />
+                      <Route path="/accounts" render={props => <Accounts {...props} />} />
+                      <Route path="/card" render={props => <Card {...props} />} />
+                      <Redirect from="/manager/reload" to="/manager" />
+                      <Route path="/manager" render={props => <Manager {...props} />} />
+                      <Route
+                        path="/platform"
+                        render={(props: any) => <PlatformCatalog {...props} />}
+                        exact
+                      />
+                      <Route
+                        path="/platform/:appId"
+                        render={(props: any) => <PlatformApp {...props} />}
+                      />
+                      <Route path="/lend" render={props => <Lend {...props} />} />
+                      <Route path="/exchange" render={props => <Exchange {...props} />} />
+                      <Route
+                        exact
+                        path="/account/:id/nft-collection"
+                        render={props => <NFTGallery {...props} />}
+                      />
+                      <Route
+                        path="/account/:id/nft-collection/:collectionAddress?"
+                        render={props => <NFTCollection {...props} />}
+                      />
+                      <Route
+                        path="/account/:parentId/:id"
+                        render={props => <Account {...props} />}
+                      />
+                      <Route path="/account/:id" render={props => <Account {...props} />} />
+                      <Route
+                        path="/asset/:assetId+"
+                        render={(props: any) => <Asset {...props} />}
+                      />
+                      <Route path="/swap" render={props => <Swap2 {...props} />} />
+                      <Route
+                        path="/USBTroubleshooting"
+                        render={props => <USBTroubleshooting {...props} />}
+                      />
+                      <Route
+                        path="/market/:currencyId"
+                        render={props => <MarketCoinScreen {...props} />}
+                      />
+                      <Route path="/market" render={props => <Market {...props} />} />
+                      <FeatureToggle feature="learn">
+                        <Route path="/learn" render={props => <Learn {...props} />} />
+                      </FeatureToggle>
+                    </Switch>
+                  </Page>
+                  <Drawer />
+                  <ToastOverlay />
+                </Box>
+
+                {__NIGHTLY__ ? <NightlyLayer /> : null}
+
+                <LibcoreBusyIndicator />
+                <DeviceBusyIndicator />
+                <KeyboardContent sequence="BJBJBJ">
+                  <PerfIndicator />
+                </KeyboardContent>
+              </Route>
+            </Switch>
           </ContextMenuWrapper>
         </BridgeSyncProvider>
       </IsUnlocked>

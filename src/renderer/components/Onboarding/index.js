@@ -228,12 +228,12 @@ const ScreenContainer = styled.div`
   }
 `;
 
-export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boolean }) {
+export function Onboarding() {
   const dispatch = useDispatch();
   const currentDevice = useSelector(getCurrentDevice);
   const notSeededDeviceRelaunch = useSelector(notSeededDeviceRelaunchSelector);
 
-  const isOnboard = true;
+  const isOnboard = false;
   const [imgsLoaded, setImgsLoaded] = useState(false);
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
@@ -292,7 +292,6 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">
           <ScreenContainer>
             <Switch>
-              <Route exact path="/" component={isOnboard ? Welcome : Dashboard} />
               <Route path="/welcome" component={Welcome} />
               <Route path="/terms" component={Terms} />
               <Route path="/select-device" component={SelectDevice} />
