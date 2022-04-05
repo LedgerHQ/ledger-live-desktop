@@ -1,7 +1,9 @@
 // @flow
 import React, { useMemo, useEffect, useCallback, useState } from "react";
-import type { NFT } from "@ledgerhq/live-common/lib/types";
+import { useSelector } from "react-redux";
+import type { Account } from "@ledgerhq/live-common/lib/types";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft/helpers";
+import { hiddenNftCollectionsSelector } from "~/renderer/reducers/settings";
 import Select from "~/renderer/components/Select";
 import Option from "./Option";
 
@@ -9,19 +11,25 @@ const SelectNFT = ({
   onSelect,
   maybeNFTId,
   maybeNFTCollection,
-  nfts,
+  account,
 }: {
   onSelect: any => void,
   maybeNFTId?: string,
   maybeNFTCollection?: string,
-  nfts: NFT[],
+  account: Account,
 }) => {
   const [token, setToken] = useState(null);
   const getOptionValue = useCallback(item => item, []);
 
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
   const filteredNFTs = useMemo(
-    () => (maybeNFTCollection ? nftsByCollections(nfts, maybeNFTCollection) : nfts),
-    [nfts, maybeNFTCollection],
+    () =>
+      maybeNFTCollection
+        ? nftsByCollections(account.nfts, maybeNFTCollection)
+        : account.nfts?.filter(
+            nft => !hiddenNftCollections.includes(`${account.id}|${nft.contract}`),
+          ) || [],
+    [maybeNFTCollection, account.nfts, account.id, hiddenNftCollections],
   );
 
   const onTokenSelected = useCallback(
