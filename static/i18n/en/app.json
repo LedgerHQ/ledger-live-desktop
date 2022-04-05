@@ -1054,6 +1054,11 @@
     "desc": "This action will hide all <1><0>{{tokenName}}</0></1> accounts, you can show them again using <3>Settings</3>",
     "hideCTA": "Hide token"
   },
+  "hideNftCollection": {
+    "title": "Hide NFT Colection",
+    "desc": "This action will hide all NFTs from the <1><0>{{collectionName}}</0></1> collection, you can show them again using <3>Settings</3>",
+    "hideCTA": "Hide NFT Collection"
+  },
   "banners": {
     "cleanCache": {
       "title": "Modification of experimental settings require a clear cache",
@@ -2843,6 +2848,12 @@
         "desc": "You can hide tokens by going to the parent account then right-clicking on the token and selecting 'Hide token'.",
         "count": "{{count}} token",
         "count_plural": "{{count}} tokens"
+      },
+      "hiddenNftCollections": {
+        "title": "Hidden NFT Collections",
+        "desc": "You can hide NFT Collections by right-clicking on the collection name and selecting 'Hide NFT Collection'.",
+        "count": "{{count}} collection",
+        "count_plural": "{{count}} collections"
       },
       "fullNode": {
         "title": "Connect Bitcoin full node",

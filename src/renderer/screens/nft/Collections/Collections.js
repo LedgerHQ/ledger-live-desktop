@@ -2,7 +2,7 @@
 
 import React, { useState, useCallback, useEffect, useMemo, memo } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -17,6 +17,7 @@ import Row from "./Row";
 import { useHistory } from "react-router-dom";
 import { openModal } from "~/renderer/actions/modals";
 import Spinner from "~/renderer/components/Spinner";
+import { hiddenNftCollectionsSelector } from "~/renderer/reducers/settings";
 
 const INCREMENT = 5;
 type Props = {
@@ -52,20 +53,22 @@ const Collections = ({ account }: Props) => {
     );
   }, [collectionsLength]);
 
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
   const visibleCollection = useMemo(
     () =>
       Object.entries(collections)
+        .filter(([contract]) => !hiddenNftCollections.includes(`${account.id}|${contract}`))
         .slice(0, numberOfVisibleCollection)
         .map(([contract, nfts]: any) => (
           <Row
             onClick={() => onOpenCollection(contract)}
             key={contract}
             contract={contract}
-            currencyId={account.currency.id}
+            account={account}
             nfts={nfts}
           />
         )),
-    [account.currency, collections, numberOfVisibleCollection, onOpenCollection],
+    [account, collections, hiddenNftCollections, numberOfVisibleCollection, onOpenCollection],
   );
 
   useEffect(() => {

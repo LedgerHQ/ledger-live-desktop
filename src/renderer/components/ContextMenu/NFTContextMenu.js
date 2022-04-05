@@ -1,30 +1,22 @@
 // @flow
-import React, { useMemo, memo } from "react";
-import { useTranslation } from "react-i18next";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import React, { memo } from "react";
 import ContextMenuItem from "./ContextMenuItem";
-import nftLinksFactory from "~/helpers/nftLinksFactory";
+import type { Account, ProtoNFT, NFTMetadata } from "@ledgerhq/live-common/lib/types";
+import useNftLinks from "~/renderer/hooks/useNftLinks";
 
 type Props = {
-  contract: string,
-  tokenId: string,
-  currencyId: string,
+  account: Account,
+  nft: ProtoNFT,
+  metadata: NFTMetadata,
   leftClick?: boolean,
   children: any,
 };
 
-const NFTContextMenu = ({ leftClick, children, contract, tokenId, currencyId }: Props) => {
-  const { t } = useTranslation();
-  const { status, metadata } = useNftMetadata(contract, tokenId, currencyId);
-  const links = useMemo(() => nftLinksFactory(currencyId, t, metadata?.links), [
-    currencyId,
-    metadata?.links,
-    t,
-  ]);
-  const menuItems = useMemo(() => (status === "loaded" ? links : []), [links, status]);
+const NFTContextMenu = ({ leftClick, children, account, nft, metadata }: Props) => {
+  const links = useNftLinks(account, nft, metadata);
 
   return (
-    <ContextMenuItem leftClick={leftClick} items={menuItems}>
+    <ContextMenuItem leftClick={leftClick} items={links}>
       {children}
     </ContextMenuItem>
   );
