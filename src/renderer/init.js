@@ -25,7 +25,6 @@ import LoggerTransport from "~/logger/logger-transport-renderer";
 import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from "~/config/global-tab";
 import sentry from "~/sentry/browser";
 import { setEnvOnAllThreads } from "~/helpers/env";
-import { command } from "~/renderer/commands";
 import dbMiddleware from "~/renderer/middlewares/db";
 import createStore from "~/renderer/createStore";
 import events from "~/renderer/events";
@@ -141,9 +140,6 @@ async function init() {
     matcher.addListener(updateOSTheme);
 
     events({ store });
-
-    const libcoreVersion = await command("libcoreGetVersion")().toPromise();
-    logger.log("libcore", libcoreVersion);
 
     window.addEventListener("keydown", (e: SyntheticKeyboardEvent<any>) => {
       if (e.which === TAB_KEY) {

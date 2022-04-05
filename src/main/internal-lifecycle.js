@@ -123,7 +123,6 @@ function handleGlobalInternalMessage(payload) {
       // captureException(err)
       break;
     }
-    case "setLibcoreBusy":
     case "setDeviceBusy": {
       const win = getMainWindow && getMainWindow();
       if (!win) {
