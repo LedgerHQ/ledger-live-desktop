@@ -55,6 +55,7 @@
 | Expanse | EXP | NO | expanse |
 | FIC | FIC | NO | fic |
 | Factom | FCT | NO | factom |
+| Filecoin | FIL | NO | filecoin |
 | Flow | FLOW | NO | flow |
 | GameCredits | GAME | NO | game_credits |
 | GoChain | GO | NO | gochain |
@@ -92,6 +93,7 @@
 | Resistance | RES | NO | resistance |
 | Rise | RISE | NO | rise |
 | Songbird | SGB | NO | songbird |
+| Stacks | STX | NO | stacks |
 | Thundercore | TT | NO | thundercore |
 | TomoChain | TOMO | NO | tomo |
 | Ubiq | UBQ | NO | ubiq |
@@ -101,12 +103,10 @@
 | ZClassic | ZCL | NO | zclassic |
 | ZCoin | XZC | NO | zcoin |
 | Zilliqa | ZIL | NO | zilliqa |
-| filecoin | FIL | NO | filecoin |
 | lisk | LSK | NO | lisk |
-| stacks | STX | NO | stacks |
 | æternity | AE | NO | aeternity |
 
-## Tokens (9825)
+## Tokens (9826)
 | parent currency | ticker | contract | name | status | ledger id |
 |--|--|--|--|--|--|
 | Algorand | ARCC | MESEJMPXKL7YUWEQGNRCKSLMQDKHOHWIZ3RBWP7BV4JDMUJXFUVQZWUBJM | Asia Reserve Currency Coin | countervalues disabled | algorand/asa/163650 |
@@ -7340,7 +7340,7 @@
 | Tron | BHS | TUMt9MHAVzm6m7Ra7ZSJbWPAuzkbUL2qN6 | BattleHashes | delisted, countervalues disabled | tron/trc10/1002831 |
 | Tron | BTZN | TRtAUYabc1cyRSHQ1pNvCUYAuWimxDKipQ | Batzen | delisted, countervalues disabled | tron/trc10/1000754 |
 | Tron | BTZ | TMSxpLYHJJqhbnT3w8KAfVXyEKxXPeYb2Q | Beatz | delisted, countervalues disabled | tron/trc10/1001760 |
-| Tron | BTZC | TV6jkvfAntSDohZF3onVSnpb4wceEPh32a | BeatzCoin | countervalues disabled | tron/trc10/1002413 |
+| Tron | BTZC | TV6jkvfAntSDohZF3onVSnpb4wceEPh32a | BeatzCoin | delisted, countervalues disabled | tron/trc10/1002413 |
 | Tron | BTZC | TGcvY5rcopeyooHcNbxa3XEKVuJws3y9Td | BeatzCoin | delisted, countervalues disabled | tron/trc10/1000501 |
 | Tron | BTZC | TCx1SceEX4qz9XFuqPE8YxHzjtT9mEGn8o | Beatzcoin | delisted, countervalues disabled | tron/trc10/1001243 |
 | Tron | BEE | TQHr6XjSeNjn72GpPqhFfJzW4aEa1qP3V6 | Bee | delisted, countervalues disabled | tron/trc10/1001763 |
@@ -7394,12 +7394,12 @@
 | Tron | BTT | TTta446cW3cPiuSBCK9AueEkMp8aCCuEWC | BitTorrent | delisted, countervalues disabled | tron/trc10/1002038 |
 | Tron | BTT | TCPFgqdUzrcV3CyJ1ZScdc5rkyQWUbL4p4 | BitTorrent | delisted, countervalues disabled | tron/trc10/1002009 |
 | Tron | BTT | TQLKoKSs53CzTENzLryXFRRAAmK9t1ykfp | BitTorrent | delisted, countervalues disabled | tron/trc10/1002001 |
-| Tron | BTT | TF5Bn4cJCT6GVeUgyCN4rBhDg42KBrpAjg | BitTorrent |  | tron/trc10/1002000 |
 | Tron | BTT | TFuDYHUNxrseoBTEKUxhiddZQ5m8jFVBqc | BitTorrent | delisted, countervalues disabled | tron/trc10/1001964 |
 | Tron | BTT | TWkLwAgXtFHwQ93sQEpVA5SMJJnjBsGwJX | BitTorrent | delisted, countervalues disabled | tron/trc10/1001952 |
 | Tron | BTT | TGUTUbTMkHrmrQWATyUELKemD1fjj2vWZv | BitTorrent | delisted, countervalues disabled | tron/trc10/1001948 |
 | Tron | BTT | TFMAHNTS35ZNL5Pr9XToVVekyAbE9ts65Y | BitTorrent | delisted, countervalues disabled | tron/trc10/1000491 |
 | Tron | BTT | TAFjULxiVgT4qWk6UZwjqwZXTSaGaqnVp4 | BitTorrent | countervalues disabled | tron/trc20/TAFjULxiVgT4qWk6UZwjqwZXTSaGaqnVp4 |
+| Tron | BTTOLD | TF5Bn4cJCT6GVeUgyCN4rBhDg42KBrpAjg | BitTorrent Old | delisted, countervalues disabled | tron/trc10/1002000 |
 | Tron | BTT | TNMZhgyEAiMENBm2zcLpFs7j8VzQbdLn58 | BitTorrentToken | delisted, countervalues disabled | tron/trc10/1001940 |
 | Tron | BTV | TJUwM4qk1et2nNKuESQ7UVHPjAHoRqAz3T | BitValuta | delisted, countervalues disabled | tron/trc10/1002521 |
 | Tron | BTC | TBNmtwdvevnd6uHUimUFLDD7odEzEFJegD | Bitcoin | delisted, countervalues disabled | tron/trc10/1002211 |
@@ -7584,7 +7584,7 @@
 | Tron | CCI | TAK5eFrVftAUFj87TjAq5At4QZhRV6SaDx | ComicCon | delisted, countervalues disabled | tron/trc10/1001215 |
 | Tron | CAT | TAc1T73sXuT7kZAJT2gUtt6FMTd4FbvVKL | CommunityAction | delisted, countervalues disabled | tron/trc10/1001017 |
 | Tron | CMC | TPcAJU939W9TaAsds66SpmADkkywK8SBPT | CommunityCoin | delisted, countervalues disabled | tron/trc10/1000701 |
-| Tron | TRUC | TDGy2M9qWBepSHDEutWWxWd1JZfmAed3BP | CommunityNodeToken | countervalues disabled | tron/trc10/1000322 |
+| Tron | TRUC | TDGy2M9qWBepSHDEutWWxWd1JZfmAed3BP | CommunityNodeToken | delisted, countervalues disabled | tron/trc10/1000322 |
 | Tron | CSA | T9yaC22hs7ofM6dDznnQxdcBUFD4uQpV78 | CommunitySupportedAgriculture | delisted, countervalues disabled | tron/trc10/1001828 |
 | Tron | COD | TJKf72NjL1cR49SHfDnPTXTFjRwjgr7v8Z | ConnectDApp | delisted, countervalues disabled | tron/trc10/1002446 |
 | Tron | CTRX | TResWKmyy4GMEnQPRnAX4HgXQJkt68ud6W | ConstrucTRON | delisted, countervalues disabled | tron/trc10/1000658 |
@@ -7619,13 +7619,13 @@
 | Tron | CARDI | THPamt9vJs1wc1t94HLjmuaxeMbsgWFrfk | CryptoCardiB | delisted, countervalues disabled | tron/trc10/1000719 |
 | Tron | CCC | TUvRBke8Ed1KqcoWRkBQzx6jgxfctpJtri | CryptoCashCow | delisted, countervalues disabled | tron/trc10/1001123 |
 | Tron | CCT | TUkWD1V2bws2Wt4Lu9EqF9AxnL8vWtNvHy | CryptoChain | delisted, countervalues disabled | tron/trc10/1000166 |
-| Tron | CDF | TPRxUBEakukBMwTScCHgvCPSBYk5UhfboJ | CryptoDivaFund | countervalues disabled | tron/trc10/1001351 |
+| Tron | CDF | TPRxUBEakukBMwTScCHgvCPSBYk5UhfboJ | CryptoDivaFund | delisted, countervalues disabled | tron/trc10/1001351 |
 | Tron | CFTX | TALxM53HWd2oueBSLvhS7XRBmAVUxXzLre | CryptoFlash | delisted, countervalues disabled | tron/trc10/1001814 |
 | Tron | CFT | TSH3yQT1UbTN7347wNq8omqTgnCmLJf8EJ | CryptoFluenceToken | delisted, countervalues disabled | tron/trc10/1001648 |
 | Tron | CRYPTO | TEV5PJWga6crSeNLHmHaaco8fon6nm74wJ | CryptoFriends | delisted, countervalues disabled | tron/trc10/1002662 |
 | Tron | CGT1 | TAMTEtmbWoXfpcZpkAPfrH8n5BawBuyZif | CryptoGameToken | delisted, countervalues disabled | tron/trc10/1000713 |
 | Tron | CGT | TY2FVhrqyLKTGws4fWghn8wxNzGkiwupFP | CryptoGamesToken | delisted, countervalues disabled | tron/trc10/1000694 |
-| Tron | CGIZA | TCLJe8giq47DEwX9PtiSJk64LRhQMtNARf | CryptoGuyInZA | countervalues disabled | tron/trc10/1001313 |
+| Tron | CGIZA | TCLJe8giq47DEwX9PtiSJk64LRhQMtNARf | CryptoGuyInZA | delisted, countervalues disabled | tron/trc10/1001313 |
 | Tron | CGIZA | TRsPfmG2RAaY2TXnXE8JhtWpoWgm2SzFqk | CryptoGuyinZA | delisted, countervalues disabled | tron/trc10/1001365 |
 | Tron | HUB | TAWVcmUGF6iKC6tvjwdNyJopFrpatGsk6q | CryptoHub | delisted, countervalues disabled | tron/trc10/1000873 |
 | Tron | CIT | THSTkThHnjmFCHLXdQZ4PpFfo6uQsC1XWW | CryptoInfluencerToken | delisted, countervalues disabled | tron/trc10/1001669 |
@@ -8236,7 +8236,7 @@
 | Tron | JOSEREYES | TTMF5ucUyGxBE6dHh4pasRd1UUqRhX8hHX | JoseReyes | delisted, countervalues disabled | tron/trc10/1001887 |
 | Tron | ANGEL | THdC8k8p4V59PS2TGewNiHEkNUhwnZMjbV | JudgmentAngel | delisted, countervalues disabled | tron/trc10/1001998 |
 | Tron | JUP | TPVUXsuq35xNPCe1RYDEjvqZU4esKBHTrH | JupiterToken | delisted, countervalues disabled | tron/trc10/1001970 |
-| Tron | KAOS | TPuYjud9uLVCc7kNuXvA3kMj9fw8Jf3pdk | KAOSCANDY | countervalues disabled | tron/trc10/1001107 |
+| Tron | KAOS | TPuYjud9uLVCc7kNuXvA3kMj9fw8Jf3pdk | KAOSCANDY | delisted, countervalues disabled | tron/trc10/1001107 |
 | Tron | KAEGG | TAfRs79QyGx39WocLj5q63PPpRxR46ELFZ | KAOSEGG | delisted, countervalues disabled | tron/trc10/1001674 |
 | Tron | FAKE | TDPE3deqapt8nKVQoNjfFSohs351nQq4ZD | KAOSKANDY | delisted, countervalues disabled | tron/trc10/1001129 |
 | Tron | KARMA | TGnaRfjgJYUhNy4Y9itTMBE8VrXK963GSy | KARMA | delisted, countervalues disabled | tron/trc10/1000269 |
@@ -8633,7 +8633,7 @@
 | Tron | PU | TFFLLMftQPegEYpvBBXxQS1JzxeT11rJ7D | PLUTONIUM | delisted, countervalues disabled | tron/trc10/1000384 |
 | Tron | POINT | TGmjNPYs8r4Bm1FBhSQM4gyHYFCS71WbFX | POINT | delisted, countervalues disabled | tron/trc10/1001186 |
 | Tron | PLN | TQW18iyaB45yji2jWCUe6SsXH9EzjGfzjF | POLLEN | delisted, countervalues disabled | tron/trc10/1001678 |
-| Tron | POPPY | TRNSzTRpHahqRbg7LBBUJpwpzD4viCgFRH | POPPY | countervalues disabled | tron/trc10/1001943 |
+| Tron | POPPY | TRNSzTRpHahqRbg7LBBUJpwpzD4viCgFRH | POPPY | delisted, countervalues disabled | tron/trc10/1001943 |
 | Tron | POPPY | TZCdgJnNStVJa8FC5CcxEMjQTLJNC2TPo8 | POPPY | delisted, countervalues disabled | tron/trc10/1001155 |
 | Tron | PORN | TXnN7p2BjxLqyPHX29H8ES9bUWEDD6Jiao | PORN | delisted, countervalues disabled | tron/trc10/1001161 |
 | Tron | POS | TSMS3fbn7dBkLpBS9stesEGjCMLgbo3rFn | POS | delisted, countervalues disabled | tron/trc10/1001837 |
@@ -8848,14 +8848,14 @@
 | Tron | SAFE | TGqpUQfz872CfL4vfRmGYkGNhvbsRVHQov | SAFFRON | delisted, countervalues disabled | tron/trc10/1000929 |
 | Tron | SCAM | TL7p5G6EyMrZLmSe8QpQFkp24qm1R4Hpjt | SCAM | delisted, countervalues disabled | tron/trc10/1002229 |
 | Tron | SCAM | TMfw9jcV6doTszxa8YyKpLBGMoQirRTyNi | SCAMTOKEN | delisted, countervalues disabled | tron/trc10/1001852 |
-| Tron | SCC | TSCCdKhtTge29sdyEC1tnQYaPJQyywXh5L | SCC | countervalues disabled | tron/trc10/1002670 |
+| Tron | SCC | TSCCdKhtTge29sdyEC1tnQYaPJQyywXh5L | SCC | delisted, countervalues disabled | tron/trc10/1002670 |
 | Tron | SCC | TSCCeBYrP3eahnBgE8pM6aA5U2fED9mAr3 | SCC | delisted, countervalues disabled | tron/trc10/1001091 |
 | Tron | SBAT | TCuxAVuGarRZaL912LHbQwBhTSoCKLHXaz | SCCBetaAccessToken | delisted, countervalues disabled | tron/trc10/1000846 |
 | Tron | SCCTEST | TSCCptifQfgi7Q9yjbZ1UjsiGuzLThnHRD | SCCTEST | delisted, countervalues disabled | tron/trc10/1002757 |
 | Tron | SCDF | TJKpyE5yKKShH1GVdgnzXyHVoEHCirjjzk | SCFARM | delisted, countervalues disabled | tron/trc10/1002787 |
 | Tron | RCJ | TPUHePpBzb8gxCmPD2WmXGvfomC81pZeMv | SCHNEID | delisted, countervalues disabled | tron/trc10/1001332 |
 | Tron | SCO | TQDKrf5wMFn33Kt7weB9wsaGUKZ25EYEa4 | SCO | delisted, countervalues disabled | tron/trc10/1001260 |
-| Tron | SCT | TSCCemmYcB6ASd3HiUuBjUncwQCJyQ3biK | SCT | countervalues disabled | tron/trc10/1001092 |
+| Tron | SCT | TSCCemmYcB6ASd3HiUuBjUncwQCJyQ3biK | SCT | delisted, countervalues disabled | tron/trc10/1001092 |
 | Tron | SCRT | TMHcfkic3GQKkmCs8jnNc2ZVjy3ScWJg5Z | SECRET | delisted, countervalues disabled | tron/trc10/1001062 |
 | Tron | SEED | TXk39yyhzpfbqtU1BATUzpcfQ37L8Tc4Ht | SEED | delisted, countervalues disabled | tron/trc10/1002141 |
 | Tron | SEED | THckFxKBo1dyHZNmMDZ64aY1N2FgD1sc8N | SEED | delisted, countervalues disabled | tron/trc10/1002018 |
@@ -8863,7 +8863,7 @@
 | Tron | SEED | TQSV4h1HDaqJJCG4pTXgNxbKe1rdy2oiWT | SEED | delisted, countervalues disabled | tron/trc10/1001879 |
 | Tron | SEED | TEUBykq4STvu27fsGEQGrPwpdaWuDgmkSL | SEED | delisted, countervalues disabled | tron/trc10/1001877 |
 | Tron | TRX | TFE3TW7P5Y1nWdMf2bMk14M8eS4kTjr8eH | SEED | delisted, countervalues disabled | tron/trc10/1001873 |
-| Tron | SEED | TGzz8gjYiYRqpfmDwnLxfgPuLVNmpCswVp | SEED | countervalues disabled | tron/trc10/1000001 |
+| Tron | SEED | TGzz8gjYiYRqpfmDwnLxfgPuLVNmpCswVp | SEED | delisted, countervalues disabled | tron/trc10/1000001 |
 | Tron | SEED | TBwoSTyywvLrgjSgaatxrBhxt3DGpVuENh | SEED | countervalues disabled | tron/trc20/TBwoSTyywvLrgjSgaatxrBhxt3DGpVuENh |
 | Tron | SEGG | TJEDEi1hQTGVGzrqyvBssV46tbSv23cP2W | SEEDEGG | delisted, countervalues disabled | tron/trc10/1001284 |
 | Tron | SEED | TZ6dgQ8UU2Pw1RXKcduwCRi5otVQwG1XCQ | SEEDGerminator | delisted, countervalues disabled | tron/trc10/1001465 |
@@ -9146,7 +9146,7 @@
 | Tron | TEX | TJQH8qi4Z3iMydw6gR5MGz6oTnWoAZ1EX1 | TRONEX | delisted, countervalues disabled | tron/trc10/1000884 |
 | Tron | TRONX | TZDJPG7FBEZv1xnGZ7Mkg7QKcj2ZjoyMrW | TRONEXCHANGE | delisted, countervalues disabled | tron/trc10/1001254 |
 | Tron | ELITE | TGzwN5CehrQXtkiY3zgrv9BJXGHdAjwFin | TRONElites | delisted, countervalues disabled | tron/trc10/1002179 |
-| Tron | TERC | TRseWF73sdjasSBmDnZdt6gpcsE8ARFuVG | TRONEuropeRewardCoin | countervalues disabled | tron/trc10/1000226 |
+| Tron | TERC | TRseWF73sdjasSBmDnZdt6gpcsE8ARFuVG | TRONEuropeRewardCoin | delisted, countervalues disabled | tron/trc10/1000226 |
 | Tron | TRF | TDyXnAFSfiDnDUjLP2fvbiPAJhtvLR7J7J | TRONFORCE | delisted, countervalues disabled | tron/trc10/1001181 |
 | Tron | TRNF | TJAv5czFcntSf3fXuKaRLShB7dYqP6LmjF | TRONFUTURES | delisted, countervalues disabled | tron/trc10/1002410 |
 | Tron | GOLD | TXr6ScFtkntXGQURAwJkCY7JzoQAyLsv6g | TRONGOLD | delisted, countervalues disabled | tron/trc10/1000231 |
@@ -9163,7 +9163,7 @@
 | Tron | MEGA | TSUVKj8QfaSLtdGKNxXWGG3nmxwY7h4Fw4 | TRONMegaMillions | delisted, countervalues disabled | tron/trc10/1002405 |
 | Tron | TRN | TYc7pb8c9g89drH9CDrqRizpWsXVBiDkLq | TRONO | delisted, countervalues disabled | tron/trc10/1002528 |
 | Tron | TRONO | TT43DgfxgMdR4BVZNua4YCwG34AgfGN6Uu | TRONO | delisted, countervalues disabled | tron/trc10/1001414 |
-| Tron | TONE | TU1LUTYDMG6iihimUpAmdnnBthawPKh1cm | TRONONE | countervalues disabled | tron/trc10/1001090 |
+| Tron | TONE | TU1LUTYDMG6iihimUpAmdnnBthawPKh1cm | TRONONE | delisted, countervalues disabled | tron/trc10/1001090 |
 | Tron | TPGD | TQgHj9KeMGNMFheewVWMYLznzRoxMnKGok | TRONPAGODA | delisted, countervalues disabled | tron/trc10/1002678 |
 | Tron | TRXP | TBS2rSyG5cwcMhPeRQo3AeYpj7MjsB8gsv | TRONPLAY | delisted, countervalues disabled | tron/trc10/1002067 |
 | Tron | TRXP | TJJe3KnD3dKmqcdzsfrk36v5QGua14W5ui | TRONPrivate | delisted, countervalues disabled | tron/trc10/1002818 |
@@ -9212,6 +9212,7 @@
 | Tron | TDEX | TRVQqdLgNv8j7xPUbT4EMLiT93YHHCFASj | TRUDEX | delisted, countervalues disabled | tron/trc10/1001691 |
 | Tron | TRUMP | TCaoHmxvJXM8A9UrUJ4AoKgVstauyjZw5k | TRUMP | delisted, countervalues disabled | tron/trc10/1001219 |
 | Tron | TRX | TB16q6kpSEW2WqvTJ9ua7HAoP9ugQ2HdHZ | TRX | delisted, countervalues disabled | tron/trc10/1000002 |
+| Tron | TRON | 3QJmnh | TRX | delisted, countervalues disabled | tron/trc10/0 |
 | Tron | TRXB | TGWBfWLpcJuNEHk8CQkwqA5d1eSkJhY6dC | TRXBURN | delisted, countervalues disabled | tron/trc10/1000175 |
 | Tron | TRXC | THs5b6Nt8q4NxaFiQPcaSRfXscdjqXfteG | TRXCash | delisted, countervalues disabled | tron/trc10/1000012 |
 | Tron | TDI | TKxztan5aHTs4VBsrYqWTCiHDp7n79FWdf | TRXDEXio | delisted, countervalues disabled | tron/trc10/1001707 |
@@ -9484,7 +9485,7 @@
 | Tron | TSVIP | TX8CmjAKe1AdaCjMg5ajkS3g5ZqssSVkFs | TronShopVIP | delisted, countervalues disabled | tron/trc10/1001417 |
 | Tron | TRS | TQCtA68Ur9LFRKB6mhBvuNT71rCNG4LCoP | TronSilver | delisted, countervalues disabled | tron/trc10/1001878 |
 | Tron | AG | TADthRPabXKWE62ArTTJrbrNKP9gyo52gZ | TronSilver | delisted, countervalues disabled | tron/trc10/1000861 |
-| Tron | TSY | TLck39eRzum8PU7r9v6jPcsqreKt2qC58Z | TronSociety | countervalues disabled | tron/trc10/1001316 |
+| Tron | TSY | TLck39eRzum8PU7r9v6jPcsqreKt2qC58Z | TronSociety | delisted, countervalues disabled | tron/trc10/1001316 |
 | Tron | SPARK | TTMNxTmRpBZnjtUnohX84j25NLkTqDga7j | TronSpark | delisted, countervalues disabled | tron/trc10/1000595 |
 | Tron | TSP | TVb2Yu1BQ7yDNh8ygBDxzw9RdcQ35s6wPa | TronSports | delisted, countervalues disabled | tron/trc10/1001548 |
 | Tron | TST | TVo3mYozYv8eQ6AHMLpc7orwMuqGuyuJDN | TronSquadToken | delisted, countervalues disabled | tron/trc10/1001912 |
