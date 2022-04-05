@@ -4,7 +4,8 @@ import styled from "styled-components";
 import toPairs from "lodash/toPairs";
 import { Trans } from "react-i18next";
 import type { AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import { decodeAccountId } from "@ledgerhq/live-common/lib/account";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
@@ -57,7 +58,8 @@ const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
 `;
 
 const NFTAmountField = ({ operation }: Props) => {
-  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId);
+  const { currencyId } = decodeAccountId(operation.accountId);
+  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId, currencyId);
   const show = useMemo(() => status === "loading", [status]);
 
   return (

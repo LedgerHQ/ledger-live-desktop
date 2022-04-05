@@ -2,6 +2,7 @@
 
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { decodeAccountId } from "@ledgerhq/live-common/lib/account";
 import {
   OpDetailsSection,
   OpDetailsTitle,
@@ -20,7 +21,8 @@ import { centerEllipsis } from "~/renderer/styles/helpers";
 
 const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
   const { t } = useTranslation();
-  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId);
+  const { currencyId } = decodeAccountId(operation.accountId);
+  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId, currencyId);
   const show = useMemo(() => status === "loading", [status]);
 
   return operation.contract && operation.tokenId ? (

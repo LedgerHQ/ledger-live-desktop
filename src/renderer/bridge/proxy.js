@@ -51,6 +51,7 @@ export const getCurrencyBridge = (currency: CryptoCurrency): CurrencyBridge => {
     hydrate: value => bridgeImpl.getCurrencyBridge(currency).hydrate(value, currency),
 
     scanAccounts,
+    nftMetadataResolver: bridgeImpl.getCurrencyBridge(currency).nftMetadataResolver,
   };
 
   if (getPreloadStrategy) {

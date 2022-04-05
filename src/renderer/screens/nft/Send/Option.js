@@ -12,18 +12,14 @@ type OptionProps = {
   data: {
     tokenId: string,
     amount: BigNumber,
-    collection: { contract: string, standard: string },
+    contract: string,
+    standard: string,
+    currencyId: string,
   },
 };
 
-const Option = ({
-  data: {
-    tokenId,
-    amount,
-    collection: { contract, standard },
-  },
-}: OptionProps) => {
-  const { status, metadata } = useNftMetadata(contract, tokenId);
+const Option = ({ data: { tokenId, amount, contract, standard, currencyId } }: OptionProps) => {
+  const { status, metadata } = useNftMetadata(contract, tokenId, currencyId);
   const show = useMemo(() => status === "loading", [status]);
   return (
     <Box horizontal>
@@ -55,4 +51,5 @@ const Option = ({
   );
 };
 
+// $FlowFixMe
 export default Option;

@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo, useCallback, useRef, useState, useEffect } from "react";
+import React, { useMemo, useCallback, useRef, useState, useEffect, memo } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
@@ -49,12 +49,16 @@ const Collection = () => {
   const { id, collectionAddress } = useParams();
   const account = useSelector(state => accountSelector(state, { accountId: id }));
 
-  const collection = useMemo(() => nftsByCollections(account.nfts, collectionAddress)[0], [
+  const nfts = useMemo(() => nftsByCollections(account.nfts, collectionAddress) || [], [
     account.nfts,
     collectionAddress,
   ]);
 
-  const { status, metadata } = useNftMetadata(collection.contract, collection.nfts[0].tokenId);
+  const { status, metadata } = useNftMetadata(
+    nfts[0]?.contract,
+    nfts[0]?.tokenId,
+    account.currency.id,
+  );
   const show = useMemo(() => status === "loading", [status]);
 
   const onSend = useCallback(() => {
@@ -66,22 +70,19 @@ const Collection = () => {
   // NB To be determined if this filter is good enough for what we expect.
   const filterOperation = op =>
     !!op.nftOperations?.length &&
-    !!op.nftOperations.find(nftOp => nftOp.contract === collectionAddress);
+    !!op.nftOperations.find(nftOp => nftOp?.contract === collectionAddress);
 
   const ref = useRef();
   const isAtBottom = useOnScreen(ref);
   const [maxVisibleNTFs, setMaxVisibleNFTs] = useState(1);
 
   useEffect(() => {
-    if (isAtBottom && maxVisibleNTFs < collection.nfts.length) {
+    if (isAtBottom && maxVisibleNTFs < nfts.length) {
       setMaxVisibleNFTs(maxVisibleNTFs => maxVisibleNTFs + 5);
     }
   }, [isAtBottom]);
 
-  const slicedNfts = useMemo(() => collection.nfts.slice(0, maxVisibleNTFs), [
-    collection.nfts,
-    maxVisibleNTFs,
-  ]);
+  const slicedNfts = useMemo(() => nfts.slice(0, maxVisibleNTFs), [nfts, maxVisibleNTFs]);
 
   return (
     <>
@@ -93,13 +94,13 @@ const Collection = () => {
           <Skeleton width={93} barHeight={6} minHeight={24} show={show}>
             <Text ff="Inter|Regular" color="palette.text.shade60" fontSize={2}>
               {t("NFT.gallery.collection.header.contract", {
-                contract: collection.contract,
+                contract: collectionAddress,
               })}
             </Text>
           </Skeleton>
           <Skeleton width={143} minHeight={33} barHeight={12} show={show}>
             <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={22}>
-              <CollectionName collection={collection} />
+              <CollectionName nft={nfts[0]} />
             </Text>
           </Skeleton>
         </Box>
@@ -111,8 +112,8 @@ const Collection = () => {
         </Button>
       </Box>
       <GridListToggle />
-      <TokensList account={account} collectionAddress={collectionAddress} nfts={slicedNfts} />
-      {collection.nfts.length > maxVisibleNTFs && (
+      <TokensList account={account} nfts={slicedNfts} />
+      {nfts.length > maxVisibleNTFs && (
         <SpinnerContainer>
           <SpinnerBackground>
             <Spinner size={14} />
@@ -129,4 +130,4 @@ const Collection = () => {
   );
 };
 
-export default Collection;
+export default memo<{}>(Collection);
