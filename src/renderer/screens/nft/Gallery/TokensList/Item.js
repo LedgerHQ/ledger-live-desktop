@@ -78,12 +78,7 @@ const NftCard = ({ id, mode, account, withContextMenu = false }: Props) => {
 
   const MaybeContext = ({ children }: any) =>
     withContextMenu ? (
-      <NFTContextMenu
-        key={id}
-        contract={nft.contract}
-        tokenId={nft.tokenId}
-        currencyId={nft.currencyId}
-      >
+      <NFTContextMenu key={id} nft={nft} account={account} metadata={metadata}>
         {children}
       </NFTContextMenu>
     ) : (
@@ -138,9 +133,9 @@ const NftCard = ({ id, mode, account, withContextMenu = false }: Props) => {
             )}
             <NFTContextMenu
               key={id}
-              contract={nft.contract}
-              tokenId={nft.tokenId}
-              currencyId={nft.currencyId}
+              nft={nft}
+              account={account}
+              metadata={metadata}
               leftClick={true}
             >
               <Dots>
