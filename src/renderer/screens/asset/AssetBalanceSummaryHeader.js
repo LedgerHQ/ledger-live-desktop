@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import type {
   Currency,
@@ -19,6 +19,15 @@ import Price from "~/renderer/components/Price";
 import PillsDaysCount from "~/renderer/components/PillsDaysCount";
 import styled from "styled-components";
 import Swap from "~/renderer/icons/Swap";
+
+// $FlowFixMe
+import Button from "~/renderer/components/Button.ui.tsx";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { useHistory } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import { useProviders } from "../exchange/Swap2/Form";
 
 type Props = {
   isAvailable: boolean,
@@ -43,17 +52,72 @@ export default function AssetBalanceSummaryHeader({
   unit,
 }: Props) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const history = useHistory();
+
   const cvUnit = counterValue.units[0];
-  const data = [
-    { valueChange: cryptoChange, balance: last.value, unit },
-    { valueChange: countervalueChange, balance: last.countervalue, unit: cvUnit },
-  ];
-  if (countervalueFirst) {
-    data.reverse();
-  }
+  const data = useMemo(
+    () => [
+      { valueChange: cryptoChange, balance: last.value, unit },
+      { valueChange: countervalueChange, balance: last.countervalue, unit: cvUnit },
+    ],
+    [countervalueChange, cryptoChange, cvUnit, last.countervalue, last.value, unit],
+  );
+
+  useEffect(() => {
+    if (countervalueFirst) {
+      data.reverse();
+    }
+  }, [countervalueFirst, data]);
 
   const primaryKey = data[0].unit.code;
   const secondaryKey = data[1].unit.code;
+
+  const rampCatalog = useRampCatalog();
+  // eslint-disable-next-line no-unused-vars
+  const [availableOnBuy, availableOnSell] = useMemo(() => {
+    if (!rampCatalog.value) {
+      return [false, false];
+    }
+
+    const allBuyableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(rampCatalog.value.onRamp);
+    const allSellableCryptoCurrencyIds = getAllSupportedCryptoCurrencyIds(
+      rampCatalog.value.offRamp,
+    );
+    return [
+      allBuyableCryptoCurrencyIds.includes(currency.id),
+      allSellableCryptoCurrencyIds.includes(currency.id),
+    ];
+  }, [rampCatalog.value, currency.id]);
+
+  const { providers, storedProviders } = useProviders();
+
+  const availableOnSwap =
+    (providers || storedProviders) &&
+    !!(providers || storedProviders).find(({ pairs }) => {
+      return pairs && pairs.find(({ from, to }) => [from, to].includes(currency.id));
+    });
+
+  const onBuy = useCallback(() => {
+    setTrackingSource("asset header actions");
+    history.push({
+      pathname: "/exchange",
+      state: {
+        mode: "onRamp",
+        currencyId: currency.id,
+      },
+    });
+  }, [currency, history]);
+
+  const onSwap = useCallback(() => {
+    setTrackingSource("asset header actions");
+    history.push({
+      pathname: "/swap",
+      state: {
+        defaultCurrency: currency,
+      },
+    });
+  }, [currency, history]);
 
   return (
     <Box flow={5}>
@@ -103,6 +167,17 @@ export default function AssetBalanceSummaryHeader({
             />
           </Wrapper>
         </BalanceTotal>
+        {availableOnBuy && (
+          <Button data-test-id="portfolio-buy-button" variant="color" mr={1} onClick={onBuy}>
+            {t("accounts.contextMenu.buy")}
+          </Button>
+        )}
+
+        {availableOnSwap && (
+          <Button data-test-id="portfolio-swap-button" variant="color" onClick={onSwap}>
+            {t("accounts.contextMenu.swap")}
+          </Button>
+        )}
       </Box>
       <Box
         key={primaryKey}

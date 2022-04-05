@@ -61,6 +61,8 @@ import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
 // $FlowFixMe
 import Learn from "~/renderer/screens/learn";
 
+import { useProviders } from "~/renderer/screens/exchange/Swap2/Form";
+
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
   top: 0;
@@ -119,6 +121,8 @@ export default function Default() {
   const ref: React$ElementRef<any> = useRef();
   useDeeplink();
   useUSBTroubleshooting();
+
+  useProviders(); // prefetch data from swap providers here
 
   // every time location changes, scroll back up
   useEffect(() => {
