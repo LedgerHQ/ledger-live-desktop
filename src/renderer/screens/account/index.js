@@ -30,7 +30,7 @@ import Collections from "~/renderer/screens/nft/Collections";
 
 import BalanceSummary from "./BalanceSummary";
 import AccountHeader from "./AccountHeader";
-import AccountHeaderActions from "./AccountHeaderActions";
+import AccountHeaderActions, { AccountHeaderSettingsButton } from "./AccountHeaderActions";
 import EmptyStateAccount from "./EmptyStateAccount";
 import TokensList from "./TokensList";
 import CompoundBodyHeader from "~/renderer/screens/lend/Account/AccountBodyHeader";
@@ -105,19 +105,32 @@ const AccountPage = ({
         operationsLength={account.operations.length}
       />
       <SyncOneAccountOnMount priority={10} accountId={mainAccount.id} />
-
-      <Box horizontal mb={3} flow={4} style={{ justifyContent: "space-between" }}>
+      <Box
+        horizontal
+        mb={1}
+        flow={4}
+        style={{ justifyContent: "space-between", alignItems: "center" }}
+      >
         <AccountHeader account={account} parentAccount={parentAccount} />
+        <AccountHeaderSettingsButton account={account} parentAccount={parentAccount} />
+      </Box>
+      <Box
+        horizontal
+        pb={3}
+        flow={4}
+        style={{
+          width: "100%",
+          overflowX: "scroll",
+        }}
+      >
         <AccountHeaderActions account={account} parentAccount={parentAccount} />
       </Box>
-
       {AccountSubHeader ? (
         <AccountSubHeader account={account} parentAccount={parentAccount} />
       ) : null}
-
       {!isAccountEmpty(account) ? (
         <>
-          <Box mt={3} mb={7}>
+          <Box mb={7}>
             <BalanceSummary
               mainAccount={mainAccount}
               account={account}

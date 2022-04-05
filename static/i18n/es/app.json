@@ -720,11 +720,13 @@
     "undelegatingTooltip": "Los activos desdelegados presentan un bloqueo temporal de 21 días antes de estar disponibles."
   },
   "exchange": {
+    "chooseProvider": "Elegir de {{providerCount}} proveedor",
+    "chooseProviders": "Elegir de {{providerCount}} proveedores",
     "title": "Comprar y vender cripto",
     "reset": "Reiniciar flujo",
     "verifyAddress": "Confirma que la dirección que se muestra coincide exactamente con la que aparece en tu dispositivo",
     "buy": {
-      "header": "Compra y vende cripto",
+      "header": "Compra cripto a través de nuestros socios",
       "title": "Elige un proveedor para comprar cripto",
       "buyFrom": "Compra dondequiera que estés",
       "cryptoSupported": "cripto compatibles",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "Vender cripto con {{provider}}",
+      "header": "Vende cripto a través de nuestros socios",
       "title": "Vender cripto mediante <0>{{provider}}</0>",
       "tab": "Vender",
       "selectCrypto": "Elige un activo cripto",
@@ -2760,7 +2762,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Implementaciones JS experimentales",
-          "description": "Usar implementaciones de JS experimentales para Tezos."
+          "description": "Usar implementaciones de JS experimentales para Tezos y Cosmos."
         },
         "experimentalCurrencies": {
           "title": "Integraciones experimentales",
