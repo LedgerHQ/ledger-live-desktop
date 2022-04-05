@@ -52,6 +52,7 @@ export type DropDownItemType = {
   key: string,
   label: any,
   disabled?: boolean,
+  content?: any,
 };
 
 const OptionContainer = styled.div`

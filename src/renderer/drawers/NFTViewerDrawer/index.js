@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo, useCallback, useState } from "react";
+import React, { useMemo, useCallback, useState, memo } from "react";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
@@ -16,7 +16,7 @@ import { getNFTById } from "~/renderer/reducers/accounts";
 import { NFTProperties } from "./NFTProperties";
 import { CopiableField } from "./CopiableField";
 import NftPanAndZoom from "./NftPanAndZoom";
-import { ExternalViewerButton } from "./ExternalViewerButton";
+import ExternalViewerButton from "./ExternalViewerButton";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import Image from "~/renderer/screens/nft/Image";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
@@ -115,42 +115,45 @@ const HashContainer = styled.div`
   user-select: none;
 `;
 
-function NFTAttribute({
-  title,
-  value,
-  skeleton,
-  separatorBottom,
-  separatorTop,
-}: {
-  title: string,
-  value: string,
-  skeleton?: boolean,
-  separatorBottom?: boolean,
-  separatorTop?: boolean,
-}) {
-  if (!skeleton && !value) return null;
+const NFTAttribute = memo(
+  ({
+    title,
+    value,
+    skeleton,
+    separatorBottom,
+    separatorTop,
+  }: {
+    title: string,
+    value: string,
+    skeleton?: boolean,
+    separatorBottom?: boolean,
+    separatorTop?: boolean,
+  }) => {
+    if (!skeleton && !value) return null;
 
-  return (
-    <React.Fragment>
-      {separatorTop ? <Separator /> : null}
-      <Text
-        mb={1}
-        lineHeight="15.73px"
-        fontSize={4}
-        color="palette.text.shade60"
-        ff="Inter|SemiBold"
-      >
-        {title}
-      </Text>
-      <Skeleton show={skeleton} width={120} minHeight={24} barHeight={10}>
-        <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" ff="Inter|Regular">
-          <Pre>{value}</Pre>
+    return (
+      <>
+        {separatorTop ? <Separator /> : null}
+        <Text
+          mb={1}
+          lineHeight="15.73px"
+          fontSize={4}
+          color="palette.text.shade60"
+          ff="Inter|SemiBold"
+        >
+          {title}
         </Text>
-      </Skeleton>
-      {separatorBottom ? <Separator /> : null}
-    </React.Fragment>
-  );
-}
+        <Skeleton show={skeleton} width={120} minHeight={24} barHeight={10}>
+          <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" ff="Inter|Regular">
+            <Pre>{value}</Pre>
+          </Text>
+        </Skeleton>
+        {separatorBottom ? <Separator /> : null}
+      </>
+    );
+  },
+);
+NFTAttribute.displayName = "NFTAttribute";
 
 type NFTViewerDrawerProps = {
   account: Account,
@@ -160,12 +163,12 @@ type NFTViewerDrawerProps = {
   onRequestClose: () => void,
 };
 
-export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps) {
+const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const nft = useSelector(state => getNFTById(state, { nftId }));
-  const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
+  const { status, metadata } = useNftMetadata(nft.contract, nft.tokenId, nft.currencyId);
   const show = useMemo(() => status === "loading", [status]);
   const name = metadata?.nftName || nft.tokenId;
 
@@ -241,8 +244,9 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
 
             <ExternalViewerButton
               links={metadata?.links}
-              contract={nft.collection.contract}
+              contract={nft.contract}
               tokenId={nft.tokenId}
+              currencyId={nft.currencyId}
             />
           </NFTActions>
           <NFTAttributes>
@@ -263,9 +267,9 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
               {t("NFT.viewer.attributes.tokenAddress")}
             </Text>
             <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" fontWeight="600">
-              <CopiableField value={nft.collection.contract}>
+              <CopiableField value={nft.contract}>
                 <HashContainer>
-                  <SplitAddress value={nft.collection.contract} ff="Inter|Regular" />
+                  <SplitAddress value={nft.contract} ff="Inter|Regular" />
                 </HashContainer>
               </CopiableField>
             </Text>
@@ -291,7 +295,7 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
                 )}
               </CopiableField>
             </Text>
-            {nft.collection.standard === "ERC1155" ? (
+            {nft.standard === "ERC1155" ? (
               <React.Fragment>
                 <NFTAttribute
                   separatorTop
@@ -306,4 +310,6 @@ export function NFTViewerDrawer({ account, nftId, height }: NFTViewerDrawerProps
       </NFTViewerDrawerContainer>
     </Box>
   );
-}
+};
+
+export default memo<NFTViewerDrawerProps>(NFTViewerDrawer);

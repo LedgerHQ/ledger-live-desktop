@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useMemo } from "react";
+import React, { useMemo, memo } from "react";
 import { Trans } from "react-i18next";
 import { useSelector } from "react-redux";
 import { getAllNFTs } from "~/renderer/reducers/accounts";
@@ -12,10 +12,16 @@ import Skeleton from "~/renderer/screens/nft/Skeleton";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 
-const Summary = ({ transaction }: { transaction: Transaction }) => {
+type Props = {
+  transaction: Transaction,
+};
+
+const Summary = ({ transaction }: Props) => {
   const allNfts = useSelector(getAllNFTs);
-  const nft = allNfts.find(nft => nft.tokenId === transaction?.tokenIds[0]);
-  const { status, metadata } = useNftMetadata(nft.collection.contract, nft.tokenId);
+  const [tokenId] = transaction.tokenIds;
+  const [contract] = transaction.collections;
+  const nft = allNfts.find(nft => nft.tokenId === tokenId && nft.contract === contract);
+  const { status, metadata } = useNftMetadata(nft.contract, nft.tokenId, nft.currencyId);
   const { nftName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
 
@@ -44,7 +50,7 @@ const Summary = ({ transaction }: { transaction: Transaction }) => {
           </Skeleton>
         </Box>
       </Box>
-      {nft.collection.standard === "ERC1155" ? (
+      {nft.standard === "ERC1155" ? (
         <Box horizontal justifyContent="space-between" mb={2}>
           <Text ff="Inter|Medium" color="palette.text.shade40" fontSize={4}>
             <Trans i18nKey="send.steps.details.nftQuantity" />
@@ -60,4 +66,4 @@ const Summary = ({ transaction }: { transaction: Transaction }) => {
   );
 };
 
-export default Summary;
+export default memo<Props>(Summary);
