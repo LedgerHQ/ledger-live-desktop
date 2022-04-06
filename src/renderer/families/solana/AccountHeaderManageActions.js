@@ -1,6 +1,5 @@
 // @flow
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import { canDelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import invariant from "invariant";
 import { useCallback } from "react";
@@ -17,15 +16,6 @@ type Props = {
 const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const mainAccount = getMainAccount(account, parentAccount);
-
-  const { solanaResources } = mainAccount;
-
-  invariant(solanaResources, "solana account expected");
-
-  if (solanaResources.stakes.length > 0) {
-    return null;
-  }
 
   const onClick = useCallback(() => {
     dispatch(
@@ -34,6 +24,13 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
       }),
     );
   }, [dispatch, account]);
+
+  const mainAccount = getMainAccount(account, parentAccount);
+  const { solanaResources } = mainAccount;
+
+  if (!solanaResources || solanaResources.stakes.length > 0) {
+    return null;
+  }
 
   return [
     {
