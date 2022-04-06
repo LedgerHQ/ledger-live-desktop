@@ -100,12 +100,9 @@ export function SelectUseCase() {
   const history = useHistory();
   const device = deviceById(deviceId);
 
-  const onWrappedUseCase = useCallback(
-    useCase => {
-      dispatch(openModal("MODAL_RECOVERY_SEED_WARNING", { deviceId }));
-    },
-    [deviceId, dispatch],
-  );
+  const onWrappedUseCase = useCallback(() => {
+    dispatch(openModal("MODAL_RECOVERY_SEED_WARNING", { deviceId }));
+  }, [deviceId, dispatch]);
 
   return (
     <ScrollArea withHint>
@@ -145,7 +142,8 @@ export function SelectUseCase() {
               Illu={<NanoBox />}
               onClick={() => {
                 track("Onboarding - Setup new");
-                /* sendEvent("OPEN_PEDAGOGY_MODAL") */
+                history.push(`/setup-device/${deviceId}`);
+                // dispatch(openModal("MODAL_PEDAGOGY", { deviceId }));
               }}
             />
           </RightColumn>
