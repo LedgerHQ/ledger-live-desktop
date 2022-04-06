@@ -720,11 +720,13 @@
     "undelegatingTooltip": "解除委托的资产会有 21 天的时间锁，之后才可用。"
   },
   "exchange": {
+    "chooseProvider": "从 {{providerCount}} 提供商选择",
+    "chooseProviders": "从 {{providerCount}} 提供商选择",
     "title": "买入和卖出加密货币",
     "reset": "重置流程",
     "verifyAddress": "请确认显示的地址与您设备上显示的地址完全匹配",
     "buy": {
-      "header": "买入和卖出加密货币",
+      "header": "通过我们的合作伙伴买入加密货币",
       "title": "选择一个购买加密货币的供应方",
       "buyFrom": "可从任何地方购买",
       "cryptoSupported": "已支持的加密币种",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "使用 {{provider}} 卖出加密",
+      "header": "通过我们的合作伙伴卖出加密资产",
       "title": "通过 <0>{{provider}}</0> 卖出加密",
       "tab": "卖出",
       "selectCrypto": "选择加密资产",
@@ -2760,7 +2762,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "实验性的 JS 实现",
-          "description": "对 Tezos 使用实验性的 JS 实现。"
+          "description": "对 Tezos 和 Cosmos 使用实验性的 JS 实现。"
         },
         "experimentalCurrencies": {
           "title": "实验集成",

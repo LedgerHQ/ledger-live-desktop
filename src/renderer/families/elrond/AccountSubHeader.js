@@ -46,7 +46,7 @@ export default function AccountSubHeader() {
     setIsDrawerOpen(false);
   }
   return (
-    <Card px={2} py={1}>
+    <Card px={2} py={1} mb={3}>
       <CardContent>
         <CardHeaderContainer>
           <InfoCircle size={12} />
