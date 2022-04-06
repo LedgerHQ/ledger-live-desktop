@@ -1,4 +1,5 @@
 import React, { useCallback } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { openURL } from "~/renderer/linking";
@@ -19,7 +20,7 @@ import { isAcceptedTerms } from "~/renderer/terms";
 const stepLogos = [accessCrypto, ownPrivateKey, stayOffline, validateTransactions, setupNano];
 registerAssets(stepLogos);
 
-const Link = styled(Text)`
+const StyledLink = styled(Text)`
   text-decoration: underline;
   cursor: pointer;
 `;
@@ -81,19 +82,12 @@ const Description = styled(Text)`
   white-space: pre-line;
 `;
 
-type Props = {
-  sendEvent: (event: string) => void;
-  onboardingRelaunched: boolean;
-};
-
-export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
+export function Welcome() {
+  // const onboardingOrigin = useSelector();
+  const onboardingOrigin = "/settings";
   const { t } = useTranslation();
 
   const hasAcceptedTerms = isAcceptedTerms();
-
-  const handleNext = useCallback(() => {
-    sendEvent(hasAcceptedTerms ? "NEXT" : "OPEN_TERMS_MODAL");
-  }, [hasAcceptedTerms, sendEvent]);
 
   const buyNanoX = useCallback(() => {
     openURL(urls.noDevice.buyNew);
@@ -119,27 +113,28 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
           </Description>
         </Presentation>
         <ProductHighlight>
-          <Button
-            data-testid="onboarding-get-started-button"
-            iconPosition="right"
-            Icon={Icons.ArrowRightMedium}
-            variant="main"
-            onClick={handleNext}
-          >
-            {t("v3.onboarding.screens.welcome.nextButton")}
-          </Button>
+          <Link to="/terms">
+            <Button
+              data-testid="onboarding-get-started-button"
+              iconPosition="right"
+              Icon={Icons.ArrowRightMedium}
+              variant="main"
+            >
+              {t("v3.onboarding.screens.welcome.nextButton")}
+            </Button>
+          </Link>
           <NoDevice>
             <Text marginRight={2}>{t("v3.onboarding.screens.welcome.noDevice")}</Text>
-            <Link onClick={buyNanoX}>{t("v3.onboarding.screens.welcome.buyLink")}</Link>
+            <StyledLink onClick={buyNanoX}>{t("v3.onboarding.screens.welcome.buyLink")}</StyledLink>
           </NoDevice>
         </ProductHighlight>
       </LeftContainer>
       <RightContainer>
         <CarouselTopBar>
-          {onboardingRelaunched && (
-            <Button small onClick={() => sendEvent("PREV")}>
-              {t("common.previous")}
-            </Button>
+          {onboardingOrigin && (
+            <Link to={onboardingOrigin}>
+              <Button small>{t("common.previous")}</Button>
+            </Link>
           )}
           <LangSwitcher />
         </CarouselTopBar>
