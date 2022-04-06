@@ -2,6 +2,7 @@
 
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
@@ -55,6 +56,7 @@ const TermsCTA = styled(Button)`
 type TermsProps = { sendEvent: string => void };
 
 export const Terms = ({ sendEvent }: TermsProps) => {
+  const history = useHistory();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const privacyPolicyUrl = useDynamicUrl("privacyPolicy");
@@ -65,13 +67,13 @@ export const Terms = ({ sendEvent }: TermsProps) => {
   const handleNext = useCallback(() => {
     acceptTerms();
     dispatch(setShareAnalytics(true));
-    sendEvent("NEXT");
+    history.push("/select-device");
   }, [dispatch, sendEvent]);
 
   return (
     <TermsContainer>
       <TermsNavigation>
-        <Button small onClick={() => sendEvent("PREV")}>
+        <Button small onClick={() => history.push("/welcome")}>
           {t("common.previous")}
         </Button>
       </TermsNavigation>
