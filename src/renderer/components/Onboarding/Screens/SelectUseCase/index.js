@@ -2,6 +2,7 @@
 
 import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory, useParams } from "react-router-dom";
 import { openModal } from "~/renderer/actions/modals";
 import { useTranslation, Trans } from "react-i18next";
 import Text from "~/renderer/components/Text";
@@ -16,6 +17,8 @@ import nanoBox from "./assets/nanoBox.svg";
 import { deviceById } from "~/renderer/components/Onboarding/Screens/SelectDevice/devices";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
+
+import { track } from "~/renderer/analytics/segment";
 
 registerAssets([deviceConnect, importRecovery, nanoBox]);
 
@@ -90,30 +93,24 @@ const TopRightContainer = styled.div`
   top: 40px;
 `;
 
-type Props = {
-  sendEvent: string => void,
-  context: {
-    deviceId: string,
-  },
-};
-
-export function SelectUseCase({ sendEvent, context }: Props) {
+export function SelectUseCase() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { deviceId } = useParams();
+  const history = useHistory();
+  const device = deviceById(deviceId);
 
-  const device = deviceById(context.deviceId);
   const onWrappedUseCase = useCallback(
     useCase => {
-      dispatch(openModal("MODAL_RECOVERY_SEED_WARNING", { deviceId: context.deviceId }));
-      sendEvent(useCase);
+      dispatch(openModal("MODAL_RECOVERY_SEED_WARNING", { deviceId }));
     },
-    [context.deviceId, dispatch, sendEvent],
+    [deviceId, dispatch],
   );
 
   return (
     <ScrollArea withHint>
       <TopRightContainer>
-        <Button small onClick={() => sendEvent("PREV")}>
+        <Button small onClick={() => history.push("/select-device")}>
           {t("onboarding.screens.selectUseCase.switchDevice")}
         </Button>
       </TopRightContainer>
@@ -146,7 +143,10 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               }
               description={t("onboarding.screens.selectUseCase.options.1.description")}
               Illu={<NanoBox />}
-              onClick={() => sendEvent("OPEN_PEDAGOGY_MODAL")}
+              onClick={() => {
+                track("Onboarding - Setup new");
+                /* sendEvent("OPEN_PEDAGOGY_MODAL") */
+              }}
             />
           </RightColumn>
         </Row>
@@ -169,7 +169,11 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               }
               description={t("onboarding.screens.selectUseCase.options.2.description")}
               Illu={<DeviceConnect />}
-              onClick={() => onWrappedUseCase("CONNECT_SETUP_DEVICE")}
+              onClick={() => {
+                track("Onboarding - Connect");
+                history.push(`/connect-device/${deviceId}`);
+                onWrappedUseCase();
+              }}
             />
             <UseCaseOption
               dataTestId="onboarding-restore-device"
@@ -184,7 +188,11 @@ export function SelectUseCase({ sendEvent, context }: Props) {
                 />
               }
               Illu={<ImportRecovery />}
-              onClick={() => onWrappedUseCase("USE_RECOVERY_PHRASE")}
+              onClick={() => {
+                track("Onboarding - Restore");
+                history.push("/use-recovery-phrase");
+                onWrappedUseCase();
+              }}
             />
           </RightColumn>
         </Row>

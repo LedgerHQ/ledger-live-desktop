@@ -4,6 +4,7 @@ import React from "react";
 import styled from "styled-components";
 import { useMachine } from "@xstate/react";
 import { CSSTransition } from "react-transition-group";
+import { useHistory, useParams } from "react-router-dom";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Stepper } from "~/renderer/components/Onboarding/Screens/Tutorial/Stepper";
 import { ImportYourRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/ImportYourRecoveryPhrase";
@@ -204,10 +205,11 @@ function Tutorial({ sendEventToParent, machine, parentContext }: TutorialProps) 
       topLevelNext: () => sendEventToParent("NEXT"),
       fireConfetti,
     },
-    context: {
-      deviceId: parentContext.deviceId,
-    },
   });
+
+  const dispatch = useDispatch();
+  const { deviceId } = useParams();
+  const history = useHistory();
 
   const Screen = screens[state.value].component;
   const theme = screens[state.value].bgTheme;
