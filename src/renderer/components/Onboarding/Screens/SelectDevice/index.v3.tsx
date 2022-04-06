@@ -1,6 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 import { DeviceModelId } from "@ledgerhq/devices";
@@ -8,6 +9,7 @@ import { Text } from "@ledgerhq/react-ui";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Button from "~/renderer/components/Button";
 import { DeviceSelector } from "./DeviceSelector";
+import { track } from "~/renderer/analytics/segment";
 
 const SelectDeviceContainer: ThemedComponent<any> = styled.div`
   height: 100%;
@@ -32,24 +34,22 @@ const TitleText = styled(Text)`
   pointer-events: none;
 `;
 
-interface Props {
-  sendEvent: (arg1: { type: string; deviceId: DeviceModelId } | string) => any;
-}
-
-export function SelectDevice({ sendEvent }: Props) {
+export function SelectDevice() {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const handleDeviceSelect = useCallback(
     (deviceId: DeviceModelId) => {
-      sendEvent({ type: "DEVICE_SELECTED", deviceId });
+      track("Onboarding Device - Selection", { deviceId });
+      history.push(`/select-use-case/${deviceId}`);
     },
-    [sendEvent],
+    [history],
   );
 
   return (
     <SelectDeviceContainer>
       <TopRightContainer>
-        <Button small onClick={() => sendEvent("PREV")}>
+        <Button small onClick={() => history.push("/terms")}>
           {t("common.previous")}
         </Button>
       </TopRightContainer>
