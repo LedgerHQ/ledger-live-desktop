@@ -1,5 +1,6 @@
 import { Flex, Aside, Logos, Button, Icons, ProgressBar, Drawer, Popin } from "@ledgerhq/react-ui";
 import React, { useCallback } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { useMachine } from "@xstate/react";
@@ -212,10 +213,11 @@ function Tutorial({ sendEventToParent, machine, parentContext }) {
       topLevelNext: () => sendEventToParent("NEXT"),
       fireConfetti,
     },
-    context: {
-      deviceId: parentContext.deviceId,
-    },
   });
+
+  const { deviceId } = useParams();
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const Screen = screens[state.value].component;
 
