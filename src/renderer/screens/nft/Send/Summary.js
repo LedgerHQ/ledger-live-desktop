@@ -19,7 +19,8 @@ type Props = {
 const Summary = ({ transaction }: Props) => {
   const allNfts = useSelector(getAllNFTs);
   const [tokenId] = transaction.tokenIds;
-  const [contract] = transaction.collections;
+  const [quantity] = transaction.quantities;
+  const contract = transaction.collection;
   const nft = allNfts.find(nft => nft.tokenId === tokenId && nft.contract === contract);
   const { status, metadata } = useNftMetadata(nft.contract, nft.tokenId, nft.currencyId);
   const { nftName } = metadata || {};
@@ -57,7 +58,7 @@ const Summary = ({ transaction }: Props) => {
           </Text>
           <Box>
             <Text ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
-              {transaction.quantities[0].toString()}
+              {quantity.toFixed()}
             </Text>
           </Box>
         </Box>
