@@ -3,10 +3,12 @@
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 import type { DeviceModelId } from "@ledgerhq/devices";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
+import { track } from "~/renderer/analytics/segment";
 import { DeviceSelector } from "./DeviceSelector";
 
 const SelectDeviceContainer: ThemedComponent<*> = styled.div`
@@ -24,24 +26,22 @@ const TopRightContainer = styled.div`
   top: 40px;
 `;
 
-type Props = {
-  sendEvent: ({ type: string, deviceId: DeviceModelId } | string) => void,
-};
-
-export function SelectDevice({ sendEvent }: Props) {
+export function SelectDevice() {
   const { t } = useTranslation();
+  const history = useHistory();
 
   const handleDeviceSelect = useCallback(
     (deviceId: DeviceModelId) => {
-      sendEvent({ type: "DEVICE_SELECTED", deviceId });
+      track("Onboarding Device - Selection", { deviceId });
+      history.push(`/select-use-case/${deviceId}`);
     },
-    [sendEvent],
+    [history],
   );
 
   return (
     <SelectDeviceContainer>
       <TopRightContainer>
-        <Button small onClick={() => sendEvent("PREV")}>
+        <Button small onClick={() => history.push("/terms")}>
           {t("common.previous")}
         </Button>
       </TopRightContainer>
