@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { openURL } from "~/renderer/linking";
@@ -16,6 +17,8 @@ import validateTransactions from "./assets/validate-transactions.svg";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import { isAcceptedTerms } from "~/renderer/terms";
+
+import { relaunchOnboarding } from "~/renderer/actions/onboarding";
 
 const stepLogos = [accessCrypto, ownPrivateKey, stayOffline, validateTransactions, setupNano];
 registerAssets(stepLogos);
@@ -84,8 +87,10 @@ const Description = styled(Text)`
 
 export function Welcome() {
   // const onboardingOrigin = useSelector();
-  const onboardingOrigin = "/settings";
+  const onboardingOrigin = "/settings/help";
   const { t } = useTranslation();
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const hasAcceptedTerms = isAcceptedTerms();
 
@@ -99,6 +104,11 @@ export function Welcome() {
     description: t(`v3.onboarding.screens.welcome.steps.${index}.desc`),
     isLast: index === stepLogos.length - 1,
   }));
+
+  const handlePrevious = () => {
+    history.push(onboardingOrigin);
+    dispatch(relaunchOnboarding(false));
+  };
 
   return (
     <WelcomeContainer>
@@ -132,9 +142,9 @@ export function Welcome() {
       <RightContainer>
         <CarouselTopBar>
           {onboardingOrigin && (
-            <Link to={onboardingOrigin}>
-              <Button small>{t("common.previous")}</Button>
-            </Link>
+            <Button small onClick={handlePrevious}>
+              {t("common.previous")}
+            </Button>
           )}
           <LangSwitcher />
         </CarouselTopBar>
