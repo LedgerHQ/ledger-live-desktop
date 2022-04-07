@@ -42,8 +42,6 @@ const Delegation = ({ account }: Props) => {
 
   const stakesWithMeta = useSolanaStakesWithMeta(account.currency, solanaResources.stakes);
 
-  const unit = getAccountUnit(account);
-
   const onEarnRewards = useCallback(() => {
     dispatch(
       openModal("MODAL_SOLANA_DELEGATE", {

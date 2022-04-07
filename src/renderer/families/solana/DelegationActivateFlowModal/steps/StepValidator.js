@@ -27,7 +27,6 @@ export default function StepValidator({
     account && account.solanaResources && transaction,
     "solana account, resources and transaction required",
   );
-  const { solanaResources } = account;
 
   const updateValidator = ({ address }: { address: string }) => {
     const bridge: AccountBridge<Transaction> = getAccountBridge(account, parentAccount);

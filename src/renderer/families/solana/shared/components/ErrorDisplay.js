@@ -1,4 +1,4 @@
-//@flow
+// @flow
 import React from "react";
 import Box from "~/renderer/components/Box";
 import styled from "styled-components";
