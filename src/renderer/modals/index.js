@@ -61,6 +61,13 @@ import MODAL_POLKADOT_BOND from "../families/polkadot/BondFlowModal";
 import MODAL_POLKADOT_UNBOND from "../families/polkadot/UnbondFlowModal";
 import MODAL_POLKADOT_REBOND from "../families/polkadot/RebondFlowModal";
 
+import MODAL_SOLANA_REWARDS_INFO from "../families/solana/DelegationFlowModal/Info";
+import MODAL_SOLANA_DELEGATE from "../families/solana/DelegationFlowModal";
+import MODAL_SOLANA_DELEGATION_ACTIVATE from "../families/solana/DelegationActivateFlowModal";
+import MODAL_SOLANA_DELEGATION_DEACTIVATE from "../families/solana/DelegationDeactivateFlowModal";
+import MODAL_SOLANA_DELEGATION_REACTIVATE from "../families/solana/DelegationReactivateFlowModal";
+import MODAL_SOLANA_DELEGATION_WITHDRAW from "../families/solana/DelegationWithdrawFlowModal";
+
 // Lending
 import MODAL_LEND_MANAGE from "../screens/lend/modals/ManageLend";
 import MODAL_LEND_ENABLE_INFO from "../screens/lend/modals/EnableInfoModal";
@@ -120,6 +127,12 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_POLKADOT_BOND,
   MODAL_POLKADOT_UNBOND,
   MODAL_POLKADOT_REBOND,
+  MODAL_SOLANA_REWARDS_INFO,
+  MODAL_SOLANA_DELEGATE,
+  MODAL_SOLANA_DELEGATION_ACTIVATE,
+  MODAL_SOLANA_DELEGATION_DEACTIVATE,
+  MODAL_SOLANA_DELEGATION_REACTIVATE,
+  MODAL_SOLANA_DELEGATION_WITHDRAW,
   MODAL_FULL_NODE,
   MODAL_LOTTIE_DEBUGGER,
   MODAL_RECOVERY_SEED_WARNING,
