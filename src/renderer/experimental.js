@@ -46,16 +46,6 @@ const deltaExperimentalExplorers = Object.keys(explorerConfig)
 const experimentalCurrencies = "";
 
 export const experimentalFeatures: Feature[] = [
-  {
-    type: "toggle",
-    name: "EXPERIMENTAL_CURRENCIES_JS_BRIDGE",
-    title: <Trans i18nKey="settings.experimental.features.experimentalJSCurrencies.title" />,
-    description: (
-      <Trans i18nKey="settings.experimental.features.experimentalJSCurrencies.description" />
-    ),
-    valueOn: "tezos,cosmos",
-    valueOff: "",
-  },
   ...(experimentalCurrencies.length
     ? [
         {

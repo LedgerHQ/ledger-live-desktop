@@ -9,6 +9,6 @@ if (!process.env.IS_INTERNAL_PROCESS) {
   // Main electron thread
   require("./main");
 } else {
-  // Internal thread (libcore, hardware)
+  // Internal thread (coins, hardware)
   require("./internal");
 }
