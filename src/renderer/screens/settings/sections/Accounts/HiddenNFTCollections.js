@@ -1,20 +1,22 @@
 // @flow
-import { SettingsSection as Section, SettingsSectionRow as Row } from "../../SettingsSection";
-import Text from "~/renderer/components/Text";
 import React, { useCallback, useState, useMemo } from "react";
-import { useTranslation } from "react-i18next";
-import Box from "~/renderer/components/Box";
 import styled from "styled-components";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  useNftMetadata,
+  useNftCollectionMetadata,
+} from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { SettingsSection as Section, SettingsSectionRow as Row } from "../../SettingsSection";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import Text from "~/renderer/components/Text";
+import Box from "~/renderer/components/Box";
 import IconCross from "~/renderer/icons/Cross";
 import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
-import { useDispatch, useSelector } from "react-redux";
 import { unhideNftCollection } from "~/renderer/actions/settings";
 import { hiddenNftCollectionsSelector } from "~/renderer/reducers/settings";
 import { accountSelector } from "~/renderer/reducers/accounts";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
-
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Track from "~/renderer/analytics/Track";
 import IconAngleDown from "~/renderer/icons/AngleDown";
 
@@ -30,20 +32,25 @@ const HiddenNftCollectionRow = ({
   const account = useSelector(state => accountSelector(state, { accountId }));
 
   const firstNft = account?.nfts.find(nft => nft.contract === contractAddress);
-
-  const { metadata, status } = useNftMetadata(
+  const { metadata: nftMetadata, status: nftStatus } = useNftMetadata(
     contractAddress,
     firstNft?.tokenId,
     firstNft?.currencyId,
   );
-  const { tokenName } = metadata || {};
+  const { metadata: collectionMetadata, status: collectionStatus } = useNftCollectionMetadata(
+    contractAddress,
+    firstNft?.currencyId,
+  );
 
-  const show = useMemo(() => status === "loading", [status]);
+  const loading = useMemo(() => nftStatus === "loading" || collectionStatus === "loading", [
+    collectionStatus,
+    nftStatus,
+  ]);
 
   return (
     <HiddenNftCollectionRowContainer>
-      <Skeleton width={32} minHeight={32} show={show}>
-        <Image nft={metadata} />
+      <Skeleton width={32} minHeight={32} show={loading}>
+        <Image nft={nftMetadata} />
       </Skeleton>
       <Text
         style={{ marginLeft: 10, flex: 1 }}
@@ -51,7 +58,7 @@ const HiddenNftCollectionRow = ({
         color="palette.text.shade100"
         fontSize={3}
       >
-        {tokenName || contractAddress}
+        {collectionMetadata?.tokenName || contractAddress}
       </Text>
       <IconContainer onClick={onUnhide}>
         <IconCross size={16} />
