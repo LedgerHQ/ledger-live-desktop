@@ -1,6 +1,6 @@
 // @flow
-import React, { memo } from "react";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import React, { memo, useMemo } from "react";
+import { useNftCollectionMetadata } from "@ledgerhq/live-common/lib/nft";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account, ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import NFTCollectionContextMenu from "~/renderer/components/ContextMenu/NFTCollectionContextMenu";
@@ -34,9 +34,9 @@ type Props = {
 
 // TODO Make me pretty
 const CollectionName = ({ nft, fallback, account, showHideMenu }: Props) => {
-  const { status, metadata } = useNftMetadata(nft.contract, nft.tokenId, nft.currencyId);
+  const { status, metadata } = useNftCollectionMetadata(nft.contract, nft.currencyId);
   const { tokenName } = metadata || {};
-  const loading = status === "loading";
+  const loading = useMemo(() => status === "loading", [status]);
 
   return (
     <Skeleton width={80} minHeight={24} barHeight={10} show={loading}>
