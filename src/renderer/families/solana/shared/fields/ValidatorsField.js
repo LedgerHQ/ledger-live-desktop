@@ -24,6 +24,12 @@ type Props = {
   onChangeValidator: (v: ValidatorAppValidator) => void,
 };
 
+const MaybeValidatorField = ({ status }: Props) => {
+  if (!status) return null;
+
+  return ValidatorField;
+};
+
 const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, status }: Props) => {
   invariant(account && account.solanaResources, "solana account and resources required");
 
@@ -121,4 +127,4 @@ const SeeAllButton: ThemedComponent<{ expanded: boolean }> = styled.div`
   }
 `;
 
-export default ValidatorField;
+export default MaybeValidatorField;
