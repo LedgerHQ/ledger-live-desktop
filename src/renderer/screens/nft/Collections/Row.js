@@ -2,6 +2,10 @@
 
 import React, { useMemo, memo } from "react";
 import styled from "styled-components";
+import {
+  useNftCollectionMetadata,
+  useNftMetadata,
+} from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { rgba } from "~/renderer/styles/helpers";
@@ -10,7 +14,6 @@ import type { Account, NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
 import NFTCollectionContextMenu from "~/renderer/components/ContextMenu/NFTCollectionContextMenu";
 import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 
 const Container: ThemedComponent<{}> = styled(Box)`
   &.disabled {
@@ -35,9 +38,20 @@ type Props = {
 };
 
 const Row = ({ nfts, contract, account, onClick }: Props) => {
-  const { status, metadata } = useNftMetadata(contract, nfts[0].tokenId, account.currency.id);
-  const { tokenName } = metadata || {};
-  const show = useMemo(() => status === "loading", [status]);
+  const { status: collectionStatus, metadata: collectionMetadata } = useNftCollectionMetadata(
+    contract,
+    account.currency.id,
+  );
+  const { status: nftStatus, metadata: nftMetadata } = useNftMetadata(
+    contract,
+    nfts[0].tokenId,
+    account.currency.id,
+  );
+  const { tokenName } = collectionMetadata || {};
+  const loading = useMemo(() => nftStatus === "loading" || collectionStatus === "loading", [
+    collectionStatus,
+    nftStatus,
+  ]);
 
   return (
     <NFTCollectionContextMenu
@@ -46,25 +60,25 @@ const Row = ({ nfts, contract, account, onClick }: Props) => {
       account={account}
     >
       <Container
-        className={show || process.env.ALWAYS_SHOW_SKELETONS ? "disabled" : ""}
+        className={loading || process.env.ALWAYS_SHOW_SKELETONS ? "disabled" : ""}
         justifyContent="center"
         horizontal
         px={4}
         py={3}
         onClick={onClick}
       >
-        <Skeleton width={32} minHeight={32} show={show}>
-          <Image nft={metadata} />
+        <Skeleton width={32} minHeight={32} show={loading}>
+          <Image nft={nftMetadata} />
         </Skeleton>
         <Box ml={3} flex={1}>
-          <Skeleton width={136} minHeight={24} barHeight={10} show={show}>
+          <Skeleton width={136} minHeight={24} barHeight={10} show={loading}>
             <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
               {tokenName || contract}
             </Text>
           </Skeleton>
         </Box>
-        <Skeleton width={42} minHeight={24} barHeight={10} show={show}>
-          <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4}>
+        <Skeleton width={42} minHeight={24} barHeight={10} show={loading}>
+          <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={4} textAlign="right">
             {nfts?.length ?? 0}
           </Text>
         </Skeleton>
