@@ -171,7 +171,7 @@ const Row: ThemedComponent<{ active: boolean, disabled: boolean }> = styled(Box)
       : ""}
 `;
 
-type ValidatorRowProps = {
+export type ValidatorRowProps = {
   validator: { address: string },
   icon: React$Node,
   title: React$Node,
@@ -188,6 +188,7 @@ type ValidatorRowProps = {
   unit: Unit,
   onMax?: () => void,
   shouldRenderMax?: boolean,
+  className?: string,
 };
 
 const ValidatorRow = ({
@@ -207,6 +208,7 @@ const ValidatorRow = ({
   unit,
   onMax,
   shouldRenderMax,
+  className,
 }: ValidatorRowProps) => {
   const inputRef = useRef();
   const onTitleClick = useCallback(
@@ -269,7 +271,13 @@ const ValidatorRow = ({
   );
 
   return (
-    <Row style={style} disabled={!value && disabled} active={!!value} onClick={onRowClick}>
+    <Row
+      className={className}
+      style={style}
+      disabled={!value && disabled}
+      active={!!value}
+      onClick={onRowClick}
+    >
       {icon}
       <InfoContainer>
         <Title onClick={onTitleClick}>
