@@ -2558,6 +2558,115 @@
       }
     }
   },
+  "solana": {
+    "common": {
+      "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+      "viewDetails": "View details",
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    },
+    "delegation": {
+      "totalStake": "Total Stake",
+      "commission": "Commission",
+      "delegate": "Add",
+      "listHeader": "Delegations",
+      "availableBalance": "Available balance",
+      "active": "Active",
+      "activeTooltip": "Active amount generate rewards",
+      "inactiveTooltip": "Inactive amount does not generate rewards",
+      "delegatedInfoTooltip": "Total amount that is delegated to validators.",
+      "withdrawableInfoTooltip": "Total amount that is withdrawable from delegations.",
+      "withdrawableTitle": "Withdrawable",
+      "statusUpdateNotice": "The status of the delegation will be updated when the transaction is confirmed.",
+      "ledgerByFigmentTC": "Ledger by Figment T&Cs",
+      "emptyState": {
+        "description": "You can earn SOL rewards by delegating your assets.",
+        "info": "How Delegation works",
+        "delegation": "Earn rewards"
+      },
+      "earnRewards": {
+        "description": "You may earn rewards by delegating your SOL assets to a validator.",
+        "bullet": {
+          "0": "You keep ownership of delegated assets",
+          "1": "Delegate using your Ledger device",
+          "2": "Assets will be available after undelegation"
+        },
+        "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+      },
+      "flow": {
+        "title": "Delegate",
+        "steps": {
+          "validator": {
+            "title": "Validator"
+          },
+          "amount": {
+            "title": "Amount"
+          },
+          "confirmation": {
+            "success": {
+              "title": "You have successfully delegated your assets"
+            }
+          }
+        }
+      },
+      "withdraw": {
+        "flow": {
+          "title": "Withdraw",
+          "steps": {
+            "amount": {
+              "title": "Amount"
+            },
+            "confirmation": {
+              "success": {
+                "title": "You have successfully withdrawn your assets.",
+                "text": "Your account balance will be updated when the transaction is confirmed."
+              }
+            }
+          }
+        }
+      },
+      "activate": {
+        "flow": {
+          "title": "Activate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully activated you delegation."
+              }
+            }
+          }
+        }
+      },
+      "reactivate": {
+        "flow": {
+          "title": "Reactivate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully reactivated you delegation."
+              }
+            }
+          }
+        }
+      },
+      "deactivate": {
+        "flow": {
+          "title": "Deactivate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully deactivated your delegation."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "Earn rewards",
     "header": "Delegation",
