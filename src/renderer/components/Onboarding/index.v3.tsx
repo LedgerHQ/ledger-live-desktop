@@ -265,7 +265,7 @@ export function Onboarding() {
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">
           <ScreenContainer>
             <Switch>
-              <Route exact path="/" component={isOnboard ? Welcome : Dashboard} />
+              <Route component={Welcome} />
               <Route path="/welcome" component={Welcome} />
               <Route path="/terms" component={Terms} />
               <Route path="/select-device" component={SelectDevice} />

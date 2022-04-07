@@ -51,7 +51,6 @@ import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
 import { Onboarding } from "./components/Onboarding";
 
 import { hasCompletedOnboardingSelector } from "~/renderer/reducers/settings";
-import { onboardingRelaunchedSelector } from "~/renderer/reducers/onboarding";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -111,7 +110,6 @@ export default function Default() {
   const ref: React$ElementRef<any> = useRef();
   const history = useHistory();
   const hasCompletedOnboarding = useSelector(hasCompletedOnboardingSelector);
-  const onboardingRelaunched = useSelector(onboardingRelaunchedSelector);
   useDeeplink();
   useUSBTroubleshooting();
 
@@ -123,12 +121,10 @@ export default function Default() {
   }, [location]);
 
   useEffect(() => {
-    if (!hasCompletedOnboarding || onboardingRelaunched) {
-      history.push("/welcome");
-    } else {
-      history.push("/dashboard");
+    if (!hasCompletedOnboarding) {
+      history.push("/onboarding");
     }
-  }, [history, hasCompletedOnboarding, onboardingRelaunched]);
+  }, [history, hasCompletedOnboarding]);
 
   return (
     <>
@@ -163,12 +159,13 @@ export default function Default() {
               {process.env.DEBUG_FIRMWARE_UPDATE ? <DebugFirmwareUpdater /> : null}
             </DebugWrapper>
 
-            <Onboarding />
+            {/* <Onboarding /> */}
 
             <Switch>
               <Route exact path="/walletconnect">
                 <WalletConnect />
               </Route>
+              <Route exact path="/onboarding" render={props => <Onboarding {...props} />} />
               <Route>
                 <IsNewVersion />
                 <SyncNewAccounts priority={2} />

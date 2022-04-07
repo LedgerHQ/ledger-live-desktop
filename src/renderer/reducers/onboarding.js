@@ -164,10 +164,12 @@ const handlers = {
     ...state,
     deviceModelId,
   }),
-  ONBOARDING_RELAUNCH: (state: OnboardingState, { payload: onboardingRelaunched }) => ({
-    ...initialState,
-    onboardingRelaunched,
-  }),
+  ONBOARDING_RELAUNCH: (state: OnboardingState, { payload: onboardingRelaunched }) => {
+    return {
+      ...initialState,
+      onboardingRelaunched,
+    };
+  },
 };
 
 export default handleActions(handlers, initialState);

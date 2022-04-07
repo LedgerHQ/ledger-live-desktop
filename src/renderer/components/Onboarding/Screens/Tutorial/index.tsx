@@ -1,6 +1,7 @@
 import { Flex, Aside, Logos, Button, Icons, ProgressBar, Drawer, Popin } from "@ledgerhq/react-ui";
 import React, { useCallback } from "react";
 import { useHistory, useParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { useMachine } from "@xstate/react";
@@ -205,7 +206,7 @@ const FlowStepper: React.FC<FlowStepperProps> = ({
   );
 };
 
-function Tutorial({ sendEventToParent, machine, parentContext }) {
+function Tutorial({ sendEventToParent, machine, component }) {
   const { t } = useTranslation();
   const [state, sendEvent] = useMachine(machine, {
     actions: {
@@ -219,7 +220,7 @@ function Tutorial({ sendEventToParent, machine, parentContext }) {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const Screen = screens[state.value].component;
+  const Screen = component || screens[state.value].component;
 
   const steps = state.context.steps.map(({ id }) => ({
     key: id,
@@ -317,14 +318,12 @@ function Tutorial({ sendEventToParent, machine, parentContext }) {
 
 export function ConnectSetUpDevice({ sendEvent, context }) {
   return (
-    <Tutorial sendEventToParent={sendEvent} machine={connectSetupDevice} parentContext={context} />
+    <Tutorial sendEventToParent={sendEvent} machine={connectSetupDevice} component={context} />
   );
 }
 
 export function SetupNewDevice({ sendEvent, context }) {
-  return (
-    <Tutorial sendEventToParent={sendEvent} machine={setupNewDevice} parentContext={context} />
-  );
+  return <Tutorial sendEventToParent={sendEvent} machine={setupNewDevice} component={context} />;
 }
 
 export function UseRecoveryPhrase({ sendEvent, context }) {
@@ -332,7 +331,7 @@ export function UseRecoveryPhrase({ sendEvent, context }) {
     <Tutorial
       sendEventToParent={sendEvent}
       machine={useRecoveryPhraseMachine}
-      parentContext={context}
+      component={context}
     />
   );
 }
