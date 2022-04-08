@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useMachine } from "@xstate/react";
 import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
@@ -213,6 +213,7 @@ const ScreenContainer = styled.div`
 export function Onboarding() {
   const dispatch = useDispatch();
   const [imgsLoaded, setImgsLoaded] = useState(false);
+  const { path } = useRouteMatch();
   const isOnboard = true;
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
@@ -265,14 +266,14 @@ export function Onboarding() {
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">
           <ScreenContainer>
             <Switch>
-              <Route component={Welcome} />
-              <Route path="/welcome" component={Welcome} />
-              <Route path="/terms" component={Terms} />
-              <Route path="/select-device" component={SelectDevice} />
-              <Route path="/select-use-case/:deviceId" component={SelectUseCase} />
-              <Route path="/setup-device/:deviceId" component={SetupNewDevice} />
-              <Route path="/connect-device/:deviceId" component={ConnectSetUpDevice} />
-              <Route path="/use-recovery-phrase" component={UseRecoveryPhrase} />
+              <Route exact path={path} component={Welcome} />
+              <Route path={`${path}/welcome`} component={Welcome} />
+              <Route path={`${path}/terms`} component={Terms} />
+              <Route path={`${path}/select-device`} component={SelectDevice} />
+              <Route path={`${path}/select-use-case/:deviceId`} component={SelectUseCase} />
+              <Route path={`${path}/setup-device/:deviceId`} component={SetupNewDevice} />
+              <Route path={`${path}/connect-device/:deviceId`} component={ConnectSetUpDevice} />
+              <Route path={`${path}/use-recovery-phrase`} component={UseRecoveryPhrase} />
             </Switch>
           </ScreenContainer>
         </CSSTransition>

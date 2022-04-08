@@ -41,7 +41,7 @@ export function SelectDevice() {
   const handleDeviceSelect = useCallback(
     (deviceId: DeviceModelId) => {
       track("Onboarding Device - Selection", { deviceId });
-      history.push(`/select-use-case/${deviceId}`);
+      history.push(`/onboarding/select-use-case/${deviceId}`);
     },
     [history],
   );
@@ -49,7 +49,7 @@ export function SelectDevice() {
   return (
     <SelectDeviceContainer>
       <TopRightContainer>
-        <Button small onClick={() => history.push("/terms")}>
+        <Button small onClick={() => history.push("/onboarding/terms")}>
           {t("common.previous")}
         </Button>
       </TopRightContainer>

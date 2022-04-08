@@ -123,7 +123,7 @@ export function Welcome() {
           </Description>
         </Presentation>
         <ProductHighlight>
-          <Link to="/terms">
+          <Link to={`/onboarding/terms`}>
             <Button
               data-testid="onboarding-get-started-button"
               iconPosition="right"

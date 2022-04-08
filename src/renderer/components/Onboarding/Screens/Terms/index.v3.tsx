@@ -63,13 +63,13 @@ export const Terms = () => {
   const handleNext = useCallback(() => {
     acceptTerms();
     dispatch(setShareAnalytics(true));
-    history.push("/select-device");
+    history.push(`/onboarding/select-device`);
   }, [dispatch, history]);
 
   return (
     <TermsContainer>
       <TermsNavigation>
-        <Button small onClick={() => history.push("/welcome")}>
+        <Button small onClick={() => history.push(`/onboarding/welcome`)}>
           Previous
         </Button>
       </TermsNavigation>

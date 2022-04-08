@@ -165,7 +165,7 @@ export default function Default() {
               <Route exact path="/walletconnect">
                 <WalletConnect />
               </Route>
-              <Route exact path="/onboarding" render={props => <Onboarding {...props} />} />
+              <Route path="/onboarding" render={props => <Onboarding {...props} />} />
               <Route>
                 <IsNewVersion />
                 <SyncNewAccounts priority={2} />

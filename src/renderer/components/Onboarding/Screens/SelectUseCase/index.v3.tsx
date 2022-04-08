@@ -95,7 +95,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
 
   return (
     <ScrollArea withHint>
-      <OnboardingNavHeader onClickPrevious={() => history.push("/select-device")} />
+      <OnboardingNavHeader onClickPrevious={() => history.push("/onboarding/select-device")} />
       <SelectUseCaseContainer>
         <Row>
           <LeftColumn>
@@ -123,7 +123,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Setup new");
-                history.push(`/setup-device/${deviceId}`);
+                history.push(`/onboarding/setup-device/${deviceId}`);
                 // dispatch(openModal("MODAL_PEDAGOGY", { deviceId }));
               }}
             />
@@ -149,7 +149,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Connect");
-                history.push(`/connect-device/${deviceId}`);
+                history.push(`/onboarding/connect-device/${deviceId}`);
                 onWrappedUseCase();
               }}
             />
@@ -167,7 +167,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Restore");
-                history.push("/use-recovery-phrase");
+                history.push("/onboarding/use-recovery-phrase");
                 onWrappedUseCase();
               }}
             />
