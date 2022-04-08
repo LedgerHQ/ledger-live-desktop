@@ -1,6 +1,7 @@
 import { Flex, Aside, Logos, Button, Icons, ProgressBar, Drawer, Popin } from "@ledgerhq/react-ui";
+import { DeviceModelId } from "@ledgerhq/devices";
 import React, { useCallback } from "react";
-import { useHistory, useParams } from "react-router-dom";
+import { Switch, Route, Redirect, useHistory, useParams, useRouteMatch } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -16,14 +17,20 @@ import { ExistingRecoveryPhrase } from "~/renderer/components/Onboarding/Screens
 import { RecoveryHowTo3 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo3";
 import { RecoveryHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo2";
 import { RecoveryHowTo1 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo1";
-import { PairMyNano } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PairMyNano";
+import {
+  PairMyNano,
+  PairMyNanoProps,
+} from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PairMyNano";
 import { PinHelp } from "~/renderer/components/Onboarding/Help/PinHelp";
 import { HideRecoverySeed } from "~/renderer/components/Onboarding/Help/HideRecoverySeed";
 import { RecoverySeed } from "~/renderer/components/Onboarding/Help/RecoverySeed";
 import { HideRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HideRecoveryPhrase";
 import { HowToGetStarted } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HowToGetStarted";
 import { NewRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/NewRecoveryPhrase";
-import { GenuineCheck } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/GenuineCheck";
+import {
+  GenuineCheck,
+  GenuineCheckProps,
+} from "~/renderer/components/Onboarding/Screens/Tutorial/screens/GenuineCheck";
 import { CarefullyFollowInstructions } from "~/renderer/components/Onboarding/Alerts/CarefullyFollowInstructions";
 import { connectSetupDevice } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/connectSetupDevice";
 import { PreferLedgerRecoverySeed } from "~/renderer/components/Onboarding/Alerts/PreferLedgerRecoverySeed";
@@ -142,12 +149,15 @@ const FlowStepper: React.FC<FlowStepperProps> = ({
   ProgressBar,
   children,
 }) => {
+  const { deviceId } = useParams();
+  const history = useHistory();
+
   const handleBack = useCallback(() => {
-    sendEvent("PREV");
-  }, []);
+    history.push(`/onboarding/select-use-case/${deviceId}`);
+  }, [history, deviceId]);
 
   const handleContinue = useCallback(() => {
-    onContinue ? onContinue() : sendEvent("NEXT");
+    if (onContinue) onContinue();
   }, [onContinue]);
 
   const handleHelp = useCallback(() => {
@@ -316,9 +326,117 @@ function Tutorial({ sendEventToParent, machine, component }) {
   );
 }
 
-export function ConnectSetUpDevice({ sendEvent, context }) {
+interface NewTutorialProps {
+  component: React.ReactNode;
+  state: {
+    context: {
+      steps: {
+        id: string;
+        status: string;
+      }[];
+    };
+    deviceId: DeviceModelId | null;
+    alerts?: { [key: string]: unknown };
+    help?: { [key: string]: unknown };
+  };
+  currentStepIndex: number;
+}
+
+function NewTutorial({ component: Screen, state, onContinue }: NewTutorialProps) {
+  const { t } = useTranslation();
+  const { deviceId } = useParams();
+  const { path, url } = useRouteMatch();
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const progressSteps = state.context.steps.map(({ id }) => ({
+    key: id,
+    label: t(`onboarding.screens.tutorial.steps.${id}`),
+  }));
+
   return (
-    <Tutorial sendEventToParent={sendEvent} machine={connectSetupDevice} component={context} />
+    <FlowStepper
+      illustration={Screen.Illustration}
+      AsideFooter={Screen.Footer}
+      disableContinue={Screen.canContinue ? !Screen.canContinue(state.context) : false}
+      ProgressBar={<ProgressBar steps={progressSteps} currentIndex={state.currentStepIndex} />}
+      continueLabel={Screen.continueLabel}
+      onContinue={onContinue}
+    >
+      <Screen />
+    </FlowStepper>
+  );
+}
+
+export function ConnectSetUpDevice() {
+  const { path, url } = useRouteMatch();
+  const { deviceId } = useParams();
+  const history = useHistory();
+  // TODO: redux state
+  const state = {
+    context: {
+      steps: [
+        {
+          id: "getStarted",
+          status: "success",
+        },
+        {
+          id: "pinCode",
+          status: "success",
+        },
+        {
+          id: "recoveryPhrase",
+          status: "success",
+        },
+        {
+          id: "hideRecoveryPhrase",
+          status: "success",
+        },
+        {
+          id: "pairNano",
+          status: "active",
+        },
+      ],
+      deviceId,
+      // alerts: {},
+      // help: {},
+    },
+    currentStepIndex: 0,
+  };
+
+  state.currentStepIndex = state.context.steps.findIndex(({ status }) => status === "active");
+
+  const afterPairNano = () => {
+    history.push(`${url}/genuine-check`);
+  };
+
+  const afterGenuineCheck = () => {
+    console.log("finished");
+  };
+
+  return (
+    <Switch>
+      <Route exact path="/onboarding/connect-device/:deviceId">
+        <Redirect to={`${url}/pair-nano`} />
+      </Route>
+      <Route
+        path={`${path}/pair-nano`}
+        render={props => (
+          <NewTutorial {...props} component={PairMyNano} state={state} onContinue={afterPairNano} />
+        )}
+      />
+      <Route
+        path={`${path}/genuine-check`}
+        render={props => (
+          <NewTutorial
+            {...props}
+            component={GenuineCheck}
+            state={state}
+            onContinue={afterGenuineCheck}
+          />
+        )}
+      />
+    </Switch>
   );
 }
 

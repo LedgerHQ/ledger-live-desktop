@@ -28,7 +28,7 @@ const Success = ({ device }: { device: Device }) => {
   );
 };
 
-type Props = {
+export type GenuineCheckProps = {
   sendEvent: (event: any) => void;
   context: {
     deviceId: DeviceModelId;
@@ -36,8 +36,12 @@ type Props = {
   };
 };
 
-export function GenuineCheck({ sendEvent, context }: Props) {
-  const { deviceId, device } = context;
+export function GenuineCheck({ sendEvent }: GenuineCheckProps) {
+  // TODO: deviceId in redux state
+  const deviceId = "nanoS";
+  const device = undefined;
+
+  // const { device } = context;
 
   const onResult = useCallback(
     res => {
