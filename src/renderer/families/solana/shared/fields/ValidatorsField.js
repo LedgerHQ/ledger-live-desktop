@@ -27,6 +27,7 @@ type Props = {
 const MaybeValidatorField = ({ status }: Props) => {
   if (!status) return null;
 
+  // $FlowFixMe FIXME Not sure what's wrong here
   return ValidatorField;
 };
 
