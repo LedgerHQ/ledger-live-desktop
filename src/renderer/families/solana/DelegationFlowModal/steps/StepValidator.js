@@ -49,13 +49,16 @@ export default function StepValidator({
     <Box flow={1}>
       <TrackPage category="Solana Delegation" name="Step Validator" />
       {error && <ErrorBanner error={error} />}
-      <ValidatorsField
-        account={account}
-        chosenVoteAccAddr={chosenVoteAccAddr}
-        onChangeValidator={updateValidator}
-        status={status}
-        t={t}
-      />
+      {
+        // $FlowFixMe FIXME Not sure what's wrong here
+        <ValidatorsField
+          account={account}
+          chosenVoteAccAddr={chosenVoteAccAddr}
+          onChangeValidator={updateValidator}
+          status={status}
+          t={t}
+        />
+      }
     </Box>
   );
 }
