@@ -28,7 +28,7 @@ const Success = ({ device }: { device: Device }) => {
   );
 };
 
-type Props = {
+export type GenuineCheckProps = {
   sendEvent: (event: any) => void;
   context: {
     deviceId: DeviceModelId;
@@ -36,7 +36,7 @@ type Props = {
   };
 };
 
-export function GenuineCheck({ sendEvent, context }: Props) {
+export function GenuineCheck({ sendEvent, context }: GenuineCheckProps) {
   const { deviceId, device } = context;
 
   const onResult = useCallback(
