@@ -1,7 +1,6 @@
 // @flow
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import invariant from "invariant";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
