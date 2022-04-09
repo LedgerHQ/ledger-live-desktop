@@ -83,7 +83,7 @@
     "lodash": "^4.17.21",
     "lru-cache": "^5.1.1",
     "measure-scrollbar": "^1.1.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "node-abi": "^2.30.0",
     "openpgp": "^4.10.10",
     "os-locale": "^5.0.0",
