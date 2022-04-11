@@ -56,7 +56,7 @@ const Delegation: FC = ({
       [
         {
           key: "MODAL_ELROND_UNDELEGATE",
-          label: <Trans i18nKey="cosmos.delegation.undelegate" />,
+          label: <Trans i18nKey="elrond.delegation.undelegate" />,
           show: true,
           parameters: {
             account,
@@ -68,7 +68,7 @@ const Delegation: FC = ({
         },
         {
           key: "MODAL_ELROND_CLAIM_REWARDS",
-          label: <Trans i18nKey="cosmos.delegation.reward" />,
+          label: <Trans i18nKey="elrond.delegation.reward" />,
           show: BigNumber(claimableRewards).gt(0),
           parameters: {
             account,
@@ -115,7 +115,7 @@ const Delegation: FC = ({
 
       <Column>
         <Box color="positiveGreen" pl={2}>
-          <ToolTip content={<Trans i18nKey="cosmos.delegation.activeTooltip" />}>
+          <ToolTip content={<Trans i18nKey="elrond.delegation.activeTooltip" />}>
             <CheckCircle size={14} />
           </ToolTip>
         </Box>

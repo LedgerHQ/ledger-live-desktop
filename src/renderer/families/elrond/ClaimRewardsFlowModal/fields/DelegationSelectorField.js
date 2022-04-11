@@ -102,7 +102,7 @@ export default function DelegationSelectorField({
 
   return (
     <Box flow={1} mt={5}>
-      <Label>{t("cosmos.claimRewards.flow.steps.claimRewards.selectLabel")}</Label>
+      <Label>{t("elrond.claimRewards.flow.steps.claimRewards.selectLabel")}</Label>
       <Select
         value={value}
         options={options}

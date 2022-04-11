@@ -1,13 +1,6 @@
-// @flow
-
 import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
-import { useSelector } from "react-redux";
-
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -23,7 +16,8 @@ import { setDrawer } from "~/renderer/drawers/Provider";
 
 import type { StepProps } from "../types";
 
-import { localeSelector } from "~/renderer/reducers/settings";
+import { denominate } from "~/renderer/families/elrond/helpers";
+import { constants } from "~/renderer/families/elrond/constants";
 
 const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -42,37 +36,33 @@ function StepConfirmation({
   device,
   signed,
   transaction,
+  validators,
 }: StepProps & { theme: * }) {
-  const { validators } = useCosmosPreloadData();
-  const locale = useSelector(localeSelector);
-
   if (optimisticOperation) {
-    const unit = account && getAccountUnit(account);
+    const validator = transaction && transaction.recipient;
 
-    const validator = transaction && transaction.validators ? transaction.validators[0] : null;
+    const v = validator && validators.find(({ providers }) => providers.includes(validator));
 
-    const v =
-      validator &&
-      validators.find(({ validatorAddress }) => validatorAddress === validator.address);
-
-    const amount =
-      unit && validator && formatCurrencyUnit(unit, validator.amount, { showCode: true, locale });
+    const amount = `${denominate({
+      input: String(transaction.amount),
+      showLastNonZeroDecimal: true,
+    })} ${constants.egldLabel}`;
 
     const titleKey = transaction?.mode === "claimRewards" ? "title" : "titleCompound";
     const textKey = transaction?.mode === "claimRewards" ? "text" : "textCompound";
 
     return (
       <Container>
-        <TrackPage category="ClaimRewards Cosmos Flow" name="Step Confirmed" />
+        <TrackPage category="ClaimRewards Elrond Flow" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={
-            <Trans i18nKey={`cosmos.claimRewards.flow.steps.confirmation.success.${titleKey}`} />
+            <Trans i18nKey={`elrond.claimRewards.flow.steps.confirmation.success.${titleKey}`} />
           }
           description={
             <div>
               <Trans
-                i18nKey={`cosmos.claimRewards.flow.steps.confirmation.success.${textKey}`}
+                i18nKey={`elrond.claimRewards.flow.steps.confirmation.success.${textKey}`}
                 values={{ amount, validator: v && v.name }}
               >
                 <b></b>
@@ -87,10 +77,10 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="ClaimRewards Cosmos Flow" name="Step Confirmation Error" />
+        <TrackPage category="ClaimRewards Elrond Flow" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer
-            title={<Trans i18nKey="cosmos.claimRewards.flow.steps.confirmation.broadcastError" />}
+            title={<Trans i18nKey="elrond.claimRewards.flow.steps.confirmation.broadcastError" />}
           />
         ) : null}
         <ErrorDisplay error={error} withExportLogs={true} />
@@ -127,7 +117,7 @@ export function StepConfirmationFooter({
         <Button
           primary={true}
           ml={2}
-          event="ClaimRewards Cosmos Flow Step 3 View OpD Clicked"
+          event="ClaimRewards Elrond Flow Step 3 View OpD Clicked"
           onClick={() => {
             onClose();
             if (account && concernedOperation) {
@@ -139,7 +129,7 @@ export function StepConfirmationFooter({
             }
           }}
         >
-          <Trans i18nKey="cosmos.claimRewards.flow.steps.confirmation.success.cta" />
+          <Trans i18nKey="elrond.claimRewards.flow.steps.confirmation.success.cta" />
         </Button>
       ) : error ? (
         <RetryButton primary ml={2} onClick={onRetry} />

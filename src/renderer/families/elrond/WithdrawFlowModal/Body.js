@@ -199,7 +199,7 @@ const Body = ({
 
   return (
     <Stepper {...stepperProps}>
-      <SyncSkipUnderPriority priority={100} />
+      {/* <SyncSkipUnderPriority priority={100} /> */}
       <Track onUnmount event="CloseModalClaimRewards" />
     </Stepper>
   );

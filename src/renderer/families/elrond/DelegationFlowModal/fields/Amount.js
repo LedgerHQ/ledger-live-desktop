@@ -1,14 +1,18 @@
-// @flow
 import React, { useMemo, useState } from "react";
 import { BigNumber } from "bignumber.js";
 import styled from "styled-components";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import type { Account, Unit, TransactionStatus } from "@ledgerhq/live-common/lib/types";
-import Box from "~/renderer/components/Box";
 import InputCurrency from "~/renderer/components/InputCurrency";
 import Label from "~/renderer/components/Label";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { constants } from "~/renderer/families/elrond/constants";
+import { Trans } from "react-i18next";
+import Box from "~/renderer/components/Box";
+import Text from "~/renderer/components/Text";
+import Check from "~/renderer/icons/Check";
+import ExclamationCircle from "~/renderer/icons/ExclamationCircle";
+import { denominate } from "~/renderer/families/elrond/helpers";
 
 export default function AmountField({
   amount,
@@ -49,12 +53,17 @@ export default function AmountField({
   );
 
   const error = errors.amount || errors.redelegation || errors.unbonding;
-
   const warning = useMemo(() => focused && Object.values(warnings || {})[0], [focused, warnings]);
+
+  const remainder = useMemo(
+    () => denominate({ input: String(initialAmount.minus(amount)), showLastNonZeroDecimal: true }),
+    [initialAmount, amount],
+  );
 
   return (
     <Box my={2}>
       <Label>{label}</Label>
+
       <InputCurrency
         autoFocus={false}
         error={error}
@@ -80,12 +89,55 @@ export default function AmountField({
           </InputRight>
         }
       />
+
+      <Availability>
+        {initialAmount.minus(amount).gt(0) ? (
+          <Text fontSize={3} ff="Inter|Medium">
+            <Trans
+              i18nKey="vote.steps.castVotes.votes"
+              values={{ total: `${remainder} ${constants.egldLabel}` }}
+            />
+          </Text>
+        ) : initialAmount.isLessThan(amount) ? (
+          <Box horizontal={true} color="alertRed">
+            <Availability>
+              <ExclamationCircle size={13} />
+              <Box ml={1}>
+                <Text fontSize={3} ff="Inter|Medium">
+                  <Trans
+                    i18nKey="vote.steps.castVotes.maxUsed"
+                    values={{ total: `${remainder} ${constants.egldLabel}` }}
+                  />
+                </Text>
+              </Box>
+            </Availability>
+          </Box>
+        ) : (
+          <Box horizontal={true} color="positiveGreen">
+            <Availability>
+              <Check size={13} />
+              <Box ml={1}>
+                <Text fontSize={3} ff="Inter|Medium">
+                  <Trans i18nKey="vote.steps.castVotes.allVotesAreUsed" />
+                </Text>
+              </Box>
+            </Availability>
+          </Box>
+        )}
+      </Availability>
     </Box>
   );
 }
 
+const Availability = styled.div`
+  text-align: right;
+  display: flex;
+  margin-left: auto;
+  align-items: center;
+`;
+
 const InputLeft = styled(Box).attrs(() => ({
-  ff: "Inter|Medium",
+  textAlign: "right",
   color: "palette.text.shade60",
   fontSize: 4,
   justifyContent: "center",

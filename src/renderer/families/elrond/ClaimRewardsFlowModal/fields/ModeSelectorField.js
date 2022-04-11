@@ -12,11 +12,11 @@ import Popover from "~/renderer/components/Popover";
 const options = [
   {
     value: "reDelegateRewards",
-    label: <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.compound" />,
+    label: <Trans i18nKey="elrond.claimRewards.flow.steps.claimRewards.compound" />,
   },
   {
     value: "claimRewards",
-    label: <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.claim" />,
+    label: <Trans i18nKey="elrond.claimRewards.flow.steps.claimRewards.claim" />,
   },
 ];
 
@@ -42,19 +42,19 @@ export default function ModeSelectorField({
             <Box vertical={true} px={2}>
               <Box vertical={true} alignItems="start" justifyContent="start" my={2}>
                 <Text ff="Inter|SemiBold" fontSize={4} color="palette.primary.main">
-                  <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.compound" />
+                  <Trans i18nKey="elrond.claimRewards.flow.steps.claimRewards.compound" />
                 </Text>
                 <Text fontSize={3} textAlign="left" color="palette.text.shade80">
-                  <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.compoundDescription" />
+                  <Trans i18nKey="elrond.claimRewards.flow.steps.claimRewards.compoundDescription" />
                 </Text>
               </Box>
 
               <Box vertical={true} alignItems="start" justifyContent="start" my={2}>
                 <Text ff="Inter|SemiBold" fontSize={4} color="palette.primary.main">
-                  <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.claim" />
+                  <Trans i18nKey="elrond.claimRewards.flow.steps.claimRewards.claim" />
                 </Text>
                 <Text fontSize={3} textAlign="left" color="palette.text.shade80">
-                  <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.claimDescription" />
+                  <Trans i18nKey="elrond.claimRewards.flow.steps.claimRewards.claimDescription" />
                 </Text>
               </Box>
             </Box>
@@ -62,7 +62,7 @@ export default function ModeSelectorField({
         >
           <Box horizontal={true} alignItems="center" p={2} justifyContent="center">
             <Text ff="Inter|SemiBold" fontSize={4}>
-              <Trans i18nKey="cosmos.claimRewards.flow.steps.claimRewards.compoundOrClaim" />
+              <Trans i18nKey="elrond.claimRewards.flow.steps.claimRewards.compoundOrClaim" />
             </Text>
             <Box ml={1}>
               <InfoCircle size={16} />

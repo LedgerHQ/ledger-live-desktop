@@ -12,6 +12,7 @@ import Text from "~/renderer/components/Text";
 import Alert from "~/renderer/components/Alert";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
+import StepRecipientSeparator from "~/renderer/components/StepRecipientSeparator";
 
 export default function StepAmount({
   account,
@@ -63,19 +64,15 @@ export default function StepAmount({
       {error && <ErrorBanner error={error} />}
       <Box horizontal={true} justifyContent="center" mb={2}>
         <Text ff="Inter|Medium" fontSize={4}>
-          <Trans i18nKey="cosmos.undelegation.flow.steps.amount.subtitle">
+          <Trans i18nKey="elrond.undelegation.flow.steps.amount.subtitle">
             <b></b>
           </Trans>
         </Text>
       </Box>
 
-      <ValidatorField
-        account={account}
-        contract={contract}
-        transaction={transaction}
-        onChange={onChangeValidator}
-        delegations={delegations}
-      />
+      <ValidatorField contract={contract} onChange={onChangeValidator} delegations={delegations} />
+
+      <StepRecipientSeparator />
 
       <AmountField
         amount={value}
@@ -83,11 +80,11 @@ export default function StepAmount({
         status={status}
         initialAmount={initialAmount}
         onChange={onChangeAmount}
-        label={<Trans i18nKey="cosmos.undelegation.flow.steps.amount.fields.amount" />}
+        label={<Trans i18nKey="elrond.undelegation.flow.steps.amount.fields.amount" />}
       />
 
       <Alert info="primary" mt={2}>
-        <Trans i18nKey="cosmos.undelegation.flow.steps.amount.warning">
+        <Trans i18nKey="elrond.undelegation.flow.steps.amount.warning">
           <b></b>
         </Trans>
       </Alert>

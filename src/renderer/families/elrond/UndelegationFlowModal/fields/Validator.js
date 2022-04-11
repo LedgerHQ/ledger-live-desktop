@@ -77,7 +77,7 @@ const Dropdown = ({ delegations, onChange, contract }: Props) => {
 
   return (
     <Box mb={4}>
-      <Label>{t("cosmos.undelegation.flow.steps.amount.fields.validator")}</Label>
+      <Label>{t("elrond.undelegation.flow.steps.amount.fields.validator")}</Label>
       <Select
         value={value}
         options={options}

@@ -87,7 +87,7 @@ const Unbonding: FC = ({ account, contract, seconds, validator, amount }: Unbond
 
       <Column>
         <Box color="alertRed" pl={2}>
-          <ToolTip content={<Trans i18nKey="cosmos.undelegation.inactiveTooltip" />}>
+          <ToolTip content={<Trans i18nKey="elrond.undelegation.inactiveTooltip" />}>
             <ExclamationCircleThin size={14} />
           </ToolTip>
         </Box>

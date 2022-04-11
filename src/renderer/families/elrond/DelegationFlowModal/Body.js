@@ -57,20 +57,20 @@ type Props = OwnProps & StateProps;
 const steps: Array<St> = [
   {
     id: "castDelegations",
-    label: <Trans i18nKey="cosmos.delegation.flow.steps.validator.title" />,
+    label: <Trans i18nKey="elrond.delegation.flow.steps.validator.title" />,
     component: StepDelegation,
     noScroll: true,
     footer: StepDelegationFooter,
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="cosmos.delegation.flow.steps.connectDevice.title" />,
+    label: <Trans i18nKey="elrond.delegation.flow.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("castDelegations"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="cosmos.delegation.flow.steps.confirmation.title" />,
+    label: <Trans i18nKey="elrond.delegation.flow.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
   },
@@ -165,7 +165,7 @@ const Body = ({
   }
 
   const stepperProps = {
-    title: t("cosmos.delegation.flow.title"),
+    title: t("elrond.delegation.flow.title"),
     device,
     account,
     parentAccount,
