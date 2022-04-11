@@ -12,22 +12,24 @@ import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import { HeaderContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
-import NanoSAnim from "../assets/animations/nanoS/pin-code.json";
+import NanoSAnimLight from "../assets/animations/nanoS/pinCode/light.json";
+import NanoSAnimDark from "../assets/animations/nanoS/pinCode/dark.json";
 import NanoSPAnimLight from "../assets/animations/nanoSP/pinCode/light.json";
 import NanoSPAnimDark from "../assets/animations/nanoSP/pinCode/dark.json";
-import NanoXAnim from "../assets/animations/nanoX/pin-code.json";
+import NanoXAnimLight from "../assets/animations/nanoX/pinCode/light.json";
+import NanoXAnimDark from "../assets/animations/nanoX/pinCode/dark.json";
 import NanoDeviceCheckIcon from "~/renderer/icons/NanoDeviceCheckIcon";
 import NanoDeviceCancelIcon from "~/renderer/icons/NanoDeviceCancelIcon";
 import useTheme from "~/renderer/hooks/useTheme";
 
 const animations = {
   nanoX: {
-    light: NanoXAnim,
-    dark: NanoXAnim,
+    light: NanoXAnimLight,
+    dark: NanoXAnimDark,
   },
   nanoS: {
-    light: NanoSAnim,
-    dark: NanoSAnim,
+    light: NanoSAnimLight,
+    dark: NanoSAnimDark,
   },
   nanoSP: {
     light: NanoSPAnimLight,

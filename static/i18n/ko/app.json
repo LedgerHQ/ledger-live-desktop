@@ -720,11 +720,13 @@
     "undelegatingTooltip": "위임 해제 자산은 21일 후 타임락이 해제되면 사용 가능합니다."
   },
   "exchange": {
+    "chooseProvider": "{{providerCount}} 제공자에서 선택",
+    "chooseProviders": "{{providerCount}} 제공자에서 선택",
     "title": "암호화폐 매수 및 매도",
     "reset": "플로우 리셋",
     "verifyAddress": "장치에 표시된 주소와 정확히 일치하는지 확인하세요",
     "buy": {
-      "header": "암호화폐 매수 및 매도",
+      "header": "당사 파트너와 함께 암호화폐 구매",
       "title": "암호화폐를 구매할 공급자를 선택하세요",
       "buyFrom": "어디서나 구매 가능",
       "cryptoSupported": "암호화폐 지원됨",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "{{provider}}(으)로 암호화폐 판매",
+      "header": "당사 파트너와 함께 암호화폐 판매",
       "title": "<0>{{provider}}를</0> 통해 암호화폐 판매",
       "tab": "판매",
       "selectCrypto": "암호화폐 선택",
@@ -2760,7 +2762,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "실험 JS 도입",
-          "description": "테조스에 실험 JS 구현을 사용합니다."
+          "description": "테조스 및 코스모스에 실험 JS 구현을 사용합니다."
         },
         "experimentalCurrencies": {
           "title": "실험 통합",
