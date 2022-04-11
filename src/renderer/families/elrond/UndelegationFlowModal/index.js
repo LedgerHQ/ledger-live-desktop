@@ -38,6 +38,7 @@ export default function UndelegationModal({ name }: Props) {
           contract={data.contract}
           validators={data.validators}
           amount={data.amount}
+          delegations={data.delegations}
         />
       )}
     />

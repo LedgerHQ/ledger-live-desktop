@@ -1,29 +1,78 @@
 // @flow
-import React from "react";
+import React, { useMemo, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useCosmosDelegationsQuerySelector } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import type {
-  Transaction,
-  CosmosMappedDelegation,
-} from "@ledgerhq/live-common/lib/families/cosmos/types";
-import type { Account } from "@ledgerhq/live-common/lib/types";
+
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import Select from "~/renderer/components/Select";
 import Text from "~/renderer/components/Text";
+import { denominate } from "~/renderer/families/elrond/helpers";
+import { constants } from "~/renderer/families/elrond/constants";
 
-type Props = {
-  account: Account,
-  transaction: Transaction,
-  onChange: (delegaiton: CosmosMappedDelegation) => void,
+const Item = item => {
+  const amount = useMemo(
+    () => denominate({ input: item.data.userActiveStake, showLastNonZeroDecimal: true }),
+    [item.data.userActiveStake],
+  );
+
+  return (
+    <Box
+      key={item.data.contract}
+      horizontal={true}
+      alignItems="center"
+      justifyContent="space-between"
+    >
+      <Box horizontal={true} alignItems="center">
+        <FirstLetterIcon label={item.data.validator.name} mr={2} />
+        <Text ff="Inter|Medium">{item.data.validator.name}</Text>
+      </Box>
+
+      <Text ff="Inter|Regular">
+        {amount} {constants.egldLabel}
+      </Text>
+    </Box>
+  );
 };
 
-export default function ValidatorField({ account, transaction, onChange }: Props) {
+const Dropdown = ({ delegations, onChange, contract }: Props) => {
   const { t } = useTranslation();
-  const { query, setQuery, options, value } = useCosmosDelegationsQuerySelector(
-    account,
-    transaction,
+
+  const options = useMemo(
+    () =>
+      delegations.reduce(
+        (total, delegation) =>
+          delegation.contract === contract ? [delegation, ...total] : [...total, delegation],
+        [],
+      ),
+    [delegations, contract],
+  );
+
+  const [query, setQuery] = useState("");
+  const [value, setValue] = useState(options[0]);
+
+  const noOptionsMessageCallback = useCallback(
+    needle =>
+      t("common.selectValidatorNoOption", {
+        accountName: needle.inputValue,
+      }),
+    [t],
+  );
+
+  const filterOptions = useCallback(
+    (option, needle) => option.data.validator.name.toLowerCase().includes(needle.toLowerCase()),
+    [],
+  );
+
+  const onValueChange = useCallback(
+    option => {
+      setValue(option);
+
+      if (onChange) {
+        onChange(option);
+      }
+    },
+    [onChange],
   );
 
   return (
@@ -32,34 +81,17 @@ export default function ValidatorField({ account, transaction, onChange }: Props
       <Select
         value={value}
         options={options}
-        inputValue={query}
+        renderValue={Item}
+        renderOption={Item}
         onInputChange={setQuery}
-        renderOption={OptionRow}
-        renderValue={OptionRow}
-        onChange={onChange}
+        inputValue={query}
+        filterOption={filterOptions}
+        placeholder={t("common.selectAccount")}
+        noOptionsMessage={noOptionsMessageCallback}
+        onChange={onValueChange}
       />
     </Box>
   );
-}
-
-type OptionRowProps = {
-  data: CosmosMappedDelegation,
 };
 
-function OptionRow({ data: { validatorAddress, validator, formattedAmount } }: OptionRowProps) {
-  const name = validator?.name ?? validatorAddress;
-  return (
-    <Box
-      key={validatorAddress}
-      horizontal={true}
-      alignItems="center"
-      justifyContent="space-between"
-    >
-      <Box horizontal={true} alignItems="center">
-        <FirstLetterIcon label={name} mr={2} />
-        <Text ff="Inter|Medium">{name}</Text>
-      </Box>
-      <Text ff="Inter|Regular">{formattedAmount}</Text>
-    </Box>
-  );
-}
+export default Dropdown;

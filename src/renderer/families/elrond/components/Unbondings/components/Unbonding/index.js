@@ -1,5 +1,6 @@
 import React, { FC, useState, useCallback, useMemo, useEffect } from "react";
 import { Trans } from "react-i18next";
+import { useDispatch } from "react-redux";
 import moment from "moment";
 
 import Box from "~/renderer/components/Box/Box";
@@ -8,10 +9,12 @@ import ToolTip from "~/renderer/components/Tooltip";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import { UnbondingType } from "~/renderer/families/elrond/types";
 import { denominate } from "~/renderer/families/elrond/helpers";
+import { constants } from "~/renderer/families/elrond/constants";
 import { openURL } from "~/renderer/linking";
-import { Ellipsis, Column, Wrapper } from "~/renderer/families/elrond/blocks/Delegation";
+import { Ellipsis, Column, Wrapper, Withdraw } from "~/renderer/families/elrond/blocks/Delegation";
+import { openModal } from "~/renderer/actions/modals";
 
-const Unbonding: FC = ({ contract, seconds, validator, amount }: UnbondingType) => {
+const Unbonding: FC = ({ account, contract, seconds, validator, amount }: UnbondingType) => {
   const [counter, setCounter] = useState(seconds);
 
   const name = validator?.name ?? contract;
@@ -24,6 +27,7 @@ const Unbonding: FC = ({ contract, seconds, validator, amount }: UnbondingType) 
     [amount],
   );
 
+  const dispatch = useDispatch();
   const getTime = useCallback(() => {
     const duration = moment.duration(counter, "seconds");
     const formatters = {
@@ -55,6 +59,16 @@ const Unbonding: FC = ({ contract, seconds, validator, amount }: UnbondingType) 
     };
   };
 
+  const onWithdraw = () => {
+    dispatch(
+      openModal("MODAL_ELROND_WITHDRAW", {
+        account,
+        validator,
+        contract,
+      }),
+    );
+  };
+
   useEffect(handleCounter, [seconds]);
 
   return (
@@ -62,7 +76,7 @@ const Unbonding: FC = ({ contract, seconds, validator, amount }: UnbondingType) 
       <Column
         strong={true}
         clickable={true}
-        onClick={() => openURL(`https://testnet-explorer.elrond.com/providers/${contract}`)}
+        onClick={() => openURL(`${constants.explorer}/providers/${contract}`)}
       >
         <Box mr={2}>
           <FirstLetterIcon label={name} />
@@ -78,8 +92,14 @@ const Unbonding: FC = ({ contract, seconds, validator, amount }: UnbondingType) 
           </ToolTip>
         </Box>
       </Column>
-      <Column>{balance} EGLD</Column>
-      <Column>{counter > 0 ? getTime() : "N/A"}</Column>
+
+      <Column>
+        {balance} {constants.egldLabel}
+      </Column>
+
+      <Column>
+        {counter > 0 ? getTime() : <Withdraw onClick={onWithdraw}>Withdraw</Withdraw>}
+      </Column>
     </Wrapper>
   );
 };

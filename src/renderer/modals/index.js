@@ -47,6 +47,7 @@ import MODAL_ELROND_DELEGATE from "../families/elrond/DelegationFlowModal";
 import MODAL_ELROND_REWARDS_INFO from "../families/elrond/DelegationFlowModal/Info";
 import MODAL_ELROND_UNDELEGATE from "../families/elrond/UndelegationFlowModal";
 import MODAL_ELROND_CLAIM_REWARDS from "../families/elrond/ClaimRewardsFlowModal";
+import MODAL_ELROND_WITHDRAW from "../families/elrond/WithdrawFlowModal";
 
 import MODAL_COSMOS_DELEGATE from "../families/cosmos/DelegationFlowModal";
 import MODAL_COSMOS_REWARDS_INFO from "../families/cosmos/DelegationFlowModal/Info";
@@ -124,6 +125,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_ELROND_REWARDS_INFO,
   MODAL_ELROND_UNDELEGATE,
   MODAL_ELROND_CLAIM_REWARDS,
+  MODAL_ELROND_WITHDRAW,
   MODAL_EXCHANGE_CRYPTO_DEVICE,
   MODAL_SELL_CRYPTO_DEVICE,
   MODAL_ALGORAND_OPT_IN,

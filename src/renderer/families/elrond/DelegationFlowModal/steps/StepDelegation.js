@@ -45,6 +45,7 @@ export default function StepDelegation({
         onChangeDelegations={updateDelegation}
         status={status}
         t={t}
+        transaction={transaction}
       />
     </Box>
   );

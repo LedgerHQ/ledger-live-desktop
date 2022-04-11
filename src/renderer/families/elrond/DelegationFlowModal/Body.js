@@ -115,7 +115,11 @@ const Body = ({
     const bridge = getAccountBridge(account, undefined);
     const transaction = bridge.createTransaction(account);
 
-    return { account, parentAccount: undefined, transaction };
+    return {
+      account,
+      parentAccount: undefined,
+      transaction,
+    };
   });
 
   const handleCloseModal = useCallback(() => {

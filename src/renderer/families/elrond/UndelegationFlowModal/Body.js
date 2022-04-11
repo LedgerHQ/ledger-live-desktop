@@ -68,6 +68,7 @@ function Body({
   contract,
   validators,
   amount,
+  delegations,
 }: Props) {
   const dispatch = useDispatch();
 
@@ -87,7 +88,14 @@ function Body({
     const bridge = getAccountBridge(accountProp, undefined);
     const transaction = bridge.createTransaction(accountProp);
 
-    return { account: accountProp, transaction };
+    return {
+      account: accountProp,
+      transaction: contract
+        ? bridge.updateTransaction(transaction, {
+            recipient: contract,
+          })
+        : transaction,
+    };
   });
 
   const steps = useSteps();
@@ -160,6 +168,7 @@ function Body({
     contract,
     validators,
     amount,
+    delegations,
   };
 
   return (

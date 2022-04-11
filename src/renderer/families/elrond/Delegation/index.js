@@ -1,13 +1,18 @@
 // @flow
-import React, { Fragment, useCallback, useState, useEffect } from "react";
+import React, { Fragment, useCallback, useMemo, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
+import { BigNumber } from "bignumber.js";
+
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import { openModal } from "~/renderer/actions/modals";
+import { denominate } from "~/renderer/families/elrond/helpers";
+import { constants } from "~/renderer/families/elrond/constants";
+
 import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
@@ -36,63 +41,77 @@ const Wrapper = styled(Box).attrs(() => ({
 `;
 
 const Delegation = ({ account }: Props) => {
-  const [validators, setValidators] = useState();
-  const [delegations, setDelegations] = useState();
-  const [unbondings, setUnbondings] = useState();
+  const [validators, setValidators] = useState([]);
 
   const dispatch = useDispatch();
-  const delegationEnabled = true;
-  const hasRewards = true;
+  const delegationEnabled = useMemo(() => BigNumber(denominate({ input: account.balance })).gt(1), [
+    account.balance,
+  ]);
 
-  const fetchData = () => {
-    const fetchPayload = async (): Promise<void> => {
-      const endpoints = {
-        validators: "https://testnet-api.elrond.com/identities?identities=validblocks",
-        delegations: `https://testnet-delegation-api.elrond.com/accounts/${account.freshAddress}/delegations`,
-      };
+  const findValidator = useCallback(
+    (needle: string) => validators.find(item => item.providers.includes(needle)),
+    [validators],
+  );
 
-      const [providers, stakings] = await axios.all([
-        axios.get(endpoints.validators),
-        axios.get(endpoints.delegations),
-      ]);
+  const hasRewards = useMemo(
+    () =>
+      account.elrondResources.delegations
+        .reduce(
+          (total, delegation) => BigNumber(delegation.claimableRewards).plus(total),
+          BigNumber(0),
+        )
+        .gt(60),
+    [account.elrondResources.delegations],
+  );
 
-      const findValidator = (needle: string) =>
-        providers.data.find(item => item.providers.includes(needle));
+  const delegations = useMemo(() => {
+    const transform = (input: string) =>
+      BigNumber(denominate({ input, showLastNonZeroDecimal: true }));
 
-      const allUnbondings = stakings.data.reduce(
-        (total, item) =>
-          total.concat(
-            item.userUndelegatedList.map(unbonding => ({
-              ...unbonding,
-              contract: item.contract,
-              validator: findValidator(item.contract),
-            })),
-          ),
-        [],
-      );
+    const assignValidator = delegation => ({
+      ...delegation,
+      validator: findValidator(delegation.contract),
+    });
 
-      setValidators(providers.data);
-      setUnbondings(allUnbondings.sort((alpha, beta) => alpha.seconds - beta.seconds));
-      setDelegations(
-        stakings.data.map(staking => ({
-          ...staking,
-          validator: findValidator(staking.contract),
-        })),
-      );
+    const sortDelegations = (alpha, beta) =>
+      transform(alpha.userActiveStake).isGreaterThan(transform(beta.userActiveStake)) ? -1 : 1;
+
+    return account.elrondResources.delegations.map(assignValidator).sort(sortDelegations);
+  }, [findValidator, account.elrondResources.delegations]);
+
+  const unbondings = account.elrondResources.delegations
+    .reduce(
+      (total, item) =>
+        total.concat(
+          item.userUndelegatedList.map(unbonding => ({
+            ...unbonding,
+            contract: item.contract,
+            validator: findValidator(item.contract),
+          })),
+        ),
+      [],
+    )
+    .sort((alpha, beta) => alpha.seconds - beta.seconds);
+
+  const fetchValidators = () => {
+    const fetchData = async (): Promise<void> => {
+      const providers = await axios.get(constants.identities);
+
+      const randomize = providers =>
+        providers
+          .map(provider => ({ provider, sort: Math.random() }))
+          .sort((alpha, beta) => alpha.sort - beta.sort)
+          .map(item => item.provider);
+
+      setValidators(randomize(providers.data.filter(validator => validator.providers)));
     };
 
-    const returnCallback = () => {
-      setValidators();
-      setDelegations();
-      setUnbondings();
-    };
+    fetchData();
 
-    fetchPayload();
-
-    return returnCallback;
+    return setValidators;
   };
 
-  useEffect(fetchData, [account.freshAddress]);
+  useEffect(fetchValidators, []);
 
   const onEarnRewards = useCallback(() => {
     dispatch(
@@ -126,19 +145,22 @@ const Delegation = ({ account }: Props) => {
     }
   }, [account, delegations, validators, dispatch]);
 
+  const hasDelegations = delegations.length > 0;
+  const hasUnbondings = unbondings.length > 0;
+
   return (
     <Fragment>
       <TableContainer mb={6}>
         <TableHeader
-          title={<Trans i18nKey="cosmos.delegation.header" />}
+          title={<Trans i18nKey="elrond.delegation.header" />}
           titleProps={{ "data-e2e": "title_Delegation" }}
         >
-          {(delegations || hasRewards) && (
+          {(hasDelegations || hasRewards) && (
             <Fragment>
               {delegations && (
                 <ToolTip
                   content={
-                    !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
+                    !delegationEnabled ? <Trans i18nKey="elrond.delegation.minSafeWarning" /> : null
                   }
                 >
                   <Button
@@ -152,7 +174,7 @@ const Delegation = ({ account }: Props) => {
                     <Box horizontal={true} flow={1} alignItems="center">
                       <DelegateIcon size={12} />
                       <Box>
-                        <Trans i18nKey="cosmos.delegation.delegate" />
+                        <Trans i18nKey="elrond.delegation.delegate" />
                       </Box>
                     </Box>
                   </Button>
@@ -160,7 +182,7 @@ const Delegation = ({ account }: Props) => {
               )}
 
               <ToolTip
-                content={!hasRewards ? <Trans i18nKey="cosmos.delegation.noRewards" /> : null}
+                content={!hasRewards ? <Trans i18nKey="elrond.delegation.noRewards" /> : null}
               >
                 <Button
                   id={"account-rewards-button"}
@@ -172,7 +194,7 @@ const Delegation = ({ account }: Props) => {
                   <Box horizontal flow={1} alignItems="center">
                     <ClaimRewards size={12} />
                     <Box>
-                      <Trans i18nKey="cosmos.delegation.claimRewards" />
+                      <Trans i18nKey="elrond.delegation.claimRewards" />
                     </Box>
                   </Box>
                 </Button>
@@ -181,21 +203,21 @@ const Delegation = ({ account }: Props) => {
           )}
         </TableHeader>
 
-        {delegations ? (
+        {hasDelegations ? (
           <Delegations delegations={delegations} validators={validators} account={account} />
         ) : (
           <Wrapper horizontal={true}>
             <Box style={{ maxWidth: "65%" }}>
               <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
                 <Trans
-                  i18nKey="cosmos.delegation.emptyState.description"
+                  i18nKey="elrond.delegation.emptyState.description"
                   values={{ name: account.currency.name }}
                 />
               </Text>
 
               <Box mt={2}>
                 <LinkWithExternalIcon
-                  label={<Trans i18nKey="cosmos.delegation.emptyState.info" />}
+                  label={<Trans i18nKey="elrond.delegation.emptyState.info" />}
                   onClick={() => openURL(urls.stakingCosmos)}
                 />
               </Box>
@@ -204,7 +226,7 @@ const Delegation = ({ account }: Props) => {
             <Box>
               <ToolTip
                 content={
-                  !delegationEnabled ? <Trans i18nKey="cosmos.delegation.minSafeWarning" /> : null
+                  !delegationEnabled ? <Trans i18nKey="elrond.delegation.minSafeWarning" /> : null
                 }
               >
                 <Button
@@ -217,7 +239,7 @@ const Delegation = ({ account }: Props) => {
                     <IconChartLine size={12} />
 
                     <Box>
-                      <Trans i18nKey="cosmos.delegation.emptyState.delegation" />
+                      <Trans i18nKey="elrond.delegation.emptyState.delegation" />
                     </Box>
                   </Box>
                 </Button>
@@ -227,7 +249,7 @@ const Delegation = ({ account }: Props) => {
         )}
       </TableContainer>
 
-      {unbondings && <Unbondings unbondings={unbondings} />}
+      {hasUnbondings && <Unbondings unbondings={unbondings} account={account} />}
     </Fragment>
   );
 };

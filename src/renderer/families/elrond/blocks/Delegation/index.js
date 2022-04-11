@@ -52,6 +52,10 @@ const Ellipsis: ThemedComponent<{}> = styled.div`
   white-space: nowrap;
 `;
 
+const Withdraw: ThemedComponent<{}> = styled.div`
+  line-height: 1;
+`;
+
 const Divider: ThemedComponent<*> = styled.div`
   width: 100%;
   height: 1px;
@@ -59,4 +63,4 @@ const Divider: ThemedComponent<*> = styled.div`
   background-color: ${p => p.theme.colors.palette.divider};
 `;
 
-export { TableLine, Column, Wrapper, Ellipsis, Divider };
+export { TableLine, Column, Wrapper, Ellipsis, Divider, Withdraw };
