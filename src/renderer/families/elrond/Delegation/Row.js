@@ -18,7 +18,8 @@ import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
 
 import { openURL } from "~/renderer/linking";
-import { denominate } from "../helpers";
+import { denominate } from "~/renderer/families/elrond/helpers";
+import { constants } from "~/renderer/families/elrond/constants";
 
 export const Wrapper: ThemedComponent<*> = styled.div`
   display: flex;
@@ -138,32 +139,32 @@ export function Row({
   return (
     <Wrapper>
       <Column
-        strong
-        clickable
-        onClick={() => openURL(`https://testnet-explorer.elrond.com/providers/${contract}`)}
+        strong={true}
+        clickable={true}
+        onClick={() => openURL(`${constants.explorer}/providers/${contract}`)}
       >
         <Box mr={2}>
           <FirstLetterIcon label={name} />
         </Box>
         <Ellipsis>{name}</Ellipsis>
       </Column>
+
       <Column>
-        {/* {status === "bonded" ? ( */}
         <Box color="positiveGreen" pl={2}>
           <ToolTip content={<Trans i18nKey="cosmos.delegation.activeTooltip" />}>
             <CheckCircle size={14} />
           </ToolTip>
         </Box>
-        {/* ) : (
-        <Box color="alertRed" pl={2}>
-          <ToolTip content={<Trans i18nKey="cosmos.delegation.inactiveTooltip" />}>
-            <ExclamationCircleThin size={14} />
-          </ToolTip>
-        </Box>
-        )} */}
       </Column>
-      <Column>{amount} EGLD</Column>
-      <Column>{rewards} EGLD</Column>
+
+      <Column>
+        {amount} {constants.egldLabel}
+      </Column>
+
+      <Column>
+        {rewards} {constants.egldLabel}
+      </Column>
+
       <Column>
         <DropDown items={dropDownItems} renderItem={ManageDropDownItem} onChange={onSelect}>
           {() => (

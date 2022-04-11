@@ -1,7 +1,6 @@
 // @flow
 import React, { useCallback } from "react";
 import { useTranslation, Trans } from "react-i18next";
-import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -13,11 +12,9 @@ import RetryButton from "~/renderer/components/RetryButton";
 import SuccessDisplay from "~/renderer/components/SuccessDisplay";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { StepProps } from "../types";
+import { denominate } from "~/renderer/families/elrond/helpers";
+import { constants } from "~/renderer/families/elrond/constants";
 
-import { useCosmosPreloadData } from "@ledgerhq/live-common/lib/families/cosmos/react";
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { localeSelector } from "~/renderer/reducers/settings";
 import { OperationDetails } from "~/renderer/drawers/OperationDetails";
 import { setDrawer } from "~/renderer/drawers/Provider";
 
@@ -28,22 +25,19 @@ export default function StepConfirmation({
   device,
   signed,
   transaction,
+  validators,
 }: StepProps) {
   const { t } = useTranslation();
-  const { validators } = useCosmosPreloadData();
-  const locale = useSelector(localeSelector);
 
   if (optimisticOperation) {
-    const unit = account && getAccountUnit(account);
+    const validator = transaction && transaction.recipient;
 
-    const validator = transaction && transaction.validators ? transaction.validators[0] : null;
+    const v = validator && validators.find(({ providers }) => providers.includes(validator));
 
-    const v =
-      validator &&
-      validators.find(({ validatorAddress }) => validatorAddress === validator.address);
-
-    const amount =
-      unit && validator && formatCurrencyUnit(unit, validator.amount, { showCode: true, locale });
+    const amount = `${denominate({
+      input: String(transaction.amount),
+      showLastNonZeroDecimal: true,
+    })} ${constants.egldLabel}`;
 
     return (
       <Container>
@@ -128,9 +122,8 @@ export function StepConfirmationFooter({
         {t("common.close")}
       </Button>
       {concernedOperation ? (
-        // FIXME make a standalone component!
         <Button
-          primary
+          primary={true}
           ml={2}
           event="Undelegation Cosmos Flow Step 3 View OpD Clicked"
           onClick={onViewDetails}

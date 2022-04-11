@@ -1,13 +1,8 @@
-// @flow
-import invariant from "invariant";
-import React, { useCallback, useState, useRef, useEffect } from "react";
+import React, { Fragment, useCallback, useMemo, useState, useRef, useEffect } from "react";
 import { Trans } from "react-i18next";
 import { BigNumber } from "bignumber.js";
-import type { TFunction } from "react-i18next";
 
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { getDefaultExplorerView, getAddressExplorer } from "@ledgerhq/live-common/lib/explorers";
-import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
@@ -19,6 +14,10 @@ import ValidatorSearchInput, {
 } from "~/renderer/components/Delegation/ValidatorSearchInput";
 import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
 import Text from "~/renderer/components/Text";
+import { denominate } from "~/renderer/families/elrond/helpers";
+import { constants } from "~/renderer/families/elrond/constants";
+
+import estimateMaxSpendable from "@ledgerhq/live-common/lib/families/elrond/js-estimateMaxSpendable";
 
 const ValidatorField = ({
   t,
@@ -28,7 +27,9 @@ const ValidatorField = ({
   bridgePending,
   delegations,
   validators,
+  transaction,
 }: Props) => {
+  const [available, setAvailable] = useState(BigNumber(0));
   const [search, setSearch] = useState("");
   const [items, setItems] = useState(
     validators.map(validator => ({
@@ -37,7 +38,7 @@ const ValidatorField = ({
     })),
   );
 
-  const onSearch = event => {
+  const onSearch = useCallback(event => {
     setSearch(event.target.value);
     setItems(items =>
       items.map(validator => ({
@@ -50,10 +51,21 @@ const ValidatorField = ({
             : false,
       })),
     );
-  };
+  }, []);
 
-  const visibleItems = items.filter(validator => validator.searched);
   const unit = getAccountUnit(account);
+  const visibleItems = useMemo(() => items.filter(validator => validator.searched), [items]);
+  const delegationsSelected = useMemo(() => (transaction.amount.gt(0) ? 1 : 0), [
+    transaction.amount,
+  ]);
+
+  const maxText = useMemo(() => {
+    const available = denominate({
+      input: String(account.spendableBalance.minus(transaction.amount)),
+    });
+
+    return `${available} ${constants.egldLabel}`;
+  }, [account.spendableBalance, transaction.amount]);
 
   const onUpdateDelegation = useCallback(
     (recipient, value) =>
@@ -77,9 +89,33 @@ const ValidatorField = ({
     }
   }, []);
 
+  useEffect(() => {
+    const fetchEstimation = async () => {
+      const balance = await estimateMaxSpendable({ account, transaction });
+
+      console.log({
+        balance: String(balance),
+        origina: String(account.spendableBalance),
+        transaction,
+        amounts: String(transaction.amount),
+      });
+    };
+
+    fetchEstimation();
+  }, [transaction, account]);
+
   const renderItem = useCallback(
     (validator, index) => {
-      const [provider] = validator.providers;
+      const [provider] = validator.providers || [];
+      const delegation = delegations.find(delegation => delegation.contract === provider);
+      const amount = BigNumber(delegation ? delegation.userActiveStake : 0);
+      const selected = validator.providers.includes(transaction.recipient);
+      const value = selected ? transaction.amount : null;
+      const disabled = transaction.amount.gt(0) && !selected;
+
+      const onMax = () => {
+        onUpdateDelegation(provider, account.spendableBalance);
+      };
 
       return (
         <ValidatorRow
@@ -92,10 +128,12 @@ const ValidatorField = ({
           }
           title={`${index + 1}. ${validator.name || provider}`}
           subtitle={
-            false ? (
+            amount.gt(0) ? (
               <Trans
                 i18nKey="cosmos.delegation.currentDelegation"
-                values={{ amount: "d.formattedAmount" }}
+                values={{
+                  amount: denominate({ input: String(amount), showLastNonZeroDecimal: true }),
+                }}
               >
                 <b style={{ marginLeft: 5 }}></b>
               </Trans>
@@ -111,38 +149,42 @@ const ValidatorField = ({
               </Text>
             </Box>
           }
-          // value={item && item.amount.toNumber()}
           onExternalLink={() =>
-            openURL(`https://testnet-explorer.elrond.com/providers/${provider}
+            openURL(`${constants.explorer}/providers/${provider}
           `)
           }
-          // notEnoughVotes={item && item.amount && max.lt(0)}
-          // maxAvailable={max.toNumber()}
+          value={value}
           unit={unit}
           onUpdateVote={onUpdateDelegation}
-          // onMax={onMax}
-          // shouldRenderMax={currentMax.gt(0)}
-          // disabled={disabled}
+          onMax={onMax}
+          shouldRenderMax={true}
+          disabled={disabled}
         />
       );
     },
-    [onUpdateDelegation, unit],
+    [
+      onUpdateDelegation,
+      delegations,
+      account.spendableBalance,
+      transaction.recipient,
+      transaction.amount,
+      unit,
+    ],
   );
 
   if (!status) return null;
 
   return (
-    <>
+    <Fragment>
       <ValidatorSearchInput id="delegate-search-bar" search={search} onSearch={onSearch} />
-      {/* <ValidatorListHeader
+      <ValidatorListHeader
         votesSelected={delegationsSelected}
-        votesAvailable={max.toNumber()}
-        max={formatMax}
-        maxText={formatMaxText}
-        maxVotes={COSMOS_MAX_DELEGATIONS}
-        totalValidators={SR.length}
-        notEnoughVotes={notEnoughDelegations}
-      /> */}
+        maxText={maxText}
+        maxVotes={items.length}
+        totalValidators={items.length}
+        notEnoughVotes={transaction.amount.gt(account.spendableBalance)}
+        max={account.spendableBalance.minus(transaction.amount).toNumber()}
+      />
       <Box id="delegate-list">
         <ScrollLoadingList
           data={visibleItems}
@@ -153,7 +195,7 @@ const ValidatorField = ({
           }
         />
       </Box>
-    </>
+    </Fragment>
   );
 };
 

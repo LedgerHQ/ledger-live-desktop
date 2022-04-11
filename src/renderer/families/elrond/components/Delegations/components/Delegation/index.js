@@ -16,6 +16,7 @@ import { Ellipsis, Column, Wrapper, Divider } from "~/renderer/families/elrond/b
 import { openURL } from "~/renderer/linking";
 import { openModal } from "~/renderer/actions/modals";
 import { denominate } from "~/renderer/families/elrond/helpers";
+import { constants } from "~/renderer/families/elrond/constants";
 
 type RenderDropdownItemType = {
   isActive: boolean,
@@ -36,7 +37,11 @@ const Delegation: FC = ({
   account,
   delegations,
   validators,
-}: DelegationType & AccountType & Array<DelegationType> & Array<ValidatorType>) => {
+}: DelegationType &
+  AccountType &
+  Array<DelegationType> &
+  Array<ValidatorType> &
+  Array<UnbondingType>) => {
   const dispatch = useDispatch();
 
   const onSelect = useCallback(
@@ -57,6 +62,7 @@ const Delegation: FC = ({
             account,
             contract,
             validators,
+            delegations,
             amount: userActiveStake,
           },
         },
@@ -99,7 +105,7 @@ const Delegation: FC = ({
       <Column
         strong={true}
         clickable={true}
-        onClick={() => openURL(`https://testnet-explorer.elrond.com/providers/${contract}`)}
+        onClick={() => openURL(`${constants.explorer}/providers/${contract}`)}
       >
         <Box mr={2}>
           <FirstLetterIcon label={name} />
@@ -115,8 +121,13 @@ const Delegation: FC = ({
         </Box>
       </Column>
 
-      <Column>{amount} EGLD</Column>
-      <Column>{rewards} EGLD</Column>
+      <Column>
+        {amount} {constants.egldLabel}
+      </Column>
+
+      <Column>
+        {rewards} {constants.egldLabel}
+      </Column>
 
       <Column>
         <DropDown items={dropDownItems} renderItem={RenderDropdownItem} onChange={onSelect}>
@@ -137,7 +148,7 @@ const Delegation: FC = ({
 
 const RenderDropdownItem = ({ item, isActive }: RenderDropdownItemType) => (
   <Fragment>
-    {item.key === "MODAL_COSMOS_CLAIM_REWARDS" && <Divider />}
+    {item.key === "MODAL_ELROND_CLAIM_REWARDS" && <Divider />}
 
     <ToolTip content={item.tooltip} containerStyle={{ width: "100%" }}>
       <DropDownItem disabled={item.disabled} isActive={isActive}>

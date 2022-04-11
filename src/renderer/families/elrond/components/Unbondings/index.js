@@ -10,7 +10,7 @@ type UnbondingsType = {
   unbondings: Array<UnbondingType>,
 };
 
-const Unbondings: FC = ({ unbondings }: UnbondingsType) => (
+const Unbondings: FC = ({ unbondings, account }: UnbondingsType) => (
   <TableContainer mb={6}>
     <TableHeader
       title={<Trans i18nKey="cosmos.undelegation.header" />}
@@ -34,7 +34,7 @@ const Unbondings: FC = ({ unbondings }: UnbondingsType) => (
     </HeaderWrapper>
 
     {unbondings.map((unbonding, index) => (
-      <Unbonding key={`${unbonding.contract}-${index}`} {...unbonding} />
+      <Unbonding key={`${unbonding.contract}-${index}`} account={account} {...unbonding} />
     ))}
   </TableContainer>
 );

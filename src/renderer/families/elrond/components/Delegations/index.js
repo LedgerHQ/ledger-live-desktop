@@ -4,7 +4,7 @@ import { Account as AccountType } from "@ledgerhq/live-common/lib/types";
 
 import { HeaderWrapper } from "~/renderer/components/TableContainer";
 import { TableLine } from "~/renderer/families/elrond/blocks/Delegation";
-import { DelegationType, ValidatorType } from "~/renderer/families/elrond/types";
+import { DelegationType, ValidatorType, UnbondingType } from "~/renderer/families/elrond/types";
 import Delegation from "~/renderer/families/elrond/components/Delegations/components/Delegation";
 
 type DelegationsType = {

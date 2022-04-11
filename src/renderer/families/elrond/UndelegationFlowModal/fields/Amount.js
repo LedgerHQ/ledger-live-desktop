@@ -18,28 +18,20 @@ type Props = {
 };
 
 export default function AmountField({
-  amount: initialAmount,
+  amount,
+  initialAmount,
   account,
   onChange,
   status: { errors, warnings },
   label,
-}: Props) {
+}: *) {
   const unit = getAccountUnit(account);
 
   const [focused, setFocused] = useState(false);
-  const [amount, setAmount] = useState(initialAmount);
 
   const onAmountChange = (amount: BigNumber, unit?: Unit): void => {
     onChange(amount, unit);
-    setAmount(amount);
   };
-
-  // useEffect(() => {
-  //   if (validator && validator.validatorAddress !== currentValidator.validatorAddress) {
-  //     setCurrentValidator(validator);
-  //     setInitialAmount(validator.amount);
-  //   }
-  // }, [validator, currentValidator]);
 
   const options = useMemo(
     () => [

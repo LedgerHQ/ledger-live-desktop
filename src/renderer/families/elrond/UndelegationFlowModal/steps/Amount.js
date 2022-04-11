@@ -1,11 +1,9 @@
 // @flow
 import { BigNumber } from "bignumber.js";
-import invariant from "invariant";
-import React, { useCallback, useMemo } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import type { StepProps } from "../types";
-import type { CosmosMappedDelegation } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -24,30 +22,29 @@ export default function StepAmount({
   error,
   contract,
   amount,
-  ...rest
+  delegations,
 }: StepProps) {
-  // invariant(account && transaction && transaction.validators, "account and transaction required");
-
+  const [initialAmount, setInitialAmount] = useState(BigNumber(amount));
+  const [value, setValue] = useState(BigNumber(amount));
   const bridge = getAccountBridge(account);
 
   const updateValidator = useCallback(
-    validatorFields => {
-      onUpdateTransaction(tx =>
-        bridge.updateTransaction(tx, {
-          ...validatorFields,
-          recipient: contract,
+    payload => {
+      onUpdateTransaction(transaction =>
+        bridge.updateTransaction(transaction, {
           mode: "unDelegate",
+          ...payload,
         }),
       );
     },
-    [onUpdateTransaction, contract, bridge],
+    [onUpdateTransaction, bridge],
   );
 
-  console.log(35, { transaction });
-
   const onChangeValidator = useCallback(
-    ({ validatorAddress, amount }: CosmosMappedDelegation) => {
-      updateValidator({ address: validatorAddress, amount });
+    ({ userActiveStake, contract }) => {
+      updateValidator({ recipient: contract, amount: BigNumber(userActiveStake) });
+      setInitialAmount(BigNumber(userActiveStake));
+      setValue(BigNumber(userActiveStake));
     },
     [updateValidator],
   );
@@ -55,6 +52,7 @@ export default function StepAmount({
   const onChangeAmount = useCallback(
     (amount: BigNumber) => {
       updateValidator({ amount });
+      setValue(amount);
     },
     [updateValidator],
   );
@@ -70,14 +68,24 @@ export default function StepAmount({
           </Trans>
         </Text>
       </Box>
-      {/* <ValidatorField account={account} transaction={transaction} onChange={onChangeValidator} /> */}
+
+      <ValidatorField
+        account={account}
+        contract={contract}
+        transaction={transaction}
+        onChange={onChangeValidator}
+        delegations={delegations}
+      />
+
       <AmountField
-        amount={BigNumber(amount)}
+        amount={value}
         account={account}
         status={status}
+        initialAmount={initialAmount}
         onChange={onChangeAmount}
         label={<Trans i18nKey="cosmos.undelegation.flow.steps.amount.fields.amount" />}
       />
+
       <Alert info="primary" mt={2}>
         <Trans i18nKey="cosmos.undelegation.flow.steps.amount.warning">
           <b></b>
@@ -97,8 +105,6 @@ export function StepAmountFooter({
   transaction,
 }: StepProps) {
   const { t } = useTranslation();
-
-  invariant(account, "account required");
 
   const { errors } = status;
   const hasErrors = Object.keys(errors).length;

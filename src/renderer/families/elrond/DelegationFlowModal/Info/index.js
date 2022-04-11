@@ -12,8 +12,6 @@ import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 
-// import { getValidators } from "@ledgerhq/live-common/lib/families/elrond/api";
-
 type Props = {
   name?: string,
   account: AccountLike,
