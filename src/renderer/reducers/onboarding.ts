@@ -17,12 +17,12 @@ type Step = {
 export type OnboardingState = {
   stepIndex: number;
   stepName: string; // TODO: specify that the string comes from Steps type
+  deviceModelId?: DeviceModelId;
   steps: Step[];
   genuine: {
     isDeviceGenuine: boolean;
     displayErrorScreen: boolean;
   };
-  deviceModelId: DeviceModelId | null;
   flowType: string;
   onboardingRelaunched?: boolean;
 };
@@ -30,11 +30,11 @@ export type OnboardingState = {
 const initialState: OnboardingState = {
   stepIndex: 0,
   stepName: getEnv("SKIP_ONBOARDING") ? "analytics" : "start",
+  deviceModelId: undefined,
   genuine: {
     isDeviceGenuine: false,
     displayErrorScreen: false,
   },
-  deviceModelId: null,
   flowType: "",
   onboardingRelaunched: false,
   steps: [
@@ -158,7 +158,7 @@ const handlers = {
     ...state,
     flowType,
   }),
-  ONBOARDING_SET_DEVICE_TYPE: (state: OnboardingState, { payload: deviceModelId }) => ({
+  ONBOARDING_SET_DEVICE_MODEL_ID: (state: OnboardingState, { payload: deviceModelId }) => ({
     ...state,
     deviceModelId,
   }),
@@ -176,3 +176,5 @@ export const onboardingSelector = (s: State): OnboardingState => s.onboarding;
 
 export const onboardingRelaunchedSelector = (s: State): boolean =>
   s.onboarding.onboardingRelaunched;
+
+export const deviceModelIdSelector = (s: State): DeviceModelId => s.onboarding.deviceModelId;
