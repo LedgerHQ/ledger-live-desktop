@@ -2,7 +2,7 @@ import { Flex, Aside, Logos, Button, Icons, ProgressBar, Drawer, Popin } from "@
 import { DeviceModelId } from "@ledgerhq/devices";
 import React, { useCallback } from "react";
 import { Switch, Route, Redirect, useHistory, useParams, useRouteMatch } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { useMachine } from "@xstate/react";
@@ -40,6 +40,8 @@ import { QuizSuccess } from "~/renderer/components/Onboarding/Screens/Tutorial/s
 import { fireConfetti } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/confetti";
 import RecoveryWarning from "../../Help/RecoveryWarning";
 import { QuizzPopin } from "~/renderer/modals/OnboardingQuizz/OnboardingQuizzModal";
+
+import { deviceModelIdSelector } from "~/renderer/reducers/onboarding";
 
 const screens = {
   howToGetStarted: {
@@ -149,12 +151,11 @@ const FlowStepper: React.FC<FlowStepperProps> = ({
   ProgressBar,
   children,
 }) => {
-  const { deviceId } = useParams();
   const history = useHistory();
 
   const handleBack = useCallback(() => {
-    history.push(`/onboarding/select-use-case/${deviceId}`);
-  }, [history, deviceId]);
+    history.push("/onboarding/select-use-case");
+  }, [history]);
 
   const handleContinue = useCallback(() => {
     if (onContinue) onContinue();
@@ -225,8 +226,6 @@ function Tutorial({ sendEventToParent, machine, component }) {
       fireConfetti,
     },
   });
-
-  const { deviceId } = useParams();
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -344,7 +343,6 @@ interface NewTutorialProps {
 
 function NewTutorial({ component: Screen, state, onContinue }: NewTutorialProps) {
   const { t } = useTranslation();
-  const { deviceId } = useParams();
   const { path, url } = useRouteMatch();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -369,8 +367,8 @@ function NewTutorial({ component: Screen, state, onContinue }: NewTutorialProps)
 }
 
 export function ConnectSetUpDevice() {
-  const { path, url } = useRouteMatch();
-  const { deviceId } = useParams();
+  const { path } = useRouteMatch();
+  const deviceId = useSelector(deviceModelIdSelector);
   const history = useHistory();
   // TODO: redux state
   const state = {
@@ -407,7 +405,7 @@ export function ConnectSetUpDevice() {
   state.currentStepIndex = state.context.steps.findIndex(({ status }) => status === "active");
 
   const afterPairNano = () => {
-    history.push(`${url}/genuine-check`);
+    history.push(`${path}/genuine-check`);
   };
 
   const afterGenuineCheck = () => {
@@ -416,8 +414,8 @@ export function ConnectSetUpDevice() {
 
   return (
     <Switch>
-      <Route exact path="/onboarding/connect-device/:deviceId">
-        <Redirect to={`${url}/pair-nano`} />
+      <Route exact path="/onboarding/connect-device">
+        <Redirect to={`${path}/pair-nano`} />
       </Route>
       <Route
         path={`${path}/pair-nano`}

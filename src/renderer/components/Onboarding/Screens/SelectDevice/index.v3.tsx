@@ -46,7 +46,7 @@ export function SelectDevice() {
     (deviceModelId: DeviceModelId) => {
       track("Onboarding Device - Selection", { deviceModelId });
       dispatch(setDeviceModelId(deviceModelId));
-      history.push(`/onboarding/select-use-case/${deviceModelId}`);
+      history.push("/onboarding/select-use-case");
     },
     [dispatch, history],
   );
