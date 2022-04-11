@@ -26,7 +26,6 @@ export default function StepValidator({
     account && account.solanaResources && transaction,
     "solana account, resources and transaction required",
   );
-  const { solanaResources } = account;
 
   const updateValidator = ({ address }: { address: string }) => {
     const bridge: AccountBridge<Transaction> = getAccountBridge(account, parentAccount);
@@ -50,13 +49,16 @@ export default function StepValidator({
     <Box flow={1}>
       <TrackPage category="Solana Delegation" name="Step Validator" />
       {error && <ErrorBanner error={error} />}
-      <ValidatorsField
-        account={account}
-        chosenVoteAccAddr={chosenVoteAccAddr}
-        onChangeValidator={updateValidator}
-        status={status}
-        t={t}
-      />
+      {
+        // $FlowFixMe FIXME Not sure what's wrong here
+        <ValidatorsField
+          account={account}
+          chosenVoteAccAddr={chosenVoteAccAddr}
+          onChangeValidator={updateValidator}
+          status={status}
+          t={t}
+        />
+      }
     </Box>
   );
 }

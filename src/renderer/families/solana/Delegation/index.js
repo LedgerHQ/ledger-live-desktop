@@ -1,5 +1,4 @@
 // @flow
-import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import { getAddressExplorer, getDefaultExplorerView } from "@ledgerhq/live-common/lib/explorers";
 import { useSolanaStakesWithMeta } from "@ledgerhq/live-common/lib/families/solana/react";
 import type { SolanaStakeWithMeta } from "@ledgerhq/live-common/lib/families/solana/types";
@@ -41,8 +40,6 @@ const Delegation = ({ account }: Props) => {
   const dispatch = useDispatch();
 
   const stakesWithMeta = useSolanaStakesWithMeta(account.currency, solanaResources.stakes);
-
-  const unit = getAccountUnit(account);
 
   const onEarnRewards = useCallback(() => {
     dispatch(

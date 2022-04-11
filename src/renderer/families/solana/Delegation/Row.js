@@ -56,13 +56,6 @@ const Ellipsis: ThemedComponent<{}> = styled.div`
   white-space: nowrap;
 `;
 
-const Divider: ThemedComponent<*> = styled.div`
-  width: 100%;
-  height: 1px;
-  margin-bottom: ${p => p.theme.space[1]}px;
-  background-color: ${p => p.theme.colors.palette.divider};
-`;
-
 const ManageDropDownItem = ({
   item,
   isActive,

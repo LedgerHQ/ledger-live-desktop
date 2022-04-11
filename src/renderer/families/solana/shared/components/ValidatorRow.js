@@ -1,4 +1,4 @@
-//@flow
+// @flow
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import { getAddressExplorer, getDefaultExplorerView } from "@ledgerhq/live-common/lib/explorers";
 import type { ValidatorAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
