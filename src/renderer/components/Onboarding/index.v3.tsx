@@ -270,9 +270,9 @@ export function Onboarding() {
               <Route path={`${path}/welcome`} component={Welcome} />
               <Route path={`${path}/terms`} component={Terms} />
               <Route path={`${path}/select-device`} component={SelectDevice} />
-              <Route path={`${path}/select-use-case/:deviceId`} component={SelectUseCase} />
-              <Route path={`${path}/setup-device/:deviceId`} component={SetupNewDevice} />
-              <Route path={`${path}/connect-device/:deviceId`} component={ConnectSetUpDevice} />
+              <Route path={`${path}/select-use-case`} component={SelectUseCase} />
+              <Route path={`${path}/setup-device`} component={SetupNewDevice} />
+              <Route path={`${path}/connect-device`} component={ConnectSetUpDevice} />
               <Route path={`${path}/use-recovery-phrase`} component={UseRecoveryPhrase} />
             </Switch>
           </ScreenContainer>

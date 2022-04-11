@@ -36,8 +36,12 @@ export type GenuineCheckProps = {
   };
 };
 
-export function GenuineCheck({ sendEvent, context }: GenuineCheckProps) {
-  const { deviceId, device } = context;
+export function GenuineCheck({ sendEvent }: GenuineCheckProps) {
+  // TODO: deviceId in redux state
+  const deviceId = "nanoS";
+  const device = undefined;
+
+  // const { device } = context;
 
   const onResult = useCallback(
     res => {

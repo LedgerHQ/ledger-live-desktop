@@ -2,6 +2,7 @@
 
 import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled, { useTheme } from "styled-components";
 import { DeviceModelId } from "@ledgerhq/devices";
@@ -10,6 +11,8 @@ import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Button from "~/renderer/components/Button";
 import { DeviceSelector } from "./DeviceSelector";
 import { track } from "~/renderer/analytics/segment";
+
+import { setDeviceModelId } from "~/renderer/actions/onboarding";
 
 const SelectDeviceContainer: ThemedComponent<any> = styled.div`
   height: 100%;
@@ -37,13 +40,15 @@ const TitleText = styled(Text)`
 export function SelectDevice() {
   const { t } = useTranslation();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleDeviceSelect = useCallback(
-    (deviceId: DeviceModelId) => {
-      track("Onboarding Device - Selection", { deviceId });
-      history.push(`/onboarding/select-use-case/${deviceId}`);
+    (deviceModelId: DeviceModelId) => {
+      track("Onboarding Device - Selection", { deviceModelId });
+      dispatch(setDeviceModelId(deviceModelId));
+      history.push("/onboarding/select-use-case");
     },
-    [history],
+    [dispatch, history],
   );
 
   return (

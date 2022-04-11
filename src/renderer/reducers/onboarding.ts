@@ -17,25 +17,25 @@ type Step = {
 export type OnboardingState = {
   stepIndex: number;
   stepName: string; // TODO: specify that the string comes from Steps type
+  deviceModelId?: DeviceModelId;
   steps: Step[];
   genuine: {
     isDeviceGenuine: boolean;
     displayErrorScreen: boolean;
   };
-  deviceModelId: DeviceModelId | null;
-  flowType: string;
   onboardingRelaunched?: boolean;
 };
+
+// type TutorialState;
 
 const initialState: OnboardingState = {
   stepIndex: 0,
   stepName: getEnv("SKIP_ONBOARDING") ? "analytics" : "start",
+  deviceModelId: undefined,
   genuine: {
     isDeviceGenuine: false,
     displayErrorScreen: false,
   },
-  deviceModelId: null,
-  flowType: "",
   onboardingRelaunched: false,
   steps: [
     {
@@ -116,37 +116,6 @@ const initialState: OnboardingState = {
 };
 
 const handlers = {
-  ONBOARDING_NEXT_STEP: state => {
-    const step = state.steps.find(step => step.name === state.stepName);
-    if (!step) {
-      return state;
-    }
-    const index = state.steps.indexOf(step);
-    if (index > state.steps.length - 2) {
-      return state;
-    }
-    return { ...state, stepName: state.steps[index + 1].name, stepIndex: index + 1 };
-  },
-  ONBOARDING_PREV_STEP: (state: OnboardingState) => {
-    const step = state.steps.find(step => step.name === state.stepName);
-    if (!step) {
-      return state;
-    }
-    const index = state.steps.indexOf(step);
-    if (index < 1) {
-      return state;
-    }
-    return { ...state, stepName: state.steps[index - 1].name, stepIndex: index - 1 };
-  },
-  ONBOARDING_JUMP_STEP: (state: OnboardingState, { payload: stepName }) => {
-    const step = state.steps.find(step => step.name === stepName);
-    if (!step) {
-      return state;
-    }
-    const index = state.steps.indexOf(step);
-    return { ...state, stepName: step.name, stepIndex: index };
-  },
-
   UPDATE_GENUINE_CHECK: (state: OnboardingState, { payload: obj }) => ({
     ...state,
     genuine: {
@@ -154,11 +123,7 @@ const handlers = {
       ...obj,
     },
   }),
-  ONBOARDING_SET_FLOW_TYPE: (state: OnboardingState, { payload: flowType }) => ({
-    ...state,
-    flowType,
-  }),
-  ONBOARDING_SET_DEVICE_TYPE: (state: OnboardingState, { payload: deviceModelId }) => ({
+  ONBOARDING_SET_DEVICE_MODEL_ID: (state: OnboardingState, { payload: deviceModelId }) => ({
     ...state,
     deviceModelId,
   }),
@@ -176,3 +141,5 @@ export const onboardingSelector = (s: State): OnboardingState => s.onboarding;
 
 export const onboardingRelaunchedSelector = (s: State): boolean =>
   s.onboarding.onboardingRelaunched;
+
+export const deviceModelIdSelector = (s: State): DeviceModelId => s.onboarding.deviceModelId;

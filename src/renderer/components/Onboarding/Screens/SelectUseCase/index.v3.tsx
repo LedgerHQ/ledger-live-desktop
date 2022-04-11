@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory, useParams } from "react-router-dom";
 import { openModal } from "~/renderer/actions/modals";
 import { useTranslation, Trans } from "react-i18next";
@@ -17,6 +17,8 @@ import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import OnboardingNavHeader from "../../OnboardingNavHeader.v3";
 
 import { track } from "~/renderer/analytics/segment";
+
+import { deviceModelIdSelector } from "~/renderer/reducers/onboarding";
 
 registerAssets([placeholderOption]);
 
@@ -75,23 +77,16 @@ const RightColumn = styled.div`
   }
 `;
 
-interface Props {
-  sendEvent: (arg1: string) => any;
-  context: {
-    deviceId: string;
-  };
-}
-
-export function SelectUseCase({ sendEvent, context }: Props) {
+export function SelectUseCase() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { deviceId } = useParams();
+  const deviceModelId = useSelector(deviceModelIdSelector);
   const history = useHistory();
-  const device = deviceById(deviceId);
+  const device = deviceById(deviceModelId);
 
   const onWrappedUseCase = useCallback(() => {
-    dispatch(openModal("MODAL_RECOVERY_SEED_WARNING", { deviceId }));
-  }, [deviceId, dispatch]);
+    dispatch(openModal("MODAL_RECOVERY_SEED_WARNING", { deviceModelId }));
+  }, [deviceModelId, dispatch]);
 
   return (
     <ScrollArea withHint>
@@ -123,8 +118,8 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Setup new");
-                history.push(`/onboarding/setup-device/${deviceId}`);
-                // dispatch(openModal("MODAL_PEDAGOGY", { deviceId }));
+                history.push("/onboarding/setup-device");
+                // dispatch(openModal("MODAL_PEDAGOGY", { deviceModelId }));
               }}
             />
           </RightColumn>
@@ -149,7 +144,7 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Connect");
-                history.push(`/onboarding/connect-device/${deviceId}`);
+                history.push("/onboarding/connect-device");
                 onWrappedUseCase();
               }}
             />
