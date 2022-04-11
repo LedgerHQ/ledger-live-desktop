@@ -52,7 +52,7 @@
     "disclaimer": {
       "title": "Application externe",
       "description": "Vous allez être redirigé(e) vers une application non exploitée par Ledger.",
-      "legalAdvice": "Cette application n'est pas exploitée par Ledger. Ledger ne saurait être tenu responsable de toute perte de fonds ou qualité de service due à cette application.\n\nVérifiez toujours les informations affichées sur votre appareil.",
+      "legalAdvice": "Cette application n'est pas exploitée par Ledger. Ledger ne saurait être tenue responsable de toute perte de fonds ou qualité de service due à cette application.\n\nVérifiez toujours les informations affichées sur votre appareil.",
       "checkbox": "Ne plus me le rappeler",
       "CTA": "Continuer"
     }
@@ -1379,7 +1379,7 @@
     },
     "fullNodeReadyInfo": "Les comptes seront ajoutés en utilisant votre nœud Bitcoin.",
     "fullNodeConfigure": "Configurer le nœud",
-    "tokensTip": "{{token}} ({{ticker}}) est un token {{tokenType}}. Vous pouvez recevoir des tokens directement sur un compte {{currency}}.",
+    "tokensTip": "{{token}} ({{ticker}}) est un token {{tokenType}}. Vous pouvez recevoir ces tokens directement sur un compte {{currency}}.",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
