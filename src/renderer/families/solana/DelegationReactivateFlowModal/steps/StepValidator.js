@@ -1,8 +1,9 @@
 // @flow
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
-import { useSolanaStakesWithMeta } from "@ledgerhq/live-common/lib/families/solana/react";
-import { BigNumber } from "bignumber.js";
+import {
+  useSolanaStakesWithMeta,
+  useLedgerFirstShuffledValidators,
+} from "@ledgerhq/live-common/lib/families/solana/react";
 import invariant from "invariant";
 import React from "react";
 import { Trans } from "react-i18next";
@@ -10,14 +11,10 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
-import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
-import Image from "~/renderer/components/Image";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
-import { Ellipsis } from "../../shared/components/Ellipsis";
 import ErrorDisplay from "../../shared/components/ErrorDisplay";
 import type { StepProps } from "../types";
 import ValidatorRow from "../../shared/components/ValidatorRow";
-import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 
 export default function StepValidator({
   account,
@@ -48,7 +45,7 @@ export default function StepValidator({
     throw new Error(`stake with account address <${stakeAccAddr}> not found`);
   }
 
-  const { meta, stake } = stakeWithMeta;
+  const { stake } = stakeWithMeta;
 
   const unit = getAccountUnit(account);
 

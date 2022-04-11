@@ -1,4 +1,4 @@
-//@flow
+// @flow
 import React from "react";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import { useTranslation } from "react-i18next";

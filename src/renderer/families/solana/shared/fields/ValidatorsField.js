@@ -1,12 +1,10 @@
 // @flow
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { getAddressExplorer, getDefaultExplorerView } from "@ledgerhq/live-common/lib/explorers";
 import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
-import { swap } from "@ledgerhq/live-common/lib/families/solana/utils";
 import type { ValidatorAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import invariant from "invariant";
-import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import type { TFunction } from "react-i18next";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
@@ -15,7 +13,6 @@ import { NoResultPlaceholder } from "~/renderer/components/Delegation/ValidatorS
 import ScrollLoadingList from "~/renderer/components/ScrollLoadingList";
 import Text from "~/renderer/components/Text";
 import IconAngleDown from "~/renderer/icons/AngleDown";
-import { openURL } from "~/renderer/linking";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ValidatorRow from "../components/ValidatorRow";
 
@@ -27,14 +24,17 @@ type Props = {
   onChangeValidator: (v: ValidatorAppValidator) => void,
 };
 
-const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, status }: Props) => {
+const MaybeValidatorField = ({ status }: Props) => {
   if (!status) return null;
 
+  // $FlowFixMe FIXME Not sure what's wrong here
+  return ValidatorField;
+};
+
+const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, status }: Props) => {
   invariant(account && account.solanaResources, "solana account and resources required");
 
-  const { solanaResources } = account;
-
-  const [search, setSearch] = useState("");
+  const [search] = useState("");
   const [showAll, setShowAll] = useState(false);
 
   const unit = getAccountUnit(account);
@@ -57,8 +57,6 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
   }, [validators, search]);
 
   const containerRef = useRef();
-
-  const onSearch = (event: SyntheticInputEvent<HTMLInputElement>) => setSearch(event.target.value);
 
   /** auto focus first input on mount */
   useEffect(() => {
@@ -130,4 +128,4 @@ const SeeAllButton: ThemedComponent<{ expanded: boolean }> = styled.div`
   }
 `;
 
-export default ValidatorField;
+export default MaybeValidatorField;
