@@ -34,13 +34,13 @@ const linksPerCurrency = {
       type: "separator",
       label: "",
     },
-    links?.etherscan && {
-      key: "etherscan",
-      id: "etherscan",
+    links?.explorer && {
+      key: "explorer",
+      id: "explorer",
       label: t("NFT.viewer.actions.open", { viewer: "Explorer" }),
       Icon: IconGlobe,
       type: "external",
-      callback: () => openURL(links.etherscan),
+      callback: () => openURL(links.explorer),
     },
   ],
   polygon: (t, links, dispatch) => [
@@ -66,13 +66,13 @@ const linksPerCurrency = {
       type: "separator",
       label: "",
     },
-    links?.polygonscan && {
-      key: "polygonscan",
-      id: "polygonscan",
+    links?.explorer && {
+      key: "explorer",
+      id: "explorer",
       label: t("NFT.viewer.actions.open", { viewer: "Explorer" }),
       Icon: IconGlobe,
       type: "external",
-      callback: () => openURL(links.polygonscan),
+      callback: () => openURL(links.explorer),
     },
   ],
 };
