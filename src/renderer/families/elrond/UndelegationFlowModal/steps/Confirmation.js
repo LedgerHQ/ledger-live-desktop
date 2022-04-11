@@ -31,7 +31,6 @@ export default function StepConfirmation({
 
   if (optimisticOperation) {
     const validator = transaction && transaction.recipient;
-
     const v = validator && validators.find(({ providers }) => providers.includes(validator));
 
     const amount = `${denominate({
@@ -41,14 +40,14 @@ export default function StepConfirmation({
 
     return (
       <Container>
-        <TrackPage category="Undelegation Cosmos Flow" name="Step Confirmed" />
+        <TrackPage category="Undelegation Elrond Flow" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
-          title={t("cosmos.undelegation.flow.steps.confirmation.success.title")}
+          title={t("elrond.undelegation.flow.steps.confirmation.success.title")}
           description={
             <div>
               <Trans
-                i18nKey="cosmos.undelegation.flow.steps.confirmation.success.description"
+                i18nKey="elrond.undelegation.flow.steps.confirmation.success.description"
                 values={{
                   amount,
                   validator: v && v.name,
@@ -66,10 +65,10 @@ export default function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Undelegation Cosmos Flow" name="Step Confirmation Error" />
+        <TrackPage category="Undelegation Elrond Flow" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer
-            title={t("cosmos.undelegation.flow.steps.confirmation.broadcastError")}
+            title={t("elrond.undelegation.flow.steps.confirmation.broadcastError")}
           />
         ) : null}
         <ErrorDisplay error={error} withExportLogs />
@@ -125,10 +124,10 @@ export function StepConfirmationFooter({
         <Button
           primary={true}
           ml={2}
-          event="Undelegation Cosmos Flow Step 3 View OpD Clicked"
+          event="Undelegation Elrond Flow Step 3 View OpD Clicked"
           onClick={onViewDetails}
         >
-          {t("cosmos.undelegation.flow.steps.confirmation.success.cta")}
+          {t("elrond.undelegation.flow.steps.confirmation.success.cta")}
         </Button>
       ) : error ? (
         <RetryButton primary ml={2} onClick={onRetry} />

@@ -72,7 +72,7 @@ export default function StepClaimRewards({
       {transaction.amount.gt(0) && (
         <Text fontSize={4} ff="Inter|Medium" textAlign="center">
           <Trans
-            i18nKey={`cosmos.claimRewards.flow.steps.claimRewards.${key}`}
+            i18nKey={`elrond.claimRewards.flow.steps.claimRewards.${key}`}
             values={{
               amount: `${denominate({
                 input: String(transaction.amount),

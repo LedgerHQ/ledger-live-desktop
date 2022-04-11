@@ -13,9 +13,9 @@ type UnbondingsType = {
 const Unbondings: FC = ({ unbondings, account }: UnbondingsType) => (
   <TableContainer mb={6}>
     <TableHeader
-      title={<Trans i18nKey="cosmos.undelegation.header" />}
+      title={<Trans i18nKey="elrond.undelegation.header" />}
       titleProps={{ "data-e2e": "title_Undelegation" }}
-      tooltip={<Trans i18nKey="cosmos.undelegation.headerTooltip" />}
+      tooltip={<Trans i18nKey="elrond.undelegation.headerTooltip" />}
     />
 
     <HeaderWrapper>
