@@ -2682,8 +2682,8 @@
     "display": {
       "language": "Langue d'affichage",
       "languageDesc": "Choisissez la langue d'affichage de Ledger Live.",
-      "theme": "Thème",
-      "themeDesc": "Sélectionnez un thème.",
+      "theme": "Mode",
+      "themeDesc": "Sélectionnez un mode.",
       "counterValue": "Devise préférée",
       "counterValueDesc": "Choisissez la devise dans laquelle afficher votre solde et vos opérations.",
       "region": "Région",
@@ -2923,7 +2923,7 @@
     }
   },
   "theme": {
-    "system": "Sélectionnez le thème du système",
+    "system": "Sélectionnez le mode de l'interface",
     "light": "Clair",
     "dusk": "Crépuscule",
     "dark": "Sombre"
