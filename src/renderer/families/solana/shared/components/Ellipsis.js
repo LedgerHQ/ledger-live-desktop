@@ -1,4 +1,4 @@
-//@flow
+// @flow
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
