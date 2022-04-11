@@ -3027,9 +3027,9 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#0ed12b7625d6d0d497d5714fd0e2757a3322044b":
+"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#b9a8bd0a030b2caeca6b0e0e886a9da80dda5812":
   version "22.0.0"
-  resolved "https://github.com/LedgerHQ/ledger-live-common.git#0ed12b7625d6d0d497d5714fd0e2757a3322044b"
+  resolved "https://github.com/LedgerHQ/ledger-live-common.git#b9a8bd0a030b2caeca6b0e0e886a9da80dda5812"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
@@ -3121,6 +3121,7 @@
     semver "^7.3.5"
     sha.js "^2.4.11"
     stellar-sdk "^10.0.1"
+    superstruct "^0.14.2"
     triple-beam "^1.3.0"
     winston "^3.4.0"
     xstate "^4.28.1"
