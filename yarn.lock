@@ -2891,6 +2891,14 @@
     "@grpc/proto-loader" "^0.6.4"
     "@types/node" ">=12.12.47"
 
+"@grpc/grpc-js@^1.5.7":
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/@grpc/grpc-js/-/grpc-js-1.6.3.tgz#1424cd3a85df3d569c339830cbc9ed3f66a2f192"
+  integrity sha512-2B9WnKGowOHvcicX5WOVpA3KlLqm1qfPdd4oFeyzJCT6g8hk6aobBnD7QhqZc8/2e5GU0OGTV4QvvzMdDRAH+w==
+  dependencies:
+    "@grpc/proto-loader" "^0.6.4"
+    "@types/node" ">=12.12.47"
+
 "@grpc/proto-loader@^0.6.0", "@grpc/proto-loader@^0.6.4":
   version "0.6.9"
   resolved "https://registry.yarnpkg.com/@grpc/proto-loader/-/proto-loader-0.6.9.tgz#4014eef366da733f8e04a9ddd7376fe8a58547b7"
@@ -2901,6 +2909,44 @@
     long "^4.0.0"
     protobufjs "^6.10.0"
     yargs "^16.2.0"
+
+"@hashgraph/cryptography@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@hashgraph/cryptography/-/cryptography-1.1.2.tgz#bd2ca9e8f91ab21155f0eb230a58e3e7d45d7982"
+  integrity sha512-oSnDDs5foNq6Yni4kCwbA01NuVY2mewVr1jhkJG7yNDT6+xIBCztRWDeINb1JuShXe57Cuf88M1zmN5iFN7JgA==
+  dependencies:
+    bignumber.js "^9.0.2"
+    crypto-js "^4.1.1"
+    elliptic "^6.5.4"
+    expo-crypto "^10.1.2"
+    expo-random "^12.1.2"
+    js-base64 "^3.7.2"
+    tweetnacl "^1.0.3"
+    utf8 "^3.0.0"
+
+"@hashgraph/proto@^2.3.0":
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/@hashgraph/proto/-/proto-2.3.0.tgz#b9cbc328884e933d70a759c09df42c6b7af3af8e"
+  integrity sha512-zZAb/V4j9OersY/rXfPKqiNKyGnT2zPV1v2MA0uW+OKn8BAy9+GwVwANcfrs8VbAqP151iEA6sQSuOH216ytRg==
+  dependencies:
+    long "^4.0.0"
+    protobufjs "^6.11.2"
+
+"@hashgraph/sdk@^2.10.1":
+  version "2.12.1"
+  resolved "https://registry.yarnpkg.com/@hashgraph/sdk/-/sdk-2.12.1.tgz#0e3decbd65cb993c655fb60ac56035e76c40deb8"
+  integrity sha512-VisSO8GZ5I/azPj2h2mRTtJsw541POsuhFJ7aRhmhMEFZrpcnXFnkKSp1KYYNT2ELAEZy2pKNBpv9V0GEkUIpw==
+  dependencies:
+    "@grpc/grpc-js" "^1.5.7"
+    "@hashgraph/cryptography" "^1.1.2"
+    "@hashgraph/proto" "^2.3.0"
+    bignumber.js "^9.0.2"
+    crypto-js "^4.1.1"
+    js-base64 "^3.7.2"
+    js-logger "^1.6.1"
+    long "^4.0.0"
+    protobufjs "^6.11.2"
+    utf8 "^3.0.0"
 
 "@hot-loader/react-dom@^17.0.1":
   version "17.0.1"
@@ -3457,10 +3503,9 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@22.0.0":
+"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#e91a4ff67d9e4d4c225e71000eef172a957da023":
   version "22.0.0"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-22.0.0.tgz#2717701fc8ba63b4befdd3cb1400527c2922335f"
-  integrity sha512-BUMgPMWmavlFip0LwMVzr+TABG1o77nLZepGSmxZWIcyLUvsmRRDtCEasVJCW60g0Cd0BhvbtUOo8l0NdDZ+/A==
+  resolved "https://github.com/LedgerHQ/ledger-live-common.git#e91a4ff67d9e4d4c225e71000eef172a957da023"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
@@ -3472,6 +3517,7 @@
     "@crypto-com/chain-jslib" "0.0.19"
     "@ethereumjs/common" "^2.6.2"
     "@ethereumjs/tx" "^3.5.0"
+    "@hashgraph/sdk" "^2.10.1"
     "@ledgerhq/compressjs" "1.3.2"
     "@ledgerhq/cryptoassets" "6.28.0"
     "@ledgerhq/devices" "6.24.1"
@@ -11515,6 +11561,18 @@ expect@^27.4.6:
     jest-matcher-utils "^27.5.1"
     jest-message-util "^27.5.1"
 
+expo-crypto@^10.1.2:
+  version "10.1.2"
+  resolved "https://registry.yarnpkg.com/expo-crypto/-/expo-crypto-10.1.2.tgz#5dfc0f0a5b4aa94dae2ecfb744d4aa8c001660b7"
+  integrity sha512-TYaBtV9oK5OH+EfsAUHQkWkRPifZjCMDn6Yf9gk3/LyHdJHDYnB6NQWTJo9Qkl6vzI9svQ6PMnQTm2Yxrb3ZfQ==
+
+expo-random@^12.1.2:
+  version "12.1.2"
+  resolved "https://registry.yarnpkg.com/expo-random/-/expo-random-12.1.2.tgz#ed4e7f85728b609bcb373bc4c4a1a05192ec44b9"
+  integrity sha512-ajB+Mwff9PdglsyLliaU4K9BtVwKvAVVI2hQhnvlS3QgsAhHf+jQVUfAysQJHuioF6ADMEsab/kRUy4Dy03aoQ==
+  dependencies:
+    base64-js "^1.3.0"
+
 express@^4.14.0:
   version "4.17.3"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.3.tgz#f6c7302194a4fb54271b73a1fe7a06478c8f85a1"
@@ -14916,6 +14974,16 @@ jpeg-js@^0.4.2:
   resolved "https://registry.yarnpkg.com/jpeg-js/-/jpeg-js-0.4.3.tgz#6158e09f1983ad773813704be80680550eff977b"
   integrity sha512-ru1HWKek8octvUHFHvE5ZzQ1yAsJmIvRdGWvSoKV52XKyuyYA437QWDttXT8eZXDSbuMpHlLzPDZUPd6idIz+Q==
 
+js-base64@^3.7.2:
+  version "3.7.2"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-3.7.2.tgz#816d11d81a8aff241603d19ce5761e13e41d7745"
+  integrity sha512-NnRs6dsyqUXejqk/yv2aiXlAvOs56sLkX6nUdeaNezI5LFFLlsZjOThmwnrcwh5ZZRwZlCMnVAY3CvhIhoVEKQ==
+
+js-logger@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/js-logger/-/js-logger-1.6.1.tgz#8f09671b515e4a6f31dced8fdb8923432e2c60af"
+  integrity sha512-yTgMCPXVjhmg28CuUH8CKjU+cIKL/G+zTu4Fn4lQxs8mRFH/03QTNvEFngcxfg/gRDiQAOoyCKmMTOm9ayOzXA==
+
 js-sha256@^0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/js-sha256/-/js-sha256-0.9.0.tgz#0b89ac166583e91ef9123644bd3c5334ce9d0966"
@@ -18111,7 +18179,7 @@ protobufjs@6.10.1:
     "@types/node" "^13.7.0"
     long "^4.0.0"
 
-protobufjs@^6.10.0, protobufjs@^6.8.8, protobufjs@~6.11.2:
+protobufjs@^6.10.0, protobufjs@^6.11.2, protobufjs@^6.8.8, protobufjs@~6.11.2:
   version "6.11.2"
   resolved "https://registry.yarnpkg.com/protobufjs/-/protobufjs-6.11.2.tgz#de39fabd4ed32beaa08e9bb1e30d08544c1edf8b"
   integrity sha512-4BQJoPooKJl2G9j3XftkIXjoC9C0Av2NOrWmbLWT1vH32GcSUHjM0Arra6UfTsVyfMAuFzaLucXn1sadxJydAw==
@@ -22173,7 +22241,7 @@ utf8-byte-length@^1.0.1:
   resolved "https://registry.yarnpkg.com/utf8-byte-length/-/utf8-byte-length-1.0.4.tgz#f45f150c4c66eee968186505ab93fcbb8ad6bf61"
   integrity sha1-9F8VDExm7uloGGUFq5P8u4rWv2E=
 
-utf8@3.0.0:
+utf8@3.0.0, utf8@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/utf8/-/utf8-3.0.0.tgz#f052eed1364d696e769ef058b183df88c87f69d1"
   integrity sha512-E8VjFIQ/TyQgp+TZfS6l8yp/xWppSAHzidGiRrqe4bK4XP9pTRyKFgGJpO3SN7zdX4DeomTrwaseCHovfpFcqQ==
