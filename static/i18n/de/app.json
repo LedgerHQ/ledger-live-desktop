@@ -1055,9 +1055,9 @@
     "hideCTA": "Token ausblenden"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Colection",
-    "desc": "This action will hide all NFTs from the <1><0>{{collectionName}}</0></1> collection, you can show them again using <3>Settings</3>",
-    "hideCTA": "Hide NFT Collection"
+    "title": "NFT-Sammlung ausblenden",
+    "desc": "Diese Aktion wird alle NFTs aus der <1><0>{{collectionName}}</0></1> Sammlung ausblenden. Sie können sie erneut mit <3>Einstellungen</3> anzeigen",
+    "hideCTA": "NFT-Sammlung ausblenden"
   },
   "banners": {
     "cleanCache": {
@@ -2560,22 +2560,22 @@
   },
   "solana": {
     "common": {
-      "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
-      "viewDetails": "View details",
+      "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen.",
+      "viewDetails": "Details anzeigen",
       "connectDevice": {
-        "title": "Device"
+        "title": "Gerät"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Bestätigung"
       }
     },
     "delegation": {
-      "totalStake": "Total Stake",
-      "commission": "Commission",
-      "delegate": "Add",
-      "listHeader": "Delegations",
-      "availableBalance": "Available balance",
-      "active": "Active",
+      "totalStake": "Summe Stake",
+      "commission": "Kommission",
+      "delegate": "Hinzufügen",
+      "listHeader": "Delegierungen",
+      "availableBalance": "Verfügbares Guthaben",
+      "active": "Aktiv",
       "activeTooltip": "Active amount generate rewards",
       "inactiveTooltip": "Inactive amount does not generate rewards",
       "delegatedInfoTooltip": "Total amount that is delegated to validators.",
