@@ -13,10 +13,8 @@ import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
-import type { StepId, StepProps, St } from "./types";
-import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
-import type { TFunction } from "react-i18next";
-import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import type { StepProps, St } from "./types";
+import type { Operation } from "@ledgerhq/live-common/lib/types";
 
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";

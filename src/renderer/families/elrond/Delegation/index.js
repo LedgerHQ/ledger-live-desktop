@@ -120,7 +120,7 @@ const Delegation = ({ account }: Props) => {
 
   const onEarnRewards = useCallback(() => {
     dispatch(
-      openModal("MODAL_ELROND_REWARDS_INFO", {
+      openModal("MODAL_ELROND_WITHDRAW", {
         account,
       }),
     );

@@ -1,7 +1,6 @@
 // @flow
 import invariant from "invariant";
 import React, { useState, useCallback } from "react";
-import { BigNumber } from "bignumber.js";
 import { compose } from "redux";
 import { connect, useDispatch } from "react-redux";
 import { Trans, withTranslation } from "react-i18next";
@@ -14,10 +13,8 @@ import { UserRefusedOnDevice } from "@ledgerhq/errors";
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import useBridgeTransaction from "@ledgerhq/live-common/lib/bridge/useBridgeTransaction";
 
-import type { StepId, StepProps, St } from "./types";
-import type { Account, Operation } from "@ledgerhq/live-common/lib/types";
-import type { TFunction } from "react-i18next";
-import type { Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import type { StepProps, St } from "./types";
+import type { Operation } from "@ledgerhq/live-common/lib/types";
 
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
@@ -26,9 +23,7 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
-import StepStarter, { StepStarterFooter } from "./steps/StepStarter";
-import StepValidators, { StepValidatorsFooter } from "./steps/StepValidators";
-import StepDestinationValidators from "./steps/StepDestinationValidators";
+import StepClaimRewards, { StepClaimRewardsFooter } from "./steps/StepClaimRewards";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
@@ -40,7 +35,9 @@ type OwnProps = {|
   params: {
     account: Account,
     parentAccount: ?Account,
-    validatorAddress: ?string,
+    delegations?: any,
+    validators?: any,
+    contract?: string,
   },
   name: string,
 |};
@@ -58,39 +55,23 @@ type Props = OwnProps & StateProps;
 
 const steps: Array<St> = [
   {
-    id: "validators",
-    label: <Trans i18nKey="cosmos.redelegation.flow.steps.validators.title" />,
-    component: StepValidators,
+    id: "withdraw",
+    label: <Trans i18nKey="elrond.claimRewards.flow.steps.claimRewards.title" />,
+    component: StepClaimRewards,
     noScroll: true,
-    footer: StepValidatorsFooter,
+    footer: StepClaimRewardsFooter,
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="cosmos.redelegation.flow.steps.device.title" />,
+    label: <Trans i18nKey="elrond.claimRewards.flow.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("castRedelegations"),
+    onBack: ({ transitionTo }: StepProps) => transitionTo("claimRewards"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="cosmos.redelegation.flow.steps.confirmation.title" />,
+    label: <Trans i18nKey="elrond.claimRewards.flow.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
-  },
-  {
-    id: "destinationValidators",
-    label: <Trans i18nKey="cosmos.redelegation.flow.steps.validators.title" />,
-    component: StepDestinationValidators,
-    noScroll: true,
-    excludeFromBreadcrumb: true,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("validators"),
-  },
-  {
-    id: "starter",
-    label: <Trans i18nKey="cosmos.redelegation.flow.steps.starter.title" />,
-    component: StepStarter,
-    noScroll: true,
-    excludeFromBreadcrumb: true,
-    footer: StepStarterFooter,
   },
 ];
 
@@ -119,34 +100,24 @@ const Body = ({
   const dispatch = useDispatch();
 
   const {
+    account,
     transaction,
+    bridgeError,
     setTransaction,
     updateTransaction,
-    account,
-    parentAccount,
-    status,
-    bridgeError,
     bridgePending,
+    status,
+    parentAccount,
   } = useBridgeTransaction(() => {
-    const { account, validatorAddress } = params;
+    const bridge = getAccountBridge(params.account, undefined);
+    const transaction = bridge.createTransaction(params.account);
 
-    invariant(account && account.cosmosResources, "cosmos: account and cosmos resources required");
-
-    const source = account.cosmosResources?.delegations.find(
-      d => d.validatorAddress === validatorAddress,
-    );
-
-    const bridge = getAccountBridge(account, undefined);
-
-    const t = bridge.createTransaction(account);
-
-    const transaction = bridge.updateTransaction(t, {
-      mode: "redelegate",
-      validators: [{ address: "", amount: source?.amount ?? BigNumber(0) }],
-      cosmosSourceValidator: validatorAddress,
-    });
-
-    return { account, parentAccount: undefined, transaction };
+    return {
+      account: params.account,
+      transaction: bridge.updateTransaction(transaction, {
+        mode: "withdraw",
+      }),
+    };
   });
 
   const handleCloseModal = useCallback(() => {
@@ -157,7 +128,7 @@ const Body = ({
 
   const handleRetry = useCallback(() => {
     setTransactionError(null);
-    onChangeStepId("validators");
+    onChangeStepId("withdraw");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
@@ -181,7 +152,8 @@ const Body = ({
     [account, dispatch],
   );
 
-  const error = transactionError || bridgeError;
+  const error = transactionError || bridgeError || status.errors.amount;
+  const warning = status.warnings ? Object.values(status.warnings)[0] : null;
 
   const errorSteps = [];
 
@@ -192,7 +164,7 @@ const Body = ({
   }
 
   const stepperProps = {
-    title: t("cosmos.redelegation.flow.title"),
+    title: t("elrond.claimRewards.flow.title"),
     device,
     account,
     parentAccount,
@@ -202,13 +174,12 @@ const Body = ({
     steps,
     errorSteps,
     disabledSteps: [],
-    hideBreadcrumb:
-      (!!error && ["validators"].includes(stepId)) ||
-      ["starter", "destinationValidators"].includes(stepId),
+    hideBreadcrumb: (!!error || !!warning) && ["withdraw"].includes(stepId),
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,
     error,
+    warning,
     status,
     optimisticOperation,
     openModal,
@@ -219,14 +190,19 @@ const Body = ({
     onTransactionError: handleTransactionError,
     t,
     bridgePending,
+    delegations: params.delegations,
+    validators: params.validators,
+    contract: params.contract,
   };
 
-  return (
-    <Stepper {...stepperProps}>
-      <SyncSkipUnderPriority priority={100} />
-      <Track onUnmount event="CloseModalRedelegation" />
-    </Stepper>
-  );
+  return <div>Work in Progress!</div>;
+
+  // return (
+  //   <Stepper {...stepperProps}>
+  //     <SyncSkipUnderPriority priority={100} />
+  //     <Track onUnmount={true} event="CloseModalClaimRewards" />
+  //   </Stepper>
+  // );
 };
 
 const C: React$ComponentType<OwnProps> = compose(

@@ -1,5 +1,3 @@
-// @flow
-
 import React from "react";
 import { Trans } from "react-i18next";
 import styled, { withTheme } from "styled-components";
@@ -7,7 +5,6 @@ import styled, { withTheme } from "styled-components";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { multiline } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import RetryButton from "~/renderer/components/RetryButton";
@@ -18,6 +15,9 @@ import { OperationDetails } from "~/renderer/drawers/OperationDetails";
 import { setDrawer } from "~/renderer/drawers/Provider";
 
 import type { StepProps } from "../types";
+
+import { denominate } from "~/renderer/families/elrond/helpers";
+import { constants } from "~/renderer/families/elrond/constants";
 
 const Container: ThemedComponent<{ shouldSpace?: boolean }> = styled(Box).attrs(() => ({
   alignItems: "center",
@@ -36,15 +36,39 @@ function StepConfirmation({
   device,
   signed,
   transaction,
+  validators,
 }: StepProps & { theme: * }) {
   if (optimisticOperation) {
+    const validator = transaction && transaction.recipient;
+
+    const v = validator && validators.find(({ providers }) => providers.includes(validator));
+
+    const amount = `${denominate({
+      input: String(transaction.amount),
+      showLastNonZeroDecimal: true,
+    })} ${constants.egldLabel}`;
+
+    const titleKey = transaction?.mode === "claimRewards" ? "title" : "titleCompound";
+    const textKey = transaction?.mode === "claimRewards" ? "text" : "textCompound";
+
     return (
       <Container>
-        <TrackPage category="Redelegation Cosmos Flow" name="Step Confirmed" />
+        <TrackPage category="ClaimRewards Elrond Flow" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
-          title={<Trans i18nKey="cosmos.redelegation.flow.steps.confirmation.success.title" />}
-          description={multiline(t("cosmos.redelegation.flow.steps.confirmation.success.text"))}
+          title={
+            <Trans i18nKey={`elrond.claimRewards.flow.steps.confirmation.success.${titleKey}`} />
+          }
+          description={
+            <div>
+              <Trans
+                i18nKey={`elrond.claimRewards.flow.steps.confirmation.success.${textKey}`}
+                values={{ amount, validator: v && v.name }}
+              >
+                <b></b>
+              </Trans>
+            </div>
+          }
         />
       </Container>
     );
@@ -53,13 +77,13 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="Redelegation Cosmos Flow" name="Step Confirmation Error" />
+        <TrackPage category="ClaimRewards Elrond Flow" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer
-            title={<Trans i18nKey="cosmos.redelegation.flow.steps.confirmation.broadcastError" />}
+            title={<Trans i18nKey="elrond.claimRewards.flow.steps.confirmation.broadcastError" />}
           />
         ) : null}
-        <ErrorDisplay error={error} withExportLogs />
+        <ErrorDisplay error={error} withExportLogs={true} />
       </Container>
     );
   }
@@ -84,16 +108,16 @@ export function StepConfirmationFooter({
     : null;
 
   return (
-    <Box horizontal alignItems="right">
+    <Box horizontal={true} alignItems="right">
       <Button ml={2} onClick={onClose}>
         <Trans i18nKey="common.close" />
       </Button>
       {concernedOperation ? (
         // FIXME make a standalone component!
         <Button
-          primary
+          primary={true}
           ml={2}
-          event="Redelegation Cosmos Flow Step 3 View OpD Clicked"
+          event="ClaimRewards Elrond Flow Step 3 View OpD Clicked"
           onClick={() => {
             onClose();
             if (account && concernedOperation) {
@@ -105,7 +129,7 @@ export function StepConfirmationFooter({
             }
           }}
         >
-          <Trans i18nKey="cosmos.redelegation.flow.steps.confirmation.success.cta" />
+          <Trans i18nKey="elrond.claimRewards.flow.steps.confirmation.success.cta" />
         </Button>
       ) : error ? (
         <RetryButton primary ml={2} onClick={onRetry} />
