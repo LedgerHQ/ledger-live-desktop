@@ -1054,6 +1054,11 @@
     "desc": "이 작업은 모든 <1><0>{{tokenName}}</0></1>의 계정을 숨기며 <3>설정</3>을 사용하여 다시 표시할 수 있습니다",
     "hideCTA": "토큰 숨기기"
   },
+  "hideNftCollection": {
+    "title": "Hide NFT Colection",
+    "desc": "This action will hide all NFTs from the <1><0>{{collectionName}}</0></1> collection, you can show them again using <3>Settings</3>",
+    "hideCTA": "Hide NFT Collection"
+  },
   "banners": {
     "cleanCache": {
       "title": "실험 설정을 변경하려면 캐시 삭제가 필요합니다",
@@ -2553,6 +2558,115 @@
       }
     }
   },
+  "solana": {
+    "common": {
+      "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+      "viewDetails": "View details",
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    },
+    "delegation": {
+      "totalStake": "Total Stake",
+      "commission": "Commission",
+      "delegate": "Add",
+      "listHeader": "Delegations",
+      "availableBalance": "Available balance",
+      "active": "Active",
+      "activeTooltip": "Active amount generate rewards",
+      "inactiveTooltip": "Inactive amount does not generate rewards",
+      "delegatedInfoTooltip": "Total amount that is delegated to validators.",
+      "withdrawableInfoTooltip": "Total amount that is withdrawable from delegations.",
+      "withdrawableTitle": "Withdrawable",
+      "statusUpdateNotice": "The status of the delegation will be updated when the transaction is confirmed.",
+      "ledgerByFigmentTC": "Ledger by Figment T&Cs",
+      "emptyState": {
+        "description": "You can earn SOL rewards by delegating your assets.",
+        "info": "How Delegation works",
+        "delegation": "Earn rewards"
+      },
+      "earnRewards": {
+        "description": "You may earn rewards by delegating your SOL assets to a validator.",
+        "bullet": {
+          "0": "You keep ownership of delegated assets",
+          "1": "Delegate using your Ledger device",
+          "2": "Assets will be available after undelegation"
+        },
+        "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+      },
+      "flow": {
+        "title": "Delegate",
+        "steps": {
+          "validator": {
+            "title": "Validator"
+          },
+          "amount": {
+            "title": "Amount"
+          },
+          "confirmation": {
+            "success": {
+              "title": "You have successfully delegated your assets"
+            }
+          }
+        }
+      },
+      "withdraw": {
+        "flow": {
+          "title": "Withdraw",
+          "steps": {
+            "amount": {
+              "title": "Amount"
+            },
+            "confirmation": {
+              "success": {
+                "title": "You have successfully withdrawn your assets.",
+                "text": "Your account balance will be updated when the transaction is confirmed."
+              }
+            }
+          }
+        }
+      },
+      "activate": {
+        "flow": {
+          "title": "Activate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully activated you delegation."
+              }
+            }
+          }
+        }
+      },
+      "reactivate": {
+        "flow": {
+          "title": "Reactivate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully reactivated you delegation."
+              }
+            }
+          }
+        }
+      },
+      "deactivate": {
+        "flow": {
+          "title": "Deactivate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully deactivated your delegation."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "보상 받기",
     "header": "위임",
@@ -2760,10 +2874,6 @@
           "title": "TronGrid.io 사용",
           "description": "원장 프록시 없이 트론 그리드 바로 사용하기"
         },
-        "experimentalJSCurrencies": {
-          "title": "실험 JS 도입",
-          "description": "테조스 및 코스모스에 실험 JS 구현을 사용합니다."
-        },
         "experimentalCurrencies": {
           "title": "실험 통합",
           "description": "사용 가능한 실험 암호화폐 통합을 사용합니다."
@@ -2847,6 +2957,12 @@
         "desc": "상위 계정으로 이동한 후 토큰을 오른쪽 마우스 클릭하여 '토큰 숨기기'를 선택하면 토큰을 숨길 수 있습니다.",
         "count": "({{count}}) 토큰",
         "count_plural": "({{count}}) 토큰"
+      },
+      "hiddenNftCollections": {
+        "title": "Hidden NFT Collections",
+        "desc": "You can hide NFT Collections by right-clicking on the collection name and selecting 'Hide NFT Collection'.",
+        "count": "{{count}} collection",
+        "count_plural": "{{count}} collections"
       },
       "fullNode": {
         "title": "비트코인 풀 노드 연결",
@@ -4128,6 +4244,9 @@
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "상위 계정의 잔액이 부족합니다"
+    },
+    "quantityNeedsToBePositive": {
+      "title": "Quantity needs to be at least 1"
     },
     "NotEnoughSpendableBalance": {
       "title": "잔액은 {{minimumAmount}} 미만일 수 없습니다"
