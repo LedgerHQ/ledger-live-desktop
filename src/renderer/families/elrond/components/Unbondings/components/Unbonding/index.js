@@ -61,7 +61,7 @@ const Unbonding: FC = ({ account, contract, seconds, validator, amount }: Unbond
 
   const onWithdraw = () => {
     dispatch(
-      openModal("MODAL_ELROND_WITHDRAW", {
+      openModal("MODAL_ELROND_REDELEGATE", {
         account,
         validator,
         contract,
