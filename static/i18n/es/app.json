@@ -65,7 +65,7 @@
     "reject": "Rechazar",
     "cancel": "Cancelar",
     "getSupport": "Obtener ayuda",
-    "delete": "Eliminar",
+    "delete": "Eliminar cuenta del Portfolio",
     "launch": "Ejecutar",
     "continue": "Continuar",
     "previous": "Anterior",
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "Tarjeta",
-    "learn": "Learn",
+    "learn": "Aprender",
     "menu": "Menú",
     "stars": "Cuentas destacadas",
     "accounts": "Cuentas",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "Probar"
   },
   "fullNode": {
     "status": "Estado",
@@ -720,11 +720,13 @@
     "undelegatingTooltip": "Los activos desdelegados presentan un bloqueo temporal de 21 días antes de estar disponibles."
   },
   "exchange": {
+    "chooseProvider": "Elegir de {{providerCount}} proveedor",
+    "chooseProviders": "Elegir de {{providerCount}} proveedores",
     "title": "Comprar y vender cripto",
     "reset": "Reiniciar flujo",
     "verifyAddress": "Confirma que la dirección que se muestra coincide exactamente con la que aparece en tu dispositivo",
     "buy": {
-      "header": "Compra y vende cripto",
+      "header": "Compra cripto a través de nuestros socios",
       "title": "Elige un proveedor para comprar cripto",
       "buyFrom": "Compra dondequiera que estés",
       "cryptoSupported": "cripto compatibles",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "Vender cripto con {{provider}}",
+      "header": "Vende cripto a través de nuestros socios",
       "title": "Vender cripto mediante <0>{{provider}}</0>",
       "tab": "Vender",
       "selectCrypto": "Elige un activo cripto",
@@ -1187,7 +1189,13 @@
     "deviceInBootloader": "Tu dispositivo está en modo Bootloader. Haz clic en <1>Continuar</1> para actualizarlo."
   },
   "learn": {
-    "title": "Learn"
+    "title": "Aprender",
+    "noConnection": "No hay conexión",
+    "noConnectionDesc": "Parece que no estás conectado a Internet. Por favor, revisa tu conexión y vuelve a intentarlo.",
+    "sectionShows": "Muestra",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Artículos"
   },
   "market": {
     "title": "Mercado",
@@ -1487,6 +1495,7 @@
     "appNotInstalled": "La aplicacion {{appName}} es necesaria para completar esta acción. Ingresa a Manager e instálala en tu dispositivo",
     "appNotInstalled_plural": "Las aplicaciones {{appName}} son necesarias para completar esta acción. Ingresa a Manager e instálalas en tu dispositivo",
     "openManager": "Abrir Manager",
+    "openOnboarding": "Configurar dispositivo",
     "outdated": "Versión de aplicación obsoleta",
     "outdatedDesc": "Hay una actualización importante disponible para la aplicación {{appName}} en tu dispositivo. Ingresa a Manager para actualizarla.",
     "installApp": "Instalación de aplicación {{appName}}",
@@ -1604,10 +1613,10 @@
         "tokenAppDisclaimerInstalled": "Para administrar los tokens <1>{{tokenType}} {{tokenName}}</1>, por favor verifica que tienes la versión <1>{{tokenType}} </1> antes de enviarlos <3>a tu cuenta de {{appName}} </3>.",
         "goToAccounts": "Ir a cuentas",
         "intallParentApp": "Instalar aplicación {{appName}}",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "Ir a la aplicación",
+        "swap": "Permuta",
+        "tool": "Más información",
+        "app": "Más información"
       },
       "uninstall": {
         "title": "Desinstalar todas",
@@ -2701,7 +2710,9 @@
       "addLocalAppDesc": "Explorar archivos locales y añadir una aplicación local usando un manifiesto local",
       "addLocalAppButton": "Explorar",
       "runLocalAppDeleteButton": "Eliminar",
-      "runLocalAppOpenButton": "Abrir"
+      "runLocalAppOpenButton": "Abrir",
+      "enableLearnStagingUrl": "URL de ensayo de la página Learn",
+      "enableLearnStagingUrlDesc": "Activar el URL de ensayo de la página Learn."
     },
     "currencies": {
       "selectPlaceholder": "Seleccionar activo cripto",
@@ -2751,11 +2762,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "Implementaciones JS experimentales",
-          "description": "Usar implementaciones de JS experimentales para Algorand y Tezos."
+          "description": "Usar implementaciones de JS experimentales para Tezos y Cosmos."
         },
         "experimentalCurrencies": {
           "title": "Integraciones experimentales",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "Utilizar integraciones experimentales de actrivos cripto disponibles."
         },
         "experimentalLanguages": {
           "title": "Probar traducciones",
@@ -2782,8 +2793,8 @@
           "description": "Cambiar el proveedor de aplicaciones en el Manager puede imposibilitar la instalación o desinstalación de aplicaciones en tu dispositivo Ledger."
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "Probar animaciones Lottie",
+          "description": "Probar todas las animaciones utilizadas en Ledger Live"
         }
       }
     },
@@ -2807,6 +2818,7 @@
     "removeAccountModal": {
       "title": "Quitar cuenta",
       "desc": "Esto no afectará a tus activos cripto. Las cuentas existentes siempre pueden añadirse de nuevo.",
+      "delete": "Eliminar del Portfolio",
       "warning": "Eliminar esta cuenta borrará el historial de transacciones de permuta asociado a dicha cuenta."
     },
     "openUserDataDirectory": {
@@ -3592,6 +3604,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "No es posible encontrar la aplicación {{appName}} para tu configuración específica.",
+      "description": "Intenta reinstalar la aplicación desde el Manager"
+    },
     "countervaluesUnavailable": {
       "title": "No es posible ofrecer una contraparte para este activo en este momento"
     },
@@ -3719,6 +3735,10 @@
     "DeviceHalted": {
       "title": "Reinicia tu dispositivo Ledger e inténtalo de nuevo",
       "description": "Se produjo un error inesperado. Inténtalo de nuevo"
+    },
+    "DeviceNotOnboarded": {
+      "title": "Tu dispositivo aún no está listo para usar",
+      "description": "Configura tu dispositivo antes de usarlo con Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "Reinicia tu dispositivo Ledger e inténtalo de nuevo",

@@ -65,7 +65,7 @@
     "reject": "رفض",
     "cancel": "إلغاء",
     "getSupport": "الحصول على الدعم",
-    "delete": "حذف",
+    "delete": "Remove account from portfolio",
     "launch": "بدء",
     "continue": "متابعة",
     "previous": "السابق",
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "بطاقة",
-    "learn": "Learn",
+    "learn": "تعلم",
     "menu": "القائمة",
     "stars": "الحسابات المفضلة",
     "accounts": "الحسابات",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "إختبر"
   },
   "fullNode": {
     "status": "الحالة",
@@ -720,11 +720,13 @@
     "undelegatingTooltip": "تكون الأصول غير المفوضة مقيدة في قفل زمني محدد بـ21 يومًا قبل أن تصبح متاحة."
   },
   "exchange": {
+    "chooseProvider": "Choose from {{providerCount}} provider",
+    "chooseProviders": "Choose from {{providerCount}} providers",
     "title": "شراء وبيع العملات المشفرة",
     "reset": "إعادة تعيين التدفق",
     "verifyAddress": "يُرجى تأكيد أن العنوان المعروض يتطابق تمامًا مع العنوان المعروض على جهازك",
     "buy": {
-      "header": "شراء وبيع الأصول المشفرة",
+      "header": "Buy crypto with our partners",
       "title": "اختار مزود لشراء الأصول المشفرة",
       "buyFrom": "قم بالشراء من أي مكان",
       "cryptoSupported": "الأصول المشفرة المدعومة",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "بيع العملات المشفرة باستخدام {{provider}}",
+      "header": "Sell crypto with our partners",
       "title": "بيع العملات المشفرة من خلال <0>{{provider}}</0>",
       "tab": "بيع",
       "selectCrypto": "اختار أصل مشفّر",
@@ -1187,7 +1189,13 @@
     "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
   },
   "learn": {
-    "title": "Learn"
+    "title": "تعلم",
+    "noConnection": "لايوجد اتصال",
+    "noConnectionDesc": "يبدو أنه ليس لديك اتصال بالإنترنت. الرجاء التحقق من اتصالك وحاول مرة أخرى.",
+    "sectionShows": "البرامج",
+    "sectionVideo": "فيديو",
+    "sectionPodcast": "بودكاست",
+    "sectionArticles": "مقالات"
   },
   "market": {
     "title": "سوق",
@@ -1487,6 +1495,7 @@
     "appNotInstalled": "التطبيق {{appName}} مطلوب لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيته على جهازك",
     "appNotInstalled_plural": "التطبيقات {{appName}} مطلوبة لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيتهم على جهازك",
     "openManager": "افتح المدير",
+    "openOnboarding": "إعداد الجهاز",
     "outdated": "إصدار التطبيق قديم",
     "outdatedDesc": "يوجد تحديث هام لتطبيق {{appName}} على جهازك. يُرجى الذهاب إلى المدير لتحديثه.",
     "installApp": "تثبيت تطبيق {{appName}}",
@@ -1604,10 +1613,10 @@
         "tokenAppDisclaimerInstalled": "لإدارة <1>رموز التوكن {{tokenName}} {{tokenType}}</1>، يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حسابك {{appName}}</3>.",
         "goToAccounts": "الذهاب إلى الحسابات",
         "intallParentApp": "تثبيت تطبيق {{appName}}",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "انتقل إلى التطبيق",
+        "swap": "مبادلة",
+        "tool": "معرفة المزيد",
+        "app": "معرفة المزيد"
       },
       "uninstall": {
         "title": "إلغاء تثبيت الكل",
@@ -2701,7 +2710,9 @@
       "addLocalAppDesc": "تصفح الملفات المحلية وقم بإضافة تطبيق محلي باستخدام بيان محلي",
       "addLocalAppButton": "تصفح",
       "runLocalAppDeleteButton": "حذف",
-      "runLocalAppOpenButton": "فتح"
+      "runLocalAppOpenButton": "فتح",
+      "enableLearnStagingUrl": "الرابط المرحلي (staging URL) للصفحة التعليمية",
+      "enableLearnStagingUrlDesc": "تمكين الرابط المرحلي (staging URL) للصفحة التعليمية."
     },
     "currencies": {
       "selectPlaceholder": "اختار الأصل المشفر",
@@ -2751,11 +2762,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "عمليات تنفيذ JS التجريبية",
-          "description": "استخدم عمليات تنفيذ JS التجريبية لAlgorand و Tezos."
+          "description": "Use experimental JS implementations for Tezos and Cosmos."
         },
         "experimentalCurrencies": {
           "title": "تكاملات تجريبية",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "استخدم عمليات تكامل الأصول المشفرة التجريبية المتاحة."
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -2782,8 +2793,8 @@
           "description": "تغيير مزود التطبيقات في المدير قد يجعله من المستحيل تثبيت أو إلغاء تثبيت التطبيقات على جهاز Ledger الخاص بك."
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "اختبر الرسوم المتحركة Lottie",
+          "description": "اختبر جميع الرسوم المتحركة المستخدمة في Ledger Live"
         }
       }
     },
@@ -2807,7 +2818,8 @@
     "removeAccountModal": {
       "title": "إزالة حساب",
       "desc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد.",
-      "warning": "سيؤدي حذف هذا الحساب إلى محو سجل معاملات المبادلة المرتبطة به."
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "عرض بيانات المستخدم",
@@ -3592,6 +3604,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "لا يمكن العثور على التطبيق {{appName}} للتهيئة الخاصة بك.",
+      "description": "حاول إعادة تثبيت التطبيق من المدير"
+    },
     "countervaluesUnavailable": {
       "title": "نحن غير قادرين على توفير قيمة مقابلة لهذا الأصل في الوقت الحالي"
     },
@@ -3719,6 +3735,10 @@
     "DeviceHalted": {
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
       "description": "حدث خطأ غير متوقع. يرجى إعادة المحاولة مرة أخرى."
+    },
+    "DeviceNotOnboarded": {
+      "title": "جهازك غير جاهز للاستخدام بعد",
+      "description": "قم بإعداد جهازك قبل استخدامه مع Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",

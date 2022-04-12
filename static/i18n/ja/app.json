@@ -65,7 +65,7 @@
     "reject": "却下",
     "cancel": "キャンセル",
     "getSupport": "サポートを利用する",
-    "delete": "削除",
+    "delete": "ポートフォリオからアカウントを削除する",
     "launch": "開始",
     "continue": "続行",
     "previous": "戻る",
@@ -164,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} bytes",
-    "kbUnit": "{{size}} KB",
-    "mbUnit": "{{size}} MB"
+    "kbUnit": "{{size}}KB",
+    "mbUnit": "{{size}}MB"
   },
   "time": {
     "minute": "分",
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "カード",
-    "learn": "Learn",
+    "learn": "学ぶ",
     "menu": "メニュー",
     "stars": "お気に入りアカウント",
     "accounts": "アカウント",
@@ -367,12 +367,12 @@
     },
     "missingApp": {
       "title": "お使いのデバイスに、{{appName}}アプリをインストールしてください。",
-      "subtitle": "「管理」から{{appName}} アプリをインストールして、暗号資産をスワップする。",
-      "cta": "「管理」に移動"
+      "subtitle": "管理画面から{{appName}}アプリをインストールして、暗号資産をスワップする。",
+      "cta": "管理画面に移動"
     },
     "outdatedApp": {
       "title": "デバイス上の{{appName}}アプリをアップデートしてください。",
-      "subtitle": "「管理」から{{appName}} アプリをインストールして、暗号資産をスワップする。",
+      "subtitle": "「管理」から{{appName}}アプリをインストールして、暗号資産をスワップする。",
       "cta": "「管理」に移動"
     },
     "providers": {
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "テスト"
   },
   "fullNode": {
     "status": "ステータス",
@@ -580,7 +580,7 @@
               "fields": {
                 "nodeHost": {
                   "title": "ホスト",
-                  "tooltip": "ノードがこのコンピュータ上で実行されている場合はデフォルトのままにするか、ノードの IP アドレスとポート番号を変更してください。"
+                  "tooltip": "ノードがこのコンピューター上で実行されている場合はデフォルトのままにするか、ノードの IP アドレスとポート番号を変更してください。"
                 },
                 "rpcCredentials": {
                   "title": "RPCクレデンシャル",
@@ -635,12 +635,12 @@
             "notConnected": {
               "header": "Ledger SatStackをダウンロードして起動する",
               "description": "Ledger SatStackは、Ledger Liveがフルノードと通信できるようにするためのアプリケーションです。続行する前にダウンロードして起動してください。",
-              "disclaimer": "SatStackはLedger Liveのフルノード接続に必要です。コンピュータ起動時のSatStackの自動起動設定を検討してください。",
+              "disclaimer": "SatStackはLedger Liveのフルノード接続に必要です。コンピューター起動時のSatStackの自動起動設定を検討してください。",
               "cta": "SatStackをダウンロード"
             },
             "satstack-disconnected": {
               "header": "SatStackに接続ができませんでした。",
-              "description": "このコンピュータでSatStackが起動していることを確認してください。"
+              "description": "このコンピューターでSatStackが起動していることを確認してください。"
             },
             "satstack-outdated": {
               "header": "SatStackをアップグレードしてください。",
@@ -720,11 +720,13 @@
     "undelegatingTooltip": "デリゲートを解除した資産は、21日間のロック期間後に再び利用可能になります。"
   },
   "exchange": {
+    "chooseProvider": "{{providerCount}}件のプロバイダーから選択する",
+    "chooseProviders": "{{providerCount}}件のプロバイダーから選択する",
     "title": "暗号通貨の購入と売却",
     "reset": "フローをリセット",
     "verifyAddress": "デバイスに表示されているアドレスと、完全に一致しているか確認してください。",
     "buy": {
-      "header": "暗号資産の購入と売却",
+      "header": "パートナーを通して暗号資産を購入する",
       "title": "暗号資産を購入するプロバイダーを選択",
       "buyFrom": "どこからでも購入可能",
       "cryptoSupported": "暗号資産対応",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "{{provider}}で暗号資産を売却する",
+      "header": "パートナーを通して暗号資産を売却する",
       "title": "<0>{{provider}}</0>で暗号資産を売却する",
       "tab": "売却",
       "selectCrypto": "暗号資産を選択",
@@ -1167,7 +1169,7 @@
   "emptyState": {
     "dashboard": {
       "title": "デバイスにアプリをインストールする",
-      "desc": "デバイスにアプリをインストールするには、マネージャーに移動してください。デバイスにアプリを入手後、アカウントの追加が可能になります。",
+      "desc": "デバイスにアプリをインストールするには、管理画面に移動してください。デバイスにアプリを入手後、アカウントの追加が可能になります。",
       "buttons": {
         "installApp": "「管理」に移動",
         "help": "ヘルプ"
@@ -1187,7 +1189,13 @@
     "deviceInBootloader": "Bootloaderモード搭載。<1>続行</1>をクリックしてアップデートしてください。"
   },
   "learn": {
-    "title": "Learn"
+    "title": "学ぶ",
+    "noConnection": "接続なし",
+    "noConnectionDesc": "インターネットにアクセスできません。接続を確認して、もう一度やり直してください。",
+    "sectionShows": "表示",
+    "sectionVideo": "動画",
+    "sectionPodcast": "ポッドキャスト",
+    "sectionArticles": "記事"
   },
   "market": {
     "title": "マーケット",
@@ -1206,7 +1214,7 @@
     "marketList": {
       "crypto": "暗号資産",
       "price": "価格",
-      "change": "変更",
+      "change": "前日比",
       "marketCap": "マーケットキャップ",
       "last7d": "過去7日間"
     },
@@ -1484,11 +1492,12 @@
     "quitApp": "デバイスのアプリケーションを終了する",
     "appNotInstalledTitle": "必要なアプリが揃っていません。",
     "appNotInstalledTitle_plural": "必要なアプリが揃っていません。",
-    "appNotInstalled": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
-    "appNotInstalled_plural": "操作を完了するには、{{appName}}アプリが必要です。「管理」からデバイスにインストールしてください。",
-    "openManager": "「管理」を開く",
+    "appNotInstalled": "操作を完了するには、{{appName}}アプリが必要です。管理画面からデバイスにインストールしてください。",
+    "appNotInstalled_plural": "操作を完了するには、{{appName}}アプリが必要です。管理画面からデバイスにインストールしてください。",
+    "openManager": "管理画面を開く",
+    "openOnboarding": "デバイスをセットアップ",
     "outdated": "アプリのバージョンが最新ではありません。",
-    "outdatedDesc": "お使いのデバイス上の{{appName}} アプリに重要なアップデートがあります。「管理」に移動してアップデートしてください。",
+    "outdatedDesc": "お使いのデバイス上の{{appName}}アプリに重要なアップデートがあります。「管理」からアップデートしてください。",
     "installApp": "{{appName}}アプリのインストール",
     "installAppDescription": "インストールが完了するまでお待ちください。",
     "listApps": "アプリの状態を確認しています。",
@@ -1574,7 +1583,7 @@
         "title_plural": "アップデートが利用可能です。",
         "progressTitle": "{{number}}件のアプリをアップデート",
         "progressTitle_plural": "{{number}}件のアプリをアップデート",
-        "progressWarning": "アップデート中にマネージャーを終了しないでください。",
+        "progressWarning": "アップデート中にManager(管理画面)を終了しないでください。",
         "progress": "すべてをアップデート中…"
       },
       "item": {
@@ -1604,10 +1613,10 @@
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} トークン</1>を管理するには、<3>{{appName}} アカウント</3>に送付する前に、<1>{{tokenType}} バージョン</1>であることを確認してください。",
         "goToAccounts": "「アカウント」へ移動",
         "intallParentApp": "{{appName}} アプリをインストール",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "アプリに移動する",
+        "swap": "スワップ",
+        "tool": "詳細はこちら",
+        "app": "詳細はこちら"
       },
       "uninstall": {
         "title": "すべてアンインストール",
@@ -1638,7 +1647,7 @@
       "updateBtn": "ファームウェアをアップデート",
       "banner": {
         "warning": "ファームウェアを最新の{{latestFirmware}}へアップデート可能です。",
-        "cta": "「管理」を開く",
+        "cta": "管理画面を開く",
         "old": {
           "warning": "デバイスのファームウェアのバージョンが古いため、アップデートできません。Ledgerサポートに連絡して、デバイスを交換してください。",
           "cta": "サポートへのお問い合わせ"
@@ -2701,7 +2710,9 @@
       "addLocalAppDesc": "ローカルファイルを参照し、ローカルのマニフェストファイルを使用してローカルアプリを追加する",
       "addLocalAppButton": "画面をチェックする",
       "runLocalAppDeleteButton": "削除",
-      "runLocalAppOpenButton": "開く"
+      "runLocalAppOpenButton": "開く",
+      "enableLearnStagingUrl": "学習ページのステージングURL",
+      "enableLearnStagingUrlDesc": "学習ページのステージングURLを有効にする。"
     },
     "currencies": {
       "selectPlaceholder": "暗号資産を選択",
@@ -2751,11 +2762,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "試験的JSの実装",
-          "description": "Algorand and Tezosの試験的JS実装を利用する。"
+          "description": "CosmosとTezosの試験的JS実装を利用する。"
         },
         "experimentalCurrencies": {
           "title": "試験的統合",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "利用可能な試験的暗号資産の統合を使用する。"
         },
         "experimentalLanguages": {
           "title": "翻訳テスト",
@@ -2782,14 +2793,14 @@
           "description": "プロバイダー管理でアプリプロバイダーを変更すると、Ledgerデバイスにアプリをインストールまたはアンインストールできなくなる場合があります。"
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "Lottieアニメーションのテスト",
+          "description": "Ledger Liveで使用される全アニメーションをテストする"
         }
       }
     },
     "hardResetModal": {
       "title": "Ledger Liveをリセット",
-      "desc": "Ledger Liveをリセットして、コンピュータ上のすべての設定とアカウントを消去します。 その後パスワードを選択し、Ledgerデバイスにアカウントを再度追加することが可能です。 暗号資産へのアクセスを提供する秘密鍵は、引き続きLedgerデバイスに安全に保管され、リカバリフレーズによってバックアップされます。",
+      "desc": "Ledger Liveをリセットして、コンピューター上のすべての設定とアカウントを消去します。 その後パスワードを選択し、Ledgerデバイスにアカウントを再度追加することが可能です。 暗号資産へのアクセスを提供する秘密鍵は、引き続きLedgerデバイスに安全に保管され、リカバリフレーズによってバックアップされます。",
       "warning": "Ledger Liveをリセットすると、すべてのアカウントのスワップ取引履歴が消去されます。"
     },
     "softResetModal": {
@@ -2807,7 +2818,8 @@
     "removeAccountModal": {
       "title": "アカウントの削除",
       "desc": "これは、お客様の暗号資産には影響しません。既存のアカウントは、後からいつでも追加できます。",
-      "warning": "このアカウントを削除すると、このアカウントに関連するスワップ取引履歴が消去されます。"
+      "delete": "ポートフォリオから削除",
+      "warning": "このアカウントを削除すると、このアカウントに関連するスワップ取引履歴も削除されます。"
     },
     "openUserDataDirectory": {
       "title": "ユーザーデータの閲覧",
@@ -2999,7 +3011,7 @@
         "contactSupportCTA": "サポートへのお問い合わせ",
         "continueCTA": "続行",
         "title": "箱の中身を確認してください。",
-        "description": "{{device}}にPINコードまたはリカバリーフレーズが付属していた場合、そのデバイスは安全ではありません。絶対に使用せず、Ledgerサポートに連絡してください。",
+        "description": "{{device}}に、PINコードまたはリカバリーフレーズが付属していた場合、そのデバイスは安全ではありません。絶対に使用せず、Ledgerサポートに連絡してください。",
         "alert": "デバイスのセットアップ時に表示されたリカバリーフレーズのみを使用してください。"
       }
     },
@@ -3018,7 +3030,7 @@
     "screens": {
       "welcome": {
         "title": "ようこそ、Ledgerへ",
-        "description": "コンピュータで暗号資産を安全に管理しましょう。",
+        "description": "コンピューターで暗号資産を安全に管理しましょう。",
         "cta": "はじめる",
         "noDevice": "デバイスがありませんか？<0>Ledger Nano Xを購入</0>",
         "languageWarning": {
@@ -3088,7 +3100,7 @@
           "deviceHowTo": {
             "turnOn": {
               "title": "Nanoの電源をオンにする",
-              "descr": "USBケーブルを使用して、デバイスをコンピュータに接続する。"
+              "descr": "USBケーブルを使用して、デバイスをコンピューターに接続する。"
             },
             "browse": {
               "title": "デバイスの画面をチェック",
@@ -3111,7 +3123,7 @@
           "deviceHowTo2": {
             "turnOn": {
               "title": "Nanoの電源をオンにする",
-              "descr": "USBケーブルでデバイスをコンピュータに接続する。"
+              "descr": "USBケーブルでデバイスをコンピューターに接続する。"
             },
             "browse": {
               "title": "デバイスの画面をチェック",
@@ -3257,7 +3269,7 @@
           "genuineCheck": {
             "success": {
               "title": "All good!",
-              "desc": "{{deviceName}} は正規品で、Ledger Liveを使う準備が整いました。"
+              "desc": "{{deviceName}} は正規品です。Ledger Liveの準備が整いました。"
             },
             "buttons": {
               "next": "続行",
@@ -3452,7 +3464,7 @@
           }
         },
         "anotherComputer": {
-          "title": "別のコンピュータを試す",
+          "title": "別のコンピューターを試す",
           "bullets": {
             "0": "別のコンピューターで<0>{{link}}</0>にアクセスし、Ledger Liveをダウンロードしてインストールする。",
             "1": "デバイスを接続してロックを解除し、検出されるか確認する。"
@@ -3592,6 +3604,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "特定の設定に必要な{{appName}}アプリが見つかりません。",
+      "description": "管理画面からアプリの再インストールを試す"
+    },
     "countervaluesUnavailable": {
       "title": "現在、この資産のカウンターバリュー（表示通貨）を提供できません。"
     },
@@ -3720,6 +3736,10 @@
       "title": "Ledgerデバイスを再起動し、もう一度やり直してください。",
       "description": "予期しないエラーが発生しました。もう一度お試しください。"
     },
+    "DeviceNotOnboarded": {
+      "title": "お使いのデバイスはまだ使用できません",
+      "description": "Ledger Liveを使用する前にデバイスを設定する。"
+    },
     "DeviceSocketFail": {
       "title": "Ledgerデバイスを再起動し、もう一度やり直してください。",
       "description": "予期せぬエラーが発生しました。後でもう一度お試しください。{{message}}"
@@ -3808,7 +3828,7 @@
       },
       "uninstall": {
         "title": "アプリのインストールを終了しますか？",
-        "description": "マネージャーを終了すると、アンインストールも終了します。",
+        "description": "Manager(管理画面)を終了すると、アンインストールも終了します。",
         "stay": "アンインストールを終了"
       },
       "update": {
@@ -3912,7 +3932,7 @@
       "description": "デバイスを再起動するか、Ledgerサポートにお問い合わせください。"
     },
     "UserRefusedAllowManager": {
-      "title": "デバイスのマネージャーが却下されました。"
+      "title": "デバイスのManagerが却下されました。"
     },
     "UserRefusedFirmwareUpdate": {
       "title": "デバイス上でアップデートがキャンセルされました。",
@@ -3932,7 +3952,7 @@
     },
     "UpdateYourApp": {
       "title": "アプリのアップデートが必要です。",
-      "description": "「管理」で{{managerAppName}} アプリをアンインストール後、再インストールしてください。"
+      "description": "管理ページから{{managerAppName}}アプリをアンインストール後、再インストールしてください。"
     },
     "DeviceOnDashboardExpected": {
       "title": "ダッシュボードに戻る",
@@ -3952,7 +3972,7 @@
     },
     "DeviceAppVerifyNotSupported": {
       "title": "アプリのアップデートが必要です。",
-      "description": "「管理」で{{managerAppName}} アプリをアンインストール後、再インストールしてください。"
+      "description": "管理ページで{{managerAppName}}アプリをアンインストール後、再インストールしてください。"
     },
     "InvalidAddress": {
       "title": "これは有効な{{currencyName}} アドレスではありません。"
@@ -3997,7 +4017,7 @@
       "list": {
         "1": "ボタンを押さずにUSBケーブルの取り外しや再接続をしてください。",
         "2": "両方のボタンを同時に3回押すと、ダッシュボードが表示されます。",
-        "3": "「管理」を開き、ファームウェアをアップデートをクリック。"
+        "3": "管理タブを開き、ファームウェアをアップデートをクリック。"
       }
     },
     "UnavailableTezosOriginatedAccountReceive": {

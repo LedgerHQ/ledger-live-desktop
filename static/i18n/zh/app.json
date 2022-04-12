@@ -65,7 +65,7 @@
     "reject": "拒绝",
     "cancel": "取消",
     "getSupport": "获取支持",
-    "delete": "删除",
+    "delete": "从资产组合中删除账户",
     "launch": "启动",
     "continue": "继续",
     "previous": "上一步",
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "卡",
-    "learn": "Learn",
+    "learn": "学习",
     "menu": "菜单",
     "stars": "星标账户",
     "accounts": "账户",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "测试"
   },
   "fullNode": {
     "status": "状态",
@@ -720,11 +720,13 @@
     "undelegatingTooltip": "解除委托的资产会有 21 天的时间锁，之后才可用。"
   },
   "exchange": {
+    "chooseProvider": "从 {{providerCount}} 提供商选择",
+    "chooseProviders": "从 {{providerCount}} 提供商选择",
     "title": "买入和卖出加密货币",
     "reset": "重置流程",
     "verifyAddress": "请确认显示的地址与您设备上显示的地址完全匹配",
     "buy": {
-      "header": "买入和卖出加密货币",
+      "header": "通过我们的合作伙伴买入加密货币",
       "title": "选择一个购买加密货币的供应方",
       "buyFrom": "可从任何地方购买",
       "cryptoSupported": "已支持的加密币种",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "使用 {{provider}} 卖出加密",
+      "header": "通过我们的合作伙伴卖出加密资产",
       "title": "通过 <0>{{provider}}</0> 卖出加密",
       "tab": "卖出",
       "selectCrypto": "选择加密资产",
@@ -1187,7 +1189,13 @@
     "deviceInBootloader": "您的设备处于 Bootloader 模式。请单击 <1>Continue</1> （继续）进行更新。"
   },
   "learn": {
-    "title": "Learn"
+    "title": "学习",
+    "noConnection": "无网络连接",
+    "noConnectionDesc": "未接入互联网，请检查连接状态后再次尝试。",
+    "sectionShows": "节目",
+    "sectionVideo": "视频",
+    "sectionPodcast": "播客",
+    "sectionArticles": "文章"
   },
   "market": {
     "title": "市场",
@@ -1487,6 +1495,7 @@
     "appNotInstalled": "需要 {{appName}} 应用程序来完成此操作。请前往管理器并在您的设备上安装它",
     "appNotInstalled_plural": "需要 {{appName}} 应用程序来完成此操作。请前往管理器并在您的设备上安装它",
     "openManager": "打开 Manager（管理器）",
+    "openOnboarding": "设置设备",
     "outdated": "应用程序版本过期",
     "outdatedDesc": "您设备上的 {{appName}} 应用程序有可用的重要更新。请前往管理器对其进行更新。",
     "installApp": "{{appName}} 应用程序安装",
@@ -1604,10 +1613,10 @@
         "tokenAppDisclaimerInstalled": "如需管理 <1>{{tokenName}} {{tokenType}} 代币</1>，请验证您确实拥有 <1>{{tokenType}} 版本，</1> 然后将其发送至 <3>您的 {{appName}} 账户</3>。",
         "goToAccounts": "前往账户",
         "intallParentApp": "安装 {{appName}} 应用程序",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "前往应用",
+        "swap": "互换",
+        "tool": "了解更多",
+        "app": "了解更多"
       },
       "uninstall": {
         "title": "卸载全部",
@@ -2701,7 +2710,9 @@
       "addLocalAppDesc": "浏览本地文件并使用本地清单添加本地应用程序",
       "addLocalAppButton": "浏览",
       "runLocalAppDeleteButton": "删除",
-      "runLocalAppOpenButton": "打开"
+      "runLocalAppOpenButton": "打开",
+      "enableLearnStagingUrl": "学习页面登台网页地址 URL",
+      "enableLearnStagingUrlDesc": "为学习页面启用登台网页地址 URL。"
     },
     "currencies": {
       "selectPlaceholder": "选择加密资产",
@@ -2751,11 +2762,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "实验性的 JS 实现",
-          "description": "对 Algorand 和 Tezos 使用实验性的 JS 实现。"
+          "description": "对 Tezos 和 Cosmos 使用实验性的 JS 实现。"
         },
         "experimentalCurrencies": {
           "title": "实验集成",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "使用可用的实验性加密资产集成。"
         },
         "experimentalLanguages": {
           "title": "翻译测试",
@@ -2782,8 +2793,8 @@
           "description": "在管理器中更改应用程序提供商可能会导致无法在您的 Ledger 设备上安装或卸载应用程序。"
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "测试 Lottie 动画",
+          "description": "测试 Ledger Live 中使用的所有动画"
         }
       }
     },
@@ -2807,6 +2818,7 @@
     "removeAccountModal": {
       "title": "移除账户",
       "desc": "该操作不会影响您的加密资产。可随时再次添加现有账户。",
+      "delete": "从资产组合中删除",
       "warning": "删除此账户将会清除您与它相关的 swap 互换交易历史记录。"
     },
     "openUserDataDirectory": {
@@ -3592,6 +3604,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "无法为您的特定配置找到 {{appName}} 应用程序。",
+      "description": "尝试从管理器重新安装应用程序"
+    },
     "countervaluesUnavailable": {
       "title": "我们目前无法为此资产提供对价"
     },
@@ -3719,6 +3735,10 @@
     "DeviceHalted": {
       "title": "请重启您的 Ledger 设备并重试",
       "description": "发生意外错误。请重试。"
+    },
+    "DeviceNotOnboarded": {
+      "title": "您的设备尚未准备好使用",
+      "description": "在使用 Ledger Live 之前设置您的设备。"
     },
     "DeviceSocketFail": {
       "title": "请重启您的 Ledger 设备并重试",

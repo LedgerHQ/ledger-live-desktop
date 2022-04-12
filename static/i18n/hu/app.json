@@ -65,7 +65,7 @@
     "reject": "Reject",
     "cancel": "Mégsem",
     "getSupport": "Támogatás kérése",
-    "delete": "Törlés",
+    "delete": "Remove account from portfolio",
     "launch": "Indít",
     "continue": "Folytatás",
     "previous": "Previous",
@@ -720,11 +720,13 @@
     "undelegatingTooltip": "Undelegated assets are in a timelock of 21 days, before being available."
   },
   "exchange": {
+    "chooseProvider": "Choose from {{providerCount}} provider",
+    "chooseProviders": "Choose from {{providerCount}} providers",
     "title": "Buy and sell crypto",
     "reset": "Reset flow",
     "verifyAddress": "Please confirm the address displayed exactly matches the one shown on your device",
     "buy": {
-      "header": "Buy and sell crypto",
+      "header": "Buy crypto with our partners",
       "title": "Choose a provider to buy crypto",
       "buyFrom": "Buy from anywhere",
       "cryptoSupported": "crypto supported",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "Sell crypto with {{provider}}",
+      "header": "Sell crypto with our partners",
       "title": "Sell crypto via <0>{{provider}}</0>",
       "tab": "Sell",
       "selectCrypto": "Choose a crypto asset",
@@ -1187,7 +1189,13 @@
     "deviceInBootloader": "Az eszköz Bootloader módban. Kattints a <1>Folytatásra</1> a frissítéshez."
   },
   "learn": {
-    "title": "Learn"
+    "title": "Learn",
+    "noConnection": "No connection",
+    "noConnectionDesc": "It seems you don't have access to the Internet. Please check your connection and try again.",
+    "sectionShows": "Shows",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Articles"
   },
   "market": {
     "title": "Market",
@@ -1487,6 +1495,7 @@
     "appNotInstalled": "The {{appName}} app is required to complete this action. Please go to the manager and install it on your device",
     "appNotInstalled_plural": "The {{appName}} apps are required to complete this action. Please go to the manager and install them on your device",
     "openManager": "Eszközkezelő megnyitása",
+    "openOnboarding": "Setup device",
     "outdated": "App version outdated",
     "outdatedDesc": "An important update is available for the {{appName}} application on your device. Please go to the Manager to update it.",
     "installApp": "{{appName}} App installation",
@@ -2701,7 +2710,9 @@
       "addLocalAppDesc": "Browse local files and add a local app using a local manifest",
       "addLocalAppButton": "Browse",
       "runLocalAppDeleteButton": "Delete",
-      "runLocalAppOpenButton": "Open"
+      "runLocalAppOpenButton": "Open",
+      "enableLearnStagingUrl": "Learn page staging URL",
+      "enableLearnStagingUrlDesc": "Enable the staging URL for the learn page."
     },
     "currencies": {
       "selectPlaceholder": "Select crypto asset",
@@ -2751,7 +2762,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Experimental JS implementations",
-          "description": "Use experimental JS implementations for Algorand and Tezos."
+          "description": "Use experimental JS implementations for Tezos and Cosmos."
         },
         "experimentalCurrencies": {
           "title": "Experimental integrations",
@@ -2807,7 +2818,8 @@
     "removeAccountModal": {
       "title": "Számla eltávolítása",
       "desc": "This will not affect your crypto assets. Existing accounts can always be added again.",
-      "warning": "Deleting this account will erase your swap transaction history associated to it."
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "Felhasználói adatok megtekintése",
@@ -3592,6 +3604,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "The {{appName}} app cannot be found for your specific configuration.",
+      "description": "Try reinstalling the app from the Manager"
+    },
     "countervaluesUnavailable": {
       "title": "We're not able to provide a countervalue for this asset at the moment"
     },
@@ -3719,6 +3735,10 @@
     "DeviceHalted": {
       "title": "Kérlek, indítsd újra a Ledger eszközöd, és próbáld meg újra",
       "description": "An unexpected error occurred. Please try again"
+    },
+    "DeviceNotOnboarded": {
+      "title": "Your device is not ready to use yet",
+      "description": "Set up your device before using it with Ledger Live."
     },
     "DeviceSocketFail": {
       "title": "Kérlek, indítsd újra a Ledger eszközöd, és próbáld meg újra",

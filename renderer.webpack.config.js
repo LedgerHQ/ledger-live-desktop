@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const babelPlugins = require("./babel.plugins");
 const UnusedWebpackPlugin = require("unused-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
 
 const packagesToTranspile = [
   /@polkadot[\\/]api/,
@@ -25,9 +26,9 @@ const packagesToTranspile = [
   /@polkadot[\\/]x-textencoder/,
   /@polkadot[\\/]x-ws/,
   /@polkadot[\\/]react-identicon/,
-]
+];
 
-const exceptionToTranspile = (path_ruled) => {
+const exceptionToTranspile = path_ruled => {
   // DO transpile these packages
   if (packagesToTranspile.some(pkg => path_ruled.match(pkg))) {
     return false;
@@ -36,19 +37,17 @@ const exceptionToTranspile = (path_ruled) => {
   // Ignore all other modules that are in node_modules
   if (path_ruled.match(/node_modules/)) {
     return true;
-  }
+  } else return false;
+};
 
-  else return false;
-}
-
-const includeToTranspile = (path_ruled) => {
+const includeToTranspile = path_ruled => {
   // DO transpile these packages
   if (packagesToTranspile.some(pkg => path_ruled.match(pkg))) {
     return true;
   }
 
   return false;
-}
+};
 
 const babelConfig = {
   presets: [
@@ -100,6 +99,18 @@ const babelTsConfig = {
   ],
 };
 
+function getDotenvPathFromEnv() {
+  if (process.env.TESTING) {
+    return ".env.testing";
+  } else if (process.env.STAGING) {
+    return ".env.staging";
+  } else if (process.env.NODE_ENV === "production") {
+    return ".env.production";
+  }
+
+  return ".env";
+}
+
 module.exports = {
   target: "electron-renderer",
   entry: ["./src/renderer/index.js"],
@@ -111,6 +122,9 @@ module.exports = {
     minimize: false,
   },
   plugins: [
+    new Dotenv({
+      path: getDotenvPathFromEnv(),
+    }),
     new HtmlWebpackPlugin({
       template: "./src/renderer/index.html",
       filename: "index.html",
@@ -146,7 +160,7 @@ module.exports = {
       },
       {
         test: /\.js$/i,
-        loader: require.resolve('@open-wc/webpack-import-meta-loader'),
+        loader: require.resolve("@open-wc/webpack-import-meta-loader"),
         include: includeToTranspile,
       },
       {

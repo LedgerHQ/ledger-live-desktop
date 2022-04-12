@@ -65,7 +65,7 @@
     "reject": "Refuser",
     "cancel": "Annuler",
     "getSupport": "Obtenir de l'aide",
-    "delete": "Supprimer",
+    "delete": "Retirer ce compte du Portefeuille",
     "launch": "Lancer",
     "continue": "Continuer",
     "previous": "Précédent",
@@ -107,7 +107,7 @@
     "lockScreen": {
       "title": "Bienvenue",
       "subTitle": null,
-      "description": "Entrer le mot de passe pour continuer",
+      "description": "Entrez le mot de passe pour continuer",
       "inputPlaceholder": "Saisissez votre mot de passe",
       "lostPassword": "Mot de passe oublié"
     },
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "Carte",
-    "learn": "Approfondir",
+    "learn": "Apprendre",
     "menu": "Menu",
     "stars": "Comptes favoris",
     "accounts": "Comptes",
@@ -720,11 +720,13 @@
     "undelegatingTooltip": "Les actifs dont la délégation est interrompue sont verrouillés pendant 21 jours avant d'être disponibles."
   },
   "exchange": {
+    "chooseProvider": "Choisissez parmi {{providerCount}} prestataire",
+    "chooseProviders": "Choisissez parmi {{providerCount}} prestataires",
     "title": "Acheter et vendre des cryptos",
     "reset": "Réinitialiser",
     "verifyAddress": "Merci de confirmer que l'adresse affichée est identique à celle sur votre appareil",
     "buy": {
-      "header": "Acheter et vendre des cryptos",
+      "header": "Acheter des cryptos avec nos partenaires",
       "title": "Choisissez un prestataire pour acheter des cryptos.",
       "buyFrom": "Achetez de là où vous vous trouvez",
       "cryptoSupported": "cryptos prises en charge",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "Vendre des cryptos avec {{provider}}",
+      "header": "Vendre des cryptos avec nos partenaires",
       "title": "Vendez des cryptos avec <0>{{provider}}</0>.",
       "tab": "Vendre",
       "selectCrypto": "Choisir un crypto-actif",
@@ -888,7 +890,7 @@
           "title": "Confirmation",
           "success": {
             "title": "Transaction bien envoyée",
-            "text": "Votre approbation a été envoyée au réseau pour confirmation. Vous pourrez émettre des prêts une fois qu'elle aura été confirmée.",
+            "text": "Votre validation a été envoyée au réseau pour confirmation. Vous pourrez émettre des prêts une fois qu'elle aura été confirmée.",
             "done": "Fermer",
             "info": "Il peut y avoir un délai avant que les transactions apparaissent dans un explorateur et soient confirmées."
           },
@@ -905,7 +907,7 @@
           "amountToWithdraw": "Montant à retirer",
           "withdrawAll": "Retirer le maximum",
           "placeholder": "Retirer le maximum",
-          "maxWithdrawble": "Le montant maximal à retirer est"
+          "maxWithdrawble": "Montant maximal à retirer :"
         },
         "connectDevice": {
           "title": "Appareil"
@@ -955,7 +957,7 @@
         "amount": {
           "title": "Montant",
           "amountToSupply": "Montant à déposer",
-          "maxSupply": "Le montant maximal disponible est"
+          "maxSupply": "Montant maximal disponible :"
         },
         "device": {
           "title": "Appareil"
@@ -1160,7 +1162,7 @@
     "title": "Adresse actuelle",
     "for": "Adresse pour <1><0>{{name}}</0></1>",
     "messageIfUnverified": "Merci de vérifier que l'adresse partagée est identique à celle sur votre appareil",
-    "messageIfSkipped": "Votre adresse {{name}} n'a pas été confirmée sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale.",
+    "messageIfSkipped": "Vous n'avez pas vérifié votre adresse {{name}} sur votre appareil Ledger. Vérifiez-la pour une sécurité optimale.",
     "showQrCode": "Afficher le code QR",
     "taprootWarning": "Vérifiez que l'émetteur prend en charge Taproot"
   },
@@ -1187,7 +1189,13 @@
     "deviceInBootloader": "Appareil en mode Bootloader. Choisissez <1>Continuer</1> pour le mettre à jour."
   },
   "learn": {
-    "title": "Approfondir"
+    "title": "Apprendre",
+    "noConnection": "Pas de connexion",
+    "noConnectionDesc": "Aucune connexion Internet détectée. Veuillez vérifier votre connexion et réessayer.",
+    "sectionShows": "Séries",
+    "sectionVideo": "Vidéos",
+    "sectionPodcast": "Podcasts",
+    "sectionArticles": "Articles"
   },
   "market": {
     "title": "Marché",
@@ -1383,7 +1391,7 @@
     "createNewAccount": {
       "noOperationOnLastAccount": "Impossible d'ajouter un nouveau compte avant d'avoir reçu des actifs sur votre compte <1><0>{{accountName}}</0></1>",
       "noAccountToCreate": "Aucun compte <1><0>{{currencyName}}</0></1> trouvé",
-      "showAllAddressTypes": "Montrer tous les types d'adresses",
+      "showAllAddressTypes": "Afficher tous les types d'adresses",
       "showAllAddressTypesTooltip": "Ne changez le type d'adresse que si vous avez besoin de recevoir des {{family}} sur d'autres formats d'adresse."
     },
     "supportLinks": {
@@ -1481,12 +1489,13 @@
     "connectAndUnlockDevice": "Connectez et déverrouillez votre appareil.",
     "unlockDevice": "Déverrouillez votre appareil.",
     "unlockDeviceAfterFirmwareUpdate": "Patientez pendant la mise à jour du micrologiciel, puis déverrouillez votre appareil avec votre code PIN.",
-    "quitApp": "Quittez l'application sur votre appareil.",
+    "quitApp": "Sortez de l'application sur votre appareil.",
     "appNotInstalledTitle": "Application nécessaire manquante",
     "appNotInstalledTitle_plural": "Applications nécessaires manquantes",
     "appNotInstalled": "L'application {{appName}} est nécessaire pour terminer cette action. Utilisez le Gestionnaire pour l'installer sur votre appareil.",
     "appNotInstalled_plural": "Les applications {{appName}} sont nécessaires pour terminer cette action. Utilisez le Gestionnaire pour les installer sur votre appareil",
     "openManager": "Ouvrir le Gestionnaire",
+    "openOnboarding": "Configurer un appareil",
     "outdated": "Version de l'application obsolète",
     "outdatedDesc": "Une mise à jour importante est disponible pour l'application {{appName}} sur votre appareil. Merci d'aller dans le Gestionnaire pour mettre à jour.",
     "installApp": "Installation de l'application {{appName}}",
@@ -1604,10 +1613,10 @@
         "tokenAppDisclaimerInstalled": "Pour gérer <1>des tokens {{tokenName}} {{tokenType}}</1>, vérifiez que vous avez bien la <1> version {{tokenType}}</1> avant d'en envoyer <3>sur votre compte {{appName}}</3>.",
         "goToAccounts": "Accéder aux Comptes",
         "intallParentApp": "Installer l'application {{appName}}",
-        "plugin": "Go to app",
+        "plugin": "Accéder à l'application",
         "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "tool": "En savoir plus",
+        "app": "En savoir plus"
       },
       "uninstall": {
         "title": "Tout désinstaller",
@@ -1857,7 +1866,7 @@
       },
       "amount": {
         "title": "Montant",
-        "banner": "Le montant maximal pouvant être envoyé est",
+        "banner": "Montant maximal pouvant être envoyé :",
         "fees": "Frais",
         "standard": "Standard",
         "advanced": "Avancé",
@@ -2701,7 +2710,9 @@
       "addLocalAppDesc": "Parcourez vos fichiers et ajoutez une app locale avec un manifeste local.",
       "addLocalAppButton": "Naviguer",
       "runLocalAppDeleteButton": "Effacer",
-      "runLocalAppOpenButton": "Ouvrir"
+      "runLocalAppOpenButton": "Ouvrir",
+      "enableLearnStagingUrl": "Activer l'URL de test de la page Apprendre",
+      "enableLearnStagingUrlDesc": "Activez l'URL de test de la page Apprendre."
     },
     "currencies": {
       "selectPlaceholder": "Crypto-actif",
@@ -2751,7 +2762,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Implémentations JS expérimentales",
-          "description": "Utilisez des implémentations JS expérimentales pour Algorand et Tezos."
+          "description": "Utilisez des implémentations JS expérimentales pour Tezos et Cosmos."
         },
         "experimentalCurrencies": {
           "title": "Intégrations expérimentales",
@@ -2807,7 +2818,8 @@
     "removeAccountModal": {
       "title": "Supprimer le compte",
       "desc": "Cela n'a pas d'effet sur vos crypto-actifs. Vous pourrez de nouveau ajouter vos comptes existants.",
-      "warning": "La suppression de ce compte effacera l'historique de vos transactions de swap avec ce dernier."
+      "delete": "Retirer du Portefeuille",
+      "warning": "L'historique de vos transactions de swap en lien avec ce compte sera effacé."
     },
     "openUserDataDirectory": {
       "title": "Voir les données utilisateur",
@@ -3059,12 +3071,12 @@
           "getStarted": "Commencer",
           "pinCode": "Code PIN",
           "recoveryPhrase": "Phrase de récupération",
-          "hideRecoveryPhrase": "Cacher sa phrase de récupération",
-          "pairNano": "Connecter son Nano"
+          "hideRecoveryPhrase": "Cacher votre phrase de récupération",
+          "pairNano": "Connecter votre Nano"
         },
         "screens": {
           "importYourRecoveryPhrase": {
-            "title": "Restaurer à partir d'une phrase de récupération",
+            "title": "Restaurez à partir d'une phrase de récupération",
             "paragraph1": "Utilisez votre phrase de récupération afin de restaurer, remplacer ou sauvegarder votre wallet physique Ledger.",
             "paragraph2": "Votre Nano va restaurer vos clés privées pour vous permettre d'accéder à vos cryptos et de les gérer.",
             "buttons": {
@@ -3174,7 +3186,7 @@
             }
           },
           "existingRecoveryPhrase": {
-            "title": "Saisir sa phrase de récupération",
+            "title": "Saisissez votre phrase de récupération",
             "paragraph1": "Votre phrase de récupération (\"recovery phrase\") est la liste secrète de mots que vous avez mise en lieu sûr après avoir configuré votre nouveau wallet.",
             "paragraph2": "Ledger ne conserve pas de copie de votre phrase de récupération.",
             "disclaimer": "Je comprends que si je perds ma phrase de récupération, je ne pourrais plus accéder à mes cryptos au cas où je n'ai plus accès à mon Nano.",
@@ -3191,7 +3203,7 @@
           },
           "useRecoverySheet": {
             "takeYourRecoverySheet": {
-              "title": "Utiliser sa feuille de récupération",
+              "title": "Utiliser votre feuille de récupération",
               "descr": "Prenez la feuille de récupération vierge incluse avec votre Nano. Contactez l'Assistance Ledger si la feuille de récupération fournie n'était pas vierge."
             },
             "writeDownWords": {
@@ -3242,7 +3254,7 @@
           },
           "recoveryHowTo3": {
             "reEnterWord": {
-              "title": "Confirmer sa phrase de récupération",
+              "title": "Confirmer votre phrase de récupération",
               "descr": "Appuyez sur le bouton droit pour faire défiler les mots jusqu'à ce que vous trouviez le mot n°1 (\"Word #1\"). Validez en appuyant sur les deux boutons."
             },
             "repeat": {
@@ -3266,7 +3278,7 @@
             }
           },
           "hideRecoveryPhrase": {
-            "title": "Cacher sa phrase de récupération",
+            "title": "Cachez votre phrase de récupération",
             "paragraph": "Votre phrase de récupération est votre seule façon d'accéder à vos cryptos si vous ne pouvez plus utiliser votre Nano. La garder en lieu sûr est crucial.",
             "keepItOffline": "Saisissez ces mots uniquement sur un wallet physique, pas sur un ordinateur ni sur un téléphone.",
             "neverShowToAnyone": "Ne partagez jamais vos 24 mots avec qui que ce soit. Pas même Ledger.",
@@ -3274,7 +3286,7 @@
               "next": "Compris",
               "prev": "Étape précédente",
               "help": "Besoin d'aide",
-              "learn": "Apprendre à cacher sa phrase de récupération"
+              "learn": "Apprendre à cacher votre phrase de récupération"
             }
           },
           "pairMyNano": {
@@ -3293,23 +3305,23 @@
       "heading": "Les bases",
       "screens": {
         "accessYourCoins": {
-          "title": "Accéder à ses cryptos",
+          "title": "Accédez à vos cryptos",
           "description": "Vos crypto-actifs sont stockés sur la blockchain. Vous avez besoin d'une clé privée pour y accéder et les gérer."
         },
         "ownYourPrivateKey": {
-          "title": "Posséder sa clé privée",
+          "title": "Détenez votre clé privée",
           "description": "Votre clé privée est stockée dans votre wallet Ledger. Vous devez être la seule personne à la posséder pour conserver le contrôle de votre argent."
         },
         "stayOffline": {
-          "title": "Rester hors ligne",
+          "title": "Restez hors ligne",
           "description": "Votre Nano est un wallet physique de stockage à froid. Cela signifie que votre clé privée n'est jamais exposée sur Internet, même lorsque vous utilisez Ledger Live."
         },
         "validateTransactions": {
-          "title": "Valider ses transactions",
+          "title": "Validez vos transactions",
           "description": "Achetez, vendez, gérez, échangez et gagnez des cryptos en toute sécurité sur Ledger Live. Vous devez valider chaque transaction de vos cryptos avec votre Nano."
         },
         "setUpNanoWallet": {
-          "title": "Configurer son Nano",
+          "title": "Configurez votre Nano",
           "description": "Commencez par configurer les paramètres de votre nouveau Nano.",
           "CTA": "Configurer le Nano"
         }
@@ -3592,6 +3604,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "Échec de la localisation de l'application {{appName}} pour votre appareil.",
+      "description": "Veuillez essayer de réinstaller l'application depuis le Gestionnaire."
+    },
     "countervaluesUnavailable": {
       "title": "Actuellement impossible d'afficher une devise de contrepartie pour cet actif"
     },
@@ -3720,6 +3736,10 @@
       "title": "Veuillez redémarrer votre appareil Ledger et réessayer.",
       "description": "Une erreur inattendue s'est produite. Veuillez réessayer."
     },
+    "DeviceNotOnboarded": {
+      "title": "Votre appareil n'est pas encore prêt à être utilisé.",
+      "description": "Configurez votre appareil avant de l'utiliser avec Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "Veuillez redémarrer votre appareil Ledger et réessayer.",
       "description": "Une erreur inattendue s'est produite. Veuillez réessayer ({{message}})."
@@ -3803,20 +3823,20 @@
     "ManagerQuitPage": {
       "install": {
         "title": "Finir l'installation de l'application en cours ?",
-        "description": "Quitter le Gestionnaire interrompra l'installation de l'application. Merci de finir l'installation pour installer les applications dans la file d'attente.",
+        "description": "Sortir du Gestionnaire interrompra l'installation de l'application. Merci de finir l'installation pour installer les applications dans la file d'attente.",
         "stay": "Finir l'installation"
       },
       "uninstall": {
         "title": "Finir la désinstallation de l'application en cours ?",
-        "description": "Quitter le Gestionnaire interrompra les désinstallations des applications en cours.",
+        "description": "Sortir du Gestionnaire interrompra les désinstallations des applications en cours.",
         "stay": "Finir la désinstallation"
       },
       "update": {
         "title": "Finir les mises à jour d'applications en cours ?",
-        "description": "Quitter le Gestionnaire interrompra les mises à jour d'applications en cours.",
+        "description": "Sortir du Gestionnaire interrompra les mises à jour d'applications en cours.",
         "stay": "Finir les mises à jour"
       },
-      "quit": "Quitter le Gestionnaire"
+      "quit": "Sortir du Gestionnaire"
     },
     "ManagerUninstallBTCDep": {
       "title": "Application nécessaire",

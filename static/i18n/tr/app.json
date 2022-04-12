@@ -65,7 +65,7 @@
     "reject": "Reddet",
     "cancel": "İptal et",
     "getSupport": "Destek alın",
-    "delete": "Sil",
+    "delete": "Hesabı portföyden kaldır",
     "launch": "Başlat",
     "continue": "Devam",
     "previous": "Geri",
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "Kart",
-    "learn": "Learn",
+    "learn": "Öğren",
     "menu": "Menü",
     "stars": "Favori hesaplar",
     "accounts": "Hesaplar",
@@ -720,11 +720,13 @@
     "undelegatingTooltip": "Yetkisi iptal edilen varlıklar, kullanıma açılmadan önce 21 gün boyunca zaman kilidinde tutulurlar."
   },
   "exchange": {
+    "chooseProvider": "{{providerCount}} sağlayıcı arasında seçim yapın",
+    "chooseProviders": "{{providerCount}} sağlayıcı arasında seçim yapın",
     "title": "Kripto al ve sat",
     "reset": "Başa dön",
     "verifyAddress": "Görüntülenen adres ile cihazınızda gösterilen adresin tam olarak eşleştiğinden lütfen emin olun",
     "buy": {
-      "header": "Kripto alın ve satın",
+      "header": "Ortaklarımız ile kripto satın alın",
       "title": "Kripto satın almak için bir sağlayıcı seçin",
       "buyFrom": "İstediğiniz yerden satın alın",
       "cryptoSupported": "kripto destekleniyor",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "{{provider}} ile kripto satın",
+      "header": "Ortaklarımız ile kripto satın",
       "title": "<0>{{provider}}</0> üzerinden kripto satın",
       "tab": "Sat",
       "selectCrypto": "Bir kripto varlık seçin",
@@ -1187,7 +1189,13 @@
     "deviceInBootloader": "Cihaz Bootloader (önyükleyici) modunda. Güncellemek için <1>Devam</1>'a tıklayın."
   },
   "learn": {
-    "title": "Learn"
+    "title": "Öğren",
+    "noConnection": "Bağlantı yok",
+    "noConnectionDesc": "İnternet bağlantısı kurulamadı. Lütfen bağlantınızı kontrol edin ve tekrar deneyin.",
+    "sectionShows": "Seriler",
+    "sectionVideo": "Videolar",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Makaleler"
   },
   "market": {
     "title": "Piyasa",
@@ -1487,6 +1495,7 @@
     "appNotInstalled": "Bu eylemi tamamlamak için {{appName}} uygulaması gerekli. Lütfen yöneticiye gidin ve cihazınıza yükleyin",
     "appNotInstalled_plural": "Bu işlemi tamamlamak için {{appName}} uygulamaları gerekli. Lütfen yöneticiye gidin ve cihazınıza yükleyin",
     "openManager": "Yöneticiyi Aç",
+    "openOnboarding": "Cihazı kurun",
     "outdated": "Uygulama sürümü eski",
     "outdatedDesc": "Cihazınızdaki {{appName}} uygulaması için önemli bir güncelleme mevcut. Güncellemek için lütfen Yöneticiye gidin.",
     "installApp": "{{appName}} Uygulama yüklemesi",
@@ -1604,10 +1613,10 @@
         "tokenAppDisclaimerInstalled": "<1>{{tokenName}} {{tokenType}} token'larını</1> yönetmek için lütfen <3>{{appName}} hesabınıza</3> göndermeden önce <1>{{tokenType}} sürümüne</1> sahip olduğunuzdan emin olun.",
         "goToAccounts": "Hesaplara git",
         "intallParentApp": "{{appName}} uygulamasını yükleyin",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "Uygulamaya git",
+        "swap": "Takas",
+        "tool": "Daha fazla bilgi",
+        "app": "Daha fazla bilgi"
       },
       "uninstall": {
         "title": "Tümünü kaldır",
@@ -2076,7 +2085,7 @@
       "delegate": "Ekle",
       "undelegate": "Yetkiyi iptal et",
       "redelegate": "Yetkiyi yeniden devret",
-      "redelegateDisabledTooltip": "Yetkiyi başkasına devretmek için <0>{{days}}</0> gün beklemelisiniz",
+      "redelegateDisabledTooltip": "Yetkiyi yeniden devretmek için <0>{{days}}</0> gün beklemelisiniz",
       "redelegateMaxDisabledTooltip": "Bir seferde en fazla <0>7</0> doğrulayıcıya yetki devredebilirsiniz.",
       "undelegateDisabledTooltip": "Bir seferde en fazla <0>7</0> doğrulayıcının yetkisini iptal edebilirsiniz.",
       "reward": "Ödüllerinizi alın",
@@ -2155,7 +2164,7 @@
     },
     "redelegation": {
       "flow": {
-        "title": "Varlıkların Yetkisini Başkasına Devretme",
+        "title": "Varlıkların Yetkisini Yeniden Devretme",
         "steps": {
           "starter": {
             "title": "Yetkinin Yeniden Devri",
@@ -2701,7 +2710,9 @@
       "addLocalAppDesc": "Yerel dizini kullanarak yerel dosyalara göz atın ve yerel bir uygulama ekleyin",
       "addLocalAppButton": "Göz At",
       "runLocalAppDeleteButton": "Sil",
-      "runLocalAppOpenButton": "Aç"
+      "runLocalAppOpenButton": "Aç",
+      "enableLearnStagingUrl": "Öğren sayfası test URL'si",
+      "enableLearnStagingUrlDesc": "Öğren sayfası için test ortamı URL'sini etkinleştirin."
     },
     "currencies": {
       "selectPlaceholder": "Kripto varlık seç",
@@ -2751,11 +2762,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "Deneysel JS uygulamaları",
-          "description": "Algorand ve Tezos için deneysel JS uygulamalarını kullanın."
+          "description": "Tezos ve Cosmos için deneysel JS uygulamalarını kullanın."
         },
         "experimentalCurrencies": {
           "title": "Deneysel entegrasyonlar",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "Mevcut deneysel kripto varlık entegrasyonlarını kullanın."
         },
         "experimentalLanguages": {
           "title": "Çeviri testi",
@@ -2782,8 +2793,8 @@
           "description": "Yönetici'de uygulama sağlayıcısını değiştirmek, Ledger cihazınıza uygulama yüklemeyi veya kaldırmayı imkansız hale getirebilir."
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "Lottie animasyonlarını test edin",
+          "description": "Ledger Live'da kullanılan tüm animasyonları test edin"
         }
       }
     },
@@ -2807,7 +2818,8 @@
     "removeAccountModal": {
       "title": "Hesabı kaldır",
       "desc": "Bu eylem kripto varlıklarınızı etkilemez. Mevcut hesaplar her zaman tekrar eklenebilir.",
-      "warning": "Bu hesabın silinmesi, hesapla ilgili takas işlem geçmişinin de silinmesine neden olacaktır."
+      "delete": "Portföyden kaldır",
+      "warning": "Bu hesabın kaldırılması, hesapla ilgili takas işlem geçmişinin de silinmesine neden olacaktır."
     },
     "openUserDataDirectory": {
       "title": "Kullanıcı verilerini görün",
@@ -3100,7 +3112,7 @@
             },
             "follow": {
               "title": "Yönergeleri uygulayın",
-              "descr": "PIN kodunuzdaki yönergeleri uygulamak için buraya dönün."
+              "descr": "PIN kodunuzla ilgili yönergeleri uygulamak için buraya dönün."
             },
             "buttons": {
               "next": "Sonraki adım",
@@ -3123,7 +3135,7 @@
             },
             "follow": {
               "title": "Yönergeleri uygulayın",
-              "descr": "PIN kodunuzdaki yönergeleri uygulamak için buraya dönün."
+              "descr": "PIN kodunuzla ilgili yönergeleri uygulamak için buraya dönün."
             },
             "buttons": {
               "next": "Sonraki adım",
@@ -3142,7 +3154,7 @@
             }
           },
           "quizSuccess": {
-            "title": "İşin uzmanı oldunuz bile!",
+            "title": "İşin ustası oldunuz bile!",
             "paragraph": "Kriptonuzu güvenli bir şekilde yönetmeye hazırsınız.\n\nSadece küçük bir adım kaldı!",
             "buttons": {
               "next": "Sonraki adım",
@@ -3151,7 +3163,7 @@
             }
           },
           "quizFailure": {
-            "title": "İşin uzmanı olmanıza az kaldı...",
+            "title": "İşin ustası olmanıza az kaldı...",
             "paragraph": "Merak etmeyin! Ledger, yolculuğunuz boyunca size rehberlik etmek için burada. Yakında kripto güvenliğiniz konusunda çok daha rahat hissedeceksiniz.\n\nSadece küçük bir adım kaldı!",
             "buttons": {
               "next": "Sonraki adım",
@@ -3302,7 +3314,7 @@
         },
         "stayOffline": {
           "title": "Çevrim dışı kalın",
-          "description": "Nano'nuz \"soğuk depolama\" cüzdanı olarak çalışır. Bu, uygulamayı kullanırken bile özel anahtarınızı asla çevrim içi olarak açığa çıkarmayacağı anlamına gelir."
+          "description": "Nano cihazınız \"soğuk depolama\" cüzdanı olarak çalışır. Yani özel anahtarınız, bu uygulamayı kullanırken bile asla çevrim içi olarak açığa çıkmaz."
         },
         "validateTransactions": {
           "title": "İşlemleri onaylayın",
@@ -3310,7 +3322,7 @@
         },
         "setUpNanoWallet": {
           "title": "Nano'nuzu kuralım!",
-          "description": "Nano güvenliğinizi kurarak başlayacağız.",
+          "description": "Nano cihazınızın güvenliğini sağlayarak başlayacağız.",
           "CTA": "Haydi yapalım!"
         }
       }
@@ -3592,6 +3604,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "Yapılandırmanız için {{appName}} uygulaması bulunamadı.",
+      "description": "Uygulamayı Yöneticiden yeniden yüklemeyi deneyin"
+    },
     "countervaluesUnavailable": {
       "title": "Şu anda bu varlık için bir karşı değer sağlayamıyoruz"
     },
@@ -3719,6 +3735,10 @@
     "DeviceHalted": {
       "title": "Lütfen Ledger cihazınızı yeniden başlatın ve tekrar deneyin",
       "description": "Beklenmedik bir hata oluştu. Lütfen tekrar deneyin"
+    },
+    "DeviceNotOnboarded": {
+      "title": "Cihazınız henüz kullanıma hazır değil",
+      "description": "Ledger Live ile kullanmaya başlamadan önce cihazınızı kurun."
     },
     "DeviceSocketFail": {
       "title": "Lütfen Ledger cihazınızı yeniden başlatın ve tekrar deneyin",
@@ -3948,7 +3968,7 @@
     },
     "WrongDeviceForAccount": {
       "title": "Bir hata oluştu",
-      "description": "Lütfen donanım cüzdanınızın seçilen hesapla ilişkili kurtarma ifadesi veya passphrasse ile ayarlandığını kontrol edin."
+      "description": "Lütfen donanım cüzdanınızın, seçilen hesapla bağlantılı kurtarma ifadesi veya passphrase ile kurulmuş olduğundan emin olun."
     },
     "DeviceAppVerifyNotSupported": {
       "title": "Uygulama güncellemesi gerekli",

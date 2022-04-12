@@ -65,7 +65,7 @@
     "reject": "Ablehnen",
     "cancel": "Abbrechen",
     "getSupport": "Hilfe",
-    "delete": "Löschen",
+    "delete": "Konto aus Portfolio entfernen",
     "launch": "Starten",
     "continue": "Weiter",
     "previous": "Zurück",
@@ -193,7 +193,7 @@
   },
   "sidebar": {
     "card": "Karte",
-    "learn": "Learn",
+    "learn": "Lernen",
     "menu": "Menü",
     "stars": "Favoriten",
     "accounts": "Konten",
@@ -549,7 +549,7 @@
     }
   },
   "lottieDebugger": {
-    "buttonTitle": "Test"
+    "buttonTitle": "Testen"
   },
   "fullNode": {
     "status": "Status",
@@ -720,11 +720,13 @@
     "undelegatingTooltip": "Nicht delegierte Vermögenswerte sind in einer Zeitsperre von 21 Tagen, bevor sie verfügbar sind."
   },
   "exchange": {
+    "chooseProvider": "Wählen Sie aus {{providerCount}} Anbieter",
+    "chooseProviders": "Wählen Sie aus {{providerCount}} Anbietern",
     "title": "Krypto kaufen und verkaufen",
     "reset": "Zurücksetzen",
     "verifyAddress": "Bitte bestätigen Sie, dass die angezeigte Adresse genau mit der auf Ihrem Gerät angezeigten Adresse übereinstimmt",
     "buy": {
-      "header": "Krypto kaufen und verkaufen",
+      "header": "Krypto kaufen über unsere Partner",
       "title": "Wählen Sie einen Anbieter um Krypto zu kaufen",
       "buyFrom": "Von überall aus kaufen",
       "cryptoSupported": "Krypto unterstützt",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "Krypto verkaufen mit {{provider}}",
+      "header": "Krypto verkaufen über unsere Partner",
       "title": "Krypto verkaufen über <0>{{provider}}</0>",
       "tab": "Verkaufen",
       "selectCrypto": "Wählen Sie einen Krypto-Vermögenswert",
@@ -1187,7 +1189,13 @@
     "deviceInBootloader": "Gerät im Bootloader-Modus. Klicken Sie auf <1>Fortfahren</1>, um es zu aktualisieren."
   },
   "learn": {
-    "title": "Learn"
+    "title": "Lernen",
+    "noConnection": "Keine Verbindung",
+    "noConnectionDesc": "Es scheint, dass Sie keinen Zugriff auf das Internet haben. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "sectionShows": "Shows",
+    "sectionVideo": "Video",
+    "sectionPodcast": "Podcast",
+    "sectionArticles": "Artikel"
   },
   "market": {
     "title": "Markt",
@@ -1487,6 +1495,7 @@
     "appNotInstalled": "Die App {{appName}} ist erforderlich, um diese Aktion durchzuführen. Bitte gehen Sie zum Manager und installieren Sie sie auf Ihrem Gerät",
     "appNotInstalled_plural": "Die Apps {{appName}} sind erforderlich, um diese Aktion durchzuführen. Bitte gehen Sie zum Manager und installieren Sie sie auf Ihrem Gerät",
     "openManager": "Manager öffnen",
+    "openOnboarding": "Gerät einrichten",
     "outdated": "App-Version veraltet",
     "outdatedDesc": "Ein wichtiges Update ist für die Anwendung {{appName}} auf Ihrem Gerät verfügbar. Bitte gehen Sie zum Manager, um das Update durchzuführen.",
     "installApp": "{{appName}} App-Installation",
@@ -1604,10 +1613,10 @@
         "tokenAppDisclaimerInstalled": "Zur Verwaltung von <1>{{tokenName}} {{tokenType}}-Token</1> zu verwalten, vergewissern Sie sich bitte, dass Sie tatsächlich die <1>{{tokenType}}-Version</1> haben, bevor Sie <3>an Ihr {{appName}}-Konto</3> senden.",
         "goToAccounts": "Zu den Konten gehen",
         "intallParentApp": "{{appName}} App installieren",
-        "plugin": "Go to app",
-        "swap": "Swap",
-        "tool": "Learn more",
-        "app": "Learn more"
+        "plugin": "Zur App gehen",
+        "swap": "Tauschen",
+        "tool": "Mehr erfahren",
+        "app": "Mehr erfahren"
       },
       "uninstall": {
         "title": "Alle deinstallieren",
@@ -1975,7 +1984,7 @@
       "warnEarnRewards": "Sie benötigen mindestens {{amount}}, um Prämien zu erhalten",
       "claimRewards": "Prämie beanspruchen",
       "nextRewardsDate": "Prämien können beansprucht werden am {{date}}",
-      "claimAvailableRewards": "Anspruch {{Betrag}}",
+      "claimAvailableRewards": "Anspruch {{amount}}",
       "header": "Abstimmungen",
       "percentageTP": "% der abgegebenen Stimmen",
       "noRewards": "Keine Prämien verfügbar",
@@ -2701,7 +2710,9 @@
       "addLocalAppDesc": "Durchsuchen Sie lokale Dateien und fügen Sie eine lokale App mit einem lokalen Manifest hinzu",
       "addLocalAppButton": "Durchsuchen",
       "runLocalAppDeleteButton": "Löschen",
-      "runLocalAppOpenButton": "Öffnen"
+      "runLocalAppOpenButton": "Öffnen",
+      "enableLearnStagingUrl": "Staging-URL für Lernen-Seite",
+      "enableLearnStagingUrlDesc": "Aktivieren Sie die Staging-URL für die Lernen-Seite."
     },
     "currencies": {
       "selectPlaceholder": "Krypto-Vermögenswert auswählen",
@@ -2751,11 +2762,11 @@
         },
         "experimentalJSCurrencies": {
           "title": "Experimentelle JS-Implementierungen",
-          "description": "Verwenden Sie experimentelle JS-Implementierungen für Algorand und Tezos."
+          "description": "Verwenden Sie experimentelle JS-Implementierungen für Tezos und Kosmos."
         },
         "experimentalCurrencies": {
           "title": "Experimentelle Integrationen",
-          "description": "Use available experimental crypto assets integrations."
+          "description": "Verwenden Sie verfügbare experimentelle Integrationen für Krypto-Werte."
         },
         "experimentalLanguages": {
           "title": "Testen der Übersetzung",
@@ -2782,8 +2793,8 @@
           "description": "Das Ändern des App-Anbieters im Manager kann es unmöglich machen, Apps auf Ihrem Ledger-Gerät zu installieren oder zu deinstallieren."
         },
         "testAnimations": {
-          "title": "Test Lottie animations",
-          "description": "Test all animations used in Ledger Live"
+          "title": "Lottie-Animationen testen",
+          "description": "Testen Sie alle Animationen, die in Ledger Live verwendet werden"
         }
       }
     },
@@ -2807,7 +2818,8 @@
     "removeAccountModal": {
       "title": "Konto entfernen",
       "desc": "Ihre Krypto-Vermögenswerte sind davon nicht betroffen. Bestehende Konten können jederzeit wieder hinzugefügt werden.",
-      "warning": "Das Löschen dieses Kontos löscht Ihren zugehörigen Swap-Transaktionsverlauf."
+      "delete": "Aus Portfolio entfernen",
+      "warning": "Das Entfernen dieses Kontos löscht Ihren zugehörigen Swap-Transaktionsverlauf."
     },
     "openUserDataDirectory": {
       "title": "Benutzerdaten anzeigen",
@@ -3592,6 +3604,10 @@
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "Die {{appName}} -App kann für Ihre spezifische Konfiguration nicht gefunden werden.",
+      "description": "Versuchen Sie, die App aus dem Manager heraus neu zu installieren"
+    },
     "countervaluesUnavailable": {
       "title": "Wir können derzeit keinen Gegenwert für diesen Vermögenswert angeben"
     },
@@ -3719,6 +3735,10 @@
     "DeviceHalted": {
       "title": "Bitte starten Sie Ihr Ledger-Gerät neu und versuchen Sie es erneut",
       "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut"
+    },
+    "DeviceNotOnboarded": {
+      "title": "Ihr Gerät kann noch nicht verwendet werden",
+      "description": "Richten Sie Ihr Gerät ein, bevor Sie es mit Ledger Live verwenden."
     },
     "DeviceSocketFail": {
       "title": "Bitte starten Sie Ihr Ledger-Gerät neu und versuchen Sie es erneut",

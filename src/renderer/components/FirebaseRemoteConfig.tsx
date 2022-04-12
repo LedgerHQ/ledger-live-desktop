@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import { getRemoteConfig, fetchAndActivate, RemoteConfig } from "firebase/remote-config";
 import { defaultFeatures } from "@ledgerhq/live-common/lib/featureFlags";
 import { DefaultFeatures } from "@ledgerhq/live-common/lib/types";
-import { reduce } from "lodash";
+import { reduce, snakeCase } from "lodash";
 
 import { getFirebaseConfig } from "~/firebase-setup";
 
@@ -11,7 +11,7 @@ export const FirebaseRemoteConfigContext = React.createContext<RemoteConfig | nu
 
 export const useFirebaseRemoteConfig = () => useContext(FirebaseRemoteConfigContext);
 
-export const formatFeatureId = (id: string) => `feature_${id}`;
+export const formatFeatureId = (id: string) => `feature_${snakeCase(id)}`;
 
 // Firebase SDK treat JSON values as strings
 const formatDefaultFeatures = (config: DefaultFeatures) =>

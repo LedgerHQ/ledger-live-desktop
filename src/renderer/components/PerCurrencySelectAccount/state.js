@@ -1,6 +1,6 @@
 // @flow
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
 import type { Account, SubAccount } from "@ledgerhq/live-common/lib/types/account";
 import { makeEmptyTokenAccount } from "@ledgerhq/live-common/lib/account";
 import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types/currencies";
@@ -55,24 +55,28 @@ export type UseCurrencyAccountSelectReturnType = {
 export function useCurrencyAccountSelect({
   allCurrencies,
   allAccounts,
-  defaultCurrency,
-  defaultAccount,
+  defaultCurrencyId,
+  defaultAccountId,
   hideEmpty,
 }: {
   allCurrencies: Array<CryptoCurrency | TokenCurrency>,
   allAccounts: Account[],
-  defaultCurrency: ?(CryptoCurrency | TokenCurrency),
-  defaultAccount: ?Account,
+  defaultCurrencyId: ?string,
+  defaultAccountId: ?string,
   hideEmpty?: ?boolean,
 }): UseCurrencyAccountSelectReturnType {
   const [state, setState] = useState(() => {
-    const currency = defaultCurrency || null;
+    const currency = defaultCurrencyId
+      ? allCurrencies.find(currency => currency.id === defaultCurrencyId)
+      : allCurrencies.length > 0
+      ? allCurrencies[0]
+      : undefined;
     if (!currency) {
       return { currency: null, accountId: null };
     }
     const availableAccounts = getAccountTuplesForCurrency(currency, allAccounts, hideEmpty);
-    const { accountId } = defaultAccount
-      ? { accountId: defaultAccount.id }
+    const { accountId } = defaultAccountId
+      ? { accountId: defaultAccountId }
       : availableAccounts.length
       ? getIdsFromTuple(availableAccounts[0])
       : { accountId: null };
@@ -128,6 +132,18 @@ export function useCurrencyAccountSelect({
       }
     );
   }, [availableAccounts, accountId]);
+
+  useEffect(() => {
+    if (!accountId && availableAccounts.length > 0) {
+      setState(currState => ({
+        ...currState,
+        accountId: availableAccounts[0].account.id,
+        subAccountId: availableAccounts[0].subAccount ? availableAccounts[0].subAccount.id : null,
+      }));
+    }
+  }, [availableAccounts, accountId]);
+
+  console.log({ availableAccounts, account, currency, subAccount });
 
   return {
     availableAccounts,
