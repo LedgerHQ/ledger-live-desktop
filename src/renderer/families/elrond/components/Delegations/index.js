@@ -4,7 +4,7 @@ import { Account as AccountType } from "@ledgerhq/live-common/lib/types";
 
 import { HeaderWrapper } from "~/renderer/components/TableContainer";
 import { TableLine } from "~/renderer/families/elrond/blocks/Delegation";
-import { DelegationType, ValidatorType, UnbondingType } from "~/renderer/families/elrond/types";
+import { DelegationType, ValidatorType } from "~/renderer/families/elrond/types";
 import Delegation from "~/renderer/families/elrond/components/Delegations/components/Delegation";
 
 type DelegationsType = {
@@ -13,34 +13,35 @@ type DelegationsType = {
   account: AccountType,
 };
 
-const Delegations = ({ delegations, validators, account }: DelegationsType) => (
-  <Fragment>
-    <HeaderWrapper>
-      <TableLine>
-        <Trans i18nKey="delegation.validator" />
-      </TableLine>
-      <TableLine>
-        <Trans i18nKey="delegation.status" />
-      </TableLine>
-      <TableLine>
-        <Trans i18nKey="delegation.delegated" />
-      </TableLine>
-      <TableLine>
-        <Trans i18nKey="delegation.rewards" />
-      </TableLine>
-      <TableLine />
-    </HeaderWrapper>
+const Delegations = ({ delegations, validators, account }: DelegationsType) => {
+  const columns = [
+    "delegation.validator",
+    "delegation.status",
+    "delegation.delegated",
+    "delegation.rewards",
+  ];
 
-    {delegations.map(delegation => (
-      <Delegation
-        key={`delegation-${delegation.contract}`}
-        delegations={delegations}
-        validators={validators}
-        account={account}
-        {...delegation}
-      />
-    ))}
-  </Fragment>
-);
+  return (
+    <Fragment>
+      <HeaderWrapper>
+        {columns.map(column => (
+          <TableLine key={column}>
+            <Trans i18nKey={column} />
+          </TableLine>
+        ))}
+      </HeaderWrapper>
+
+      {delegations.map(delegation => (
+        <Delegation
+          key={`delegation-${delegation.contract}`}
+          delegations={delegations}
+          validators={validators}
+          account={account}
+          {...delegation}
+        />
+      ))}
+    </Fragment>
+  );
+};
 
 export default Delegations;

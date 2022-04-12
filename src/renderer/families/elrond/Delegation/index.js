@@ -44,6 +44,7 @@ const Delegation = ({ account }: Props) => {
   const [validators, setValidators] = useState([]);
 
   const dispatch = useDispatch();
+  const delegationResources = useMemo(() => account.elrondResources.delegations || [], [account]);
   const delegationEnabled = useMemo(() => BigNumber(denominate({ input: account.balance })).gt(1), [
     account.balance,
   ]);
@@ -55,13 +56,13 @@ const Delegation = ({ account }: Props) => {
 
   const hasRewards = useMemo(
     () =>
-      account.elrondResources.delegations
+      delegationResources
         .reduce(
           (total, delegation) => BigNumber(delegation.claimableRewards).plus(total),
           BigNumber(0),
         )
-        .gt(60),
-    [account.elrondResources.delegations],
+        .gt(0),
+    [delegationResources],
   );
 
   const delegations = useMemo(() => {
@@ -76,22 +77,26 @@ const Delegation = ({ account }: Props) => {
     const sortDelegations = (alpha, beta) =>
       transform(alpha.userActiveStake).isGreaterThan(transform(beta.userActiveStake)) ? -1 : 1;
 
-    return account.elrondResources.delegations.map(assignValidator).sort(sortDelegations);
-  }, [findValidator, account.elrondResources.delegations]);
+    return delegationResources.map(assignValidator).sort(sortDelegations);
+  }, [findValidator, delegationResources]);
 
-  const unbondings = account.elrondResources.delegations
-    .reduce(
-      (total, item) =>
-        total.concat(
-          item.userUndelegatedList.map(unbonding => ({
-            ...unbonding,
-            contract: item.contract,
-            validator: findValidator(item.contract),
-          })),
-        ),
-      [],
-    )
-    .sort((alpha, beta) => alpha.seconds - beta.seconds);
+  const unbondings = useMemo(
+    () =>
+      delegationResources
+        .reduce(
+          (total, item) =>
+            total.concat(
+              item.userUndelegatedList.map(unbonding => ({
+                ...unbonding,
+                contract: item.contract,
+                validator: findValidator(item.contract),
+              })),
+            ),
+          [],
+        )
+        .sort((alpha, beta) => alpha.seconds - beta.seconds),
+    [delegationResources, findValidator],
+  );
 
   const fetchValidators = () => {
     const fetchData = async (): Promise<void> => {
