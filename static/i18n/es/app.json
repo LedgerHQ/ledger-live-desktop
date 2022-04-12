@@ -1055,9 +1055,9 @@
     "hideCTA": "Ocultar token"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Colection",
-    "desc": "This action will hide all NFTs from the <1><0>{{collectionName}}</0></1> collection, you can show them again using <3>Settings</3>",
-    "hideCTA": "Hide NFT Collection"
+    "title": "Ocultar colección de NFTs",
+    "desc": "Esta acción ocultará todos los NFTs de la colección <1><0>{{collectionName}}</0></1>, puedes mostrarlos de nuevo usando <3>Configuración</3>",
+    "hideCTA": "Ocultar colección de NFTs"
   },
   "banners": {
     "cleanCache": {
@@ -2560,10 +2560,10 @@
   },
   "solana": {
     "common": {
-      "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
-      "viewDetails": "View details",
+      "broadcastError": "Es posible que la transacción haya fallado. Espera un momento y comprueba el historial de transacciones antes de intentarlo de nuevo.",
+      "viewDetails": "Ver detalles",
       "connectDevice": {
-        "title": "Device"
+        "title": "Dispositivo"
       },
       "confirmation": {
         "title": "Confirmation"
