@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { Bullet, Column, IllustrationContainer } from "../shared";
 import getStarted from "../assets/v3/getStarted.png";
@@ -9,6 +9,12 @@ import DeviceAction from "~/renderer/components/DeviceAction";
 
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { command } from "~/renderer/commands";
+import { useDispatch, useSelector } from "react-redux";
+import { deviceModelIdSelector } from "~/renderer/reducers/onboarding";
+import { useHistory } from "react-router-dom";
+import { saveSettings } from "~/renderer/actions/settings";
+import { relaunchOnboarding } from "~/renderer/actions/onboarding";
+import { track } from "~/renderer/analytics/segment";
 
 const connectManagerExec = command("connectManager");
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectManagerExec);
@@ -27,27 +33,21 @@ const Success = ({ device }: { device: Device }) => {
     </Column>
   );
 };
-
-export type GenuineCheckProps = {
-  sendEvent: (event: any) => void;
-  context: {
-    deviceId: DeviceModelId;
-    device?: Device;
-  };
-};
-
-export function GenuineCheck({ sendEvent }: GenuineCheckProps) {
-  // TODO: deviceId in redux state
-  const deviceId = "nanoS";
-  const device = undefined;
-
-  // const { device } = context;
+export function GenuineCheck() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const deviceId = useSelector(deviceModelIdSelector);
+  const [device, updateDevice] = useState(undefined);
 
   const onResult = useCallback(
     res => {
-      sendEvent({ type: "GENUINE_CHECK_SUCCESS", device: res.device });
+      updateDevice(res.device);
+      // history.push("/");
+      dispatch(saveSettings({ hasCompletedOnboarding: true }));
+      dispatch(relaunchOnboarding(false));
+      track("Onboarding - End");
     },
-    [sendEvent],
+    [dispatch, history],
   );
 
   return device ? (
