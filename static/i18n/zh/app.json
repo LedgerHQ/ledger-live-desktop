@@ -1,18 +1,18 @@
 {
   "calendar": {
-    "today": "Today",
-    "tomorrow": "Tomorrow",
-    "yesterday": "Yesterday",
-    "transactionDate": "Transaction date"
+    "today": "今天",
+    "tomorrow": "明天",
+    "yesterday": "昨天",
+    "transactionDate": "交易日期"
   },
   "platform": {
     "flows": {
       "requestAccount": {
-        "title": "Select an account"
+        "title": "选择一个账户"
       },
       "broadcast": {
         "toast": {
-          "title": "Transaction sent !",
+          "title": "交易已发送！",
           "text": "Click here to see operation details"
         }
       }
@@ -2635,7 +2635,7 @@
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully activated you delegation."
+                "title": "您的委托已成功激活。"
               }
             }
           }
@@ -2643,11 +2643,11 @@
       },
       "reactivate": {
         "flow": {
-          "title": "Reactivate",
+          "title": "重新激活",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully reactivated you delegation."
+                "title": "您的委托已成功重新激活。"
               }
             }
           }
@@ -2655,11 +2655,11 @@
       },
       "deactivate": {
         "flow": {
-          "title": "Deactivate",
+          "title": "停用",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully deactivated your delegation."
+                "title": "您的委托已成功停用。"
               }
             }
           }
@@ -2959,10 +2959,10 @@
         "count_plural": "{{count}} tokens"
       },
       "hiddenNftCollections": {
-        "title": "Hidden NFT Collections",
-        "desc": "You can hide NFT Collections by right-clicking on the collection name and selecting 'Hide NFT Collection'.",
-        "count": "{{count}} collection",
-        "count_plural": "{{count}} collections"
+        "title": "隐藏的 NFT 收藏",
+        "desc": "您可以通过右键点击收藏名称并选择 “隐藏 NFT 收藏” 来隐藏 NFT 收藏。",
+        "count": "{{count}} 个收藏",
+        "count_plural": "{{count}} 个收藏"
       },
       "fullNode": {
         "title": "Connect Bitcoin full node",
@@ -3699,11 +3699,11 @@
   },
   "families": {
     "stellar": {
-      "memo": "Memo",
+      "memo": "Memo 标签",
       "memoType": {
         "MEMO_TEXT": "Memo Text",
         "NO_MEMO": "No Memo",
-        "MEMO_ID": "Memo ID",
+        "MEMO_ID": "Memo 标签 ID",
         "MEMO_HASH": "Memo Hash",
         "MEMO_RETURN": "Memo Return"
       },
@@ -4246,7 +4246,7 @@
       "title": "Insufficient balance in the parent account"
     },
     "quantityNeedsToBePositive": {
-      "title": "Quantity needs to be at least 1"
+      "title": "数量需至少为 1"
     },
     "NotEnoughSpendableBalance": {
       "title": "Balance cannot be below {{minimumAmount}}"
