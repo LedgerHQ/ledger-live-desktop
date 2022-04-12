@@ -364,13 +364,13 @@ function BigTutorial() {
   return (
     <Switch>
       <Route exact path="/onboarding/setup-device">
-        <Redirect to={`${url}/pair-nano`} />
+        <Redirect to={`${url}/pair-my-nano`} />
       </Route>
       <Route exact path="/onboarding/connect-device">
-        <Redirect to={`${url}/pair-nano`} />
+        <Redirect to={`${url}/pair-my-nano`} />
       </Route>
       <Route exact path="/onboarding/recovery-phrase">
-        <Redirect to={`${url}/pair-nano`} />
+        <Redirect to={`${url}/pair-my-nano`} />
       </Route>
       {useCaseScreens.map(({ component: Screen, id }) => {
         // TODO : remove this!!!
