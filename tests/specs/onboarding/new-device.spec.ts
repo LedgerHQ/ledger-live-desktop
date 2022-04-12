@@ -3,7 +3,6 @@ import { expect } from "@playwright/test";
 import { OnboardingPage } from "../../models/OnboardingPage";
 import { DeviceAction } from "../../models/DeviceAction";
 
-
 const nanos = ["Nano X", "Nano S Plus", "Nano S"];
 
 test.describe.parallel("Onboarding", () => {
@@ -37,8 +36,8 @@ test.describe.parallel("Onboarding", () => {
 
       });
 
-      await test.step(`[${nanos[nano]}]" Set Up new"`, async () => {
-        expect(await page.screenshot()).toMatchSnapshot(`${nanos[nano]}-onboarding-flows.png`);
+      await test.step(`[${nano}]" Set Up new"`, async () => {
+        expect(await page.screenshot()).toMatchSnapshot(`${nano}-onboarding-flows.png`);
         await onboardingPage.newDevice();
       });
 
@@ -116,8 +115,8 @@ test.describe.parallel("Onboarding", () => {
         await onboardingPage.quizEnd();
       });
 
-      await test.step(`[${nanos[nano]}]"Device genuine check"`, async () => {
-        expect(await page.screenshot()).toMatchSnapshot(`connect-${nanos[nano]}.png`);
+      await test.step(`[${nano}]"Device genuine check"`, async () => {
+        expect(await page.screenshot()).toMatchSnapshot(`connect-${nano}.png`);
         await onboardingPage.checkDevice();
         expect(await page.screenshot()).toMatchSnapshot("before-genuine-check.png");
       });
