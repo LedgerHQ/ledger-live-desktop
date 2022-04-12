@@ -2566,64 +2566,64 @@
         "title": "Dispositivo"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Confirmación"
       }
     },
     "delegation": {
-      "totalStake": "Total Stake",
-      "commission": "Commission",
-      "delegate": "Add",
-      "listHeader": "Delegations",
-      "availableBalance": "Available balance",
-      "active": "Active",
-      "activeTooltip": "Active amount generate rewards",
-      "inactiveTooltip": "Inactive amount does not generate rewards",
-      "delegatedInfoTooltip": "Total amount that is delegated to validators.",
-      "withdrawableInfoTooltip": "Total amount that is withdrawable from delegations.",
-      "withdrawableTitle": "Withdrawable",
-      "statusUpdateNotice": "The status of the delegation will be updated when the transaction is confirmed.",
-      "ledgerByFigmentTC": "Ledger by Figment T&Cs",
+      "totalStake": "Participación total",
+      "commission": "Comisión",
+      "delegate": "Agregar",
+      "listHeader": "Delegaciones",
+      "availableBalance": "Saldo disponible",
+      "active": "Activa",
+      "activeTooltip": "Cantidad activa genera recompensas",
+      "inactiveTooltip": "Cantidad inactiva no genera recompensas",
+      "delegatedInfoTooltip": "Cantidad total delegada a validadores.",
+      "withdrawableInfoTooltip": "Cantidad total que es posible retirar de las delegaciones.",
+      "withdrawableTitle": "Es posible retirar",
+      "statusUpdateNotice": "El estado de la delegación se actualizará cuando se confirme la transacción.",
+      "ledgerByFigmentTC": "Términos y condiciones de Ledger a través de Figment",
       "emptyState": {
-        "description": "You can earn SOL rewards by delegating your assets.",
-        "info": "How Delegation works",
-        "delegation": "Earn rewards"
+        "description": "Puedes recibir recompensas de SOL delegando tu activos.",
+        "info": "Cómo funciona la delegación",
+        "delegation": "Recibir recompensas"
       },
       "earnRewards": {
-        "description": "You may earn rewards by delegating your SOL assets to a validator.",
+        "description": "Puedes recibir recompensas delegando tus activos SOL a un validador.",
         "bullet": {
-          "0": "You keep ownership of delegated assets",
-          "1": "Delegate using your Ledger device",
-          "2": "Assets will be available after undelegation"
+          "0": "Conservas la propiedad de los activos delegados",
+          "1": "Delegar utilizando tu dispositivo Ledger",
+          "2": "Los activos estarán disponibles después de la desdelegación"
         },
-        "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+        "warning": "Elige tu validador con cuidado: Puedes perder definitivamente parte de tus activos delegados si el validador no se comporta apropiadamente."
       },
       "flow": {
-        "title": "Delegate",
+        "title": "Delegar",
         "steps": {
           "validator": {
-            "title": "Validator"
+            "title": "Validador"
           },
           "amount": {
-            "title": "Amount"
+            "title": "Cantidad"
           },
           "confirmation": {
             "success": {
-              "title": "You have successfully delegated your assets"
+              "title": "Has delegado tus activos con éxito"
             }
           }
         }
       },
       "withdraw": {
         "flow": {
-          "title": "Withdraw",
+          "title": "Retirar",
           "steps": {
             "amount": {
-              "title": "Amount"
+              "title": "Importe"
             },
             "confirmation": {
               "success": {
-                "title": "You have successfully withdrawn your assets.",
-                "text": "Your account balance will be updated when the transaction is confirmed."
+                "title": "Has retirado con éxito tus activos.",
+                "text": "El saldo de tu cuenta se actualizará cuando se confirme la transacción."
               }
             }
           }
@@ -2631,11 +2631,11 @@
       },
       "activate": {
         "flow": {
-          "title": "Activate",
+          "title": "Activar",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully activated you delegation."
+                "title": "Has activado correctamente tu delegación."
               }
             }
           }
@@ -2643,11 +2643,11 @@
       },
       "reactivate": {
         "flow": {
-          "title": "Reactivate",
+          "title": "Reactivar",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully reactivated you delegation."
+                "title": "Has reactivado correctamente tu delegación."
               }
             }
           }
@@ -2655,11 +2655,11 @@
       },
       "deactivate": {
         "flow": {
-          "title": "Deactivate",
+          "title": "Desactivar",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully deactivated your delegation."
+                "title": "Has desactivado correctamente tu delegación."
               }
             }
           }
@@ -2959,10 +2959,10 @@
         "count_plural": "{{count}} tokens"
       },
       "hiddenNftCollections": {
-        "title": "Hidden NFT Collections",
-        "desc": "You can hide NFT Collections by right-clicking on the collection name and selecting 'Hide NFT Collection'.",
-        "count": "{{count}} collection",
-        "count_plural": "{{count}} collections"
+        "title": "Colecciones de NFTs ocultas",
+        "desc": "Puedes ocultar colecciones de NFTs haciendo clic derecho sobre el nombre de la colección y seleccionando 'Ocultar colección de NFTs'.",
+        "count": "Colección {{count}}",
+        "count_plural": "Colecciones {{count}}"
       },
       "fullNode": {
         "title": "Conectar nodo completo de Bitcoin",
@@ -4246,7 +4246,7 @@
       "title": "Saldo insuficiente en la cuenta principal"
     },
     "quantityNeedsToBePositive": {
-      "title": "Quantity needs to be at least 1"
+      "title": "La cantidad debe ser de al menos 1"
     },
     "NotEnoughSpendableBalance": {
       "title": "El saldo no puede ser inferior a {{minimumAmount}}"
