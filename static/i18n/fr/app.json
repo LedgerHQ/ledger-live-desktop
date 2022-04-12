@@ -2563,7 +2563,7 @@
       "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
       "viewDetails": "View details",
       "connectDevice": {
-        "title": "Device"
+        "title": "Appareil"
       },
       "confirmation": {
         "title": "Confirmation"
@@ -2572,7 +2572,7 @@
     "delegation": {
       "totalStake": "Total Stake",
       "commission": "Commission",
-      "delegate": "Add",
+      "delegate": "Ajouter",
       "listHeader": "Delegations",
       "availableBalance": "Available balance",
       "active": "Active",
@@ -2601,14 +2601,14 @@
         "title": "Delegate",
         "steps": {
           "validator": {
-            "title": "Validator"
+            "title": "Validateur"
           },
           "amount": {
-            "title": "Amount"
+            "title": "Montant"
           },
           "confirmation": {
             "success": {
-              "title": "You have successfully delegated your assets"
+              "title": "Actifs bien délégués"
             }
           }
         }
@@ -4246,7 +4246,7 @@
       "title": "Solde du compte parent insuffisant"
     },
     "quantityNeedsToBePositive": {
-      "title": "Quantity needs to be at least 1"
+      "title": "Le nombre doit être égal ou supérieur à 1"
     },
     "NotEnoughSpendableBalance": {
       "title": "Le solde ne peut pas être inférieur à {{minimumAmount}}."
