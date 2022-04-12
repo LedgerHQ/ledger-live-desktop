@@ -38,10 +38,7 @@ export class OnboardingPage {
     this.getStartedButton = page.locator("data-test-id=onboarding-get-started-button");
     this.termsCheckbox = page.locator("data-test-id=onboarding-terms-checkbox");
     this.termsSubmitButton = page.locator("data-test-id=onboarding-terms-submit");
-    this.selectDeviceButton = (deviceId: string): Locator =>
-
-      page.locator(`data-test-id=${deviceId}`);
-
+    this.selectDeviceButton = (device: "nanoS" | "nanoX" | "nanoSP"): Locator => page.locator(`data-test-id=device-${device}`);
     this.checkMyNanoButton = page.locator('button:has-text("Check my Nano")');
     this.continueButton = page.locator('button:has-text("Continue")');
     this.newDeviceButton = page.locator("data-test-id=onboarding-new-device");
@@ -79,9 +76,7 @@ export class OnboardingPage {
     await this.termsSubmitButton.click();
   }
 
-
-  async selectDevice(device: "Nano S" | "Nano S Plus" | "Nano X" | string) {
-
+  async selectDevice(device: "nanoS" | "nanoSP" | "nanoX" | string) {
     await this.selectDeviceButton(device).click();
   }
 

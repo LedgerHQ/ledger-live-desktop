@@ -3,18 +3,11 @@ import { expect } from "@playwright/test";
 import { OnboardingPage } from "../../models/OnboardingPage";
 import { DeviceAction } from "../../models/DeviceAction";
 
-const nanos = ["Nano X", "Nano S Plus", "Nano S"];
+const nanos = ["nanoS", "nanoSP", "nanoX"];
 
 test.describe.parallel("Onboarding", () => {
   for (const nano of nanos) {
-    const deviceId = {
-      "Nano S": "device-nanoS",
-      "Nano S Plus": "device-nanoSP",
-      "Nano X": "device-nanoX",
-    }[nano];
-
     test(`[${nano}] Onboarding flow new device`, async ({ page }) => {
-
       const onboardingPage = new OnboardingPage(page);
       const deviceAction = new DeviceAction(page);
 
@@ -29,11 +22,9 @@ test.describe.parallel("Onboarding", () => {
         await onboardingPage.acceptTerms();
       });
 
-
       await test.step(`[${nano}]" Select Device"`, async () => {
         expect(await page.screenshot()).toMatchSnapshot("device-selection.png");
-        await onboardingPage.selectDevice(deviceId);
-
+        await onboardingPage.selectDevice(nano);
       });
 
       await test.step(`[${nano}]" Set Up new"`, async () => {
