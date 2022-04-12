@@ -2655,11 +2655,11 @@
       },
       "deactivate": {
         "flow": {
-          "title": "Deactivate",
+          "title": "Devre dışı bırak",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully deactivated your delegation."
+                "title": "Yetki devrinizi başarıyla devre dışı bıraktınız."
               }
             }
           }
@@ -2959,10 +2959,10 @@
         "count_plural": "{{count}} token"
       },
       "hiddenNftCollections": {
-        "title": "Hidden NFT Collections",
-        "desc": "You can hide NFT Collections by right-clicking on the collection name and selecting 'Hide NFT Collection'.",
-        "count": "{{count}} collection",
-        "count_plural": "{{count}} collections"
+        "title": "Gizli NFT Koleksiyonları",
+        "desc": "NFT Koleksiyonlarınızı, koleksiyon adı üzerinde sağ tıklayarak ve 'NFT Koleksiyonunu Gizle' seçeneğini kullanarak gizleyebilirsiniz.",
+        "count": "{{count}} koleksiyon",
+        "count_plural": "{{count}} koleksiyon"
       },
       "fullNode": {
         "title": "Bitcoin tam düğümü bağlayın",
@@ -4246,7 +4246,7 @@
       "title": "Ana hesapta yetersiz bakiye"
     },
     "quantityNeedsToBePositive": {
-      "title": "Quantity needs to be at least 1"
+      "title": "Miktar en az 1 olmalıdır"
     },
     "NotEnoughSpendableBalance": {
       "title": "Bakiye {{minimumAmount}} altında olamaz"
