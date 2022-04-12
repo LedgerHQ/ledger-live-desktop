@@ -1055,9 +1055,9 @@
     "hideCTA": "Token'ı gizle"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Colection",
-    "desc": "This action will hide all NFTs from the <1><0>{{collectionName}}</0></1> collection, you can show them again using <3>Settings</3>",
-    "hideCTA": "Hide NFT Collection"
+    "title": "NFT Koleksiyonunu Sakla",
+    "desc": "Bu eylem <1><0>{{collectionName}}</0></1> koleksiyonundaki tüm NFT'leri gizler; <3>Ayarlar'ı</3> kullanarak tekrar görünür hale getirebilirsiniz",
+    "hideCTA": "NFT Koleksiyonunu Sakla"
   },
   "banners": {
     "cleanCache": {
@@ -2103,7 +2103,7 @@
         "title": "Yetki Devri",
         "steps": {
           "starter": {
-            "description": "ATOM varlıklarınızın yetkisini bir doğrulayıcıya devrederek ödüller kazanabilirsiniz.",
+            "description": "ATOM varlıklarınızla bir doğrulayıcıya yetki devrederek ödüller kazanabilirsiniz.",
             "bullet": [
               "Yetki devrinde kullanılan varlıklar size ait olmaya devam eder.",
               "Ledger cihazınızı kullanarak yetki devredin.",
@@ -2560,70 +2560,70 @@
   },
   "solana": {
     "common": {
-      "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
-      "viewDetails": "View details",
+      "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin.",
+      "viewDetails": "Ayrıntıları göster",
       "connectDevice": {
-        "title": "Device"
+        "title": "Cihaz"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Onay"
       }
     },
     "delegation": {
-      "totalStake": "Total Stake",
-      "commission": "Commission",
-      "delegate": "Add",
-      "listHeader": "Delegations",
-      "availableBalance": "Available balance",
-      "active": "Active",
-      "activeTooltip": "Active amount generate rewards",
-      "inactiveTooltip": "Inactive amount does not generate rewards",
-      "delegatedInfoTooltip": "Total amount that is delegated to validators.",
-      "withdrawableInfoTooltip": "Total amount that is withdrawable from delegations.",
-      "withdrawableTitle": "Withdrawable",
-      "statusUpdateNotice": "The status of the delegation will be updated when the transaction is confirmed.",
-      "ledgerByFigmentTC": "Ledger by Figment T&Cs",
+      "totalStake": "Toplam Stake",
+      "commission": "Komisyon",
+      "delegate": "Ekle",
+      "listHeader": "Yetki devirleri",
+      "availableBalance": "Mevcut bakiye",
+      "active": "Aktif",
+      "activeTooltip": "Aktif tutar, ödül üretmeye devam eder",
+      "inactiveTooltip": "İnaktif tutar ödül üretmez",
+      "delegatedInfoTooltip": "Doğrulayıcılara yetkisi devredilen toplam tutar.",
+      "withdrawableInfoTooltip": "Yetki devirlerinden çekilebilecek toplam tutar.",
+      "withdrawableTitle": "Çekilebilir",
+      "statusUpdateNotice": "İşlem onaylandığında yetki devrinin durumu güncellenecek.",
+      "ledgerByFigmentTC": "Ledger by Figment Hüküm ve Koşullar",
       "emptyState": {
-        "description": "You can earn SOL rewards by delegating your assets.",
-        "info": "How Delegation works",
-        "delegation": "Earn rewards"
+        "description": "Varlıklarınızla yetki devrederek SOL ödülleri kazanabilirsiniz.",
+        "info": "Yetki Devri nasıl çalışır?",
+        "delegation": "Ödüller kazanın"
       },
       "earnRewards": {
-        "description": "You may earn rewards by delegating your SOL assets to a validator.",
+        "description": "SOL varlıklarınızla bir doğrulayıcıya yetki devrederek ödüller kazanabilirsiniz.",
         "bullet": {
-          "0": "You keep ownership of delegated assets",
-          "1": "Delegate using your Ledger device",
-          "2": "Assets will be available after undelegation"
+          "0": "Yetki devrinde kullanılan varlıklar size ait olmaya devam eder",
+          "1": "Ledger cihazınızı kullanarak yetki devredin",
+          "2": "Varlıklar yetki iptalinden sonra mevcut olacak"
         },
-        "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+        "warning": "Doğrulayıcınızı dikkatle seçin: Doğrulayıcının yanlış kararlar vermesi halinde yetki devrinde kullandığınız varlıkların bir kısmını geri dönülemez bir şekilde kaybedebilirsiniz."
       },
       "flow": {
-        "title": "Delegate",
+        "title": "Yetki Devri",
         "steps": {
           "validator": {
-            "title": "Validator"
+            "title": "Doğrulayıcı"
           },
           "amount": {
-            "title": "Amount"
+            "title": "Tutar"
           },
           "confirmation": {
             "success": {
-              "title": "You have successfully delegated your assets"
+              "title": "Varlıklarınızla başarıyla yetki devrettiniz"
             }
           }
         }
       },
       "withdraw": {
         "flow": {
-          "title": "Withdraw",
+          "title": "Çekim",
           "steps": {
             "amount": {
-              "title": "Amount"
+              "title": "Tutar"
             },
             "confirmation": {
               "success": {
-                "title": "You have successfully withdrawn your assets.",
-                "text": "Your account balance will be updated when the transaction is confirmed."
+                "title": "Varlıklarınızı başarıyla çektiniz.",
+                "text": "İşlem onaylandığında hesap bakiyeniz güncellenecek."
               }
             }
           }
@@ -2631,11 +2631,11 @@
       },
       "activate": {
         "flow": {
-          "title": "Activate",
+          "title": "Etkinleştir",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully activated you delegation."
+                "title": "Yetki devrinizi başarıyla etkinleştirdiniz."
               }
             }
           }
@@ -2643,11 +2643,11 @@
       },
       "reactivate": {
         "flow": {
-          "title": "Reactivate",
+          "title": "Yeniden Etkinleştir",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully reactivated you delegation."
+                "title": "Yetki devrinizi başarıyla yeniden etkinleştirdiniz."
               }
             }
           }
