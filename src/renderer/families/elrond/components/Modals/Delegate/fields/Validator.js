@@ -58,7 +58,7 @@ const Dropdown = ({ validators, onChange }: Props) => {
 
   return (
     <Box mb={4}>
-      <Label>{t("elrond.undelegation.flow.steps.amount.fields.validator")}</Label>
+      <Label>{t("elrond.delegation.flow.steps.amount.fields.validator")}</Label>
       <Select
         value={value}
         options={validators}

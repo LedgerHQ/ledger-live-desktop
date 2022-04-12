@@ -1,4 +1,3 @@
-// @flow
 import React, { Fragment, useCallback, useMemo, useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Trans } from "react-i18next";
@@ -42,9 +41,11 @@ const Wrapper = styled(Box).attrs(() => ({
 
 const Delegation = ({ account }: Props) => {
   const [validators, setValidators] = useState([]);
+  const [delegationResources, setDelegationResources] = useState(
+    account.elrondResources.delegations || [],
+  );
 
   const dispatch = useDispatch();
-  const delegationResources = useMemo(() => account.elrondResources.delegations || [], [account]);
   const delegationEnabled = useMemo(() => BigNumber(denominate({ input: account.balance })).gt(1), [
     account.balance,
   ]);
@@ -116,11 +117,25 @@ const Delegation = ({ account }: Props) => {
     return setValidators;
   };
 
-  useEffect(fetchValidators, []);
+  const fetchDelegations = () => {
+    const fetchData = async () => {
+      const delegations = await axios.get(
+        `${constants.delegations}/accounts/${account.freshAddress}/delegations`,
+      );
+
+      setDelegationResources(delegations.data);
+    };
+
+    if (account.elrondResources && !account.elrondResources.delegations) {
+      fetchData();
+    }
+
+    return () => setDelegationResources(account.elrondResources.delegations || []);
+  };
 
   const onEarnRewards = useCallback(() => {
     dispatch(
-      openModal("MODAL_ELROND_WITHDRAW", {
+      openModal("MODAL_ELROND_REWARDS_INFO", {
         account,
       }),
     );
@@ -152,6 +167,9 @@ const Delegation = ({ account }: Props) => {
 
   const hasDelegations = delegations.length > 0;
   const hasUnbondings = unbondings.length > 0;
+
+  useEffect(fetchValidators, []);
+  useEffect(fetchDelegations, [account]);
 
   return (
     <Fragment>

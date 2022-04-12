@@ -9,7 +9,7 @@ type State = {
 };
 
 const INITIAL_STATE = {
-  stepId: "claimRewards",
+  stepId: "withdraw",
 };
 
 class ClaimRewardsModal extends PureComponent<{ name: string }, State> {
@@ -38,7 +38,12 @@ class ClaimRewardsModal extends PureComponent<{ name: string }, State> {
             name={name}
             onClose={onClose}
             onChangeStepId={this.handleStepChange}
-            params={data || {}}
+            params={{
+              contract: data.contract,
+              account: data.account,
+              amount: data.amount,
+              unbondings: data.unbondings,
+            }}
           />
         )}
       />

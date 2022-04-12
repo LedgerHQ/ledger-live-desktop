@@ -10,19 +10,18 @@ import { constants } from "~/renderer/families/elrond/constants";
 import { BigNumber } from "bignumber.js";
 
 const renderItem = item => {
-  const [provider] = item.data.providers;
-  const name = item.data.name || provider;
   const balance = denominate({
-    input: item.data.delegation.claimableRewards,
+    input: item.data.amount,
     showLastNonZeroDecimal: true,
   });
 
   return (
     <Box horizontal={true} alignItems="center" justifyContent="space-between">
       <Box horizontal={true} alignItems="center">
-        <FirstLetterIcon label={name} mr={2} />
-        <Text ff="Inter|Medium">{name}</Text>
+        <FirstLetterIcon label={item.data.validator.name} mr={2} />
+        <Text ff="Inter|Medium">{item.data.validator.name}</Text>
       </Box>
+
       <Text ff="Inter|Regular">
         {balance} {constants.egldLabel}
       </Text>
@@ -31,8 +30,8 @@ const renderItem = item => {
 };
 
 export default function DelegationSelectorField({
-  validators,
-  delegations,
+  unbondings,
+  amount,
   contract,
   t,
   onChange,
@@ -42,25 +41,18 @@ export default function DelegationSelectorField({
 }: *) {
   const options = useMemo(
     () =>
-      validators.reduce((total, validator) => {
-        const item = {
-          ...validator,
-          delegation: validator.providers
-            ? delegations.find(delegation => validator.providers.includes(delegation.contract))
-            : null,
-        };
-
-        return item.delegation
-          ? contract && validator.providers.includes(contract)
-            ? [item, ...total]
-            : [...total, item]
-          : total;
-      }, []),
-    [delegations, validators, contract],
+      unbondings.reduce(
+        (total, unbonding) =>
+          unbonding.amount === amount && unbonding.contract === contract
+            ? [unbonding, ...total]
+            : [...total, unbonding],
+        [],
+      ),
+    [unbondings, amount, contract],
   );
 
-  const [query, setQuery] = useState<string>("");
-  const [value, setValue] = useState<any>(options[0]);
+  const [query, setQuery] = useState("");
+  const [value, setValue] = useState(options[0]);
 
   const noOptionsMessageCallback = useCallback(
     needle =>
@@ -71,9 +63,7 @@ export default function DelegationSelectorField({
   );
 
   const filterOptions = useCallback(
-    (option, needle) =>
-      BigNumber(option.data.delegation.claimableRewards).gt(0) &&
-      option.data.name.toLowerCase().includes(needle.toLowerCase()),
+    (option, needle) => option.data.validator.name.toLowerCase().includes(needle.toLowerCase()),
     [],
   );
 
@@ -93,8 +83,8 @@ export default function DelegationSelectorField({
     if (defaultOption && !Boolean(transaction.recipient) && transaction.amount.isEqualTo(0)) {
       onUpdateTransaction(transaction =>
         bridge.updateTransaction(transaction, {
-          recipient: defaultOption.delegation.contract,
-          amount: BigNumber(defaultOption.delegation.claimableRewards),
+          recipient: defaultOption.contract,
+          amount: BigNumber(defaultOption.amount),
         }),
       );
     }
@@ -102,7 +92,7 @@ export default function DelegationSelectorField({
 
   return (
     <Box flow={1} mt={5}>
-      <Label>{t("elrond.claimRewards.flow.steps.claimRewards.selectLabel")}</Label>
+      <Label>{t("elrond.withdraw.flow.steps.withdraw.selectLabel")}</Label>
       <Select
         value={value}
         options={options}

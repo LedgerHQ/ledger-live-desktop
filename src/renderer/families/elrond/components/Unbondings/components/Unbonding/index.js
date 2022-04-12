@@ -14,7 +14,14 @@ import { openURL } from "~/renderer/linking";
 import { Ellipsis, Column, Wrapper, Withdraw } from "~/renderer/families/elrond/blocks/Delegation";
 import { openModal } from "~/renderer/actions/modals";
 
-const Unbonding: FC = ({ account, contract, seconds, validator, amount }: UnbondingType) => {
+const Unbonding: FC = ({
+  account,
+  contract,
+  seconds,
+  validator,
+  amount,
+  unbondings,
+}: UnbondingType) => {
   const [counter, setCounter] = useState(seconds);
 
   const name = validator?.name ?? contract;
@@ -59,15 +66,16 @@ const Unbonding: FC = ({ account, contract, seconds, validator, amount }: Unbond
     };
   };
 
-  const onWithdraw = () => {
+  const onWithdraw = useCallback(() => {
     dispatch(
-      openModal("MODAL_ELROND_REDELEGATE", {
+      openModal("MODAL_ELROND_WITHDRAW", {
         account,
-        validator,
+        unbondings,
         contract,
+        amount,
       }),
     );
-  };
+  }, [account, contract, unbondings, amount, dispatch]);
 
   useEffect(handleCounter, [seconds]);
 
@@ -98,7 +106,13 @@ const Unbonding: FC = ({ account, contract, seconds, validator, amount }: Unbond
       </Column>
 
       <Column>
-        {counter > 0 ? getTime() : <Withdraw onClick={onWithdraw}>Withdraw</Withdraw>}
+        {counter > 0 ? (
+          getTime()
+        ) : (
+          <Withdraw onClick={onWithdraw}>
+            <Trans i18nKey="elrond.undelegation.withdraw.cta" />
+          </Withdraw>
+        )}
       </Column>
     </Wrapper>
   );

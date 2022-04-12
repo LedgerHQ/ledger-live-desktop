@@ -36,34 +36,24 @@ function StepConfirmation({
   device,
   signed,
   transaction,
-  validators,
 }: StepProps & { theme: * }) {
   if (optimisticOperation) {
-    const validator = transaction && transaction.recipient;
-
-    const v = validator && validators.find(({ providers }) => providers.includes(validator));
-
     const amount = `${denominate({
       input: String(transaction.amount),
       showLastNonZeroDecimal: true,
     })} ${constants.egldLabel}`;
 
-    const titleKey = transaction?.mode === "claimRewards" ? "title" : "titleCompound";
-    const textKey = transaction?.mode === "claimRewards" ? "text" : "textCompound";
-
     return (
       <Container>
-        <TrackPage category="ClaimRewards Elrond Flow" name="Step Confirmed" />
+        <TrackPage category="Withdraw Elrond Flow" name="Step Confirmed" />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
-          title={
-            <Trans i18nKey={`elrond.claimRewards.flow.steps.confirmation.success.${titleKey}`} />
-          }
+          title={<Trans i18nKey="elrond.withdraw.flow.steps.confirmation.success.title" />}
           description={
             <div>
               <Trans
-                i18nKey={`elrond.claimRewards.flow.steps.confirmation.success.${textKey}`}
-                values={{ amount, validator: v && v.name }}
+                i18nKey="elrond.withdraw.flow.steps.confirmation.success.text"
+                values={{ amount }}
               >
                 <b></b>
               </Trans>
@@ -77,10 +67,10 @@ function StepConfirmation({
   if (error) {
     return (
       <Container shouldSpace={signed}>
-        <TrackPage category="ClaimRewards Elrond Flow" name="Step Confirmation Error" />
+        <TrackPage category="Withdraw Elrond Flow" name="Step Confirmation Error" />
         {signed ? (
           <BroadcastErrorDisclaimer
-            title={<Trans i18nKey="elrond.claimRewards.flow.steps.confirmation.broadcastError" />}
+            title={<Trans i18nKey="elrond.withdraw.flow.steps.confirmation.broadcastError" />}
           />
         ) : null}
         <ErrorDisplay error={error} withExportLogs={true} />
@@ -117,7 +107,7 @@ export function StepConfirmationFooter({
         <Button
           primary={true}
           ml={2}
-          event="ClaimRewards Elrond Flow Step 3 View OpD Clicked"
+          event="ClaimRewards Withdraw Flow Step 3 View OpD Clicked"
           onClick={() => {
             onClose();
             if (account && concernedOperation) {
@@ -129,7 +119,7 @@ export function StepConfirmationFooter({
             }
           }}
         >
-          <Trans i18nKey="elrond.claimRewards.flow.steps.confirmation.success.cta" />
+          <Trans i18nKey="elrond.withdraw.flow.steps.confirmation.success.cta" />
         </Button>
       ) : error ? (
         <RetryButton primary ml={2} onClick={onRetry} />

@@ -23,7 +23,7 @@ import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
 
 import Stepper from "~/renderer/components/Stepper";
-import StepClaimRewards, { StepClaimRewardsFooter } from "./steps/StepClaimRewards";
+import StepWithdraw, { StepWithdrawFooter } from "./steps/StepWithdraw";
 import GenericStepConnectDevice from "~/renderer/modals/Send/steps/GenericStepConnectDevice";
 import StepConfirmation, { StepConfirmationFooter } from "./steps/StepConfirmation";
 import logger from "~/logger/logger";
@@ -35,9 +35,9 @@ type OwnProps = {|
   params: {
     account: Account,
     parentAccount: ?Account,
-    delegations?: any,
-    validators?: any,
+    unbondings?: any,
     contract?: string,
+    amount?: string,
   },
   name: string,
 |};
@@ -56,20 +56,20 @@ type Props = OwnProps & StateProps;
 const steps: Array<St> = [
   {
     id: "withdraw",
-    label: <Trans i18nKey="elrond.claimRewards.flow.steps.claimRewards.title" />,
-    component: StepClaimRewards,
+    label: <Trans i18nKey="elrond.withdraw.flow.steps.withdraw.title" />,
+    component: StepWithdraw,
     noScroll: true,
-    footer: StepClaimRewardsFooter,
+    footer: StepWithdrawFooter,
   },
   {
     id: "connectDevice",
-    label: <Trans i18nKey="elrond.claimRewards.flow.steps.connectDevice.title" />,
+    label: <Trans i18nKey="elrond.withdraw.flow.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
     onBack: ({ transitionTo }: StepProps) => transitionTo("claimRewards"),
   },
   {
     id: "confirmation",
-    label: <Trans i18nKey="elrond.claimRewards.flow.steps.confirmation.title" />,
+    label: <Trans i18nKey="elrond.withdraw.flow.steps.confirmation.title" />,
     component: StepConfirmation,
     footer: StepConfirmationFooter,
   },
@@ -164,7 +164,7 @@ const Body = ({
   }
 
   const stepperProps = {
-    title: t("elrond.claimRewards.flow.title"),
+    title: t("elrond.withdraw.flow.title"),
     device,
     account,
     parentAccount,
@@ -190,19 +190,17 @@ const Body = ({
     onTransactionError: handleTransactionError,
     t,
     bridgePending,
-    delegations: params.delegations,
-    validators: params.validators,
+    unbondings: params.unbondings,
     contract: params.contract,
+    amount: params.amount,
   };
 
-  return <div>Work in Progress!</div>;
-
-  // return (
-  //   <Stepper {...stepperProps}>
-  //     <SyncSkipUnderPriority priority={100} />
-  //     <Track onUnmount={true} event="CloseModalClaimRewards" />
-  //   </Stepper>
-  // );
+  return (
+    <Stepper {...stepperProps}>
+      <SyncSkipUnderPriority priority={100} />
+      <Track onUnmount={true} event="CloseModalWithdraw" />
+    </Stepper>
+  );
 };
 
 const C: React$ComponentType<OwnProps> = compose(
