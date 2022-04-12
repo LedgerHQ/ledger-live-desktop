@@ -41,61 +41,7 @@ import { fireConfetti } from "~/renderer/components/Onboarding/Screens/Tutorial/
 import RecoveryWarning from "../../Help/RecoveryWarning";
 import { QuizzPopin } from "~/renderer/modals/OnboardingQuizz/OnboardingQuizzModal";
 
-import { deviceModelIdSelector } from "~/renderer/reducers/onboarding";
-
-const screens = {
-  howToGetStarted: {
-    component: HowToGetStarted,
-  },
-  importRecoveryPhrase: {
-    component: ImportYourRecoveryPhrase,
-  },
-  deviceHowTo: {
-    component: DeviceHowTo,
-  },
-  deviceHowTo2: {
-    component: DeviceHowTo2,
-  },
-  pinCode: {
-    component: PinCode,
-  },
-  genuineCheck: {
-    component: GenuineCheck,
-  },
-  pinCodeHowTo: {
-    component: PinCodeHowTo,
-  },
-  existingRecoveryPhrase: {
-    component: ExistingRecoveryPhrase,
-  },
-  newRecoveryPhrase: {
-    component: NewRecoveryPhrase,
-  },
-  recoveryHowTo1: {
-    component: RecoveryHowTo1,
-  },
-  recoveryHowTo2: {
-    component: RecoveryHowTo2,
-  },
-  recoveryHowTo3: {
-    component: RecoveryHowTo3,
-  },
-  hideRecoveryPhrase: {
-    component: HideRecoveryPhrase,
-  },
-  useRecoverySheet: {
-    component: UseRecoverySheet,
-  },
-  pairMyNano: {
-    component: PairMyNano,
-  },
-  quizSuccess: {
-    component: QuizSuccess,
-  },
-  quizFailure: {
-    component: QuizFailure,
-  },
-};
+import { deviceModelIdSelector, UseCase } from "~/renderer/reducers/onboarding";
 
 const FlowStepperContainer = styled(Flex)`
   width: 100%;
@@ -325,6 +271,117 @@ function Tutorial({ sendEventToParent, machine, component }) {
   );
 }
 
+interface IScreen {
+  id: string;
+  component: React.ComponentType;
+  useCases?: UseCase[];
+}
+
+function BigTutorial() {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { url } = useRouteMatch();
+
+  const urlSplit = url.split("/");
+  const useCase = urlSplit[urlSplit.length - 1] as UseCase;
+
+  const screens: IScreen[] = [
+    {
+      id: "how-to-get-started",
+      component: HowToGetStarted,
+      useCases: [UseCase.setupDevice],
+    },
+    {
+      id: "import-your-recovery-phrase",
+      component: ImportYourRecoveryPhrase,
+    },
+    {
+      id: "device-how-to",
+      component: DeviceHowTo,
+    },
+    {
+      id: "device-how-to-2",
+      component: DeviceHowTo2,
+    },
+    {
+      id: "pin-code",
+      component: PinCode,
+    },
+    {
+      id: "genuine-check",
+      component: GenuineCheck,
+    },
+    {
+      id: "pin-code-how-to",
+      component: PinCodeHowTo,
+    },
+    {
+      id: "existing-recovery-phrase",
+      component: ExistingRecoveryPhrase,
+    },
+    {
+      id: "new-recovery-phrase",
+      component: NewRecoveryPhrase,
+    },
+    {
+      id: "recovery-how-to",
+      component: RecoveryHowTo1,
+    },
+    {
+      id: "recovery-how-to-2",
+      component: RecoveryHowTo2,
+    },
+    {
+      id: "recovery-how-to-3",
+      component: RecoveryHowTo3,
+    },
+    {
+      id: "hide-recovery-phrase",
+      component: HideRecoveryPhrase,
+    },
+    {
+      id: "use-recovery-sheet",
+      component: UseRecoverySheet,
+    },
+    {
+      id: "pair-my-nano",
+      component: PairMyNano,
+    },
+    {
+      id: "quiz-success",
+      component: QuizSuccess,
+    },
+    {
+      id: "quiz-failure",
+      component: QuizFailure,
+    },
+  ];
+
+  const useCaseScreens = screens.filter(screen => {
+    return !screen.useCases || screen.useCases.includes(useCase);
+  });
+
+  return (
+    <Switch>
+      <Route exact path="/onboarding/setup-device">
+        <Redirect to={`${url}/pair-nano`} />
+      </Route>
+      <Route exact path="/onboarding/connect-device">
+        <Redirect to={`${url}/pair-nano`} />
+      </Route>
+      <Route exact path="/onboarding/recovery-phrase">
+        <Redirect to={`${url}/pair-nano`} />
+      </Route>
+      {useCaseScreens.map(({ component: Screen, id }) => {
+        // TODO : remove this!!!
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        return <Route key={id} path={`${url}/${id}`} render={props => <Screen {...props} />} />;
+      })}
+    </Switch>
+  );
+}
+
 interface NewTutorialProps {
   component: React.ReactNode;
   state: {
@@ -412,42 +469,45 @@ export function ConnectSetUpDevice() {
     console.log("finished");
   };
 
-  return (
-    <Switch>
-      <Route exact path="/onboarding/connect-device">
-        <Redirect to={`${path}/pair-nano`} />
-      </Route>
-      <Route
-        path={`${path}/pair-nano`}
-        render={props => (
-          <NewTutorial {...props} component={PairMyNano} state={state} onContinue={afterPairNano} />
-        )}
-      />
-      <Route
-        path={`${path}/genuine-check`}
-        render={props => (
-          <NewTutorial
-            {...props}
-            component={GenuineCheck}
-            state={state}
-            onContinue={afterGenuineCheck}
-          />
-        )}
-      />
-    </Switch>
-  );
+  return <BigTutorial />;
+  // return (
+  //   <Switch>
+  //     <Route exact path="/onboarding/connect-device">
+  //       <Redirect to={`${path}/pair-nano`} />
+  //     </Route>
+  //     <Route
+  //       path={`${path}/pair-nano`}
+  //       render={props => (
+  //         <NewTutorial {...props} component={PairMyNano} state={state} onContinue={afterPairNano} />
+  //       )}
+  //     />
+  //     <Route
+  //       path={`${path}/genuine-check`}
+  //       render={props => (
+  //         <NewTutorial
+  //           {...props}
+  //           component={GenuineCheck}
+  //           state={state}
+  //           onContinue={afterGenuineCheck}
+  //         />
+  //       )}
+  //     />
+  //   </Switch>
+  // );
 }
 
-export function SetupNewDevice({ sendEvent, context }) {
-  return <Tutorial sendEventToParent={sendEvent} machine={setupNewDevice} component={context} />;
+export function SetupNewDevice() {
+  // return <Tutorial sendEventToParent={sendEvent} machine={setupNewDevice} component={context} />;
+  return <BigTutorial />;
 }
 
-export function UseRecoveryPhrase({ sendEvent, context }) {
-  return (
-    <Tutorial
-      sendEventToParent={sendEvent}
-      machine={useRecoveryPhraseMachine}
-      component={context}
-    />
-  );
+export function UseRecoveryPhrase() {
+  // return (
+  //   <Tutorial
+  //     sendEventToParent={sendEvent}
+  //     machine={useRecoveryPhraseMachine}
+  //     component={context}
+  //   />
+  // );
+  return <BigTutorial />;
 }

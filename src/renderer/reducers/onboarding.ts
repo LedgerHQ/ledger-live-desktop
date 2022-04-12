@@ -14,6 +14,12 @@ type Step = {
   };
 };
 
+export enum UseCase {
+  setupDevice = "setup-device",
+  connectDevice = "connect-device",
+  recoveryPhrase = "recovery-phrase",
+}
+
 export type OnboardingState = {
   stepIndex: number;
   stepName: string; // TODO: specify that the string comes from Steps type
@@ -24,6 +30,7 @@ export type OnboardingState = {
     displayErrorScreen: boolean;
   };
   onboardingRelaunched?: boolean;
+  useCase?: UseCase;
 };
 
 // type TutorialState;
@@ -113,6 +120,7 @@ const initialState: OnboardingState = {
       },
     },
   ],
+  useCase: undefined,
 };
 
 const handlers = {
@@ -131,6 +139,12 @@ const handlers = {
     return {
       ...initialState,
       onboardingRelaunched,
+    };
+  },
+  SET_USE_CASE: (state: OnboardingState, { payload: useCase }) => {
+    return {
+      ...state,
+      useCase,
     };
   },
 };

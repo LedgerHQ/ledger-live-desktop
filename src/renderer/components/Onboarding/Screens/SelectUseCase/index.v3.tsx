@@ -19,6 +19,7 @@ import OnboardingNavHeader from "../../OnboardingNavHeader.v3";
 import { track } from "~/renderer/analytics/segment";
 
 import { deviceModelIdSelector } from "~/renderer/reducers/onboarding";
+import { setUseCase } from "~/renderer/actions/onboarding";
 
 registerAssets([placeholderOption]);
 
@@ -118,6 +119,7 @@ export function SelectUseCase() {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Setup new");
+                dispatch(setUseCase("setup-device"));
                 history.push("/onboarding/setup-device");
                 // dispatch(openModal("MODAL_PEDAGOGY", { deviceModelId }));
               }}
@@ -144,6 +146,7 @@ export function SelectUseCase() {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Connect");
+                dispatch(setUseCase("connect-device"));
                 history.push("/onboarding/connect-device");
                 onWrappedUseCase();
               }}
@@ -162,6 +165,7 @@ export function SelectUseCase() {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Restore");
+                dispatch(setUseCase("use-recovery-phrase"));
                 history.push("/onboarding/use-recovery-phrase");
                 onWrappedUseCase();
               }}
