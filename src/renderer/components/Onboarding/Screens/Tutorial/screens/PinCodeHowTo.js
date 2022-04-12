@@ -13,10 +13,31 @@ import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import { HeaderContainer } from "~/renderer/components/Onboarding/Screens/Tutorial/shared";
 import NanoSAnim from "../assets/animations/nanoS/pin-code.json";
+import NanoSPAnimLight from "../assets/animations/nanoSP/pinCode/light.json";
+import NanoSPAnimDark from "../assets/animations/nanoSP/pinCode/dark.json";
 import NanoXAnim from "../assets/animations/nanoX/pin-code.json";
 import NanoDeviceCheckIcon from "~/renderer/icons/NanoDeviceCheckIcon";
 import NanoDeviceCancelIcon from "~/renderer/icons/NanoDeviceCancelIcon";
 import useTheme from "~/renderer/hooks/useTheme";
+
+const animations = {
+  nanoX: {
+    light: NanoXAnim,
+    dark: NanoXAnim,
+  },
+  nanoS: {
+    light: NanoSAnim,
+    dark: NanoSAnim,
+  },
+  nanoSP: {
+    light: NanoSPAnimLight,
+    dark: NanoSPAnimDark,
+  },
+  blue: {
+    light: null,
+    dark: null,
+  },
+};
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -49,8 +70,8 @@ const StepIndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(100, 144, 241, 0.1);
-  color: #6490f1;
+  background: rgba(138, 128, 219, 0.1);
+  color: #8a80db;
 `;
 
 const StepContainer = styled.div`
@@ -141,6 +162,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
   const { deviceId } = context;
   const colors = useTheme("colors");
   const allSteps = useMemo(() => steps(colors.wallet), [colors]);
+  const theme = useTheme("colors.palette.type");
 
   const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
@@ -159,7 +181,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
         </HeaderContainer>
         <Animation
           loop
-          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          animation={animations[deviceId][theme]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}
@@ -178,7 +200,7 @@ export function PinCodeHowTo({ sendEvent, context }: Props) {
             <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.prev" />
           </Text>
         </Button>
-        <Button id="pincode-howto-cta" primary onClick={onClickNext}>
+        <Button data-test-id="pincode-howto-cta" primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             <Trans i18nKey="onboarding.screens.tutorial.screens.pinCodeHowTo.buttons.next" />
           </Text>

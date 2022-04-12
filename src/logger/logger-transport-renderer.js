@@ -8,7 +8,12 @@ export default class RendererTransport extends Transport {
       this.emit("logged", info);
     });
 
-    this.ipcRenderer.send("log", { log: info });
+    try {
+      this.ipcRenderer.send("log", { log: info });
+    } catch (e) {
+      // a malformed tracking data can cause issues to arise better fail safe this
+      console.error(e, info);
+    }
 
     callback();
   }

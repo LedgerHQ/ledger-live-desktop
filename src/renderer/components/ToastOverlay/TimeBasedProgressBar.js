@@ -46,7 +46,7 @@ export function TimeBasedProgressBar({ duration, onComplete, nonce = 1 }: Props)
             height: 5,
             width: "100%",
             transformOrigin: "left center",
-            background: "#6490F1", // "#00000022",
+            background: "#8a80db", // "#00000022",
           }}
         />
       ))}

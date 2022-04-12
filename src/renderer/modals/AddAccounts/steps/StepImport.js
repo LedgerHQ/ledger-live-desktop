@@ -11,10 +11,6 @@ import { isAccountEmpty, groupAddAccounts } from "@ledgerhq/live-common/lib/acco
 import { openModal } from "~/renderer/actions/modals";
 import { DeviceShouldStayInApp } from "@ledgerhq/errors";
 import { getCurrencyBridge } from "@ledgerhq/live-common/lib/bridge";
-import {
-  getDefaultPreferredNewAccountScheme,
-  getPreferredNewAccountScheme,
-} from "@ledgerhq/live-common/lib/derivation";
 
 import uniq from "lodash/uniq";
 import { urls } from "~/config/urls";
@@ -255,13 +251,12 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
     if (!currency) return null;
     const mainCurrency = currency.type === "TokenCurrency" ? currency.parentCurrency : currency;
 
-    const newAccountSchemes = getPreferredNewAccountScheme(mainCurrency);
-
-    const preferedNewAccountScheme = getDefaultPreferredNewAccountScheme(mainCurrency);
-
-    const preferredNewAccountSchemes = preferedNewAccountScheme
-      ? [preferedNewAccountScheme]
-      : undefined;
+    // Find accounts that are (scanned && !existing && !used)
+    const newAccountSchemes = scannedAccounts
+      .filter(a1 => !existingAccounts.map(a2 => a2.id).includes(a1.id) && !a1.used)
+      .map(a => a.derivationMode);
+    const preferredNewAccountScheme =
+      newAccountSchemes && newAccountSchemes.length > 0 ? newAccountSchemes[0] : undefined;
 
     if (err) {
       return (
@@ -279,7 +274,7 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
       scanning: scanStatus === "scanning",
       preferredNewAccountSchemes: this.state.showAllCreatedAccounts
         ? undefined
-        : preferredNewAccountSchemes,
+        : [preferredNewAccountScheme],
     });
 
     const emptyTexts = {

@@ -125,7 +125,7 @@ function DoubleCounterValue({
                     {tooltipDateLabel || <Trans i18nKey={"calendar.transactionDate"} />}
                   </Title>
                   <Subtitle>
-                    <FormattedDate date={date} format="LL" />
+                    <FormattedDate date={date} format="L" />
                   </Subtitle>
                 </Column>
                 <div>
@@ -146,7 +146,7 @@ function DoubleCounterValue({
                 <Column mr={2}>
                   <Title>{tooltipCompareDateLabel || <Trans i18nKey={"calendar.today"} />}</Title>
                   <Subtitle>
-                    <FormattedDate date={compareDate} format="LL" />
+                    <FormattedDate date={compareDate} format="L LT" />
                   </Subtitle>
                 </Column>
                 <div>

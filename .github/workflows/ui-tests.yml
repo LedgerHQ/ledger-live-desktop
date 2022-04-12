@@ -9,17 +9,24 @@ on:
       - develop
       - master
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  cancel-previous:
-    name: "cancel previous workflow"
+  check-if-fork:
     runs-on: ubuntu-20.04
+    outputs:
+      forked: ${{ steps.forked.outputs.forked }}
     steps:
-      - name: Cancel Previous Runs
-        run: curl -i -L -X GET 'https://github-actions-live.ledger.tools/api/cancel-previous-run?runId=${{ github.run_id }}&owner=LedgerHQ&repo=ledger-live-desktop&branch=${{ github.event.pull_request.head.ref }}&headSha=${{ github.event.pull_request.head.sha }}'
+      - name: check if we are on a forked repo
+        id: forked
+        run: echo "::set-output name=forked::$(${{github.event.pull_request.head.repo.full_name != github.repository }})"
 
   start-runner:
     name: "[Runner] start ec2 instance"
-    needs: cancel-previous
+    needs: check-if-fork
+    if: ${{ !needs.check-if-fork.outputs.forked && github.actor != 'dependabot[bot]' }}
     uses: ledgerhq/actions/.github/workflows/start-linux-runner.yml@main
     with:
       instance-type: c5.4xlarge
@@ -28,8 +35,8 @@ jobs:
 
   stop-runner:
     name: "[Runner] stop ec2 instance"
-    if: ${{ always() }}
-    needs: [start-runner, ui-tests-linux]
+    if: ${{ always() && !needs.check-if-fork.outputs.forked && github.actor != 'dependabot[bot]' }}
+    needs: [start-runner, ui-tests-linux-hosted]
     uses: ledgerhq/actions/.github/workflows/stop-linux-runner.yml@main
     with:
       label: ${{ needs.start-runner.outputs.label }}
@@ -49,8 +56,7 @@ jobs:
 
   codecheck:
     name: "[Codecheck] Lint"
-    needs: [start-runner, prepare-runner]
-    runs-on: ${{ needs.start-runner.outputs.label }}
+    runs-on: ubuntu-20.04
     permissions:
       issues: write
       pull-requests: write
@@ -71,7 +77,17 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
         env:
           JOBS: max
         run: yarn --frozen-lockfile --network-timeout 100000
@@ -82,7 +98,7 @@ jobs:
         if: always()
         run: yarn test --silent --ci --coverage --json --testLocationInResults --outputFile=report.json 2> >(tee jest.txt)
       - uses: ArtiomTr/jest-coverage-report-action@v2.0-rc.6
-        if: github.event.pull_request != ''
+        if: always() && github.event.pull_request != ''
         with:
           github-token: ${{ github.token }}
           package-manager: yarn
@@ -104,20 +120,19 @@ jobs:
             jest.txt
       # pr/NR
 
-  ui-tests-linux:
+  ui-tests-linux-hosted:
     name: "[Linux] UI"
     needs: [start-runner, prepare-runner]
     runs-on: ${{ needs.start-runner.outputs.label }}
-    permissions:
-      issues: write
-      pull-requests: write
     steps:
-      - uses: actions/checkout@v2
+      - name: checkout feature branch for testing
+        uses: actions/checkout@v2
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           repository: ${{github.event.pull_request.head.repo.full_name}}
           persist-credentials: false
-      - uses: actions/setup-node@v2
+      - name: setup node
+        uses: actions/setup-node@v2
         if: always()
         with:
           node-version: 14.x
@@ -128,7 +143,17 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
         env:
           JOBS: max
         run: yarn --frozen-lockfile --network-timeout 100000
@@ -146,7 +171,7 @@ jobs:
         uses: ledgerhq/actions/packages/upload-images@main
         id: imgur
         with:
-          path: playwright/artifacts/test-results
+          path: tests/artifacts/test-results
           workspace: ${{ github.workspace }}
           os: linux
       - name: upload images
@@ -161,20 +186,84 @@ jobs:
         with:
           name: playwright-results-linux
           path: |
-            playwright/artifacts/test-results
-            playwright/artifacts/html-report
-            playwright/artifacts/coverage
-            playwright/artifacts/videos
+            tests/artifacts/test-results
+            tests/artifacts/html-report
+            tests/artifacts/coverage
+            tests/artifacts/videos
 
-  ui-tests:
-    needs: cancel-previous
-    name: "[${{ matrix.os }}] UI"
-    strategy:
-      fail-fast: false
-      matrix:
-        # os: [macos-latest, windows-latest]
-        os: [windows-latest]
-    runs-on: ${{ matrix.os}}
+  ui-tests-linux-guest:
+    name: "[Linux] UI"
+    needs: [check-if-fork]
+    runs-on: ubuntu-20.04
+    if: ${{ needs.check-if-fork.outputs.forked || github.actor == 'dependabot[bot]' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          repository: ${{github.event.pull_request.head.repo.full_name}}
+          persist-credentials: false
+      - uses: actions/setup-node@v2
+        if: always()
+        with:
+          node-version: 14.x
+          cache: yarn
+      - name: set git user
+        run: |
+          git config user.email "team-live@ledger.fr"
+          git config user.name "Team Live"
+      - name: install linux dependencies
+        run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000
+      - name: install operating system dependencies for playwright
+        run: npx playwright install-deps
+      - name: build electron app
+        env:
+          INSTRUMENT_BUILD: true
+        run: yarn build
+      - name: run ui tests (Linux)
+        if: always()
+        run: xvfb-run --auto-servernum -- yarn playwright
+      - name: upload diffs to imgur
+        if: always()
+        uses: ledgerhq/actions/packages/upload-images@main
+        id: imgur
+        with:
+          path: tests/artifacts/test-results
+          workspace: ${{ github.workspace }}
+          os: linux
+      - name: upload images
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: images-linux.json
+          path: images-linux.json
+      - name: upload ci suggested screenshots
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-results-linux
+          path: |
+            tests/artifacts/test-results
+            tests/artifacts/html-report
+            tests/artifacts/coverage
+            tests/artifacts/videos
+
+  ui-tests-windows:
+    name: "[Windows] UI"
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -185,7 +274,17 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 14.x
+      - uses: ledgerhq/actions/packages/has-hash-commit-deps@main
+        id: has-hash-commit-deps
+        with:
+          workspace: ${{ github.workspace }}
       - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'true' }}
+        env:
+          JOBS: max
+        run: yarn --frozen-lockfile --network-timeout 100000 --network-concurrency 1
+      - name: install dependencies
+        if: ${{ steps.has-hash-commit-deps.outputs.has-hash-commit-deps == 'false' }}
         env:
           JOBS: max
         run: yarn --frozen-lockfile --network-timeout 100000
@@ -195,29 +294,80 @@ jobs:
         env:
           INSTRUMENT_BUILD: true
         run: yarn build
-      - name: run ui tests (${{ matrix.os }})
+      - name: run ui tests (windows)
         run: yarn playwright
       - name: upload diffs to imgur
         if: always()
         uses: ledgerhq/actions/packages/upload-images@main
         id: imgur
         with:
-          path: playwright/artifacts/test-results
+          path: tests/artifacts/test-results
           workspace: ${{ github.workspace }}
-          os: ${{ matrix.os }}
+          os: windows-latest
       - name: upload images
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: images-${{ matrix.os }}.json
-          path: images-${{ matrix.os }}.json
+          name: images-windows-latest.json
+          path: images-windows-latest.json
       - name: upload ci suggested screenshots
         if: always()
         uses: actions/upload-artifact@v2
         with:
-          name: playwright-results-${{ matrix.os }}
+          name: playwright-results-windows-latest
           path: |
-            playwright/artifacts/test-results
-            playwright/artifacts/html-report
-            playwright/artifacts/coverage
-            playwright/artifacts/videos
+            tests/artifacts/test-results
+            tests/artifacts/html-report
+            tests/artifacts/coverage
+            tests/artifacts/videos
+  # ui-tests-macos:
+  #
+  #   name: "[macOS] UI"
+  #   runs-on: [ledger-live, macos]
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #       with:
+  #         ref: ${{ github.event.pull_request.head.sha }}
+  #         repository: ${{github.event.pull_request.head.repo.full_name}}
+  #         persist-credentials: false
+  #     - uses: actions/setup-node@v2
+  #       with:
+  #         node-version: 14.x
+  #     - name: install yarn
+  #       run: npm i -g yarn
+  #     - name: install dependencies
+  #       env:
+  #         JOBS: max
+  #       run: yarn --frozen-lockfile --network-timeout 100000
+  #     - name: install operating system dependencies
+  #       run: npx playwright install-deps
+  #     - name: build electron app
+  #       env:
+  #         INSTRUMENT_BUILD: true
+  #       run: yarn build
+  #     - name: run ui tests (macos)
+  #       run: yarn playwright
+  #     - name: upload diffs to imgur
+  #       if: always()
+  #       uses: ledgerhq/actions/packages/upload-images@main
+  #       id: imgur
+  #       with:
+  #         path: tests/artifacts/test-results
+  #         workspace: ${{ github.workspace }}
+  #         os: macos
+  #     - name: upload images
+  #       if: always()
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: images-macos.json
+  #         path: images-macos.json
+  #     - name: upload ci suggested screenshots
+  #       if: always()
+  #       uses: actions/upload-artifact@v2
+  #       with:
+  #         name: playwright-results-macos
+  #         path: |
+  #           tests/artifacts/test-results
+  #           tests/artifacts/html-report
+  #           tests/artifacts/coverage
+  #           tests/artifacts/videos

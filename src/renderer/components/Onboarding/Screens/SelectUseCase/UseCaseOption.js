@@ -15,7 +15,7 @@ const Container = styled.div`
   width: 100%;
   padding: 24px;
   box-sizing: border-box;
-  background-color: #6490f120;
+  background-color: #8a80db20;
   border-radius: 4px;
   position: relative;
   display: flex;
@@ -53,6 +53,7 @@ type UseCaseOptionProps = {
   Illu: React$Node,
   onClick: () => void,
   id?: string,
+  dataTestId?: string,
 };
 
 export function UseCaseOption({
@@ -61,10 +62,10 @@ export function UseCaseOption({
   description,
   Illu,
   onClick,
-  id,
+  dataTestId,
 }: UseCaseOptionProps) {
   return (
-    <UseCaseOptionContainer id={id} onClick={onClick}>
+    <UseCaseOptionContainer data-test-id={dataTestId} onClick={onClick}>
       <Container>
         <Text
           mb="8px"

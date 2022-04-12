@@ -17,7 +17,7 @@ const ExternalLink: ThemedComponent<{}> = styled(ExternalLinkButton)`
 
   &:hover {
     border: 1px solid ${p => p.theme.colors.wallet};
-    background-color: rgba(100, 144, 241, 0.2);
+    background-color: rgba(138, 128, 219, 0.2);
   }
 `;
 

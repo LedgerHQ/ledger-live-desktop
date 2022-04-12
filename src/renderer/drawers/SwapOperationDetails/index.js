@@ -274,7 +274,7 @@ const SwapOperationDetails = ({
         </OpDetailsTitle>
         <OpDetailsData>
           <Box>
-            <FormattedDate date={operation.date} format="MMMM, Do, YYYY" />
+            <FormattedDate date={operation.date} format="L" />
           </Box>
         </OpDetailsData>
       </OpDetailsSection>

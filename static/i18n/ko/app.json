@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "블루"
   },
@@ -163,8 +164,8 @@
   },
   "byteSize": {
     "bytes": "{{size}} 바이트",
-    "kbUnit": "{{size}} Kb",
-    "mbUnit": "{{size}} Mb"
+    "kbUnit": "{{size}} KB",
+    "mbUnit": "{{size}} MB"
   },
   "time": {
     "minute": "분",
@@ -191,6 +192,8 @@
     "feesAmount": "수수료 비용"
   },
   "sidebar": {
+    "card": "카드",
+    "learn": "Learn",
     "menu": "메뉴",
     "stars": "즐겨찾는 계정",
     "accounts": "계정",
@@ -198,7 +201,8 @@
     "exchange": "매수 / 매도",
     "swap": "스왑",
     "lend": "대출",
-    "catalog": "탐색"
+    "catalog": "탐색",
+    "market": "시장"
   },
   "stars": {
     "placeholder": "계정을 즐겨찾기 하여 여기서 바로 확인하세요.",
@@ -232,7 +236,7 @@
         "label": {
           "provider": "공급자",
           "rate": "요율",
-          "fees": "수수료",
+          "fees": "네트워크 수수료",
           "target": "보내는 계정"
         },
         "tooltip": {
@@ -330,8 +334,8 @@
     "exchangeDrawer": {
       "title": "교환을 확인해 주세요",
       "completed": {
-        "title": "교환 대기 중",
-        "description": "확인을 위해 귀하의 스왑 거래를 네트워크로 전송했습니다. {{targetCurrency}}(을)를 받기까지 최대 한 시간이 소요될 수 있습니다.",
+        "title": "거래 브로드캐스트 성공",
+        "description": "귀하의 스왑 작업이 확인을 위해 네트워크로 전송되었습니다. 거래가 확인되고 공급자가 귀하의{{targetCurrency}}을(를) 처리하고 보낼 때까지 기다려 주세요.",
         "disclaimer": "<0><0>{{provider}}</0> 지원</0>의 도움이 필요한 경우를 대비하여 스왑 ID 번호를 기록해 두세요.",
         "seeDetails": "세부사항 확인"
       }
@@ -467,7 +471,7 @@
       "exchange": "교환",
       "helpCTA": "스왑이란?",
       "bubble": "본사는 고정 요율을 사용하며, 이는 귀하가 받게 될 정확한 금액입니다.",
-      "noAccounts": "잔금이 있는 {{currencyName}} 계정이 없습니다.",
+      "noAccounts": "잔액이 있는 {{currencyName}} 계정이 없습니다.",
       "noApp": "{{currencyName}} 앱이 설치되지 않았습니다.",
       "outdatedApp": "{{currencyName}} 앱을 업데이트하실 수 있습니다.",
       "loadingRates": "요율 로딩중..."
@@ -543,6 +547,9 @@
       "initialAmount": "초기 금액",
       "creditedAmount": "적립된 금액"
     }
+  },
+  "lottieDebugger": {
+    "buttonTitle": "Test"
   },
   "fullNode": {
     "status": "상태",
@@ -653,7 +660,7 @@
             },
             "ready": {
               "header": "준비 완료",
-              "description": "풀 노드가 완전히 동기화되었습니다. 비트코인 계정 잔금이 현재 올바르지 않습니다."
+              "description": "풀 노드가 완전히 동기화되었습니다. 비트코인 계정 잔액이 현재 올바르지 않습니다."
             },
             "syncing": {
               "header": "노드 동기화 진행 중...",
@@ -698,10 +705,11 @@
         "desc": "사용할 단위를 선택하세요"
       }
     },
-    "availableBalance": "가용 잔금",
+    "availableBalance": "이용 가능 잔액",
     "frozenAssets": "동결 자산",
     "bandwidth": "대역폭",
     "energy": "에너지",
+    "stake": "스테이크",
     "delegatedAssets": "위임된 자산",
     "undelegating": "위임 해제",
     "availableBalanceTooltip": "가처분 금액입니다.",
@@ -716,13 +724,20 @@
     "reset": "플로우 리셋",
     "verifyAddress": "장치에 표시된 주소와 정확히 일치하는지 확인하세요",
     "buy": {
-      "header": "{{provider}}로 암호화폐 구매",
-      "title": "<0>{{provider}}</0>로 암호화폐 구매",
+      "header": "암호화폐 매수 및 매도",
+      "title": "암호화폐를 구매할 공급자를 선택하세요",
+      "buyFrom": "어디서나 구매 가능",
+      "cryptoSupported": "암호화폐 지원됨",
+      "payWith": "카드 또는 SEPA로 지불",
       "tab": "구매",
-      "selectCrypto": "암호화폐 선택",
-      "selectAccount": "계정 선택",
-      "continue": "계속",
-      "addAccount": "계정 추가"
+      "coinify": {
+        "header": "{{provider}}로 암호화폐 구매",
+        "title": "<0>{{provider}}</0>로 암호화폐 구매",
+        "selectCrypto": "암호화폐 선택",
+        "selectAccount": "계정 선택",
+        "continue": "계속",
+        "addAccount": "계정 추가"
+      }
     },
     "sell": {
       "header": "{{provider}}(으)로 암호화폐 판매",
@@ -731,11 +746,6 @@
       "selectCrypto": "암호화폐 선택",
       "selectAccount": "계정 선택",
       "continue": "계속"
-    },
-    "history": {
-      "tab": "내역",
-      "exporting": "내보내기 중...",
-      "exportOperations": "거래 내보내기"
     }
   },
   "lend": {
@@ -793,7 +803,7 @@
         "accounts": "계정",
         "amountSupplied": "대출 개시",
         "amountSuppliedTooltip": "네트워크 예치 금액",
-        "accruedInterests": "이자 잔금",
+        "accruedInterests": "이자 잔액",
         "accruedInterestsTooltip": "대출에 발생한 이자",
         "status": "계정 상태",
         "actions": "조치"
@@ -822,7 +832,7 @@
       },
       "rates": {
         "allAssets": "자산",
-        "totalBalance": "자산 잔금",
+        "totalBalance": "자산 잔액",
         "totalBalanceTooltip": "대출 가능 금액",
         "currentAPY": "APY 예치",
         "currentAPYTooltip": "계속 컴파운드가 적용되는 예치금 연간 수익율",
@@ -980,8 +990,8 @@
     "order": {
       "name|asc": "이름 A-Z",
       "name|desc": "이름 Z-A",
-      "balance|asc": "최저 잔금",
-      "balance|desc": "최고 잔금"
+      "balance|asc": "최저 잔액",
+      "balance|desc": "최고 잔액"
     },
     "range": {
       "day": "일",
@@ -1125,7 +1135,9 @@
       "confirm": {
         "title": "연결",
         "details": "지갑을 통해 다음 이더리움 계정에 연결하고 싶다면:",
-        "deeplinkDetails": "Ledger Live에 연결하고 싶습니다. 이더리움 계정을 선택하세요:"
+        "deeplinkDetails": "Ledger Live에 연결하고 싶습니다. 이더리움 계정을 선택하세요:",
+        "noEthAccount": "이더리움 계정이 없습니다. Wallet Connect를 사용하려면 이더리움 계정을 추가하세요.",
+        "alreadyConnected": "다른 dApp이 이미 연결된 상태에서 dApp에 연결하려고 합니다. Live를 새로운 dApp으로 다시 연결하기 전에 연결된 dApp에서 연결을 끊으세요."
       }
     },
     "connectedscreen": {
@@ -1142,14 +1154,15 @@
     },
     "recentActivity": "최신 운영",
     "totalBalance": "총 잔액",
-    "transactionsPendingConfirmation": "일부 트랜잭션이 아직 확인되지 않았습니다. 트랜잭션이 확인된 후 잔금에 반영되며 사용이 가능합니다."
+    "transactionsPendingConfirmation": "일부 트랜잭션이 아직 확인되지 않았습니다. 트랜잭션이 확인된 후 잔액에 반영되며 사용이 가능합니다."
   },
   "currentAddress": {
     "title": "현재 주소",
     "for": "<1><0>{{name}}</0></1> 주소",
     "messageIfUnverified": "공유된 주소가 장치의 주소와 정확히 일치하는지 확인하세요.",
     "messageIfSkipped": "귀하의 {{name}} 주소가 Ledger 장치에서 확인되지 않았습니다. 보안을 위해 주소를 인증하세요.",
-    "showQrCode": "QR 코드 보기"
+    "showQrCode": "QR 코드 보기",
+    "taprootWarning": "발송자가 탭루트를 지원하는지 확인해 주세요"
   },
   "emptyState": {
     "dashboard": {
@@ -1172,6 +1185,78 @@
   },
   "genuinecheck": {
     "deviceInBootloader": "Bootloader 모드 장치 &lt;1&gt;Continue&lt;1&gt;를 클릭하여 업데이트하세요."
+  },
+  "learn": {
+    "title": "Learn"
+  },
+  "market": {
+    "title": "시장",
+    "currency": "통화",
+    "rangeLabel": "시간",
+    "goBack": "돌아가기",
+    "filters": {
+      "title": "필터",
+      "show": "보기",
+      "all": "전체",
+      "isLedgerCompatible": "Ledger Live 호환",
+      "isFavorite": "별표 표시된 자산",
+      "applyFilters": "필터 적용",
+      "clearAll": "모두 지우기"
+    },
+    "marketList": {
+      "crypto": "암호화폐",
+      "price": "가격",
+      "change": "변경",
+      "marketCap": "시가총액",
+      "last7d": "지난 7 일"
+    },
+    "detailsPage": {
+      "priceStatistics": "가격 통계",
+      "tradingVolume": "거래량",
+      "24hLowHight": "24시간 최저 / 24시간 최고",
+      "7dLowHigh": "7일 최저 / 7일 최고",
+      "allTimeHigh": "사상 최고치",
+      "allTimeLow": "사상 최저치",
+      "marketCapRank": "시가총액 순위",
+      "marketCapDominance": "시가총액 도미넌스",
+      "supply": "공급",
+      "circulatingSupply": "유통량",
+      "totalSupply": "총 공급량",
+      "maxSupply": "최대 공급량",
+      "assetNotSupportedOnLedgerLive": "이 자산은 Ledger Live에서 지원되지 않습니다.",
+      "supportedCoinsAndTokens": "지원되는 코인 및 토큰"
+    },
+    "range": {
+      "1H_label": "1시간",
+      "1D_label": "1일",
+      "1W_label": "1주",
+      "1M_label": "1달",
+      "1Y_label": "1년",
+      "1h": "1시간",
+      "24h": "24시간",
+      "7d": "7일",
+      "30d": "30일",
+      "1y": "1년",
+      "1H_selectorLabel": "지난 1시간",
+      "1D_selectorLabel": "지난 24시간",
+      "1W_selectorLabel": "지난 주",
+      "1M_selectorLabel": "지난 달",
+      "1Y_selectorLabel": "지난 해"
+    },
+    "warnings": {
+      "connectionError": "연결 오류",
+      "ledgerUnableToRetrieveData": "Ledger Live는 데이터를 검색할 수 없습니다.",
+      "checkInternetAndReload": "인터넷 연결을 확인하고 이 페이지를 새로고침하세요.",
+      "reload": "새로고침",
+      "noCryptosFound": "발견된 코인이 없습니다",
+      "noSearchResultsFor": "죄송합니다. <0>{{search}}</0>에 대한 코인을 찾지 못했습니다. 다른 키워드로 검색을 다시 시도해 주세요.",
+      "noSearchResults": "죄송합니다. 검색 결과를 찾지 못했습니다.",
+      "retrySearchKeyword": "다른 키워드로 검색을 다시 시도해 주세요.",
+      "retrySearchParams": "다른 매개변수로 검색을 다시 시도해 주세요.",
+      "trackFavAssets": "귀하의 즐겨찾기 추적",
+      "clickOnStarIcon": "자산 옆에 있는 별 아이콘을 클릭하면 자산이 자동으로 즐겨찾기에 추가됩니다.",
+      "browseAssets": "자산 찾기"
+    }
   },
   "NFT": {
     "viewer": {
@@ -1430,6 +1515,10 @@
     "sell": {
       "notice": "장치에서 매도 세부사항을 확인한 후 전송하세요. 주소가 안전하게 교환되어 주소를 따로 인증할 필요 없습니다.",
       "confirm": "매도 트랜잭션을 확인하세요"
+    },
+    "fund": {
+      "notice": "송금하기 전에 기기에서 자금 세부정보를 확인하세요. 주소는 안전하게 교환되므로 확인할 필요가 없습니다.",
+      "confirm": "자금 거래 확인"
     }
   },
   "manager": {
@@ -1514,7 +1603,11 @@
         "tokenAppDisclaimer": "{{tokenName}} {{tokenType}} 토큰을 관리하려면, &lt;1&gt;{{appName}} 앱을 설치하고 &lt;1&gt;{{tokenType}} 버전인지 확인한 후 &lt;3&gt;귀하의 {{appName}} 계정으로 전송하세요.",
         "tokenAppDisclaimerInstalled": "&lt;1&gt;{{tokenName}} {{tokenType}} 토큰을 관리하려면, &lt;1&gt;{{tokenType}} 버전인지 확인한 후 &lt;3&gt;귀하의 {{appName}} 계정으로 전송하세요.",
         "goToAccounts": "계정으로 이동",
-        "intallParentApp": "{{appName}} 앱 설치"
+        "intallParentApp": "{{appName}} 앱 설치",
+        "plugin": "Go to app",
+        "swap": "Swap",
+        "tool": "Learn more",
+        "app": "Learn more"
       },
       "uninstall": {
         "title": "모두 제거",
@@ -1622,7 +1715,7 @@
         "title": "확인",
         "success": {
           "title": "보상 수령함",
-          "text": "보상이 가용 잔금에 추가됩니다.",
+          "text": "보상이 이용 가능 잔액에 추가됩니다.",
           "cta": "세부사항 보기",
           "done": "완료"
         },
@@ -1804,7 +1897,7 @@
         "title": "확인",
         "success": {
           "title": "트랜잭션 전송됨",
-          "text": "블록체인이 트랜잭션을 확인하면 계정 잔금이 업데이트됩니다.",
+          "text": "블록체인이 트랜잭션을 확인하면 계정 잔액이 업데이트됩니다.",
           "cta": "세부 정보 보기"
         },
         "pending": {
@@ -1814,7 +1907,7 @@
       },
       "warning": {
         "tezos": {
-          "text": "전송 금액은 위임된 계정의 잔금에서 공제합니다."
+          "text": "전송 금액은 위임된 계정의 잔액에서 공제합니다."
         }
       }
     },
@@ -1914,7 +2007,7 @@
       },
       "unfreeze": {
         "title": "동결 해제",
-        "description": "TRX 동결을 해제하여 가용 잔금에 다시 추가하세요. 이제는 보상을 적립하지 못합니다."
+        "description": "TRX 동결을 해제하여 이용 가능 잔액에 다시 추가하세요. 이제는 보상을 적립하지 못합니다."
       },
       "vote": {
         "title": "투표",
@@ -2016,7 +2109,7 @@
             "title": "확인",
             "success": {
               "title": "자산을 성공적으로 위임했습니다",
-              "text": "블록체인이 트랜잭션 검증을 완료하면 계정 잔금이 업데이트됩니다.",
+              "text": "블록체인이 트랜잭션 검증을 완료하면 계정 잔액이 업데이트됩니다.",
               "cta": "세부사항 보기"
             },
             "broadcastError": "트랜잭션이 실패한 것 같습니다. 잠시 기다려 트랜잭션 내역을 확인한 후 다시 시도하세요."
@@ -2034,9 +2127,9 @@
             "claim": "현금화",
             "compoundOrClaim": "컴파운드 또는 현금화",
             "compoundDescription": "위임된 금액에 보상이 추가됩니다",
-            "claimDescription": "가용 잔금에 보상이 추가됩니다",
+            "claimDescription": "이용 가능 잔액에 보상이 추가됩니다",
             "compoundInfo": "<0>{{amount}}</0>의 수익을 획득했습니다. '계속'을 클릭하면, 바로 보상을 수령하고 동일한 검증인에게 자동 위임합니다.",
-            "claimInfo": "아래 검증인으로부터 <0>{{amount}}</0>의 수익을 획득했습니다. '계속'을 클릭하면, 바로 보상을 수령하고 가용 잔금에 자동 추가됩니다.",
+            "claimInfo": "아래 검증인으로부터 <0>{{amount}}</0>의 수익을 획득했습니다. '계속'을 클릭하면, 바로 보상을 수령하고 이용 가능 잔액에 자동 추가됩니다.",
             "selectLabel": "위임 선택"
           },
           "connectDevice": {
@@ -2048,7 +2141,7 @@
             "success": {
               "title": "보상을 성공적으로 현금화 했습니다",
               "titleCompound": "성공적으로 보상에 복리를 적용했습니다.",
-              "text": "보상이 가용 잔금에 추가되었습니다",
+              "text": "보상이 이용 가능 잔액에 추가되었습니다",
               "textCompound": "귀하의 보상이 <0>{{amount}}</0>자동으로 <0>{{validator}}</0>에게 위임되었습니다",
               "cta": "세부사항 보기"
             },
@@ -2102,7 +2195,7 @@
           "amount": {
             "title": "금액",
             "subtitle": "위임 해제 절차 완료까지 <0>21일</0>이 소요됩니다.",
-            "warning": "보상은 즉시 현금화할 수 있습니다. 위임 해제 금액은 <0>21일 시간 잠금</0> 후에 가용 잔금으로 되돌아옵니다.",
+            "warning": "보상은 즉시 현금화할 수 있습니다. 위임 해제 금액은 <0>21일 시간 잠금</0> 후에 이용 가능 잔액으로 되돌아옵니다.",
             "fields": {
               "validator": "검증인",
               "amount": "위임 해제 금액"
@@ -2164,8 +2257,8 @@
           "starter": {
             "description": "Algorand로 자산 관리를 하는 것만으로도 Algorand 보상을 받을 수 있습니다.",
             "bullet": {
-              "delegate": "보상을 받으려면 최소 잔금(1 ALGO)이 필요합니다.",
-              "access": "계정 잔금을 늘려 더 많은 보상을 받아보세요.",
+              "delegate": "보상을 받으려면 최소 잔액(1 ALGO)이 필요합니다.",
+              "access": "계정 잔액을 늘려 더 많은 보상을 받아보세요.",
               "ledger": "계정에서 트랜잭션을 수행하여 보상을 수령하세요."
             },
             "learnMore": "Algorand 보상은 어떤 원리인가요?",
@@ -2176,7 +2269,7 @@
           "info": {
             "title": "보상",
             "description": "축하합니다! {{amount}}(을)를 획득했습니다. 클릭하여 계속해서 보상을 수령하세요",
-            "info": "계정에 빈 거래를 생성하라는 메시지가 표시됩니다. 그렇게 할 경우, 최소 트랜잭션 수수료로 계정 잔금에 현재 보상이 추가됩니다."
+            "info": "계정에 빈 거래를 생성하라는 메시지가 표시됩니다. 그렇게 할 경우, 최소 트랜잭션 수수료로 계정 잔액에 현재 보상이 추가됩니다."
           },
           "connectDevice": {
             "title": "장치"
@@ -2185,7 +2278,7 @@
             "title": "확인",
             "success": {
               "title": "보상을 성공적으로 수령했습니다!",
-              "text": "보상이 가용 잔금에 추가되었습니다",
+              "text": "보상이 이용 가능 잔액에 추가되었습니다",
               "cta": "세부사항 보기"
             },
             "broadcastError": "트랜잭션이 실패한 것 같습니다. 잠시 기다려 트랜잭션 내역을 확인한 후 다시 시도하세요."
@@ -2202,7 +2295,7 @@
     "unlockedBalance": "언본딩된",
     "unlockedTooltip": "언본딩된 자산은 출금 거래를 통해 이동할 수 있습니다.",
     "networkFees": "네트워크 수수료는 폴카닷 컨센서스에 의해 자동으로 설정되며, 사용자는 장치에서 네트워크 수수료를 검토할 수 없습니다",
-    "bondedBalanceBelowMinimum": "본딩된 잔금이 현재 최소 금액 {{minimumBondBalance}} 미만입니다. 사용자가 지명한 검증인이 제거될 위험이 있습니다.",
+    "bondedBalanceBelowMinimum": "본딩된 잔액이 현재 최소 금액 {{minimumBondBalance}} 미만입니다. 사용자가 지명한 검증인이 제거될 위험이 있습니다.",
     "nomination": {
       "emptyState": {
         "description": "자산을 본딩하고 검증인을 지명하여 보상을 받을 수 있습니다.",
@@ -2246,7 +2339,7 @@
       "headerTooltip": "28일의 언본딩 기간이 지난 후 이용 가능합니다.",
       "withdrawUnbonded": "({{amount}}) 출금",
       "withdrawTooltip": "언본딩한 금액이 가용 잔금에 추가됩니다.",
-      "noUnlockedWarning": "아직 출금할 언본딩된 잔금이 없습니다.",
+      "noUnlockedWarning": "아직 출금할 언본딩된 잔액이 없습니다.",
       "rebond": "재본딩",
       "unbonded": "언본딩"
     },
@@ -2262,7 +2355,7 @@
       },
       "withdrawUnbonded": {
         "title": "출금",
-        "description": "언본딩된 금액을 다시 가용 잔금으로 가져오려면 직접 출금해야 합니다."
+        "description": "언본딩된 금액을 다시 이용 가능 잔액으로 가져오려면 직접 출금해야 합니다."
       },
       "nominate": {
         "title": "지명",
@@ -2303,10 +2396,10 @@
       "title": "자산 본딩",
       "rewardDestination": {
         "label": "보상 데스티네이션",
-        "stash": "이용 가능 잔금",
-        "stashDescription": "보상이 사용자의 이용 가능 잔금에 입금됩니다.",
-        "staked": "본딩된 잔금",
-        "stakedDescription": "본딩된 잔금에 보상이 입금되고 복리 수입이 들어옵니다.",
+        "stash": "이용 가능 잔액",
+        "stashDescription": "보상이 사용자의 이용 가능 잔액에 입금됩니다.",
+        "staked": "본딩된 잔액",
+        "stakedDescription": "본딩된 잔액에 보상이 입금되고 컴파운드 수익이 들어옵니다.",
         "optionTitle": "주의",
         "optionDescription": "옵션을 한 번 설정하고 나면 해당 본딩 만료 시점까지 고정됩니다. 마음이 바뀌었을 경우, 아래 글을 읽어보세요"
       },
@@ -2371,7 +2464,7 @@
           "label": "확인",
           "success": {
             "title": "자산이 성공적으로 재본딩 되었습니다",
-            "text": "네트워크가 트랜잭션을 확인한 후에 계정 잔금이 업데이트됩니다.",
+            "text": "네트워크가 트랜잭션을 확인한 후에 계정 잔액이 업데이트됩니다.",
             "cta": "세부사항 보기"
           },
           "pending": {
@@ -2415,7 +2508,7 @@
         "withdrawUnbonded": {
           "title": "출금",
           "description": "28일의 언본딩 기간이 지나면 언본드된 자산을 출금할 수 있습니다.",
-          "info": "그런 다음 언본딩한 자산을 가용 잔금으로 출금할 수 있습니다."
+          "info": "그런 다음 언본딩한 자산을 이용 가능 잔액으로 출금할 수 있습니다."
         },
         "chill": {
           "title": "지명 해제",
@@ -2585,7 +2678,7 @@
       "counterValue": "선호 통화",
       "counterValueDesc": "잔액 및 작업 옆에 표시할 통화를 선택합니다.",
       "region": "지역",
-      "regionDesc": "지역을 선택하여 Ledger Live의시간대를 설정하세요.",
+      "regionDesc": "날짜, 시간 및 통화 형식을 업데이트하려면 지역을 선택해 주세요.",
       "stock": "지역 마켓 지표",
       "stockDesc": "서부를 선택하면 파란색, 동부를 선택하면 빨간색으로 시장 증가율이 표시됩니다.",
       "carouselVisibility": "슬라이드 활성화",
@@ -2615,11 +2708,11 @@
       "desc": "암호화폐를 선택하여 관련 설정을 수정하세요.",
       "placeholder": "이 자산 관련 설정 값이 없음",
       "confirmationsNb": "확인 수",
-      "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 확인 수를 설정합니다."
+      "confirmationsNbDesc": "트랜잭션이 확인된 것으로 표시되는 네트워크 컨펌 수를 설정합니다."
     },
     "profile": {
       "password": "암호 잠금",
-      "passwordDesc": "패스워드를 설정해 계정 이름, 잔금, 트랜잭션, 공개 주소를 포함한 Ledger Live 데이터를 컴퓨터에 안전하게 보관하세요.",
+      "passwordDesc": "패스워드를 설정해 계정 이름, 잔액, 트랜잭션, 공개 주소를 포함한 Ledger Live 데이터를 컴퓨터에 안전하게 보관하세요.",
       "passwordAutoLock": "자동 잠금",
       "passwordAutoLockDesc": "활성화 상태가 아닐 때 Ledger Live가 자동 잠깁니다.",
       "changePassword": "암호 변경",
@@ -2656,9 +2749,13 @@
           "title": "TronGrid.io 사용",
           "description": "원장 프록시 없이 트론 그리드 바로 사용하기"
         },
-        "experimentalCurrencies": {
+        "experimentalJSCurrencies": {
           "title": "실험적 JS 도입",
-          "description": "비트코인, 모든 비트코인 포크 및 태조스에 실험적인 JS 구현을 사용하세요."
+          "description": "알고랜드 및 테조스에 실험적인 JS 구현을 사용합니다."
+        },
+        "experimentalCurrencies": {
+          "title": "실험적 통합",
+          "description": "Use available experimental crypto assets integrations."
         },
         "experimentalLanguages": {
           "title": "번역 테스팅",
@@ -2674,7 +2771,7 @@
         },
         "experimentalExplorers": {
           "title": "실험적 탐색기 API",
-          "description": "Ledger 블록체인 탐색기 새 버전을 사용해 보세요. 이 설정을 변경하면 계정 잔금과 동기화, 전송 기능이 영향을 받을 수 있습니다.\n(<0></0>)"
+          "description": "Ledger 블록체인 탐색기 새 버전을 사용해 보세요. 이 설정을 변경하면 계정 잔액과 동기화, 전송 기능이 영향을 받을 수 있습니다.\n(<0></0>)"
         },
         "keychainObservableRange": {
           "title": "맞춤형 갭 한도",
@@ -2683,6 +2780,10 @@
         "forceProvider": {
           "title": "관리자 공급자",
           "description": "관리자에서 앱 공급자를 변경하면 Ledger 기기에서 앱 설치 또는 삭제가 불가능해질 수 있습니다."
+        },
+        "testAnimations": {
+          "title": "Test Lottie animations",
+          "description": "Test all animations used in Ledger Live"
         }
       }
     },
@@ -2727,7 +2828,7 @@
     "accounts": {
       "hideEmptyTokens": {
         "title": "빈 토큰 계정 숨기기",
-        "desc": "계정 페이지에서 잔금이 0인 토큰 계정을 숨기세요."
+        "desc": "계정 페이지에서 잔액이 0인 토큰 계정을 숨기세요."
       },
       "tokenBlacklist": {
         "title": "숨겨진 토큰",
@@ -3486,8 +3587,8 @@
       "memoWarningText": "메모 기능을 사용할 때는 해당 정보를 수령인과 신중하게 확인하세요"
     },
     "solana": {
-      "memo": "Memo",
-      "memoPlaceholder": "Optional"
+      "memo": "메모",
+      "memoPlaceholder": "선택사항"
     }
   },
   "errors": {
@@ -3747,6 +3848,9 @@
       "title": "입력한 패스워드가 올바르지 않습니다",
       "description": "다시 시도해주세요"
     },
+    "QuantityNeedsToBePositive": {
+      "title": "수량은 0보다 커야 합니다."
+    },
     "RPCHostRequired": {
       "title": "호스트가 필요합니다."
     },
@@ -3765,7 +3869,7 @@
     },
     "SatStackStillSyncing": {
       "title": "노드 동기화가 진행 중입니다...",
-      "description": "노드가 동기화될 때까지 기다려 주세요 비트코인 계정 잔금이 올바르지 않아 전송할 수 없습니다"
+      "description": "노드가 동기화될 때까지 기다려 주세요 비트코인 계정 잔액이 올바르지 않아 전송할 수 없습니다"
     },
     "SatStackVersionTooOld": {
       "title": "SatStack을 업그레이드하세요",
@@ -3853,6 +3957,9 @@
     "InvalidAddress": {
       "title": "유효한 {{currencyName}} 주소가 아닙니다"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "귀하의 계정은 이미 이 검증인에게 위임되었습니다"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "수신자의 주소가 발신자의 주소와 동일합니다"
     },
@@ -3863,6 +3970,10 @@
     "ETHAddressNonEIP": {
       "title": "자동 확인을 사용할 수 없습니다: 주소를 신중하게 확인해주세요",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "이 장치에서 사용할 수 없는 작업",
+      "description": "NFT 보내기 기능은 Nano X에서만 사용할 수 있습니다. Nano S로 NFT를 보내는 방법을 알아보려면 고객 지원 플랫폼을 방문해 주세요."
     },
     "CantScanQRCode": {
       "title": "이 QR 코드를 스캔할 수 없습니다: 이 주소는 자동 확인을 지원하지 않습니다"
@@ -3990,16 +4101,16 @@
       "title": "유효하지 않은 XRP 데스티네이션 태그"
     },
     "NotEnoughBalanceToDelegate": {
-      "title": "위임에 필요한 잔금이 부족합니다"
+      "title": "위임에 필요한 잔액이 부족합니다"
     },
     "NotEnoughDelegationBalance": {
-      "title": "위임에 필요한 잔금이 부족합니다"
+      "title": "위임에 필요한 잔액이 부족합니다"
     },
     "NotEnoughBalanceInParentAccount": {
-      "title": "상위 계정의 잔금이 부족합니다"
+      "title": "상위 계정의 잔액이 부족합니다"
     },
     "NotEnoughSpendableBalance": {
-      "title": "잔금은 {{minimumAmount}} 미만일 수 없습니다"
+      "title": "잔액은 {{minimumAmount}} 미만일 수 없습니다"
     },
     "WrongAppForCurrency": {
       "title": "{{expected}} 앱을 실행해주세요"
@@ -4038,16 +4149,16 @@
       "title": "현재 지명이 없습니다"
     },
     "PolkadotAllFundsWarning": {
-      "title": "향후 트랜잭션 수수료 지불에 필요한 잔금을 충분히 남겨 두세요"
+      "title": "향후 트랜잭션 수수료 지불에 필요한 잔액을 충분히 남겨 두세요"
     },
     "PolkadotDoMaxSendInstead": {
-      "title": "잔금은 {{minimumBalance}} 이상이어야 합니다. 최대 금액을 전송하여 계정을 비우세요."
+      "title": "잔액은 {{minimumBalance}} 이상이어야 합니다. 최대 금액을 전송하여 계정을 비우세요."
     },
     "PolkadotBondMinimumAmount": {
       "title": "적어도 {{minimumBondAmount}} 이상 본딩해야 합니다."
     },
     "PolkadotBondMinimumAmountWarning": {
-      "title": "본딩된 잔금은 {{minimumBondAmount}} 이상이어야 합니다."
+      "title": "본딩된 잔액은 {{minimumBondAmount}} 이상이어야 합니다."
     },
     "PolkadotMaxUnbonding": {
       "title": "언본딩 한도를 초과했습니다."
@@ -4063,13 +4174,13 @@
       "title": "메인넷 활성화 전에 탭루트(taproot) 주소로 보내는 것은 안전하지 않습니다"
     },
     "SolanaAccountNotFunded": {
-      "title": "Account not funded"
+      "title": "자금이 입금되지 않은 계정"
     },
     "SolanaMemoIsTooLong": {
-      "title": "Memo is too long. Max length is {{maxLength}}"
+      "title": "메모가 너무 깁니다. 최대 길이는 {{maxLength}}입니다."
     },
     "SolanaAddressOfEd25519": {
-      "title": "Address off ed25519 curve"
+      "title": "주소 끄기 ed25519 곡선"
     },
     "NotEnoughNftOwned": {
       "title": "사용 가능한 토큰 수를 초과했습니다"

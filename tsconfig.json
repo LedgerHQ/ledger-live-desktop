@@ -1,12 +1,33 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "strict": true,
+    "composite": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
     "module": "commonjs",
+    "jsx": "react",
+    "lib": ["es6", "dom"],
     "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "strict": true,
+    "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["src/*"]
+    },
+    "skipLibCheck": true,
     "sourceMap": true,
-    "outDir": "playwright/tests-out"
+    "outDir": "tests/tests-out",
+    "rootDir": "./src"
   },
-  "include": ["playwright"],
-  "exclude": ["node_modules"]
+  "include": ["tests", "src/**/*"],
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js",
+    "./scripts",
+    "./lib",
+  ]
 }

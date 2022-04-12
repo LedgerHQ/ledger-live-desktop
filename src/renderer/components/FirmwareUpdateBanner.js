@@ -27,7 +27,7 @@ const FirmwareUpdateBanner = ({ old, right }: { old?: boolean, right?: any }) =>
     });
     const search = urlParams.toString();
     history.push({
-      pathname: "manager",
+      pathname: "/manager",
       search: `?${search}`,
     });
   };

@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { openModal } from "~/renderer/actions/modals";
 import { getSystemLocale } from "~/helpers/systemLocale";
-import { languageSelector, pushedLanguages } from "~/renderer/reducers/settings";
+import { languageSelector } from "~/renderer/reducers/settings";
+import { pushedLanguages } from "~/config/languages";
 
 // To reset os language proposition, change this date !
 const lastAskedLanguageAvailable = "2021-09-23";

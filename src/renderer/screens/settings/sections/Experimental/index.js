@@ -17,6 +17,7 @@ import { SettingsSectionBody as Body, SettingsSectionRow as Row } from "../../Se
 import ExperimentalSwitch from "./ExperimentalSwitch";
 import ExperimentalInteger from "./ExperimentalInteger";
 import FullNode from "~/renderer/screens/settings/sections/Accounts/FullNode";
+import LottieTester from "./LottieTester";
 
 const experimentalTypesMap = {
   toggle: ExperimentalSwitch,
@@ -111,6 +112,7 @@ const SectionExperimental = () => {
           ) : null,
         )}
         {process.env.SHOW_ETHEREUM_BRIDGE ? <EthereumBridgeRow /> : null}
+        {process.env.DEBUG_LOTTIE ? <LottieTester /> : null}
         <FullNode />
       </Body>
     </div>

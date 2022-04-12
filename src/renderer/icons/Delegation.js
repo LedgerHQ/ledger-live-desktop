@@ -3,7 +3,7 @@ import React from "react";
 
 const Delegation = ({ size }: { size: number }) => (
   <svg viewBox="0 0 76 32" width={size} height={(size * 32) / 76}>
-    <g fill="#6490F1" fillRule="evenodd">
+    <g fill="#8a80db" fillRule="evenodd">
       <g transform="translate(0 14)">
         <circle opacity=".2" cx="2" cy="2" r="2" />
         <circle opacity=".4" cx="9" cy="2" r="2" />

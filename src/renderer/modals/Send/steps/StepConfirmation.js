@@ -34,13 +34,19 @@ function StepConfirmation({
   error,
   theme,
   device,
+  isNFTSend,
   signed,
   currencyName,
 }: StepProps & { theme: * }) {
   if (optimisticOperation) {
     return (
       <Container>
-        <TrackPage category="Send Flow" name="Step Confirmed" currencyName={currencyName} />
+        <TrackPage
+          category="Send Flow"
+          name="Step Confirmed"
+          currencyName={currencyName}
+          isNFTSend={isNFTSend}
+        />
         <SyncOneAccountOnMount priority={10} accountId={optimisticOperation.accountId} />
         <SuccessDisplay
           title={<Trans i18nKey="send.steps.confirmation.success.title" />}

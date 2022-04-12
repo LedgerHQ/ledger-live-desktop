@@ -22,7 +22,7 @@ export function AnimatedWave({ height, color }: Props) {
             V 0
             Z"
       >
-        {!process.env.SPECTRON_RUN ? (
+        {!process.env.PLAYWRIGHT_RUN ? (
           <animate
             repeatCount="indefinite"
             attributeName="d"

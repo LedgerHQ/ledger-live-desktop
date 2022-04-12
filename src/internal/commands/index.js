@@ -20,6 +20,8 @@ import testCrash from "./testCrash";
 import testInterval from "./testInterval";
 import appOpExec from "./appOpExec";
 import initSwap from "./initSwap";
+import startExchange from "./startExchange";
+import completeExchange from "./completeExchange";
 import websocketBridge from "./websocketBridge";
 import checkSignatureAndPrepare from "./checkSignatureAndPrepare";
 import getTransactionId from "./getTransactionId";
@@ -47,6 +49,8 @@ export const commandsById = {
   ping,
   testApdu,
   initSwap,
+  startExchange,
+  completeExchange,
   checkSignatureAndPrepare,
   getTransactionId,
   testCrash,
