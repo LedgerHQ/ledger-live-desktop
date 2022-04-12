@@ -7,12 +7,7 @@ import type { Account, TransactionStatus, Operation } from "@ledgerhq/live-commo
 
 import type { Transaction } from "@ledgerhq/live-common/lib/families/cosmos/types";
 
-export type StepId =
-  | "starter"
-  | "validators"
-  | "destinationValidators"
-  | "connectDevice"
-  | "confirmation";
+export type StepId = "claimRewards" | "connectDevice" | "confirmation";
 
 export type StepProps = {
   t: TFunction,
@@ -25,6 +20,7 @@ export type StepProps = {
   openModal: (key: string, config?: any) => void,
   optimisticOperation: *,
   error: *,
+  warning: *,
   signed: boolean,
   transaction: ?Transaction,
   status: TransactionStatus,
@@ -34,6 +30,9 @@ export type StepProps = {
   onOperationBroadcasted: Operation => void,
   setSigned: boolean => void,
   bridgePending: boolean,
+  contract?: string,
+  validators?: any,
+  delegations?: any,
 };
 
 export type St = Step<StepId, StepProps>;
