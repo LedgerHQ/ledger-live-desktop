@@ -1055,9 +1055,9 @@
     "hideCTA": "Скрыть токен"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Colection",
-    "desc": "This action will hide all NFTs from the <1><0>{{collectionName}}</0></1> collection, you can show them again using <3>Settings</3>",
-    "hideCTA": "Hide NFT Collection"
+    "title": "Скрыть коллекцию NFT",
+    "desc": "Это действие скроет все NFT из <1><0>{{collectionName}}</0></1>. Вы можете снова отобразить их в <3>Настройках</3>",
+    "hideCTA": "Скрыть коллекцию NFT"
   },
   "banners": {
     "cleanCache": {
@@ -2560,70 +2560,70 @@
   },
   "solana": {
     "common": {
-      "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
-      "viewDetails": "View details",
+      "broadcastError": "Вероятно, при обработке транзакции произошла ошибка. Проверьте историю транзакций через несколько минут, прежде чем повторить попытку.",
+      "viewDetails": "Подробнее",
       "connectDevice": {
-        "title": "Device"
+        "title": "Устройство"
       },
       "confirmation": {
-        "title": "Confirmation"
+        "title": "Подтверждение"
       }
     },
     "delegation": {
-      "totalStake": "Total Stake",
-      "commission": "Commission",
-      "delegate": "Add",
-      "listHeader": "Delegations",
-      "availableBalance": "Available balance",
-      "active": "Active",
-      "activeTooltip": "Active amount generate rewards",
-      "inactiveTooltip": "Inactive amount does not generate rewards",
-      "delegatedInfoTooltip": "Total amount that is delegated to validators.",
-      "withdrawableInfoTooltip": "Total amount that is withdrawable from delegations.",
-      "withdrawableTitle": "Withdrawable",
-      "statusUpdateNotice": "The status of the delegation will be updated when the transaction is confirmed.",
+      "totalStake": "Общая доля",
+      "commission": "Комиссия",
+      "delegate": "Добавить",
+      "listHeader": "Назначения",
+      "availableBalance": "Доступный баланс",
+      "active": "Активно",
+      "activeTooltip": "Делегированные средства приносят вознаграждения",
+      "inactiveTooltip": "Без делегирования средства не приносят вознаграждения",
+      "delegatedInfoTooltip": "Всего делегировано валидаторам.",
+      "withdrawableInfoTooltip": "Общая сумма, которую можно вывести из делегированной.",
+      "withdrawableTitle": "Доступно для вывода",
+      "statusUpdateNotice": "Статус делегированных средств будет обновлён после подтверждения транзакций.",
       "ledgerByFigmentTC": "Ledger by Figment T&Cs",
       "emptyState": {
-        "description": "You can earn SOL rewards by delegating your assets.",
-        "info": "How Delegation works",
-        "delegation": "Earn rewards"
+        "description": "Вы можете зарабатывать вознаграждения в SOL, делегируя активы.",
+        "info": "Как работает делегирование",
+        "delegation": "Получение вознаграждения"
       },
       "earnRewards": {
-        "description": "You may earn rewards by delegating your SOL assets to a validator.",
+        "description": "Вы можете получать вознаграждения, делегируя активы SOL валидатору.",
         "bullet": {
-          "0": "You keep ownership of delegated assets",
-          "1": "Delegate using your Ledger device",
-          "2": "Assets will be available after undelegation"
+          "0": "Делегированные активы остаются в вашей собственности",
+          "1": "Делегируйте прямо на устройстве Ledger",
+          "2": "Активы станут доступны после отмены делегирования"
         },
-        "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+        "warning": "Выбирайте валидатора с умом. Часть делегированных активов может быть безвозвратно утеряна, если валидатор поведёт себя недобросовестно."
       },
       "flow": {
-        "title": "Delegate",
+        "title": "Делегирование",
         "steps": {
           "validator": {
-            "title": "Validator"
+            "title": "Валидатор"
           },
           "amount": {
-            "title": "Amount"
+            "title": "Кол-во"
           },
           "confirmation": {
             "success": {
-              "title": "You have successfully delegated your assets"
+              "title": "Вы успешно делегировали активы"
             }
           }
         }
       },
       "withdraw": {
         "flow": {
-          "title": "Withdraw",
+          "title": "Вывод средств",
           "steps": {
             "amount": {
-              "title": "Amount"
+              "title": "Кол-во"
             },
             "confirmation": {
               "success": {
-                "title": "You have successfully withdrawn your assets.",
-                "text": "Your account balance will be updated when the transaction is confirmed."
+                "title": "Вы успешно вывели средства.",
+                "text": "Баланс счёта будет обновлён после подтверждения транзакции."
               }
             }
           }
@@ -2631,11 +2631,11 @@
       },
       "activate": {
         "flow": {
-          "title": "Activate",
+          "title": "Активация",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully activated you delegation."
+                "title": "Вы успешно активировали делегирование (назначения)."
               }
             }
           }
@@ -2643,11 +2643,11 @@
       },
       "reactivate": {
         "flow": {
-          "title": "Reactivate",
+          "title": "Возобновление",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully reactivated you delegation."
+                "title": "Вы успешно возобновили делегирование (назначения)."
               }
             }
           }
@@ -2655,11 +2655,11 @@
       },
       "deactivate": {
         "flow": {
-          "title": "Deactivate",
+          "title": "Отзыв делегирования",
           "steps": {
             "confirmation": {
               "success": {
-                "title": "You have successfully deactivated your delegation."
+                "title": "Вы успешно отозвали делегирование (назначения)."
               }
             }
           }
@@ -2959,10 +2959,10 @@
         "count_plural": "Токенов: {{count}}"
       },
       "hiddenNftCollections": {
-        "title": "Hidden NFT Collections",
-        "desc": "You can hide NFT Collections by right-clicking on the collection name and selecting 'Hide NFT Collection'.",
-        "count": "{{count}} collection",
-        "count_plural": "{{count}} collections"
+        "title": "Скрытые коллекции NFT",
+        "desc": "Вы можете скрыть коллекции NFT, щёлкнув правой кнопкой мыши по названию коллекции и выбрав опцию «Скрыть коллекцию NFT».",
+        "count": "{{count}} коллекция",
+        "count_plural": "Коллекций: {{count}}"
       },
       "fullNode": {
         "title": "Подключение полной ноды Биткойна",
@@ -3762,7 +3762,7 @@
       "description": ""
     },
     "CompoundLowerAllowanceOfActiveAccountError": {
-      "title": "Вы не можете уменьшить подтверждённую сумму, пока у вас имеется активная транзакция на пополнения."
+      "title": "Вы не можете уменьшить подтверждённую сумму, пока у вас имеется активная транзакция на пополнение."
     },
     "CosmosBroadcastCodeInternal": {
       "title": "Произошла ошибка (ошибка № 1)",
@@ -4246,7 +4246,7 @@
       "title": "Недостаточно средств на основном счёте"
     },
     "quantityNeedsToBePositive": {
-      "title": "Quantity needs to be at least 1"
+      "title": "Количество должно быть не менее 1"
     },
     "NotEnoughSpendableBalance": {
       "title": "Баланс не может быть меньше {{minimumAmount}}"
