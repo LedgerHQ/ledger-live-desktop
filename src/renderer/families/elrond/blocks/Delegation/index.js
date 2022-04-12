@@ -54,6 +54,7 @@ const Ellipsis: ThemedComponent<{}> = styled.div`
 
 const Withdraw: ThemedComponent<{}> = styled.div`
   line-height: 1;
+  cursor: pointer;
 `;
 
 const Divider: ThemedComponent<*> = styled.div`

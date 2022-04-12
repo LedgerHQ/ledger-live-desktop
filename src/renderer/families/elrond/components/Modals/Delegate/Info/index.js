@@ -48,7 +48,12 @@ export default function ElrondEarnRewardsInfoModal({ name, account, parentAccoun
       additional={
         <WarnBox>{t("elrond.delegation.flow.steps.starter.warning.description")}</WarnBox>
       }
-      footerLeft={<LinkWithExternalIcon label={t("delegation.howItWorks")} onClick={onLearnMore} />}
+      footerLeft={
+        <LinkWithExternalIcon
+          label={t("elrond.delegation.emptyState.info")}
+          onClick={onLearnMore}
+        />
+      }
     />
   );
 }

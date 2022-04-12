@@ -10,7 +10,6 @@ import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
 import TrackPage from "~/renderer/analytics/TrackPage";
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
-import ModeSelectorField from "../fields/ModeSelectorField";
 import Text from "~/renderer/components/Text";
 import { denominate } from "~/renderer/families/elrond/helpers";
 import { constants } from "~/renderer/families/elrond/constants";
@@ -18,7 +17,7 @@ import DelegationSelectorField from "../fields/DelegationSelectorField";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 
-export default function StepClaimRewards({
+export default function StepWithdraw({
   account,
   parentAccount,
   onUpdateTransaction,
@@ -28,51 +27,37 @@ export default function StepClaimRewards({
   warning,
   error,
   t,
-  validators,
-  delegations,
+  unbondings,
   contract,
+  amount,
 }: StepProps) {
-  invariant(account && account.elrondResources && transaction, "account and transaction required");
   const bridge = getAccountBridge(account, parentAccount);
 
-  const updateClaimRewards = useCallback(
-    newTransaction => {
-      onUpdateTransaction(transaction => bridge.updateTransaction(transaction, newTransaction));
+  const onDelegationChange = useCallback(
+    validator => {
+      onUpdateTransaction(transaction =>
+        bridge.updateTransaction(transaction, {
+          ...transaction,
+          recipient: validator.contract,
+          amount: BigNumber(validator.amount),
+        }),
+      );
     },
     [bridge, onUpdateTransaction],
   );
 
-  const onChangeMode = useCallback(
-    mode => {
-      updateClaimRewards({ ...transaction, mode });
-    },
-    [updateClaimRewards, transaction],
-  );
-
-  const onDelegationChange = useCallback(
-    validator => {
-      updateClaimRewards({
-        ...transaction,
-        recipient: validator.delegation.contract,
-        amount: BigNumber(validator.delegation.claimableRewards),
-      });
-    },
-    [updateClaimRewards, transaction],
-  );
-
-  const key = transaction.mode === "claimRewards" ? "claimInfo" : "compoundInfo";
+  console.log({ transaction, am: String(transaction.amount) });
 
   return (
     <Box flow={1}>
       <TrackPage category="ClaimRewards Flow" name="Step 1" />
       {warning && !error ? <ErrorBanner error={warning} warning={true} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
-      <ModeSelectorField mode={transaction.mode} onChange={onChangeMode} />
 
       {transaction.amount.gt(0) && (
         <Text fontSize={4} ff="Inter|Medium" textAlign="center">
           <Trans
-            i18nKey={`elrond.claimRewards.flow.steps.claimRewards.${key}`}
+            i18nKey="elrond.withdraw.flow.steps.withdraw.description"
             values={{
               amount: `${denominate({
                 input: String(transaction.amount),
@@ -87,8 +72,8 @@ export default function StepClaimRewards({
 
       <DelegationSelectorField
         contract={contract}
-        validators={validators}
-        delegations={delegations}
+        unbondings={unbondings}
+        amount={amount}
         t={t}
         onChange={onDelegationChange}
         bridge={bridge}
@@ -99,7 +84,7 @@ export default function StepClaimRewards({
   );
 }
 
-export function StepClaimRewardsFooter({
+export function StepWithdrawFooter({
   transitionTo,
   account,
   parentAccount,
