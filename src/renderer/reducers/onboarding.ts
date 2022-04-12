@@ -1,4 +1,4 @@
-import { DeviceModelId } from "@ledgerhq/devices";
+import { DeviceModel, DeviceModelId } from "@ledgerhq/devices";
 import { handleActions } from "redux-actions";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { State } from ".";
@@ -153,7 +153,8 @@ export default handleActions(handlers, initialState);
 
 export const onboardingSelector = (s: State): OnboardingState => s.onboarding;
 
-export const onboardingRelaunchedSelector = (s: State): boolean =>
-  s.onboarding.onboardingRelaunched;
+export const onboardingRelaunchedSelector = (s: State) =>
+  s.onboarding.onboardingRelaunched as boolean;
 
-export const deviceModelIdSelector = (s: State): DeviceModelId => s.onboarding.deviceModelId;
+export const deviceModelIdSelector = (s: State) => s.onboarding.deviceModelId as DeviceModelId;
+export const useCaseSelector = (s: State) => s.onboarding.useCase as UseCase;

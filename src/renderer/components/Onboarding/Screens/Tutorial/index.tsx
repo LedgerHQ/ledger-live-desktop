@@ -41,7 +41,7 @@ import { fireConfetti } from "~/renderer/components/Onboarding/Screens/Tutorial/
 import RecoveryWarning from "../../Help/RecoveryWarning";
 import { QuizzPopin } from "~/renderer/modals/OnboardingQuizz/OnboardingQuizzModal";
 
-import { deviceModelIdSelector, UseCase } from "~/renderer/reducers/onboarding";
+import { deviceModelIdSelector, UseCase, useCaseSelector } from "~/renderer/reducers/onboarding";
 
 const FlowStepperContainer = styled(Flex)`
   width: 100%;
@@ -282,8 +282,10 @@ function BigTutorial() {
   const dispatch = useDispatch();
   const { url } = useRouteMatch();
 
+  const useCase = useSelector(useCaseSelector);
+
   const urlSplit = url.split("/");
-  const useCase = urlSplit[urlSplit.length - 1] as UseCase;
+  const currentStep = urlSplit[urlSplit.length - 1] as UseCase;
 
   const screens: IScreen[] = [
     {
@@ -338,6 +340,7 @@ function BigTutorial() {
     {
       id: "hide-recovery-phrase",
       component: HideRecoveryPhrase,
+      useCases: [UseCase.connectDevice, UseCase.setupDevice],
     },
     {
       id: "use-recovery-sheet",
@@ -356,6 +359,38 @@ function BigTutorial() {
       component: QuizFailure,
     },
   ];
+
+  const steps = [
+    {
+      start: "how-to-get-started",
+      end: "import-your-recovery-phrase",
+      name: "getStarted",
+    },
+    {
+      start: "how-to-get-started",
+      end: "import-your-recovery-phrase",
+      name: "pinCode",
+    },
+  ];
+
+  const stepsStatus: { [key: string]: "success" | "active" | "inactive" } = {};
+  const currentScreenIndex = screens.findIndex(s => s.id === currentStep);
+
+  steps.forEach(step => {
+    const startIndex = screens.findIndex(s => s.id === step.start);
+    const endIndex = screens.findIndex(s => s.id === step.end);
+
+    let status: "success" | "active" | "inactive";
+
+    if (currentScreenIndex > endIndex) {
+      status = "success";
+    } else if (currentScreenIndex < startIndex) {
+      status = "inactive";
+    } else {
+      status = "active";
+    }
+    stepsStatus[step.name] = status;
+  });
 
   const useCaseScreens = screens.filter(screen => {
     return !screen.useCases || screen.useCases.includes(useCase);
