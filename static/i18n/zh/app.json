@@ -1055,9 +1055,9 @@
     "hideCTA": "隐藏代币"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Colection",
-    "desc": "This action will hide all NFTs from the <1><0>{{collectionName}}</0></1> collection, you can show them again using <3>Settings</3>",
-    "hideCTA": "Hide NFT Collection"
+    "title": "隐藏 NFT 收藏",
+    "desc": "此操作将隐藏 <1><0>{{collectionName}}</0></1> 收藏中的所有 NFT，您可以使用 <3>设置</3> 再次显示它们。",
+    "hideCTA": "隐藏 NFT 收藏"
   },
   "banners": {
     "cleanCache": {
