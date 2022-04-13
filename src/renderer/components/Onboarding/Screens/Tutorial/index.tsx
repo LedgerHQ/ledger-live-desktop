@@ -356,30 +356,59 @@ export default function Tutorial() {
 
   const steps = [
     {
-      start: ScreenId.howToGetStarted,
-      end: ScreenId.importYourRecoveryPhrase,
       name: "getStarted",
+      screens: [
+        ScreenId.howToGetStarted,
+        ScreenId.deviceHowTo,
+        ScreenId.deviceHowTo2,
+        ScreenId.importYourRecoveryPhrase,
+      ],
     },
     {
-      start: ScreenId.howToGetStarted,
-      end: ScreenId.importYourRecoveryPhrase,
       name: "pinCode",
+      screens: [ScreenId.pinCode, ScreenId.pinCodeHowTo],
+    },
+    {
+      name: "recoveryPhrase",
+      screens: [
+        ScreenId.newRecoveryPhrase,
+        ScreenId.useRecoverySheet,
+        ScreenId.existingRecoveryPhrase,
+        ScreenId.recoveryHowTo,
+        ScreenId.recoveryHowTo2,
+        ScreenId.recoveryHowTo3,
+      ],
+    },
+    {
+      name: "hideRecoveryPhrase",
+      screens: [ScreenId.hideRecoveryPhrase, ScreenId.quizSuccess, ScreenId.quizFailure],
+    },
+    {
+      name: "pairNano",
+      screens: [ScreenId.pairMyNano, ScreenId.genuineCheck],
     },
   ];
 
+  if (useCase === UseCase.recoveryPhrase) {
+    // Remove step : hideRecoveryPhrase
+    steps.splice(3, 1);
+  }
+
   const stepsStatus: { [key: string]: "success" | "active" | "inactive" } = {};
   const currentScreenIndex = screens.findIndex(s => s.id === currentStep);
-  const { component: CurrentScreen, canContinue, next, previous } = screens[currentScreenIndex];
+  const { component: CurrentScreen, canContinue, next, previous, id: currentScreenId } = screens[
+    currentScreenIndex
+  ];
+  const screenStepIndex = steps.findIndex(
+    s => !!s.screens.find(screenId => screenId === currentScreenId),
+  );
 
-  steps.forEach(step => {
-    const startIndex = screens.findIndex(s => s.id === step.start);
-    const endIndex = screens.findIndex(s => s.id === step.end);
-
+  steps.forEach((step, stepIndex) => {
     let status: "success" | "active" | "inactive";
 
-    if (currentScreenIndex > endIndex) {
+    if (screenStepIndex > stepIndex) {
       status = "success";
-    } else if (currentScreenIndex < startIndex) {
+    } else if (screenStepIndex < stepIndex) {
       status = "inactive";
     } else {
       status = "active";
@@ -395,13 +424,6 @@ export default function Tutorial() {
     key: name,
     label: t(`onboarding.screens.tutorial.steps.${name}`),
   }));
-
-  const activeIndex = steps.findIndex(step => {
-    const startIndex = screens.findIndex(s => s.id === step.start);
-    const endIndex = screens.findIndex(s => s.id === step.end);
-
-    return currentScreenIndex <= endIndex && currentScreenIndex >= startIndex;
-  });
 
   const quizSucceeds = () => {
     setQuizOpen(false);
@@ -420,7 +442,7 @@ export default function Tutorial() {
         illustration={CurrentScreen.Illustration}
         AsideFooter={CurrentScreen.Footer}
         disableContinue={canContinue === false}
-        ProgressBar={<ProgressBar steps={progressSteps} currentIndex={activeIndex} />}
+        ProgressBar={<ProgressBar steps={progressSteps} currentIndex={screenStepIndex} />}
         continueLabel={CurrentScreen.continueLabel}
         handleContinue={next}
         handleBack={previous}
