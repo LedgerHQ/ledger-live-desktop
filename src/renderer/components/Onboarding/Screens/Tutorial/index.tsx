@@ -284,6 +284,7 @@ interface IScreen {
 function BigTutorial() {
   const history = useHistory();
   const dispatch = useDispatch();
+  const [quizzOpen, setQuizOpen] = useState(false);
   const { t } = useTranslation();
   const { url } = useRouteMatch();
 
@@ -302,21 +303,15 @@ function BigTutorial() {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Get started step 1");
         }
-        history.push(`${path}/device-how-to-2`);
+        history.push(`${path}/device-how-to`);
       },
-      previous: () => history.push("/onboarding/select-use-case"),
-    },
-    {
-      id: "import-your-recovery-phrase",
-      component: ImportYourRecoveryPhrase,
-      next: () => history.push(`${path}/device-how-to-2`),
       previous: () => history.push("/onboarding/select-use-case"),
     },
     {
       id: "device-how-to",
       component: DeviceHowTo,
-      next: () => history.push(`${path}/device-how-to-2`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      next: () => history.push(`${path}/pin-code`),
+      previous: () => history.push(`${path}/how-to-get-started`),
     },
     {
       id: "device-how-to-2",
@@ -324,30 +319,49 @@ function BigTutorial() {
       next: () => history.push(`${path}/device-how-to-2`),
       previous: () => history.push(`${path}/how-to-get-started`),
     },
-
     {
       id: "pin-code",
       component: PinCode,
-      next: () => history.push(`${path}/device-how-to-2`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      next: () => {
+        if (useCase === UseCase.setupDevice) {
+          track("Onboarding - Pin code step 1");
+        }
+        history.push(`${path}/pin-code-how-to`);
+      },
+      previous: () => history.push(`${path}/device-how-to`),
     },
     {
       id: "pin-code-how-to",
       component: PinCodeHowTo,
-      next: () => history.push(`${path}/device-how-to-2`),
-      previous: () => history.push("/onboarding/select-use-case"),
-    },
-    {
-      id: "existing-recovery-phrase",
-      component: ExistingRecoveryPhrase,
-      next: () => history.push(`${path}/device-how-to-2`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      next: () => {
+        if (useCase === UseCase.setupDevice) {
+          track("Onboarding - Pin code step 2");
+        }
+        history.push(`${path}/new-recovery-phrase`);
+      },
+      previous: () => history.push(`${path}/pin-code`),
     },
     {
       id: "new-recovery-phrase",
       component: NewRecoveryPhrase,
-      next: () => history.push(`${path}/device-how-to-2`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      next: () => {
+        if (useCase === UseCase.setupDevice) {
+          track("Onboarding - Recovery step 1");
+        }
+        history.push(`${path}/use-recovery-sheet`);
+      },
+      previous: () => history.push(`${path}/pin-code-how-to`),
+    },
+    {
+      id: "use-recovery-sheet",
+      component: UseRecoverySheet,
+      next: () => {
+        if (useCase === UseCase.setupDevice) {
+          track("Onboarding - Recovery step 2");
+        }
+        history.push(`${path}/recovery-how-to-3`);
+      },
+      previous: () => history.push(`${path}/new-recovery-phrase`),
     },
     {
       id: "recovery-how-to",
@@ -364,45 +378,78 @@ function BigTutorial() {
     {
       id: "recovery-how-to-3",
       component: RecoveryHowTo3,
-      next: () => history.push(`${path}/device-how-to-2`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      next: () => {
+        if (useCase === UseCase.setupDevice) {
+          track("Onboarding - Recovery step 3");
+        }
+        history.push(`${path}/hide-recovery-phrase`);
+      },
+      previous: () => history.push(`${path}/use-recovery-sheet`),
     },
     {
       id: "hide-recovery-phrase",
       component: HideRecoveryPhrase,
       useCases: [UseCase.connectDevice, UseCase.setupDevice],
+      next: () => {
+        if (useCase === UseCase.setupDevice) {
+          track("Onboarding - Recovery step 4");
+          setQuizOpen(true);
+        }
+        history.push(`${path}/hide-recovery-phrase`);
+      },
+      previous: () => history.push(`${path}/recovery-how-to-3`),
+    },
+
+    {
+      id: "import-your-recovery-phrase",
+      component: ImportYourRecoveryPhrase,
       next: () => history.push(`${path}/device-how-to-2`),
       previous: () => history.push("/onboarding/select-use-case"),
     },
     {
-      id: "use-recovery-sheet",
-      component: UseRecoverySheet,
+      id: "existing-recovery-phrase",
+      component: ExistingRecoveryPhrase,
       next: () => history.push(`${path}/device-how-to-2`),
       previous: () => history.push("/onboarding/select-use-case"),
     },
     {
       id: "quiz-success",
       component: QuizSuccess,
-      next: () => history.push(`${path}/device-how-to-2`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      next: () => {
+        if (useCase === UseCase.setupDevice) {
+          track("Onboarding - Pair start");
+        }
+        history.push(`${path}/pair-my-nano`);
+      },
+      previous: () => history.push(`${path}/hide-recovery-phrase`),
     },
     {
       id: "quiz-failure",
       component: QuizFailure,
-      next: () => history.push(`${path}/device-how-to-2`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      next: () => {
+        if (useCase === UseCase.setupDevice) {
+          track("Onboarding - Pair start");
+        }
+        history.push(`${path}/pair-my-nano`);
+      },
+      previous: () => history.push(`${path}/hide-recovery-phrase`),
     },
     {
       id: "pair-my-nano",
       component: PairMyNano,
-      next: () => history.push(`${path}/device-how-to-2`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      next: () => {
+        if (useCase === UseCase.setupDevice) {
+          track("Onboarding - Genuine Check");
+        }
+        history.push(`${path}/genuine-check`);
+      },
+      previous: () => history.push(`${path}/hide-recovery-phrase`),
     },
     {
       id: "genuine-check",
       component: GenuineCheck,
-      next: () => history.push(`${path}/device-how-to-2`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      next: () => history.push("/"),
+      previous: () => history.push(`${path}/pair-my-nano`),
     },
   ];
 
@@ -455,35 +502,48 @@ function BigTutorial() {
     return currentScreenIndex <= endIndex && currentScreenIndex >= startIndex;
   });
 
+  const quizSucceeds = () => {
+    setQuizOpen(false);
+    history.push(`${path}/quiz-success`);
+  };
+
+  const quizFails = () => {
+    setQuizOpen(false);
+    history.push(`${path}/quiz-failure`);
+  };
+
   return (
-    <FlowStepper
-      illustration={CurrentScreen.Illustration}
-      AsideFooter={CurrentScreen.Footer}
-      disableContinue={
-        CurrentScreen.canContinue ? !CurrentScreen.canContinue(state.context) : false
-      }
-      ProgressBar={<ProgressBar steps={progressSteps} currentIndex={activeIndex} />}
-      continueLabel={CurrentScreen.continueLabel}
-      onContinue={CurrentScreen.onContinue ? () => CurrentScreen.onContinue(sendEvent) : null}
-    >
-      <Switch>
-        <Route exact path="/onboarding/setup-device">
-          <Redirect to={`${url}/pair-my-nano`} />
-        </Route>
-        <Route exact path="/onboarding/connect-device">
-          <Redirect to={`${url}/pair-my-nano`} />
-        </Route>
-        <Route exact path="/onboarding/recovery-phrase">
-          <Redirect to={`${url}/pair-my-nano`} />
-        </Route>
-        {useCaseScreens.map(({ component: Screen, id }) => {
-          // TODO : remove this!!!
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          return <Route key={id} path={`${url}/${id}`} render={props => <Screen {...props} />} />;
-        })}
-      </Switch>
-    </FlowStepper>
+    <>
+      <QuizzPopin isOpen={quizzOpen} onWin={quizSucceeds} onLose={quizFails} onClose={quizFails} />
+      <FlowStepper
+        illustration={CurrentScreen.Illustration}
+        AsideFooter={CurrentScreen.Footer}
+        disableContinue={
+          CurrentScreen.canContinue ? !CurrentScreen.canContinue(state.context) : false
+        }
+        ProgressBar={<ProgressBar steps={progressSteps} currentIndex={activeIndex} />}
+        continueLabel={CurrentScreen.continueLabel}
+        onContinue={CurrentScreen.onContinue ? () => CurrentScreen.onContinue(sendEvent) : null}
+      >
+        <Switch>
+          <Route exact path="/onboarding/setup-device">
+            <Redirect to={`${url}/pair-my-nano`} />
+          </Route>
+          <Route exact path="/onboarding/connect-device">
+            <Redirect to={`${url}/pair-my-nano`} />
+          </Route>
+          <Route exact path="/onboarding/recovery-phrase">
+            <Redirect to={`${url}/pair-my-nano`} />
+          </Route>
+          {useCaseScreens.map(({ component: Screen, id }) => {
+            // TODO : remove this!!!
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            return <Route key={id} path={`${url}/${id}`} render={props => <Screen {...props} />} />;
+          })}
+        </Switch>
+      </FlowStepper>
+    </>
   );
 }
 
