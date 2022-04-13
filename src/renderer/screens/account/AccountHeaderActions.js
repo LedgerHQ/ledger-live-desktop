@@ -285,9 +285,9 @@ const AccountHeaderActions = ({ account, parentAccount, openModal }: Props) => {
 
   const NonEmptyAccountHeader = (
     <FadeInButtonsContainer data-test-id="account-buttons-group" show={showButtons}>
-      {availableOnBuy && BuyHeader}
-      {availableOnSwap && SwapHeader}
       {manageActions.length > 0 && ManageActionsHeader}
+      {availableOnSwap && SwapHeader}
+      {availableOnBuy && BuyHeader}
       {canSend(account, parentAccount) && (
         <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
       )}
