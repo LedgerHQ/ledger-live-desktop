@@ -55,8 +55,8 @@ const Delegation: FC = ({
     () =>
       [
         {
-          key: "MODAL_ELROND_UNDELEGATE",
-          label: <Trans i18nKey="elrond.delegation.undelegate" />,
+          key: constants.modals.unstake,
+          label: "elrond.delegation.undelegate",
           show: true,
           parameters: {
             account,
@@ -67,8 +67,8 @@ const Delegation: FC = ({
           },
         },
         {
-          key: "MODAL_ELROND_CLAIM_REWARDS",
-          label: <Trans i18nKey="elrond.delegation.reward" />,
+          key: constants.modals.claim,
+          label: "elrond.delegation.reward",
           show: BigNumber(claimableRewards).gt(0),
           parameters: {
             account,
@@ -148,12 +148,14 @@ const Delegation: FC = ({
 
 const RenderDropdownItem = ({ item, isActive }: RenderDropdownItemType) => (
   <Fragment>
-    {item.key === "MODAL_ELROND_CLAIM_REWARDS" && <Divider />}
+    {item.key === constants.modals.claim && <Divider />}
 
     <ToolTip content={item.tooltip} containerStyle={{ width: "100%" }}>
       <DropDownItem disabled={item.disabled} isActive={isActive}>
         <Box horizontal={true} alignItems="center" justifyContent="center">
-          <Text ff="Inter|SemiBold">{item.label}</Text>
+          <Text ff="Inter|SemiBold">
+            <Trans i18nKey={item.label} />
+          </Text>
         </Box>
       </DropDownItem>
     </ToolTip>

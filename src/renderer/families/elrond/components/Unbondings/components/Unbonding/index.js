@@ -68,7 +68,7 @@ const Unbonding: FC = ({
 
   const onWithdraw = useCallback(() => {
     dispatch(
-      openModal("MODAL_ELROND_WITHDRAW", {
+      openModal(constants.modals.withdraw, {
         account,
         unbondings,
         contract,

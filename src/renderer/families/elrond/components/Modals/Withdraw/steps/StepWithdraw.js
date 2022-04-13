@@ -46,8 +46,6 @@ export default function StepWithdraw({
     [bridge, onUpdateTransaction],
   );
 
-  console.log({ transaction, am: String(transaction.amount) });
-
   return (
     <Box flow={1}>
       <TrackPage category="ClaimRewards Flow" name="Step 1" />

@@ -35,7 +35,8 @@ const Item = item => {
   );
 };
 
-const Dropdown = ({ delegations, onChange, contract }: Props) => {
+const Dropdown = (props: Props) => {
+  const { delegations, onChange, contract } = props;
   const { t } = useTranslation();
 
   const options = useMemo(

@@ -116,10 +116,12 @@ export function StepClaimRewardsFooter({
   return (
     <Fragment>
       <AccountFooter parentAccount={parentAccount} account={account} status={status} />
+
       <Box horizontal={true}>
         <Button mr={1} secondary={true} onClick={onClose}>
           <Trans i18nKey="common.cancel" />
         </Button>
+
         <Button disabled={!canNext} primary={true} onClick={() => transitionTo("connectDevice")}>
           <Trans i18nKey="common.continue" />
         </Button>
