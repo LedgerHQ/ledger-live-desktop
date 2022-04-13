@@ -35,6 +35,10 @@ const animations = {
     light: NanoSPAnimLight,
     dark: NanoSPAnimDark,
   },
+  nanoFTS: {
+    light: NanoSAnimLight,
+    dark: NanoSAnimDark,
+  },
   blue: {
     light: null,
     dark: null,

@@ -43,6 +43,11 @@ const illustrations = {
     dark: nanoSPDark,
     width: 332,
   },
+  nanoFTS: {
+    light: nanoS,
+    dark: nanoSDark,
+    width: 290,
+  },
   blue: {
     light: blue,
     dark: blueDark,
