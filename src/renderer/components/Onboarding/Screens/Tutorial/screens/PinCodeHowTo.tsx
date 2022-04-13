@@ -7,11 +7,7 @@ import NanoDeviceCheckIcon from "~/renderer/icons/NanoDeviceCheckIcon";
 import NanoDeviceCancelIcon from "~/renderer/icons/NanoDeviceCancelIcon";
 import { useTheme } from "styled-components";
 
-type Props = {
-  sendEvent: (event: string, params: any) => void;
-};
-
-export function PinCodeHowTo({ sendEvent }: Props) {
+export function PinCodeHowTo() {
   const { colors } = useTheme();
   const color = colors.palette.primary.c80;
   const steps = [
