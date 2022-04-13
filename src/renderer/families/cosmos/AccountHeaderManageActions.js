@@ -33,8 +33,7 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
 
   if (parentAccount) return null;
 
-  const disabledLabel = earnRewardEnabled ? "" : ` - ${t("cosmos.delegation.minSafeWarning")}`;
-  const label = `${t("account.stake")}${disabledLabel}`;
+  const disabledLabel = earnRewardEnabled ? "" : t("cosmos.delegation.minSafeWarning");
 
   return [
     {
@@ -42,7 +41,8 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
       onClick: onClick,
       icon: IconCoins,
       disabled: !earnRewardEnabled,
-      label: label,
+      label: t("account.stake"),
+      tooltip: disabledLabel,
     },
   ];
 };

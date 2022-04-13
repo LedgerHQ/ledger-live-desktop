@@ -32,7 +32,7 @@ const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) 
       key: "Stake",
       onClick: onClick,
       icon: IconCoins,
-      label: t('account.stake'),
+      label: t("account.stake"),
     },
   ];
 };

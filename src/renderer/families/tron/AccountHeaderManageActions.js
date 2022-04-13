@@ -1,14 +1,11 @@
 // @flow
 import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
-import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import { BigNumber } from "bignumber.js";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
 import IconCoins from "~/renderer/icons/Coins";
-import { localeSelector } from "~/renderer/reducers/settings";
 
 type Props = {
   account: AccountLike,
@@ -19,20 +16,12 @@ const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) 
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const unit = getAccountUnit(account);
-  const locale = useSelector(localeSelector);
   const mainAccount = getMainAccount(account, parentAccount);
   const minAmount = 10 ** unit.magnitude;
 
   const { tronResources, spendableBalance } = mainAccount;
   const tronPower = tronResources?.tronPower ?? 0;
   const earnRewardDisabled = tronPower === 0 && spendableBalance.lt(minAmount);
-
-  const formattedMinAmount = formatCurrencyUnit(unit, BigNumber(minAmount), {
-    disableRounding: true,
-    alwaysShowSign: false,
-    showCode: true,
-    locale,
-  });
 
   const onClick = useCallback(() => {
     if (tronPower > 0) {
@@ -60,7 +49,7 @@ const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) 
       onClick: onClick,
       disabled: earnRewardDisabled,
       icon: IconCoins,
-      label: t('account.stake'),
+      label: t("account.stake"),
     },
   ];
 };
