@@ -2582,7 +2582,7 @@
       "withdrawableInfoTooltip": "Общая сумма, которую можно вывести из делегированной.",
       "withdrawableTitle": "Доступно для вывода",
       "statusUpdateNotice": "Статус делегированных средств будет обновлён после подтверждения транзакций.",
-      "ledgerByFigmentTC": "Ledger by Figment T&Cs",
+      "ledgerByFigmentTC": "Положения и условия Ledger от Figment",
       "emptyState": {
         "description": "Вы можете зарабатывать вознаграждения в SOL, делегируя активы.",
         "info": "Как работает делегирование",
