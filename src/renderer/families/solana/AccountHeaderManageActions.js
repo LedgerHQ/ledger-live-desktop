@@ -1,8 +1,6 @@
 // @flow
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
-import { canDelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import invariant from "invariant";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
@@ -14,37 +12,38 @@ type Props = {
   parentAccount: ?Account,
 };
 
-const AccountHeaderActions = ({ account, parentAccount }: Props) => {
+const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const mainAccount = getMainAccount(account, parentAccount);
-
-  const { cosmosResources } = mainAccount;
-  invariant(cosmosResources, "cosmos account expected");
-  const earnRewardEnabled = canDelegate(mainAccount);
 
   const onClick = useCallback(() => {
     dispatch(
-      openModal("MODAL_COSMOS_REWARDS_INFO", {
+      openModal("MODAL_DELEGATE", {
+        parentAccount,
         account,
       }),
     );
-  }, [dispatch, account]);
+  }, [dispatch, account, parentAccount]);
 
   if (parentAccount) return null;
-
-  const disabledLabel = earnRewardEnabled ? "" : ` - ${t("cosmos.delegation.minSafeWarning")}`;
-  const label = `${t("account.stake")}${disabledLabel}`;
 
   return [
     {
       key: "Stake",
       onClick: onClick,
       icon: IconCoins,
-      disabled: !earnRewardEnabled,
-      label: label,
+      label: t('account.stake'),
     },
   ];
 };
 
-export default AccountHeaderActions;
+const AccountHeaderManageActions = ({ account, parentAccount }: Props) => {
+  const mainAccount = getMainAccount(account, parentAccount);
+  const { tezosResources } = mainAccount;
+
+  if (!tezosResources) return null;
+
+  return AccountHeaderManageActionsComponent({ account, parentAccount });
+};
+
+export default AccountHeaderManageActions;

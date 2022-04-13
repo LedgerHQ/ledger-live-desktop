@@ -1,14 +1,13 @@
 // @flow
-import { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useTranslation } from "react-i18next";
-import { BigNumber } from "bignumber.js";
 import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import IconChartLine from "~/renderer/icons/ChartLine";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import { BigNumber } from "bignumber.js";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
+import IconCoins from "~/renderer/icons/Coins";
 import { localeSelector } from "~/renderer/reducers/settings";
 
 type Props = {
@@ -55,18 +54,13 @@ const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) 
 
   if (parentAccount) return null;
 
-  const disabledLabel = earnRewardDisabled
-    ? ` - ${t("tron.voting.warnEarnRewards", { amount: formattedMinAmount })}`
-    : "";
-  const label = `${t(tronPower > 0 ? "tron.voting.manageTP" : "delegation.title")}${disabledLabel}`;
-
   return [
     {
-      key: "tron",
+      key: "Stake",
       onClick: onClick,
       disabled: earnRewardDisabled,
-      icon: tronPower > 0 ? CryptoCurrencyIcon : IconChartLine,
-      label,
+      icon: IconCoins,
+      label: t('account.stake'),
     },
   ];
 };
