@@ -1,7 +1,14 @@
 import { Flex, Aside, Logos, Button, Icons, ProgressBar, Drawer, Popin } from "@ledgerhq/react-ui";
-import { DeviceModelId } from "@ledgerhq/devices";
-import React, { useCallback } from "react";
-import { Switch, Route, Redirect, useHistory, useParams, useRouteMatch } from "react-router-dom";
+import React, { useCallback, useState } from "react";
+import {
+  Switch,
+  Route,
+  Redirect,
+  useHistory,
+  useParams,
+  useRouteMatch,
+  useLocation,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -11,28 +18,19 @@ import { DeviceHowTo } from "~/renderer/components/Onboarding/Screens/Tutorial/s
 import { DeviceHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/DeviceHowTo2";
 import { PinCode } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PinCode";
 import { PinCodeHowTo } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PinCodeHowTo";
-import { useRecoveryPhraseMachine } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/useRecoveryPhrase";
-import { setupNewDevice } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/setupNewDevice";
 import { ExistingRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/ExistingRecoveryPhrase";
 import { RecoveryHowTo3 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo3";
 import { RecoveryHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo2";
 import { RecoveryHowTo1 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/RecoveryHowTo1";
-import {
-  PairMyNano,
-  PairMyNanoProps,
-} from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PairMyNano";
+import { PairMyNano } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/PairMyNano";
 import { PinHelp } from "~/renderer/components/Onboarding/Help/PinHelp";
 import { HideRecoverySeed } from "~/renderer/components/Onboarding/Help/HideRecoverySeed";
 import { RecoverySeed } from "~/renderer/components/Onboarding/Help/RecoverySeed";
 import { HideRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HideRecoveryPhrase";
 import { HowToGetStarted } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/HowToGetStarted";
 import { NewRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/NewRecoveryPhrase";
-import {
-  GenuineCheck,
-  GenuineCheckProps,
-} from "~/renderer/components/Onboarding/Screens/Tutorial/screens/GenuineCheck";
+import { GenuineCheck } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/GenuineCheck";
 import { CarefullyFollowInstructions } from "~/renderer/components/Onboarding/Alerts/CarefullyFollowInstructions";
-import { connectSetupDevice } from "~/renderer/components/Onboarding/Screens/Tutorial/machines/connectSetupDevice";
 import { PreferLedgerRecoverySeed } from "~/renderer/components/Onboarding/Alerts/PreferLedgerRecoverySeed";
 import { UseRecoverySheet } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/UseRecoverySheet";
 import { QuizFailure } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizFailure";
@@ -41,7 +39,7 @@ import { fireConfetti } from "~/renderer/components/Onboarding/Screens/Tutorial/
 import RecoveryWarning from "../../Help/RecoveryWarning";
 import { QuizzPopin } from "~/renderer/modals/OnboardingQuizz/OnboardingQuizzModal";
 
-import { deviceModelIdSelector, UseCase, useCaseSelector } from "~/renderer/reducers/onboarding";
+import { UseCase, useCaseSelector } from "~/renderer/reducers/onboarding";
 
 import { track } from "~/renderer/analytics/segment";
 
@@ -78,6 +76,8 @@ type FlowStepperProps = {
   disableContinue?: boolean;
   disableBack?: boolean;
   children: React.ReactNode;
+  handleBack: () => void;
+  handleContinue: () => void;
 };
 
 const FooterContainer = styled(Flex).attrs({ rowGap: 3, height: 120 })`
@@ -94,23 +94,13 @@ const FlowStepper: React.FC<FlowStepperProps> = ({
   backLabel,
   disableContinue,
   disableBack,
-  sendEvent,
-  onContinue,
   ProgressBar,
   children,
+  handleBack,
+  handleContinue,
 }) => {
-  const history = useHistory();
-
-  const handleBack = useCallback(() => {
-    history.push("/onboarding/select-use-case");
-  }, [history]);
-
-  const handleContinue = useCallback(() => {
-    if (onContinue) onContinue();
-  }, [onContinue]);
-
   const handleHelp = useCallback(() => {
-    sendEvent("HELP");
+    // sendEvent("HELP");
   }, []);
 
   const { t } = useTranslation();
@@ -148,7 +138,7 @@ const FlowStepper: React.FC<FlowStepperProps> = ({
               outline
               Icon={() => <Icons.ArrowLeftMedium size={18} />}
             >
-              {backLabel ?? t("common.back")}
+              {backLabel || t("common.back")}
             </Button>
             <Button
               onClick={handleContinue}
@@ -156,7 +146,7 @@ const FlowStepper: React.FC<FlowStepperProps> = ({
               variant="main"
               Icon={() => <Icons.ArrowRightMedium size={18} />}
             >
-              {continueLabel ?? t("common.continue")}
+              {continueLabel || t("common.continue")}
             </Button>
           </Flex>
         </FlowStepperContent>
@@ -186,24 +176,23 @@ enum ScreenId {
 }
 
 interface IScreen {
-  id: string;
+  id: ScreenId;
   component: React.ComponentType;
   useCases?: UseCase[];
   next: () => void;
   previous: () => void;
+  canContinue?: boolean;
 }
 
-function BigTutorial() {
+export default function Tutorial() {
   const history = useHistory();
-  const dispatch = useDispatch();
   const [quizzOpen, setQuizOpen] = useState(false);
   const { t } = useTranslation();
-  const { url } = useRouteMatch();
-
+  const { pathname } = useLocation();
   const useCase = useSelector(useCaseSelector);
 
-  const urlSplit = url.split("/");
-  const currentStep = urlSplit[urlSplit.length - 1] as UseCase;
+  const urlSplit = pathname.split("/");
+  const currentStep = urlSplit[urlSplit.length - 1];
   const path = urlSplit.slice(0, urlSplit.length - 1).join("/");
 
   const screens: IScreen[] = [
@@ -380,7 +369,7 @@ function BigTutorial() {
 
   const stepsStatus: { [key: string]: "success" | "active" | "inactive" } = {};
   const currentScreenIndex = screens.findIndex(s => s.id === currentStep);
-  const { component: CurrentScreen, canContinue, onContinue } = screens[currentScreenIndex];
+  const { component: CurrentScreen, canContinue, next, previous } = screens[currentScreenIndex];
 
   steps.forEach(step => {
     const startIndex = screens.findIndex(s => s.id === step.start);
@@ -430,28 +419,29 @@ function BigTutorial() {
       <FlowStepper
         illustration={CurrentScreen.Illustration}
         AsideFooter={CurrentScreen.Footer}
-        disableContinue={
-          CurrentScreen.canContinue ? !CurrentScreen.canContinue(state.context) : false
-        }
+        disableContinue={canContinue === false}
         ProgressBar={<ProgressBar steps={progressSteps} currentIndex={activeIndex} />}
         continueLabel={CurrentScreen.continueLabel}
-        onContinue={CurrentScreen.onContinue ? () => CurrentScreen.onContinue(sendEvent) : null}
+        handleContinue={next}
+        handleBack={previous}
       >
         <Switch>
-          <Route exact path="/onboarding/setup-device">
-            <Redirect to={`${url}/pair-my-nano`} />
+          {/* <Route exact path="/onboarding/setup-device">
+            <Redirect push to={`${path}/how-to-get-started`} />
           </Route>
           <Route exact path="/onboarding/connect-device">
-            <Redirect to={`${url}/pair-my-nano`} />
+            <Redirect push to={`${path}/pair-my-nano`} />
           </Route>
           <Route exact path="/onboarding/recovery-phrase">
-            <Redirect to={`${url}/pair-my-nano`} />
-          </Route>
+            <Redirect push to={`${path}/import-your-recovery-phrase`} />
+          </Route> */}
           {useCaseScreens.map(({ component: Screen, id }) => {
             // TODO : remove this!!!
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            return <Route key={id} path={`${url}/${id}`} render={props => <Screen {...props} />} />;
+            return (
+              <Route key={id} path={`${path}/${id}`} render={props => <Screen {...props} />} />
+            );
           })}
         </Switch>
       </FlowStepper>
@@ -560,7 +550,7 @@ function BigTutorial() {
 //         >
 //           <Screen sendEvent={sendEvent} context={state.context} />
 //         </FlowStepper>
-  //       )}
+//       )}
 //     </>
 //   );
 // }
