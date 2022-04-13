@@ -120,7 +120,7 @@ export function SelectUseCase() {
               onClick={() => {
                 track("Onboarding - Setup new");
                 dispatch(setUseCase("setup-device"));
-                history.push("/onboarding/setup-device");
+                history.push("/onboarding/setup-device/how-to-get-started");
                 // dispatch(openModal("MODAL_PEDAGOGY", { deviceModelId }));
               }}
             />
@@ -147,7 +147,7 @@ export function SelectUseCase() {
               onClick={() => {
                 track("Onboarding - Connect");
                 dispatch(setUseCase("connect-device"));
-                history.push("/onboarding/connect-device");
+                history.push("/onboarding/connect-device/pair-my-nano");
                 onWrappedUseCase();
               }}
             />
@@ -166,7 +166,7 @@ export function SelectUseCase() {
               onClick={() => {
                 track("Onboarding - Restore");
                 dispatch(setUseCase("use-recovery-phrase"));
-                history.push("/onboarding/use-recovery-phrase");
+                history.push("/onboarding/use-recovery-phrase/import-your-recovery-phrase");
                 onWrappedUseCase();
               }}
             />
