@@ -18,8 +18,9 @@ import OnboardingNavHeader from "../../OnboardingNavHeader.v3";
 
 import { track } from "~/renderer/analytics/segment";
 
-import { deviceModelIdSelector } from "~/renderer/reducers/onboarding";
+import { deviceModelIdSelector, UseCase } from "~/renderer/reducers/onboarding";
 import { setUseCase } from "~/renderer/actions/onboarding";
+import { ScreenId } from "../Tutorial";
 
 registerAssets([placeholderOption]);
 
@@ -119,8 +120,8 @@ export function SelectUseCase() {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Setup new");
-                dispatch(setUseCase("setup-device"));
-                history.push("/onboarding/setup-device/how-to-get-started");
+                dispatch(setUseCase(UseCase.setupDevice));
+                history.push(`/onboarding/${UseCase.setupDevice}/${ScreenId.howToGetStarted}`);
                 // dispatch(openModal("MODAL_PEDAGOGY", { deviceModelId }));
               }}
             />
@@ -146,8 +147,8 @@ export function SelectUseCase() {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Connect");
-                dispatch(setUseCase("connect-device"));
-                history.push("/onboarding/connect-device/pair-my-nano");
+                dispatch(setUseCase(UseCase.connectDevice));
+                history.push(`/onboarding/${UseCase.connectDevice}/${ScreenId.pairMyNano}`);
                 onWrappedUseCase();
               }}
             />
@@ -165,8 +166,10 @@ export function SelectUseCase() {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Restore");
-                dispatch(setUseCase("use-recovery-phrase"));
-                history.push("/onboarding/use-recovery-phrase/import-your-recovery-phrase");
+                dispatch(setUseCase(UseCase.recoveryPhrase));
+                history.push(
+                  `/onboarding/${UseCase.recoveryPhrase}/${ScreenId.importYourRecoveryPhrase}`,
+                );
                 onWrappedUseCase();
               }}
             />

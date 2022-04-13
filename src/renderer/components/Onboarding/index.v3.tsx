@@ -28,6 +28,7 @@ import { preloadAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import { SideDrawer } from "../SideDrawer";
 import Box from "../Box";
 import TermsAndConditionsModal from "./Screens/Welcome/TermsAndConditionsModal";
+import { UseCase } from "~/renderer/reducers/onboarding";
 
 const OnboardingContainer = styled.div`
   display: flex;
@@ -268,9 +269,9 @@ export function Onboarding() {
               <Route path={`${path}/select-use-case`} component={SelectUseCase} />
               <Route
                 path={[
-                  `${path}/setup-device`,
-                  `${path}/connect-device`,
-                  `${path}/use-recovery-phrase`,
+                  `${path}/${UseCase.setupDevice}`,
+                  `${path}/${UseCase.connectDevice}`,
+                  `${path}/${UseCase.recoveryPhrase}`,
                 ]}
                 component={Tutorial}
               />
