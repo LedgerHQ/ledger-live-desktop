@@ -42,6 +42,7 @@ import { QuizzPopin } from "~/renderer/modals/OnboardingQuizz/OnboardingQuizzMod
 import { UseCase, useCaseSelector } from "~/renderer/reducers/onboarding";
 
 import { track } from "~/renderer/analytics/segment";
+import { useFromAmountError } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 
 const FlowStepperContainer = styled(Flex)`
   width: 100%;
@@ -201,9 +202,7 @@ export default function Tutorial() {
       component: HowToGetStarted,
       useCases: [UseCase.setupDevice],
       next: () => {
-        if (useCase === UseCase.setupDevice) {
-          track("Onboarding - Get started step 1");
-        }
+        track("Onboarding - Get started step 1");
         history.push(`${path}/${ScreenId.deviceHowTo}`);
       },
       previous: () => history.push("/onboarding/select-use-case"),
@@ -211,40 +210,73 @@ export default function Tutorial() {
     {
       id: ScreenId.deviceHowTo,
       component: DeviceHowTo,
+      useCases: [UseCase.setupDevice],
       next: () => history.push(`${path}/${ScreenId.pinCode}`),
       previous: () => history.push(`${path}/${ScreenId.howToGetStarted}`),
     },
     {
       id: ScreenId.deviceHowTo2,
       component: DeviceHowTo2,
-      next: () => history.push(`${path}/${ScreenId.deviceHowTo2}`),
-      previous: () => history.push(`${path}/${ScreenId.howToGetStarted}`),
+      useCases: [UseCase.setupDevice, UseCase.recoveryPhrase],
+      next: () => {
+        if (useCase === UseCase.setupDevice) {
+          history.push(`${path}/${ScreenId.deviceHowTo2}`);
+        }
+        // useCase === UseCase.recoveryPhrase
+        else {
+          history.push(`${path}/${ScreenId.pinCode}`);
+        }
+      },
+      previous: () => {
+        if (useCase === UseCase.setupDevice) {
+          history.push(`${path}/${ScreenId.howToGetStarted}`);
+        }
+        // useCase === UseCase.recoveryPhrase
+        else {
+          history.push(`${path}/${ScreenId.importYourRecoveryPhrase}`);
+        }
+      },
     },
     {
       id: ScreenId.pinCode,
       component: PinCode,
+      useCases: [UseCase.setupDevice, UseCase.recoveryPhrase],
       next: () => {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Pin code step 1");
         }
         history.push(`${path}/${ScreenId.pinCodeHowTo}`);
       },
-      previous: () => history.push(`${path}/${ScreenId.deviceHowTo}`),
+      previous: () => {
+        if (useCase === UseCase.setupDevice) {
+          history.push(`${path}/${ScreenId.deviceHowTo}`);
+        }
+        // useCase === UseCase.recoveryPhrase
+        else {
+          history.push(`${path}/${ScreenId.deviceHowTo2}`);
+        }
+      },
     },
     {
       id: ScreenId.pinCodeHowTo,
       component: PinCodeHowTo,
+      useCases: [UseCase.setupDevice, UseCase.recoveryPhrase],
       next: () => {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Pin code step 2");
+          history.push(`${path}/${ScreenId.newRecoveryPhrase}`);
         }
-        history.push(`${path}/${ScreenId.newRecoveryPhrase}`);
+        // useCase === UseCase.recoveryPhrase
+        else {
+          history.push(`${path}/${ScreenId.existingRecoveryPhrase}`);
+        }
       },
       previous: () => history.push(`${path}/${ScreenId.pinCode}`),
     },
     {
       id: ScreenId.newRecoveryPhrase,
       component: NewRecoveryPhrase,
+      useCases: [UseCase.setupDevice],
       next: () => {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Recovery step 1");
@@ -256,6 +288,7 @@ export default function Tutorial() {
     {
       id: ScreenId.useRecoverySheet,
       component: UseRecoverySheet,
+      useCases: [UseCase.setupDevice],
       next: () => {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Recovery step 2");
@@ -267,18 +300,21 @@ export default function Tutorial() {
     {
       id: ScreenId.recoveryHowTo,
       component: RecoveryHowTo1,
-      next: () => history.push(`${path}/${ScreenId.deviceHowTo2}`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      useCases: [UseCase.recoveryPhrase],
+      next: () => history.push(`${path}/${ScreenId.recoveryHowTo2}`),
+      previous: () => history.push(`${path}/${ScreenId.existingRecoveryPhrase}`),
     },
     {
       id: ScreenId.recoveryHowTo2,
       component: RecoveryHowTo2,
-      next: () => history.push(`${path}/${ScreenId.deviceHowTo2}`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      useCases: [UseCase.recoveryPhrase],
+      next: () => history.push(`${path}/${ScreenId.pairMyNano}`),
+      previous: () => history.push(`${path}/${ScreenId.recoveryHowTo}`),
     },
     {
       id: ScreenId.recoveryHowTo3,
       component: RecoveryHowTo3,
+      useCases: [UseCase.setupDevice],
       next: () => {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Recovery step 3");
@@ -290,7 +326,7 @@ export default function Tutorial() {
     {
       id: ScreenId.hideRecoveryPhrase,
       component: HideRecoveryPhrase,
-      useCases: [UseCase.connectDevice, UseCase.setupDevice],
+      useCases: [UseCase.setupDevice],
       next: () => {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Recovery step 4");
@@ -300,22 +336,30 @@ export default function Tutorial() {
       },
       previous: () => history.push(`${path}/${ScreenId.recoveryHowTo3}`),
     },
-
     {
       id: ScreenId.importYourRecoveryPhrase,
       component: ImportYourRecoveryPhrase,
+      useCases: [UseCase.setupDevice, UseCase.recoveryPhrase],
       next: () => history.push(`${path}/${ScreenId.deviceHowTo2}`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      previous: () => {
+        if (useCase === UseCase.setupDevice) {
+          history.push("/onboarding/select-use-case");
+        } else {
+          history.push("/onboarding/select-use-case");
+        }
+      },
     },
     {
       id: ScreenId.existingRecoveryPhrase,
       component: ExistingRecoveryPhrase,
-      next: () => history.push(`${path}/${ScreenId.deviceHowTo2}`),
-      previous: () => history.push("/onboarding/select-use-case"),
+      useCases: [UseCase.recoveryPhrase],
+      next: () => history.push(`${path}/${ScreenId.recoveryHowTo}`),
+      previous: () => history.push(`${path}/${ScreenId.pinCodeHowTo}`),
     },
     {
       id: ScreenId.quizSuccess,
       component: QuizSuccess,
+      useCases: [UseCase.setupDevice],
       next: () => {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Pair start");
@@ -327,6 +371,7 @@ export default function Tutorial() {
     {
       id: ScreenId.quizFailure,
       component: QuizFailure,
+      useCases: [UseCase.setupDevice],
       next: () => {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Pair start");
@@ -344,7 +389,17 @@ export default function Tutorial() {
         }
         history.push(`${path}/${ScreenId.genuineCheck}`);
       },
-      previous: () => history.push(`${path}/${ScreenId.hideRecoveryPhrase}`),
+      previous: () => {
+        if (useCase === UseCase.connectDevice) {
+          history.push("/onboarding/select-use-case");
+        } else if (useCase === UseCase.setupDevice) {
+          history.push(`${path}/${ScreenId.hideRecoveryPhrase}`);
+        }
+        // useCase === UseCase.recoveryPhrase
+        else {
+          history.push(`${path}/${ScreenId.recoveryHowTo2}`);
+        }
+      },
     },
     {
       id: ScreenId.genuineCheck,
