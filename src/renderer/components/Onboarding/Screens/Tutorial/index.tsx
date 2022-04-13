@@ -425,15 +425,15 @@ export default function Tutorial() {
     label: t(`onboarding.screens.tutorial.steps.${name}`),
   }));
 
-  const quizSucceeds = () => {
+  const quizSucceeds = useCallback(() => {
     setQuizOpen(false);
     history.push(`${path}/quiz-success`);
-  };
+  }, [history, path]);
 
-  const quizFails = () => {
+  const quizFails = useCallback(() => {
     setQuizOpen(false);
     history.push(`${path}/quiz-failure`);
-  };
+  }, [history, path]);
 
   return (
     <>
