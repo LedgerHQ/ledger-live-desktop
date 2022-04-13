@@ -17,12 +17,7 @@ import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
 import { Terms } from "~/renderer/components/Onboarding/Screens/Terms";
 import { SelectDevice } from "~/renderer/components/Onboarding/Screens/SelectDevice";
 import { SelectUseCase } from "~/renderer/components/Onboarding/Screens/SelectUseCase";
-import {
-  SetupNewDevice,
-  ConnectSetUpDevice,
-  UseRecoveryPhrase,
-} from "~/renderer/components/Onboarding/Screens/Tutorial";
-import Dashboard from "~/renderer/screens/dashboard";
+import Tutorial from "~/renderer/components/Onboarding/Screens/Tutorial";
 
 import { pedagogyMachine } from "~/renderer/components/Onboarding/Pedagogy/state";
 
@@ -271,9 +266,14 @@ export function Onboarding() {
               <Route path={`${path}/terms`} component={Terms} />
               <Route path={`${path}/select-device`} component={SelectDevice} />
               <Route path={`${path}/select-use-case`} component={SelectUseCase} />
-              <Route path={`${path}/setup-device`} component={SetupNewDevice} />
-              <Route path={`${path}/connect-device`} component={ConnectSetUpDevice} />
-              <Route path={`${path}/use-recovery-phrase`} component={UseRecoveryPhrase} />
+              <Route
+                path={[
+                  `${path}/setup-device`,
+                  `${path}/connect-device`,
+                  `${path}/use-recovery-phrase`,
+                ]}
+                component={Tutorial}
+              />
             </Switch>
           </ScreenContainer>
         </CSSTransition>
