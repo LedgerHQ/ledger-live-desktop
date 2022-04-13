@@ -165,112 +165,7 @@ const FlowStepper: React.FC<FlowStepperProps> = ({
   );
 };
 
-function Tutorial({ sendEventToParent, machine, component }) {
-  const { t } = useTranslation();
-  const [state, sendEvent] = useMachine(machine, {
-    actions: {
-      topLevelPrev: () => sendEventToParent("PREV"),
-      topLevelNext: () => sendEventToParent("NEXT"),
-      fireConfetti,
-    },
-  });
-  const dispatch = useDispatch();
-  const history = useHistory();
-
-  const Screen = component || screens[state.value].component;
-
-  const steps = state.context.steps.map(({ id }) => ({
-    key: id,
-    label: t(`onboarding.screens.tutorial.steps.${id}`),
-  }));
-  const currentIndex = state.context.steps.findIndex(({ status }) => status === "active");
-
-  return (
-    <>
-      <QuizzPopin
-        isOpen={state.context.quizzOpen}
-        onWin={() => {
-          sendEvent("QUIZ_SUCCESS");
-        }}
-        onLose={() => {
-          sendEvent("QUIZ_FAILURE");
-        }}
-        onClose={() => {
-          sendEvent("QUIZ_FAILURE");
-        }}
-      />
-      <Popin isOpen={state.context.alerts.beCareful}>
-        <CarefullyFollowInstructions
-          onClose={() =>
-            sendEvent({ type: "SET_ALERT_STATUS", alertId: "beCareful", status: false })
-          }
-        />
-      </Popin>
-      <Popin isOpen={state.context.alerts.preferLedgerSeed}>
-        <PreferLedgerRecoverySeed
-          onClose={() =>
-            sendEvent({ type: "SET_ALERT_STATUS", alertId: "preferLedgerSeed", status: false })
-          }
-        />
-      </Popin>
-      <Drawer
-        isOpen={!!state.context.help.pinCode}
-        onClose={() => sendEvent({ type: "SET_HELP_STATUS", helpId: "pinCode", status: false })}
-        direction="left"
-      >
-        <Flex px={40}>
-          <PinHelp />
-        </Flex>
-      </Drawer>
-      <Drawer
-        isOpen={!!state.context.help.recoveryPhrase}
-        onClose={() =>
-          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhrase", status: false })
-        }
-        direction="left"
-      >
-        <Flex px={40}>
-          <RecoverySeed />
-        </Flex>
-      </Drawer>
-      <Drawer
-        isOpen={!!state.context.help.hideRecoveryPhrase}
-        onClose={() =>
-          sendEvent({ type: "SET_HELP_STATUS", helpId: "hideRecoveryPhrase", status: false })
-        }
-        direction="left"
-      >
-        <Flex px={40}>
-          <HideRecoverySeed />
-        </Flex>
-      </Drawer>
-      <Drawer
-        isOpen={!!state.context.help.recoveryPhraseWarning}
-        onClose={() =>
-          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
-        }
-        direction="left"
-      >
-        <Flex px={40}>
-          <RecoveryWarning />
-        </Flex>
-      </Drawer>
-
-      {!!Screen && (
-        <FlowStepper
-          illustration={Screen.Illustration}
-          AsideFooter={Screen.Footer}
-          sendEvent={sendEvent}
-          disableContinue={Screen.canContinue ? !Screen.canContinue(state.context) : false}
-          ProgressBar={<ProgressBar steps={steps} currentIndex={currentIndex} />}
-          continueLabel={Screen.continueLabel}
-          onContinue={Screen.onContinue ? () => Screen.onContinue(sendEvent) : null}
-        >
-          <Screen sendEvent={sendEvent} context={state.context} />
-        </FlowStepper>
-      )}
-    </>
-  );
+  genuineCheck = "genuine-check",
 }
 
 interface IScreen {
@@ -547,132 +442,108 @@ function BigTutorial() {
   );
 }
 
-interface NewTutorialProps {
-  component: React.ReactNode;
-  state: {
-    context: {
-      steps: {
-        id: string;
-        status: string;
-      }[];
-    };
-    deviceId: DeviceModelId | null;
-    alerts?: { [key: string]: unknown };
-    help?: { [key: string]: unknown };
-  };
-  currentStepIndex: number;
-}
+// function OldTutorial({ sendEventToParent, machine, component }) {
+//   const { t } = useTranslation();
+//   const [state, sendEvent] = useMachine(machine, {
+//     actions: {
+//       topLevelPrev: () => sendEventToParent("PREV"),
+//       topLevelNext: () => sendEventToParent("NEXT"),
+//       fireConfetti,
+//     },
+//   });
 
-function NewTutorial({ component: Screen, state, onContinue }: NewTutorialProps) {
-  const { t } = useTranslation();
-  const { path, url } = useRouteMatch();
-  const dispatch = useDispatch();
-  const history = useHistory();
+//   const Screen = component || screens[state.value].component;
 
-  const progressSteps = state.context.steps.map(({ id }) => ({
-    key: id,
-    label: t(`onboarding.screens.tutorial.steps.${id}`),
-  }));
+//   const steps = state.context.steps.map(({ id }) => ({
+//     key: id,
+//     label: t(`onboarding.screens.tutorial.steps.${id}`),
+//   }));
+//   const currentIndex = state.context.steps.findIndex(({ status }) => status === "active");
 
-  return (
-    <FlowStepper
-      illustration={Screen.Illustration}
-      AsideFooter={Screen.Footer}
-      disableContinue={Screen.canContinue ? !Screen.canContinue(state.context) : false}
-      ProgressBar={<ProgressBar steps={progressSteps} currentIndex={state.currentStepIndex} />}
-      continueLabel={Screen.continueLabel}
-      onContinue={onContinue}
-    >
-      <Screen />
-    </FlowStepper>
-  );
-}
+//   return (
+//     <>
+//       <QuizzPopin
+//         isOpen={state.context.quizzOpen}
+//         onWin={() => {
+//           sendEvent("QUIZ_SUCCESS");
+//         }}
+//         onLose={() => {
+//           sendEvent("QUIZ_FAILURE");
+//         }}
+//         onClose={() => {
+//           sendEvent("QUIZ_FAILURE");
+//         }}
+//       />
+//       <Popin isOpen={state.context.alerts.beCareful}>
+//         <CarefullyFollowInstructions
+//           onClose={() =>
+//             sendEvent({ type: "SET_ALERT_STATUS", alertId: "beCareful", status: false })
+//           }
+//         />
+//       </Popin>
+//       <Popin isOpen={state.context.alerts.preferLedgerSeed}>
+//         <PreferLedgerRecoverySeed
+//           onClose={() =>
+//             sendEvent({ type: "SET_ALERT_STATUS", alertId: "preferLedgerSeed", status: false })
+//           }
+//         />
+//       </Popin>
+//       <Drawer
+//         isOpen={!!state.context.help.pinCode}
+//         onClose={() => sendEvent({ type: "SET_HELP_STATUS", helpId: "pinCode", status: false })}
+//         direction="left"
+//       >
+//         <Flex px={40}>
+//           <PinHelp />
+//         </Flex>
+//       </Drawer>
+//       <Drawer
+//         isOpen={!!state.context.help.recoveryPhrase}
+//         onClose={() =>
+//           sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhrase", status: false })
+//         }
+//         direction="left"
+//       >
+//         <Flex px={40}>
+//           <RecoverySeed />
+//         </Flex>
+//       </Drawer>
+//       <Drawer
+//         isOpen={!!state.context.help.hideRecoveryPhrase}
+//         onClose={() =>
+//           sendEvent({ type: "SET_HELP_STATUS", helpId: "hideRecoveryPhrase", status: false })
+//         }
+//         direction="left"
+//       >
+//         <Flex px={40}>
+//           <HideRecoverySeed />
+//         </Flex>
+//       </Drawer>
+//       <Drawer
+//         isOpen={!!state.context.help.recoveryPhraseWarning}
+//         onClose={() =>
+//           sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
+//         }
+//         direction="left"
+//       >
+//         <Flex px={40}>
+//           <RecoveryWarning />
+//         </Flex>
+//       </Drawer>
 
-export function ConnectSetUpDevice() {
-  const { path } = useRouteMatch();
-  const deviceId = useSelector(deviceModelIdSelector);
-  const history = useHistory();
-  // TODO: redux state
-  const state = {
-    context: {
-      steps: [
-        {
-          id: "getStarted",
-          status: "success",
-        },
-        {
-          id: "pinCode",
-          status: "success",
-        },
-        {
-          id: "recoveryPhrase",
-          status: "success",
-        },
-        {
-          id: "hideRecoveryPhrase",
-          status: "success",
-        },
-        {
-          id: "pairNano",
-          status: "active",
-        },
-      ],
-      deviceId,
-      // alerts: {},
-      // help: {},
-    },
-    currentStepIndex: 0,
-  };
-
-  state.currentStepIndex = state.context.steps.findIndex(({ status }) => status === "active");
-
-  const afterPairNano = () => {
-    history.push(`${path}/genuine-check`);
-  };
-
-  const afterGenuineCheck = () => {
-    console.log("finished");
-  };
-
-  return <BigTutorial />;
-  // return (
-  //   <Switch>
-  //     <Route exact path="/onboarding/connect-device">
-  //       <Redirect to={`${path}/pair-nano`} />
-  //     </Route>
-  //     <Route
-  //       path={`${path}/pair-nano`}
-  //       render={props => (
-  //         <NewTutorial {...props} component={PairMyNano} state={state} onContinue={afterPairNano} />
+//       {!!Screen && (
+//         <FlowStepper
+//           illustration={Screen.Illustration}
+//           AsideFooter={Screen.Footer}
+//           sendEvent={sendEvent}
+//           disableContinue={Screen.canContinue ? !Screen.canContinue(state.context) : false}
+//           ProgressBar={<ProgressBar steps={steps} currentIndex={currentIndex} />}
+//           continueLabel={Screen.continueLabel}
+//           onContinue={Screen.onContinue ? () => Screen.onContinue(sendEvent) : null}
+//         >
+//           <Screen sendEvent={sendEvent} context={state.context} />
+//         </FlowStepper>
   //       )}
-  //     />
-  //     <Route
-  //       path={`${path}/genuine-check`}
-  //       render={props => (
-  //         <NewTutorial
-  //           {...props}
-  //           component={GenuineCheck}
-  //           state={state}
-  //           onContinue={afterGenuineCheck}
-  //         />
-  //       )}
-  //     />
-  //   </Switch>
-  // );
-}
-
-export function SetupNewDevice() {
-  // return <Tutorial sendEventToParent={sendEvent} machine={setupNewDevice} component={context} />;
-  return <BigTutorial />;
-}
-
-export function UseRecoveryPhrase() {
-  // return (
-  //   <Tutorial
-  //     sendEventToParent={sendEvent}
-  //     machine={useRecoveryPhraseMachine}
-  //     component={context}
-  //   />
-  // );
-  return <BigTutorial />;
-}
+//     </>
+//   );
+// }
