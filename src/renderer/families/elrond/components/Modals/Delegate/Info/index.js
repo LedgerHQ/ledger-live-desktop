@@ -1,8 +1,6 @@
-// @flow
 import React, { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 
 import { openModal, closeModal } from "~/renderer/actions/modals";
@@ -10,6 +8,7 @@ import EarnRewardsInfoModal from "~/renderer/components/EarnRewardsInfoModal";
 import WarnBox from "~/renderer/components/WarnBox";
 import { urls } from "~/config/urls";
 import { openURL } from "~/renderer/linking";
+import { constants } from "~/renderer/families/elrond/constants";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 
 type Props = {
@@ -24,7 +23,7 @@ export default function ElrondEarnRewardsInfoModal({ name, account, parentAccoun
   const onNext = useCallback(() => {
     dispatch(closeModal(name));
     dispatch(
-      openModal("MODAL_ELROND_DELEGATE", {
+      openModal(constants.modals.stake, {
         parentAccount,
         account,
       }),
@@ -32,7 +31,7 @@ export default function ElrondEarnRewardsInfoModal({ name, account, parentAccoun
   }, [parentAccount, account, dispatch, name]);
 
   const onLearnMore = useCallback(() => {
-    openURL(urls.cosmosStakingRewards);
+    openURL(urls.elrondStaking);
   }, []);
 
   return (

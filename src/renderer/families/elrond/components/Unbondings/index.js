@@ -12,38 +12,41 @@ type UnbondingsType = {
   account: Account,
 };
 
-const Unbondings: FC = ({ unbondings, account }: UnbondingsType) => (
-  <TableContainer mb={6}>
-    <TableHeader
-      title={<Trans i18nKey="elrond.undelegation.header" />}
-      titleProps={{ "data-e2e": "title_Undelegation" }}
-      tooltip={<Trans i18nKey="elrond.undelegation.headerTooltip" />}
-    />
+const Unbondings: FC = (props: UnbondingsType) => {
+  const { unbondings, account } = props;
+  const columns = [
+    "delegation.validator",
+    "delegation.status",
+    "delegation.delegated",
+    "delegation.completionDate",
+  ];
 
-    <HeaderWrapper>
-      <TableLine>
-        <Trans i18nKey="delegation.validator" />
-      </TableLine>
-      <TableLine>
-        <Trans i18nKey="delegation.status" />
-      </TableLine>
-      <TableLine>
-        <Trans i18nKey="delegation.delegated" />
-      </TableLine>
-      <TableLine>
-        <Trans i18nKey="delegation.completionDate" />
-      </TableLine>
-    </HeaderWrapper>
-
-    {unbondings.map((unbonding, index) => (
-      <Unbonding
-        key={`${unbonding.contract}-${index}`}
-        account={account}
-        unbondings={unbondings}
-        {...unbonding}
+  return (
+    <TableContainer mb={6}>
+      <TableHeader
+        title={<Trans i18nKey="elrond.undelegation.header" />}
+        titleProps={{ "data-e2e": "title_Undelegation" }}
+        tooltip={<Trans i18nKey="elrond.undelegation.headerTooltip" />}
       />
-    ))}
-  </TableContainer>
-);
+
+      <HeaderWrapper>
+        {columns.map(column => (
+          <TableLine key={column}>
+            <Trans i18nKey={column} />
+          </TableLine>
+        ))}
+      </HeaderWrapper>
+
+      {unbondings.map((unbonding, index) => (
+        <Unbonding
+          key={`${unbonding.contract}-${index}`}
+          account={account}
+          unbondings={unbondings}
+          {...unbonding}
+        />
+      ))}
+    </TableContainer>
+  );
+};
 
 export default Unbondings;

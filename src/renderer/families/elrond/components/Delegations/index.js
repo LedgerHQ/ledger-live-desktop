@@ -29,6 +29,7 @@ const Delegations = ({ delegations, validators, account }: DelegationsType) => {
             <Trans i18nKey={column} />
           </TableLine>
         ))}
+        <TableLine />
       </HeaderWrapper>
 
       {delegations.map(delegation => (

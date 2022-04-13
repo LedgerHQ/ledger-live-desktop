@@ -39,7 +39,11 @@ const Wrapper = styled(Box).attrs(() => ({
   align-items: center;
 `;
 
-const Delegation = ({ account }: Props) => {
+const withDelegation = Component => props =>
+  props.account.elrondResources ? <Component {...props} /> : null;
+
+const Delegation = (props: Props) => {
+  const { account } = props;
   const [validators, setValidators] = useState([]);
   const [delegationResources, setDelegationResources] = useState(
     account.elrondResources.delegations || [],
@@ -135,7 +139,7 @@ const Delegation = ({ account }: Props) => {
 
   const onEarnRewards = useCallback(() => {
     dispatch(
-      openModal("MODAL_ELROND_REWARDS_INFO", {
+      openModal(constants.modals.rewards, {
         account,
       }),
     );
@@ -144,7 +148,7 @@ const Delegation = ({ account }: Props) => {
   const onDelegate = useCallback(() => {
     if (validators) {
       dispatch(
-        openModal("MODAL_ELROND_DELEGATE", {
+        openModal(constants.modals.stake, {
           account,
           validators,
           delegations,
@@ -156,7 +160,7 @@ const Delegation = ({ account }: Props) => {
   const onClaimRewards = useCallback(() => {
     if (validators && delegations) {
       dispatch(
-        openModal("MODAL_ELROND_CLAIM_REWARDS", {
+        openModal(constants.modals.claim, {
           account,
           validators,
           delegations,
@@ -277,7 +281,4 @@ const Delegation = ({ account }: Props) => {
   );
 };
 
-const DelegationsRenderer = (props: Props) =>
-  props.account.elrondResources ? <Delegation {...props} /> : null;
-
-export default DelegationsRenderer;
+export default withDelegation(Delegation);
