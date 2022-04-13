@@ -165,6 +165,23 @@ const FlowStepper: React.FC<FlowStepperProps> = ({
   );
 };
 
+enum ScreenId {
+  howToGetStarted = "how-to-get-started",
+  deviceHowTo = "device-how-to",
+  deviceHowTo2 = "device-how-to-2",
+  pinCode = "pin-code",
+  pinCodeHowTo = "pin-code-how-to",
+  newRecoveryPhrase = "new-recovery-phrase",
+  useRecoverySheet = "use-recovery-sheet",
+  recoveryHowTo = "recovery-how-to",
+  recoveryHowTo2 = "recovery-how-to-2",
+  recoveryHowTo3 = "recovery-how-to-3",
+  hideRecoveryPhrase = "hide-recovery-phrase",
+  importYourRecoveryPhrase = "import-your-recovery-phrase",
+  existingRecoveryPhrase = "existing-recovery-phrase",
+  quizSuccess = "quiz-success",
+  quizFailure = "quiz-failure",
+  pairMyNano = "pair-my-nano",
   genuineCheck = "genuine-check",
 }
 
