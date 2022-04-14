@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext } from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { Bullet, Column, IllustrationContainer } from "../shared";
 import getStarted from "../assets/v3/getStarted.png";
@@ -9,11 +9,11 @@ import DeviceAction from "~/renderer/components/DeviceAction";
 
 import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { command } from "~/renderer/commands";
-import { useDispatch, useSelector } from "react-redux";
-import { deviceModelIdSelector } from "~/renderer/reducers/onboarding";
+import { useDispatch } from "react-redux";
 import { saveSettings } from "~/renderer/actions/settings";
-import { relaunchOnboarding } from "~/renderer/actions/onboarding";
+import { relaunchOnboarding } from "~/renderer/actions/application";
 import { track } from "~/renderer/analytics/segment";
+import { OnboardingContext } from "../../../index.v3";
 
 const connectManagerExec = command("connectManager");
 const action = createAction(getEnv("MOCK") ? mockedEventEmitter : connectManagerExec);
@@ -40,7 +40,7 @@ type Props = {
 
 export function GenuineCheck({ connectedDevice, setConnectedDevice }: Props) {
   const dispatch = useDispatch();
-  const deviceId = useSelector(deviceModelIdSelector);
+  const { deviceModelId } = useContext(OnboardingContext);
 
   const onResult = useCallback(
     res => {
@@ -56,7 +56,7 @@ export function GenuineCheck({ connectedDevice, setConnectedDevice }: Props) {
     <Success device={connectedDevice} />
   ) : (
     <DeviceAction
-      overridesPreferredDeviceModel={deviceId}
+      overridesPreferredDeviceModel={deviceModelId}
       action={action}
       onResult={onResult}
       request={null}
@@ -65,8 +65,6 @@ export function GenuineCheck({ connectedDevice, setConnectedDevice }: Props) {
 }
 
 GenuineCheck.Illustration = <IllustrationContainer width="240px" height="245px" src={getStarted} />;
-
-GenuineCheck.Footer = null;
 
 GenuineCheck.continueLabel = (
   <Trans i18nKey="onboarding.screens.tutorial.screens.genuineCheck.buttons.next" />
