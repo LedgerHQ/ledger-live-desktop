@@ -1,6 +1,6 @@
 import React, { useCallback } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { openURL } from "~/renderer/linking";
@@ -16,9 +16,9 @@ import stayOffline from "./assets/stay-offline.svg";
 import validateTransactions from "./assets/validate-transactions.svg";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
-import { isAcceptedTerms } from "~/renderer/terms";
 
 import { relaunchOnboarding } from "~/renderer/actions/onboarding";
+import { onboardingRelaunchedSelector } from "~/renderer/reducers/onboarding";
 
 const stepLogos = [accessCrypto, ownPrivateKey, stayOffline, validateTransactions, setupNano];
 registerAssets(stepLogos);
@@ -86,8 +86,7 @@ const Description = styled(Text)`
 `;
 
 export function Welcome() {
-  // const onboardingOrigin = useSelector();
-  const onboardingOrigin = "/settings/help";
+  const onboardingOrigin = useSelector(onboardingRelaunchedSelector) ? "/settings/help" : undefined;
   const { t } = useTranslation();
   const history = useHistory();
   const dispatch = useDispatch();
@@ -139,7 +138,7 @@ export function Welcome() {
       </LeftContainer>
       <RightContainer>
         <CarouselTopBar>
-          {onboardingOrigin && (
+          {!!onboardingOrigin && (
             <Button small onClick={handlePrevious}>
               {t("common.previous")}
             </Button>
