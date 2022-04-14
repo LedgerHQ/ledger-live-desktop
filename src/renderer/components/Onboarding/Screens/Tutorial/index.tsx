@@ -188,6 +188,18 @@ interface IScreen {
 export const TutorialContext = createContext({
   userUnderstandConsequences: false,
   setUserUnderstandConsequences: () => null,
+  alertBeCareful: false,
+  setAlertBeCareful: () => null,
+  alertPreferLedgerSeed: false,
+  setAlertPreferLedgerSeed: () => null,
+  helpPinCode: false,
+  sethelpPinCode: () => null,
+  helpRecoveryPhrase: false,
+  setHelpRecoveryPhrase: () => null,
+  helpHideRecoveryPhrase: false,
+  setHelpHideRecoveryPhrase: () => null,
+  helpRecoveryPhraseWarning: false,
+  setHelpRecoveryPhraseWarning: () => null,
 });
 
 export default function Tutorial() {
@@ -200,6 +212,10 @@ export default function Tutorial() {
   const [userUnderstandConsequences, setUserUnderstandConsequences] = useState(false);
   const [alertBeCareful, setAlertBeCareful] = useState(false);
   const [alertPreferLedgerSeed, setAlertPreferLedgerSeed] = useState(false);
+  const [helpPinCode, sethelpPinCode] = useState(false);
+  const [helpRecoveryPhrase, setHelpRecoveryPhrase] = useState(false);
+  const [helpHideRecoveryPhrase, setHelpHideRecoveryPhrase] = useState(false);
+  const [helpRecoveryPhraseWarning, setHelpRecoveryPhraseWarning] = useState(false);
 
   const urlSplit = pathname.split("/");
   const currentStep = urlSplit[urlSplit.length - 1];
@@ -501,36 +517,39 @@ export default function Tutorial() {
   }, [history, path]);
 
   return (
-    <TutorialContext.Provider value={{ userUnderstandConsequences, setUserUnderstandConsequences }}>
+    <TutorialContext.Provider
+      value={{
+        userUnderstandConsequences,
+        setUserUnderstandConsequences,
+        alertBeCareful,
+        setAlertBeCareful,
+        alertPreferLedgerSeed,
+        setAlertPreferLedgerSeed,
+        helpPinCode,
+        sethelpPinCode,
+        helpRecoveryPhrase,
+        setHelpRecoveryPhrase,
+        helpHideRecoveryPhrase,
+        setHelpHideRecoveryPhrase,
+        helpRecoveryPhraseWarning,
+        setHelpRecoveryPhraseWarning,
+      }}
+    >
       <QuizzPopin isOpen={quizzOpen} onWin={quizSucceeds} onLose={quizFails} onClose={quizFails} />
       <Popin isOpen={alertBeCareful}>
-        <CarefullyFollowInstructions
-          onClose={() =>
-            sendEvent({ type: "SET_ALERT_STATUS", alertId: "beCareful", status: false })
-          }
-        />
+        <CarefullyFollowInstructions onClose={() => setAlertBeCareful(false)} />
       </Popin>
       <Popin isOpen={alertPreferLedgerSeed}>
-        <PreferLedgerRecoverySeed
-          onClose={() =>
-            sendEvent({ type: "SET_ALERT_STATUS", alertId: "preferLedgerSeed", status: false })
-          }
-        />
+        <PreferLedgerRecoverySeed onClose={() => setAlertPreferLedgerSeed} />
       </Popin>
-      <Drawer
-        isOpen={!!state.context.help.pinCode}
-        onClose={() => sendEvent({ type: "SET_HELP_STATUS", helpId: "pinCode", status: false })}
-        direction="left"
-      >
+      <Drawer isOpen={helpPinCode} onClose={() => sethelpPinCode(false)} direction="left">
         <Flex px={40}>
           <PinHelp />
         </Flex>
       </Drawer>
       <Drawer
-        isOpen={!!state.context.help.recoveryPhrase}
-        onClose={() =>
-          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhrase", status: false })
-        }
+        isOpen={helpRecoveryPhrase}
+        onClose={() => setHelpRecoveryPhrase(false)}
         direction="left"
       >
         <Flex px={40}>
@@ -538,10 +557,8 @@ export default function Tutorial() {
         </Flex>
       </Drawer>
       <Drawer
-        isOpen={!!state.context.help.hideRecoveryPhrase}
-        onClose={() =>
-          sendEvent({ type: "SET_HELP_STATUS", helpId: "hideRecoveryPhrase", status: false })
-        }
+        isOpen={helpHideRecoveryPhrase}
+        onClose={() => setHelpHideRecoveryPhrase(false)}
         direction="left"
       >
         <Flex px={40}>
@@ -549,10 +566,8 @@ export default function Tutorial() {
         </Flex>
       </Drawer>
       <Drawer
-        isOpen={!!state.context.help.recoveryPhraseWarning}
-        onClose={() =>
-          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
-        }
+        isOpen={helpRecoveryPhraseWarning}
+        onClose={() => setHelpRecoveryPhraseWarning(false)}
         direction="left"
       >
         <Flex px={40}>
