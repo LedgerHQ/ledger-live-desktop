@@ -1,31 +1,24 @@
-import React, { useCallback } from "react";
+import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { Title, SubTitle, AsideFooter, CheckStep, Column, IllustrationContainer } from "../shared";
 import getStarted from "../assets/v3/getStarted.png";
 
 type Props = {
-  sendEvent: (event: string, props: any) => void;
-  context: {
-    userChosePincodeHimself: boolean;
-  };
+  toggleUserChosePinCodeHimself: () => void;
+  userChosePinCodeHimself: boolean;
 };
 
-export function PinCode({ sendEvent, context }: Props) {
+export function PinCode({ toggleUserChosePinCodeHimself, userChosePinCodeHimself }: Props) {
   const { t } = useTranslation();
-  const { userChosePincodeHimself } = context;
-
-  const onClickTermsChange = useCallback(
-    () => sendEvent("PINCODE_TERMS_CHANGED", { value: !userChosePincodeHimself }),
-    [sendEvent, userChosePincodeHimself],
-  );
+  console.log({ toggleUserChosePinCodeHimself, userChosePinCodeHimself });
 
   return (
     <Column>
       <Title>{t("onboarding.screens.tutorial.screens.pinCode.title")}</Title>
       <SubTitle>{t("onboarding.screens.tutorial.screens.pinCode.paragraph")}</SubTitle>
       <CheckStep
-        checked={userChosePincodeHimself}
-        onClick={onClickTermsChange}
+        checked={userChosePinCodeHimself}
+        onClick={toggleUserChosePinCodeHimself}
         label={t("onboarding.screens.tutorial.screens.pinCode.disclaimer")}
       />
     </Column>
@@ -42,8 +35,6 @@ const Footer = (props: any) => {
 };
 
 PinCode.Footer = Footer;
-
-PinCode.canContinue = context => context.userChosePincodeHimself;
 
 PinCode.continueLabel = (
   <Trans i18nKey="onboarding.screens.tutorial.screens.pinCode.buttons.next" />

@@ -32,23 +32,28 @@ const Success = ({ device }: { device: Device }) => {
     </Column>
   );
 };
-export function GenuineCheck() {
+
+type Props = {
+  connectedDevice: unknown;
+  setConnectedDevice: (device: unknown) => void;
+};
+
+export function GenuineCheck({ connectedDevice, setConnectedDevice }: Props) {
   const dispatch = useDispatch();
   const deviceId = useSelector(deviceModelIdSelector);
-  const [device, updateDevice] = useState(undefined);
 
   const onResult = useCallback(
     res => {
-      updateDevice(res.device);
+      setConnectedDevice(res.device);
       dispatch(saveSettings({ hasCompletedOnboarding: true }));
       dispatch(relaunchOnboarding(false));
       track("Onboarding - End");
     },
-    [dispatch],
+    [setConnectedDevice, dispatch],
   );
 
-  return device ? (
-    <Success device={device} />
+  return connectedDevice ? (
+    <Success device={connectedDevice} />
   ) : (
     <DeviceAction
       overridesPreferredDeviceModel={deviceId}
@@ -62,8 +67,6 @@ export function GenuineCheck() {
 GenuineCheck.Illustration = <IllustrationContainer width="240px" height="245px" src={getStarted} />;
 
 GenuineCheck.Footer = null;
-
-GenuineCheck.canContinue = context => context.device;
 
 GenuineCheck.continueLabel = (
   <Trans i18nKey="onboarding.screens.tutorial.screens.genuineCheck.buttons.next" />

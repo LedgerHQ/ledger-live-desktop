@@ -13,7 +13,7 @@ import { Button, Icons } from "@ledgerhq/react-ui";
 import getStarted from "../assets/v3/getStarted.png";
 
 type Props = {
-  sendEvent: (event: string, params?: any) => void;
+  handleHelp: () => void;
 };
 
 export function HideRecoveryPhrase({ handleHelp }: Props) {

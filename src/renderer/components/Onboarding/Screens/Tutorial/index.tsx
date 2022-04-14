@@ -40,9 +40,9 @@ import RecoveryWarning from "../../Help/RecoveryWarning";
 import { QuizzPopin } from "~/renderer/modals/OnboardingQuizz/OnboardingQuizzModal";
 
 import { UseCase, useCaseSelector } from "~/renderer/reducers/onboarding";
+import { getCurrentDevice } from "~/renderer/reducers/devices";
 
 import { track } from "~/renderer/analytics/segment";
-import { useFromAmountError } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 
 const FlowStepperContainer = styled(Flex)`
   width: 100%;
@@ -183,6 +183,7 @@ interface IScreen {
   next: () => void;
   previous: () => void;
   canContinue?: boolean;
+  props?: { [key: string]: unknown };
 }
 
 export const TutorialContext = createContext({});
@@ -193,9 +194,14 @@ export default function Tutorial() {
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const useCase = useSelector(useCaseSelector);
+  const device = useSelector(getCurrentDevice);
 
   const [userUnderstandConsequences, setUserUnderstandConsequences] = useState(false);
-  const [alertBeCareful, setAlertBeCareful] = useState(false);
+  const [userChosePinCodeHimself, setUserChosePinCodeHimself] = useState(false);
+
+  const [connectedDevice, setConnectedDevice] = useState(null);
+
+  const [alertBeCareful, setAlertBeCareful] = useState(true);
   const [alertPreferLedgerSeed, setAlertPreferLedgerSeed] = useState(false);
   const [helpPinCode, setHelpPinCode] = useState(false);
   const [helpRecoveryPhrase, setHelpRecoveryPhrase] = useState(false);
@@ -250,7 +256,14 @@ export default function Tutorial() {
     {
       id: ScreenId.pinCode,
       component: PinCode,
+      props: {
+        toggleUserChosePinCodeHimself: () => {
+          setUserChosePinCodeHimself(!userChosePinCodeHimself);
+        },
+        userChosePinCodeHimself,
+      },
       useCases: [UseCase.setupDevice, UseCase.recoveryPhrase],
+      canContinue: userChosePinCodeHimself,
       next: () => {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Pin code step 1");
@@ -286,7 +299,14 @@ export default function Tutorial() {
     {
       id: ScreenId.newRecoveryPhrase,
       component: NewRecoveryPhrase,
+      props: {
+        toggleUserUnderstandConsequences: () => {
+          setUserUnderstandConsequences(!userUnderstandConsequences);
+        },
+        userUnderstandConsequences,
+      },
       useCases: [UseCase.setupDevice],
+      canContinue: userUnderstandConsequences,
       next: () => {
         if (useCase === UseCase.setupDevice) {
           track("Onboarding - Recovery step 1");
@@ -336,6 +356,12 @@ export default function Tutorial() {
     {
       id: ScreenId.hideRecoveryPhrase,
       component: HideRecoveryPhrase,
+      props: {
+        handleHelp: () => {
+          track("Onboarding - Recovery step 4 - HELP CLICK");
+          setHelpHideRecoveryPhrase(true);
+        },
+      },
       useCases: [UseCase.setupDevice],
       next: () => {
         if (useCase === UseCase.setupDevice) {
@@ -415,6 +441,11 @@ export default function Tutorial() {
     {
       id: ScreenId.genuineCheck,
       component: GenuineCheck,
+      props: {
+        connectedDevice,
+        setConnectedDevice,
+      },
+      canContinue: !!connectedDevice,
       next: () => history.push("/"),
       previous: () => history.push(`${path}/${ScreenId.pairMyNano}`),
     },
@@ -502,7 +533,7 @@ export default function Tutorial() {
   }, [history, path]);
 
   return (
-    <TutorialContext.Provider value={}>
+    <TutorialContext.Provider value={{ prout: true }}>
       <QuizzPopin isOpen={quizzOpen} onWin={quizSucceeds} onLose={quizFails} onClose={quizFails} />
       <Popin isOpen={alertBeCareful}>
         <CarefullyFollowInstructions onClose={() => setAlertBeCareful(false)} />
@@ -562,12 +593,16 @@ export default function Tutorial() {
           <Route exact path="/onboarding/recovery-phrase">
             <Redirect push to={`${path}/import-your-recovery-phrase`} />
           </Route> */}
-          {useCaseScreens.map(({ component: Screen, id }) => {
+          {useCaseScreens.map(({ component: Screen, id, props: screenProps = {} }) => {
             // TODO : remove this!!!
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             return (
-              <Route key={id} path={`${path}/${id}`} render={props => <Screen {...props} />} />
+              <Route
+                key={id}
+                path={`${path}/${id}`}
+                render={props => <Screen {...{ ...props, ...screenProps }} />}
+              />
             );
           })}
         </Switch>
