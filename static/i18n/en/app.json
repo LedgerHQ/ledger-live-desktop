@@ -1609,7 +1609,7 @@
         "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Add account",
         "addAccountTooltip": "Add {{appName}} account",
-        "addAccountWarn": "Please wait for the app updates to finish",
+        "addAccountWarn": "Please wait for processing to finish",
         "learnMore": "Learn more",
         "learnMoreTooltip": "Learn more about {{appName}}",
         "removeTooltip": "Uninstall {{appName}}",
