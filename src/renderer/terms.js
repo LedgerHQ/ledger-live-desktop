@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { languageSelector } from "~/renderer/reducers/settings";
 import { urls } from "~/config/urls";
 
-const currentTermsRequired = "2019-12-04";
+const currentTermsRequired = "2022-04-14";
 const currentLendingTermsRequired = "2020-11-10";
 
 export function isAcceptedTerms() {

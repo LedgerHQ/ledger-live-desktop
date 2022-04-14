@@ -31,6 +31,7 @@ import OnboardingOrElse from "~/renderer/components/OnboardingOrElse";
 import AppRegionDrag from "~/renderer/components/AppRegionDrag";
 import IsNewVersion from "~/renderer/components/IsNewVersion";
 import IsSystemLanguageAvailable from "~/renderer/components/IsSystemLanguageAvailable";
+import IsTermOfUseUpdated from "./components/IsTermOfServiceUpdated";
 import LibcoreBusyIndicator from "~/renderer/components/LibcoreBusyIndicator";
 import DeviceBusyIndicator from "~/renderer/components/DeviceBusyIndicator";
 import KeyboardContent from "~/renderer/components/KeyboardContent";
@@ -159,6 +160,7 @@ export default function Default() {
                 <Route>
                   <IsNewVersion />
                   <IsSystemLanguageAvailable />
+                  <IsTermOfUseUpdated />
                   <SyncNewAccounts priority={2} />
 
                   <Box
