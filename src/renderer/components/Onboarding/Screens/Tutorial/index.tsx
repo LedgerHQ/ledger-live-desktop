@@ -185,22 +185,7 @@ interface IScreen {
   canContinue?: boolean;
 }
 
-export const TutorialContext = createContext({
-  userUnderstandConsequences: false,
-  setUserUnderstandConsequences: () => null,
-  alertBeCareful: false,
-  setAlertBeCareful: () => null,
-  alertPreferLedgerSeed: false,
-  setAlertPreferLedgerSeed: () => null,
-  helpPinCode: false,
-  sethelpPinCode: () => null,
-  helpRecoveryPhrase: false,
-  setHelpRecoveryPhrase: () => null,
-  helpHideRecoveryPhrase: false,
-  setHelpHideRecoveryPhrase: () => null,
-  helpRecoveryPhraseWarning: false,
-  setHelpRecoveryPhraseWarning: () => null,
-});
+export const TutorialContext = createContext({});
 
 export default function Tutorial() {
   const history = useHistory();
@@ -212,7 +197,7 @@ export default function Tutorial() {
   const [userUnderstandConsequences, setUserUnderstandConsequences] = useState(false);
   const [alertBeCareful, setAlertBeCareful] = useState(false);
   const [alertPreferLedgerSeed, setAlertPreferLedgerSeed] = useState(false);
-  const [helpPinCode, sethelpPinCode] = useState(false);
+  const [helpPinCode, setHelpPinCode] = useState(false);
   const [helpRecoveryPhrase, setHelpRecoveryPhrase] = useState(false);
   const [helpHideRecoveryPhrase, setHelpHideRecoveryPhrase] = useState(false);
   const [helpRecoveryPhraseWarning, setHelpRecoveryPhraseWarning] = useState(false);
@@ -517,24 +502,7 @@ export default function Tutorial() {
   }, [history, path]);
 
   return (
-    <TutorialContext.Provider
-      value={{
-        userUnderstandConsequences,
-        setUserUnderstandConsequences,
-        alertBeCareful,
-        setAlertBeCareful,
-        alertPreferLedgerSeed,
-        setAlertPreferLedgerSeed,
-        helpPinCode,
-        sethelpPinCode,
-        helpRecoveryPhrase,
-        setHelpRecoveryPhrase,
-        helpHideRecoveryPhrase,
-        setHelpHideRecoveryPhrase,
-        helpRecoveryPhraseWarning,
-        setHelpRecoveryPhraseWarning,
-      }}
-    >
+    <TutorialContext.Provider value={}>
       <QuizzPopin isOpen={quizzOpen} onWin={quizSucceeds} onLose={quizFails} onClose={quizFails} />
       <Popin isOpen={alertBeCareful}>
         <CarefullyFollowInstructions onClose={() => setAlertBeCareful(false)} />
@@ -542,7 +510,7 @@ export default function Tutorial() {
       <Popin isOpen={alertPreferLedgerSeed}>
         <PreferLedgerRecoverySeed onClose={() => setAlertPreferLedgerSeed} />
       </Popin>
-      <Drawer isOpen={helpPinCode} onClose={() => sethelpPinCode(false)} direction="left">
+      <Drawer isOpen={helpPinCode} onClose={() => setHelpPinCode(false)} direction="left">
         <Flex px={40}>
           <PinHelp />
         </Flex>
