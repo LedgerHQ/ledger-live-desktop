@@ -11,7 +11,6 @@ import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
 import { command } from "~/renderer/commands";
 import { useDispatch, useSelector } from "react-redux";
 import { deviceModelIdSelector } from "~/renderer/reducers/onboarding";
-import { useHistory } from "react-router-dom";
 import { saveSettings } from "~/renderer/actions/settings";
 import { relaunchOnboarding } from "~/renderer/actions/onboarding";
 import { track } from "~/renderer/analytics/segment";
@@ -34,7 +33,6 @@ const Success = ({ device }: { device: Device }) => {
   );
 };
 export function GenuineCheck() {
-  const history = useHistory();
   const dispatch = useDispatch();
   const deviceId = useSelector(deviceModelIdSelector);
   const [device, updateDevice] = useState(undefined);
@@ -42,12 +40,11 @@ export function GenuineCheck() {
   const onResult = useCallback(
     res => {
       updateDevice(res.device);
-      // history.push("/");
       dispatch(saveSettings({ hasCompletedOnboarding: true }));
       dispatch(relaunchOnboarding(false));
       track("Onboarding - End");
     },
-    [dispatch, history],
+    [dispatch],
   );
 
   return device ? (

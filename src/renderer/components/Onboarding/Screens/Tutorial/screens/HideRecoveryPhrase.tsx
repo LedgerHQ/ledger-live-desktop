@@ -16,7 +16,7 @@ type Props = {
   sendEvent: (event: string, params?: any) => void;
 };
 
-export function HideRecoveryPhrase({ sendEvent }: Props) {
+export function HideRecoveryPhrase({ handleHelp }: Props) {
   const { t } = useTranslation();
 
   return (
@@ -34,12 +34,7 @@ export function HideRecoveryPhrase({ sendEvent }: Props) {
         text={t("onboarding.screens.tutorial.screens.hideRecoveryPhrase.neverShowToAnyone")}
       />
       <Row>
-        <Button
-          onClick={() => sendEvent("HELP")}
-          Icon={Icons.HelpRegular}
-          iconSize={18}
-          iconPosition="right"
-        >
+        <Button onClick={handleHelp} Icon={Icons.HelpRegular} iconSize={18} iconPosition="right">
           {t("onboarding.screens.tutorial.screens.hideRecoveryPhrase.buttons.learn")}
         </Button>
       </Row>

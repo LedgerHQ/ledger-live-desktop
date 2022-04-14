@@ -1,5 +1,5 @@
 import { Flex, Aside, Logos, Button, Icons, ProgressBar, Drawer, Popin } from "@ledgerhq/react-ui";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, createContext } from "react";
 import {
   Switch,
   Route,
@@ -185,12 +185,21 @@ interface IScreen {
   canContinue?: boolean;
 }
 
+export const TutorialContext = createContext({
+  userUnderstandConsequences: false,
+  setUserUnderstandConsequences: () => null,
+});
+
 export default function Tutorial() {
   const history = useHistory();
   const [quizzOpen, setQuizOpen] = useState(false);
   const { t } = useTranslation();
   const { pathname } = useLocation();
   const useCase = useSelector(useCaseSelector);
+
+  const [userUnderstandConsequences, setUserUnderstandConsequences] = useState(false);
+  const [alertBeCareful, setAlertBeCareful] = useState(false);
+  const [alertPreferLedgerSeed, setAlertPreferLedgerSeed] = useState(false);
 
   const urlSplit = pathname.split("/");
   const currentStep = urlSplit[urlSplit.length - 1];
@@ -355,6 +364,7 @@ export default function Tutorial() {
       useCases: [UseCase.recoveryPhrase],
       next: () => history.push(`${path}/${ScreenId.recoveryHowTo}`),
       previous: () => history.push(`${path}/${ScreenId.pinCodeHowTo}`),
+      canContinue: userUnderstandConsequences,
     },
     {
       id: ScreenId.quizSuccess,
@@ -491,8 +501,65 @@ export default function Tutorial() {
   }, [history, path]);
 
   return (
-    <>
+    <TutorialContext.Provider value={{ userUnderstandConsequences, setUserUnderstandConsequences }}>
       <QuizzPopin isOpen={quizzOpen} onWin={quizSucceeds} onLose={quizFails} onClose={quizFails} />
+      <Popin isOpen={alertBeCareful}>
+        <CarefullyFollowInstructions
+          onClose={() =>
+            sendEvent({ type: "SET_ALERT_STATUS", alertId: "beCareful", status: false })
+          }
+        />
+      </Popin>
+      <Popin isOpen={alertPreferLedgerSeed}>
+        <PreferLedgerRecoverySeed
+          onClose={() =>
+            sendEvent({ type: "SET_ALERT_STATUS", alertId: "preferLedgerSeed", status: false })
+          }
+        />
+      </Popin>
+      <Drawer
+        isOpen={!!state.context.help.pinCode}
+        onClose={() => sendEvent({ type: "SET_HELP_STATUS", helpId: "pinCode", status: false })}
+        direction="left"
+      >
+        <Flex px={40}>
+          <PinHelp />
+        </Flex>
+      </Drawer>
+      <Drawer
+        isOpen={!!state.context.help.recoveryPhrase}
+        onClose={() =>
+          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhrase", status: false })
+        }
+        direction="left"
+      >
+        <Flex px={40}>
+          <RecoverySeed />
+        </Flex>
+      </Drawer>
+      <Drawer
+        isOpen={!!state.context.help.hideRecoveryPhrase}
+        onClose={() =>
+          sendEvent({ type: "SET_HELP_STATUS", helpId: "hideRecoveryPhrase", status: false })
+        }
+        direction="left"
+      >
+        <Flex px={40}>
+          <HideRecoverySeed />
+        </Flex>
+      </Drawer>
+      <Drawer
+        isOpen={!!state.context.help.recoveryPhraseWarning}
+        onClose={() =>
+          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
+        }
+        direction="left"
+      >
+        <Flex px={40}>
+          <RecoveryWarning />
+        </Flex>
+      </Drawer>
+
       <FlowStepper
         illustration={CurrentScreen.Illustration}
         AsideFooter={CurrentScreen.Footer}
@@ -522,112 +589,6 @@ export default function Tutorial() {
           })}
         </Switch>
       </FlowStepper>
-    </>
+    </TutorialContext.Provider>
   );
 }
-
-// function OldTutorial({ sendEventToParent, machine, component }) {
-//   const { t } = useTranslation();
-//   const [state, sendEvent] = useMachine(machine, {
-//     actions: {
-//       topLevelPrev: () => sendEventToParent("PREV"),
-//       topLevelNext: () => sendEventToParent("NEXT"),
-//       fireConfetti,
-//     },
-//   });
-
-//   const Screen = component || screens[state.value].component;
-
-//   const steps = state.context.steps.map(({ id }) => ({
-//     key: id,
-//     label: t(`onboarding.screens.tutorial.steps.${id}`),
-//   }));
-//   const currentIndex = state.context.steps.findIndex(({ status }) => status === "active");
-
-//   return (
-//     <>
-//       <QuizzPopin
-//         isOpen={state.context.quizzOpen}
-//         onWin={() => {
-//           sendEvent("QUIZ_SUCCESS");
-//         }}
-//         onLose={() => {
-//           sendEvent("QUIZ_FAILURE");
-//         }}
-//         onClose={() => {
-//           sendEvent("QUIZ_FAILURE");
-//         }}
-//       />
-//       <Popin isOpen={state.context.alerts.beCareful}>
-//         <CarefullyFollowInstructions
-//           onClose={() =>
-//             sendEvent({ type: "SET_ALERT_STATUS", alertId: "beCareful", status: false })
-//           }
-//         />
-//       </Popin>
-//       <Popin isOpen={state.context.alerts.preferLedgerSeed}>
-//         <PreferLedgerRecoverySeed
-//           onClose={() =>
-//             sendEvent({ type: "SET_ALERT_STATUS", alertId: "preferLedgerSeed", status: false })
-//           }
-//         />
-//       </Popin>
-//       <Drawer
-//         isOpen={!!state.context.help.pinCode}
-//         onClose={() => sendEvent({ type: "SET_HELP_STATUS", helpId: "pinCode", status: false })}
-//         direction="left"
-//       >
-//         <Flex px={40}>
-//           <PinHelp />
-//         </Flex>
-//       </Drawer>
-//       <Drawer
-//         isOpen={!!state.context.help.recoveryPhrase}
-//         onClose={() =>
-//           sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhrase", status: false })
-//         }
-//         direction="left"
-//       >
-//         <Flex px={40}>
-//           <RecoverySeed />
-//         </Flex>
-//       </Drawer>
-//       <Drawer
-//         isOpen={!!state.context.help.hideRecoveryPhrase}
-//         onClose={() =>
-//           sendEvent({ type: "SET_HELP_STATUS", helpId: "hideRecoveryPhrase", status: false })
-//         }
-//         direction="left"
-//       >
-//         <Flex px={40}>
-//           <HideRecoverySeed />
-//         </Flex>
-//       </Drawer>
-//       <Drawer
-//         isOpen={!!state.context.help.recoveryPhraseWarning}
-//         onClose={() =>
-//           sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
-//         }
-//         direction="left"
-//       >
-//         <Flex px={40}>
-//           <RecoveryWarning />
-//         </Flex>
-//       </Drawer>
-
-//       {!!Screen && (
-//         <FlowStepper
-//           illustration={Screen.Illustration}
-//           AsideFooter={Screen.Footer}
-//           sendEvent={sendEvent}
-//           disableContinue={Screen.canContinue ? !Screen.canContinue(state.context) : false}
-//           ProgressBar={<ProgressBar steps={steps} currentIndex={currentIndex} />}
-//           continueLabel={Screen.continueLabel}
-//           onContinue={Screen.onContinue ? () => Screen.onContinue(sendEvent) : null}
-//         >
-//           <Screen sendEvent={sendEvent} context={state.context} />
-//         </FlowStepper>
-//       )}
-//     </>
-//   );
-// }
