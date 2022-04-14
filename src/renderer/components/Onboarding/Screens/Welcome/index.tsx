@@ -92,8 +92,6 @@ export function Welcome() {
   const history = useHistory();
   const dispatch = useDispatch();
 
-  const hasAcceptedTerms = isAcceptedTerms();
-
   const buyNanoX = useCallback(() => {
     openURL(urls.noDevice.buyNew);
   }, []);
