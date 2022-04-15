@@ -17,8 +17,8 @@ import validateTransactions from "./assets/validate-transactions.svg";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
 
-import { relaunchOnboarding } from "~/renderer/actions/onboarding";
-import { onboardingRelaunchedSelector } from "~/renderer/reducers/onboarding";
+import { relaunchOnboarding } from "~/renderer/actions/application";
+import { onboardingRelaunchedSelector } from "~/renderer/reducers/application";
 
 const stepLogos = [accessCrypto, ownPrivateKey, stayOffline, validateTransactions, setupNano];
 registerAssets(stepLogos);
@@ -85,7 +85,11 @@ const Description = styled(Text)`
   white-space: pre-line;
 `;
 
-export function Welcome() {
+type Props = {
+  setOpenedTermsModal: (isOpened: boolean) => void;
+};
+
+export function Welcome({ setOpenedTermsModal }: Props) {
   const onboardingOrigin = useSelector(onboardingRelaunchedSelector) ? "/settings/help" : undefined;
   const { t } = useTranslation();
   const history = useHistory();
@@ -126,6 +130,7 @@ export function Welcome() {
               iconPosition="right"
               Icon={Icons.ArrowRightMedium}
               variant="main"
+              onClick={() => setOpenedTermsModal(true)}
             >
               {t("v3.onboarding.screens.welcome.nextButton")}
             </Button>

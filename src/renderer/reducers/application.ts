@@ -40,7 +40,7 @@ const handlers = {
     ...state,
     ...payload,
   }),
-  ONBOARDING_RELAUNCH: (
+  RELAUNCH_ONBOARDING: (
     state: ApplicationState,
     { payload: onboardingRelaunched }: { payload: boolean },
   ) => {

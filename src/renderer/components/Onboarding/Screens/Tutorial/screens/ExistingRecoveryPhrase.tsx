@@ -1,12 +1,17 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { Title, SubTitle, AsideFooter, CheckStep, Column, IllustrationContainer } from "../shared";
 import getStarted from "../assets/v3/getStarted.png";
-import { TutorialContext } from "..";
 
-export function ExistingRecoveryPhrase() {
+type Props = {
+  userUnderstandConsequences: boolean;
+  toggleUserUnderstandConsequences: () => void;
+};
+export function ExistingRecoveryPhrase({
+  userUnderstandConsequences,
+  toggleUserUnderstandConsequences,
+}: Props) {
   const { t } = useTranslation();
-  const { userUnderstandConsequences, setUserUnderstandConsequences } = useContext(TutorialContext);
 
   return (
     <Column>
@@ -19,7 +24,7 @@ export function ExistingRecoveryPhrase() {
       </SubTitle>
       <CheckStep
         checked={userUnderstandConsequences}
-        onClick={() => setUserUnderstandConsequences(!userUnderstandConsequences)}
+        onClick={toggleUserUnderstandConsequences}
         label={t("onboarding.screens.tutorial.screens.existingRecoveryPhrase.disclaimer")}
       />
     </Column>

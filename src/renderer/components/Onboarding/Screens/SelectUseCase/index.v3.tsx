@@ -1,8 +1,6 @@
-// @flow
-
-import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import React, { useCallback, useContext } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { openModal } from "~/renderer/actions/modals";
 import { useTranslation, Trans } from "react-i18next";
 import { Text } from "@ledgerhq/react-ui";
@@ -18,9 +16,8 @@ import OnboardingNavHeader from "../../OnboardingNavHeader.v3";
 
 import { track } from "~/renderer/analytics/segment";
 
-import { deviceModelIdSelector, UseCase } from "~/renderer/reducers/onboarding";
-import { setUseCase } from "~/renderer/actions/onboarding";
 import { ScreenId } from "../Tutorial";
+import { OnboardingContext, UseCase } from "../../index.v3";
 
 registerAssets([placeholderOption]);
 
@@ -79,10 +76,15 @@ const RightColumn = styled.div`
   }
 `;
 
-export function SelectUseCase() {
+type Props = {
+  setUseCase: (useCase: UseCase) => void;
+  setOpenedPedagogyModal: (isOpened: boolean) => void;
+};
+
+export function SelectUseCase({ setUseCase, setOpenedPedagogyModal }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const deviceModelId = useSelector(deviceModelIdSelector);
+  const { deviceModelId } = useContext(OnboardingContext);
   const history = useHistory();
   const device = deviceById(deviceModelId);
 
@@ -120,9 +122,9 @@ export function SelectUseCase() {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Setup new");
-                dispatch(setUseCase(UseCase.setupDevice));
+                setUseCase(UseCase.setupDevice);
+                setOpenedPedagogyModal(true);
                 history.push(`/onboarding/${UseCase.setupDevice}/${ScreenId.howToGetStarted}`);
-                // dispatch(openModal("MODAL_PEDAGOGY", { deviceModelId }));
               }}
             />
           </RightColumn>
@@ -147,7 +149,7 @@ export function SelectUseCase() {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Connect");
-                dispatch(setUseCase(UseCase.connectDevice));
+                setUseCase(UseCase.connectDevice);
                 history.push(`/onboarding/${UseCase.connectDevice}/${ScreenId.pairMyNano}`);
                 onWrappedUseCase();
               }}
@@ -166,7 +168,7 @@ export function SelectUseCase() {
               Illu={<PlaceholderIllu />}
               onClick={() => {
                 track("Onboarding - Restore");
-                dispatch(setUseCase(UseCase.recoveryPhrase));
+                setUseCase(UseCase.recoveryPhrase);
                 history.push(
                   `/onboarding/${UseCase.recoveryPhrase}/${ScreenId.importYourRecoveryPhrase}`,
                 );

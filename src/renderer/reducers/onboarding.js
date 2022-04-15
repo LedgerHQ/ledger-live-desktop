@@ -1,5 +1,7 @@
 // @flow
 
+// ! No need for .ts file for this reducer in v3
+
 import type { DeviceModelId } from "@ledgerhq/devices";
 import { handleActions } from "redux-actions";
 import { getEnv } from "@ledgerhq/live-common/lib/env";

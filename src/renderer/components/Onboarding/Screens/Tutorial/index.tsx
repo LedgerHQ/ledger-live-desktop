@@ -39,7 +39,7 @@ import { fireConfetti } from "~/renderer/components/Onboarding/Screens/Tutorial/
 import RecoveryWarning from "../../Help/RecoveryWarning";
 import { QuizzPopin } from "~/renderer/modals/OnboardingQuizz/OnboardingQuizzModal";
 
-import { UseCase, useCaseSelector } from "~/renderer/reducers/onboarding";
+import { UseCase } from "../../index.v3";
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 
 import { track } from "~/renderer/analytics/segment";
@@ -186,14 +186,15 @@ interface IScreen {
   props?: { [key: string]: unknown };
 }
 
-export const TutorialContext = createContext({});
+type Props = {
+  useCase: UseCase;
+};
 
-export default function Tutorial() {
+export default function Tutorial({ useCase }: Props) {
   const history = useHistory();
   const [quizzOpen, setQuizOpen] = useState(false);
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const useCase = useSelector(useCaseSelector);
   const device = useSelector(getCurrentDevice);
 
   const [userUnderstandConsequences, setUserUnderstandConsequences] = useState(false);
@@ -388,6 +389,12 @@ export default function Tutorial() {
     {
       id: ScreenId.existingRecoveryPhrase,
       component: ExistingRecoveryPhrase,
+      props: {
+        userUnderstandConsequences,
+        toggleUserUnderstandConsequences: () => {
+          setUserUnderstandConsequences(!userUnderstandConsequences);
+        },
+      },
       useCases: [UseCase.recoveryPhrase],
       next: () => history.push(`${path}/${ScreenId.recoveryHowTo}`),
       previous: () => history.push(`${path}/${ScreenId.pinCodeHowTo}`),
@@ -533,7 +540,7 @@ export default function Tutorial() {
   }, [history, path]);
 
   return (
-    <TutorialContext.Provider value={{ prout: true }}>
+    <>
       <QuizzPopin isOpen={quizzOpen} onWin={quizSucceeds} onLose={quizFails} onClose={quizFails} />
       <Popin isOpen={alertBeCareful}>
         <CarefullyFollowInstructions onClose={() => setAlertBeCareful(false)} />
@@ -607,6 +614,6 @@ export default function Tutorial() {
           })}
         </Switch>
       </FlowStepper>
-    </TutorialContext.Provider>
+    </>
   );
 }

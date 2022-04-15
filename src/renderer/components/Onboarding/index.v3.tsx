@@ -1,13 +1,14 @@
 // @flow
 
-import React, { useEffect, useState } from "react";
+import { DeviceModelId } from "@ledgerhq/devices";
+import React, { useEffect, useState, createContext } from "react";
 import { Switch, Route, useRouteMatch } from "react-router-dom";
 import { useMachine } from "@xstate/react";
 import { assign, Machine } from "xstate";
 import { CSSTransition } from "react-transition-group";
 import { saveSettings } from "~/renderer/actions/settings";
 import { useDispatch } from "react-redux";
-import { relaunchOnboarding } from "~/renderer/actions/onboarding";
+import { relaunchOnboarding } from "~/renderer/actions/application";
 import { track } from "~/renderer/analytics/segment";
 import { openURL } from "~/renderer/linking";
 import { urls } from "~/config/urls";
@@ -28,7 +29,6 @@ import { preloadAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import { SideDrawer } from "../SideDrawer";
 import Box from "../Box";
 import TermsAndConditionsModal from "./Screens/Welcome/TermsAndConditionsModal";
-import { UseCase } from "~/renderer/reducers/onboarding";
 
 const OnboardingContainer = styled.div`
   display: flex;
@@ -206,11 +206,32 @@ const ScreenContainer = styled.div`
   }
 `;
 
+export enum UseCase {
+  setupDevice = "setup-device",
+  connectDevice = "connect-device",
+  recoveryPhrase = "recovery-phrase",
+}
+
+type OnboardingContextTypes = {
+  deviceModelId: DeviceModelId | null;
+  setDeviceModelId: (deviceModelId: DeviceModelId | null) => void;
+};
+
+export const OnboardingContext = createContext<OnboardingContextTypes>({
+  deviceModelId: null,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setDeviceModelId: () => {},
+});
+
 export function Onboarding() {
   const dispatch = useDispatch();
   const [imgsLoaded, setImgsLoaded] = useState(false);
+  const [useCase, setUseCase] = useState(null);
+  const [deviceModelId, setDeviceModelId] = useState(null);
+  const [openedPedagogyModal, setOpenedPedagogyModal] = useState(false);
+  const [openedTermsModal, setOpenedTermsModal] = useState(false);
+  const [openedRecoveryPhraseWarningHelp, setOpenedRecoveryPhraseWarningHelp] = useState(false);
   const { path } = useRouteMatch();
-  const isOnboard = true;
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
     actions: {
@@ -236,22 +257,28 @@ export function Onboarding() {
   }, []);
 
   return (
-    <React.Fragment>
+    <OnboardingContext.Provider value={{ deviceModelId, setDeviceModelId }}>
       <Pedagogy
-        isOpen={state.context.pedagogy}
-        onClose={() => sendEvent("CLOSE_PEDAGOGY_MODAL")}
-        onDone={() => sendEvent("SETUP_NEW_DEVICE")}
+        isOpen={openedPedagogyModal}
+        onClose={() => {
+          setOpenedPedagogyModal(false);
+        }}
+        onDone={() => {
+          setOpenedPedagogyModal(false);
+        }}
       />
       <TermsAndConditionsModal
-        isOpen={state.context.showTerms}
-        onClose={() => sendEvent("CLOSE_TERMS_MODAL")}
-        sendEvent={sendEvent}
+        isOpen={openedTermsModal}
+        onClose={() => {
+          setOpenedTermsModal(false);
+        }}
+        setOpenedTermsModal={setOpenedTermsModal}
       />
       <SideDrawer
-        isOpen={!!state.context.help.recoveryPhraseWarning}
-        onRequestClose={() =>
-          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
-        }
+        isOpen={openedRecoveryPhraseWarningHelp}
+        onRequestClose={() => {
+          setOpenedRecoveryPhraseWarningHelp(false);
+        }}
         direction="left"
       >
         <Box px={40}>
@@ -266,19 +293,24 @@ export function Onboarding() {
               <Route path={`${path}/welcome`} component={Welcome} />
               <Route path={`${path}/terms`} component={Terms} />
               <Route path={`${path}/select-device`} component={SelectDevice} />
-              <Route path={`${path}/select-use-case`} component={SelectUseCase} />
+              <Route
+                path={`${path}/select-use-case`}
+                render={props => {
+                  return <SelectUseCase {...props} setUseCase={setUseCase} />;
+                }}
+              />
               <Route
                 path={[
                   `${path}/${UseCase.setupDevice}`,
                   `${path}/${UseCase.connectDevice}`,
                   `${path}/${UseCase.recoveryPhrase}`,
                 ]}
-                component={Tutorial}
+                render={props => <Tutorial {...props} useCase={useCase} />}
               />
             </Switch>
           </ScreenContainer>
         </CSSTransition>
       </OnboardingContainer>
-    </React.Fragment>
+    </OnboardingContext.Provider>
   );
 }
