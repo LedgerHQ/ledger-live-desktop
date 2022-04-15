@@ -1,10 +1,7 @@
-// @flow
-
 import React, { useCallback, useContext } from "react";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { DeviceModelId } from "@ledgerhq/devices";
 import { Text } from "@ledgerhq/react-ui";
 import { ThemedComponent } from "~/renderer/styles/StyleProvider";

@@ -1,18 +1,10 @@
 import { Flex, Aside, Logos, Button, Icons, ProgressBar, Drawer, Popin } from "@ledgerhq/react-ui";
-import React, { useCallback, useState, createContext } from "react";
-import {
-  Switch,
-  Route,
-  Redirect,
-  useHistory,
-  useParams,
-  useRouteMatch,
-  useLocation,
-} from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useCallback, useState } from "react";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
+import { Switch, Route, useHistory, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
-import { useMachine } from "@xstate/react";
 import { ImportYourRecoveryPhrase } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/ImportYourRecoveryPhrase";
 import { DeviceHowTo } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/DeviceHowTo";
 import { DeviceHowTo2 } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/DeviceHowTo2";
@@ -35,12 +27,10 @@ import { PreferLedgerRecoverySeed } from "~/renderer/components/Onboarding/Alert
 import { UseRecoverySheet } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/UseRecoverySheet";
 import { QuizFailure } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizFailure";
 import { QuizSuccess } from "~/renderer/components/Onboarding/Screens/Tutorial/screens/QuizSuccess";
-import { fireConfetti } from "~/renderer/components/Onboarding/Screens/Tutorial/assets/confetti";
 import RecoveryWarning from "../../Help/RecoveryWarning";
 import { QuizzPopin } from "~/renderer/modals/OnboardingQuizz/OnboardingQuizzModal";
 
 import { UseCase } from "../../index.v3";
-import { getCurrentDevice } from "~/renderer/reducers/devices";
 
 import { track } from "~/renderer/analytics/segment";
 
@@ -101,7 +91,7 @@ const FlowStepper: React.FC<FlowStepperProps> = ({
   handleContinue,
 }) => {
   const handleHelp = useCallback(() => {
-    // sendEvent("HELP");
+    openURL(urls.faq);
   }, []);
 
   const { t } = useTranslation();
@@ -195,7 +185,6 @@ export default function Tutorial({ useCase }: Props) {
   const [quizzOpen, setQuizOpen] = useState(false);
   const { t } = useTranslation();
   const { pathname } = useLocation();
-  const device = useSelector(getCurrentDevice);
 
   const [userUnderstandConsequences, setUserUnderstandConsequences] = useState(false);
   const [userChosePinCodeHimself, setUserChosePinCodeHimself] = useState(false);
@@ -591,15 +580,6 @@ export default function Tutorial({ useCase }: Props) {
         handleBack={previous}
       >
         <Switch>
-          {/* <Route exact path="/onboarding/setup-device">
-            <Redirect push to={`${path}/how-to-get-started`} />
-          </Route>
-          <Route exact path="/onboarding/connect-device">
-            <Redirect push to={`${path}/${ScreenId.pairMyNano}`} />
-          </Route>
-          <Route exact path="/onboarding/recovery-phrase">
-            <Redirect push to={`${path}/import-your-recovery-phrase`} />
-          </Route> */}
           {useCaseScreens.map(({ component: Screen, id, props: screenProps = {} }) => {
             // TODO : remove this!!!
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment

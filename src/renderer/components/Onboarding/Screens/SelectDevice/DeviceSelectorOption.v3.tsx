@@ -1,8 +1,5 @@
-// @flow
-
 import React from "react";
 import styled, { css } from "styled-components";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { Text, Button } from "@ledgerhq/react-ui";
 import { useTranslation } from "react-i18next";
 
