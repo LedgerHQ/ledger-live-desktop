@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -106,10 +106,10 @@ export function Welcome({ setOpenedTermsModal }: Props) {
     isLast: index === stepLogos.length - 1,
   }));
 
-  const handlePrevious = () => {
+  const handlePrevious = useCallback(() => {
     history.push(onboardingOrigin);
     dispatch(relaunchOnboarding(false));
-  };
+  }, [history, onboardingOrigin, dispatch]);
 
   return (
     <WelcomeContainer>
@@ -124,17 +124,15 @@ export function Welcome({ setOpenedTermsModal }: Props) {
           </Description>
         </Presentation>
         <ProductHighlight>
-          <Link to={`/onboarding/terms`}>
-            <Button
-              data-testid="onboarding-get-started-button"
-              iconPosition="right"
-              Icon={Icons.ArrowRightMedium}
-              variant="main"
-              onClick={() => setOpenedTermsModal(true)}
-            >
-              {t("v3.onboarding.screens.welcome.nextButton")}
-            </Button>
-          </Link>
+          <Button
+            data-testid="onboarding-get-started-button"
+            iconPosition="right"
+            Icon={Icons.ArrowRightMedium}
+            variant="main"
+            onClick={() => setOpenedTermsModal(true)}
+          >
+            {t("v3.onboarding.screens.welcome.nextButton")}
+          </Button>
           <NoDevice>
             <Text marginRight={2}>{t("v3.onboarding.screens.welcome.noDevice")}</Text>
             <StyledLink onClick={buyNanoX}>{t("v3.onboarding.screens.welcome.buyLink")}</StyledLink>

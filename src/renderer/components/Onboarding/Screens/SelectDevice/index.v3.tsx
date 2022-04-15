@@ -54,7 +54,7 @@ export function SelectDevice() {
   return (
     <SelectDeviceContainer>
       <TopRightContainer>
-        <Button small onClick={() => history.push("/onboarding/terms")}>
+        <Button small onClick={() => history.push("/onboarding/welcome")}>
           {t("common.previous")}
         </Button>
       </TopRightContainer>

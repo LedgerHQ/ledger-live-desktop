@@ -15,7 +15,6 @@ import { urls } from "~/config/urls";
 
 // screens
 import { Welcome } from "~/renderer/components/Onboarding/Screens/Welcome";
-import { Terms } from "~/renderer/components/Onboarding/Screens/Terms";
 import { SelectDevice } from "~/renderer/components/Onboarding/Screens/SelectDevice";
 import { SelectUseCase } from "~/renderer/components/Onboarding/Screens/SelectUseCase";
 import Tutorial from "~/renderer/components/Onboarding/Screens/Tutorial";
@@ -289,9 +288,15 @@ export function Onboarding() {
         <CSSTransition in appear key={state.value} timeout={DURATION} classNames="page-switch">
           <ScreenContainer>
             <Switch>
-              <Route exact path={path} component={Welcome} />
-              <Route path={`${path}/welcome`} component={Welcome} />
-              <Route path={`${path}/terms`} component={Terms} />
+              <Route
+                exact
+                path={path}
+                render={props => <Welcome {...props} setOpenedTermsModal={setOpenedTermsModal} />}
+              />
+              <Route
+                path={`${path}/welcome`}
+                render={props => <Welcome {...props} setOpenedTermsModal={setOpenedTermsModal} />}
+              />
               <Route path={`${path}/select-device`} component={SelectDevice} />
               <Route
                 path={`${path}/select-use-case`}

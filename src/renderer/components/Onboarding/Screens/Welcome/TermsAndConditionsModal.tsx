@@ -5,6 +5,7 @@ import { acceptTerms, useDynamicUrl } from "~/renderer/terms";
 import { setShareAnalytics } from "~/renderer/actions/settings";
 import { openURL } from "~/renderer/linking";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 const TermsAndConditionsModal: React.FC<{
   isOpen: boolean;
@@ -20,12 +21,14 @@ const TermsAndConditionsModal: React.FC<{
   const privacyPolicyUrl = useDynamicUrl("privacyPolicy");
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const handleAcceptTermsOfUse = useCallback(() => {
     acceptTerms();
     dispatch(setShareAnalytics(true));
     setOpenedTermsModal(false);
-  }, [dispatch, setOpenedTermsModal]);
+    history.push("/onboarding/select-device");
+  }, [dispatch, setOpenedTermsModal, history]);
 
   return (
     <Popin isOpen={isOpen} onClose={onClose} width={622} height={220}>
