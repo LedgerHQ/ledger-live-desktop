@@ -228,6 +228,9 @@ export function Onboarding() {
   const [imgsLoaded, setImgsLoaded] = useState(false);
   const [useCase, setUseCase] = useState(null);
   const [deviceModelId, setDeviceModelId] = useState(null);
+  const [openedPedagogyModal, setOpenedPedagogyModal] = useState(false);
+  const [openedTermsModal, setOpenedTermsModal] = useState(false);
+  const [openedRecoveryPhraseWarningHelp, setOpenedRecoveryPhraseWarningHelp] = useState(false);
   const { path } = useRouteMatch();
 
   const [state, sendEvent, service] = useMachine(onboardingMachine, {
@@ -256,20 +259,26 @@ export function Onboarding() {
   return (
     <OnboardingContext.Provider value={{ deviceModelId, setDeviceModelId }}>
       <Pedagogy
-        isOpen={state.context.pedagogy}
-        onClose={() => sendEvent("CLOSE_PEDAGOGY_MODAL")}
-        onDone={() => sendEvent("SETUP_NEW_DEVICE")}
+        isOpen={openedPedagogyModal}
+        onClose={() => {
+          setOpenedPedagogyModal(false);
+        }}
+        onDone={() => {
+          setOpenedPedagogyModal(false);
+        }}
       />
       <TermsAndConditionsModal
-        isOpen={state.context.showTerms}
-        onClose={() => sendEvent("CLOSE_TERMS_MODAL")}
-        sendEvent={sendEvent}
+        isOpen={openedTermsModal}
+        onClose={() => {
+          setOpenedTermsModal(false);
+        }}
+        setOpenedTermsModal={setOpenedTermsModal}
       />
       <SideDrawer
-        isOpen={!!state.context.help.recoveryPhraseWarning}
-        onRequestClose={() =>
-          sendEvent({ type: "SET_HELP_STATUS", helpId: "recoveryPhraseWarning", status: false })
-        }
+        isOpen={openedRecoveryPhraseWarningHelp}
+        onRequestClose={() => {
+          setOpenedRecoveryPhraseWarningHelp(false);
+        }}
         direction="left"
       >
         <Box px={40}>

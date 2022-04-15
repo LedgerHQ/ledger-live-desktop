@@ -85,7 +85,11 @@ const Description = styled(Text)`
   white-space: pre-line;
 `;
 
-export function Welcome() {
+type Props = {
+  setOpenedTermsModal: (isOpened: boolean) => void;
+};
+
+export function Welcome({ setOpenedTermsModal }: Props) {
   const onboardingOrigin = useSelector(onboardingRelaunchedSelector) ? "/settings/help" : undefined;
   const { t } = useTranslation();
   const history = useHistory();
@@ -126,6 +130,7 @@ export function Welcome() {
               iconPosition="right"
               Icon={Icons.ArrowRightMedium}
               variant="main"
+              onClick={() => setOpenedTermsModal(true)}
             >
               {t("v3.onboarding.screens.welcome.nextButton")}
             </Button>

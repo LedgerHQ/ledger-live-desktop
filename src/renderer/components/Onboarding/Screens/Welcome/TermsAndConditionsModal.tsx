@@ -9,8 +9,8 @@ import { useDispatch } from "react-redux";
 const TermsAndConditionsModal: React.FC<{
   isOpen: boolean;
   onClose: () => void;
-  sendEvent: (e: string) => void;
-}> = ({ isOpen, onClose, sendEvent }) => {
+  setOpenedTermsModal: (isOpened: boolean) => void;
+}> = ({ isOpen, onClose, setOpenedTermsModal }) => {
   const { t } = useTranslation();
 
   const [acceptedTermsOfUse, setAcceptedTermsOfUse] = React.useState(false);
@@ -24,8 +24,8 @@ const TermsAndConditionsModal: React.FC<{
   const handleAcceptTermsOfUse = useCallback(() => {
     acceptTerms();
     dispatch(setShareAnalytics(true));
-    sendEvent("NEXT");
-  }, [dispatch, sendEvent]);
+    setOpenedTermsModal(false);
+  }, [dispatch, setOpenedTermsModal]);
 
   return (
     <Popin isOpen={isOpen} onClose={onClose} width={622} height={220}>

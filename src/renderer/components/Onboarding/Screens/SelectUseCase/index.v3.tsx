@@ -78,9 +78,10 @@ const RightColumn = styled.div`
 
 type Props = {
   setUseCase: (useCase: UseCase) => void;
+  setOpenedPedagogyModal: (isOpened: boolean) => void;
 };
 
-export function SelectUseCase({ setUseCase }: Props) {
+export function SelectUseCase({ setUseCase, setOpenedPedagogyModal }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { deviceModelId } = useContext(OnboardingContext);
@@ -122,8 +123,8 @@ export function SelectUseCase({ setUseCase }: Props) {
               onClick={() => {
                 track("Onboarding - Setup new");
                 setUseCase(UseCase.setupDevice);
+                setOpenedPedagogyModal(true);
                 history.push(`/onboarding/${UseCase.setupDevice}/${ScreenId.howToGetStarted}`);
-                // dispatch(openModal("MODAL_PEDAGOGY", { deviceModelId }));
               }}
             />
           </RightColumn>
