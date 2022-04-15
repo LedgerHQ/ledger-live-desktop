@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, DefaultTheme, ThemeProps } from "styled-components";
 import { Text, Button } from "@ledgerhq/react-ui";
 import { useTranslation } from "react-i18next";
 
@@ -9,16 +9,18 @@ const DeviceIllustrationContainer = styled.div`
   display: flex;
 `;
 
-const bkgColor = p => p.theme.colors.palette.neutral.c00;
-const bkgColorHover = p => p.theme.colors.palette.neutral.c20;
-const borderColorHover = p => p.theme.colors.palette.neutral.c40;
+type BorderProps = ThemeProps<DefaultTheme> & { isFirst: boolean; isLast: boolean };
+
+const bkgColor = (p: BorderProps) => p.theme.colors.palette.neutral.c00;
+const bkgColorHover = (p: BorderProps) => p.theme.colors.palette.neutral.c20;
+const borderColorHover = (p: BorderProps) => p.theme.colors.palette.neutral.c40;
 
 const borderCSS = css`
-  ${p => (p.isFirst ? "" : `border-left: 1px solid ${bkgColor(p)};`)}
-  ${p => (p.isLast ? "" : `border-right: 1px solid ${bkgColor(p)};`)}
+  ${(p: BorderProps) => (p.isFirst ? "" : `border-left: 1px solid ${bkgColor(p)};`)}
+  ${(p: BorderProps) => (p.isLast ? "" : `border-right: 1px solid ${bkgColor(p)};`)}
   &:hover {
-    ${p => (p.isFirst ? "" : `border-left: 1px solid ${borderColorHover(p)};`)}
-    ${p => (p.isLast ? "" : `border-right: 1px solid ${borderColorHover(p)};`)}
+    ${(p: BorderProps) => (p.isFirst ? "" : `border-left: 1px solid ${borderColorHover(p)};`)}
+    ${(p: BorderProps) => (p.isLast ? "" : `border-right: 1px solid ${borderColorHover(p)};`)}
   }
 `;
 

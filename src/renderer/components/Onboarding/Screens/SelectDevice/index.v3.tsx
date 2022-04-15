@@ -4,14 +4,13 @@ import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { DeviceModelId } from "@ledgerhq/devices";
 import { Text } from "@ledgerhq/react-ui";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Button from "~/renderer/components/Button";
 import { DeviceSelector } from "./DeviceSelector";
 import { track } from "~/renderer/analytics/segment";
 
 import { OnboardingContext } from "../../index.v3";
 
-const SelectDeviceContainer: ThemedComponent<any> = styled.div`
+const SelectDeviceContainer = styled.div`
   height: 100%;
   width: 100%;
   display: flex;

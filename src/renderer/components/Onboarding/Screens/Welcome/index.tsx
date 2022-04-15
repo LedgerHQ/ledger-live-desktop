@@ -107,8 +107,10 @@ export function Welcome({ setOpenedTermsModal }: Props) {
   }));
 
   const handlePrevious = useCallback(() => {
-    history.push(onboardingOrigin);
-    dispatch(relaunchOnboarding(false));
+    if (onboardingOrigin) {
+      history.push(onboardingOrigin);
+      dispatch(relaunchOnboarding(false));
+    }
   }, [history, onboardingOrigin, dispatch]);
 
   return (
