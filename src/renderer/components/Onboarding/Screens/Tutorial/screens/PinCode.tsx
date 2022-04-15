@@ -10,7 +10,6 @@ type Props = {
 
 export function PinCode({ toggleUserChosePinCodeHimself, userChosePinCodeHimself }: Props) {
   const { t } = useTranslation();
-  console.log({ toggleUserChosePinCodeHimself, userChosePinCodeHimself });
 
   return (
     <Column>
