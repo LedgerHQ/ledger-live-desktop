@@ -59,9 +59,8 @@ const StepContent = styled.div`
 type FlowStepperProps = {
   illustration?: React.ReactNode;
   content?: React.ReactNode;
-  AsideFooter?: React.ReactNode;
+  AsideFooter?: React.ElementType;
   ProgressBar?: React.ReactNode;
-  key: string;
   continueLabel?: string;
   backLabel?: string;
   disableContinue?: boolean;
@@ -166,9 +165,29 @@ export enum ScreenId {
   genuineCheck = "genuine-check",
 }
 
+type ScreenComponent =
+  | typeof HowToGetStarted
+  | typeof DeviceHowTo
+  | typeof DeviceHowTo2
+  | typeof PinCode
+  | typeof PinCodeHowTo
+  | typeof NewRecoveryPhrase
+  | typeof UseRecoverySheet
+  | typeof RecoveryHowTo1
+  | typeof RecoveryHowTo2
+  | typeof RecoveryHowTo3
+  | typeof HideRecoveryPhrase
+  | typeof ImportYourRecoveryPhrase
+  | typeof ExistingRecoveryPhrase
+  | typeof QuizSuccess
+  | typeof QuizFailure
+  | typeof PairMyNano
+  | typeof GenuineCheck
+  | typeof Screen;
+
 interface IScreen {
   id: ScreenId;
-  component: React.ComponentType;
+  component: ScreenComponent;
   useCases?: UseCase[];
   next: () => void;
   previous: () => void;
@@ -498,9 +517,15 @@ export default function Tutorial({ useCase }: Props) {
     currentStep,
     screens,
   ]);
-  const { component: CurrentScreen, canContinue, next, previous, id: currentScreenId } = screens[
+  const { component, canContinue, next, previous, id: currentScreenId } = screens[
     currentScreenIndex
   ];
+  const CurrentScreen = (component as unknown) as {
+    Illustration: JSX.Element;
+    Footer: React.ElementType;
+    continueLabel: string;
+  };
+
   const screenStepIndex = useMemo(
     () => steps.findIndex(s => !!s.screens.find(screenId => screenId === currentScreenId)),
     [currentScreenId, steps],
@@ -586,13 +611,12 @@ export default function Tutorial({ useCase }: Props) {
       >
         <Switch>
           {useCaseScreens.map(({ component: Screen, id, props: screenProps = {} }) => {
-            // TODO : remove this!!!
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
             return (
               <Route
                 key={id}
                 path={`${path}/${id}`}
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 render={props => <Screen {...{ ...props, ...screenProps }} />}
               />
             );

@@ -47,9 +47,11 @@ export enum UseCase {
   recoveryPhrase = "recovery-phrase",
 }
 
+type NullableDeviceModelId = DeviceModelId | null;
+
 type OnboardingContextTypes = {
-  deviceModelId: DeviceModelId | null;
-  setDeviceModelId: (deviceModelId: DeviceModelId | null) => void;
+  deviceModelId: NullableDeviceModelId;
+  setDeviceModelId: (deviceModelId: NullableDeviceModelId) => void;
 };
 
 export const OnboardingContext = createContext<OnboardingContextTypes>({
@@ -61,7 +63,7 @@ export const OnboardingContext = createContext<OnboardingContextTypes>({
 export function Onboarding() {
   const [imgsLoaded, setImgsLoaded] = useState(false);
   const [useCase, setUseCase] = useState(null);
-  const [deviceModelId, setDeviceModelId] = useState(null);
+  const [deviceModelId, setDeviceModelId] = useState<NullableDeviceModelId>(null);
   const [openedPedagogyModal, setOpenedPedagogyModal] = useState(false);
   const [openedTermsModal, setOpenedTermsModal] = useState(false);
   const [openedRecoveryPhraseWarningHelp, setOpenedRecoveryPhraseWarningHelp] = useState(false);
@@ -94,7 +96,7 @@ export function Onboarding() {
         onRequestClose={() => {
           setOpenedRecoveryPhraseWarningHelp(false);
         }}
-        direction="left"
+        direction={"left"}
       >
         <Box px={40}>
           <RecoveryWarning />
@@ -116,15 +118,13 @@ export function Onboarding() {
               <Route path={`${path}/select-device`} component={SelectDevice} />
               <Route
                 path={`${path}/select-use-case`}
-                render={props => {
-                  return (
-                    <SelectUseCase
-                      {...props}
-                      setOpenedPedagogyModal={setOpenedPedagogyModal}
-                      setUseCase={setUseCase}
-                    />
-                  );
-                }}
+                render={props => (
+                  <SelectUseCase
+                    {...props}
+                    setOpenedPedagogyModal={setOpenedPedagogyModal}
+                    setUseCase={setUseCase}
+                  />
+                )}
               />
               <Route
                 path={[
@@ -132,7 +132,7 @@ export function Onboarding() {
                   `${path}/${UseCase.connectDevice}`,
                   `${path}/${UseCase.recoveryPhrase}`,
                 ]}
-                render={props => <Tutorial {...props} useCase={useCase} />}
+                render={props => useCase && <Tutorial {...props} useCase={useCase} />}
               />
             </Switch>
           </ScreenContainer>
