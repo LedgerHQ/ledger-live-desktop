@@ -3061,16 +3061,16 @@
     nan "^2.14.2"
     node-gyp "^7.1.2"
 
-"@ledgerhq/live-app-sdk@git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#adding-token-support":
+"@ledgerhq/live-app-sdk@git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#60c347d810d1b83cbaa8a14120d175393d40b09e":
   version "0.5.0"
-  resolved "git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#68682f62e0ff504573316e8f13ddfb010d55993d"
+  resolved "git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#60c347d810d1b83cbaa8a14120d175393d40b09e"
   dependencies:
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#d8de13968fbcb2048b9a0540f0f7beefc9ee4027":
+"@ledgerhq/live-common@git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#e9c686ba3016fb4e87f5520398d7a067f861f836":
   version "21.36.2"
-  resolved "git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#d8de13968fbcb2048b9a0540f0f7beefc9ee4027"
+  resolved "git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#e9c686ba3016fb4e87f5520398d7a067f861f836"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
@@ -3100,7 +3100,7 @@
     "@ledgerhq/hw-transport-mocker" "6.24.1"
     "@ledgerhq/hw-transport-node-speculos" "6.24.1"
     "@ledgerhq/json-bignumber" "^1.1.0"
-    "@ledgerhq/live-app-sdk" "git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#adding-token-support"
+    "@ledgerhq/live-app-sdk" "git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#60c347d810d1b83cbaa8a14120d175393d40b09e"
     "@ledgerhq/logs" "6.10.0"
     "@polkadot/types" "7.8.1"
     "@polkadot/types-known" "7.8.1"
@@ -3145,6 +3145,7 @@
     leb128 "^0.0.5"
     lodash "^4.17.21"
     lru-cache "5.1.1"
+    minimatch "^5.0.1"
     numeral "^2.0.6"
     object-hash "^2.2.0"
     performance-now "^2.1.0"
@@ -7728,6 +7729,13 @@ brace-expansion@^1.1.7:
   dependencies:
     balanced-match "^1.0.0"
     concat-map "0.0.1"
+
+brace-expansion@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-2.0.1.tgz#1edc459e0f0c548486ecf9fc99f2221364b9a0ae"
+  integrity sha512-XnAIvQ8eM+kC6aULx6wuQiwVsnzsi9d3WxzV3FpWTGA19F621kwdbsAcFKXgKUHZWsy+mY6iL1sHTxWEFCytDA==
+  dependencies:
+    balanced-match "^1.0.0"
 
 braces@^1.8.2:
   version "1.8.5"
@@ -15488,6 +15496,13 @@ minimatch@3.0.4, minimatch@^3.0.2, minimatch@^3.0.3, minimatch@^3.0.4:
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
   dependencies:
     brace-expansion "^1.1.7"
+
+minimatch@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-5.0.1.tgz#fb9022f7528125187c92bd9e9b6366be1cf3415b"
+  integrity sha512-nLDxIFRyhDblz3qMuq+SoRZED4+miJ/G+tdDrjkkkRnjAsBexeGpgjLEQ0blJy7rHhR2b93rhQY4SvyWu9v03g==
+  dependencies:
+    brace-expansion "^2.0.1"
 
 minimist@^1.1.1, minimist@^1.2.0, minimist@^1.2.3, minimist@^1.2.5:
   version "1.2.5"

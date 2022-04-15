@@ -33,6 +33,13 @@ import type {
 } from "@ledgerhq/live-common/lib/platform/rawTypes";
 
 import {
+  filterPlatformAccounts,
+  AccountFilters,
+  filterPlatformCurrencies,
+  CurrencyFilters,
+} from "@ledgerhq/live-common/lib/platform/filters";
+
+import {
   serializePlatformAccount,
   deserializePlatformTransaction,
   serializePlatformSignedTransaction,
@@ -132,18 +139,30 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
     return urlObj;
   }, [manifest.url, theme, inputs, manifest.params]);
 
-  const listAccounts = useCallback(() => {
-    return accounts.map(account =>
-      accountToPlatformAccount(
-        account,
-        account.type === "TokenAccount" ? accounts.find(a => a.id === account.parentId) : undefined,
-      ),
-    );
-  }, [accounts]);
+  const listAccounts = useCallback(
+    (filters?: AccountFilters) => {
+      const platformAccounts = accounts.map(account =>
+        accountToPlatformAccount(
+          account,
+          account.type === "TokenAccount"
+            ? accounts.find(a => a.id === account.parentId)
+            : undefined,
+        ),
+      );
 
-  const listCurrencies = useCallback(() => {
-    return currencies.map(currencyToPlatformCurrency);
-  }, [currencies]);
+      return filterPlatformAccounts(platformAccounts, filters || {});
+    },
+    [accounts],
+  );
+
+  const listCurrencies = useCallback(
+    (filters?: CurrencyFilters) => {
+      const platformCurrencies = currencies.map(currencyToPlatformCurrency);
+
+      return filterPlatformCurrencies(platformCurrencies, filters || {});
+    },
+    [currencies],
+  );
 
   const receiveOnAccount = useCallback(
     ({ accountId }: { accountId: string }) => {
@@ -232,13 +251,22 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
   );
 
   const requestAccount = useCallback(
-    ({ currencies, allowAddAccount }: { currencies?: string[], allowAddAccount?: boolean }) => {
+    ({
+      currencies,
+      allowAddAccount,
+      includeTokens,
+    }: {
+      currencies?: string[],
+      allowAddAccount?: boolean,
+      includeTokens?: boolean,
+    }) => {
       tracking.platformRequestAccountRequested(manifest);
       return new Promise((resolve, reject) =>
         dispatch(
           openModal("MODAL_REQUEST_ACCOUNT", {
             currencies,
             allowAddAccount,
+            includeTokens,
             onResult: account => {
               tracking.platformRequestAccountSuccess(manifest);
               /**
