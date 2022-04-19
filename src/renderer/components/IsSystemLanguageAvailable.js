@@ -3,8 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { openModal } from "~/renderer/actions/modals";
-import { getSystemLocale } from "~/helpers/systemLocale";
-import { languageSelector } from "~/renderer/reducers/settings";
+import { languageSelector, getInitialLanguageLocale } from "~/renderer/reducers/settings";
 import { pushedLanguages } from "~/config/languages";
 
 // To reset os language proposition, change this date !
@@ -21,17 +20,22 @@ export function answerLanguageAvailable() {
 const IsSystemLanguageAvailable = () => {
   const dispatch = useDispatch();
   const currAppLanguage = useSelector(languageSelector);
-  const { language: osLanguage } = getSystemLocale();
+  const defaultLanguage = getInitialLanguageLocale();
 
   useEffect(() => {
     if (
       !hasAnsweredLanguageAvailable() &&
-      currAppLanguage !== osLanguage &&
-      pushedLanguages.includes(osLanguage)
+      currAppLanguage !== defaultLanguage &&
+      pushedLanguages.includes(defaultLanguage)
     ) {
-      dispatch(openModal("MODAL_SYSTEM_LANGUAGE_AVAILABLE", { osLanguage, currAppLanguage }));
+      dispatch(
+        openModal("MODAL_SYSTEM_LANGUAGE_AVAILABLE", {
+          osLanguage: defaultLanguage,
+          currAppLanguage,
+        }),
+      );
     }
-  }, [osLanguage, dispatch, currAppLanguage]);
+  }, [defaultLanguage, dispatch, currAppLanguage]);
 
   return null;
 };
