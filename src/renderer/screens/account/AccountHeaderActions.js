@@ -5,7 +5,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { withTranslation, Trans } from "react-i18next";
 import styled from "styled-components";
-import type { Account, AccountLike, CryptoCurrency } from "@ledgerhq/live-common/lib/types";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import Tooltip from "~/renderer/components/Tooltip";
 import {
   isAccountEmpty,
@@ -176,11 +176,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal }: Props) => {
     });
 
   const history = useHistory();
-
-  const onWalletConnect = useCallback(() => {
-    setTrackingSource("account header actions");
-    openModal("MODAL_WALLETCONNECT_PASTE_LINK", { account });
-  }, [openModal, account]);
 
   const onBuy = useCallback(() => {
     setTrackingSource("account header actions");
