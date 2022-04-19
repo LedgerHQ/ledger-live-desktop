@@ -102,7 +102,7 @@ const AccountHeaderSettingsButtonComponent = ({ account, parentAccount, openModa
           rounded
         />
       </Tooltip>
-      {currency.id === "ethereum" ? (
+      {["ethereum", "bsc", "polygon"].includes(currency.id) ? (
         <Tooltip content={t("walletconnect.titleAccount")}>
           <ButtonSettings onClick={onWalletConnect}>
             <Box justifyContent="center">
@@ -127,7 +127,7 @@ const AccountHeaderSettingsButtonComponent = ({ account, parentAccount, openModa
   );
 };
 
-const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) => {
+const AccountHeaderActions = ({ account, parentAccount, openModal }: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
   const contrastText = useTheme("colors.palette.text.shade60");
 
