@@ -12,8 +12,8 @@ import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account, NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
 import NFTCollectionContextMenu from "~/renderer/components/ContextMenu/NFTCollectionContextMenu";
-import Image from "~/renderer/screens/nft/Image";
-import Skeleton from "~/renderer/screens/nft/Skeleton";
+import Image from "~/renderer/components/nft/Image";
+import Skeleton from "~/renderer/components/nft/Skeleton";
 
 const Container: ThemedComponent<{}> = styled(Box)`
   &.disabled {

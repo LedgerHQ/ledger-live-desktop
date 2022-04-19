@@ -8,7 +8,7 @@ import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import { decodeAccountId } from "@ledgerhq/live-common/lib/account";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
-import Skeleton from "~/renderer/screens/nft/Skeleton";
+import Skeleton from "~/renderer/components/nft/Skeleton";
 import Text from "~/renderer/components/Text";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 

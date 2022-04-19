@@ -3,7 +3,7 @@
 import React, { useMemo } from "react";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
-import Skeleton from "~/renderer/screens/nft/Skeleton";
+import Skeleton from "~/renderer/components/nft/Skeleton";
 import { useTranslation } from "react-i18next";
 
 import type { NFT } from "@ledgerhq/live-common/lib/types";

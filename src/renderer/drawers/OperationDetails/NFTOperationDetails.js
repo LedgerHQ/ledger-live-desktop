@@ -12,14 +12,14 @@ import {
   HashContainer,
 } from "~/renderer/drawers/OperationDetails/styledComponents";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
-import Image from "~/renderer/screens/nft/Image";
+import Image from "~/renderer/components/nft/Image";
 import Box from "~/renderer/components/Box";
 import {
   useNftMetadata,
   useNftCollectionMetadata,
 } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
-import Skeleton from "~/renderer/screens/nft/Skeleton";
+import Skeleton from "~/renderer/components/nft/Skeleton";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 
 const NFTOperationDetails = ({ operation }: { operation: Operation }) => {

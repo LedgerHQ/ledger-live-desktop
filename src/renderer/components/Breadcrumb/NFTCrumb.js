@@ -14,7 +14,7 @@ import IconAngleDown from "~/renderer/icons/AngleDown";
 import IconAngleUp from "~/renderer/icons/AngleUp";
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import CollectionName from "~/renderer/screens/nft/CollectionName";
+import CollectionName from "~/renderer/components/nft/CollectionName";
 
 const LabelWithMeta = ({
   item,

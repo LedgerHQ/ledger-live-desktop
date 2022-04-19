@@ -7,8 +7,8 @@ import { getAllNFTs } from "~/renderer/reducers/accounts";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
-import Image from "~/renderer/screens/nft/Image";
-import Skeleton from "~/renderer/screens/nft/Skeleton";
+import Image from "~/renderer/components/nft/Image";
+import Skeleton from "~/renderer/components/nft/Skeleton";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 

@@ -5,8 +5,8 @@ import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvide
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
-import Image from "~/renderer/screens/nft/Image";
-import Skeleton from "~/renderer/screens/nft/Skeleton";
+import Image from "~/renderer/components/nft/Image";
+import Skeleton from "~/renderer/components/nft/Skeleton";
 
 type OptionProps = {
   data: {

@@ -11,7 +11,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import styled from "styled-components";
 import useOnScreen from "../useOnScreen";
-import Image from "~/renderer/screens/nft/Image";
+import Image from "~/renderer/components/nft/Image";
 import IconSend from "~/renderer/icons/Send";
 import TokensList from "./TokensList";
 import Spinner from "~/renderer/components/Spinner";
@@ -19,9 +19,9 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import OperationsList from "~/renderer/components/OperationsList";
-import CollectionName from "../CollectionName";
+import CollectionName from "~/renderer/components/nft/CollectionName";
 import GridListToggle from "./GridListToggle";
-import Skeleton from "../Skeleton";
+import Skeleton from "~/renderer/components/nft/Skeleton";
 
 const SpinnerContainer: ThemedComponent<{}> = styled.div`
   display: flex;

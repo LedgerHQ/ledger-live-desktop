@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 
 import type { NFT } from "@ledgerhq/live-common/lib/types";
 import IconCross from "~/renderer/icons/Cross";
-import Image from "~/renderer/screens/nft/Image";
+import Image from "~/renderer/components/nft/Image";
 
 import PrismaZoom from "react-prismazoom";
 

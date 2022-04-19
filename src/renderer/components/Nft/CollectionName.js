@@ -4,7 +4,7 @@ import { useNftCollectionMetadata } from "@ledgerhq/live-common/lib/nft";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account, ProtoNFT } from "@ledgerhq/live-common/lib/types";
 import NFTCollectionContextMenu from "~/renderer/components/ContextMenu/NFTCollectionContextMenu";
-import Skeleton from "~/renderer/screens/nft/Skeleton";
+import Skeleton from "~/renderer/components/nft/Skeleton";
 import IconDots from "~/renderer/icons/Dots";
 import styled from "styled-components";
 

@@ -28,7 +28,7 @@ import {
 } from "@ledgerhq/live-common/lib/operation";
 import type { Account, AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
-import Skeleton from "~/renderer/screens/nft/Skeleton";
+import Skeleton from "~/renderer/components/nft/Skeleton";
 
 import { urls } from "~/config/urls";
 import TrackPage, { setTrackingSource } from "~/renderer/analytics/TrackPage";
