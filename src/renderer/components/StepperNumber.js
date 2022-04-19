@@ -71,6 +71,12 @@ class StepperNumber extends PureComponent<Props, State> {
     value: this.props.value,
   };
 
+  static getDerivedStateFromProps(nextProps: number, prevState: number) {
+    return {
+      value: nextProps.value,
+    };
+  }
+
   _timeout = undefined;
 
   isMax = (v: number) => v >= this.props.max;
