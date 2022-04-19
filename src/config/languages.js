@@ -25,7 +25,11 @@ export const allLanguages = [
 
 export const prodStableLanguages = ["en", "fr", "es", "ru", "zh", "de", "tr", "ja", "ko"];
 
-export const pushedLanguages = ["fr", "ru"];
+/**
+ * List of languages that should be prompted to existing users once if they are
+ * using LL in english.
+ * */
+export const pushedLanguages = ["fr", "ru", "es", "zh"];
 
 export const getLanguages = () =>
   getEnv("EXPERIMENTAL_LANGUAGES") ? allLanguages : prodStableLanguages;
