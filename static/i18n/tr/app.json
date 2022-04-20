@@ -1141,9 +1141,9 @@
       },
       "confirm": {
         "title": "Bağlan",
-        "details": "Cüzdanınız üzerinden bağlanmak istenen Ethereum hesabı:",
-        "deeplinkDetails": "Ledger Live'a bağlanmak istiyor. Ethereum adresinizi seçin:",
-        "noEthAccount": "Ethereum hesabınız yok. Wallet Connect kullanmak için lütfen bir Ethereum hesabı ekleyin.",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "Başka bir dApp bağlıyken yeni bir dApp'e bağlanmaya çalışıyorsunuz. Live'ı yeni bir dApp'e bağlamadan önce lütfen bağlı olduğunuz dApp'in bağlantısını kesin."
       }
     },
