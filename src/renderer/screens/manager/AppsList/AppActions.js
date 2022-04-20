@@ -6,6 +6,7 @@ import {
   useAppUninstallNeedsDeps,
 } from "@ledgerhq/live-common/lib/apps/react";
 import manager from "@ledgerhq/live-common/lib/manager";
+import { useHistory } from "react-router-dom";
 
 import type { App } from "@ledgerhq/live-common/lib/types/manager";
 import type { State, Action, InstalledItem } from "@ledgerhq/live-common/lib/apps/types";
@@ -13,14 +14,13 @@ import type { State, Action, InstalledItem } from "@ledgerhq/live-common/lib/app
 import styled from "styled-components";
 import { Trans } from "react-i18next";
 
-import { openURL } from "~/renderer/linking";
-import { urls } from "~/config/urls";
-
 import Text from "~/renderer/components/Text";
 import Tooltip from "~/renderer/components/Tooltip";
 import Button from "~/renderer/components/Button";
 import Progress from "~/renderer/screens/manager/AppsList/Progress";
 import Box from "~/renderer/components/Box/Box";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 
 import { colors } from "~/renderer/styles/theme";
 
@@ -28,13 +28,18 @@ import AccountAdd from "~/renderer/icons/AccountAdd";
 import IconCheck from "~/renderer/icons/Check";
 import IconTrash from "~/renderer/icons/Trash";
 import IconArrowDown from "~/renderer/icons/ArrowDown";
-import LinkIcon from "~/renderer/icons/LinkIcon";
+import IconExternalLink from "~/renderer/icons/ExternalLink";
+
+const ExternalLinkIconContainer = styled.span`
+  display: inline-flex;
+  margin-left: 4px;
+`;
 
 const AppActionsWrapper = styled.div`
   display: flex;
-  flex: 1;
-  min-width: 150px;
-  justify-content: flex-end;
+  min-width: 300px;
+  padding-left: 10px;
+  justify-content: ${p => (p.right ? "flex-end" : "space-between")};
   flex-direction: row;
   > *:not(:last-child) {
     margin-right: 10px;
@@ -85,7 +90,8 @@ const AppActions: React$ComponentType<Props> = React.memo(
     isLiveSupported,
     addAccount,
   }: Props) => {
-    const { name } = app;
+    const { name, type } = app;
+    const history = useHistory();
     const { installedAvailable, installQueue, uninstallQueue, updateAllQueue } = state;
 
     // $FlowFixMe
@@ -109,9 +115,22 @@ const AppActions: React$ComponentType<Props> = React.memo(
       if (addAccount) addAccount();
     }, [addAccount]);
 
-    const onSupportLink = useCallback(() => {
-      openURL(urls.appSupport[app.name] || urls.appSupport.default);
-    }, [app.name]);
+    const onNavigateTo = useCallback(() => {
+      switch (type) {
+        case "plugin":
+          history.push("/platform");
+          break;
+        case "app":
+          openURL(urls.appSupport[name] || urls.appSupport.default);
+          break;
+        case "tool":
+          openURL(urls.managerAppLearnMore);
+          break;
+        case "swap":
+          history.push("/swap");
+          break;
+      }
+    }, [name, type, history]);
 
     const updating = useMemo(() => updateAllQueue.includes(name), [updateAllQueue, name]);
     const installing = useMemo(() => installQueue.includes(name), [installQueue, name]);
@@ -122,8 +141,36 @@ const AppActions: React$ComponentType<Props> = React.memo(
       [installQueue.length, installed, uninstallQueue.length],
     );
 
+    const showLearnMore = type === "tool" || (type === "app" && !isLiveSupported);
+    const hasSpecificAction =
+      ["swap", "plugin"].includes(type) || (type === "app" && isLiveSupported);
+    const hasTwoCTAS = showLearnMore || installed;
+
     return (
-      <AppActionsWrapper>
+      <AppActionsWrapper right={!hasTwoCTAS}>
+        {showLearnMore ? (
+          <Button
+            color={"palette.primary.main"}
+            style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
+            fontSize={3}
+            onClick={onNavigateTo}
+            justifyContent="center"
+            event={`Manager ${type} Click`}
+            eventProperties={{
+              appName: name,
+              appVersion: app.version,
+            }}
+          >
+            <Box horizontal alignContent="center" justifyContent="center">
+              <Text>
+                <Trans i18nKey={`manager.applist.item.${type}`} />
+              </Text>
+              <ExternalLinkIconContainer>
+                <IconExternalLink size={16} />
+              </ExternalLinkIconContainer>
+            </Box>
+          </Button>
+        ) : null}
         {installing || uninstalling ? (
           <Progress
             state={state}
@@ -136,7 +183,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
         ) : showActions ? (
           <>
             {installed ? (
-              isLiveSupported ? (
+              type === "app" && isLiveSupported ? (
                 <Tooltip
                   content={
                     canAddAccount ? (
@@ -171,35 +218,26 @@ const AppActions: React$ComponentType<Props> = React.memo(
                     </Box>
                   </Button>
                 </Tooltip>
-              ) : (
-                <Tooltip
-                  content={
-                    <Trans
-                      i18nKey="manager.applist.item.learnMoreTooltip"
-                      values={{ appName: name }}
-                    />
-                  }
+              ) : hasSpecificAction ? (
+                <Button
+                  color={"palette.primary.main"}
+                  style={{ display: "flex", backgroundColor: "rgba(0,0,0,0)" }}
+                  fontSize={3}
+                  onClick={onNavigateTo}
+                  justifyContent="center"
+                  event={`Manager ${type} Click`}
+                  eventProperties={{
+                    appName: name,
+                    appVersion: app.version,
+                  }}
                 >
-                  <Button
-                    inverted
-                    style={{ display: "flex" }}
-                    fontSize={3}
-                    onClick={onSupportLink}
-                    event="Manager SupportLink Click"
-                    eventProperties={{
-                      appName: name,
-                      appVersion: app.version,
-                    }}
-                  >
-                    <Box horizontal alignContent="center" justifyContent="center">
-                      <LinkIcon size={16} />
-                      <Text ff="Inter" style={{ marginLeft: 8 }}>
-                        <Trans i18nKey="manager.applist.item.learnMore" />
-                      </Text>
-                    </Box>
-                  </Button>
-                </Tooltip>
-              )
+                  <Box horizontal alignContent="center" justifyContent="center">
+                    <Text>
+                      <Trans i18nKey={`manager.applist.item.${type}`} />
+                    </Text>
+                  </Box>
+                </Button>
+              ) : null
             ) : null}
             {appStoreView && installed && (
               <SuccessInstall>
@@ -220,7 +258,6 @@ const AppActions: React$ComponentType<Props> = React.memo(
               >
                 <Button
                   style={{ display: "flex" }}
-                  id={`appActionsInstall-${name}`}
                   lighterPrimary
                   disabled={!canInstall || notEnoughMemoryToInstall}
                   onClick={onInstall}
@@ -229,6 +266,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                     appName: name,
                     appVersion: app.version,
                   }}
+                  data-test-id={`manager-install-${name}-app-button`}
                 >
                   <IconArrowDown size={14} />
                   <Text style={{ marginLeft: 8 }}>
@@ -247,7 +285,7 @@ const AppActions: React$ComponentType<Props> = React.memo(
                 <Button
                   style={{ padding: 13 }}
                   onClick={onUninstall}
-                  id={`appActionsUninstall-${name}`}
+                  data-test-id={`manager-uninstall-${name}-app-button`}
                   event="Manager Uninstall Click"
                   eventProperties={{
                     appName: name,

@@ -2,12 +2,14 @@
 import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import { FeatureToggle } from "@ledgerhq/live-common/lib/featureFlags";
 import TrackAppStart from "~/renderer/components/TrackAppStart";
 import { BridgeSyncProvider } from "~/renderer/bridge/BridgeSyncContext";
 import { SyncNewAccounts } from "~/renderer/bridge/SyncNewAccounts";
 import Dashboard from "~/renderer/screens/dashboard";
 import Settings from "~/renderer/screens/settings";
 import Accounts from "~/renderer/screens/accounts";
+import Card from "~/renderer/screens/card";
 import Manager from "~/renderer/screens/manager";
 import Exchange from "~/renderer/screens/exchange";
 import Swap2 from "~/renderer/screens/exchange/Swap2";
@@ -19,6 +21,7 @@ import Lend from "~/renderer/screens/lend";
 import PlatformCatalog from "~/renderer/screens/platform";
 import PlatformApp from "~/renderer/screens/platform/App";
 import NFTGallery from "~/renderer/screens/nft/Gallery";
+import NFTCollection from "~/renderer/screens/nft/Gallery/Collection";
 import Box from "~/renderer/components/Box/Box";
 import ListenDevices from "~/renderer/components/ListenDevices";
 import ExportLogsButton from "~/renderer/components/ExportLogsButton";
@@ -51,6 +54,14 @@ import { ToastOverlay } from "~/renderer/components/ToastOverlay";
 import Drawer from "~/renderer/drawers/Drawer";
 import UpdateBanner from "~/renderer/components/Updater/Banner";
 import FirmwareUpdateBanner from "~/renderer/components/FirmwareUpdateBanner";
+// $FlowFixMe
+import Market from "~/renderer/screens/market";
+// $FlowFixMe
+import MarketCoinScreen from "~/renderer/screens/market/MarketCoinScreen";
+// $FlowFixMe
+import Learn from "~/renderer/screens/learn";
+
+import { useProviders } from "~/renderer/screens/exchange/Swap2/Form";
 
 export const TopBannerContainer: ThemedComponent<{}> = styled.div`
   position: sticky;
@@ -111,6 +122,8 @@ export default function Default() {
   useDeeplink();
   useUSBTroubleshooting();
 
+  useProviders(); // prefetch data from swap providers here
+
   // every time location changes, scroll back up
   useEffect(() => {
     if (ref && ref.current) {
@@ -131,19 +144,6 @@ export default function Default() {
         <BridgeSyncProvider>
           <ContextMenuWrapper>
             <ModalsLayer />
-            {process.env.SPECTRON_RUN ? (
-              <div
-                id="unfocus-please"
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  left: 500,
-                  width: 10,
-                  height: 10,
-                  zIndex: 999,
-                }}
-              />
-            ) : null}
             <DebugWrapper>
               {process.env.DEBUG_THEME ? <DebugTheme /> : null}
               {process.env.MOCK ? <DebugMock /> : null}
@@ -178,6 +178,7 @@ export default function Default() {
                         <Route path="/" exact render={props => <Dashboard {...props} />} />
                         <Route path="/settings" render={props => <Settings {...props} />} />
                         <Route path="/accounts" render={props => <Accounts {...props} />} />
+                        <Route path="/card" render={props => <Card {...props} />} />
                         <Redirect from="/manager/reload" to="/manager" />
                         <Route path="/manager" render={props => <Manager {...props} />} />
                         <Route
@@ -192,8 +193,13 @@ export default function Default() {
                         <Route path="/lend" render={props => <Lend {...props} />} />
                         <Route path="/exchange" render={props => <Exchange {...props} />} />
                         <Route
-                          path="/account/:id/nft-collection/:collectionId?"
+                          exact
+                          path="/account/:id/nft-collection"
                           render={props => <NFTGallery {...props} />}
+                        />
+                        <Route
+                          path="/account/:id/nft-collection/:collectionAddress?"
+                          render={props => <NFTCollection {...props} />}
                         />
                         <Route
                           path="/account/:parentId/:id"
@@ -209,6 +215,15 @@ export default function Default() {
                           path="/USBTroubleshooting"
                           render={props => <USBTroubleshooting {...props} />}
                         />
+
+                        <Route
+                          path="/market/:currencyId"
+                          render={props => <MarketCoinScreen {...props} />}
+                        />
+                        <Route path="/market" render={props => <Market {...props} />} />
+                        <FeatureToggle feature="learn">
+                          <Route path="/learn" render={props => <Learn {...props} />} />
+                        </FeatureToggle>
                       </Switch>
                     </Page>
                     <Drawer />

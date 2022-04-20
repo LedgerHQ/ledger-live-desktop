@@ -1,40 +1,70 @@
 // @flow
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
+
 import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
 import SelectAccountAndCurrency from "~/renderer/components/SelectAccountAndCurrency";
-import CoinifyWidget from "../CoinifyWidget";
-import { useExchangeProvider, useCoinifyCurrencies } from "../hooks";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { openModal } from "~/renderer/actions/modals";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types/account";
-import { useDispatch } from "react-redux";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
 import { track } from "~/renderer/analytics/segment";
+import type { DProps } from "~/renderer/screens/exchange";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import { ProviderList } from "../ProviderList";
+import { useRampCatalogCurrencies } from "../hooks";
+import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
+import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
+import BigSpinner from "~/renderer/components/BigSpinner";
 
 const BuyContainer: ThemedComponent<{}> = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex: 1;
+  width: 100%;
 `;
 
-type Props = {
-  defaultCurrency?: ?(CryptoCurrency | TokenCurrency),
-  defaultAccount?: ?Account,
+type State = {
+  sortedCurrencies: Array<TokenCurrency | CryptoCurrency>,
+  isLoading: boolean,
 };
 
-const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
+const OnRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatalog }: DProps) => {
+  const [currencyState, setCurrencyState] = useState<State>({
+    sortedCurrencies: [],
+    isLoading: false,
+  });
+
+  const allCurrencies = useRampCatalogCurrencies(rampCatalog.value.onRamp);
+
+  useEffect(() => {
+    const filteredCurrencies = defaultTicker
+      ? allCurrencies.filter(currency => currency.ticker === defaultTicker)
+      : allCurrencies;
+    setCurrencyState(oldState => ({
+      ...oldState,
+      isLoading: true,
+    }));
+
+    currenciesByMarketcap(filteredCurrencies).then(sortedCurrencies => {
+      setCurrencyState({
+        sortedCurrencies,
+        isLoading: false,
+      });
+    });
+  }, []);
+
+  const fiatCurrency = useSelector(counterValueCurrencySelector);
+
   const [state, setState] = useState({
     account: undefined,
     parentAccount: undefined,
   });
 
-  const { account, parentAccount } = state;
-
   const dispatch = useDispatch();
+
+  const { account, parentAccount } = state;
 
   const reset = useCallback(() => {
     track("Page Buy Reset");
@@ -44,26 +74,15 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
     });
   }, []);
 
-  const confirmAccount = useCallback((account: AccountLike, parentAccount: Account) => {
-    setState(oldState => ({
-      ...oldState,
-      account: account,
-      parentAccount: parentAccount,
-    }));
-  }, []);
-
   const selectAccount = useCallback(
     (account, parentAccount) => {
-      dispatch(
-        openModal("MODAL_EXCHANGE_CRYPTO_DEVICE", {
-          account,
-          parentAccount,
-          onResult: confirmAccount,
-          flow: "buy",
-        }),
-      );
+      setState(oldState => ({
+        ...oldState,
+        account: account,
+        parentAccount: parentAccount,
+      }));
     },
-    [dispatch, confirmAccount],
+    [dispatch],
   );
 
   const confirmButtonTracking = useCallback(account => {
@@ -73,22 +92,31 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
     });
   }, []);
 
-  const allCurrencies = useCoinifyCurrencies("BUY");
-  const [provider] = useExchangeProvider();
-
   return (
     <BuyContainer>
-      <TrackPage category="Buy Crypto" />
-      {account ? (
-        <CoinifyWidget account={account} parentAccount={parentAccount} mode="buy" onReset={reset} />
+      <TrackPage category="Multibuy" name="BuyPage" />
+      {currencyState.isLoading ? (
+        <BigSpinner size={42} />
+      ) : account ? (
+        <ProviderList
+          account={account}
+          parentAccount={parentAccount}
+          providers={rampCatalog.value.onRamp}
+          onBack={reset}
+          trade={{
+            type: "onRamp",
+            cryptoCurrencyId: account.token ? account.token.id : account.currency.id,
+            fiatCurrencyId: fiatCurrency.ticker,
+            fiatAmount: 400,
+          }}
+        />
       ) : (
         <SelectAccountAndCurrency
           selectAccount={selectAccount}
-          allCurrencies={allCurrencies}
-          defaultCurrency={defaultCurrency}
-          defaultAccount={defaultAccount}
+          allCurrencies={currencyState.sortedCurrencies}
+          defaultCurrencyId={defaultCurrencyId}
+          defaultAccountId={defaultAccountId}
           confirmCb={confirmButtonTracking}
-          provider={provider}
           flow="buy"
         />
       )}
@@ -96,4 +124,4 @@ const Buy = ({ defaultCurrency, defaultAccount }: Props) => {
   );
 };
 
-export default Buy;
+export default OnRamp;

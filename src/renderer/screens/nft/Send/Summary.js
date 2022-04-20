@@ -35,7 +35,7 @@ const Summary = ({ transaction }: { transaction: Transaction }) => {
             <Skeleton width={42} minHeight={18} barHeight={6} show={show}>
               <Text ff="Inter|Medium" color="palette.text.shade60" fontSize={3}>
                 {"ID:"}
-                {centerEllipsis(metadata?.tokenId)}
+                {centerEllipsis(nft.tokenId)}
               </Text>
             </Skeleton>
           </Box>

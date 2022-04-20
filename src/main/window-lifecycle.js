@@ -57,12 +57,13 @@ const defaultWindowOptions = {
     experimentalFeatures: true,
     nodeIntegration: true,
     contextIsolation: false,
+    spellcheck: false,
   },
 };
 
 export const loadWindow = async () => {
   let url = __DEV__ ? INDEX_URL : path.join("file://", __dirname, "index.html");
-  if (process.env.SPECTRON_RUN && !process.env.CI) {
+  if (process.env.PLAYWRIGHT_RUN && !process.env.CI) {
     url = url.replace("localhost", "host.docker.internal");
   }
   if (mainWindow) {
@@ -71,7 +72,10 @@ export const loadWindow = async () => {
 };
 
 export async function createMainWindow({ dimensions, positions }: any, settings: any) {
-  theme = settings && settings.theme ? settings.theme : "null";
+  theme =
+    settings && settings.theme && ["light", "dark"].includes(settings.theme)
+      ? settings.theme
+      : "null";
 
   // TODO renderer should provide the saved window rectangle
   const width = dimensions ? dimensions.width : DEFAULT_WINDOW_WIDTH;

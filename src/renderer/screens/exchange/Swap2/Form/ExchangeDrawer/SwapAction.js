@@ -118,7 +118,6 @@ export default function SwapAction({
         transaction,
         status,
         device: deviceRef,
-        requireLatestFirmware: true,
         userId: providerKYC?.id,
       }}
       onResult={({ initSwapResult, initSwapError, ...rest }) => {
@@ -140,7 +139,6 @@ export default function SwapAction({
         account: fromAccount,
         transaction: initData.transaction,
         appName: "Exchange",
-        requireLatestFirmware: true,
       }}
       Result={TransactionResult}
       onResult={({ signedOperation, transactionSignError }) => {

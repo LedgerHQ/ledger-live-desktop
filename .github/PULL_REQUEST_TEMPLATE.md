@@ -9,7 +9,7 @@
 
 ## 🖤  Expectations to reach
 
-PR must pass CI, merge develop if conflicts, do not force push. Thanks!
+PR must pass CI, rebase develop if conflicts. Thanks!
 
 - **on QA**: at least one of these two checkboxes must be checked:
   - [ ] a specific test planned is defined on Jira
@@ -17,8 +17,6 @@ PR must pass CI, merge develop if conflicts, do not force push. Thanks!
 - **on delivery**: at least one of these two checkboxes must be checked: <!-- NB: Delivery incrementally with feature flagging is better than a very long PR. so prefer Option 1 if Option 2 takes more than a sprint -->
   - [ ] Option 1: **no impact**: The changes of this PR have ZERO impact on the userland (invisible for users)
   - [ ] Option 2: **atomic delivery**: the changes is atomic and complete (no partial delivery)
-
-PR must pass CI, merge develop if conflicts, do not force push. Thanks!
 
 <!--
 If expectations aren't met, please document it carefully (on the reason you can't check it) and what do you need from maintainers.

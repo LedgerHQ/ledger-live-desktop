@@ -10,9 +10,33 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import Animation from "~/renderer/animations";
-import NanoSAnim from "../assets/animations/nanoS/power-on-recovery.json";
-import NanoXAnim from "../assets/animations/nanoX/power-on-recovery.json";
+import NanoSAnimLight from "../assets/animations/nanoS/powerOnRecovery/light.json";
+import NanoSPAnimLight from "../assets/animations/nanoSP/powerOnRecovery/light.json";
+import NanoSPAnimDark from "../assets/animations/nanoSP/powerOnRecovery/dark.json";
+import NanoSAnimDark from "../assets/animations/nanoS/powerOnRecovery/dark.json";
+import NanoXAnimLight from "../assets/animations/nanoX/powerOnRecovery/light.json";
+import NanoXAnimDark from "../assets/animations/nanoX/powerOnRecovery/dark.json";
 import { ContentContainer } from "../shared";
+import useTheme from "~/renderer/hooks/useTheme";
+
+const animations = {
+  nanoX: {
+    light: NanoXAnimLight,
+    dark: NanoXAnimDark,
+  },
+  nanoS: {
+    light: NanoSAnimLight,
+    dark: NanoSAnimDark,
+  },
+  nanoSP: {
+    light: NanoSPAnimLight,
+    dark: NanoSPAnimDark,
+  },
+  blue: {
+    light: null,
+    dark: null,
+  },
+};
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -38,8 +62,8 @@ const StepIndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(100, 144, 241, 0.1);
-  color: #6490f1;
+  background: rgba(138, 128, 219, 0.1);
+  color: #8a80db;
 `;
 
 const StepContainer = styled.div`
@@ -132,6 +156,7 @@ type Props = {
 export function DeviceHowTo2({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId } = context;
+  const theme = useTheme("colors.palette.type");
 
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
   const onClickNext = useCallback(() => sendEvent("NEXT"), [sendEvent]);
@@ -141,7 +166,7 @@ export function DeviceHowTo2({ sendEvent, context }: Props) {
       <ContentContainer style={{ marginTop: 94 }}>
         <Animation
           loop
-          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          animation={animations[deviceId][theme]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}

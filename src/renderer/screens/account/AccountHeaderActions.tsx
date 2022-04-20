@@ -16,7 +16,6 @@ import {
 import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
 import { openModal } from "~/renderer/actions/modals";
 import IconAccountSettings from "~/renderer/icons/AccountSettings";
-import perFamily from "~/renderer/generated/AccountHeaderActions";
 import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
 import {
   BuyActionDefault,
@@ -57,7 +56,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
   const mainAccount = getMainAccount(account, parentAccount);
   const contrastText = useTheme("colors.palette.text.shade60");
 
-  const PerFamily = perFamily[mainAccount.currency.family];
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
   const manage = perFamilyManageActions[mainAccount.currency.family];
   let manageList = [];
@@ -219,8 +217,6 @@ const AccountHeaderActions = ({ account, parentAccount, openModal, t }: Props) =
             ) : null}
 
             <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-
-            {PerFamily ? <PerFamily account={account} parentAccount={parentAccount} /> : null}
           </>
         )
       ) : null}

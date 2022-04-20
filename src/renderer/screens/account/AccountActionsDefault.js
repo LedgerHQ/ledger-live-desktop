@@ -5,30 +5,43 @@ import IconReceive from "~/renderer/icons/Receive";
 import IconSend from "~/renderer/icons/Send";
 import IconSwap from "~/renderer/icons/Swap";
 import IconExchange from "~/renderer/icons/Exchange";
-import Box from "~/renderer/components/Box";
-import Button from "~/renderer/components/Button";
-
-const ActionDefault = ({
-  onClick,
-  iconComponent,
-  labelComponent,
-}: {
+// $FlowFixMe
+import Button from "~/renderer/components/Button.ui.tsx";
+import { Flex } from "@ledgerhq/react-ui";
+type Props = {
   onClick: () => void,
   iconComponent: any,
   labelComponent: any,
-}) => (
-  <Button small primary onClick={onClick}>
-    <Box horizontal flow={1} alignItems="center">
-      {iconComponent}
-      <Box>{labelComponent}</Box>
-    </Box>
+  event?: string,
+  eventProperties?: Object,
+  disabled?: boolean,
+};
+
+export const ActionDefault = ({
+  onClick,
+  iconComponent,
+  labelComponent,
+  event,
+  eventProperties,
+  disabled,
+}: Props) => (
+  <Button
+    variant="color"
+    onClick={onClick}
+    event={event}
+    eventProperties={eventProperties}
+    disabled={disabled}
+  >
+    <Flex flexDirection="row" alignItems="center">
+      {iconComponent ? <Flex mr="8px">{iconComponent}</Flex> : null} {labelComponent}
+    </Flex>
   </Button>
 );
 
 export const SendActionDefault = ({ onClick }: { onClick: () => void }) => (
   <ActionDefault
     onClick={onClick}
-    iconComponent={<IconSend size={12} />}
+    iconComponent={<IconSend size={14} />}
     labelComponent={<Trans i18nKey="send.title" />}
   />
 );
@@ -36,7 +49,7 @@ export const SendActionDefault = ({ onClick }: { onClick: () => void }) => (
 export const ReceiveActionDefault = ({ onClick }: { onClick: () => void }) => (
   <ActionDefault
     onClick={onClick}
-    iconComponent={<IconReceive size={12} />}
+    iconComponent={<IconReceive size={14} />}
     labelComponent={<Trans i18nKey="receive.title" />}
   />
 );
@@ -45,7 +58,7 @@ export const SwapActionDefault = ({ onClick }: { onClick: () => void }) => {
   return (
     <ActionDefault
       onClick={onClick}
-      iconComponent={<IconSwap size={12} />}
+      iconComponent={<IconSwap size={14} />}
       labelComponent={<Trans i18nKey="sidebar.swap" />}
     />
   );
@@ -55,7 +68,7 @@ export const BuyActionDefault = ({ onClick }: { onClick: () => void }) => {
   return (
     <ActionDefault
       onClick={onClick}
-      iconComponent={<IconExchange size={12} />}
+      iconComponent={<IconExchange size={14} />}
       labelComponent={<Trans i18nKey="accounts.contextMenu.buy" />}
     />
   );

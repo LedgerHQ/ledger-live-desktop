@@ -81,7 +81,6 @@ export default function AccountBalanceSummaryHeader({
                 <FormattedVal
                   key={secondaryKey}
                   animateTicker
-                  disableRounding
                   alwaysShowSign={false}
                   color="warmGrey"
                   unit={data[1].unit}

@@ -5,6 +5,7 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "isolatedModules": true,
+    "module": "commonjs",
     "jsx": "react",
     "lib": ["es6", "dom"],
     "moduleResolution": "node",
@@ -16,16 +17,17 @@
       "~/*": ["src/*"]
     },
     "skipLibCheck": true,
-    "rootDir": "./src",
-    "noEmit": true
+    "sourceMap": true,
+    "outDir": "tests/tests-out",
+    "rootDir": "./src"
   },
-  "include": ["src/**/*"],
+  "include": ["tests", "src/**/*"],
   "exclude": [
     "node_modules",
     "babel.config.js",
     "metro.config.js",
     "jest.config.js",
     "./scripts",
-    "./lib"
+    "./lib",
   ]
 }

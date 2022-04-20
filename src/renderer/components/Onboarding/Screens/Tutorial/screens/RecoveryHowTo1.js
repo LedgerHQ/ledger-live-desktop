@@ -13,8 +13,32 @@ import ArrowLeft from "~/renderer/icons/ArrowLeft";
 import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import { ContentContainer, HeaderContainer } from "../shared";
-import NanoSAnim from "../assets/animations/nanoS/number-of-words.json";
-import NanoXAnim from "../assets/animations/nanoX/number-of-words.json";
+import NanoSAnimLight from "../assets/animations/nanoS/numberOfWords/light.json";
+import NanoSAnimDark from "../assets/animations/nanoS/numberOfWords/dark.json";
+import NanoSPAnimLight from "../assets/animations/nanoSP/numberOfWords/light.json";
+import NanoSPAnimDark from "../assets/animations/nanoSP/numberOfWords/dark.json";
+import NanoXAnimLight from "../assets/animations/nanoX/numberOfWords/light.json";
+import NanoXAnimDark from "../assets/animations/nanoX/numberOfWords/dark.json";
+import useTheme from "~/renderer/hooks/useTheme";
+
+const animations = {
+  nanoX: {
+    light: NanoXAnimLight,
+    dark: NanoXAnimDark,
+  },
+  nanoS: {
+    light: NanoSAnimLight,
+    dark: NanoSAnimDark,
+  },
+  nanoSP: {
+    light: NanoSPAnimLight,
+    dark: NanoSPAnimDark,
+  },
+  blue: {
+    light: null,
+    dark: null,
+  },
+};
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -40,8 +64,8 @@ const StepIndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(100, 144, 241, 0.1);
-  color: #6490f1;
+  background: rgba(138, 128, 219, 0.1);
+  color: #8a80db;
 `;
 
 const StepContainer = styled.div`
@@ -127,6 +151,7 @@ type Props = {
 export function RecoveryHowTo1({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId } = context;
+  const theme = useTheme("colors.palette.type");
 
   const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
@@ -145,7 +170,7 @@ export function RecoveryHowTo1({ sendEvent, context }: Props) {
         </HeaderContainer>
         <Animation
           loop
-          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          animation={animations[deviceId][theme]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}

@@ -86,7 +86,7 @@ export default function AmountDetails({ operation, account }: Props) {
               <Trans i18nKey={"calendar.transactionDate"} />
             </Title>
             <Subtitle>
-              <FormattedDate date={date} format="LL" />
+              <FormattedDate date={date} format="L" />
             </Subtitle>
           </Column>
         </OpDetailsTitle>
@@ -117,7 +117,7 @@ export default function AmountDetails({ operation, account }: Props) {
               <Trans i18nKey={"operationDetails.currentValue"} />
             </Title>
             <Subtitle>
-              <FormattedDate date={compareDate} format="LL" />
+              <FormattedDate date={compareDate} format="L" />
             </Subtitle>
           </Column>
         </OpDetailsTitle>

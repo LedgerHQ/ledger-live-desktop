@@ -1,4 +1,4 @@
-name: Sync Nightly Develop
+name: "Nightly | Sync Nightly Develop"
 on:
   schedule:
     - cron: "0 */2 * * *"

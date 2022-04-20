@@ -13,7 +13,6 @@ import Text from "~/renderer/components/Text";
 import Button from "~/renderer/components/Button";
 import LanguageIcon from "~/renderer/icons/Language";
 
-import { languageLabels } from "~/renderer/screens/settings/sections/General/LanguageSelect";
 import { setLanguage } from "~/renderer/actions/settings";
 import { answerLanguageAvailable } from "~/renderer/components/IsSystemLanguageAvailable";
 
@@ -69,7 +68,7 @@ const SystemLanguageAvailableBody = (props: Props) => {
   const { osLanguage } = data;
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
-  const targetLanguageTranslated = languageLabels[osLanguage];
+  const targetLanguageTranslated = t(`language.switcher.${osLanguage}`);
 
   const dontSwitchLanguage = () => {
     answerLanguageAvailable();

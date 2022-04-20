@@ -78,6 +78,10 @@ const ContextMenuItemContainer: ThemedComponent<{}> = styled(Box).attrs(p => ({
   & > * {
     pointer-events: none;
   }
+
+  & > * {
+    pointer-events: none;
+  }
   &:hover {
     cursor: pointer;
     background: ${p => p.theme.colors.palette.background.default};

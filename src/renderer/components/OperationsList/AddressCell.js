@@ -80,17 +80,23 @@ type Props = {
   operation: Operation,
 };
 
+const showSender = o => o.senders[0];
+const showRecipient = o => o.recipients[0];
+const showNothing = o => null;
+const perOperationType = {
+  IN: showSender,
+  REVEAL: showSender,
+  REWARD_PAYOUT: showSender,
+  NFT_IN: showNothing,
+  NFT_OUT: showNothing,
+  _: showRecipient,
+};
+
 class AddressCell extends PureComponent<Props> {
   render() {
     const { operation } = this.props;
-    const showSender = ["IN", "REVEAL", "REWARD_PAYOUT"];
-    const hide = ["NFT_IN", "NFT_OUT"];
-    const value = showSender.includes(operation.type)
-      ? operation.senders[0]
-      : !hide
-      ? operation.recipients[0]
-      : null;
-
+    const lense = perOperationType[operation.type] || perOperationType._;
+    const value = lense(operation);
     return value ? (
       <Cell>
         <Address value={value} />

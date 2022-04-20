@@ -12,15 +12,16 @@ import { useRefreshAccountsOrdering } from "~/renderer/actions/general";
 import { Transition } from "react-transition-group";
 import { track } from "~/renderer/analytics/segment";
 
-const disableAnimation = process.env.SPECTRON_RUN;
+const disableAnimation = process.env.PLAYWRIGHT_RUN;
 
 type Props = {
   accountId: string,
   parentId?: string,
   yellow?: boolean,
+  rounded?: boolean,
 };
 
-export default function Star({ accountId, parentId, yellow }: Props) {
+export default function Star({ accountId, parentId, yellow, rounded }: Props) {
   const isAccountStarred = useSelector(state => isStarredAccountSelector(state, { accountId }));
   const dispatch = useDispatch();
   const refreshAccountsOrdering = useRefreshAccountsOrdering();
@@ -37,8 +38,8 @@ export default function Star({ accountId, parentId, yellow }: Props) {
   const MaybeButtonWrapper = yellow ? ButtonWrapper : FloatingWrapper;
 
   return (
-    <MaybeButtonWrapper filled={isAccountStarred}>
-      <StarWrapper id="account-star-button" onClick={toggleStar} tabIndex="-1">
+    <MaybeButtonWrapper filled={isAccountStarred} rounded={rounded}>
+      <StarWrapper id="account-star-button" onClick={toggleStar} tabIndex="-1" rounded={rounded}>
         {disableAnimation ? (
           <StarIcon
             yellow={yellow}
@@ -66,13 +67,13 @@ const starBust = keyframes`
   }
 `;
 
-const ButtonWrapper: ThemedComponent<{ filled?: boolean }> = styled.div`
-  height: 34px;
-  width: 34px;
+const ButtonWrapper: ThemedComponent<{ filled?: boolean, rounded?: boolean }> = styled.div`
+  height: ${p => (p.rounded ? 40 : 34)}px};
+  width: ${p => (p.rounded ? 40 : 34)}px};
   border: 1px solid
     ${p => (p.filled ? p.theme.colors.starYellow : p.theme.colors.palette.text.shade60)};
-  border-radius: 4px;
-  padding: 8px;
+  border-radius: ${p => (p.rounded ? 20 : 4)}px;
+  padding: ${p => (p.rounded ? 14 : 8)}px;
   text-align: center;
   background: ${p => (p.filled ? p.theme.colors.starYellow : "transparent")};
   &:hover {
@@ -85,8 +86,8 @@ const ButtonWrapper: ThemedComponent<{ filled?: boolean }> = styled.div`
 const FloatingWrapper: ThemedComponent<{}> = styled.div``;
 
 // NB negative margin to allow the burst to overflow
-const StarWrapper: ThemedComponent<{}> = styled.div`
-  margin: -17px;
+const StarWrapper: ThemedComponent<{ rounded?: boolean }> = styled.div`
+  margin: -${p => (p.rounded ? 20 : 17)}px;
 `;
 
 const startBurstTiming = 800;

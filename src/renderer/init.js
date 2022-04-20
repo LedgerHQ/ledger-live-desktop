@@ -37,6 +37,7 @@ import {
   languageSelector,
   sentryLogsSelector,
   hideEmptyTokenAccountsSelector,
+  localeSelector,
 } from "~/renderer/reducers/settings";
 
 import ReactRoot from "~/renderer/ReactRoot";
@@ -61,8 +62,8 @@ async function init() {
     connect,
   });
 
-  if (process.env.SPECTRON_RUN) {
-    const spectronData = await getKey("app", "SPECTRON_RUN", {});
+  if (process.env.PLAYWRIGHT_RUN) {
+    const spectronData = await getKey("app", "PLAYWRIGHT_RUN", {});
     _.each(spectronData.localStorage, (value, key) => {
       global.localStorage.setItem(key, value);
     });
@@ -102,9 +103,10 @@ async function init() {
 
   const state = store.getState();
   const language = languageSelector(state);
+  const locale = localeSelector(state);
 
   // Moment.JS config
-  moment.locale(language);
+  moment.locale(locale);
   moment.relativeTimeThreshold("s", 45);
   moment.relativeTimeThreshold("m", 55);
   moment.relativeTimeThreshold("h", 24);

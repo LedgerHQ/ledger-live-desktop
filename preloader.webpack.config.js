@@ -25,7 +25,6 @@ const babelConfig = {
     ],
   ],
 };
-
 const babelTsConfig = {
   presets: [
     "@babel/preset-typescript",
@@ -124,6 +123,18 @@ module.exports = {
             "...",
           ],
         }
-      : {}),
+      : {
+          extensions: [
+            ".jsx",
+            ".js",
+            ".v3.tsx",
+            ".v3.ts",
+            ".v3.jsx",
+            ".v3.js",
+            ".tsx",
+            ".ts",
+            "...",
+          ],
+        }),
   },
 };

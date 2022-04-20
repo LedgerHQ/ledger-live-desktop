@@ -17,19 +17,16 @@ mac:
   entitlements: build-nightly/mac/entitlements.plist
   entitlementsInherit: build-nightly/mac/entitlements.plist
   icon: build-nightly/icon.icns
+  detectUpdateChannel: false
   target:
     - dmg
     - zip
 
-# appImage:
-#   systemIntegration: doNotAsk
-
 linux:
-  # asarUnpack:
-  #   - node_modules/@ledgerhq/ledger-core
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
   category: Finance
   icon: icons
+  detectUpdateChannel: false
   target:
     - target: AppImage
       arch:
@@ -38,6 +35,7 @@ linux:
 win:
   artifactName: ${name}-${version}-${os}-${arch}.${ext}
   icon: build-nightly/windows/app.ico
+  detectUpdateChannel: false
   sign: scripts/sign-windows.js
   signingHashAlgorithms:
     - sha256
@@ -64,8 +62,7 @@ files:
   # Exclude modules
 
 publish:
-  - provider: github
   - provider: s3
     bucket: ledger-live-download-sandbox
     region: eu-west-1
-    acl: private
+    acl: public-read

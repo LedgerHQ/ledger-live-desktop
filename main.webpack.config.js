@@ -25,13 +25,23 @@ const babelTsConfig = {
       "@babel/preset-env",
       {
         targets: {
-          node: "current",
+          electron: "7.1.9",
         },
       },
     ],
+    "@babel/preset-react",
     "@babel/preset-flow",
   ],
-  plugins: babelPlugins,
+  plugins: [
+    ...babelPlugins,
+    "react-hot-loader/babel",
+    [
+      "babel-plugin-styled-components",
+      {
+        ssr: false,
+      },
+    ],
+  ],
 };
 
 module.exports = {

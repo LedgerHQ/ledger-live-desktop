@@ -26,7 +26,7 @@ const AccountsHeader = () => {
         {t("accounts.title")}
       </Box>
       <Box horizontal flow={2} alignItems="center" justifyContent="flex-end">
-        <Button small primary onClick={openAddAccounts} id="accounts-add-account-button">
+        <Button small primary onClick={openAddAccounts} data-test-id="accounts-add-account-button">
           <Box horizontal flow={1} alignItems="center">
             <IconPlus size={12} />
             <Box>{t("addAccounts.cta.add")}</Box>
