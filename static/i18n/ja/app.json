@@ -1141,9 +1141,9 @@
       },
       "confirm": {
         "title": "接続",
-        "details": "ウォレットを通じて以下のEthereumアカウントに接続しようとしています：",
-        "deeplinkDetails": "Ledger Liveに接続します。Ethereumアカウントを選択：",
-        "noEthAccount": "Ethereumアカウントがありません。Wallet Connectに使用するEthereumアカウントを追加してください。",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "既に別のアプリが接続されている状態でdAppに接続しようとしています。Ledger Liveを新しいdAppに再接続する前に、接続済みのdAppを切断してください。"
       }
     },
