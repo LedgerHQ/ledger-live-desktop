@@ -1054,6 +1054,11 @@
     "desc": "이 작업은 모든 <1><0>{{tokenName}}</0></1>의 계정을 숨기며 <3>설정</3>을 사용하여 다시 표시할 수 있습니다",
     "hideCTA": "토큰 숨기기"
   },
+  "hideNftCollection": {
+    "title": "NFT 컬렉션 숨기기",
+    "desc": "이 작업은 <1><0>{{collectionName}}</0></1> 컬렉션에서 모든 NFT를 숨기며 <3>설정</3>을 사용하여 다시 표시할 수 있습니다",
+    "hideCTA": "NFT 컬렉션 숨기기"
+  },
   "banners": {
     "cleanCache": {
       "title": "실험 설정을 변경하려면 캐시 삭제가 필요합니다",
@@ -1136,9 +1141,9 @@
       },
       "confirm": {
         "title": "연결",
-        "details": "지갑을 통해 다음 이더리움 계정에 연결하고 싶다면:",
-        "deeplinkDetails": "Ledger Live에 연결하고 싶습니다. 이더리움 계정을 선택하세요:",
-        "noEthAccount": "이더리움 계정이 없습니다. Wallet Connect를 사용하려면 이더리움 계정을 추가하세요.",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "다른 dApp이 이미 연결된 상태에서 dApp에 연결하려고 합니다. Live를 새로운 dApp으로 다시 연결하기 전에 연결된 dApp에서 연결을 끊으세요."
       }
     },
@@ -2553,6 +2558,115 @@
       }
     }
   },
+  "solana": {
+    "common": {
+      "broadcastError": "트랜잭션이 실패한 것 같습니다. 잠시 기다려 트랜잭션 내역을 확인한 후 다시 시도하세요.",
+      "viewDetails": "세부 정보 보기",
+      "connectDevice": {
+        "title": "장치"
+      },
+      "confirmation": {
+        "title": "확인"
+      }
+    },
+    "delegation": {
+      "totalStake": "총 스테이킹",
+      "commission": "커미션",
+      "delegate": "추가",
+      "listHeader": "위임",
+      "availableBalance": "이용 가능 잔액",
+      "active": "활성",
+      "activeTooltip": "활성 금액은 보상을 창출합니다",
+      "inactiveTooltip": "비활성 금액은 보상을 창출하지 않습니다",
+      "delegatedInfoTooltip": "검증인에게 위임된 총 금액입니다.",
+      "withdrawableInfoTooltip": "위임자로부터 인출할 수 있는 총액입니다.",
+      "withdrawableTitle": "출금 가능",
+      "statusUpdateNotice": "거래가 확인되면 위임 상태가 업데이트됩니다.",
+      "ledgerByFigmentTC": "Ledger by Figment 이용약관",
+      "emptyState": {
+        "description": "자산을 위임하여 SOL 보상을 받을 수 있습니다.",
+        "info": "위임 작동 방식",
+        "delegation": "보상 받기"
+      },
+      "earnRewards": {
+        "description": "SOL 암호화폐를 검증인에게 위임하여 보상을 받을 수 있습니다.",
+        "bullet": {
+          "0": "위임된 자산의 소유권은 귀하가 갖습니다",
+          "1": "Ledger 장치를 이용하여 위임하세요",
+          "2": "자산은 위임 취소 후 사용 가능합니다"
+        },
+        "warning": "검증인을 현명하게 선택하세요. 검증인이 부적절한 행동을 하는 경우 위임된 자산의 일부가 영구 손실될 수 있습니다."
+      },
+      "flow": {
+        "title": "위임",
+        "steps": {
+          "validator": {
+            "title": "검증인"
+          },
+          "amount": {
+            "title": "금액"
+          },
+          "confirmation": {
+            "success": {
+              "title": "자산을 성공적으로 위임했습니다"
+            }
+          }
+        }
+      },
+      "withdraw": {
+        "flow": {
+          "title": "출금",
+          "steps": {
+            "amount": {
+              "title": "금액"
+            },
+            "confirmation": {
+              "success": {
+                "title": "자산을 성공적으로 출금했습니다.",
+                "text": "거래가 확인되면 계정 잔액이 업데이트됩니다."
+              }
+            }
+          }
+        }
+      },
+      "activate": {
+        "flow": {
+          "title": "활성화",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "위임을 성공적으로 활성화했습니다."
+              }
+            }
+          }
+        }
+      },
+      "reactivate": {
+        "flow": {
+          "title": "재활성화",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "위임을 성공적으로 재활성화했습니다."
+              }
+            }
+          }
+        }
+      },
+      "deactivate": {
+        "flow": {
+          "title": "비활성화",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "위임을 성공적으로 비활성화했습니다."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "보상 받기",
     "header": "위임",
@@ -2760,10 +2874,6 @@
           "title": "TronGrid.io 사용",
           "description": "원장 프록시 없이 트론 그리드 바로 사용하기"
         },
-        "experimentalJSCurrencies": {
-          "title": "실험 JS 도입",
-          "description": "테조스 및 코스모스에 실험 JS 구현을 사용합니다."
-        },
         "experimentalCurrencies": {
           "title": "실험 통합",
           "description": "사용 가능한 실험 암호화폐 통합을 사용합니다."
@@ -2847,6 +2957,12 @@
         "desc": "상위 계정으로 이동한 후 토큰을 오른쪽 마우스 클릭하여 '토큰 숨기기'를 선택하면 토큰을 숨길 수 있습니다.",
         "count": "({{count}}) 토큰",
         "count_plural": "({{count}}) 토큰"
+      },
+      "hiddenNftCollections": {
+        "title": "숨겨진 NFT 컬렉션",
+        "desc": "컬렉션 이름을 마우스 오른쪽 버튼으로 클릭하고 'NFT 컬렉션 숨기기'를 선택하여 NFT 컬렉션을 숨길 수 있습니다.",
+        "count": "{{count}}개의 컬렉션",
+        "count_plural": "{{count}}개의 컬렉션"
       },
       "fullNode": {
         "title": "비트코인 풀 노드 연결",
@@ -4128,6 +4244,9 @@
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "상위 계정의 잔액이 부족합니다"
+    },
+    "quantityNeedsToBePositive": {
+      "title": "수량은 1개 이상이어야 합니다"
     },
     "NotEnoughSpendableBalance": {
       "title": "잔액은 {{minimumAmount}} 미만일 수 없습니다"
