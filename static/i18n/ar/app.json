@@ -1141,9 +1141,9 @@
       },
       "confirm": {
         "title": "اتصال",
-        "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
-        "deeplinkDetails": "يريد الاتصال بـ Ledger Live. اختر حساب إيثيريوم الخاص بك:",
-        "noEthAccount": "ليس لديك أي حساب إيثيريوم. يرجى أن تقوم بإضافة حساب إيثيريوم لاستخدام Wallet Connect.",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "أنت تحاول الاتصال بـ dApp أثناء وجود تطبيق آخر متصل بالفعل. الرجاء قطع الاتصال من تطبيق dApp المتصل قبل إعادة اتصال Live مع تطبيق جديد."
       }
     },
