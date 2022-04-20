@@ -1,4 +1,6 @@
 import React, { useCallback } from "react";
+import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
 import { openURL } from "~/renderer/linking";
@@ -14,12 +16,14 @@ import stayOffline from "./assets/stay-offline.svg";
 import validateTransactions from "./assets/validate-transactions.svg";
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
-import { isAcceptedTerms } from "~/renderer/terms";
+
+import { relaunchOnboarding } from "~/renderer/actions/application";
+import { onboardingRelaunchedSelector } from "~/renderer/reducers/application";
 
 const stepLogos = [accessCrypto, ownPrivateKey, stayOffline, validateTransactions, setupNano];
 registerAssets(stepLogos);
 
-const Link = styled(Text)`
+const StyledLink = styled(Text)`
   text-decoration: underline;
   cursor: pointer;
 `;
@@ -82,18 +86,14 @@ const Description = styled(Text)`
 `;
 
 type Props = {
-  sendEvent: (event: string) => void;
-  onboardingRelaunched: boolean;
+  setOpenedTermsModal: (isOpened: boolean) => void;
 };
 
-export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
+export function Welcome({ setOpenedTermsModal }: Props) {
+  const onboardingOrigin = useSelector(onboardingRelaunchedSelector) ? "/settings/help" : undefined;
   const { t } = useTranslation();
-
-  const hasAcceptedTerms = isAcceptedTerms();
-
-  const handleNext = useCallback(() => {
-    sendEvent(hasAcceptedTerms ? "NEXT" : "OPEN_TERMS_MODAL");
-  }, [hasAcceptedTerms, sendEvent]);
+  const history = useHistory();
+  const dispatch = useDispatch();
 
   const buyNanoX = useCallback(() => {
     openURL(urls.noDevice.buyNew);
@@ -105,6 +105,13 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
     description: t(`v3.onboarding.screens.welcome.steps.${index}.desc`),
     isLast: index === stepLogos.length - 1,
   }));
+
+  const handlePrevious = useCallback(() => {
+    if (onboardingOrigin) {
+      history.push(onboardingOrigin);
+      dispatch(relaunchOnboarding(false));
+    }
+  }, [history, onboardingOrigin, dispatch]);
 
   return (
     <WelcomeContainer>
@@ -124,20 +131,20 @@ export function Welcome({ sendEvent, onboardingRelaunched }: Props) {
             iconPosition="right"
             Icon={Icons.ArrowRightMedium}
             variant="main"
-            onClick={handleNext}
+            onClick={() => setOpenedTermsModal(true)}
           >
             {t("v3.onboarding.screens.welcome.nextButton")}
           </Button>
           <NoDevice>
             <Text marginRight={2}>{t("v3.onboarding.screens.welcome.noDevice")}</Text>
-            <Link onClick={buyNanoX}>{t("v3.onboarding.screens.welcome.buyLink")}</Link>
+            <StyledLink onClick={buyNanoX}>{t("v3.onboarding.screens.welcome.buyLink")}</StyledLink>
           </NoDevice>
         </ProductHighlight>
       </LeftContainer>
       <RightContainer>
         <CarouselTopBar>
-          {onboardingRelaunched && (
-            <Button small onClick={() => sendEvent("PREV")}>
+          {!!onboardingOrigin && (
+            <Button small onClick={handlePrevious}>
               {t("common.previous")}
             </Button>
           )}

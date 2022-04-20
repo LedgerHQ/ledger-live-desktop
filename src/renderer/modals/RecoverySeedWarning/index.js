@@ -44,7 +44,7 @@ const RecoverySeedWarning = ({ onClose, ...props }: Props) => {
       centered
       preventBackdropClick
       name="MODAL_RECOVERY_SEED_WARNING"
-      render={({ onClose, data: { deviceId } }: ModalRenderProps) => {
+      render={({ onClose, data: { deviceModelId } }: ModalRenderProps) => {
         return (
           <ModalBody
             onClose={onClose}
@@ -69,7 +69,7 @@ const RecoverySeedWarning = ({ onClose, ...props }: Props) => {
                   mt={3}
                 >
                   {t("onboarding.modals.recoverySeedWarning.description", {
-                    device: getDeviceModel(deviceId).productName,
+                    device: getDeviceModel(deviceModelId).productName,
                   })}
                 </Text>
                 <Alert type="danger">{t("onboarding.modals.recoverySeedWarning.alert")}</Alert>

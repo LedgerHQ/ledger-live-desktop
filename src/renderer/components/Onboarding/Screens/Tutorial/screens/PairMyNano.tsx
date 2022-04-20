@@ -2,7 +2,6 @@ import React from "react";
 import { useTranslation, Trans } from "react-i18next";
 import { Title, Column, SubTitle, IllustrationContainer } from "../shared";
 import getStarted from "../assets/v3/getStarted.png";
-
 export function PairMyNano() {
   const { t } = useTranslation();
 

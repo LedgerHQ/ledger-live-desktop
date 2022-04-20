@@ -10,6 +10,6 @@ const devices = {
   },
 };
 
-export function deviceById(deviceId) {
+export function deviceById(deviceId: keyof typeof devices) {
   return devices[deviceId];
 }

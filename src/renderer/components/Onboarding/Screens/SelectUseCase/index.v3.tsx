@@ -1,7 +1,6 @@
-// @flow
-
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { openModal } from "~/renderer/actions/modals";
 import { useTranslation, Trans } from "react-i18next";
 import { Text } from "@ledgerhq/react-ui";
@@ -14,6 +13,11 @@ import { deviceById } from "~/renderer/components/Onboarding/Screens/SelectDevic
 
 import { registerAssets } from "~/renderer/components/Onboarding/preloadAssets";
 import OnboardingNavHeader from "../../OnboardingNavHeader.v3";
+
+import { track } from "~/renderer/analytics/segment";
+
+import { ScreenId } from "../Tutorial";
+import { OnboardingContext, UseCase } from "../../index.v3";
 
 registerAssets([placeholderOption]);
 
@@ -72,29 +76,25 @@ const RightColumn = styled.div`
   }
 `;
 
-interface Props {
-  sendEvent: (arg1: string) => any;
-  context: {
-    deviceId: string;
-  };
+type Props = {
+  setUseCase: (useCase: UseCase) => void;
+  setOpenedPedagogyModal: (isOpened: boolean) => void;
 };
 
-export function SelectUseCase({ sendEvent, context }: Props) {
+export function SelectUseCase({ setUseCase, setOpenedPedagogyModal }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const { deviceModelId } = useContext(OnboardingContext);
+  const history = useHistory();
+  const device = deviceById(deviceModelId);
 
-  const device = deviceById(context.deviceId);
-  const onWrappedUseCase = useCallback(
-    useCase => {
-      dispatch(openModal("MODAL_RECOVERY_SEED_WARNING", { deviceId: context.deviceId }));
-      sendEvent(useCase);
-    },
-    [context.deviceId, dispatch, sendEvent],
-  );
+  const onWrappedUseCase = useCallback(() => {
+    dispatch(openModal("MODAL_RECOVERY_SEED_WARNING", { deviceModelId }));
+  }, [deviceModelId, dispatch]);
 
   return (
     <ScrollArea withHint>
-      <OnboardingNavHeader onClickPrevious={() => sendEvent("PREV")} />
+      <OnboardingNavHeader onClickPrevious={() => history.push("/onboarding/select-device")} />
       <SelectUseCaseContainer>
         <Row>
           <LeftColumn>
@@ -120,7 +120,12 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               }
               description={t("v3.onboarding.screens.selectUseCase.options.1.description")}
               Illu={<PlaceholderIllu />}
-              onClick={() => sendEvent("OPEN_PEDAGOGY_MODAL")}
+              onClick={() => {
+                track("Onboarding - Setup new");
+                setUseCase(UseCase.setupDevice);
+                setOpenedPedagogyModal(true);
+                history.push(`/onboarding/${UseCase.setupDevice}/${ScreenId.howToGetStarted}`);
+              }}
             />
           </RightColumn>
         </Row>
@@ -142,7 +147,12 @@ export function SelectUseCase({ sendEvent, context }: Props) {
               }
               description={t("v3.onboarding.screens.selectUseCase.options.2.description")}
               Illu={<PlaceholderIllu />}
-              onClick={() => onWrappedUseCase("CONNECT_SETUP_DEVICE")}
+              onClick={() => {
+                track("Onboarding - Connect");
+                setUseCase(UseCase.connectDevice);
+                history.push(`/onboarding/${UseCase.connectDevice}/${ScreenId.pairMyNano}`);
+                onWrappedUseCase();
+              }}
             />
             <UseCaseOption
               id="restore-device"
@@ -156,7 +166,14 @@ export function SelectUseCase({ sendEvent, context }: Props) {
                 />
               }
               Illu={<PlaceholderIllu />}
-              onClick={() => onWrappedUseCase("USE_RECOVERY_PHRASE")}
+              onClick={() => {
+                track("Onboarding - Restore");
+                setUseCase(UseCase.recoveryPhrase);
+                history.push(
+                  `/onboarding/${UseCase.recoveryPhrase}/${ScreenId.importYourRecoveryPhrase}`,
+                );
+                onWrappedUseCase();
+              }}
             />
           </RightColumn>
         </Row>

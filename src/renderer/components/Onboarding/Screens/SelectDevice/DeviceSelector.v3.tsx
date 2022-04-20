@@ -1,13 +1,10 @@
-// @flow
-
 import React from "react";
 import styled from "styled-components";
 import { DeviceModelId } from "@ledgerhq/devices";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { DeviceSelectorOption } from "./DeviceSelectorOption";
 import DeviceIllustration from "~/renderer/components/DeviceIllustration";
 
-const DeviceSelectContainer: ThemedComponent<any> = styled.div`
+const DeviceSelectContainer = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -46,7 +43,7 @@ export function DeviceSelector({ onClick }: DeviceSelectorProps) {
           key={id}
           label={label}
           Illu={<DeviceIllustration deviceId={id} />}
-          onClick={() => enabled && onClick(id)}
+          onClick={() => enabled && onClick(id as DeviceModelId)}
           isFirst={index === 0}
           isLast={index === arr.length - 1}
         />

@@ -4,15 +4,14 @@ import { Title, SubTitle, AsideFooter, CheckStep, Column, IllustrationContainer 
 import getStarted from "../assets/v3/getStarted.png";
 
 type Props = {
-  sendEvent: (event: string, params: any) => void;
-  context: {
-    userUnderstandConsequences: boolean;
-  };
+  userUnderstandConsequences: boolean;
+  toggleUserUnderstandConsequences: () => void;
 };
-
-export function ExistingRecoveryPhrase({ sendEvent, context }: Props) {
+export function ExistingRecoveryPhrase({
+  userUnderstandConsequences,
+  toggleUserUnderstandConsequences,
+}: Props) {
   const { t } = useTranslation();
-  const { userUnderstandConsequences } = context;
 
   return (
     <Column>
@@ -25,7 +24,7 @@ export function ExistingRecoveryPhrase({ sendEvent, context }: Props) {
       </SubTitle>
       <CheckStep
         checked={userUnderstandConsequences}
-        onClick={() => sendEvent("RECOVERY_TERMS_CHANGED", { value: !userUnderstandConsequences })}
+        onClick={toggleUserUnderstandConsequences}
         label={t("onboarding.screens.tutorial.screens.existingRecoveryPhrase.disclaimer")}
       />
     </Column>
@@ -47,8 +46,6 @@ const Footer = (props: any) => {
 };
 
 ExistingRecoveryPhrase.Footer = Footer;
-
-ExistingRecoveryPhrase.canContinue = context => context.userUnderstandConsequences;
 
 ExistingRecoveryPhrase.continueLabel = (
   <Trans i18nKey="onboarding.screens.tutorial.screens.existingRecoveryPhrase.buttons.next" />

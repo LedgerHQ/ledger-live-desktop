@@ -19,7 +19,7 @@ const SeparatorLine = styled.div`
 
 interface SeparatorProps {
   label: string;
-};
+}
 
 export function Separator({ label }: SeparatorProps) {
   return (

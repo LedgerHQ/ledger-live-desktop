@@ -21,3 +21,10 @@ export const setNavigationLock = createAction(
     navigationLocked,
   }),
 );
+
+export const relaunchOnboarding = createAction(
+  "RELAUNCH_ONBOARDING",
+  (onboardingRelaunched: boolean) => ({
+    onboardingRelaunched,
+  }),
+);

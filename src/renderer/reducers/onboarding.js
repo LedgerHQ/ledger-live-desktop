@@ -1,5 +1,7 @@
 // @flow
 
+// ! No need for .ts file for this reducer in v3
+
 import type { DeviceModelId } from "@ledgerhq/devices";
 import { handleActions } from "redux-actions";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
@@ -164,10 +166,12 @@ const handlers = {
     ...state,
     deviceModelId,
   }),
-  ONBOARDING_RELAUNCH: (state: OnboardingState, { payload: onboardingRelaunched }) => ({
-    ...initialState,
-    onboardingRelaunched,
-  }),
+  ONBOARDING_RELAUNCH: (state: OnboardingState, { payload: onboardingRelaunched }) => {
+    return {
+      ...initialState,
+      onboardingRelaunched,
+    };
+  },
 };
 
 export default handleActions(handlers, initialState);

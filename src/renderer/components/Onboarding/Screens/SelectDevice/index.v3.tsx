@@ -1,15 +1,16 @@
-// @flow
-
-import React, { useCallback } from "react";
+import React, { useCallback, useContext } from "react";
+import { useHistory } from "react-router-dom";
 import { useTranslation } from "react-i18next";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { DeviceModelId } from "@ledgerhq/devices";
 import { Text } from "@ledgerhq/react-ui";
-import { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Button from "~/renderer/components/Button";
 import { DeviceSelector } from "./DeviceSelector";
+import { track } from "~/renderer/analytics/segment";
 
-const SelectDeviceContainer: ThemedComponent<any> = styled.div`
+import { OnboardingContext } from "../../index.v3";
+
+const SelectDeviceContainer = styled.div`
   height: 100%;
   width: 100%;
   display: flex;
@@ -32,24 +33,24 @@ const TitleText = styled(Text)`
   pointer-events: none;
 `;
 
-interface Props {
-  sendEvent: (arg1: { type: string; deviceId: DeviceModelId } | string) => any;
-}
-
-export function SelectDevice({ sendEvent }: Props) {
+export function SelectDevice() {
   const { t } = useTranslation();
+  const history = useHistory();
+  const { setDeviceModelId } = useContext(OnboardingContext);
 
   const handleDeviceSelect = useCallback(
-    (deviceId: DeviceModelId) => {
-      sendEvent({ type: "DEVICE_SELECTED", deviceId });
+    (deviceModelId: DeviceModelId) => {
+      track("Onboarding Device - Selection", { deviceModelId });
+      setDeviceModelId(deviceModelId);
+      history.push("/onboarding/select-use-case");
     },
-    [sendEvent],
+    [history, setDeviceModelId],
   );
 
   return (
     <SelectDeviceContainer>
       <TopRightContainer>
-        <Button small onClick={() => sendEvent("PREV")}>
+        <Button small onClick={() => history.push("/onboarding/welcome")}>
           {t("common.previous")}
         </Button>
       </TopRightContainer>
