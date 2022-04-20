@@ -1141,9 +1141,9 @@
       },
       "confirm": {
         "title": "Connecter",
-        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :",
-        "deeplinkDetails": "Souhaite se connecter à Ledger Live. Choisissez votre compte Ethereum :",
-        "noEthAccount": "Vous n'avez pas de compte Ethereum. Veuillez ajouter un compte Ethereum pour utiliser WalletConnect.",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "Ledger Live est déjà connecté à une dApp. Veuillez vous déconnecter de la dApp actuellement connectée, puis connectez Ledger Live à la nouvelle dApp."
       }
     },
