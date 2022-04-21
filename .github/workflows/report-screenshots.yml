@@ -140,7 +140,7 @@ jobs:
             const imagesObject = fs.readFileSync("images.json");
             const parsed = JSON.parse(imagesObject);
 
-            console.log(parsed);
+            console.log(JSON.stringify(parsed, null, 2));
 
             let blocks = [
               {
@@ -153,7 +153,7 @@ jobs:
             ];
 
             const result = { blocks };
-            console.log(result);
+            console.log(JSON.stringify(result, null, 2));
 
             return result;
       - name: Post to a Slack channel
