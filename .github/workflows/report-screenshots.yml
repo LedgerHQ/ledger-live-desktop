@@ -140,7 +140,7 @@ jobs:
             const imagesObject = fs.readFileSync("images.json");
             const parsed = JSON.parse(imagesObject);
 
-            console.log(parsed)
+            console.log(parsed);
 
             let blocks = [
               {
@@ -152,12 +152,15 @@ jobs:
                 }
             ];
 
-            return [{ blocks }]
+            const result = [{ blocks }];
+            console.log(result);
+
+            return result;
       - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.18.0
         with:
           channel-id: "C01J7M2CUTZ"
-          payload: ${{ fromJSON(steps.prepare-slack-message.outputs.matrix) }}
+          payload: ${{ fromJSON(steps.prepare-slack-message.outputs.result) }}
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
