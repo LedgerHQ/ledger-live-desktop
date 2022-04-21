@@ -137,7 +137,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const imagesObject = await fs.readFile("images.json", "utf8");
+            const imagesObject = await fs.readFile("images.json");
             const parsed = JSON.parse(imagesObject);
 
             console.log(parsed)
