@@ -135,7 +135,11 @@ class RepairModal extends PureComponent<Props, *> {
     selectedOption: null,
     availableRepairChoices: [
       ...repairChoices,
-      { forceMCU: "", label: "Something else", id: "somethingElse" },
+      {
+        forceMCU: "",
+        label: this.props.t("connectTroubleshooting.steps.4.repair.somethingElse"),
+        id: "somethingElse",
+      },
     ],
   };
 
