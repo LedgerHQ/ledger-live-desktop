@@ -33,7 +33,7 @@ jobs:
             const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
                owner: context.repo.owner,
                repo: context.repo.repo,
-               run_id: ${{github.event.workflow_run.id || github.event.inputs.runId }},
+               run_id: ${{ github.event.inputs && github.event.inputs.runId || github.event.workflow_run.id }},
             });
 
             // Filter Artifacts
@@ -147,7 +147,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": "Screenshots diff from run: ${{ github.event.workflow_run.id || github.event.inputs.runId  }}"
+                    "text": "Screenshots diff from run: ${{ github.event.inputs && github.event.inputs.runId || github.event.workflow_run.id }}"
                   }
                 }
             ];
