@@ -137,7 +137,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const imagesObject = fs.readFileSync("images.json");
+            const imagesObject = fs.readFileSync("./images.json");
             const parsed = JSON.parse(imagesObject);
 
             console.log(JSON.stringify(parsed, null, 2));
@@ -155,12 +155,13 @@ jobs:
             const result = { blocks };
             console.log(JSON.stringify(result, null, 2));
 
-            return result;
+            fs.writeFileSync("./payload-slack-content.json", JSON.stringify(result));
       - name: Post to a Slack channel
         id: slack
         uses: slackapi/slack-github-action@v1.18.0
         with:
           channel-id: "C01J7M2CUTZ"
-          payload: ${{ fromJSON(steps.prepare-slack-message.outputs.result) }}
+          # payload: ${{ fromJSON(steps.prepare-slack-message.outputs.result) }}
+          payload-file-path: "./payload-slack-content.json"
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
