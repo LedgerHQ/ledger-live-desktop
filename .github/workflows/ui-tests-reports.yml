@@ -1,10 +1,10 @@
 name: "Report | Tests Reports"
 on:
-  # workflow_dispatch:
-  #   inputs:
-  #     runId:
-  #       description: run id
-  #       required: true
+  workflow_dispatch:
+    inputs:
+      runId:
+        description: run id
+        required: true
 
   workflow_run:
     workflows: ["Tests | Test Suite"]
@@ -133,7 +133,7 @@ jobs:
             fs.writeFileSync(`./images.json`, JSON.stringify(result, null, 2));
       - name: prepare comment body
         id: comment-body
-        uses: ledgerhq/actions/packages/prepare-comment@main
+        uses: ledgerhq/ledger-live/tools/actions/prepare-comment@monorepo-setup
         with:
           images: images.json
           lintoutput: lint.txt
@@ -167,3 +167,33 @@ jobs:
                 ${{ steps.comment-body.outputs.body }}
               `
             });
+      - name: prepare slack message
+        uses: actions/github-script@v6
+        id: prepare-slack-message
+        with:
+          script: |
+            const fs = require('fs');
+            const imagesObject = await fs.readFile("images.json", "utf8");
+            const parsed = JSON.parse(imagesObject);
+
+            console.log(parsed)
+
+            let blocks = [
+              {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "Screenshots diff from run: ${{ github.event.workflow_run.id || github.event.inputs.runId  }}"
+                  }
+                }
+            ];
+
+            return [{ blocks }]
+      - name: Post to a Slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          channel-id: "C01J7M2CUTZ"
+          payload: ${{ fromJSON(steps.prepare-slack-message.outputs.matrix) }}
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
