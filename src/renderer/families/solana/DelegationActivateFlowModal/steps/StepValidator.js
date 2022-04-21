@@ -50,8 +50,7 @@ export default function StepValidator({
       <TrackPage category="Solana Delegation" name="Step Validator" />
       {error && <ErrorBanner error={error} />}
       {status.errors.fee && <ErrorDisplay error={status.errors.fee} />}
-      {
-        // $FlowFixMe FIXME Not sure what's wrong here
+      {status ? (
         <ValidatorsField
           account={account}
           chosenVoteAccAddr={chosenVoteAccAddr}
@@ -59,7 +58,7 @@ export default function StepValidator({
           status={status}
           t={t}
         />
-      }
+      ) : null}
     </Box>
   );
 }
