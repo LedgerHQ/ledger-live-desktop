@@ -3027,10 +3027,10 @@
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@22.0.1":
-  version "22.0.1"
-  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-22.0.1.tgz#25a80a97a0e1a12f7ebc9d796748c4f6e5852d7f"
-  integrity sha512-t89qIg/s3WKur+ySCdyMg3b8q4U8dNHER9SFhd8G/uVxLtnvqSBCw6iuOVjruHwpemE9F1ShyJo4Ji25PkV8qw==
+"@ledgerhq/live-common@22.0.2":
+  version "22.0.2"
+  resolved "https://registry.yarnpkg.com/@ledgerhq/live-common/-/live-common-22.0.2.tgz#e93a283788b9da50c03c16969be9459f730a48e9"
+  integrity sha512-/ZMgcVI1UqhwteCUeWuN/Gshw+A43NeHrVoVUUHYbP/sw50/Tg4oiOVJ3M/efviKAb3nhLsj4xBBEwraEdzCfQ==
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
