@@ -152,7 +152,7 @@ jobs:
                 }
             ];
 
-            const result = [{ blocks }];
+            const result = { blocks };
             console.log(result);
 
             return result;
