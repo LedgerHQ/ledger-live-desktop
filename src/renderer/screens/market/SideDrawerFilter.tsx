@@ -1,12 +1,12 @@
 import React, { useCallback } from "react";
-import { Dropdown } from "@ledgerhq/react-ui";
+import Dropdown from "./DropDown";
 
 export default function SideDrawerFilter({
   refresh,
   filters,
   t,
 }: {
-  refresh: () => void;
+  refresh: (params?: any) => void;
   filters: Record<
     "starred" | "liveCompatible",
     { value: boolean; toggle: () => void; disabled?: boolean }
@@ -14,7 +14,9 @@ export default function SideDrawerFilter({
   t: any;
 }) {
   const { starred, liveCompatible } = filters;
-  const resetFilters = useCallback(() => refresh({ starred: [], liveCompatible: false }), []);
+  const resetFilters = useCallback(() => refresh({ starred: [], liveCompatible: false }), [
+    refresh,
+  ]);
   const onChange = useCallback(
     option => {
       if (!option) return;
@@ -80,12 +82,6 @@ export default function SideDrawerFilter({
               ]
             : []),
         ]}
-        styles={{
-          control: () => ({
-            display: "flex",
-            padding: 0,
-          }),
-        }}
       />
     </>
   );

@@ -1,114 +1,127 @@
 // @flow
 
-import React, { useCallback, useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { useTranslation } from "react-i18next";
-import { useHistory } from "react-router";
 
+import { getAccountCurrency, isAccountEmpty } from "@ledgerhq/live-common/lib/account/helpers";
+import SelectAccountAndCurrency from "~/renderer/components/SelectAccountAndCurrency";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import TrackPage from "~/renderer/analytics/TrackPage";
-import Text from "~/renderer/components/Text";
-import SelectProvider from "~/renderer/screens/exchange/Buy/SelectProvider";
-import Box from "~/renderer/components/Box";
-import { CoinifySquare, MoonPay } from "~/renderer/icons/providers";
-import Button from "~/renderer/components/Button";
-import Coinify from "~/renderer/screens/exchange/Buy/Coinify";
+import { track } from "~/renderer/analytics/segment";
 import type { DProps } from "~/renderer/screens/exchange";
+import type { CryptoCurrency, TokenCurrency } from "@ledgerhq/live-common/lib/types";
+import { ProviderList } from "../ProviderList";
+import { useRampCatalogCurrencies } from "../hooks";
+import { counterValueCurrencySelector } from "~/renderer/reducers/settings";
+import { currenciesByMarketcap } from "@ledgerhq/live-common/lib/currencies";
+import BigSpinner from "~/renderer/components/BigSpinner";
 
 const BuyContainer: ThemedComponent<{}> = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex: 1;
-  padding-top: ${p => (p.isCoinify ? "" : "72px")};
-`;
-
-const Footer: ThemedComponent<{}> = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-top: 1px solid ${p => p.theme.colors.palette.divider};
   width: 100%;
-  padding: 20px 24px;
-
-  & > :only-child {
-    margin-left: auto;
-  }
 `;
 
-const ProvidersRow: ThemedComponent<{}> = styled(Box).attrs(() => ({
-  horizontal: true,
-  p: "0 40.5px",
-  width: "100%",
-  my: 48,
-}))`
-  column-gap: 24px;
-`;
+type State = {
+  sortedCurrencies: Array<TokenCurrency | CryptoCurrency>,
+  isLoading: boolean,
+};
 
-const ContinueButton: ThemedComponent<{}> = styled(Button).attrs(() => ({}))`
-  padding: 12px 16px;
-`;
+const OnRamp = ({ defaultCurrencyId, defaultAccountId, defaultTicker, rampCatalog }: DProps) => {
+  const [currencyState, setCurrencyState] = useState<State>({
+    sortedCurrencies: [],
+    isLoading: false,
+  });
 
-type Provider = "moonpay" | "coinify" | null;
+  const allCurrencies = useRampCatalogCurrencies(rampCatalog.value.onRamp);
 
-const Buy = ({ defaultCurrency, defaultAccount }: DProps) => {
-  const [selected, setSelected] = useState<Provider>(null);
-  const [isCoinify, setIsCoinify] = useState(false);
-  const { t } = useTranslation();
-  const history = useHistory();
+  useEffect(() => {
+    const filteredCurrencies = defaultTicker
+      ? allCurrencies.filter(currency => currency.ticker === defaultTicker)
+      : allCurrencies;
+    setCurrencyState(oldState => ({
+      ...oldState,
+      isLoading: true,
+    }));
 
-  const toggle = useCallback((provider: Provider) => {
-    setSelected(prev => (prev === provider ? null : provider));
+    currenciesByMarketcap(filteredCurrencies).then(sortedCurrencies => {
+      setCurrencyState({
+        sortedCurrencies,
+        isLoading: false,
+      });
+    });
   }, []);
 
-  const onContinue = useCallback(() => {
-    if (selected === "moonpay") {
-      history.push("/platform/moonpay");
+  const fiatCurrency = useSelector(counterValueCurrencySelector);
 
-      return;
-    }
+  const [state, setState] = useState({
+    account: undefined,
+    parentAccount: undefined,
+  });
 
-    setIsCoinify(true);
-  }, [selected, history]);
+  const dispatch = useDispatch();
+
+  const { account, parentAccount } = state;
+
+  const reset = useCallback(() => {
+    track("Page Buy Reset");
+    setState({
+      account: undefined,
+      parentAccount: undefined,
+    });
+  }, []);
+
+  const selectAccount = useCallback(
+    (account, parentAccount) => {
+      setState(oldState => ({
+        ...oldState,
+        account: account,
+        parentAccount: parentAccount,
+      }));
+    },
+    [dispatch],
+  );
+
+  const confirmButtonTracking = useCallback(account => {
+    track("Buy Crypto Continue Button", {
+      currencyName: getAccountCurrency(account).name,
+      isEmpty: isAccountEmpty(account),
+    });
+  }, []);
 
   return (
-    <BuyContainer isCoinify={isCoinify}>
-      <TrackPage category="Buy Crypto" />
-      {isCoinify ? (
-        <Coinify defaultCurrency={defaultCurrency} defaultAccount={defaultAccount} />
+    <BuyContainer>
+      <TrackPage category="Multibuy" name="BuyPage" />
+      {currencyState.isLoading ? (
+        <BigSpinner size={42} />
+      ) : account ? (
+        <ProviderList
+          account={account}
+          parentAccount={parentAccount}
+          providers={rampCatalog.value.onRamp}
+          onBack={reset}
+          trade={{
+            type: "onRamp",
+            cryptoCurrencyId: account.token ? account.token.id : account.currency.id,
+            fiatCurrencyId: fiatCurrency.ticker,
+            fiatAmount: 400,
+          }}
+        />
       ) : (
-        <>
-          <Text ff="Inter|SemiBold" fontSize={18} color="palette.text.shade90">
-            {t("exchange.buy.title")}
-          </Text>
-          <ProvidersRow>
-            <SelectProvider
-              provider="MoonPay"
-              cryptoCount={40}
-              onClick={() => toggle("moonpay")}
-              isActive={selected === "moonpay"}
-            >
-              <MoonPay size={48} />
-            </SelectProvider>
-            <SelectProvider
-              provider="Coinify"
-              cryptoCount={10}
-              onClick={() => toggle("coinify")}
-              isActive={selected === "coinify"}
-            >
-              <CoinifySquare size={48} />
-            </SelectProvider>
-          </ProvidersRow>
-          <Footer>
-            <ContinueButton primary disabled={!selected} onClick={onContinue}>
-              {t("common.continue")}
-            </ContinueButton>
-          </Footer>
-        </>
+        <SelectAccountAndCurrency
+          selectAccount={selectAccount}
+          allCurrencies={currencyState.sortedCurrencies}
+          defaultCurrencyId={defaultCurrencyId}
+          defaultAccountId={defaultAccountId}
+          confirmCb={confirmButtonTracking}
+          flow="buy"
+        />
       )}
     </BuyContainer>
   );
 };
 
-export default Buy;
+export default OnRamp;

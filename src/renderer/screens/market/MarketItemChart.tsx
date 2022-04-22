@@ -11,12 +11,7 @@ function SmallMarketItemChartComponent({ sparklineIn7d }: Props) {
   const { path, viewBox, isPositive } = sparklineIn7d;
 
   const { colors } = useTheme();
-  const color =
-    isPositive !== undefined
-      ? isPositive
-        ? colors.success.c80
-        : colors.error.c80
-      : colors.neutral.c80;
+  const color = colors.neutral.c80;
 
   return (
     <svg

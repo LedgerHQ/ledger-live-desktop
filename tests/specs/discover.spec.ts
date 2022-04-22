@@ -24,7 +24,7 @@ test.beforeAll(async ({ request }) => {
 });
 
 // Due to flakiness on different OS's and CI, we won't run the screenshots where unncessary for testing
-test("Live App", async ({ page }) => {
+test.skip("Live App", async ({ page }) => {
   // Don't run test if server is not running
   if (!continueTest) return;
 
