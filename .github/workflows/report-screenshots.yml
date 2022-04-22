@@ -142,16 +142,8 @@ jobs:
 
             console.log(JSON.stringify(parsed, null, 2));
 
-            let windows = parsed.windows.forEach(e => console.log(
+            let windows = parsed.windows.map(e => 
               `
-              {
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": ":alert: Screenshots have been updated!\n\n Commit: ${{ github.event.head_commit.message }}\n Author: ${{ github.author }}\n :gh: run: ${{ github.event.workflow.id }}."
-                  }
-                },
                 {
                   "type": "divider"
                 },
@@ -159,17 +151,17 @@ jobs:
                   "type": "image",
                   "title": {
                     "type": "plain_text",
-                    "text": e.actual.name,
+                    "text": ${e.actual.name},
                     "emoji": true
                   },
-                  "image_url": e.actual.link,
+                  "image_url": ${e.actual.link},
                   "alt_text": "marg"
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": e.diff.name
+                    "text": ${e.diff.name}
                   },
                   "accessory": {
                     "type": "button",
@@ -179,7 +171,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click_me_123",
-                    "url": e.diff.link,
+                    "url": ${e.diff.link},
                     "action_id": "button-action"
                   }
                 },
@@ -187,7 +179,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": e.expected.name
+                    "text": ${e.expected.name}
                   },
                   "accessory": {
                     "type": "button",
@@ -197,11 +189,10 @@ jobs:
                       "emoji": true
                     },
                     "value": "click_me_123",
-                    "url": e.expected.link,
+                    "url": ${e.expected.link},
                     "action_id": "button-action"
                   }
                 }
-              }
               `)
 
             let blocks = [
