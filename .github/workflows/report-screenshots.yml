@@ -164,40 +164,14 @@ jobs:
                 "type": "divider"
               },
               {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "Expected"
+                "type": "image",
+                "title": {
+                  "type": "plain_text",
+                  "text": parsed.linux.expected.name,
+                  "emoji": true
                 },
-                "accessory": {
-                  "type": "image",
-                  "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
-                  "alt_text": "cute cat"
-                }
-              },
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "Diff"
-                },
-                "accessory": {
-                  "type": "image",
-                  "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
-                  "alt_text": "cute cat"
-                }
-              },
-              {
-                "type": "section",
-                "text": {
-                  "type": "mrkdwn",
-                  "text": "Actual"
-                },
-                "accessory": {
-                  "type": "image",
-                  "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
-                  "alt_text": "cute cat"
-                }
+                "image_url": parsed.linux.expected.link,
+                "alt_text": "marg"
               }
             ]
 
