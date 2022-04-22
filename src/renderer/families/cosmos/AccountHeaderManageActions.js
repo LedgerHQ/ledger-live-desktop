@@ -23,13 +23,23 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   invariant(cosmosResources, "cosmos account expected");
   const earnRewardEnabled = canDelegate(mainAccount);
 
+  const hasDelegations = cosmosResources.delegations.length > 0;
+
   const onClick = useCallback(() => {
-    dispatch(
-      openModal("MODAL_COSMOS_REWARDS_INFO", {
-        account,
-      }),
-    );
-  }, [dispatch, account]);
+    if (hasDelegations) {
+      dispatch(
+        openModal("MODAL_COSMOS_DELEGATE", {
+          account,
+        }),
+      );
+    } else {
+      dispatch(
+        openModal("MODAL_COSMOS_REWARDS_INFO", {
+          account,
+        }),
+      );
+    }
+  }, [dispatch, account, hasDelegations]);
 
   if (parentAccount) return null;
 

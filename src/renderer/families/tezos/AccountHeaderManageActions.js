@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
 import IconCoins from "~/renderer/icons/Coins";
+import { useDelegation } from "@ledgerhq/live-common/lib/families/tezos/bakers";
 
 type Props = {
   account: AccountLike,
@@ -15,15 +16,22 @@ type Props = {
 const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const delegation = useDelegation(account);
 
   const onClick = useCallback(() => {
-    dispatch(
-      openModal("MODAL_DELEGATE", {
-        parentAccount,
-        account,
-      }),
-    );
-  }, [dispatch, account, parentAccount]);
+    const options = delegation
+      ? {
+          parentAccount,
+          account,
+          eventType: "redelegate",
+          stepId: "summary",
+        }
+      : {
+          parentAccount,
+          account,
+        };
+    dispatch(openModal("MODAL_DELEGATE", options));
+  }, [dispatch, account, parentAccount, delegation]);
 
   if (parentAccount) return null;
 
