@@ -251,7 +251,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":alert: Screenshots have been updated!\n\n Pull Request: ${{ github.event.commits[0].message }}\n Owner: *${{ github.actor }}*\n :gh: run: ${{ }}."
+                  "text": ":alert: Screenshots have been updated!\n\n Pull Request: ${{ github.event.commits[0].message }}\n Owner: *${{ github.actor }}*\n :gh: run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}."
                 }
               },
               {
