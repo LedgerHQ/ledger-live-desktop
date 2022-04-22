@@ -142,15 +142,64 @@ jobs:
 
             console.log(JSON.stringify(parsed, null, 2));
 
+            // let blocks = [
+            //   {
+            //       "type": "section",
+            //       "text": {
+            //         "type": "mrkdwn",
+            //         "text": "Screenshots diff from run: ${{ github.event.inputs && github.event.inputs.runId || github.event.workflow_run.id }}"
+            //       }
+            //     }
+            // ];
+
             let blocks = [
               {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "Screenshots diff from run: ${{ github.event.inputs && github.event.inputs.runId || github.event.workflow_run.id }}"
-                  }
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": ":alert: Screenshots have been updated!\n\n Pull Request: ${{ github.event.head_commit.message }}\n Owner: *${{ github.actor }}*."
                 }
-            ];
+              },
+              {
+                "type": "divider"
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "Expected"
+                },
+                "accessory": {
+                  "type": "image",
+                  "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+                  "alt_text": "cute cat"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "Diff"
+                },
+                "accessory": {
+                  "type": "image",
+                  "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+                  "alt_text": "cute cat"
+                }
+              },
+              {
+                "type": "section",
+                "text": {
+                  "type": "mrkdwn",
+                  "text": "Actual"
+                },
+                "accessory": {
+                  "type": "image",
+                  "image_url": "https://pbs.twimg.com/profile_images/625633822235693056/lNGUneLX_400x400.jpg",
+                  "alt_text": "cute cat"
+                }
+              }
+            ]
 
             const result = { blocks };
             console.log(JSON.stringify(result, null, 2));
