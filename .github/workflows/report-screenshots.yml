@@ -192,7 +192,7 @@ jobs:
                   "action_id": "button-action"
                 }
               }
-            ])
+            ]))
 
             let blocks = [
               {
