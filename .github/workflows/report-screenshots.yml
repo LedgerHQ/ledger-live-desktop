@@ -142,7 +142,7 @@ jobs:
 
             console.log(JSON.stringify(parsed, null, 2));
 
-            let windows = parsed.windows.map(e => ({
+            let windows = parsed.windows.map(e => ([
               {
                 "type": "divider"
               },
@@ -192,7 +192,7 @@ jobs:
                   "action_id": "button-action"
                 }
               }
-            })
+            ])
 
             let blocks = [
               {
@@ -202,7 +202,7 @@ jobs:
                   "text": ":alert: Screenshots have been updated!\n\n Pull Request: ${{ github.event.head_commit.message }}\n Owner: *${{ github.actor }}*."
                 }
               },
-              windows
+              ...windows
             ]
 
             const result = { blocks };
