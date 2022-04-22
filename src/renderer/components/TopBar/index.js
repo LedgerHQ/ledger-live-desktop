@@ -23,6 +23,8 @@ import IconEye from "~/renderer/icons/Eye";
 import IconHelp from "~/renderer/icons/Question";
 import IconEyeOff from "~/renderer/icons/EyeOff";
 import IconSettings from "~/renderer/icons/Settings";
+import IconOnion from "~/renderer/icons/Onion";
+import useEnv from "~/renderer/hooks/useEnv";
 
 // TODO: ActivityIndicator
 import ActivityIndicator from "./ActivityIndicator";
@@ -66,6 +68,10 @@ const TopBar = () => {
   const hasAccounts = useSelector(hasAccountsSelector);
   const discreetMode = useSelector(discreetModeSelector);
 
+
+  const torProxyUrl = useEnv("EXPERIMENTAL_ENABLE_TOR_PROXY");
+  const torProxyIsEnabled = !!torProxyUrl;
+
   const [helpSideBarVisible, setHelpSideBarVisible] = useState(false);
 
   const handleLock = useCallback(() => dispatch(lock()), [dispatch]);
@@ -95,6 +101,23 @@ const TopBar = () => {
         <Box grow horizontal justifyContent="space-between">
           <Breadcrumb />
           <Box horizontal>
+            { torProxyIsEnabled && (
+              <>
+              <Box justifyContent="center">
+                <Bar />
+              </Box>
+              <Tooltip content={torProxyUrl} placement="bottom">
+                <ItemContainer
+                  data-test-id="topbar-tor-enabled"
+                >
+                  <IconOnion size={16} color="#ffffff" />
+                </ItemContainer>
+              </Tooltip>
+              <Box justifyContent="center">
+                <Bar />
+              </Box>
+              </>
+            )}
             {hasAccounts && (
               <>
                 <ActivityIndicator />

@@ -16,12 +16,14 @@ import { setShowClearCacheBanner } from "~/renderer/actions/settings";
 import { SettingsSectionBody as Body, SettingsSectionRow as Row } from "../../SettingsSection";
 import ExperimentalSwitch from "./ExperimentalSwitch";
 import ExperimentalInteger from "./ExperimentalInteger";
+import { ExperimentalString } from "./ExperimentalString";
 import FullNode from "~/renderer/screens/settings/sections/Accounts/FullNode";
 import LottieTester from "./LottieTester";
 
 const experimentalTypesMap = {
   toggle: ExperimentalSwitch,
   integer: ExperimentalInteger,
+  string: ExperimentalString,
 };
 
 const ExperimentalFeatureRow = ({
@@ -37,6 +39,7 @@ const ExperimentalFeatureRow = ({
   const isDefault = isEnvDefault(feature.name);
   const onChange = useCallback(
     (name, value) => {
+      console.log(`ON CHANGE ${name} -> ${value}`)
       if (dirty) {
         onDirtyChange();
       }

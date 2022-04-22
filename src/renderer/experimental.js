@@ -26,6 +26,11 @@ export type FeatureToggle =
       type: "integer",
       minValue?: number,
       maxValue?: number,
+    }
+  | {
+      type: "string",
+      placeholder: string,
+      formatRegex?: string,
     };
 
 export type Feature = FeatureCommon & FeatureToggle;
@@ -149,7 +154,17 @@ export const experimentalFeatures: Feature[] = [
     description: <Trans i18nKey="settings.experimental.features.forceProvider.description" />,
     minValue: 1,
   },
+  {
+    type: "string",
+    name: "EXPERIMENTAL_ENABLE_TOR_PROXY",
+    title: "Experimental Tor proxy",
+    description: "Enable Tor proxy on your HTTP requests",
+    placeholder: "set your proxy url:port",
+    regexFormat: "^((25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9][0-9]|[0-9])(.(?!($|\:))|)){4}(\:[0-9]{1,5})?$"
+  },
 ];
+// <Trans i18nKey="settings.experimental.features.enableTorProxy.title" />,
+// <Trans i18nKey="settings.experimental.features.enableTorProxy.description" />
 
 const lsKey = "experimentalFlags";
 const lsKeyVersion = `${lsKey}_llversion`;
@@ -169,7 +184,9 @@ export const getLocalStorageEnvs = (): { [_: string]: any } => {
 
 export const enabledExperimentalFeatures = (): string[] =>
   // $FlowFixMe
-  experimentalFeatures.map(e => e.name).filter(k => !isEnvDefault(k));
+  // FIXME: check/add EXPERIMENTAL_ENABLE_TOR_PROXY to isEnvDefault
+  experimentalFeatures.map(e => e.name).filter(k => true);
+  // experimentalFeatures.map(e => e.name).filter(k => !isEnvDefault(k));
 
 export const isReadOnlyEnv = (key: EnvName) => key in process.env;
 

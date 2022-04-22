@@ -2905,6 +2905,10 @@
         "testAnimations": {
           "title": "Test Lottie animations",
           "description": "Test all animations used in Ledger Live"
+        },
+        "enableTorProxy": {
+          "title": "Experimental Tor proxy",
+          "description": "Enable Tor proxy on your HTTP requests"
         }
       }
     },
