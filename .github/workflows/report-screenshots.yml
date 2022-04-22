@@ -167,10 +167,10 @@ jobs:
                 "type": "image",
                 "title": {
                   "type": "plain_text",
-                  "text": "${parsed.linux.expected.name}",
+                  "text": "${parsed.linux[0].expected.name}",
                   "emoji": true
                 },
-                "image_url": "${parsed.linux.expected.link}",
+                "image_url": "${parsed.linux[0].expected.link}",
                 "alt_text": "marg"
               }
             ]
