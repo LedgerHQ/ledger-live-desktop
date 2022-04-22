@@ -160,7 +160,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": e.diff.name
+                  "text": `*Diff:* ${e.diff.name}`
                 },
                 "accessory": {
                   "type": "button",
@@ -178,7 +178,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": e.expected.name
+                  "text": `*Expected:* ${e.expected.name}`
                 },
                 "accessory": {
                   "type": "button",
@@ -212,7 +212,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": e.diff.name
+                  "text": `*Diff:* ${e.diff.name}`
                 },
                 "accessory": {
                   "type": "button",
@@ -230,7 +230,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": e.expected.name
+                  "text": `*Expected:* ${e.expected.name}`
                 },
                 "accessory": {
                   "type": "button",
@@ -251,7 +251,7 @@ jobs:
                 "type": "section",
                 "text": {
                   "type": "mrkdwn",
-                  "text": ":alert: Screenshots have been updated!\n\n Pull Request: ${{ github.event.commits[0].message }}\n Owner: *${{ github.actor }}*\n :gh: run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}."
+                  "text": ":alert: Screenshots have been updated!\n\n Pull Request: ${{ github.event.commits[0].message }}\n Owner: *${{ github.actor }}*\n :github: run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}."
                 }
               },
               {
