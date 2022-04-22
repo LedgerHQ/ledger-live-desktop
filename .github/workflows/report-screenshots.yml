@@ -207,7 +207,7 @@ jobs:
             ]
 
             const result = { blocks };
-            console.log(JSON.stringify(result, null, 2));
+            console.log(result);
 
             fs.writeFileSync("./payload-slack-content.json", JSON.stringify(result));
       - name: Post to a Slack channel
