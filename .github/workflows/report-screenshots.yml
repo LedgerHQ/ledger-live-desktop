@@ -142,15 +142,67 @@ jobs:
 
             console.log(JSON.stringify(parsed, null, 2));
 
-            // let blocks = [
-            //   {
-            //       "type": "section",
-            //       "text": {
-            //         "type": "mrkdwn",
-            //         "text": "Screenshots diff from run: ${{ github.event.inputs && github.event.inputs.runId || github.event.workflow_run.id }}"
-            //       }
-            //     }
-            // ];
+            let windows = parsed.windows.forEach(e => console.log(
+              `
+              {
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ":alert: Screenshots have been updated!\n\n Commit: ${{ github.event.head_commit.message }}\n Author: ${{ github.author }}\n :gh: run: ${{ github.event.workflow.id }}."
+                  }
+                },
+                {
+                  "type": "divider"
+                },
+                {
+                  "type": "image",
+                  "title": {
+                    "type": "plain_text",
+                    "text": e.actual.name,
+                    "emoji": true
+                  },
+                  "image_url": e.actual.link,
+                  "alt_text": "marg"
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": e.diff.name
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "View",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": e.diff.link,
+                    "action_id": "button-action"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": e.expected.name
+                  },
+                  "accessory": {
+                    "type": "button",
+                    "text": {
+                      "type": "plain_text",
+                      "text": "Click Me",
+                      "emoji": true
+                    },
+                    "value": "click_me_123",
+                    "url": e.expected.link,
+                    "action_id": "button-action"
+                  }
+                }
+              }
+              `)
 
             let blocks = [
               {
@@ -160,19 +212,7 @@ jobs:
                   "text": ":alert: Screenshots have been updated!\n\n Pull Request: ${{ github.event.head_commit.message }}\n Owner: *${{ github.actor }}*."
                 }
               },
-              {
-                "type": "divider"
-              },
-              {
-                "type": "image",
-                "title": {
-                  "type": "plain_text",
-                  "text": "${parsed.linux[0].expected.name}",
-                  "emoji": true
-                },
-                "image_url": "${parsed.linux[0].expected.link}",
-                "alt_text": "marg"
-              }
+              windows
             ]
 
             const result = { blocks };
