@@ -53,7 +53,7 @@ const Collections = ({ account }: Props) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const history = useHistory();
-  const [numberOfVisibleCollection, setNumberOfVisibleCollections] = useState(INCREMENT);
+  const [numberOfVisibleCollections, setNumberOfVisibleCollections] = useState(INCREMENT);
 
   const onOpenGallery = useCallback(() => {
     history.push(`/account/${account.id}/nft-collection`);
@@ -73,17 +73,23 @@ const Collections = ({ account }: Props) => {
   const collectionsLength = Object.keys(collections).length;
 
   const onShowMore = useCallback(() => {
-    setNumberOfVisibleCollections(numberOfVisibleCollection =>
-      Math.min(numberOfVisibleCollection + INCREMENT, collectionsLength),
+    setNumberOfVisibleCollections(numberOfVisibleCollections =>
+      Math.min(numberOfVisibleCollections + INCREMENT, collectionsLength),
     );
   }, [collectionsLength]);
 
   const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
-  const visibleCollection = useMemo(
+  const filteredCollections = useMemo(
     () =>
-      Object.entries(collections)
-        .filter(([contract]) => !hiddenNftCollections.includes(`${account.id}|${contract}`))
-        .slice(0, numberOfVisibleCollection)
+      Object.entries(collections).filter(
+        ([contract]) => !hiddenNftCollections.includes(`${account.id}|${contract}`),
+      ),
+    [account.id, collections, hiddenNftCollections],
+  );
+  const visibleCollections = useMemo(
+    () =>
+      filteredCollections
+        .slice(0, numberOfVisibleCollections)
         .map(([contract, nfts]: any) => (
           <Row
             onClick={() => onOpenCollection(contract)}
@@ -93,7 +99,7 @@ const Collections = ({ account }: Props) => {
             nfts={nfts}
           />
         )),
-    [account, collections, hiddenNftCollections, numberOfVisibleCollection, onOpenCollection],
+    [account, filteredCollections, numberOfVisibleCollections, onOpenCollection],
   );
 
   useEffect(() => {
@@ -104,7 +110,7 @@ const Collections = ({ account }: Props) => {
     <Box>
       <TableContainer id="tokens-list" mb={50}>
         <TableHeader title={t("NFT.collections.title")}>
-          {visibleCollection?.length ? (
+          {visibleCollections?.length ? (
             <>
               <Button primary mr={2} onClick={onReceive} icon>
                 <Box horizontal flow={1} alignItems="center">
@@ -118,8 +124,8 @@ const Collections = ({ account }: Props) => {
             </>
           ) : null}
         </TableHeader>
-        {visibleCollection?.length ? (
-          visibleCollection
+        {visibleCollections?.length ? (
+          visibleCollections
         ) : (
           <EmptyState>
             <Placeholder>
@@ -145,7 +151,7 @@ const Collections = ({ account }: Props) => {
             </Button>
           </EmptyState>
         )}
-        {collectionsLength > numberOfVisibleCollection ? (
+        {filteredCollections.length > numberOfVisibleCollections ? (
           <TokenShowMoreIndicator expanded onClick={onShowMore}>
             <Box horizontal alignContent="center" justifyContent="center" py={3}>
               <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>

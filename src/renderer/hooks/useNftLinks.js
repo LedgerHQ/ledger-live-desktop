@@ -77,7 +77,7 @@ const linksPerCurrency = {
   ],
 };
 
-export default (account: Account, nft: ProtoNFT, metadata: NFTMetadata) => {
+export default (account: Account, nft: ProtoNFT, metadata: NFTMetadata, onClose?: () => void) => {
   const dispatch = useDispatch();
   const { t } = useTranslation();
 
@@ -93,11 +93,12 @@ export default (account: Account, nft: ProtoNFT, metadata: NFTMetadata) => {
           openModal("MODAL_HIDE_NFT_COLLECTION", {
             collectionName: metadata?.tokenName ?? nft.contract,
             collectionId: `${account.id}|${nft.contract}`,
+            onClose,
           }),
         );
       },
     }),
-    [account, dispatch, metadata?.tokenName, nft, t],
+    [account.id, dispatch, metadata?.tokenName, nft.contract, onClose, t],
   );
   const links = useMemo(() => {
     const metadataLinks =

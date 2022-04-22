@@ -124,7 +124,15 @@ const Gallery = () => {
         </Button>
       </Box>
       <GridListToggle />
-      {collectionsRender}
+      {collectionsRender?.length ? (
+        collectionsRender
+      ) : (
+        <Box p={3} alignItems="center">
+          <Text ff="Inter" fontSize={3}>
+            {t("operationList.noMoreOperations")}
+          </Text>
+        </Box>
+      )}
       {isLoading && (
         <SpinnerContainer>
           <SpinnerBackground>

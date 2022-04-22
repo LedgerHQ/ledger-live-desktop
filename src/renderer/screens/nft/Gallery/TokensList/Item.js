@@ -59,9 +59,10 @@ type Props = {
   id: string,
   mode: "grid" | "list",
   withContextMenu?: boolean,
+  onHideCollection?: () => void,
 };
 
-const NftCard = ({ id, mode, account, withContextMenu = false }: Props) => {
+const NftCard = ({ id, mode, account, withContextMenu = false, onHideCollection }: Props) => {
   const nft = useSelector(state => getNFTById(state, { nftId: id }));
   const { status, metadata } = useNftMetadata(nft.contract, nft.tokenId, nft.currencyId);
   const { nftName } = metadata || {};
@@ -137,6 +138,7 @@ const NftCard = ({ id, mode, account, withContextMenu = false }: Props) => {
               account={account}
               metadata={metadata}
               leftClick={true}
+              onHideCollection={onHideCollection}
             >
               <Dots>
                 <IconDots size={20} />

@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useMemo, useCallback, useRef, useState, useEffect, memo } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
@@ -48,6 +48,7 @@ const Collection = () => {
   const dispatch = useDispatch();
   const { id, collectionAddress } = useParams();
   const account = useSelector(state => accountSelector(state, { accountId: id }));
+  const history = useHistory();
 
   const nfts = useMemo(() => nftsByCollections(account.nfts, collectionAddress) || [], [
     account.nfts,
@@ -66,6 +67,10 @@ const Collection = () => {
       openModal("MODAL_SEND", { account, isNFTSend: true, nftCollection: collectionAddress }),
     );
   }, [collectionAddress, dispatch, account]);
+
+  const onCollectionHide = useCallback(() => {
+    history.replace(`/account/${account.id}/`);
+  }, [account.id, history]);
 
   // NB To be determined if this filter is good enough for what we expect.
   const filterOperation = op =>
@@ -112,7 +117,7 @@ const Collection = () => {
         </Button>
       </Box>
       <GridListToggle />
-      <TokensList account={account} nfts={slicedNfts} />
+      <TokensList account={account} nfts={slicedNfts} onHideCollection={onCollectionHide} />
       {nfts.length > maxVisibleNTFs && (
         <SpinnerContainer>
           <SpinnerBackground>
