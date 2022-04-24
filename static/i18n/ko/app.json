@@ -1141,9 +1141,9 @@
       },
       "confirm": {
         "title": "연결",
-        "details": "Wants to connect to the following account through your wallet :",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
-        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
+        "details": "귀하의 지갑을 통해 다음 계정에 연결하고 싶다면:",
+        "deeplinkDetails": "Ledger Live에 연결하고 싶습니다. 귀하의 계정을 선택하세요:",
+        "noAccount": "호환되는 계정이 없습니다. Wallet Connect를 사용하려면 호환되는 계정을 추가하세요.",
         "alreadyConnected": "다른 dApp이 이미 연결된 상태에서 dApp에 연결하려고 합니다. Live를 새로운 dApp으로 다시 연결하기 전에 연결된 dApp에서 연결을 끊으세요."
       }
     },
