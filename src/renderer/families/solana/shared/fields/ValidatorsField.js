@@ -64,7 +64,6 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
       <ValidatorRow
         currency={account.currency}
         active={chosenVoteAccAddr === validator.voteAccount}
-        showStake={validatorIdx !== 0}
         onClick={onChangeValidator}
         key={validator.voteAccount}
         validator={validator}
@@ -78,7 +77,7 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
       <Box p={1}>
         <ScrollLoadingList
           data={showAll ? validators : [chosenValidator ?? validators[0]]}
-          style={{ flex: showAll ? "1 0 240px" : "1 0 56px", marginBottom: 0, paddingLeft: 0 }}
+          style={{ flex: showAll ? "1 0 240px" : "1 0 63px", marginBottom: 0, paddingLeft: 0 }}
           renderItem={renderItem}
           noResultPlaceholder={
             validatorsFiltered.length <= 0 &&

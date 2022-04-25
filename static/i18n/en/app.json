@@ -2570,7 +2570,7 @@
       }
     },
     "delegation": {
-      "totalStake": "Total Stake",
+      "totalStake": "Total stake",
       "commission": "Commission",
       "delegate": "Add",
       "listHeader": "Delegations",

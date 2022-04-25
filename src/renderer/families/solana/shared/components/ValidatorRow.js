@@ -21,12 +21,11 @@ type Props = {
   currency: CryptoCurrency,
   validator: ValidatorAppValidator,
   active?: boolean,
-  showStake?: boolean,
   onClick?: (v: ValidatorAppValidator) => void,
   unit: Unit,
 };
 
-function SolanaValidatorRow({ validator, active, showStake, onClick, unit, currency }: Props) {
+function SolanaValidatorRow({ validator, active, onClick, unit, currency }: Props) {
   const explorerView = getDefaultExplorerView(currency);
 
   const onExternalLink = useCallback(() => {
@@ -54,26 +53,22 @@ function SolanaValidatorRow({ validator, active, showStake, onClick, unit, curre
       onExternalLink={onExternalLink}
       unit={unit}
       subtitle={
-        showStake ? (
-          <>
-            <Trans i18nKey="solana.delegation.totalStake"></Trans>
-            <Text style={{ marginLeft: 5 }}>
-              {formatCurrencyUnit(unit, new BigNumber(validator.activeStake), {
-                showCode: true,
-              })}
-            </Text>
-          </>
-        ) : null
+        <>
+          <Trans i18nKey="solana.delegation.commission" />
+          <Text style={{ marginLeft: 5, fontSize: 11 }}>{`${validator.commission} %`}</Text>
+        </>
       }
       sideInfo={
         <Box ml={5} style={{ flexDirection: "row", alignItems: "center" }}>
           <Box>
-            <Text textAlign="center" ff="Inter|SemiBold" fontSize={2}>
-              {`${validator.commission} %`}
+            <Text textAlign="right" ff="Inter|SemiBold" style={{ fontSize: 13 }}>
+              {formatCurrencyUnit(unit, new BigNumber(validator.activeStake), {
+                showCode: true,
+              })}
             </Text>
-            <Text textAlign="center" fontSize={1}>
-              <Trans i18nKey="solana.delegation.commission" />
-            </Text>
+            <TotalStakeTitle>
+              <Trans i18nKey="solana.delegation.totalStake"></Trans>
+            </TotalStakeTitle>
           </Box>
           <Box ml={3}>
             <ChosenMark active={active ?? false} />
@@ -93,5 +88,12 @@ const ChosenMark: ThemedComponent<{ active: boolean }> = styled(Check).attrs(p =
   color: p.active ? p.theme.colors.palette.primary.main : "transparent",
   size: 14,
 }))``;
+
+const TotalStakeTitle = styled(Text)`
+  font-size: 11px;
+  font-weight: 500;
+  text-align: right;
+  color: ${p => p.theme.colors.palette.text.shade60};
+`;
 
 export default SolanaValidatorRow;
