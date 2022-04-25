@@ -276,6 +276,10 @@
         "login": {
           "required": "You need to login with this provider",
           "complete": "Login"
+        },
+        "mfa": {
+          "required": "You need to set up MFA with this provider",
+          "complete": "Set up MFA"
         }
       }
     },

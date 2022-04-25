@@ -4,7 +4,8 @@ import React from "react";
 
 import FTXLogin from "./FTX";
 
-const KYC = ({ provider, onClose }: { provider: string, onClose: Function }) => {
+// Component to display a partner login flow
+const Login = ({ provider, onClose }: { provider: string, onClose: Function }) => {
   switch (provider) {
     case "ftxus":
     case "ftx":
@@ -15,4 +16,4 @@ const KYC = ({ provider, onClose }: { provider: string, onClose: Function }) => 
   }
 };
 
-export default KYC;
+export default Login;
