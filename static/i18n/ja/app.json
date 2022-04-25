@@ -2576,7 +2576,7 @@
       "listHeader": "Delegations",
       "availableBalance": "Available balance",
       "active": "Active",
-      "activeTooltip": "Active amount generate rewards",
+      "activeTooltip": "報酬が発生するアクティブ数量",
       "inactiveTooltip": "Inactive amount does not generate rewards",
       "delegatedInfoTooltip": "Total amount that is delegated to validators.",
       "withdrawableInfoTooltip": "Total amount that is withdrawable from delegations.",
