@@ -5,6 +5,7 @@ import React from "react";
 import FTXKYC from "./FTX";
 import WyreKYC from "./Wyre";
 
+// Component to display a partner KYC flow
 const KYC = ({ provider, onClose }: { provider: string, onClose: Function }) => {
   switch (provider) {
     case "wyre":

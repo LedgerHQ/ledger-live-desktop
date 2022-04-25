@@ -34,6 +34,8 @@ import FormLoading from "./FormLoading";
 import FormNotAvailable from "./FormNotAvailable";
 import FormKYCBanner from "./FormKYCBanner";
 import FormLoginBanner from "./FormLoginBanner";
+import FormMFABanner from "./FormMFABanner";
+import FormErrorBanner from "./FormErrorBanner";
 import { swapKYCSelector } from "~/renderer/reducers/settings";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import ExchangeDrawer from "./ExchangeDrawer/index";
@@ -42,6 +44,7 @@ import { track } from "~/renderer/analytics/segment";
 import { SWAP_VERSION, trackSwapError } from "../utils/index";
 import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
 import KYC from "../KYC";
+import MFA from "../MFA";
 import Login from "../Login";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
@@ -85,8 +88,14 @@ export const useProviders = () => {
 };
 
 const SwapForm = () => {
+  // FIXME: refacto flows handleling. Have one state (enum) to represent current flow
+  // FIXME: refacto banner state. Have one state (enum) to represent current banner state
+
   const [isInLoginFlow, setIsInLoginFlow] = useState(false);
   const [isInKycFlow, setIsInKycFlow] = useState(false);
+  const [isInMfaFlow, setIsInMfaFlow] = useState(false);
+  const [showMFABanner, setShowMfaBanner] = useState(false);
+  const [error, setError] = useState();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { state: locationState } = useLocation();
@@ -113,11 +122,26 @@ const SwapForm = () => {
   const providerKYC = swapKYC?.[provider];
   const kycStatus = providerKYC?.status;
 
-  const showLoginBanner = shouldShowLoginBanner({ provider, token: providerKYC?.id });
+  console.log("TEST --- ", {
+    kycStatus,
+    isInKycFlow,
+    isInLoginFlow,
+    isInMfaFlow,
+  });
+
+  const showLoginBanner =
+    !error && !showMFABanner && shouldShowLoginBanner({ provider, token: providerKYC?.id });
 
   // we display the KYC banner component if partner requiers KYC and is not yet approved
   // we don't display it if user needs to login first
-  const showKYCBanner = !showLoginBanner && shouldShowKYCBanner({ provider, kycStatus });
+  const showKYCBanner =
+    !error && !showLoginBanner && !showMFABanner && shouldShowKYCBanner({ provider, kycStatus });
+
+  console.log("TEST --- ", {
+    showLoginBanner,
+    showKYCBanner,
+    showMFABanner,
+  });
 
   const { setDrawer } = React.useContext(context);
 
@@ -181,7 +205,7 @@ const SwapForm = () => {
    * KYC related stuff should be handled in usePollKYCStatus
    */
   useEffect(() => {
-    if (!providerKYC?.id || !exchangeRate?.rateId) {
+    if (!providerKYC?.id || !exchangeRate?.rateId || isInKycFlow || isInMfaFlow) {
       return;
     }
 
@@ -194,6 +218,19 @@ const SwapForm = () => {
         bearerToken: userId,
       });
 
+      console.log("TEST --- ", {
+        status,
+      });
+
+      // User needs to complete MFA on partner own UI / dedicated widget
+      // FIXME: status code should be "MFA_REQUIRED"
+      if (status.codeName === "UNKNOWN_ERROR(MFA_REQUIRED)") {
+        setShowMfaBanner(true);
+      } else {
+        // No need to show MFA banner for other cases
+        setShowMfaBanner(false);
+      }
+
       if (status.codeName === "RATE_VALID") {
         // If trade can be done and KYC already approved, we are good
         // PS: this can't be checked before the `checkQuote` call since a KYC status can become expierd
@@ -201,11 +238,18 @@ const SwapForm = () => {
           return;
         }
 
-        // If status is ok, close login and kyc widgets even if open
+        // If status is ok, close login, kyc and mfa widgets even if open
         setIsInLoginFlow(false);
         setIsInKycFlow(false);
+        setIsInMfaFlow(false);
 
-        dispatch(setSwapKYCStatus({ provider, id: userId, status: KYC_STATUS.approved }));
+        dispatch(
+          setSwapKYCStatus({
+            provider,
+            id: userId,
+            status: KYC_STATUS.approved,
+          }),
+        );
         return;
       }
 
@@ -213,16 +257,40 @@ const SwapForm = () => {
       if (status.codeName.startsWith("KYC_")) {
         const updatedKycStatus = getKYCStatusFromCheckQuoteStatus(status);
         if (updatedKycStatus !== kycStatus) {
-          dispatch(setSwapKYCStatus({ provider, id: userId, status: updatedKycStatus }));
+          dispatch(
+            setSwapKYCStatus({
+              provider,
+              id: userId,
+              status: updatedKycStatus,
+            }),
+          );
+          return;
         }
       }
 
+      // FIXME
+      // If user is unauthenticated (status returned after user complete MFA as of today, should be fixed)
+      if (status.codeName === "UNAUTHENTICATED_USER") {
+        dispatch(
+          setSwapKYCStatus({
+            provider,
+            id: undefined,
+            status: undefined,
+          }),
+        );
+        return;
+      }
+
+      setError(status.codeName);
+
+      // FIXME: handle WITHDRAWALS_BLOCKED status. Could fall into a "generic error" and just redirect to partner website
+
       // Handle all non KYC related errors
-      // FIXME: handle error messages
+      // FIXME: handle error messages (display generic error + CTA contact support)
     };
 
     handleCheckQuote();
-  }, [providerKYC, exchangeRate, dispatch, provider, kycStatus]);
+  }, [providerKYC, exchangeRate, dispatch, provider, kycStatus, isInKycFlow, isInMfaFlow]);
 
   const isSwapReady =
     !swapTransaction.bridgePending &&
@@ -255,6 +323,10 @@ const SwapForm = () => {
 
   if (isInKycFlow) {
     return <KYC provider={provider} onClose={() => setIsInKycFlow(false)} />;
+  }
+
+  if (isInMfaFlow) {
+    return <MFA provider={provider} onClose={() => setIsInMfaFlow(false)} />;
   }
 
   if (providers?.length)
@@ -296,6 +368,12 @@ const SwapForm = () => {
             onClick={() => setIsInKycFlow(true)}
           />
         ) : null}
+
+        {showMFABanner ? (
+          <FormMFABanner provider={provider} onClick={() => setIsInMfaFlow(true)} />
+        ) : null}
+
+        {error ? <FormErrorBanner provider={provider} error={error} /> : null}
 
         <Button primary disabled={!isSwapReady} onClick={onSubmit} data-test-id="exchange-button">
           {t("common.exchange")}
