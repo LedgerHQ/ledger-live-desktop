@@ -6,7 +6,7 @@ import type { CryptoCurrency, Unit } from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Box from "~/renderer/components/Box";
 import type { ValidatorRowProps } from "~/renderer/components/Delegation/ValidatorRow";
 import ValidatorRow, { IconContainer } from "~/renderer/components/Delegation/ValidatorRow";
@@ -22,10 +22,11 @@ type Props = {
   validator: ValidatorAppValidator,
   active?: boolean,
   onClick?: (v: ValidatorAppValidator) => void,
+  disableHover?: boolean,
   unit: Unit,
 };
 
-function SolanaValidatorRow({ validator, active, onClick, unit, currency }: Props) {
+function SolanaValidatorRow({ validator, active, onClick, unit, currency, disableHover }: Props) {
   const explorerView = getDefaultExplorerView(currency);
 
   const onExternalLink = useCallback(() => {
@@ -38,6 +39,7 @@ function SolanaValidatorRow({ validator, active, onClick, unit, currency }: Prop
 
   return (
     <StyledValidatorRow
+      disableHover={disableHover ?? false}
       onClick={onClick}
       key={validator.voteAccount}
       validator={{ address: validator.voteAccount }}
@@ -79,9 +81,12 @@ function SolanaValidatorRow({ validator, active, onClick, unit, currency }: Prop
   );
 }
 
-const StyledValidatorRow: ThemedComponent<ValidatorRowProps> = styled(ValidatorRow)`
+const StyledValidatorRow: ThemedComponent<ValidatorRowProps & { disableHover: boolean }> = styled(
+  ValidatorRow,
+)`
   border-color: transparent;
   margin-bottom: 0;
+  ${p => (p.disableHover ? "&:hover { border-color: transparent; }" : "")}
 `;
 
 const ChosenMark: ThemedComponent<{ active: boolean }> = styled(Check).attrs(p => ({

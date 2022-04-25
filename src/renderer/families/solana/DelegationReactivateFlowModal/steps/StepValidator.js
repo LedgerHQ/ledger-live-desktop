@@ -61,6 +61,7 @@ export default function StepValidator({
       <TrackPage category="Solana Delegation Reactivate" name="Step Validator" />
       {error && <ErrorBanner error={error} />}
       <ValidatorRow
+        disableHover
         active
         currency={account.currency}
         key={validator.voteAccount}
