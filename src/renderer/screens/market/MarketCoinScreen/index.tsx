@@ -118,14 +118,8 @@ export default function MarketCoinScreen() {
   }, [rampCatalog.value]);
 
   const availableOnBuy =
-    currency && currency.ticker && onRampAvailableTickers.includes(currency.ticker.toUpperCase());
+    currency && currency.ticker && onRampAvailableTickers.includes(currency.ticker?.toUpperCase());
   const availableOnSwap = internalCurrency && swapAvailableIds.includes(internalCurrency.id);
-
-  useEffect(() => {
-    return () => {
-      selectCurrency();
-    };
-  }, [selectCurrency]);
 
   const color = internalCurrency
     ? getCurrencyColor(internalCurrency, colors.background.main)
@@ -144,7 +138,7 @@ export default function MarketCoinScreen() {
         },
       });
     },
-    [internalCurrency, history, currency],
+    [history, currency],
   );
 
   const openAddAccounts = useCallback(() => {
