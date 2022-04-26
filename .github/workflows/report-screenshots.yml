@@ -1,15 +1,11 @@
-name: "Hackathon | Tests Slack Reports"
+name: "UI tests Slack reports"
 on:
-  workflow_dispatch:
-    inputs:
-      runId:
-        description: run id
-        required: true
-
   workflow_run:
     workflows: ["Tests | Test Suite"]
     types:
       - "completed"
+    branches:
+      - "develop"
 
 jobs:
   log:
@@ -134,6 +130,7 @@ jobs:
       - name: prepare slack message
         uses: ledgerhq/ledger-live/tools/actions/generate-slack-screenshots-diff@monorepo-setup
         with:
+          message: ${{ github.event.commits[0].message }}
           images: images.json
           workspace: ${{ github.workspace }}
       - name: Post to a Slack channel
