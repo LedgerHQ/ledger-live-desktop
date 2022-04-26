@@ -10,7 +10,7 @@ import { DeviceAction } from "../models/DeviceAction";
 test.use({ userdata: "1AccountBTC1AccountETH" });
 const currencies = ["bitcoin_testnet", "ethereum_ropsten", "MUON"];
 
-test("Enable dev mode from settings", async ({ page }) => {
+test.skip("Enable dev mode from settings", async ({ page }) => {
   const layout = new Layout(page);
   const modal = new Modal(page);
   const accountsPage = new AccountsPage(page);
