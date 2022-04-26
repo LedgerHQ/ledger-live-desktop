@@ -59,7 +59,7 @@ type Props = {
   swapTransaction: SwapTransactionType,
   exchangeRate: ExchangeRate,
   onCompletion: ({ operation: Operation, swapId: string }) => void,
-  onError: Error => void,
+  onError: ({ error: Error, swapId: string }) => void,
 };
 export default function SwapAction({
   swapTransaction,
@@ -120,9 +120,9 @@ export default function SwapAction({
         device: deviceRef,
         userId: providerKYC?.id,
       }}
-      onResult={({ initSwapResult, initSwapError, ...rest }) => {
-        if (initSwapError) {
-          onError(initSwapError);
+      onResult={({ initSwapResult, initSwapErrorResult, ...rest }) => {
+        if (initSwapErrorResult) {
+          onError(initSwapErrorResult);
         } else {
           setInitData(initSwapResult);
         }
