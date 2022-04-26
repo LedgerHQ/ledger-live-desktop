@@ -42,7 +42,7 @@ export default function IsUnlocked({ children }: { children: any }) {
 
   const handleSubmit = useCallback(
     async (e: SyntheticEvent<HTMLFormElement>) => {
-      e.preventDefault();
+      if (e) e.preventDefault();
 
       const isAccountDecrypted = await hasBeenDecrypted("app", "accounts");
       try {
@@ -118,6 +118,7 @@ export default function IsUnlocked({ children }: { children: any }) {
                   placeholder={t("common.lockScreen.inputPlaceholder")}
                   type="password"
                   onChange={handleChangeInput("password")}
+                  onEnter={handleSubmit}
                   value={inputValue.password}
                   error={incorrectPassword}
                   data-test-id="lockscreen-password-input"

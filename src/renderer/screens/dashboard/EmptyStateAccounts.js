@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -16,6 +16,8 @@ import { urls } from "~/config/urls";
 import { openModal } from "~/renderer/actions/modals";
 
 const EmptyStateAccounts = ({ theme }: { theme: any }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const { push } = useHistory();
   const { t } = useTranslation();
 

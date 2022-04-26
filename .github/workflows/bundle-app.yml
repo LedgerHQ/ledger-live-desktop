@@ -216,6 +216,8 @@ jobs:
         run: |
           git config user.email "team-live@ledger.fr"
           git config user.name "Team Live"
+      - name: kill apt-get
+        run: sudo killall apt-get apt || echo OK
       - name: install linux dependencies
         run: sudo apt-get update && sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: install and switch to GCC 5.4
@@ -263,6 +265,20 @@ jobs:
         with:
           name: ${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
           path: dist/${{ steps.post-version.outputs.name }}-${{ steps.post-version.outputs.version }}-linux-x86_64.AppImage
+
+  stop-runner:
+    name: Stop self-hosted EC2 runner
+    needs: [start-runner, bundle-linux]
+    runs-on: [ledger-live-desktop]
+    if: ${{ always() }}
+    steps:
+      - name: Stop EC2 runner
+        uses: machulav/ec2-github-runner@v2
+        with:
+          mode: stop
+          github-token: ${{ secrets.CI_BOT_TOKEN }}
+          label: ${{ needs.start-runner.outputs.label }}
+          ec2-instance-id: ${{ needs.start-runner.outputs.ec2-instance-id }}
 
   bundle-windows:
     name: "[Windows] Build"

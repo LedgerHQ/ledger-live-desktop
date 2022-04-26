@@ -1839,7 +1839,7 @@
         "parentAccount": "1. {{currencyName}} Konto wählen",
         "token": "2. Token auswählen",
         "verifyTokenType": "Bitte vergewissern Sie sich, dass <0>{{token}}</0> ein <0>{{tokenType}}</0> Token ist. Jeder andere Krypto-Vermögenswert, der an ein {{currency}}-Konto gesendet wird, kann verloren gehen.",
-        "warningTokenType": "Bitte senden Sie nur <0>{{ticker}}</0> oder <0>{{tokenType}}</0> Token auf ein {{currency}} Konto. Alle anderen Krypto-Vermögenswerte können verloren gehen."
+        "warningTokenType": "Please only send <0>{{ticker}}</0> or <0>{{tokenType}}</0> tokens to {{currency}} accounts. Sending other crypto assets may result in the permanent loss of funds."
       },
       "connectDevice": {
         "title": "Gerät",

@@ -68,6 +68,7 @@ module.exports = {
         "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
         "no-use-before-define": "off",
         "@typescript-eslint/no-use-before-define": ["error"],
+        "flowtype/no-types-missing-file-annotation": "off",
       },
     },
   ],

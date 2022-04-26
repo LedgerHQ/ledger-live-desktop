@@ -86,6 +86,7 @@
 | POA | POA | NO | poa |
 | Particl | PART | NO | particl |
 | Pirl | PIRL | NO | pirl |
+| Polygon | MATIC | NO | polygon |
 | QRL | QRL | NO | qrl |
 | REOSC | REOSC | NO | reosc |
 | Ravencoin | RVN | NO | ravencoin |

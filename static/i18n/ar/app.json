@@ -1947,8 +1947,7 @@
     "amount": "المبلغ",
     "value": "القيمة",
     "showAll": "عرض الكل",
-    "showLess": "عرض أقل",
-    "header": "تخصيص الأصول ({{count}})"
+    "showLess": "عرض أقل"
   },
   "accountDistribution": {
     "account": "حساب",

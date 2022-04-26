@@ -214,4 +214,5 @@ src
 ```
 
 ## Localization / Translations
+
 Translations from English to other languages are handled internally so it is not possible to directly contribute to them, however if you spot a bug (e.g. a wrong variable name) or any issue in translation files, feel free to report a bug to Ledger's support team and it will be taken care of.

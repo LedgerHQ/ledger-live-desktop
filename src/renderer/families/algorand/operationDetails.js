@@ -20,9 +20,7 @@ import { localeSelector } from "~/renderer/reducers/settings";
 import FormattedVal from "~/renderer/components/FormattedVal";
 import CounterValue from "~/renderer/components/CounterValue";
 import ToolTip from "~/renderer/components/Tooltip";
-import ConfirmationCheck, {
-  Container,
-} from "~/renderer/components/OperationsList/ConfirmationCheck";
+import ConfirmationCheck from "~/renderer/components/OperationsList/ConfirmationCheck";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 import Box from "~/renderer/components/Box/Box";
 
@@ -52,8 +50,6 @@ const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
     }
   }
 `;
-
-const ConfirmationCellContainer = styled(Container)``;
 
 type OperationDetailsExtraProps = {
   extra: { [key: string]: any },
@@ -209,15 +205,14 @@ const ConfirmationCell = ({
           <Spacer />
           <CellIcon index={0}>
             <ToolTip content={withTooltip ? t("algorand.operationHasRewards") : null}>
-              <ConfirmationCellContainer
+              <ConfirmationCheck
                 type={"REWARD"}
                 isConfirmed={isConfirmed}
                 marketColor={marketColor}
                 hasFailed={hasFailed}
                 t={t}
-              >
-                <ClaimRewards size={12} />
-              </ConfirmationCellContainer>
+                withTooltip={false}
+              />
             </ToolTip>
           </CellIcon>
         </>

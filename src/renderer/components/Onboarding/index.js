@@ -277,9 +277,6 @@ export function Onboarding({ onboardingRelaunched }: { onboardingRelaunched: boo
 
   return (
     <React.Fragment>
-      <OnboardingLogoContainer>
-        <LedgerLogo />
-      </OnboardingLogoContainer>
       <Modal
         isOpen={state.context.pedagogy}
         onRequestClose={() => sendEvent("CLOSE_PEDAGOGY_MODAL")}

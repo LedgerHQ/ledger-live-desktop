@@ -77,7 +77,10 @@ const Tag = styled(Link)`
   border-radius: 4px;
   margin: ${p => p.theme.space[2]}px ${p => p.theme.space[3]}px;
   color: ${p => p.theme.colors.palette.text.shade100};
-  background-color: ${p => p.theme.colors.palette.background.default};
+  background-color: ${p => {
+    console.log(p);
+    return p.theme.colors.palette.background.default;
+  }};
   text-decoration: none;
   cursor: pointer;
   border: solid 1px rgba(0, 0, 0, 0);

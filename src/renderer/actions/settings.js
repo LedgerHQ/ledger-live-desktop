@@ -85,7 +85,11 @@ type PortfolioRangeOption = {
   label: string,
 };
 
-export function useTimeRange() {
+export function useTimeRange(): [
+  PortfolioRange,
+  ((_range: PortfolioRange | PortfolioRangeOption) => void),
+  PortfolioRangeOption[]
+] {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const val = useSelector(selectedTimeRangeSelector);
