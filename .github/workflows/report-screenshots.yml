@@ -1,5 +1,11 @@
 name: "UI tests Slack reports"
 on:
+  workflow_dispatch:
+    inputs:
+      runId:
+        description: run id
+        required: true
+
   workflow_run:
     workflows: ["Tests | Test Suite"]
     types:
