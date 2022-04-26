@@ -130,6 +130,7 @@ const RepairDeviceButton: React$ComponentType<Props> = React.forwardRef(function
         desc={t("settings.repairDevice.desc")}
         progress={progress}
         error={error}
+        enableSomethingElseChoice={true}
       />
     </>
   );

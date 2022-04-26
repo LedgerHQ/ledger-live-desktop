@@ -128,20 +128,33 @@ type Props = {
   progress: number,
   error?: ?Error,
   isAlreadyBootloader?: boolean,
+  enableSomethingElseChoice?: boolean,
 };
 
-class RepairModal extends PureComponent<Props, *> {
-  state = {
-    selectedOption: null,
-    availableRepairChoices: [
-      ...repairChoices,
-      {
+type State = {
+  selectedOption: ChoiceOption | null,
+  availableRepairChoices: Array<ChoiceOption>,
+};
+
+class RepairModal extends PureComponent<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    const availableRepairChoices = [...repairChoices];
+
+    if (props.enableSomethingElseChoice) {
+      availableRepairChoices.push({
         forceMCU: "",
         label: this.props.t("connectTroubleshooting.steps.4.repair.somethingElse"),
         id: "somethingElse",
-      },
-    ],
-  };
+      });
+    }
+
+    this.state = {
+      selectedOption: null,
+      availableRepairChoices,
+    };
+  }
 
   onSelectOption = selectedOption => {
     this.setState({ selectedOption });
