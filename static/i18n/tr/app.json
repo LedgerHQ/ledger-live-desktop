@@ -720,11 +720,13 @@
     "undelegatingTooltip": "Yetkisi iptal edilen varlıklar, kullanıma açılmadan önce 21 gün boyunca zaman kilidinde tutulurlar."
   },
   "exchange": {
+    "chooseProvider": "{{providerCount}} sağlayıcı arasında seçim yapın",
+    "chooseProviders": "{{providerCount}} sağlayıcı arasında seçim yapın",
     "title": "Kripto al ve sat",
     "reset": "Başa dön",
     "verifyAddress": "Görüntülenen adres ile cihazınızda gösterilen adresin tam olarak eşleştiğinden lütfen emin olun",
     "buy": {
-      "header": "Kripto alın ve satın",
+      "header": "Ortaklarımız ile kripto satın alın",
       "title": "Kripto satın almak için bir sağlayıcı seçin",
       "buyFrom": "İstediğiniz yerden satın alın",
       "cryptoSupported": "kripto destekleniyor",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "{{provider}} ile kripto satın",
+      "header": "Ortaklarımız ile kripto satın",
       "title": "<0>{{provider}}</0> üzerinden kripto satın",
       "tab": "Sat",
       "selectCrypto": "Bir kripto varlık seçin",
@@ -2760,7 +2762,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Deneysel JS uygulamaları",
-          "description": "Tezos için deneysel JS uygulamalarını kullanın."
+          "description": "Tezos ve Cosmos için deneysel JS uygulamalarını kullanın."
         },
         "experimentalCurrencies": {
           "title": "Deneysel entegrasyonlar",
@@ -3312,7 +3314,7 @@
         },
         "stayOffline": {
           "title": "Çevrim dışı kalın",
-          "description": "Your Nano works as a \"cold storage\" wallet. This means that it never exposes your private key online, even when using the app."
+          "description": "Nano cihazınız \"soğuk depolama\" cüzdanı olarak çalışır. Yani özel anahtarınız, bu uygulamayı kullanırken bile asla çevrim içi olarak açığa çıkmaz."
         },
         "validateTransactions": {
           "title": "İşlemleri onaylayın",

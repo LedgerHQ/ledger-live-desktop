@@ -35,6 +35,7 @@ export const Address: ThemedComponent<{}> = styled(Text)`
   width: fit-content;
   max-width: 100%;
   display: inline-block;
+  word-break: break-all;
 `;
 
 export const GradientHover: ThemedComponent<{}> = styled(Box).attrs(() => ({

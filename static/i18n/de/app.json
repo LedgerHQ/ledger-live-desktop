@@ -720,11 +720,13 @@
     "undelegatingTooltip": "Nicht delegierte Vermögenswerte sind in einer Zeitsperre von 21 Tagen, bevor sie verfügbar sind."
   },
   "exchange": {
+    "chooseProvider": "Wählen Sie aus {{providerCount}} Anbieter",
+    "chooseProviders": "Wählen Sie aus {{providerCount}} Anbietern",
     "title": "Krypto kaufen und verkaufen",
     "reset": "Zurücksetzen",
     "verifyAddress": "Bitte bestätigen Sie, dass die angezeigte Adresse genau mit der auf Ihrem Gerät angezeigten Adresse übereinstimmt",
     "buy": {
-      "header": "Krypto kaufen und verkaufen",
+      "header": "Krypto kaufen über unsere Partner",
       "title": "Wählen Sie einen Anbieter um Krypto zu kaufen",
       "buyFrom": "Von überall aus kaufen",
       "cryptoSupported": "Krypto unterstützt",
@@ -740,7 +742,7 @@
       }
     },
     "sell": {
-      "header": "Krypto verkaufen mit {{provider}}",
+      "header": "Krypto verkaufen über unsere Partner",
       "title": "Krypto verkaufen über <0>{{provider}}</0>",
       "tab": "Verkaufen",
       "selectCrypto": "Wählen Sie einen Krypto-Vermögenswert",
@@ -2760,7 +2762,7 @@
         },
         "experimentalJSCurrencies": {
           "title": "Experimentelle JS-Implementierungen",
-          "description": "Experimentelle JS-Implementierung für Tezos verwenden."
+          "description": "Verwenden Sie experimentelle JS-Implementierungen für Tezos und Kosmos."
         },
         "experimentalCurrencies": {
           "title": "Experimentelle Integrationen",

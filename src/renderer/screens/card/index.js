@@ -4,7 +4,6 @@ import { useLocation } from "react-router-dom";
 import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import useTheme from "~/renderer/hooks/useTheme";
 
-import TrackPage from "~/renderer/analytics/TrackPage";
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
 
@@ -28,7 +27,6 @@ export default function CardPlatformApp() {
 
   return (
     <Card grow style={{ overflow: "hidden" }}>
-      <TrackPage category="Card" name="Card" appId={CARD_APP_ID} />
       {manifest ? (
         <WebPlatformPlayer
           config={{
