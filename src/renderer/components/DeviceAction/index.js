@@ -111,7 +111,7 @@ const DeviceAction = <R, H, P>({
     displayUpgradeWarning,
     passWarning,
     initSwapRequested,
-    initSwapError,
+    initSwapErrorResult,
     initSwapResult,
     completeExchangeStarted,
     completeExchangeResult,
@@ -201,7 +201,7 @@ const DeviceAction = <R, H, P>({
     }
   }
 
-  if (initSwapRequested && !initSwapResult && !initSwapError) {
+  if (initSwapRequested && !initSwapResult && !initSwapErrorResult) {
     const { transaction, exchange, exchangeRate, status } = request;
     const { amountExpectedTo, estimatedFees } = hookState;
     const renderFn = renderSwapDeviceConfirmationV2;
