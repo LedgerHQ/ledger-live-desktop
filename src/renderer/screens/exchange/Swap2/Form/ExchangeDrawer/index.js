@@ -60,9 +60,20 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
     [fromAccount, fromParentAccount, toAccount, toParentAccount],
   );
 
+  const onError = useCallback(errorResult => {
+    const { error, swapId } = errorResult;
+
+    // FIXME: call declined endpoint with swapId
+
+    setError(error);
+  }, []);
+
   const onCompletion = useCallback(
     result => {
       const { operation, swapId } = result;
+
+      // FIXME: call success endpoint with swapId and operation.hash (txId). Check if broadcast disabled
+
       const mainAccount = getMainAccount(exchange.fromAccount, exchange.fromParentAccount);
 
       if (!mainAccount) return;
@@ -171,7 +182,7 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
           swapTransaction={swapTransaction}
           exchangeRate={exchangeRate}
           onCompletion={onCompletion}
-          onError={setError}
+          onError={onError}
         />
       </ContentBox>
     </Box>
