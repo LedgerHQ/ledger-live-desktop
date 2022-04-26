@@ -56,6 +56,7 @@ export class MarketPage {
 
   async openCoinPage(ticker: string) {
     await this.coinRow(ticker).click();
+    await this.page.locator("text=PRICE STATS").waitFor({ state: "visible" });
   }
 
   async starCoin(ticker: string) {
