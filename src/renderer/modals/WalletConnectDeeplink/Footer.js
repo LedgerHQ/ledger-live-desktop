@@ -6,12 +6,12 @@ import Button from "~/renderer/components/Button";
 import { STATUS } from "~/renderer/screens/WalletConnect/Provider";
 import { useTranslation } from "react-i18next";
 
-const Footer = ({ onContinue, onReject, onCancel, wcDappName, wcStatus, account }: FooterProps) => {
+const Footer = ({ onContinue, onReject, onCancel, wcStatus, account }: FooterProps) => {
   const { t } = useTranslation();
 
   return (
     <Box horizontal justifyContent="flex-end">
-      {wcStatus === STATUS.CONNECTING && wcDappName ? (
+      {wcStatus === STATUS.CONNECTING ? (
         <>
           <Button onClick={onReject} outline>
             {t("common.reject")}
