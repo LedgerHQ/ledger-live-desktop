@@ -6,8 +6,19 @@ import anonymizer from "./../logger/anonymizer";
 
 require("../env");
 
-export default (Raven: any, shouldSendCallback: () => boolean, userId: string) => {
-  if (!__SENTRY_URL__) return;
+export default (Sentry: any, shouldSendCallback: () => boolean, userId: string) => {
+  // if (!__SENTRY_URL__) return;
+  Sentry.init({
+    dsn: "https://9158206c044848a393bbc1c4d23dd1f2@o118392.ingest.sentry.io/6325578",
+    beforeSend(e) {
+      if (!shouldSendCallback()) return;
+      return e;
+    },
+  });
+  Sentry.configureScope(scope => {
+    scope.setUser({ id: userId });
+  });
+  /*
   let r = Raven.config(__SENTRY_URL__, {
     captureUnhandledRejections: true,
     allowSecretKey: true,
@@ -77,4 +88,5 @@ export default (Raven: any, shouldSendCallback: () => boolean, userId: string) =
     r = r.setContext({ user });
   }
   r.install();
+  */
 };

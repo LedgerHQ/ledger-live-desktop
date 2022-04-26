@@ -71,7 +71,7 @@ process.on("message", m => {
 
     case "sentryLogsChanged": {
       const { payload } = m;
-      sentryEnabled = payload.value;
+      sentryEnabled = payload;
       break;
     }
 

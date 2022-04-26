@@ -1,6 +1,6 @@
 // @flow
 
-import * as Sentry from "@sentry/node";
+import * as Sentry from "@sentry/electron/main";
 import install from "./install";
 
 export default (shouldSendCallback: () => boolean, userId: string) => {

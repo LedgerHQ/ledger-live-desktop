@@ -1,19 +1,19 @@
 // @flow
 
-import Raven from "raven-js";
+import * as Sentry from "@sentry/electron/renderer";
 
 import user from "./../helpers/user";
 import install from "./install";
 
 export default async (shouldSendCallback: () => boolean) => {
   const u = await user();
-  install(Raven, shouldSendCallback, u.id);
+  install(Sentry, shouldSendCallback, u.id);
 };
 
 export const captureException = (e: Error) => {
-  Raven.captureException(e);
+  Sentry.captureException(e);
 };
 
 export const captureBreadcrumb = (o: *) => {
-  Raven.captureBreadcrumb(o);
+  Sentry.addBreadcrumb(o);
 };

@@ -89,6 +89,16 @@ async function init() {
 
   sentry(() => sentryLogsSelector(store.getState()));
 
+  let notifiedSentryLogs = false;
+  store.subscribe(() => {
+    const next = sentryLogsSelector(store.getState());
+    if (next !== notifiedSentryLogs) {
+      notifiedSentryLogs = next;
+      console.log("SEND", next);
+      ipcRenderer.send("sentryLogsChanged", next);
+    }
+  });
+
   let deepLinkUrl; // Nb In some cases `fetchSettings` runs after this, voiding the deep link.
   ipcRenderer.once("deep-linking", (event, url) => {
     store.dispatch(setDeepLinkUrl(url));

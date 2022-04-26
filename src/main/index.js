@@ -9,6 +9,7 @@ import {
   loadWindow,
 } from "./window-lifecycle";
 import "./internal-lifecycle";
+import sentry from "../sentry/main";
 import resolveUserDataDirectory from "~/helpers/resolveUserDataDirectory";
 import db from "./db";
 import debounce from "lodash/debounce";
@@ -128,6 +129,13 @@ app.on("ready", async () => {
 
   const windowParams = await db.getKey("windowParams", "MainWindow", {});
   const settings = await db.getKey("app", "settings");
+  const user = await db.getKey("app", "user");
+
+  const userId = user?.id;
+  if (userId) {
+    console.log(userId);
+    //sentry(() => settings?.sentryLogs, userId);
+  }
 
   const window = await createMainWindow(windowParams, settings);
 

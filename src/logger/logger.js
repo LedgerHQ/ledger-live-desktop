@@ -76,8 +76,10 @@ const captureBreadcrumb = (breadcrumb: any) => {
     try {
       if (typeof window !== "undefined") {
         require("~/sentry/browser").captureBreadcrumb(breadcrumb);
-      } else {
+      } else if (process.title === "Ledger Live Internal") {
         require("~/sentry/node").captureBreadcrumb(breadcrumb);
+      } else {
+        require("~/sentry/main").captureBreadcrumb(breadcrumb);
       }
     } catch (e) {
       logger.log("warn", "Can't captureBreadcrumb", e);
@@ -89,8 +91,10 @@ const captureException = (error: Error) => {
   try {
     if (typeof window !== "undefined") {
       require("~/sentry/browser").captureException(error);
-    } else {
+    } else if (process.title === "Ledger Live Internal") {
       require("~/sentry/node").captureException(error);
+    } else {
+      require("~/sentry/main").captureException(error);
     }
   } catch (e) {
     logger.log("warn", "Can't send to sentry", error, e);
