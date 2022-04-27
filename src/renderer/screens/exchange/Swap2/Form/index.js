@@ -1,17 +1,8 @@
 // @flow
-import React, { useCallback, useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
-import SwapFormSummary from "./FormSummary";
-import SwapFormSelectors from "./FormSelectors";
-import Box from "~/renderer/components/Box";
-import styled from "styled-components";
-import ButtonBase from "~/renderer/components/Button";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { context } from "~/renderer/drawers/Provider";
-import { useTranslation } from "react-i18next";
+import { checkQuote } from "@ledgerhq/live-common/lib/exchange/swap";
 import {
-  useSwapProviders,
   usePollKYCStatus,
+  useSwapProviders,
   useSwapTransaction,
 } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import {
@@ -20,32 +11,41 @@ import {
   shouldShowKYCBanner,
   shouldShowLoginBanner,
 } from "@ledgerhq/live-common/lib/exchange/swap/utils";
-import { checkQuote } from "@ledgerhq/live-common/lib/exchange/swap";
+import React, { useCallback, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
+import { useLocation } from "react-router-dom";
+import styled from "styled-components";
+import { setSwapKYCStatus } from "~/renderer/actions/settings";
 import {
-  updateProvidersAction,
-  resetSwapAction,
   providersSelector,
-  updateTransactionAction,
-  updateRateAction,
   rateSelector,
+  resetSwapAction,
+  updateProvidersAction,
+  updateRateAction,
+  updateTransactionAction,
 } from "~/renderer/actions/swap";
-import FormLoading from "./FormLoading";
-import FormNotAvailable from "./FormNotAvailable";
+import { track } from "~/renderer/analytics/segment";
+import TrackPage from "~/renderer/analytics/TrackPage";
+import Box from "~/renderer/components/Box";
+import ButtonBase from "~/renderer/components/Button";
+import { context } from "~/renderer/drawers/Provider";
+import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
+import { swapKYCSelector } from "~/renderer/reducers/settings";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import KYC from "../KYC";
+import Login from "../Login";
+import MFA from "../MFA";
+import { SWAP_VERSION, trackSwapError } from "../utils/index";
+import ExchangeDrawer from "./ExchangeDrawer/index";
+import FormErrorBanner from "./FormErrorBanner";
 import FormKYCBanner from "./FormKYCBanner";
+import FormLoading from "./FormLoading";
 import FormLoginBanner from "./FormLoginBanner";
 import FormMFABanner from "./FormMFABanner";
-import FormErrorBanner from "./FormErrorBanner";
-import { swapKYCSelector } from "~/renderer/reducers/settings";
-import { setSwapKYCStatus } from "~/renderer/actions/settings";
-import ExchangeDrawer from "./ExchangeDrawer/index";
-import TrackPage from "~/renderer/analytics/TrackPage";
-import { track } from "~/renderer/analytics/segment";
-import { SWAP_VERSION, trackSwapError } from "../utils/index";
-import { shallowAccountsSelector } from "~/renderer/reducers/accounts";
-import KYC from "../KYC";
-import MFA from "../MFA";
-import Login from "../Login";
+import FormNotAvailable from "./FormNotAvailable";
+import SwapFormSelectors from "./FormSelectors";
+import SwapFormSummary from "./FormSummary";
 
 const Wrapper: ThemedComponent<{}> = styled(Box).attrs({
   p: 20,
