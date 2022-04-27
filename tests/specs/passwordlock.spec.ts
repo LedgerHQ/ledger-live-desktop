@@ -22,7 +22,7 @@ test("Enable password lock", async ({ page, userdataFile }) => {
   await test.step("Open password lock modal", async () => {
     await layout.goToSettings();
     await passwordlockModal.toggle();
-    expect(await passwordlockModal.container.screenshot()).toMatchSnapshot(
+    expect.soft(await passwordlockModal.container.screenshot()).toMatchSnapshot(
       "set-passwordlock-modal.png",
     );
   });
@@ -30,7 +30,7 @@ test("Enable password lock", async ({ page, userdataFile }) => {
   await test.step("Enable password lock", async () => {
     await passwordlockModal.enablePassword("password", "password");
     expect(await layout.topbarLockButton).toBeVisible();
-    expect(await page.screenshot()).toMatchSnapshot("passwordlock-enabled.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("passwordlock-enabled.png");
   });
 
   await test.step("User data should be encrypted", async () => {
@@ -39,7 +39,7 @@ test("Enable password lock", async ({ page, userdataFile }) => {
 
   await test.step("Open change password modal", async () => {
     await passwordlockModal.openChangePasswordModal();
-    expect(await passwordlockModal.container.screenshot()).toMatchSnapshot(
+    expect.soft(await passwordlockModal.container.screenshot()).toMatchSnapshot(
       "changepassword-modal.png",
     );
   });
@@ -52,12 +52,12 @@ test("Enable password lock", async ({ page, userdataFile }) => {
     await layout.lockApp();
     expect(await lockscreenPage.container).toBeVisible();
     expect(await layout.logo).toBeVisible();
-    expect(await page.screenshot()).toMatchSnapshot("app-locked.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("app-locked.png");
   });
 
   await test.step("I lost my password", async () => {
     await lockscreenPage.lostPassword();
-    expect(await modal.container.screenshot()).toMatchSnapshot("lockscreen-reset-app-modal.png");
+    expect.soft(await modal.container.screenshot()).toMatchSnapshot("lockscreen-reset-app-modal.png");
     await modal.cancel();
   });
 
@@ -65,26 +65,26 @@ test("Enable password lock", async ({ page, userdataFile }) => {
     await lockscreenPage.login("wrong");
     expect(await layout.inputError).toBeVisible();
     await page.waitForTimeout(400); // weird 0.4s css transition on error message
-    expect(await page.screenshot()).toMatchSnapshot("lockscreen-wrong-password.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("lockscreen-wrong-password.png");
   });
 
   await test.step("Unlock with correct password", async () => {
     await lockscreenPage.login("newpassword");
     expect(await lockscreenPage.container).toBeHidden();
-    expect(await page.screenshot()).toMatchSnapshot("lockscreen-unlocked.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("lockscreen-unlocked.png");
     expect(await layout.topbarLockButton).toBeVisible();
   });
 
   await test.step("Open disable password lock modal", async () => {
     await passwordlockModal.toggle();
-    expect(await modal.container.screenshot()).toMatchSnapshot("disablepassword-modal.png");
+    expect.soft(await modal.container.screenshot()).toMatchSnapshot("disablepassword-modal.png");
   });
 
   await test.step("Disable password lock: Set wrong password", async () => {
     await passwordlockModal.disablePassword("password");
     expect(await layout.inputError).toBeVisible();
     expect(await layout.topbarLockButton).toBeVisible();
-    expect(await modal.container.screenshot()).toMatchSnapshot(
+    expect.soft(await modal.container.screenshot()).toMatchSnapshot(
       "passwordlock-disable-bad-password.png",
     );
   });
@@ -92,7 +92,7 @@ test("Enable password lock", async ({ page, userdataFile }) => {
   await test.step("Disable password lock: Set correct password", async () => {
     await passwordlockModal.disablePassword("newpassword");
     expect(await layout.topbarLockButton).toBeHidden();
-    expect(await page.screenshot()).toMatchSnapshot("passwordlock-disabled.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("passwordlock-disabled.png");
   });
 
   await test.step("User data shouldn't be encrypted", async () => {

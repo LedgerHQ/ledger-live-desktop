@@ -18,20 +18,20 @@ test("Layout", async ({ page }) => {
   await test.step("can open send modal", async () => {
     await layout.openSendModal();
     await sendModal.container.waitFor({ state: "visible" });
-    expect(await page.screenshot()).toMatchSnapshot("send-modal.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("send-modal.png");
     await sendModal.close();
   });
 
   await test.step("can open receive modal", async () => {
     await layout.openReceiveModal();
     await receiveModal.container.waitFor({ state: "visible" });
-    expect(await page.screenshot()).toMatchSnapshot("receive-modal.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("receive-modal.png");
     await receiveModal.close();
   });
 
   await test.step("go to accounts", async () => {
     await layout.goToAccounts();
-    expect(await page.screenshot()).toMatchSnapshot("accounts.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("accounts.png");
   });
 
   await test.step("go to discover", async () => {
@@ -43,7 +43,7 @@ test("Layout", async ({ page }) => {
 
   await test.step("go to buy / sell cryto", async () => {
     await layout.goToBuyCrypto();
-    expect(await page.screenshot()).toMatchSnapshot("buy-sell.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("buy-sell.png");
   });
 
   await test.step("go to experimental features", async () => {
@@ -52,7 +52,7 @@ test("Layout", async ({ page }) => {
     await settingsPage.enableDevMode();
     await layout.goToPortfolio();
     await layout.drawerExperimentalButton.click();
-    expect(await page.screenshot()).toMatchSnapshot("experimental-features.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("experimental-features.png");
   });
 
   await test.step("shows a starred account, and can access the page", async () => {
@@ -65,12 +65,12 @@ test("Layout", async ({ page }) => {
   await test.step("can toggle discreet mode", async () => {
     await layout.goToPortfolio(); // FIXME: remove this line when LL-8899 is fixed
     await layout.toggleDiscreetMode();
-    expect(await page.screenshot()).toMatchSnapshot("discreet-mode.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("discreet-mode.png");
   });
 
   await test.step("can collapse the main sidebar", async () => {
     await layout.drawerCollapseButton.click();
-    expect(await page.screenshot()).toMatchSnapshot("collapse-sidebar.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("collapse-sidebar.png");
   });
 
   await test.step("shows the carousel and can dismiss it", async () => {
@@ -78,11 +78,11 @@ test("Layout", async ({ page }) => {
     await portfolioPage.carousel.waitFor({ state: "visible" });
     await portfolioPage.carouselCloseButton.click();
     await portfolioPage.carouselConfirmButton.click();
-    expect(await page.screenshot()).toMatchSnapshot("dismiss-carousel.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("dismiss-carousel.png");
   });
 
   await test.step("can display the help modal", async () => {
     await layout.topbarHelpButton.click();
-    expect(await page.screenshot()).toMatchSnapshot("help-drawer.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("help-drawer.png");
   });
 });
