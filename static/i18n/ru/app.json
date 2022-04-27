@@ -1609,7 +1609,7 @@
         "not_supported": "Требуется сторонний кошелёк",
         "addAccount": "Добавить счёт",
         "addAccountTooltip": "Добавить счёт {{appName}}",
-        "addAccountWarn": "Дождитесь полного обновления приложения",
+        "addAccountWarn": "Please wait for processing to finish",
         "learnMore": "Подробнее",
         "learnMoreTooltip": "Подробнее о {{appName}}",
         "removeTooltip": "Удалить {{appName}}",
