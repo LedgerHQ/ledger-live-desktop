@@ -54,16 +54,15 @@ const NFTCrumb = () => {
   );
 
   const activeItem = useMemo(
-    () => items.find((item: any) => item.nft?.contract === collectionAddress) || items[0],
+    () => items.find((item: any) => item.key === collectionAddress) || items[0],
     [collectionAddress, items],
   );
 
   const onCollectionSelected = useCallback(
     item => {
       if (!item) return;
-      const { collection } = item;
       setTrackingSource("NFT breadcrumb");
-      history.push({ pathname: `/account/${account.id}/nft-collection/${collection.contract}` });
+      history.push({ pathname: `/account/${account.id}/nft-collection/${item.key}` });
     },
     [account.id, history],
   );
