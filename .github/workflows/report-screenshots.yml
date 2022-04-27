@@ -1,0 +1,149 @@
+name: "UI tests Slack reports"
+on:
+  workflow_dispatch:
+    inputs:
+      runId:
+        description: run id
+        required: true
+
+  workflow_run:
+    workflows: ["Tests | Test Suite"]
+    types:
+      - "completed"
+    branches:
+      - "develop"
+
+jobs:
+  log:
+    name: "Check previous github object"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: log github object
+        env:
+          GITHUB: ${{ toJSON(github) }}
+        run: |
+          echo $GITHUB
+  comment-on-pr:
+    name: "Slack report"
+    runs-on: ubuntu-20.04
+    steps:
+      - name: download artifacts
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const artifacts = await github.rest.actions.listWorkflowRunArtifacts({
+               owner: context.repo.owner,
+               repo: context.repo.repo,
+               run_id: ${{ github.event.inputs && github.event.inputs.runId || github.event.workflow_run.id }},
+            });
+
+            // Filter Artifacts
+
+            const reportArtifacts = artifacts.data.artifacts.filter(artifact => {
+              return artifact.name == "tests-reports";
+            })[0];
+
+            const playwrightArtifacts = artifacts.data.artifacts.filter(artifact => {
+              return (
+                artifact.name == "playwright-results-windows-latest" ||
+                artifact.name === "playwright-results-linux"
+              );
+            });
+
+            const imagesArtifacts = artifacts.data.artifacts.filter(artifact => {
+              return artifact.name.includes("images-");
+            });
+
+            // Download Artifacts
+
+            const downloadReport = await github.rest.actions.downloadArtifact({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              artifact_id: reportArtifacts.id,
+              archive_format: "zip",
+            });
+
+            fs.writeFileSync(
+              "${{github.workspace}}/" + reportArtifacts.name + ".zip",
+              Buffer.from(downloadReport.data)
+            );
+
+            const pPWArtifacts = await Promise.all(
+              playwrightArtifacts.map(artifact => {
+                return github.rest.actions.downloadArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: artifact.id,
+                  archive_format: "zip",
+                });
+              })
+            );
+
+            pPWArtifacts.forEach((artifact, i) => {
+              fs.writeFileSync(
+                "${{github.workspace}}/" + playwrightArtifacts[i].name + ".zip",
+                Buffer.from(artifact.data)
+              );
+            });
+
+            const pImagesArtifacts = await Promise.all(
+              imagesArtifacts.map(image => {
+                return github.rest.actions.downloadArtifact({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  artifact_id: image.id,
+                  archive_format: "zip",
+                });
+              })
+            );
+
+            pImagesArtifacts.forEach((artifact, i) => {
+              fs.writeFileSync(
+                "${{github.workspace}}/" + imagesArtifacts[i].name + ".zip",
+                Buffer.from(artifact.data)
+              );
+            });
+
+      - name: unzip files
+        run: |
+          unzip tests-reports.zip || true
+          unzip playwright-results-windows-latest.zip -d pw-windows || true
+          unzip playwright-results-linux.zip -d pw-linux || true
+          unzip images-linux.json.zip || true
+          unzip images-windows-latest.json.zip || true
+          rm tests-reports.zip playwright-results-windows-latest.zip playwright-results-linux.zip images-linux.json.zip images-windows-latest.json.zip
+      - name: parse images
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require("fs");
+
+            const files = ["images-linux", "images-windows-latest"];
+
+            let result = {};
+            for (const file of files) {
+              try {
+                const raw = JSON.parse(fs.readFileSync("${{github.workspace}}/" + file + ".json"));
+                const key = file.replace("images-", "").replace("-latest", "").trim()
+                result[key] = raw;
+              } catch (err) {
+                console.log(err);
+              }
+            }
+
+            fs.writeFileSync(`./images.json`, JSON.stringify(result, null, 2));
+      - name: prepare slack message
+        uses: ledgerhq/ledger-live/tools/actions/generate-slack-screenshots-diff@monorepo-setup
+        with:
+          images: images.json
+          workspace: ${{ github.workspace }}
+      - name: Post to a Slack channel
+        id: slack
+        uses: slackapi/slack-github-action@v1.18.0
+        with:
+          channel-id: "C01J7M2CUTZ"
+          # payload: ${{ fromJSON(steps.prepare-slack-message.outputs.result) }}
+          payload-file-path: "./payload-slack-content.json"
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_USER_OAUTH_ACCESS_TOKEN }}
