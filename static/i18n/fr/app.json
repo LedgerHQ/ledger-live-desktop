@@ -1609,7 +1609,7 @@
         "not_supported": "Wallet externe requis",
         "addAccount": "Ajouter un compte",
         "addAccountTooltip": "Ajouter un compte {{appName}}",
-        "addAccountWarn": "Merci d'attendre que les mises à jour soient terminées",
+        "addAccountWarn": "Please wait for processing to finish",
         "learnMore": "En savoir plus",
         "learnMoreTooltip": "En savoir plus sur {{appName}}",
         "removeTooltip": "Désinstaller {{appName}}",
