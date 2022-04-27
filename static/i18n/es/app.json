@@ -1609,7 +1609,7 @@
         "not_supported": "Requiere una billetera de terceros",
         "addAccount": "Agregar cuenta",
         "addAccountTooltip": "Agregar cuenta {{appName}}",
-        "addAccountWarn": "Espera a que finalicen las actualizaciones de aplicaciones",
+        "addAccountWarn": "Please wait for processing to finish",
         "learnMore": "Más información",
         "learnMoreTooltip": "Aprende más sobre {{appName}}",
         "removeTooltip": "Desinstalar {{appName}}",
