@@ -85,7 +85,12 @@ const InstallSuccessBanner = ({ state, isIncomplete, dispatch, addAccount, disab
   }, [installQueue.length, uninstallQueue.length, recentlyInstalledApps, appByName, installed]);
 
   const onAddAccount = useCallback(() => {
-    const app = installedSupportedApps[0];
+    if (installedSupportedApps.length === 0) {
+      return;
+    }
+
+    const app = installedSupportedApps[installedSupportedApps.length - 1];
+
     if (app.currencyId) {
       addAccount(getCryptoCurrencyById(app.currencyId));
       setHasBeenShown(true);
