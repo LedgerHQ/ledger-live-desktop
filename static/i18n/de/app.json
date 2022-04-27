@@ -1609,7 +1609,7 @@
         "not_supported": "Wallet von Drittanbietern erforderlich",
         "addAccount": "Konto hinzufügen",
         "addAccountTooltip": "Konto {{appName}} hinzufügen",
-        "addAccountWarn": "Bitte warten Sie, bis die App-Updates abgeschlossen sind",
+        "addAccountWarn": "Please wait for processing to finish",
         "learnMore": "Mehr erfahren",
         "learnMoreTooltip": "Erfahren Sie mehr über {{appName}}",
         "removeTooltip": "{{appName}} deinstallieren",
