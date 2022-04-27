@@ -72,7 +72,7 @@ class StepperNumber extends PureComponent<Props, State> {
   };
 
   static getDerivedStateFromProps(nextProps: number, prevState: number) {
-    if (nextProps.value !== prevState.name) {
+    if (nextProps.value !== prevState.value) {
       return {
         value: nextProps.value,
       };
