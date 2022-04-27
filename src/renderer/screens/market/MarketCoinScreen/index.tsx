@@ -201,7 +201,7 @@ export default function MarketCoinScreen() {
   }, [dispatch, isStarred, id]);
 
   return currency && counterCurrency ? (
-    <Container>
+    <Container data-test-id="market-coin-page-container">
       <Track
         event="Page Market Coin"
         onMount
