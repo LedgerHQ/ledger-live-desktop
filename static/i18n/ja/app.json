@@ -1609,7 +1609,7 @@
         "not_supported": "サードパーティのウォレットが必要です",
         "addAccount": "アカウント追加",
         "addAccountTooltip": "{{appName}} アカウントを追加",
-        "addAccountWarn": "アプリのアップデート完了までお待ちください。",
+        "addAccountWarn": "Please wait for processing to finish",
         "learnMore": "詳細はこちら",
         "learnMoreTooltip": "{{appName}} についての詳細",
         "removeTooltip": "{{appName}} をアンインストール",
