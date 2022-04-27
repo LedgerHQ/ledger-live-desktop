@@ -1609,7 +1609,7 @@
         "not_supported": "타사 지갑 필요",
         "addAccount": "계정 추가",
         "addAccountTooltip": "{{appName}} 계정 추가",
-        "addAccountWarn": "앱 업데이트가 완료될 때까지 기다려 주세요",
+        "addAccountWarn": "Please wait for processing to finish",
         "learnMore": "자세히 알아보기",
         "learnMoreTooltip": "{{appName}}에 대해 자세히 알아보기",
         "removeTooltip": "{{appName}} 제거",
