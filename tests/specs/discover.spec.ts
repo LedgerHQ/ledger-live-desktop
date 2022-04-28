@@ -57,7 +57,7 @@ test.skip("Live App", async ({ page }) => {
 
   await test.step("List all accounts", async () => {
     await discoverPage.getAccountsList();
-    expect(await page.screenshot()).toMatchSnapshot({
+    expect.soft(await page.screenshot()).toMatchSnapshot({
       name: "live-app-list-all-accounts.png",
     });
   });
@@ -65,21 +65,21 @@ test.skip("Live App", async ({ page }) => {
   await test.step("Request Account modal - open", async () => {
     await discoverPage.requestAccount();
     await discoverPage.waitForSelectAccountModalToBeVisible();
-    expect(await page.screenshot()).toMatchSnapshot({
+    expect.soft(await page.screenshot()).toMatchSnapshot({
       name: "live-app-request-account-modal-1.png",
     });
   });
 
   await test.step("Request Account - account dropdown", async () => {
     await discoverPage.openAccountDropdown();
-    expect(await page.screenshot()).toMatchSnapshot({
+    expect.soft(await page.screenshot()).toMatchSnapshot({
       name: "live-app-request-account-modal-2.png",
     });
   });
 
   await test.step("Request Account - select BTC", async () => {
     await discoverPage.selectAccount();
-    expect(await page.screenshot()).toMatchSnapshot({
+    expect.soft(await page.screenshot()).toMatchSnapshot({
       name: "live-app-request-account-modal-3.png",
     });
   });
@@ -87,7 +87,7 @@ test.skip("Live App", async ({ page }) => {
   await test.step("Request Account - single account output", async () => {
     await discoverPage.exitModal();
     await discoverPage.letLiveAppLoad();
-    expect(await page.screenshot()).toMatchSnapshot({
+    expect.soft(await page.screenshot()).toMatchSnapshot({
       name: "live-app-request-single-account-output.png",
     });
   });
