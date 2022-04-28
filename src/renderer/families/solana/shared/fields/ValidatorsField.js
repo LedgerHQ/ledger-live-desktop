@@ -1,6 +1,6 @@
 // @flow
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
-import { useLedgerFirstShuffledValidators } from "@ledgerhq/live-common/lib/families/solana/react";
+import { useValidators } from "@ledgerhq/live-common/lib/families/solana/react";
 import type { ValidatorAppValidator } from "@ledgerhq/live-common/lib/families/solana/validator-app";
 import type { Account, TransactionStatus } from "@ledgerhq/live-common/lib/types";
 import invariant from "invariant";
@@ -32,7 +32,7 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
 
   const unit = getAccountUnit(account);
 
-  const validators = useLedgerFirstShuffledValidators(account.currency);
+  const validators = useValidators(account.currency);
 
   const chosenValidator = useMemo(() => {
     if (chosenVoteAccAddr !== null) {

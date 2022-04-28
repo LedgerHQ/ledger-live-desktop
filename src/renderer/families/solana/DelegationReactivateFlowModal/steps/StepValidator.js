@@ -2,7 +2,7 @@
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import {
   useSolanaStakesWithMeta,
-  useLedgerFirstShuffledValidators,
+  useValidators,
 } from "@ledgerhq/live-common/lib/families/solana/react";
 import invariant from "invariant";
 import React from "react";
@@ -49,7 +49,7 @@ export default function StepValidator({
 
   const unit = getAccountUnit(account);
 
-  const validators = useLedgerFirstShuffledValidators(account.currency);
+  const validators = useValidators(account.currency);
   const validator = validators.find(v => v.voteAccount === stake.delegation?.voteAccAddr);
 
   if (validator === undefined) {
