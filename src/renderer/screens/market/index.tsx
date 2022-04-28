@@ -1,15 +1,15 @@
-import React, { useMemo, useCallback } from "react";
-import { Flex, Button as BaseButton, Text, SearchInput, Dropdown } from "@ledgerhq/react-ui";
-import { useSelector } from "react-redux";
-import { starredMarketCoinsSelector } from "~/renderer/reducers/settings";
-import { useTranslation } from "react-i18next";
 import { useMarketData } from "@ledgerhq/live-common/lib/market/MarketDataProvider";
+import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
+import { Button as BaseButton, Dropdown, Flex, SearchInput, Text } from "@ledgerhq/react-ui";
+import React, { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
+import Track from "~/renderer/analytics/Track";
+import { starredMarketCoinsSelector } from "~/renderer/reducers/settings";
 import CounterValueSelect from "./CountervalueSelect";
 import MarketList from "./MarketList";
 import SideDrawerFilter from "./SideDrawerFilter";
-import { rangeDataTable } from "@ledgerhq/live-common/lib/market/utils/rangeDataTable";
-import Track from "~/renderer/analytics/Track";
 
 const Container = styled(Flex).attrs({
   flex: "1",
@@ -130,7 +130,7 @@ export default function Market() {
         <SelectBarContainer flexDirection="row" alignItems="center" justifyContent="flex-end">
           <Flex data-test-id="market-countervalue-select" justifyContent="flex-end" mx={4}>
             <CounterValueSelect
-              counterCurrency={counterCurrency}
+              counterCurrency={counterCurrency || ""}
               setCounterCurrency={setCounterCurrency}
               supportedCounterCurrencies={supportedCounterCurrencies}
             />

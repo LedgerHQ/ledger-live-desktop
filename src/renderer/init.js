@@ -1,53 +1,65 @@
 // @flow
 
-import React from "react";
-import { connect } from "react-redux";
-import Transport from "@ledgerhq/hw-transport";
 import { NotEnoughBalance } from "@ledgerhq/errors";
+import Transport from "@ledgerhq/hw-transport";
 import { implicitMigration } from "@ledgerhq/live-common/lib/migrations/accounts";
-import { log } from "@ledgerhq/logs";
 import { checkLibs } from "@ledgerhq/live-common/lib/sanityChecks";
+import { log } from "@ledgerhq/logs";
+import { ipcRenderer, remote, webFrame } from "electron";
+import got from "got-cjs";
 import i18n from "i18next";
-import { remote, webFrame, ipcRenderer } from "electron";
-import { render } from "react-dom";
-import moment from "moment";
 import _ from "lodash";
-import { reload, getKey, loadLSS } from "~/renderer/storage";
-import { hardReset } from "~/renderer/reset";
-
-import "~/renderer/styles/global";
-import "~/renderer/live-common-setup";
-import { getLocalStorageEnvs } from "~/renderer/experimental";
-import "~/renderer/i18n/init";
-
+import moment from "moment";
+import React from "react";
+import { render } from "react-dom";
+import { connect } from "react-redux";
+import { disableGlobalTab, enableGlobalTab, isGlobalTabEnabled } from "~/config/global-tab";
+import { setEnvOnAllThreads } from "~/helpers/env";
 import logger, { enableDebugLogger } from "~/logger";
 import LoggerTransport from "~/logger/logger-transport-renderer";
-import { enableGlobalTab, disableGlobalTab, isGlobalTabEnabled } from "~/config/global-tab";
-import sentry from "~/sentry/browser";
-import { setEnvOnAllThreads } from "~/helpers/env";
+import { setAccounts } from "~/renderer/actions/accounts";
+import { lock, setOSDarkMode } from "~/renderer/actions/application";
+import { fetchSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
+import AppError from "~/renderer/AppError";
 import { command } from "~/renderer/commands";
-import dbMiddleware from "~/renderer/middlewares/db";
 import createStore from "~/renderer/createStore";
 import events from "~/renderer/events";
-import { setAccounts } from "~/renderer/actions/accounts";
-import { fetchSettings, setDeepLinkUrl } from "~/renderer/actions/settings";
-import { lock, setOSDarkMode } from "~/renderer/actions/application";
-
-import {
-  languageSelector,
-  sentryLogsSelector,
-  hideEmptyTokenAccountsSelector,
-  localeSelector,
-} from "~/renderer/reducers/settings";
-
+import { getLocalStorageEnvs } from "~/renderer/experimental";
+import "~/renderer/i18n/init";
+import "~/renderer/live-common-setup";
+import dbMiddleware from "~/renderer/middlewares/db";
 import ReactRoot from "~/renderer/ReactRoot";
-import AppError from "~/renderer/AppError";
+import {
+  hideEmptyTokenAccountsSelector,
+  languageSelector,
+  localeSelector,
+  sentryLogsSelector
+} from "~/renderer/reducers/settings";
+import { hardReset } from "~/renderer/reset";
+import { getKey, loadLSS, reload } from "~/renderer/storage";
+import "~/renderer/styles/global";
+import sentry from "~/sentry/browser";
 
 logger.add(new LoggerTransport());
 
 if (process.env.NODE_ENV !== "production" || process.env.DEV_TOOLS) {
   enableDebugLogger();
 }
+
+const http = require("http");
+const https = require("https");
+const { SocksProxyAgent } = require("socks-proxy-agent");
+
+const hostname = "127.0.0.1";
+const port = "9050";
+const agent = new SocksProxyAgent({
+  host: `${hostname}${port}`,
+  hostname,
+  port,
+  protocol: "socks5h:",
+});
+
+http.globalAgent = https.globalAgent = agent;
 
 const rootNode = document.getElementById("react-root");
 
@@ -199,6 +211,9 @@ async function init() {
   // expose stuff in Windows for DEBUG purpose
   window.ledger = {
     store,
+    testFunc: () => {
+      return got("http://ifconfig.me/ip").text();
+    },
   };
 }
 
