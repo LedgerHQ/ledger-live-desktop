@@ -55,7 +55,7 @@ const AccountHeaderManageActions = ({ account }: Props) => {
 
   const disabledLabel = manageEnabled
     ? ""
-    : ` - ${t(
+    : `${t(
         _hasExternalController
           ? "polkadot.nomination.externalControllerTooltip"
           : _hasExternalStash
