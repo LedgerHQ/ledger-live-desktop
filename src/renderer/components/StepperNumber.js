@@ -75,9 +75,9 @@ class StepperNumber extends PureComponent<Props, State> {
     if (nextProps.value !== prevState.value) {
       return {
         value: nextProps.value,
-      }
+      };
     }
-  };
+  }
 
   _timeout = undefined;
 
