@@ -177,9 +177,15 @@ export const urls = {
         kyc: "https://support.ledger.com/hc/en-us/articles/4404422869265",
       },
       ftx: {
-        main: "",
+        main: "https://ftx.com",
         tos: "",
-        support: "",
+        support: "https://ftx.com/eu/support",
+        kyc: "",
+      },
+      ftxus: {
+        main: "https://ftx.us/",
+        tos: "",
+        support: "https://help.ftx.us/hc/en-us/articles/360043063474-Contact-Info",
         kyc: "",
       },
     },
