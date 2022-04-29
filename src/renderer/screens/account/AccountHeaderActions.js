@@ -130,6 +130,7 @@ const AccountHeaderSettingsButtonComponent = ({ account, parentAccount, openModa
 const AccountHeaderActions = ({ account, parentAccount, openModal }: Props) => {
   const mainAccount = getMainAccount(account, parentAccount);
   const contrastText = useTheme("colors.palette.text.shade60");
+  const isAccountHasToken = useMemo(() => !isAccountEmpty(account), [account.id]);
 
   const decorators = perFamilyAccountActions[mainAccount.currency.family];
   const manage = perFamilyManageActions[mainAccount.currency.family];
@@ -275,21 +276,17 @@ const AccountHeaderActions = ({ account, parentAccount, openModal }: Props) => {
 
   const ManageActionsHeader = manageActions.map(item => renderAction(item));
 
-  const NonEmptyAccountHeader = (
-    <FadeInButtonsContainer data-test-id="account-buttons-group" show={showButtons}>
-      {availableOnBuy && BuyHeader}
-      {availableOnSwap && SwapHeader}
-      {manageActions.length > 0 && ManageActionsHeader}
-      {canSend(account, parentAccount) && (
-        <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
-      )}
-      <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
-    </FadeInButtonsContainer>
-  );
-
   return (
     <Box horizontal alignItems="center" justifyContent="flex-end" flow={2} mt={15}>
-      {!isAccountEmpty(account) ? NonEmptyAccountHeader : null}
+      <FadeInButtonsContainer data-test-id="account-buttons-group" show={showButtons}>
+        {availableOnBuy && BuyHeader}
+        {isAccountHasToken && availableOnSwap && SwapHeader}
+        {manageActions.length > 0 && ManageActionsHeader}
+        {isAccountHasToken && canSend(account, parentAccount) && (
+          <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
+        )}
+        <ReceiveAction account={account} parentAccount={parentAccount} onClick={onReceive} />
+      </FadeInButtonsContainer>
     </Box>
   );
 };
