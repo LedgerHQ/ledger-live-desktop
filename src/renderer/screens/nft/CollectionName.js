@@ -34,7 +34,7 @@ type Props = {
 
 // TODO Make me pretty
 const CollectionName = ({ nft, fallback, account, showHideMenu }: Props) => {
-  const { status, metadata } = useNftCollectionMetadata(nft.contract, nft.currencyId);
+  const { status, metadata } = useNftCollectionMetadata(nft?.contract, nft?.currencyId);
   const { tokenName } = metadata || {};
   const loading = useMemo(() => status === "loading", [status]);
 
@@ -45,7 +45,7 @@ const CollectionName = ({ nft, fallback, account, showHideMenu }: Props) => {
         {account && showHideMenu && (
           <NFTCollectionContextMenu
             collectionName={tokenName || fallback || "-"}
-            collectionAddress={nft.contract}
+            collectionAddress={nft?.contract}
             account={account}
             leftClick={true}
           >

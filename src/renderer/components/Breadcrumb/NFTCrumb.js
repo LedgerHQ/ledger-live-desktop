@@ -22,12 +22,12 @@ const LabelWithMeta = ({
   isActive: boolean,
   item: {
     label: string,
-    content: ProtoNFT,
+    content?: ProtoNFT,
   },
 }) => (
   <Item isActive={isActive}>
     <Text ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
-      <CollectionName nft={item.content} fallback={item.content.contract} />
+      <CollectionName nft={item?.content} fallback={item?.content?.contract} />
     </Text>
     {isActive && (
       <Check>

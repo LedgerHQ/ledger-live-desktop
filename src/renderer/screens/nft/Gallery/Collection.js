@@ -1,7 +1,7 @@
 // @flow
 
 import React, { useMemo, useCallback, useRef, useState, useEffect, memo } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
@@ -48,6 +48,7 @@ const Collection = () => {
   const dispatch = useDispatch();
   const { id, collectionAddress } = useParams();
   const account = useSelector(state => accountSelector(state, { accountId: id }));
+  const history = useHistory();
 
   const nfts = useMemo(() => nftsByCollections(account.nfts, collectionAddress) || [], [
     account.nfts,
@@ -83,6 +84,13 @@ const Collection = () => {
   }, [isAtBottom]);
 
   const slicedNfts = useMemo(() => nfts.slice(0, maxVisibleNTFs), [nfts, maxVisibleNTFs]);
+
+  // Should redirect to the account page if there is not NFT anymore in the page.
+  useEffect(() => {
+    if (slicedNfts.length <= 0) {
+      history.push(`/account/${account.id}/`);
+    }
+  }, [account.id, history, slicedNfts.length]);
 
   return (
     <>
