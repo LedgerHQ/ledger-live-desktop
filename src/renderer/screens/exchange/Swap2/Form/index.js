@@ -88,13 +88,9 @@ export const useProviders = () => {
 };
 
 const SwapForm = () => {
-  // FIXME: refacto flows handleling. Have one state (enum) to represent current flow
-  // FIXME: refacto banner state. Have one state (enum) to represent current banner state
+  const [currentFlow, setCurrentFlow] = useState(null);
+  const [currentBanner, setCurrentBanner] = useState(null);
 
-  const [isInLoginFlow, setIsInLoginFlow] = useState(false);
-  const [isInKycFlow, setIsInKycFlow] = useState(false);
-  const [isInMfaFlow, setIsInMfaFlow] = useState(false);
-  const [showMFABanner, setShowMfaBanner] = useState(false);
   const [error, setError] = useState();
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -122,26 +118,34 @@ const SwapForm = () => {
   const providerKYC = swapKYC?.[provider];
   const kycStatus = providerKYC?.status;
 
-  console.log("TEST --- ", {
-    kycStatus,
-    isInKycFlow,
-    isInLoginFlow,
-    isInMfaFlow,
-  });
+  // On provider change, reset banner and flow
+  useEffect(() => {
+    setCurrentBanner(null);
+    setCurrentFlow(null);
+  }, [provider]);
 
-  const showLoginBanner =
-    !error && !showMFABanner && shouldShowLoginBanner({ provider, token: providerKYC?.id });
+  useEffect(() => {
+    // In case of error, don't show  login, kyc or mfa banner
+    if (error) {
+      return;
+    }
 
-  // we display the KYC banner component if partner requiers KYC and is not yet approved
-  // we don't display it if user needs to login first
-  const showKYCBanner =
-    !error && !showLoginBanner && !showMFABanner && shouldShowKYCBanner({ provider, kycStatus });
+    // Don't display login nor kyc banner if user needs to complete MFA
+    if (currentBanner === "MFA") {
+      return;
+    }
 
-  console.log("TEST --- ", {
-    showLoginBanner,
-    showKYCBanner,
-    showMFABanner,
-  });
+    if (shouldShowLoginBanner({ provider, token: providerKYC?.id })) {
+      setCurrentBanner("LOGIN");
+      return;
+    }
+
+    // we display the KYC banner component if partner requiers KYC and is not yet approved
+    // we don't display it if user needs to login first
+    if (currentBanner !== "LOGIN" && shouldShowKYCBanner({ provider, kycStatus })) {
+      setCurrentBanner("KYC");
+    }
+  }, [error, provider, providerKYC?.id, kycStatus, currentBanner]);
 
   const { setDrawer } = React.useContext(context);
 
@@ -195,7 +199,7 @@ const SwapForm = () => {
   // close login widget once we get a bearer token (i.e: the user is logged in)
   useEffect(() => {
     if (providerKYC?.id) {
-      setIsInLoginFlow(false);
+      setCurrentFlow(null);
     }
   }, [providerKYC?.id]);
 
@@ -205,7 +209,12 @@ const SwapForm = () => {
    * KYC related stuff should be handled in usePollKYCStatus
    */
   useEffect(() => {
-    if (!providerKYC?.id || !exchangeRate?.rateId || isInKycFlow || isInMfaFlow) {
+    if (
+      !providerKYC?.id ||
+      !exchangeRate?.rateId ||
+      currentFlow === "KYC" ||
+      currentFlow === "MFA"
+    ) {
       return;
     }
 
@@ -218,17 +227,14 @@ const SwapForm = () => {
         bearerToken: userId,
       });
 
-      console.log("TEST --- ", {
-        status,
-      });
-
       // User needs to complete MFA on partner own UI / dedicated widget
       // FIXME: status code should be "MFA_REQUIRED"
-      if (status.codeName === "UNKNOWN_ERROR(MFA_REQUIRED)") {
-        setShowMfaBanner(true);
+      if (status.codeName === "MFA_REQUIRED") {
+        setCurrentBanner("MFA");
+        return;
       } else {
         // No need to show MFA banner for other cases
-        setShowMfaBanner(false);
+        setCurrentBanner(null);
       }
 
       if (status.codeName === "RATE_VALID") {
@@ -239,9 +245,7 @@ const SwapForm = () => {
         }
 
         // If status is ok, close login, kyc and mfa widgets even if open
-        setIsInLoginFlow(false);
-        setIsInKycFlow(false);
-        setIsInMfaFlow(false);
+        setCurrentFlow(null);
 
         dispatch(
           setSwapKYCStatus({
@@ -281,25 +285,21 @@ const SwapForm = () => {
         return;
       }
 
+      // All other statuses are considered errors
       setError(status.codeName);
-
-      // FIXME: handle WITHDRAWALS_BLOCKED status. Could fall into a "generic error" and just redirect to partner website
-
-      // Handle all non KYC related errors
-      // FIXME: handle error messages (display generic error + CTA contact support)
     };
 
     handleCheckQuote();
-  }, [providerKYC, exchangeRate, dispatch, provider, kycStatus, isInKycFlow, isInMfaFlow]);
+  }, [providerKYC, exchangeRate, dispatch, provider, kycStatus, currentFlow]);
 
   const isSwapReady =
+    !error &&
     !swapTransaction.bridgePending &&
     exchangeRatesState.status !== "loading" &&
     swapTransaction.transaction &&
     !providersError &&
     !swapError &&
-    !showLoginBanner &&
-    !showKYCBanner &&
+    !currentBanner &&
     exchangeRate &&
     swapTransaction.swap.to.account;
 
@@ -317,16 +317,18 @@ const SwapForm = () => {
   const sourceCurrency = swapTransaction.swap.from.currency;
   const targetCurrency = swapTransaction.swap.to.currency;
 
-  if (isInLoginFlow) {
-    return <Login provider={provider} onClose={() => setIsInLoginFlow(false)} />;
-  }
+  switch (currentFlow) {
+    case "LOGIN":
+      return <Login provider={provider} onClose={() => setCurrentFlow(null)} />;
 
-  if (isInKycFlow) {
-    return <KYC provider={provider} onClose={() => setIsInKycFlow(false)} />;
-  }
+    case "KYC":
+      return <KYC provider={provider} onClose={() => setCurrentFlow(null)} />;
 
-  if (isInMfaFlow) {
-    return <MFA provider={provider} onClose={() => setIsInMfaFlow(false)} />;
+    case "MFA":
+      return <MFA provider={provider} onClose={() => setCurrentFlow(null)} />;
+
+    default:
+      break;
   }
 
   if (providers?.length)
@@ -357,20 +359,20 @@ const SwapForm = () => {
           provider={provider}
         />
 
-        {showLoginBanner ? (
-          <FormLoginBanner provider={provider} onClick={() => setIsInLoginFlow(true)} />
+        {currentBanner === "LOGIN" ? (
+          <FormLoginBanner provider={provider} onClick={() => setCurrentFlow("LOGIN")} />
         ) : null}
 
-        {showKYCBanner ? (
+        {currentBanner === "KYC" ? (
           <FormKYCBanner
             provider={provider}
             status={kycStatus}
-            onClick={() => setIsInKycFlow(true)}
+            onClick={() => setCurrentFlow("KYC")}
           />
         ) : null}
 
-        {showMFABanner ? (
-          <FormMFABanner provider={provider} onClick={() => setIsInMfaFlow(true)} />
+        {currentBanner === "MFA" ? (
+          <FormMFABanner provider={provider} onClick={() => setCurrentFlow("MFA")} />
         ) : null}
 
         {error ? <FormErrorBanner provider={provider} error={error} /> : null}
