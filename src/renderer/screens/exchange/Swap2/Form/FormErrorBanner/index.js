@@ -1,21 +1,26 @@
 // @flow
 import React from "react";
+import { openURL } from "~/renderer/linking";
+import { urls } from "~/config/urls";
 // import { useTranslation } from "react-i18next";
 
 import SectionInformative from "~/renderer/screens/exchange/Swap2/Form/FormSummary/SectionInformative";
+import { getProviderName } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 
 const FormErrorBanner = ({ provider, error }: { provider?: string, error: string }) => {
   // const { t } = useTranslation();
 
   if (!provider) return null;
 
-  // FIXME: get link to provider website
+  const openProviderSupport = () => openURL(urls.swap.providers[provider]?.support);
 
-  const onClick = () => {};
+  // FIXME: need proper wording / transaltion
 
-  const ctaLabel = "Go to partner website";
+  const ctaLabel = `Contact ${getProviderName(provider)} support`;
 
-  return <SectionInformative message={error} ctaLabel={ctaLabel} onClick={onClick} />;
+  const message = `Error: ${error}`;
+
+  return <SectionInformative message={message} ctaLabel={ctaLabel} onClick={openProviderSupport} />;
 };
 
 export default FormErrorBanner;
