@@ -92,12 +92,6 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
         });
       }
 
-      postSwapAccepted({
-        provider: exchangeRate.provider,
-        swapId,
-        transactionId: operation.hash,
-      });
-
       const mainAccount = getMainAccount(exchange.fromAccount, exchange.fromParentAccount);
 
       if (!mainAccount) return;
