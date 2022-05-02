@@ -128,16 +128,52 @@ type Props = {
   progress: number,
   error?: ?Error,
   isAlreadyBootloader?: boolean,
+  enableSomethingElseChoice?: boolean,
 };
 
-class RepairModal extends PureComponent<Props, *> {
-  state = {
-    selectedOption: null,
-  };
+type State = {
+  selectedOption: ChoiceOption | null,
+  availableRepairChoices: Array<ChoiceOption>,
+};
+
+class RepairModal extends PureComponent<Props, State> {
+  constructor(props: Props) {
+    super(props);
+
+    const availableRepairChoices = [...repairChoices];
+
+    if (props.enableSomethingElseChoice) {
+      availableRepairChoices.push({
+        forceMCU: "",
+        label: this.props.t("connectTroubleshooting.steps.4.repair.somethingElse"),
+        id: "somethingElse",
+      });
+    }
+
+    this.state = {
+      selectedOption: null,
+      availableRepairChoices,
+    };
+  }
 
   onSelectOption = selectedOption => {
     this.setState({ selectedOption });
     track(`${this.props.analyticsName}SelectOption`, { selectedOption });
+  };
+
+  onSubmit = () => {
+    const { selectedOption } = this.state;
+    const { onReject, repair } = this.props;
+
+    if (!selectedOption) {
+      return;
+    }
+
+    if (selectedOption.id === "somethingElse") {
+      onReject({ needHelp: true });
+    } else {
+      repair(selectedOption.forceMCU);
+    }
   };
 
   render() {
@@ -159,7 +195,7 @@ class RepairModal extends PureComponent<Props, *> {
       isAlreadyBootloader,
       ...props
     } = this.props;
-    const { selectedOption } = this.state;
+    const { selectedOption, availableRepairChoices } = this.state;
     const onClose = !cancellable && isLoading ? undefined : onReject;
     const disableRepair =
       isLoading || !selectedOption || !!(error && error instanceof MCUNotGenuineToDashboard);
@@ -190,7 +226,7 @@ class RepairModal extends PureComponent<Props, *> {
 
               {!isLoading && !error ? (
                 <Box py={2} px={5} color="palette.text.shade100" fontSize={4}>
-                  {repairChoices.map(choice => (
+                  {availableRepairChoices.map(choice => (
                     <Choice
                       key={choice.id}
                       onSelect={this.onSelectOption}
@@ -211,13 +247,15 @@ class RepairModal extends PureComponent<Props, *> {
                 <div style={{ flex: 1 }} />
                 <Button onClick={onReject}>{t(`common.${error ? "close" : "cancel"}`)}</Button>
                 <Button
-                  onClick={selectedOption ? () => repair(selectedOption.forceMCU) : null}
+                  onClick={this.onSubmit}
                   primary={!isDanger}
                   danger={isDanger}
                   isLoading={isLoading}
                   disabled={disableRepair}
                 >
-                  {t("settings.repairDevice.button")}
+                  {selectedOption?.id === "somethingElse"
+                    ? t("common.continue")
+                    : t("settings.repairDevice.button")}
                 </Button>
               </Box>
             ) : null
