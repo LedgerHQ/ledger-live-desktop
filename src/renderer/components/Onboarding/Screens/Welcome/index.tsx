@@ -127,7 +127,7 @@ export function Welcome({ setOpenedTermsModal }: Props) {
         </Presentation>
         <ProductHighlight>
           <Button
-            data-testid="onboarding-get-started-button"
+            data-test-id="v3-onboarding-get-started-button"
             iconPosition="right"
             Icon={Icons.ArrowRightMedium}
             variant="main"

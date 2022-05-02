@@ -136,6 +136,7 @@ export function SelectUseCase({ setUseCase, setOpenedPedagogyModal }: Props) {
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
+              dataTestId="v3-onboarding-initialized-device"
               id="initialized-device"
               title={
                 <Trans
