@@ -4,16 +4,40 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { languageSelector } from "~/renderer/reducers/settings";
 import { urls } from "~/config/urls";
+import logger from "~/logger/logger";
 
 const currentTermsRequired = "2022-04-14";
 const currentLendingTermsRequired = "2020-11-10";
 
+function isAcceptedVersionUpToDate(acceptedVersion, currentVersion) {
+  if (!acceptedVersion) {
+    return false;
+  }
+
+  try {
+    const acceptedTermsVersion = new Date(acceptedVersion);
+    const currentTermsVersion = new Date(currentVersion);
+
+    return acceptedTermsVersion >= currentTermsVersion;
+  } catch (error) {
+    logger.error(`Failed to parse terms version's dates: ${error}`);
+
+    return false;
+  }
+}
+
 export function isAcceptedTerms() {
-  return global.localStorage.getItem("acceptedTermsVersion") === currentTermsRequired;
+  return isAcceptedVersionUpToDate(
+    global.localStorage.getItem("acceptedTermsVersion"),
+    currentTermsRequired,
+  );
 }
 
 export function isAcceptedLendingTerms() {
-  return global.localStorage.getItem("acceptedLendingTermsVersion") === currentLendingTermsRequired;
+  return isAcceptedVersionUpToDate(
+    global.localStorage.getItem("acceptedLendingTermsVersion"),
+    currentLendingTermsRequired,
+  );
 }
 
 export function acceptTerms() {
