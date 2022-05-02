@@ -6,7 +6,7 @@ import { languageSelector } from "~/renderer/reducers/settings";
 import { urls } from "~/config/urls";
 import logger from "~/logger/logger";
 
-const currentTermsRequired = "2022-04-14";
+const currentTermsRequired = "2022-05-10";
 const currentLendingTermsRequired = "2020-11-10";
 
 function isAcceptedVersionUpToDate(acceptedVersion, currentVersion) {
