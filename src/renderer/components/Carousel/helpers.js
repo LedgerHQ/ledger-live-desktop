@@ -1,6 +1,6 @@
 // @flow
 import React, { useMemo } from "react";
-import _ from "lodash";
+import map from "lodash/map";
 import { Trans } from "react-i18next";
 import Slide from "./Slide";
 import { urls } from "~/config/urls";
@@ -270,7 +270,7 @@ export const useDefaultSlides = () => {
   return useMemo(
     () =>
       // $FlowFixMe
-      _.map(process.env.PLAYWRIGHT_RUN ? [SLIDES[2], SLIDES[1]] : SLIDES, (slide: Props) => ({
+      map(process.env.PLAYWRIGHT_RUN ? [SLIDES[2], SLIDES[1]] : SLIDES, (slide: Props) => ({
         id: slide.name,
         // eslint-disable-next-line react/display-name
         Component: () => <Slide {...slide} />,

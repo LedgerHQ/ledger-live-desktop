@@ -11,7 +11,7 @@ import i18n from "i18next";
 import { remote, webFrame, ipcRenderer } from "electron";
 import { render } from "react-dom";
 import moment from "moment";
-import _ from "lodash";
+import each from "lodash/each";
 import { reload, getKey, loadLSS } from "~/renderer/storage";
 import { hardReset } from "~/renderer/reset";
 
@@ -64,7 +64,7 @@ async function init() {
 
   if (process.env.PLAYWRIGHT_RUN) {
     const spectronData = await getKey("app", "PLAYWRIGHT_RUN", {});
-    _.each(spectronData.localStorage, (value, key) => {
+    each(spectronData.localStorage, (value, key) => {
       global.localStorage.setItem(key, value);
     });
 
