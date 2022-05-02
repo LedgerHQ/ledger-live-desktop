@@ -15,11 +15,12 @@ import { openModal, closeModal } from "~/renderer/actions/modals";
 type Props = {
   buttonProps?: *,
   onRepair?: boolean => void,
+  onClose?: ({ needHelp?: boolean }) => void,
   Component?: any,
 };
 
 const RepairDeviceButton: React$ComponentType<Props> = React.forwardRef(function RepairDevice(
-  { onRepair, buttonProps, Component }: Props,
+  { onRepair, onClose, buttonProps, Component }: Props,
   ref: React$ElementRef<*>,
 ) {
   const { t } = useTranslation();
@@ -52,18 +53,24 @@ const RepairDeviceButton: React$ComponentType<Props> = React.forwardRef(function
     setOpened(true);
   }, [dispatch]);
 
-  const close = useCallback(() => {
-    if (sub && sub.current) sub.current.unsubscribe();
-    if (timeout && timeout.current) clearTimeout(timeout.current);
-    if (onRepair) {
-      onRepair(false);
-    }
-    setOpened(false);
-    dispatch(closeModal("MODAL_STUB"));
-    setIsLoading(false);
-    setError(null);
-    setProgress(0);
-  }, [onRepair, dispatch]);
+  const close = useCallback(
+    ({ needHelp }: { needHelp?: boolean }) => {
+      if (sub && sub.current) sub.current.unsubscribe();
+      if (timeout && timeout.current) clearTimeout(timeout.current);
+      if (onRepair) {
+        onRepair(false);
+      }
+      if (onClose) {
+        onClose({ needHelp });
+      }
+      setOpened(false);
+      dispatch(closeModal("MODAL_STUB"));
+      setIsLoading(false);
+      setError(null);
+      setProgress(0);
+    },
+    [onRepair, onClose, dispatch],
+  );
 
   const repair = useCallback(
     (version = null) => {
@@ -123,6 +130,7 @@ const RepairDeviceButton: React$ComponentType<Props> = React.forwardRef(function
         desc={t("settings.repairDevice.desc")}
         progress={progress}
         error={error}
+        enableSomethingElseChoice
       />
     </>
   );
