@@ -76,7 +76,7 @@ export default function Order() {
 }
 
 type ItemProps = {
-  item: DropDownItemType,
+  item: DropDownItemType<>,
   isActive: boolean,
 };
 

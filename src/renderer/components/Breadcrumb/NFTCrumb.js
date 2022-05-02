@@ -3,8 +3,10 @@ import React, { useCallback, useMemo, memo } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
+import type { DropDownItemType } from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import IconCheck from "~/renderer/icons/Check";
@@ -13,17 +15,13 @@ import IconAngleUp from "~/renderer/icons/AngleUp";
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import CollectionName from "~/renderer/screens/nft/CollectionName";
-import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
 
 const LabelWithMeta = ({
   item,
   isActive,
 }: {
   isActive: boolean,
-  item: {
-    label: string,
-    content?: ProtoNFT,
-  },
+  item: DropDownItemType<ProtoNFT>,
 }) => (
   <Item isActive={isActive}>
     <Text ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
@@ -43,9 +41,9 @@ const NFTCrumb = () => {
   const account = useSelector(state => accountSelector(state, { accountId: id }));
   const collections = useMemo(() => nftsByCollections(account.nfts), [account.nfts]);
 
-  const items = useMemo(
+  const items: DropDownItemType<ProtoNFT>[] = useMemo(
     () =>
-      Object.entries(collections).map(([contract, nfts]: any) => ({
+      Object.entries(collections).map(([contract, nfts]: [string, any]) => ({
         key: contract,
         label: contract,
         content: nfts[0],
@@ -53,8 +51,8 @@ const NFTCrumb = () => {
     [collections],
   );
 
-  const activeItem = useMemo(
-    () => items.find((item: any) => item.key === collectionAddress) || items[0],
+  const activeItem: ?DropDownItemType<ProtoNFT> = useMemo(
+    () => items.find(item => item.key === collectionAddress) || items[0],
     [collectionAddress, items],
   );
 
@@ -98,7 +96,7 @@ const NFTCrumb = () => {
               <TextLink>
                 <Button>
                   <CollectionName
-                    nft={activeItem.content}
+                    nft={activeItem?.content}
                     fallback={activeItem?.content?.contract}
                   />
                 </Button>
