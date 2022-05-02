@@ -133,9 +133,9 @@ const StepDevice = ({
       key={"initSwap"}
       action={action2}
       request={request}
-      onResult={({ initSwapResult, initSwapError, ...rest }) => {
-        if (initSwapError) {
-          onError(initSwapError);
+      onResult={({ initSwapResult, initSwapErrorResult, ...rest }) => {
+        if (initSwapErrorResult) {
+          onError(initSwapErrorResult);
         } else {
           setSwapData(initSwapResult);
         }
