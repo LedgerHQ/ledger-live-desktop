@@ -214,6 +214,7 @@ export const urls = {
     ledgerByFigmentTC: "https://drive.google.com/file/d/1vlIh2gTwtbMon8_bzFQGjCLhTUqS5uQc",
   },
   hedera: {
-    supportArticleLink: "https://launchbadge.com/blog/using-a-ledger-nano-to-create-your-hedera-account",
+    supportArticleLink:
+      "https://launchbadge.com/blog/using-a-ledger-nano-to-create-your-hedera-account",
   },
 };

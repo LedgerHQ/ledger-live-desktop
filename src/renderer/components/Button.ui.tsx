@@ -47,7 +47,7 @@ export default function Button({
     }
   };
   const inner = (
-    <Base {...rest} onClick={isClickDisabled ? undefined : onClickHandler}>
+    <Base {...rest} disabled={disabled} onClick={isClickDisabled ? undefined : onClickHandler}>
       {children}
     </Base>
   );

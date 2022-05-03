@@ -36,6 +36,15 @@ const RepairFunnelSolution = ({
     [repairRef, sendEvent],
   );
 
+  const onRepairDeviceClose = useCallback(
+    ({ needHelp }) => {
+      if (needHelp) {
+        sendEvent("DONE", { deviceModel: "nanoS" });
+      }
+    },
+    [sendEvent],
+  );
+
   return !done ? (
     <Wrapper>
       <Title>{t("connectTroubleshooting.steps.4.deviceSelection.title")}</Title>
@@ -43,7 +52,7 @@ const RepairFunnelSolution = ({
         {t("connectTroubleshooting.steps.4.deviceSelection.desc")}
       </Subtitle>
       <div style={{ display: "none" }}>
-        <RepairDeviceButton ref={repairRef} />
+        <RepairDeviceButton ref={repairRef} onClose={onRepairDeviceClose} />
       </div>
       <DeviceSelector onClick={onSelectDevice} />
     </Wrapper>

@@ -24,13 +24,6 @@ type Props = {
   onChangeValidator: (v: ValidatorAppValidator) => void,
 };
 
-const MaybeValidatorField = ({ status }: Props) => {
-  if (!status) return null;
-
-  // $FlowFixMe FIXME Not sure what's wrong here
-  return ValidatorField;
-};
-
 const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, status }: Props) => {
   invariant(account && account.solanaResources, "solana account and resources required");
 
@@ -60,7 +53,6 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
 
   /** auto focus first input on mount */
   useEffect(() => {
-    /** $FlowFixMe */
     if (containerRef && containerRef.current && containerRef.current.querySelector) {
       const firstInput = containerRef.current.querySelector("input");
       if (firstInput && firstInput.focus) firstInput.focus();
@@ -128,4 +120,4 @@ const SeeAllButton: ThemedComponent<{ expanded: boolean }> = styled.div`
   }
 `;
 
-export default MaybeValidatorField;
+export default ValidatorField;

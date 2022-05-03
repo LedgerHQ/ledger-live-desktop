@@ -58,6 +58,13 @@ const Gallery = () => {
     [account.id, account.nfts, hiddenNftCollections],
   );
 
+  // Should redirect to the account page if there is not NFT anymore in the page.
+  useEffect(() => {
+    if (collections.length <= 0) {
+      history.push(`/account/${account.id}/`);
+    }
+  }, [account.id, history, collections.length]);
+
   const onSend = useCallback(() => {
     dispatch(openModal("MODAL_SEND", { account, isNFTSend: true }));
   }, [dispatch, account]);

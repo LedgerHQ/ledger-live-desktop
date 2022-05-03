@@ -3,8 +3,10 @@ import React, { useCallback, useMemo, memo } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import DropDownSelector from "~/renderer/components/DropDownSelector";
+import type { DropDownItemType } from "~/renderer/components/DropDownSelector";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import IconCheck from "~/renderer/icons/Check";
@@ -20,14 +22,11 @@ const LabelWithMeta = ({
   isActive,
 }: {
   isActive: boolean,
-  item: {
-    label: string,
-    content: ProtoNFT,
-  },
+  item: DropDownItemType<ProtoNFT>,
 }) => (
   <Item isActive={isActive}>
     <Text ff={`Inter|${isActive ? "SemiBold" : "Regular"}`} fontSize={4}>
-      <CollectionName nft={item.content} fallback={item.content.contract} />
+      <CollectionName nft={item?.content} fallback={item?.content?.contract} />
     </Text>
     {isActive && (
       <Check>
@@ -43,9 +42,13 @@ const NFTCrumb = () => {
   const account = useSelector(state => accountSelector(state, { accountId: id }));
   const collections = useMemo(() => nftsByCollections(account.nfts), [account.nfts]);
 
-  const items = useMemo(
+  const items: DropDownItemType<ProtoNFT>[] = useMemo(
     () =>
+<<<<<<< HEAD
       Object.entries(collections).map(([contract, nfts]: any) => ({
+=======
+      Object.entries(collections).map(([contract, nfts]: [string, any]) => ({
+>>>>>>> ledgerhq/develop
         key: contract,
         label: contract,
         content: nfts[0],
@@ -53,17 +56,21 @@ const NFTCrumb = () => {
     [collections],
   );
 
+<<<<<<< HEAD
   const activeItem = useMemo(
     () => items.find((item: any) => item.nft?.contract === collectionAddress) || items[0],
+=======
+  const activeItem: ?DropDownItemType<ProtoNFT> = useMemo(
+    () => items.find(item => item.key === collectionAddress) || items[0],
+>>>>>>> ledgerhq/develop
     [collectionAddress, items],
   );
 
   const onCollectionSelected = useCallback(
     item => {
       if (!item) return;
-      const { collection } = item;
       setTrackingSource("NFT breadcrumb");
-      history.push({ pathname: `/account/${account.id}/nft-collection/${collection.contract}` });
+      history.push({ pathname: `/account/${account.id}/nft-collection/${item.key}` });
     },
     [account.id, history],
   );
@@ -99,7 +106,11 @@ const NFTCrumb = () => {
               <TextLink>
                 <Button>
                   <CollectionName
+<<<<<<< HEAD
                     nft={activeItem.content}
+=======
+                    nft={activeItem?.content}
+>>>>>>> ledgerhq/develop
                     fallback={activeItem?.content?.contract}
                   />
                 </Button>

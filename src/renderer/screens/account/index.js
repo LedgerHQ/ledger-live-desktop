@@ -120,7 +120,8 @@ const AccountPage = ({
         flow={4}
         style={{
           width: "100%",
-          overflowX: "scroll",
+          overflowX: "visible",
+          marginBottom: "30px",
         }}
       >
         <AccountHeaderActions account={account} parentAccount={parentAccount} />

@@ -18,6 +18,7 @@
 | Elrond | EGLD | YES | elrond |
 | Ethereum | ETH | YES | ethereum |
 | Ethereum Classic | ETC | YES | ethereum_classic |
+| Hedera | HBAR | YES | hedera |
 | Horizen | ZEN | YES | zencash |
 | Komodo | KMD | YES | komodo |
 | Litecoin | LTC | YES | litecoin |
@@ -60,7 +61,6 @@
 | GameCredits | GAME | NO | game_credits |
 | GoChain | GO | NO | gochain |
 | Groestlcoin | GRS | NO | groestcoin |
-| Hedera | HBAR | NO | hedera |
 | Helium | HNT | NO | helium |
 | High Performance Blockchain | HPB | NO | hpb |
 | Hycon | HYC | NO | hycon |

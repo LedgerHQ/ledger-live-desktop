@@ -130,6 +130,36 @@ export const lottieAnimations = {
       dark: NanoSPPlugDeviceDark,
     },
   },
+  nanoFTS: {
+    confirmWords: {
+      light: NanoSConfirmWordsLight,
+      dark: NanoSConfirmWordsDark,
+    },
+    numberOfWords: {
+      light: NanoSNumberOfWordsLight,
+      dark: NanoSNumberOfWordsDark,
+    },
+    pinCode: {
+      light: NanoSPinCodeLight,
+      dark: NanoSPinCodeDark,
+    },
+    powerOnRecovery: {
+      light: NanoSPowerOnRecoveryLight,
+      dark: NanoSPowerOnRecoveryDark,
+    },
+    powerOn: {
+      light: NanoSPowerOnLight,
+      dark: NanoSPowerOnDark,
+    },
+    recover: {
+      light: NanoSRecoverLight,
+      dark: NanoSRecoverDark,
+    },
+    plugDevice: {
+      light: NanoSPlugDeviceLight,
+      dark: NanoSPlugDeviceDark,
+    },
+  },
   nanoX: {
     confirmWords: {
       light: NanoXConfirmWordsLight,
