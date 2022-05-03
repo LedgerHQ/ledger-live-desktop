@@ -1055,7 +1055,7 @@
     "hideCTA": "Token ausblenden"
   },
   "hideNftCollection": {
-    "title": "NFT-Sammlung ausblenden",
+    "title": "Hide NFT Collection",
     "desc": "Diese Aktion wird alle NFTs aus der <1><0>{{collectionName}}</0></1> Sammlung ausblenden. Sie können sie erneut mit <3>Einstellungen</3> anzeigen",
     "hideCTA": "NFT-Sammlung ausblenden"
   },
