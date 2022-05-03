@@ -255,7 +255,7 @@ const Delegation = (props: Props) => {
               <Box mt={2}>
                 <LinkWithExternalIcon
                   label={<Trans i18nKey="elrond.delegation.emptyState.info" />}
-                  onClick={() => openURL(urls.stakingCosmos)}
+                  onClick={() => openURL(urls.elrondStaking)}
                 />
               </Box>
             </Box>
