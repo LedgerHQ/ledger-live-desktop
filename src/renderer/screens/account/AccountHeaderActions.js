@@ -1,24 +1,38 @@
 // @flow
 
-import React, { useCallback, useMemo } from "react";
-import { compose } from "redux";
-import { connect } from "react-redux";
-import { withTranslation, Trans } from "react-i18next";
-import styled from "styled-components";
-import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import Tooltip from "~/renderer/components/Tooltip";
 import {
-  isAccountEmpty,
   canSend,
-  getMainAccount,
   getAccountCurrency,
+  getMainAccount,
+  isAccountEmpty,
 } from "@ledgerhq/live-common/lib/account";
 import { makeCompoundSummaryForAccount } from "@ledgerhq/live-common/lib/compound/logic";
+import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
+import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
+import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
+import React, { useCallback, useMemo } from "react";
 import type { TFunction } from "react-i18next";
-import { rgba } from "~/renderer/styles/helpers";
+import { Trans, withTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { compose } from "redux";
+import styled from "styled-components";
 import { openModal } from "~/renderer/actions/modals";
-import IconAccountSettings from "~/renderer/icons/AccountSettings";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import Box, { Tabbable } from "~/renderer/components/Box";
+import Star from "~/renderer/components/Stars/Star";
+import Tooltip from "~/renderer/components/Tooltip";
+import perFamilyAccountActions from "~/renderer/generated/accountActions";
+import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
+import useTheme from "~/renderer/hooks/useTheme";
+import IconAccountSettings from "~/renderer/icons/AccountSettings";
+import IconCoins from "~/renderer/icons/ClaimReward";
+import Graph from "~/renderer/icons/Graph";
+import IconWalletConnect from "~/renderer/icons/WalletConnect";
+import { useProviders } from "~/renderer/screens/exchange/Swap2/Form";
+import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
+import { rgba } from "~/renderer/styles/helpers";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import {
   ActionDefault,
   BuyActionDefault,
@@ -26,20 +40,6 @@ import {
   SendActionDefault,
   SwapActionDefault,
 } from "./AccountActionsDefault";
-import perFamilyAccountActions from "~/renderer/generated/accountActions";
-import perFamilyManageActions from "~/renderer/generated/AccountHeaderManageActions";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { useHistory } from "react-router-dom";
-import IconWalletConnect from "~/renderer/icons/WalletConnect";
-import IconCoins from "~/renderer/icons/ClaimReward";
-import Graph from "~/renderer/icons/Graph";
-import { setTrackingSource } from "~/renderer/analytics/TrackPage";
-import useTheme from "~/renderer/hooks/useTheme";
-import useCompoundAccountEnabled from "~/renderer/screens/lend/useCompoundAccountEnabled";
-import { useProviders } from "~/renderer/screens/exchange/Swap2/Form";
-import { useRampCatalog } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider";
-import { getAllSupportedCryptoCurrencyIds } from "@ledgerhq/live-common/lib/platform/providers/RampCatalogProvider/helpers";
-import Star from "~/renderer/components/Stars/Star";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -221,9 +221,10 @@ const AccountHeaderActions = ({ account, parentAccount, openModal }: Props) => {
     openModal("MODAL_RECEIVE", { parentAccount, account });
   }, [parentAccount, account, openModal]);
 
-  const renderAction = ({ label, onClick, event, eventProperties, icon, disabled }) => {
+  const renderAction = ({ label, onClick, event, eventProperties, icon, disabled, tooltip }) => {
     const Icon = icon;
-    return (
+
+    const Action = (
       <ActionDefault
         disabled={disabled}
         onClick={onClick}
@@ -233,6 +234,12 @@ const AccountHeaderActions = ({ account, parentAccount, openModal }: Props) => {
         labelComponent={label}
       />
     );
+
+    if (tooltip) {
+      return <Tooltip content={tooltip}>{Action}</Tooltip>;
+    }
+
+    return Action;
   };
 
   const manageActions: {
@@ -242,6 +249,7 @@ const AccountHeaderActions = ({ account, parentAccount, openModal }: Props) => {
     eventProperties?: Object,
     icon: React$ComponentType<{ size: number }> | (({ size: number }) => React$Element<any>),
     disabled?: boolean,
+    tooltip?: string,
   }[] = [
     ...manageList,
     ...(availableOnCompound
@@ -277,9 +285,9 @@ const AccountHeaderActions = ({ account, parentAccount, openModal }: Props) => {
 
   const NonEmptyAccountHeader = (
     <FadeInButtonsContainer data-test-id="account-buttons-group" show={showButtons}>
-      {availableOnBuy && BuyHeader}
-      {availableOnSwap && SwapHeader}
       {manageActions.length > 0 && ManageActionsHeader}
+      {availableOnSwap && SwapHeader}
+      {availableOnBuy && BuyHeader}
       {canSend(account, parentAccount) && (
         <SendAction account={account} parentAccount={parentAccount} onClick={onSend} />
       )}
