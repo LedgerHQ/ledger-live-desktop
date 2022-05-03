@@ -62,9 +62,13 @@ export default function StepDelegation({
 
   useEffect(() => {
     const fetchEstimation = async () => {
-      const balance = await estimateMaxSpendable({ account, transaction });
+      try {
+        const balance = await estimateMaxSpendable({ account, transaction });
 
-      setInitialAmount(BigNumber(balance));
+        setInitialAmount(BigNumber(balance));
+      } catch (error) {
+        setInitialAmount(BigNumber(0));
+      }
     };
 
     fetchEstimation();

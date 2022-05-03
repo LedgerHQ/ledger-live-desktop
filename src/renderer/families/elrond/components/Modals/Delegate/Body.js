@@ -118,7 +118,9 @@ const Body = ({
     return {
       account,
       parentAccount: undefined,
-      transaction,
+      transaction: bridge.updateTransaction(transaction, {
+        mode: "delegate",
+      }),
     };
   });
 
