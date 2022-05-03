@@ -133,15 +133,26 @@ const OperationD: React$ComponentType<Props> = (props: Props) => {
   const location = useLocation();
 
   const mainAccount = getMainAccount(account, parentAccount);
-  const { extra, hash, date, senders, type, fee, recipients: _recipients } = operation;
+  const {
+    extra,
+    hash,
+    date,
+    senders,
+    type,
+    fee,
+    recipients: _recipients,
+    contract,
+    tokenId,
+  } = operation;
   const recipients = _recipients.filter(Boolean);
   const { name } = mainAccount;
-  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId);
   const isNftOperation = ["NFT_IN", "NFT_OUT"].includes(operation.type);
-  const show = useMemo(() => status === "loading", [status]);
 
   const currency = getAccountCurrency(account);
   const mainCurrency = getAccountCurrency(mainAccount);
+
+  const { status, metadata } = useNftMetadata(contract, tokenId, currency.id);
+  const show = useMemo(() => status === "loading", [status]);
 
   const unit = getAccountUnit(account);
 

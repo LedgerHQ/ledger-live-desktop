@@ -1054,6 +1054,11 @@
     "desc": "Bu eylem tüm <1><0>{{tokenName}}</0></1> hesaplarını gizler; <3>Ayarlar'ı</3> kullanarak tekrar görünür hale getirebilirsiniz",
     "hideCTA": "Token'ı gizle"
   },
+  "hideNftCollection": {
+    "title": "NFT Koleksiyonunu Sakla",
+    "desc": "Bu eylem <1><0>{{collectionName}}</0></1> koleksiyonundaki tüm NFT'leri gizler; <3>Ayarlar'ı</3> kullanarak tekrar görünür hale getirebilirsiniz",
+    "hideCTA": "NFT Koleksiyonunu Sakla"
+  },
   "banners": {
     "cleanCache": {
       "title": "Deneysel ayarların değiştirilmesi için önbellek temiz olmalıdır",
@@ -1136,9 +1141,9 @@
       },
       "confirm": {
         "title": "Bağlan",
-        "details": "Cüzdanınız üzerinden bağlanmak istenen Ethereum hesabı:",
-        "deeplinkDetails": "Ledger Live'a bağlanmak istiyor. Ethereum adresinizi seçin:",
-        "noEthAccount": "Ethereum hesabınız yok. Wallet Connect kullanmak için lütfen bir Ethereum hesabı ekleyin.",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "Başka bir dApp bağlıyken yeni bir dApp'e bağlanmaya çalışıyorsunuz. Live'ı yeni bir dApp'e bağlamadan önce lütfen bağlı olduğunuz dApp'in bağlantısını kesin."
       }
     },
@@ -2098,7 +2103,7 @@
         "title": "Yetki Devri",
         "steps": {
           "starter": {
-            "description": "ATOM varlıklarınızın yetkisini bir doğrulayıcıya devrederek ödüller kazanabilirsiniz.",
+            "description": "ATOM varlıklarınızla bir doğrulayıcıya yetki devrederek ödüller kazanabilirsiniz.",
             "bullet": [
               "Yetki devrinde kullanılan varlıklar size ait olmaya devam eder.",
               "Ledger cihazınızı kullanarak yetki devredin.",
@@ -2553,6 +2558,115 @@
       }
     }
   },
+  "solana": {
+    "common": {
+      "broadcastError": "İşleminiz başarısız olmuş olabilir. Lütfen biraz bekleyin ve tekrar denemeden önce işlem geçmişini kontrol edin.",
+      "viewDetails": "Ayrıntıları göster",
+      "connectDevice": {
+        "title": "Cihaz"
+      },
+      "confirmation": {
+        "title": "Onay"
+      }
+    },
+    "delegation": {
+      "totalStake": "Toplam Stake",
+      "commission": "Komisyon",
+      "delegate": "Ekle",
+      "listHeader": "Yetki devirleri",
+      "availableBalance": "Mevcut bakiye",
+      "active": "Aktif",
+      "activeTooltip": "Aktif tutar, ödül üretmeye devam eder",
+      "inactiveTooltip": "İnaktif tutar ödül üretmez",
+      "delegatedInfoTooltip": "Doğrulayıcılara yetkisi devredilen toplam tutar.",
+      "withdrawableInfoTooltip": "Yetki devirlerinden çekilebilecek toplam tutar.",
+      "withdrawableTitle": "Çekilebilir",
+      "statusUpdateNotice": "İşlem onaylandığında yetki devrinin durumu güncellenecek.",
+      "ledgerByFigmentTC": "Ledger by Figment Hüküm ve Koşullar",
+      "emptyState": {
+        "description": "Varlıklarınızla yetki devrederek SOL ödülleri kazanabilirsiniz.",
+        "info": "Yetki Devri nasıl çalışır?",
+        "delegation": "Ödüller kazanın"
+      },
+      "earnRewards": {
+        "description": "SOL varlıklarınızla bir doğrulayıcıya yetki devrederek ödüller kazanabilirsiniz.",
+        "bullet": {
+          "0": "Yetki devrinde kullanılan varlıklar size ait olmaya devam eder",
+          "1": "Ledger cihazınızı kullanarak yetki devredin",
+          "2": "Varlıklar yetki iptalinden sonra mevcut olacak"
+        },
+        "warning": "Doğrulayıcınızı dikkatle seçin: Doğrulayıcının yanlış kararlar vermesi halinde yetki devrinde kullandığınız varlıkların bir kısmını geri dönülemez bir şekilde kaybedebilirsiniz."
+      },
+      "flow": {
+        "title": "Yetki Devri",
+        "steps": {
+          "validator": {
+            "title": "Doğrulayıcı"
+          },
+          "amount": {
+            "title": "Tutar"
+          },
+          "confirmation": {
+            "success": {
+              "title": "Varlıklarınızla başarıyla yetki devrettiniz"
+            }
+          }
+        }
+      },
+      "withdraw": {
+        "flow": {
+          "title": "Çekim",
+          "steps": {
+            "amount": {
+              "title": "Tutar"
+            },
+            "confirmation": {
+              "success": {
+                "title": "Varlıklarınızı başarıyla çektiniz.",
+                "text": "İşlem onaylandığında hesap bakiyeniz güncellenecek."
+              }
+            }
+          }
+        }
+      },
+      "activate": {
+        "flow": {
+          "title": "Etkinleştir",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Yetki devrinizi başarıyla etkinleştirdiniz."
+              }
+            }
+          }
+        }
+      },
+      "reactivate": {
+        "flow": {
+          "title": "Yeniden Etkinleştir",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Yetki devrinizi başarıyla yeniden etkinleştirdiniz."
+              }
+            }
+          }
+        }
+      },
+      "deactivate": {
+        "flow": {
+          "title": "Devre dışı bırak",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Yetki devrinizi başarıyla devre dışı bıraktınız."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "Ödüller kazanın",
     "header": "Yetki Devri",
@@ -2760,10 +2874,6 @@
           "title": "TronGrid.io kullanın",
           "description": "Trongrid'i doğrudan Ledger sunucusu olmadan kullanın"
         },
-        "experimentalJSCurrencies": {
-          "title": "Deneysel JS uygulamaları",
-          "description": "Tezos ve Cosmos için deneysel JS uygulamalarını kullanın."
-        },
         "experimentalCurrencies": {
           "title": "Deneysel entegrasyonlar",
           "description": "Mevcut deneysel kripto varlık entegrasyonlarını kullanın."
@@ -2847,6 +2957,12 @@
         "desc": "Token'ları gizlemek için ana hesaba gidin, token ismine sağ tıklayın ve 'Token'ı gizle' seçeneğini seçin.",
         "count": "{{count}} token",
         "count_plural": "{{count}} token"
+      },
+      "hiddenNftCollections": {
+        "title": "Gizli NFT Koleksiyonları",
+        "desc": "NFT Koleksiyonlarınızı, koleksiyon adı üzerinde sağ tıklayarak ve 'NFT Koleksiyonunu Gizle' seçeneğini kullanarak gizleyebilirsiniz.",
+        "count": "{{count}} koleksiyon",
+        "count_plural": "{{count}} koleksiyon"
       },
       "fullNode": {
         "title": "Bitcoin tam düğümü bağlayın",
@@ -4128,6 +4244,9 @@
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "Ana hesapta yetersiz bakiye"
+    },
+    "quantityNeedsToBePositive": {
+      "title": "Miktar en az 1 olmalıdır"
     },
     "NotEnoughSpendableBalance": {
       "title": "Bakiye {{minimumAmount}} altında olamaz"

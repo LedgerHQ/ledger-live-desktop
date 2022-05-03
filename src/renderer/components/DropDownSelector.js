@@ -48,10 +48,11 @@ const DropContainer: ThemedComponent<{}> = styled.div`
   }
 `;
 
-export type DropDownItemType = {
+export type DropDownItemType<ContentType = any> = {
   key: string,
   label: any,
   disabled?: boolean,
+  content?: ContentType,
 };
 
 const OptionContainer = styled.div`
@@ -64,13 +65,13 @@ const ButtonContainer = styled.div`
 `;
 
 type Props = {
-  children: (props: { isOpen: ?boolean, value: ?DropDownItemType }) => React$Node,
-  items: DropDownItemType[],
+  children: (props: { isOpen: ?boolean, value: ?DropDownItemType<> }) => React$Node,
+  items: DropDownItemType<>[],
   onChange?: (value: any) => void,
   renderItem: (props: { isActive: boolean, item: any }) => React$Node | null,
-  value?: ?DropDownItemType,
+  value?: ?DropDownItemType<>,
   controlled?: boolean,
-  defaultValue?: ?DropDownItemType,
+  defaultValue?: ?DropDownItemType<>,
   buttonId?: string,
 };
 
