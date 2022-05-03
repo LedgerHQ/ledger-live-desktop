@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
@@ -37,9 +37,9 @@ type NFTPropertiesProps = {
   status: string,
 };
 
-export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
+export function NFTProperties({ nft, metadata, status }: NFTPropertiesProps) {
   const { t } = useTranslation();
-  const showSkeleton = status === "loading";
+  const showSkeleton = useMemo(() => status === "loading", [status]);
   if (!metadata?.properties?.length) return null;
 
   return (

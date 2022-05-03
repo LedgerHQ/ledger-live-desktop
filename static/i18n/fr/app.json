@@ -52,7 +52,7 @@
     "disclaimer": {
       "title": "Application externe",
       "description": "Vous allez être redirigé(e) vers une application non exploitée par Ledger.",
-      "legalAdvice": "Cette application n'est pas exploitée par Ledger. Ledger ne saurait être tenu responsable de toute perte de fonds ou qualité de service due à cette application.\n\nVérifiez toujours les informations affichées sur votre appareil.",
+      "legalAdvice": "Cette application n'est pas exploitée par Ledger. Ledger ne saurait être tenue responsable de toute perte de fonds ou qualité de service due à cette application.\n\nVérifiez toujours les informations affichées sur votre appareil.",
       "checkbox": "Ne plus me le rappeler",
       "CTA": "Continuer"
     }
@@ -1054,6 +1054,11 @@
     "desc": "Cette action masquera tous vos comptes <1><0>{{tokenName}}</0></1>. Vous pouvez restaurer leur visibilité à tout moment dans les <3>Paramètres</3>",
     "hideCTA": "Masquer le token"
   },
+  "hideNftCollection": {
+    "title": "Cacher la collection de NFT",
+    "desc": "Cachez tous les NFT de la collection <1><0>{{collectionName}}</0></1>. Vous pourrez les afficher à nouveau à partir des <3>Paramètres</3>.",
+    "hideCTA": "Cacher la collection de NFT"
+  },
   "banners": {
     "cleanCache": {
       "title": "La modification des paramètres expérimentaux nécessite de vider le cache.",
@@ -1136,9 +1141,9 @@
       },
       "confirm": {
         "title": "Connecter",
-        "details": "Souhaite se connecter au compte Ethereum suivant à l'aide de votre wallet :",
-        "deeplinkDetails": "Souhaite se connecter à Ledger Live. Choisissez votre compte Ethereum :",
-        "noEthAccount": "Vous n'avez pas de compte Ethereum. Veuillez ajouter un compte Ethereum pour utiliser WalletConnect.",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "Ledger Live est déjà connecté à une dApp. Veuillez vous déconnecter de la dApp actuellement connectée, puis connectez Ledger Live à la nouvelle dApp."
       }
     },
@@ -1379,7 +1384,7 @@
     },
     "fullNodeReadyInfo": "Les comptes seront ajoutés en utilisant votre nœud Bitcoin.",
     "fullNodeConfigure": "Configurer le nœud",
-    "tokensTip": "{{token}} ({{ticker}}) est un token {{tokenType}}. Vous pouvez recevoir des tokens directement sur un compte {{currency}}.",
+    "tokensTip": "{{token}} ({{ticker}}) est un token {{tokenType}}. Vous pouvez recevoir ces tokens directement sur un compte {{currency}}.",
     "accountToImportSubtitle_plural": "Ajouter des comptes existants",
     "selectAll": "Sélectionner tout ({{count}})",
     "unselectAll": "Désélectionner tout ({{count}})",
@@ -2553,6 +2558,115 @@
       }
     }
   },
+  "solana": {
+    "common": {
+      "broadcastError": "Échec probable de votre transaction. Patientez un instant puis vérifiez l'historique des transactions avant de réessayer.",
+      "viewDetails": "Voir les détails",
+      "connectDevice": {
+        "title": "Appareil"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    },
+    "delegation": {
+      "totalStake": "Stake total",
+      "commission": "Commission",
+      "delegate": "Ajouter",
+      "listHeader": "Délégations",
+      "availableBalance": "Solde disponible",
+      "active": "Actif",
+      "activeTooltip": "Montant actif générant des récompenses",
+      "inactiveTooltip": "Montant inactif ne générant pas de récompenses",
+      "delegatedInfoTooltip": "Montant total délégué à des validateurs",
+      "withdrawableInfoTooltip": "Montant total pouvant être retiré des délégations",
+      "withdrawableTitle": "Disponible au retrait",
+      "statusUpdateNotice": "Le statut de la délégation sera mis à jour une fois la transaction confirmée.",
+      "ledgerByFigmentTC": "Conditions d'utilisation de Ledger by Figment",
+      "emptyState": {
+        "description": "Vous pouvez gagner des récompenses SOL en déléguant vos actifs.",
+        "info": "Fonctionnement de la délégation",
+        "delegation": "Gagner des récompenses"
+      },
+      "earnRewards": {
+        "description": "Vous pouvez gagner des récompenses en déléguant vos SOL à un validateur.",
+        "bullet": {
+          "0": "Vous gardez la propriété de vos actifs délégués.",
+          "1": "Déléguez avec votre appareil Ledger.",
+          "2": "Les actifs seront disponibles une fois la délégation arrêtée."
+        },
+        "warning": "Choisissez votre validateur avec soin : une partie de vos actifs délégués peut être perdue si le validateur ne se comporte pas correctement."
+      },
+      "flow": {
+        "title": "Déléguer",
+        "steps": {
+          "validator": {
+            "title": "Validateur"
+          },
+          "amount": {
+            "title": "Montant"
+          },
+          "confirmation": {
+            "success": {
+              "title": "Actifs bien délégués"
+            }
+          }
+        }
+      },
+      "withdraw": {
+        "flow": {
+          "title": "Retirer",
+          "steps": {
+            "amount": {
+              "title": "Montant"
+            },
+            "confirmation": {
+              "success": {
+                "title": "Retrait des actifs effectué",
+                "text": "Le solde de votre compte sera mis à jour une fois la transaction confirmée."
+              }
+            }
+          }
+        }
+      },
+      "activate": {
+        "flow": {
+          "title": "Activer",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Activation de la délégation effectuée"
+              }
+            }
+          }
+        }
+      },
+      "reactivate": {
+        "flow": {
+          "title": "Réactiver",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Réactivation de la délégation effectuée"
+              }
+            }
+          }
+        }
+      },
+      "deactivate": {
+        "flow": {
+          "title": "Désactiver",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Désactivation de la délégation effectuée"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "Gagner des récompenses",
     "header": "Délégation",
@@ -2682,8 +2796,8 @@
     "display": {
       "language": "Langue d'affichage",
       "languageDesc": "Choisissez la langue d'affichage de Ledger Live.",
-      "theme": "Thème",
-      "themeDesc": "Sélectionnez un thème.",
+      "theme": "Mode",
+      "themeDesc": "Sélectionnez un mode.",
       "counterValue": "Devise préférée",
       "counterValueDesc": "Choisissez la devise dans laquelle afficher votre solde et vos opérations.",
       "region": "Région",
@@ -2759,10 +2873,6 @@
         "apiTrongridProxy": {
           "title": "Utiliser TronGrid.io",
           "description": "Utilisez TronGrid sans proxy Ledger."
-        },
-        "experimentalJSCurrencies": {
-          "title": "Implémentations JS expérimentales",
-          "description": "Utilisez des implémentations JS expérimentales pour Tezos et Cosmos."
         },
         "experimentalCurrencies": {
           "title": "Intégrations expérimentales",
@@ -2848,6 +2958,12 @@
         "count": "{{count}} token",
         "count_plural": "{{count}} tokens"
       },
+      "hiddenNftCollections": {
+        "title": "Collections de NFT cachées",
+        "desc": "Vous pouvez masquer des collections NFT en faisant un clic droit sur le nom de la collection et sélectionnant Cacher la collection de NFT.",
+        "count": "{{count}} collection",
+        "count_plural": "{{count}} collections"
+      },
       "fullNode": {
         "title": "Connecter un nœud Bitcoin complet",
         "desc": "Configurez votre nœud Bitcoin complet pour synchroniser et envoyer des transactions sans passer par les explorateurs de Ledger."
@@ -2923,7 +3039,7 @@
     }
   },
   "theme": {
-    "system": "Sélectionnez le thème du système",
+    "system": "Sélectionnez le mode de l'interface",
     "light": "Clair",
     "dusk": "Crépuscule",
     "dark": "Sombre"
@@ -4128,6 +4244,9 @@
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "Solde du compte parent insuffisant"
+    },
+    "quantityNeedsToBePositive": {
+      "title": "Le nombre doit être égal ou supérieur à 1"
     },
     "NotEnoughSpendableBalance": {
       "title": "Le solde ne peut pas être inférieur à {{minimumAmount}}."

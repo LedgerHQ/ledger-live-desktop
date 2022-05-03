@@ -31,7 +31,6 @@ import OnboardingOrElse from "~/renderer/components/OnboardingOrElse";
 import AppRegionDrag from "~/renderer/components/AppRegionDrag";
 import IsNewVersion from "~/renderer/components/IsNewVersion";
 import IsSystemLanguageAvailable from "~/renderer/components/IsSystemLanguageAvailable";
-import LibcoreBusyIndicator from "~/renderer/components/LibcoreBusyIndicator";
 import DeviceBusyIndicator from "~/renderer/components/DeviceBusyIndicator";
 import KeyboardContent from "~/renderer/components/KeyboardContent";
 import PerfIndicator from "~/renderer/components/PerfIndicator";
@@ -232,7 +231,6 @@ export default function Default() {
 
                   {__NIGHTLY__ ? <NightlyLayer /> : null}
 
-                  <LibcoreBusyIndicator />
                   <DeviceBusyIndicator />
                   <KeyboardContent sequence="BJBJBJ">
                     <PerfIndicator />

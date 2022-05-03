@@ -98,6 +98,7 @@ export type SettingsState = {
   carouselVisibility: number,
   starredAccountIds?: string[],
   blacklistedTokenIds: string[],
+  hiddenNftCollections: string[],
   deepLinkUrl: ?string,
   firstTimeLend: boolean,
   showClearCacheBanner: boolean,
@@ -175,6 +176,7 @@ const INITIAL_STATE: SettingsState = {
   lastSeenDevice: null,
   latestFirmware: null,
   blacklistedTokenIds: [],
+  hiddenNftCollections: [],
   deepLinkUrl: null,
   firstTimeLend: false,
   showClearCacheBanner: false,
@@ -270,6 +272,20 @@ const handlers: Object = {
     return {
       ...state,
       blacklistedTokenIds: [...ids, tokenId],
+    };
+  },
+  UNHIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionId }) => {
+    const ids = state.hiddenNftCollections;
+    return {
+      ...state,
+      hiddenNftCollections: ids.filter(id => id !== collectionId),
+    };
+  },
+  HIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionId }) => {
+    const collections = state.hiddenNftCollections;
+    return {
+      ...state,
+      hiddenNftCollections: [...collections, collectionId],
     };
   },
   LAST_SEEN_DEVICE_INFO: (
@@ -489,6 +505,7 @@ export const enableLearnPageStagingUrlSelector = (state: State) =>
   state.settings.enableLearnPageStagingUrl;
 
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
+export const hiddenNftCollectionsSelector = (state: State) => state.settings.hiddenNftCollections;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
 

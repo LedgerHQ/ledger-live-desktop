@@ -2,6 +2,7 @@
 
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import { decodeAccountId } from "@ledgerhq/live-common/lib/account";
 import {
   OpDetailsSection,
   OpDetailsTitle,
@@ -13,15 +14,30 @@ import {
 import type { Operation } from "@ledgerhq/live-common/lib/types";
 import Image from "~/renderer/screens/nft/Image";
 import Box from "~/renderer/components/Box";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import {
+  useNftMetadata,
+  useNftCollectionMetadata,
+} from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import CopyWithFeedback from "~/renderer/components/CopyWithFeedback";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 
 const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
   const { t } = useTranslation();
-  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId);
-  const show = useMemo(() => status === "loading", [status]);
+  const { currencyId } = decodeAccountId(operation.accountId);
+  const { status: nftStatus, metadata: nftMetadata } = useNftMetadata(
+    operation.contract,
+    operation.tokenId,
+    currencyId,
+  );
+  const { status: collectionStatus, metadata: collectionMetadata } = useNftCollectionMetadata(
+    operation.contract,
+    currencyId,
+  );
+  const show = useMemo(() => nftStatus === "loading" || collectionStatus === "loading", [
+    collectionStatus,
+    nftStatus,
+  ]);
 
   return operation.contract && operation.tokenId ? (
     <>
@@ -30,17 +46,17 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
         <OpDetailsData>
           <Box horizontal alignItems="center">
             <Skeleton width={24} minHeight={24} show={show}>
-              <Image nft={metadata} size={24} />
+              <Image nft={nftMetadata} size={24} />
             </Skeleton>
             <Box ml={2}>
               <Skeleton width={200} barHeight={10} minHeight={32} show={show}>
-                <TextEllipsis>{metadata?.tokenName || "-"}</TextEllipsis>
+                <TextEllipsis>{collectionMetadata?.tokenName || "-"}</TextEllipsis>
               </Skeleton>
             </Box>
           </Box>
           {!show ? (
             <GradientHover>
-              <CopyWithFeedback text={metadata?.tokenName} />
+              <CopyWithFeedback text={collectionMetadata?.tokenName} />
             </GradientHover>
           ) : null}
         </OpDetailsData>
