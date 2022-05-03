@@ -41,6 +41,7 @@ import MODAL_UNFREEZE from "./Unfreeze";
 import MODAL_VOTE_TRON from "./VoteTron";
 import MODAL_VOTE_TRON_INFO from "./VoteTron/Info";
 import MODAL_BLACKLIST_TOKEN from "./BlacklistToken";
+import MODAL_HIDE_NFT_COLLECTION from "./HideNftCollection";
 
 import MODAL_COSMOS_DELEGATE from "../families/cosmos/DelegationFlowModal";
 import MODAL_COSMOS_REWARDS_INFO from "../families/cosmos/DelegationFlowModal/Info";
@@ -59,6 +60,13 @@ import MODAL_POLKADOT_NOMINATE from "../families/polkadot/NominationFlowModal";
 import MODAL_POLKADOT_BOND from "../families/polkadot/BondFlowModal";
 import MODAL_POLKADOT_UNBOND from "../families/polkadot/UnbondFlowModal";
 import MODAL_POLKADOT_REBOND from "../families/polkadot/RebondFlowModal";
+
+import MODAL_SOLANA_REWARDS_INFO from "../families/solana/DelegationFlowModal/Info";
+import MODAL_SOLANA_DELEGATE from "../families/solana/DelegationFlowModal";
+import MODAL_SOLANA_DELEGATION_ACTIVATE from "../families/solana/DelegationActivateFlowModal";
+import MODAL_SOLANA_DELEGATION_DEACTIVATE from "../families/solana/DelegationDeactivateFlowModal";
+import MODAL_SOLANA_DELEGATION_REACTIVATE from "../families/solana/DelegationReactivateFlowModal";
+import MODAL_SOLANA_DELEGATION_WITHDRAW from "../families/solana/DelegationWithdrawFlowModal";
 
 // Lending
 import MODAL_LEND_MANAGE from "../screens/lend/modals/ManageLend";
@@ -101,6 +109,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_VOTE_TRON,
   MODAL_VOTE_TRON_INFO,
   MODAL_BLACKLIST_TOKEN,
+  MODAL_HIDE_NFT_COLLECTION,
   MODAL_COSMOS_DELEGATE,
   MODAL_COSMOS_REWARDS_INFO,
   MODAL_COSMOS_CLAIM_REWARDS,
@@ -118,6 +127,12 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_POLKADOT_BOND,
   MODAL_POLKADOT_UNBOND,
   MODAL_POLKADOT_REBOND,
+  MODAL_SOLANA_REWARDS_INFO,
+  MODAL_SOLANA_DELEGATE,
+  MODAL_SOLANA_DELEGATION_ACTIVATE,
+  MODAL_SOLANA_DELEGATION_DEACTIVATE,
+  MODAL_SOLANA_DELEGATION_REACTIVATE,
+  MODAL_SOLANA_DELEGATION_WITHDRAW,
   MODAL_FULL_NODE,
   MODAL_LOTTIE_DEBUGGER,
   MODAL_RECOVERY_SEED_WARNING,

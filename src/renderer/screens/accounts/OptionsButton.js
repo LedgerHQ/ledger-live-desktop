@@ -37,7 +37,7 @@ const Item: ThemedComponent<{
   align-items: center;
 `;
 
-type ItemType = DropDownItemType & {
+type ItemType = DropDownItemType<> & {
   icon?: React$Element<*>,
   onClick?: Function,
   type?: "separator",
@@ -55,7 +55,7 @@ const OptionsButton = () => {
   );
   const { t } = useTranslation();
 
-  const items: DropDownItemType[] = [
+  const items: DropDownItemType<>[] = [
     {
       key: "exportOperations",
       label: t("accounts.optionsMenu.exportOperations"),

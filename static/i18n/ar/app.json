@@ -1054,6 +1054,11 @@
     "desc": "هذا الإجراء سيخفي جميع حسابات <1><0>{{tokenName}}</0></1> ، يمكنك إظهارها مرة أخرى باستخدام <3>الإعدادات</3>",
     "hideCTA": "إخفاء رمز التوكن"
   },
+  "hideNftCollection": {
+    "title": "Hide NFT Colection",
+    "desc": "This action will hide all NFTs from the <1><0>{{collectionName}}</0></1> collection, you can show them again using <3>Settings</3>",
+    "hideCTA": "Hide NFT Collection"
+  },
   "banners": {
     "cleanCache": {
       "title": "يتطلب تعديل الإعدادات التجريبية ذاكرة تخزين مؤقت خالية",
@@ -1136,9 +1141,9 @@
       },
       "confirm": {
         "title": "اتصال",
-        "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
-        "deeplinkDetails": "يريد الاتصال بـ Ledger Live. اختر حساب إيثيريوم الخاص بك:",
-        "noEthAccount": "ليس لديك أي حساب إيثيريوم. يرجى أن تقوم بإضافة حساب إيثيريوم لاستخدام Wallet Connect.",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "أنت تحاول الاتصال بـ dApp أثناء وجود تطبيق آخر متصل بالفعل. الرجاء قطع الاتصال من تطبيق dApp المتصل قبل إعادة اتصال Live مع تطبيق جديد."
       }
     },
@@ -2553,6 +2558,115 @@
       }
     }
   },
+  "solana": {
+    "common": {
+      "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+      "viewDetails": "View details",
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    },
+    "delegation": {
+      "totalStake": "Total Stake",
+      "commission": "Commission",
+      "delegate": "Add",
+      "listHeader": "Delegations",
+      "availableBalance": "Available balance",
+      "active": "Active",
+      "activeTooltip": "Active amount generate rewards",
+      "inactiveTooltip": "Inactive amount does not generate rewards",
+      "delegatedInfoTooltip": "Total amount that is delegated to validators.",
+      "withdrawableInfoTooltip": "Total amount that is withdrawable from delegations.",
+      "withdrawableTitle": "Withdrawable",
+      "statusUpdateNotice": "The status of the delegation will be updated when the transaction is confirmed.",
+      "ledgerByFigmentTC": "Ledger by Figment T&Cs",
+      "emptyState": {
+        "description": "You can earn SOL rewards by delegating your assets.",
+        "info": "How Delegation works",
+        "delegation": "Earn rewards"
+      },
+      "earnRewards": {
+        "description": "You may earn rewards by delegating your SOL assets to a validator.",
+        "bullet": {
+          "0": "You keep ownership of delegated assets",
+          "1": "Delegate using your Ledger device",
+          "2": "Assets will be available after undelegation"
+        },
+        "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+      },
+      "flow": {
+        "title": "Delegate",
+        "steps": {
+          "validator": {
+            "title": "Validator"
+          },
+          "amount": {
+            "title": "Amount"
+          },
+          "confirmation": {
+            "success": {
+              "title": "You have successfully delegated your assets"
+            }
+          }
+        }
+      },
+      "withdraw": {
+        "flow": {
+          "title": "Withdraw",
+          "steps": {
+            "amount": {
+              "title": "Amount"
+            },
+            "confirmation": {
+              "success": {
+                "title": "You have successfully withdrawn your assets.",
+                "text": "Your account balance will be updated when the transaction is confirmed."
+              }
+            }
+          }
+        }
+      },
+      "activate": {
+        "flow": {
+          "title": "Activate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully activated you delegation."
+              }
+            }
+          }
+        }
+      },
+      "reactivate": {
+        "flow": {
+          "title": "Reactivate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully reactivated you delegation."
+              }
+            }
+          }
+        }
+      },
+      "deactivate": {
+        "flow": {
+          "title": "Deactivate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully deactivated your delegation."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "اكسب المكافآت",
     "header": "التفويض",
@@ -2760,10 +2874,6 @@
           "title": "استخدم TronGrid.io",
           "description": "استخدم TronGrid مباشرة بدون وكيل Ledger"
         },
-        "experimentalJSCurrencies": {
-          "title": "عمليات تنفيذ JS التجريبية",
-          "description": "Use experimental JS implementations for Tezos and Cosmos."
-        },
         "experimentalCurrencies": {
           "title": "تكاملات تجريبية",
           "description": "استخدم عمليات تكامل الأصول المشفرة التجريبية المتاحة."
@@ -2847,6 +2957,12 @@
         "desc": "يمكنك إخفاء رموز التوكن بالانتقال إلى الحساب الرئيسي ثم النقر بالزر الأيمن على رمز التوكن واختيار \"إخفاء رمز التوكن\".",
         "count": "{{count}} رمز توكن",
         "count_plural": "{{count}} من رموز التوكن"
+      },
+      "hiddenNftCollections": {
+        "title": "Hidden NFT Collections",
+        "desc": "You can hide NFT Collections by right-clicking on the collection name and selecting 'Hide NFT Collection'.",
+        "count": "{{count}} collection",
+        "count_plural": "{{count}} collections"
       },
       "fullNode": {
         "title": "توصيل عقدة بيتكوين الكاملة",
@@ -4128,6 +4244,9 @@
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "رصيد غير كافٍ في الحساب الرئيسي"
+    },
+    "quantityNeedsToBePositive": {
+      "title": "Quantity needs to be at least 1"
     },
     "NotEnoughSpendableBalance": {
       "title": "لا يمكن للرصيد أن يقل عن {{minimumAmount}}"

@@ -1,13 +1,13 @@
 // @flow
 
-import React, { useCallback, useRef, useState, useEffect, useMemo } from "react";
+import React, { useCallback, useRef, useState, useEffect, useMemo, memo } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { accountSelector } from "~/renderer/reducers/accounts";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import { nftsByCollections } from "@ledgerhq/live-common/lib/nft";
+import { hiddenNftCollectionsSelector } from "~/renderer/reducers/settings";
 import styled from "styled-components";
 import IconSend from "~/renderer/icons/Send";
 import CollectionName from "~/renderer/screens/nft/CollectionName";
@@ -19,6 +19,8 @@ import TrackPage from "~/renderer/analytics/TrackPage";
 import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import GridListToggle from "./GridListToggle";
+
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 const SpinnerContainer: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -46,8 +48,22 @@ const Gallery = () => {
   const { id } = useParams();
   const account = useSelector(state => accountSelector(state, { accountId: id }));
   const history = useHistory();
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
 
-  const collections = nftsByCollections(account.nfts);
+  const collections = useMemo(
+    () =>
+      Object.entries(nftsByCollections(account.nfts)).filter(
+        ([contract]) => !hiddenNftCollections.includes(`${account.id}|${contract}`),
+      ),
+    [account.id, account.nfts, hiddenNftCollections],
+  );
+
+  // Should redirect to the account page if there is not NFT anymore in the page.
+  useEffect(() => {
+    if (collections.length <= 0) {
+      history.push(`/account/${account.id}/`);
+    }
+  }, [account.id, history, collections.length]);
 
   const onSend = useCallback(() => {
     dispatch(openModal("MODAL_SEND", { account, isNFTSend: true }));
@@ -64,12 +80,8 @@ const Gallery = () => {
   const isAtBottom = useOnScreen(ref);
   const [maxVisibleNFTs, setMaxVisibleNFTs] = useState(1);
 
-  const totalNFTs = useMemo(() => collections.map(c => c.nfts.length).reduce((a, b) => a + b), [
-    collections,
-  ]);
-
   useEffect(() => {
-    if (isAtBottom && maxVisibleNFTs < totalNFTs) {
+    if (isAtBottom && maxVisibleNFTs < account.nfts.length) {
       setMaxVisibleNFTs(maxVisibleNFTs => maxVisibleNFTs + 5);
     }
   }, [isAtBottom]);
@@ -78,32 +90,29 @@ const Gallery = () => {
     const collectionsRender = [];
     let isLoading = false;
     let displayedNFTs = 0;
-    collections.forEach(collection => {
+
+    collections.forEach(([contract, nfts]: [string, any]) => {
       if (displayedNFTs > maxVisibleNFTs) return;
       collectionsRender.push(
-        <div key={collection.contract}>
-          <Box mb={2} onClick={() => onSelectCollection(collection.contract)}>
+        <div key={contract}>
+          <Box mb={2} onClick={() => onSelectCollection(contract)}>
             <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
-              <CollectionName collection={collection} fallback={collection.contract} />
+              <CollectionName nft={nfts[0]} fallback={contract} account={account} showHideMenu />
             </Text>
           </Box>
-          <TokensList
-            collectionAddress={collection.contract}
-            account={account}
-            nfts={collection.nfts.slice(0, maxVisibleNFTs - displayedNFTs)}
-          />
+          <TokensList account={account} nfts={nfts.slice(0, maxVisibleNFTs - displayedNFTs)} />
         </div>,
       );
 
-      if (displayedNFTs + collection.nfts.length > maxVisibleNFTs) {
+      if (displayedNFTs + nfts.length > maxVisibleNFTs) {
         isLoading = true;
       }
 
-      displayedNFTs += collection.nfts.length;
+      displayedNFTs += nfts.length;
     });
 
     return [collectionsRender, isLoading];
-  }, [collections, maxVisibleNFTs, account]);
+  }, [collections, maxVisibleNFTs, account, onSelectCollection]);
 
   return (
     <>
@@ -135,4 +144,4 @@ const Gallery = () => {
   );
 };
 
-export default Gallery;
+export default memo<{}>(Gallery);

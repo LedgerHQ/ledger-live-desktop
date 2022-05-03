@@ -13,9 +13,9 @@ import { centerEllipsis } from "~/renderer/styles/helpers";
 import Image from "~/renderer/screens/nft/Image";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
 import IconDots from "~/renderer/icons/Dots";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
 import NFTContextMenu from "~/renderer/components/ContextMenu/NFTContextMenu";
-import { NFTViewerDrawer } from "~/renderer/drawers/NFTViewerDrawer";
+import NFTViewerDrawer from "~/renderer/drawers/NFTViewerDrawer";
 import { setDrawer } from "~/renderer/drawers/Provider";
 
 const Wrapper: ThemedComponent<{}> = styled(Card)`
@@ -56,16 +56,14 @@ const TitleContainer: ThemedComponent<{}> = styled(Text)`
 
 type Props = {
   account: Account,
-  contract: string,
-  tokenId: string,
   id: string,
   mode: "grid" | "list",
   withContextMenu?: boolean,
 };
 
-const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false }: Props) => {
-  const { status, metadata } = useNftMetadata(contract, tokenId);
+const NftCard = ({ id, mode, account, withContextMenu = false }: Props) => {
   const nft = useSelector(state => getNFTById(state, { nftId: id }));
+  const { status, metadata } = useNftMetadata(nft.contract, nft.tokenId, nft.currencyId);
   const { nftName } = metadata || {};
   const show = useMemo(() => status === "loading", [status]);
   const isGrid = mode === "grid";
@@ -80,7 +78,7 @@ const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false
 
   const MaybeContext = ({ children }: any) =>
     withContextMenu ? (
-      <NFTContextMenu key={id} contract={contract} tokenId={tokenId}>
+      <NFTContextMenu key={id} nft={nft} account={account} metadata={metadata}>
         {children}
       </NFTContextMenu>
     ) : (
@@ -115,10 +113,10 @@ const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false
               <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={isGrid ? 3 : 2}>
                 <Trans
                   i18nKey="NFT.gallery.tokensList.item.tokenId"
-                  values={{ tokenId: centerEllipsis(tokenId) }}
+                  values={{ tokenId: centerEllipsis(nft.tokenId) }}
                 />
               </Text>
-              {nft.collection.standard === "ERC1155" && isGrid && (
+              {nft.standard === "ERC1155" && isGrid && (
                 <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3}>
                   {`x${nft.amount.toFixed()}`}
                 </Text>
@@ -128,12 +126,18 @@ const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false
         </Box>
         {!isGrid ? (
           <>
-            {nft.collection.standard === "ERC1155" && (
+            {nft.standard === "ERC1155" && (
               <Text ff="Inter|Medium" color="palette.text.shade50" fontSize={3} mr={15}>
                 {`x${nft.amount.toFixed()}`}
               </Text>
             )}
-            <NFTContextMenu key={id} contract={contract} tokenId={tokenId} leftClick={true}>
+            <NFTContextMenu
+              key={id}
+              nft={nft}
+              account={account}
+              metadata={metadata}
+              leftClick={true}
+            >
               <Dots>
                 <IconDots size={20} />
               </Dots>
@@ -145,5 +149,4 @@ const NftCard = ({ contract, tokenId, id, mode, account, withContextMenu = false
   );
 };
 
-// $FlowFixMe
-export default memo(NftCard);
+export default memo<Props>(NftCard);
