@@ -1055,7 +1055,7 @@
     "hideCTA": "토큰 숨기기"
   },
   "hideNftCollection": {
-    "title": "NFT 컬렉션 숨기기",
+    "title": "Hide NFT Collection",
     "desc": "이 작업은 <1><0>{{collectionName}}</0></1> 컬렉션에서 모든 NFT를 숨기며 <3>설정</3>을 사용하여 다시 표시할 수 있습니다",
     "hideCTA": "NFT 컬렉션 숨기기"
   },
