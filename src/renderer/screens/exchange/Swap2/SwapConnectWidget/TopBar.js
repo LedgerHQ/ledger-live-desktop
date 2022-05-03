@@ -2,21 +2,19 @@
 
 // FIXME: very similar to src/renderer/components/WebPlatformPlayer/TopBar.js
 
+import { getProviderName } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import React from "react";
 import { Trans } from "react-i18next";
-import styled from "styled-components";
-
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import { rgba } from "~/renderer/styles/helpers";
-
-import Box, { Tabbable } from "~/renderer/components/Box";
-
-import IconReload from "~/renderer/icons/UpdateCircle";
-import LightBulb from "~/renderer/icons/LightBulb";
-import IconClose from "~/renderer/icons/Cross";
-
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+import Box, { Tabbable } from "~/renderer/components/Box";
+import IconClose from "~/renderer/icons/Cross";
+import LightBulb from "~/renderer/icons/LightBulb";
+import IconReload from "~/renderer/icons/UpdateCircle";
 import { enablePlatformDevToolsSelector } from "~/renderer/reducers/settings";
+import { rgba } from "~/renderer/styles/helpers";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import { iconByProviderName } from "../utils";
 
 const Container: ThemedComponent<{}> = styled(Box).attrs(() => ({
   horizontal: true,
@@ -104,14 +102,13 @@ export const Separator: ThemedComponent<*> = styled.div`
 `;
 
 export type Props = {
-  name: string,
-  icon?: boolean,
+  provider: string,
   onClose?: Function,
   // $FlowFixMe
   webviewRef: React.MutableRefObject<any>,
 };
 
-const TopBar = ({ name, onClose, webviewRef }: Props) => {
+const TopBar = ({ provider, onClose, webviewRef }: Props) => {
   const enablePlatformDevTools = useSelector(enablePlatformDevToolsSelector);
 
   const handleReload = () => {
@@ -128,11 +125,13 @@ const TopBar = ({ name, onClose, webviewRef }: Props) => {
     }
   };
 
+  const ProviderIcon = provider && iconByProviderName[provider.toLowerCase()];
+  const name = getProviderName(provider);
+
   return (
     <Container>
       <TitleContainer>
-        {/* FIXME: should display provider icon */}
-        {/* <LiveAppIcon name={name} icon={icon || undefined} size={20} /> */}
+        <ProviderIcon size={19} />
         <ItemContent>{name}</ItemContent>
       </TitleContainer>
       <Separator />

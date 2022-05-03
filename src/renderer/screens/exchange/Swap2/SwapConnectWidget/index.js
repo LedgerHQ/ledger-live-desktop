@@ -1,20 +1,17 @@
 // @flow
 
 import { remote, WebviewTag } from "electron";
-
-import React, { useEffect, useCallback, forwardRef } from "react";
+import React, { forwardRef, useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-
 import styled from "styled-components";
-
-import Box from "~/renderer/components/Box";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { setSwapKYCStatus } from "~/renderer/actions/settings";
-import TopBar from "./TopBar";
+import Box from "~/renderer/components/Box";
 import {
   handleMessageEvent,
   handleNewWindowEvent,
 } from "~/renderer/components/WebPlatformPlayer/utils";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import TopBar from "./TopBar";
 
 type Message = { type: "setToken", token: string } | { type: "closeWidget" };
 
@@ -93,12 +90,7 @@ const SwapConnectWidget = (
 
   return (
     <Container>
-      <TopBar
-        // FIXME: should get display name from provider key
-        name={provider}
-        onClose={onClose}
-        webviewRef={webviewRef}
-      />
+      <TopBar provider={provider} onClose={onClose} webviewRef={webviewRef} />
       <Wrapper>
         <CustomWebview
           src={url.toString()}
