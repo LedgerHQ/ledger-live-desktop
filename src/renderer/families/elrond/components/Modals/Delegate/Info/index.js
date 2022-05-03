@@ -17,7 +17,13 @@ type Props = {
   parentAccount: ?Account,
 };
 
-export default function ElrondEarnRewardsInfoModal({ name, account, parentAccount }: Props) {
+export default function ElrondEarnRewardsInfoModal({
+  name,
+  account,
+  parentAccount,
+  validators,
+  delegations,
+}) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const onNext = useCallback(() => {
@@ -26,9 +32,11 @@ export default function ElrondEarnRewardsInfoModal({ name, account, parentAccoun
       openModal(constants.modals.stake, {
         parentAccount,
         account,
+        validators,
+        delegations,
       }),
     );
-  }, [parentAccount, account, dispatch, name]);
+  }, [parentAccount, account, dispatch, validators, delegations, name]);
 
   const onLearnMore = useCallback(() => {
     openURL(urls.elrondStaking);

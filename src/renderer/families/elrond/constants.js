@@ -1,4 +1,4 @@
-const type = "testnet";
+const type = "mainnet";
 const modals = {
   rewards: "MODAL_ELROND_REWARDS_INFO",
   claim: "MODAL_ELROND_CLAIM_REWARDS",

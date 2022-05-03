@@ -105,15 +105,19 @@ const Delegation = (props: Props) => {
 
   const fetchValidators = () => {
     const fetchData = async (): Promise<void> => {
-      const providers = await axios.get(constants.identities);
+      try {
+        const providers = await axios.get(constants.identities);
 
-      const randomize = providers =>
-        providers
-          .map(provider => ({ provider, sort: Math.random() }))
-          .sort((alpha, beta) => alpha.sort - beta.sort)
-          .map(item => item.provider);
+        const randomize = providers =>
+          providers
+            .map(provider => ({ provider, sort: Math.random() }))
+            .sort((alpha, beta) => alpha.sort - beta.sort)
+            .map(item => item.provider);
 
-      setValidators(randomize(providers.data.filter(validator => validator.providers)));
+        setValidators(randomize(providers.data.filter(validator => validator.providers)));
+      } catch (error) {
+        setValidators([]);
+      }
     };
 
     fetchData();
@@ -123,11 +127,15 @@ const Delegation = (props: Props) => {
 
   const fetchDelegations = () => {
     const fetchData = async () => {
-      const delegations = await axios.get(
-        `${constants.delegations}/accounts/${account.freshAddress}/delegations`,
-      );
+      try {
+        const delegations = await axios.get(
+          `${constants.delegations}/accounts/${account.freshAddress}/delegations`,
+        );
 
-      setDelegationResources(delegations.data);
+        setDelegationResources(delegations.data);
+      } catch (error) {
+        setDelegationResources([]);
+      }
     };
 
     if (account.elrondResources && !account.elrondResources.delegations) {
@@ -141,9 +149,11 @@ const Delegation = (props: Props) => {
     dispatch(
       openModal(constants.modals.rewards, {
         account,
+        validators,
+        delegations,
       }),
     );
-  }, [account, dispatch]);
+  }, [account, dispatch, validators, delegations]);
 
   const onDelegate = useCallback(() => {
     if (validators) {
