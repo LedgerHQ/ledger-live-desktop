@@ -171,7 +171,6 @@ const swapEvents = [
           rbf: false,
           utxoStrategy: {
             strategy: 0,
-            pickUnconfirmedRBF: false,
             excludeUTXOs: [],
           },
         }),

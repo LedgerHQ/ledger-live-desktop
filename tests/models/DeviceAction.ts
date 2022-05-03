@@ -118,7 +118,7 @@ export class DeviceAction {
               amount: { s: 1, e: 0, c: [1] },
               recipient: "1Cz2ZXb6Y6AacXJTpo4RBjQMLEmscuxD8e",
               rbf: false,
-              utxoStrategy: { strategy: 0, pickUnconfirmedRBF: false, excludeUTXOs: [] },
+              utxoStrategy: { strategy: 0, excludeUTXOs: [] },
               family: "bitcoin",
               feePerByte: { s: 1, e: 0, c: [1] },
               networkInfo: {
