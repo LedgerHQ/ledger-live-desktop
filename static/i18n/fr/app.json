@@ -1055,7 +1055,7 @@
     "hideCTA": "Masquer le token"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Collection",
+    "title": "Cacher la collection de NFT",
     "desc": "Cachez tous les NFT de la collection <1><0>{{collectionName}}</0></1>. Vous pourrez les afficher à nouveau à partir des <3>Paramètres</3>.",
     "hideCTA": "Cacher la collection de NFT"
   },
