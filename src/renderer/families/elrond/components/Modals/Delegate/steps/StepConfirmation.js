@@ -77,14 +77,7 @@ export function StepConfirmationFooter({
   optimisticOperation,
   transaction,
 }: StepProps) {
-  // const concernedOperation =
-  //   transaction?.validators.length === 1 && optimisticOperation
-  //     ? optimisticOperation.subOperations && optimisticOperation.subOperations.length > 0
-  //       ? optimisticOperation.subOperations[0]
-  //       : optimisticOperation
-  //     : null;
-
-  const concernedOperation = true;
+  const concernedOperation = optimisticOperation;
 
   return (
     <Box horizontal alignItems="right">
@@ -92,7 +85,6 @@ export function StepConfirmationFooter({
         <Trans i18nKey="common.close" />
       </Button>
       {concernedOperation ? (
-        // FIXME make a standalone component!
         <Button
           primary={true}
           ml={2}

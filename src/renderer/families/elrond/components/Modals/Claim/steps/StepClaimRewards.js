@@ -86,14 +86,16 @@ export default function StepClaimRewards({
       )}
 
       <DelegationSelectorField
-        contract={contract}
-        validators={validators}
-        delegations={delegations}
-        t={t}
-        onChange={onDelegationChange}
-        bridge={bridge}
-        transaction={transaction}
-        onUpdateTransaction={onUpdateTransaction}
+        {...{
+          contract,
+          validators,
+          delegations,
+          t,
+          bridge,
+          transaction,
+          onUpdateTransaction,
+          onChange: onDelegationChange,
+        }}
       />
     </Box>
   );

@@ -92,11 +92,9 @@ export default function StepDelegation({
 
       <AmountField
         amount={value}
-        account={account}
-        status={status}
-        initialAmount={initialAmount}
         onChange={onChangeAmount}
         label={<Trans i18nKey="elrond.delegation.flow.steps.fields.amount" />}
+        {...{ account, status, initialAmount }}
       />
 
       <Alert info="primary" mt={2}>
