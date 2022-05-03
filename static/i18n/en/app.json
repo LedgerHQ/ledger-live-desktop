@@ -227,6 +227,7 @@
       "kyc": "KYC"
     },
     "form": {
+      "changeCTA": "Change",
       "ratesDrawer": {
         "title": "Rate",
         "quote": "Quote",

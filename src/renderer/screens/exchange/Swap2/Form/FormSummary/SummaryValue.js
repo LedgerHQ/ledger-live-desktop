@@ -1,8 +1,9 @@
 // @flow
 import React from "react";
-import TextBase from "~/renderer/components/Text";
-import ButtonBase from "~/renderer/components/Button";
+import { useTranslation } from "react-i18next";
 import styled from "styled-components";
+import ButtonBase from "~/renderer/components/Button";
+import TextBase from "~/renderer/components/Text";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 const Container: ThemedComponent<{}> = styled.div`
@@ -47,11 +48,12 @@ const SummaryValue = ({
   handleChange?: Function,
   children?: React$Node,
 }) => {
+  const { t } = useTranslation();
   return (
     <Container>
       {children}
       {value && <Text>{value}</Text>}
-      {handleChange ? <Button onClick={handleChange}>Edit</Button> : null}
+      {handleChange ? <Button onClick={handleChange}>{t("swap2.form.changeCTA")}</Button> : null}
     </Container>
   );
 };
