@@ -1,9 +1,7 @@
 // @flow
 import { ipcRenderer, shell, remote } from "electron";
-import path from "path";
 import { useCallback } from "react";
 import { useDispatch } from "react-redux";
-import rimraf from "rimraf";
 import { log } from "@ledgerhq/logs";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 import { useCountervaluesPolling } from "@ledgerhq/live-common/lib/countervalues/react";
@@ -25,29 +23,6 @@ export async function killInternalProcess() {
   return delay(1000);
 }
 
-const removeSQLite = () =>
-  new Promise((resolve, reject) =>
-    rimraf(path.resolve(resolveUserDataDirectory(), "sqlite/"), e => {
-      if (e) reject(e);
-      else resolve();
-    }),
-  );
-
-async function resetLibcore() {
-  log("clear-cache", "resetLibcore...");
-  // we need to stop everything that is happening right now, like syncs
-  await killInternalProcess();
-  log("clear-cache", "killed.");
-
-  await removeSQLite();
-  log("clear-cache", "removeSQLite done.");
-}
-
-export function onUnusualInternalProcessError() {
-  if (recentlyKilledInternalProcess()) return;
-  resetLibcore();
-}
-
 function reload() {
   require("@electron/remote")
     .getCurrentWindow()
@@ -61,8 +36,6 @@ export async function hardReset() {
   disableDBMiddleware();
   resetAll();
   window.localStorage.clear();
-  await delay(500);
-  await resetLibcore();
 }
 
 export function useHardReset() {
@@ -85,7 +58,6 @@ export function useSoftReset() {
     log("clear-cache", "cleanCache()");
     await cleanCache();
     wipe();
-    await resetLibcore();
     log("clear-cache", "reload()");
     reload();
   }, [dispatch, wipe]);

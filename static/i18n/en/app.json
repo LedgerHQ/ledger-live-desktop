@@ -1055,7 +1055,7 @@
     "hideCTA": "Hide token"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Colection",
+    "title": "Hide NFT Collection",
     "desc": "This action will hide all NFTs from the <1><0>{{collectionName}}</0></1> collection, you can show them again using <3>Settings</3>",
     "hideCTA": "Hide NFT Collection"
   },
@@ -1141,9 +1141,9 @@
       },
       "confirm": {
         "title": "Connect",
-        "details": "Wants to connect to the following Ethereum account through your wallet :",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your Ethereum account:",
-        "noEthAccount": "You don't have any Ethereum account. Please add an Ethereum account to use Wallet Connect.",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "You are trying to connect to a dApp while having another one already connected. Please disconnect from the connected dApp before reconnecting Live with a new dApp."
       }
     },
@@ -1609,7 +1609,7 @@
         "not_supported": "Requires 3rd-party wallet",
         "addAccount": "Add account",
         "addAccountTooltip": "Add {{appName}} account",
-        "addAccountWarn": "Please wait for the app updates to finish",
+        "addAccountWarn": "Please wait for processing to finish",
         "learnMore": "Learn more",
         "learnMoreTooltip": "Learn more about {{appName}}",
         "removeTooltip": "Uninstall {{appName}}",

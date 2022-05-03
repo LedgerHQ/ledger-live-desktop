@@ -1,7 +1,5 @@
 // @flow
 import "~/live-common-setup";
-import "./implement-libcore";
-
 import { throwError } from "rxjs";
 import usbDetect from "usb-detection";
 import throttle from "lodash/throttle";
