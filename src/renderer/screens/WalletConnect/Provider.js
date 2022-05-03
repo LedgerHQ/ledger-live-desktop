@@ -34,6 +34,7 @@ const Provider = ({ children }: { children: React$Node }) => {
               openModal("MODAL_SEND", {
                 transaction: wcCallRequest.data,
                 recipient: wcCallRequest.data.recipient,
+                walletConnectProxy: true,
                 stepId: "amount",
                 account,
                 onConfirmationHandler: operation => {

@@ -1,7 +1,6 @@
 // @flow
 
-import React from "react";
-import { useTranslation } from "react-i18next";
+import React, { memo } from "react";
 import styled from "styled-components";
 
 import Box from "~/renderer/components/Box";
@@ -9,15 +8,10 @@ import Button from "~/renderer/components/Button";
 import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSelector";
 import IconDots from "~/renderer/icons/Dots";
 import IconExternal from "~/renderer/icons/ExternalLink";
-import IconOpensea from "~/renderer/icons/Opensea";
-import IconRarible from "~/renderer/icons/Rarible";
-import IconGlobe from "~/renderer/icons/Globe";
-import { openURL } from "~/renderer/linking";
+import useNftLinks from "~/renderer/hooks/useNftLinks";
 
-import type { DropDownItemType } from "~/renderer/components/DropDownSelector";
+import type { Account, ProtoNFT, NFTMetadata } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-
-import type { NFTMetadataResponse } from "@ledgerhq/live-common/lib/types";
 
 const Separator: ThemedComponent<{}> = styled.div`
   background-color: ${p => p.theme.colors.palette.divider};
@@ -37,76 +31,42 @@ const Item: ThemedComponent<{
   display: flex;
 `;
 
-type ItemType = DropDownItemType & {
-  icon?: React$Element<*>,
-  onClick?: Function,
-  type?: "separator",
-};
+const renderItem = ({ item }) => {
+  if (item.type === "separator") {
+    return <Separator />;
+  }
 
-type ExternalViewerButtonProps = {
-  links: $PropertyType<$PropertyType<NFTMetadataResponse, "result">, "links">,
-  contract: string,
-  tokenId: string,
-};
+  const Icon = item.Icon ? React.createElement(item.Icon, { size: 16 }) : <></>;
 
-export const ExternalViewerButton = ({ links, contract, tokenId }: ExternalViewerButtonProps) => {
-  const { t } = useTranslation();
-
-  const defaultLinks = {
-    openSea: `https://opensea.io/assets/${contract}/${tokenId}`,
-    rarible: `https://rarible.com/token/${contract}:${tokenId}`,
-    etherscan: `https://etherscan.io/token/${contract}?a=${tokenId}`,
-  };
-
-  const items: DropDownItemType[] = [
-    {
-      key: "opensea",
-      label: t("NFT.viewer.actions.open", { viewer: "Opensea.io" }),
-      icon: <IconOpensea size={16} />,
-      onClick: () => openURL(links?.opensea || defaultLinks.openSea),
-    },
-    {
-      key: "rarible",
-      label: t("NFT.viewer.actions.open", { viewer: "Rarible" }),
-      icon: <IconRarible size={16} />,
-      onClick: () => openURL(links?.rarible || defaultLinks.rarible),
-    },
-    {
-      key: "sep2",
-      type: "separator",
-      label: "",
-    },
-    {
-      key: "etherscan",
-      label: t("NFT.viewer.actions.open", { viewer: "Explorer" }),
-      icon: <IconGlobe size={16} />,
-      onClick: () => openURL(links?.etherscan || defaultLinks.etherscan),
-    },
-  ];
-
-  const renderItem = ({ item }: { item: ItemType }) => {
-    if (item.type === "separator") {
-      return <Separator />;
-    }
-
-    return (
-      <Item
-        id={`external-popout-${item.key}`}
-        horizontal
-        flow={2}
-        onClick={item.onClick}
-        disableHover={item.key === "hideEmpty"}
-      >
-        <Box horizontal>
-          {item.icon ? <Box mr={2}>{item.icon}</Box> : null}
-          {item.label}
-        </Box>
+  return (
+    <Item
+      id={`external-popout-${item.id}`}
+      horizontal
+      flow={2}
+      onClick={item.callback}
+      disableHover={item.id === "hideEmpty"}
+    >
+      <Box horizontal>
+        {item.Icon ? <Box mr={2}>{Icon}</Box> : null}
+        {item.label}
+      </Box>
+      {item.type === "external" ? (
         <Box ml={4}>
           <IconExternal size={16} />
         </Box>
-      </Item>
-    );
-  };
+      ) : null}
+    </Item>
+  );
+};
+
+type ExternalViewerButtonProps = {
+  nft: ProtoNFT,
+  account: Account,
+  metadata: NFTMetadata,
+};
+
+const ExternalViewerButton = ({ nft, account, metadata }: ExternalViewerButtonProps) => {
+  const items = useNftLinks(account, nft, metadata);
 
   return (
     <DropDownSelector
@@ -125,3 +85,5 @@ export const ExternalViewerButton = ({ links, contract, tokenId }: ExternalViewe
     </DropDownSelector>
   );
 };
+
+export default memo<ExternalViewerButtonProps>(ExternalViewerButton);

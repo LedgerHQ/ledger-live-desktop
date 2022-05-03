@@ -1,8 +1,8 @@
 // @flow
 
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useState, useCallback, useEffect, useMemo, memo } from "react";
 import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Button from "~/renderer/components/Button";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
@@ -17,6 +17,7 @@ import Row from "./Row";
 import { useHistory } from "react-router-dom";
 import { openModal } from "~/renderer/actions/modals";
 import Spinner from "~/renderer/components/Spinner";
+import { hiddenNftCollectionsSelector } from "~/renderer/reducers/settings";
 
 const INCREMENT = 5;
 type Props = {
@@ -43,15 +44,32 @@ const Collections = ({ account }: Props) => {
     [account.id, history],
   );
 
-  const collections = nftsByCollections(account.nfts);
+  const collections = useMemo(() => nftsByCollections(account.nfts), [account.nfts]);
+  const collectionsLength = Object.keys(collections).length;
 
   const onShowMore = useCallback(() => {
     setNumberOfVisibleCollections(numberOfVisibleCollection =>
-      Math.min(numberOfVisibleCollection + INCREMENT, collections.length),
+      Math.min(numberOfVisibleCollection + INCREMENT, collectionsLength),
     );
-  }, [collections.length]);
+  }, [collectionsLength]);
 
-  const visibleCollection = collections.slice(0, numberOfVisibleCollection);
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
+  const visibleCollection = useMemo(
+    () =>
+      Object.entries(collections)
+        .filter(([contract]) => !hiddenNftCollections.includes(`${account.id}|${contract}`))
+        .slice(0, numberOfVisibleCollection)
+        .map(([contract, nfts]: any) => (
+          <Row
+            onClick={() => onOpenCollection(contract)}
+            key={contract}
+            contract={contract}
+            account={account}
+            nfts={nfts}
+          />
+        )),
+    [account, collections, hiddenNftCollections, numberOfVisibleCollection, onOpenCollection],
+  );
 
   useEffect(() => {
     track("View NFT Collections (Account Page)");
@@ -72,20 +90,13 @@ const Collections = ({ account }: Props) => {
           </Button>
         </TableHeader>
         {account.nfts?.length ? (
-          visibleCollection.map(({ contract, nfts }) => (
-            <Row
-              onClick={() => onOpenCollection(contract)}
-              key={contract}
-              contract={contract}
-              nfts={nfts}
-            />
-          ))
+          visibleCollection
         ) : (
           <Box alignItems="center" justifyContent="center" p={4}>
             <Spinner size={16} />
           </Box>
         )}
-        {collections?.length > numberOfVisibleCollection ? (
+        {collectionsLength > numberOfVisibleCollection ? (
           <TokenShowMoreIndicator expanded onClick={onShowMore}>
             <Box horizontal alignContent="center" justifyContent="center" py={3}>
               <Text color="wallet" ff="Inter|SemiBold" fontSize={4}>
@@ -102,4 +113,4 @@ const Collections = ({ account }: Props) => {
   );
 };
 
-export default Collections;
+export default memo<Props>(Collections);

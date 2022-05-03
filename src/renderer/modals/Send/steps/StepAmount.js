@@ -36,6 +36,7 @@ const StepAmount = ({
   updateTransaction,
   currencyName,
   isNFTSend,
+  walletConnectProxy,
 }: StepProps) => {
   const allNfts = useSelector(getAllNFTs);
   const nft = allNfts?.find(nft => nft.tokenId === transaction?.tokenIds?.[0]);
@@ -49,6 +50,7 @@ const StepAmount = ({
         name="Step Amount"
         currencyName={currencyName}
         isNFTSend={isNFTSend}
+        walletConnectSend={walletConnectProxy}
       />
       {mainAccount ? <CurrencyDownStatusAlert currencies={[mainAccount.currency]} /> : null}
       {error ? <ErrorBanner error={error} /> : null}
@@ -62,7 +64,7 @@ const StepAmount = ({
             />
           ) : null}
           {isNFTSend && nft ? (
-            nft.collection.standard === "ERC1155" ? (
+            nft.standard === "ERC1155" ? (
               <Box mb={2}>
                 <Label>{t("send.steps.amount.nftQuantity")}</Label>
                 <Input
@@ -80,6 +82,7 @@ const StepAmount = ({
               transaction={transaction}
               onChangeTransaction={onChangeTransaction}
               bridgePending={bridgePending}
+              walletConnectProxy={walletConnectProxy}
               t={t}
               initValue={maybeAmount}
               resetInitValue={onResetMaybeAmount}

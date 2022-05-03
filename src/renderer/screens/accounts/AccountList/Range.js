@@ -12,7 +12,7 @@ import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSe
 import { useTimeRange } from "~/renderer/actions/settings";
 
 type RangeItemProps = {
-  item: DropDownItemType,
+  item: DropDownItemType<>,
   isActive: boolean,
 };
 

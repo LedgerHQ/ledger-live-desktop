@@ -1054,6 +1054,11 @@
     "desc": "此操作将隐藏全部 <1><0>{{tokenName}}</0></1> 帐户，您可以使用 <3>设置</3> 再次显示这些帐户。",
     "hideCTA": "隐藏代币"
   },
+  "hideNftCollection": {
+    "title": "隐藏 NFT 收藏",
+    "desc": "此操作将隐藏 <1><0>{{collectionName}}</0></1> 收藏中的所有 NFT，您可以使用 <3>设置</3> 再次显示它们。",
+    "hideCTA": "隐藏 NFT 收藏"
+  },
   "banners": {
     "cleanCache": {
       "title": "修改实验性设置需要清除缓存",
@@ -1136,9 +1141,9 @@
       },
       "confirm": {
         "title": "连接",
-        "details": "想要通过您的钱包连接到以下以太坊账户：",
-        "deeplinkDetails": "想要连接到 Ledger Live。请选择您的 Ethereum 以太坊账户：",
-        "noEthAccount": "您没有任何以太坊账户。请添加一个以太坊账户来使用 Wallet Connect（钱包连接）。",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "您正在尝试连接到一个 dApp（去中心化应用），然而您已连接到了另一个。 请先断开已连接的 dApp 后，再重新将 Live 连接到新的 dApp。"
       }
     },
@@ -2553,6 +2558,115 @@
       }
     }
   },
+  "solana": {
+    "common": {
+      "broadcastError": "您的交易可能已失败。请稍候片刻并在重试之前查看交易记录。",
+      "viewDetails": "查看详情",
+      "connectDevice": {
+        "title": "设备"
+      },
+      "confirmation": {
+        "title": "确认"
+      }
+    },
+    "delegation": {
+      "totalStake": "质押总额",
+      "commission": "佣金",
+      "delegate": "添加",
+      "listHeader": "委托",
+      "availableBalance": "可用余额",
+      "active": "活跃",
+      "activeTooltip": "活跃的数额会生成奖励",
+      "inactiveTooltip": "不活跃的数额不会生成奖励。",
+      "delegatedInfoTooltip": "已委托至验证器的总数额。",
+      "withdrawableInfoTooltip": "可从已委托值提取的总数额。",
+      "withdrawableTitle": "可提取",
+      "statusUpdateNotice": "交易确认后，委托状态将更新。",
+      "ledgerByFigmentTC": "由 Figment T&Cs 为您呈现的 Ledger",
+      "emptyState": {
+        "description": "您可以通过委托资产赚取 SOL 奖励。",
+        "info": "委托机制如何运作",
+        "delegation": "赚取奖励"
+      },
+      "earnRewards": {
+        "description": "您可以将 SOL 资产委托给验证器，从而赚取奖励。",
+        "bullet": {
+          "0": "您保有对已委托资产的所有权",
+          "1": "使用您的 Ledger 设备进行委托",
+          "2": "资产将在解除委托后可用"
+        },
+        "warning": "请明智地选择验证器：如果验证器表现不当，您可能会不可挽回地损失部分已委托资产。"
+      },
+      "flow": {
+        "title": "委托",
+        "steps": {
+          "validator": {
+            "title": "验证器"
+          },
+          "amount": {
+            "title": "数额"
+          },
+          "confirmation": {
+            "success": {
+              "title": "您的资产已经成功委托。"
+            }
+          }
+        }
+      },
+      "withdraw": {
+        "flow": {
+          "title": "提取",
+          "steps": {
+            "amount": {
+              "title": "数额"
+            },
+            "confirmation": {
+              "success": {
+                "title": "您的资产已成功提取",
+                "text": "交易确认后，您的账户余额将更新。"
+              }
+            }
+          }
+        }
+      },
+      "activate": {
+        "flow": {
+          "title": "激活",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "您的委托已成功激活。"
+              }
+            }
+          }
+        }
+      },
+      "reactivate": {
+        "flow": {
+          "title": "重新激活",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "您的委托已成功重新激活。"
+              }
+            }
+          }
+        }
+      },
+      "deactivate": {
+        "flow": {
+          "title": "停用",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "您的委托已成功停用。"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "赚取奖励",
     "header": "委托",
@@ -2760,10 +2874,6 @@
           "title": "使用 TronGrid.io",
           "description": "无需 Ledger 代理直接使用 TronGrid"
         },
-        "experimentalJSCurrencies": {
-          "title": "实验性的 JS 实现",
-          "description": "对 Tezos 和 Cosmos 使用实验性的 JS 实现。"
-        },
         "experimentalCurrencies": {
           "title": "实验集成",
           "description": "使用可用的实验性加密资产集成。"
@@ -2847,6 +2957,12 @@
         "desc": "您可以通过前往主账户，以右键点击相关代币并选择“隐藏代币”的方式来隐藏代币。",
         "count": "{{count}} 枚代币",
         "count_plural": "{{count}} 枚代币"
+      },
+      "hiddenNftCollections": {
+        "title": "隐藏的 NFT 收藏",
+        "desc": "您可以通过右键点击收藏名称并选择 “隐藏 NFT 收藏” 来隐藏 NFT 收藏。",
+        "count": "{{count}} 个收藏",
+        "count_plural": "{{count}} 个收藏"
       },
       "fullNode": {
         "title": "连接比特币完整节点",
@@ -4128,6 +4244,9 @@
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "主账户余额不足"
+    },
+    "quantityNeedsToBePositive": {
+      "title": "数量需至少为 1"
     },
     "NotEnoughSpendableBalance": {
       "title": "余额不能少于 {{minimumAmount}}"
