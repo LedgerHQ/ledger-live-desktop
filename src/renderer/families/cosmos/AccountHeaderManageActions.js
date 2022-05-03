@@ -1,16 +1,13 @@
 // @flow
-import { useCallback } from "react";
-import invariant from "invariant";
-import { useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
-
 import { getMainAccount } from "@ledgerhq/live-common/lib/account";
 import { canDelegate } from "@ledgerhq/live-common/lib/families/cosmos/logic";
-
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-
+import invariant from "invariant";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
-import IconChartLine from "~/renderer/icons/ChartLine";
+import IconCoins from "~/renderer/icons/Coins";
 
 type Props = {
   account: AccountLike,
@@ -24,29 +21,38 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
 
   const { cosmosResources } = mainAccount;
   invariant(cosmosResources, "cosmos account expected");
-  const { delegations } = cosmosResources;
   const earnRewardEnabled = canDelegate(mainAccount);
 
+  const hasDelegations = cosmosResources.delegations.length > 0;
+
   const onClick = useCallback(() => {
-    dispatch(
-      openModal("MODAL_COSMOS_REWARDS_INFO", {
-        account,
-      }),
-    );
-  }, [dispatch, account]);
+    if (hasDelegations) {
+      dispatch(
+        openModal("MODAL_COSMOS_DELEGATE", {
+          account,
+        }),
+      );
+    } else {
+      dispatch(
+        openModal("MODAL_COSMOS_REWARDS_INFO", {
+          account,
+        }),
+      );
+    }
+  }, [dispatch, account, hasDelegations]);
 
-  if (parentAccount || delegations.length > 0) return null;
+  if (parentAccount) return null;
 
-  const disabledLabel = earnRewardEnabled ? "" : ` - ${t("cosmos.delegation.minSafeWarning")}`;
-  const label = `${t("delegation.title")}${disabledLabel}`;
+  const disabledLabel = earnRewardEnabled ? "" : t("cosmos.delegation.minSafeWarning");
 
   return [
     {
-      key: "cosmos",
+      key: "Stake",
       onClick: onClick,
-      icon: IconChartLine,
+      icon: IconCoins,
       disabled: !earnRewardEnabled,
-      label,
+      label: t("account.stake"),
+      tooltip: disabledLabel,
     },
   ];
 };
