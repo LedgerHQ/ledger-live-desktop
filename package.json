@@ -173,7 +173,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^3.5.3",
     "dotenv-webpack": "^7.1.0",
-    "electron": "13.5.2",
+    "electron": "13.6.6",
     "electron-builder": "22.13.1",
     "electron-devtools-installer": "^3.2.0",
     "electron-notarize": "^1.1.0",
