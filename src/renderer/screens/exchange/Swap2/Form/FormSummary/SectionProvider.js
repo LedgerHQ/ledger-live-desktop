@@ -1,18 +1,20 @@
 // @flow
-import React from "react";
-import SummaryLabel from "./SummaryLabel";
-import SummaryValue, { NoValuePlaceholder } from "./SummaryValue";
-import SummarySection from "./SummarySection";
-import styled from "styled-components";
+import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import { getProviderName } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import React, { useContext, useMemo } from "react";
 import { useTranslation } from "react-i18next";
+import styled from "styled-components";
 import Text from "~/renderer/components/Text";
-import { rgba } from "~/renderer/styles/helpers";
+import { context } from "~/renderer/drawers/Provider";
 import CheckCircleIcon from "~/renderer/icons/CheckCircle";
 import ClockIcon from "~/renderer/icons/Clock";
 import ExclamationCircleIcon from "~/renderer/icons/ExclamationCircle";
-import { getProviderName } from "@ledgerhq/live-common/lib/exchange/swap/utils";
-import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import { rgba } from "~/renderer/styles/helpers";
 import { iconByProviderName } from "../../utils";
+import RatesDrawer from "../RatesDrawer";
+import SummaryLabel from "./SummaryLabel";
+import SummarySection from "./SummarySection";
+import SummaryValue, { NoValuePlaceholder } from "./SummaryValue";
 
 const StatusTag = styled.div`
   display: flex;
@@ -27,6 +29,9 @@ const StatusTag = styled.div`
 export type SectionProviderProps = {
   provider?: string,
   status?: KYCStatus,
+  ratesState: RatesReducerState,
+  fromCurrency: $PropertyType<SwapSelectorStateType, "currency">,
+  toCurrency: $PropertyType<SwapSelectorStateType, "currency">,
 };
 type ProviderStatusTagProps = {
   status: $NonMaybeType<$PropertyType<SectionProviderProps, "status">>,
@@ -53,19 +58,41 @@ const ProviderStatusTag = ({ status }: ProviderStatusTagProps) => {
   );
 };
 
-const SectionProvider = ({ provider, status }: SectionProviderProps) => {
+const SectionProvider = ({
+  provider,
+  status,
+  fromCurrency,
+  toCurrency,
+  ratesState,
+}: SectionProviderProps) => {
   const { t } = useTranslation();
   const ProviderIcon = provider && iconByProviderName[provider.toLowerCase()];
+
+  const { setDrawer } = useContext(context);
+  const rates = ratesState.value;
+  const handleChange = useMemo(
+    () =>
+      rates &&
+      rates.length > 1 &&
+      (() =>
+        setDrawer(RatesDrawer, {
+          fromCurrency,
+          toCurrency,
+          rates,
+          provider,
+        })),
+    [setDrawer, rates, fromCurrency, toCurrency, provider],
+  );
 
   return (
     <SummarySection>
       <SummaryLabel label={t("swap2.form.details.label.provider")} />
       {(provider && (
         <div style={{ display: "flex", columnGap: "6px", alignItems: "center" }}>
-          <SummaryValue value={getProviderName(provider)}>
+          <SummaryValue value={getProviderName(provider)} handleChange={handleChange}>
+            {status ? <ProviderStatusTag status={status} /> : null}
             {ProviderIcon && <ProviderIcon size={19} />}
           </SummaryValue>
-          {status ? <ProviderStatusTag status={status} /> : null}
         </div>
       )) || (
         <SummaryValue>
