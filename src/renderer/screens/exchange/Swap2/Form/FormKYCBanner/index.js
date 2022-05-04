@@ -1,10 +1,9 @@
 // @flow
+import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
+import { KYC_STATUS } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import React from "react";
 import { useTranslation } from "react-i18next";
-
 import SectionInformative from "~/renderer/screens/exchange/Swap2/Form/FormSummary/SectionInformative";
-import { KYC_STATUS } from "@ledgerhq/live-common/lib/exchange/swap/utils";
-import type { KYCStatus } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 
 const FormKYCBanner = ({
   provider,
@@ -18,7 +17,7 @@ const FormKYCBanner = ({
   const { t } = useTranslation();
 
   // we render the component only if KYC is rejected or need to be upgraded
-  // i.e: we don't render it if the KYC is "pending". FIXME: could add a "refresh KYC" button in this case?
+  // i.e: we don't render it if the KYC is "pending".
   if (!provider || (status && status === KYC_STATUS.pending)) return null;
 
   const { message, cta } = status

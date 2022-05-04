@@ -79,7 +79,7 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
       const { operation, swapId } = result;
 
       /**
-       * If transaction broadcast are desabled, consider the swap as cancelled
+       * If transaction broadcast are disabled, consider the swap as cancelled
        * since the partner will never receive the funds
        */
       if (getEnv("DISABLE_TRANSACTION_BROADCAST")) {

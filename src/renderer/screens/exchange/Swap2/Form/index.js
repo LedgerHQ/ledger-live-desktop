@@ -88,6 +88,7 @@ export const useProviders = () => {
 };
 
 const SwapForm = () => {
+  // FIXME: should use enums for Flow and Banner values
   const [currentFlow, setCurrentFlow] = useState(null);
   const [currentBanner, setCurrentBanner] = useState(null);
 
@@ -228,7 +229,6 @@ const SwapForm = () => {
       });
 
       // User needs to complete MFA on partner own UI / dedicated widget
-      // FIXME: status code should be "MFA_REQUIRED"
       if (status.codeName === "MFA_REQUIRED") {
         setCurrentBanner("MFA");
         return;
@@ -272,8 +272,7 @@ const SwapForm = () => {
         }
       }
 
-      // FIXME
-      // If user is unauthenticated (status returned after user complete MFA as of today, should be fixed)
+      // If user is unauthenticated, reset login and KYC state
       if (status.codeName === "UNAUTHENTICATED_USER") {
         dispatch(
           setSwapKYCStatus({
