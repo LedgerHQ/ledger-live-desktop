@@ -1055,9 +1055,9 @@
     "hideCTA": "Token'ı gizle"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Collection",
+    "title": "NFT Koleksiyonunu Gizle",
     "desc": "Bu eylem <1><0>{{collectionName}}</0></1> koleksiyonundaki tüm NFT'leri gizler; <3>Ayarlar'ı</3> kullanarak tekrar görünür hale getirebilirsiniz",
-    "hideCTA": "NFT Koleksiyonunu Sakla"
+    "hideCTA": "NFT Koleksiyonunu Gizle"
   },
   "banners": {
     "cleanCache": {
