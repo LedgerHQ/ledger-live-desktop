@@ -20,6 +20,7 @@ export function NewRecoveryPhrase({
       <SubTitle>{t("onboarding.screens.tutorial.screens.newRecoveryPhrase.paragraph1")}</SubTitle>
       <SubTitle>{t("onboarding.screens.tutorial.screens.newRecoveryPhrase.paragraph2")}</SubTitle>
       <CheckStep
+        data-test-id="v3-recovery-phrase-checkbox"
         checked={userUnderstandConsequences}
         onClick={toggleUserUnderstandConsequences}
         label={t("onboarding.screens.tutorial.screens.newRecoveryPhrase.disclaimer")}

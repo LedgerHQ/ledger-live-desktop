@@ -37,6 +37,7 @@ export default function ModalStepperBody({
   rightSideBgColor,
   stepIndex,
   stepCount,
+  dataTestId,
 }: Props) {
   const { t } = useTranslation();
 
@@ -45,7 +46,7 @@ export default function ModalStepperBody({
   const defaultContinueLabel = t("common.continue");
   const defaultBackLabel = t("common.back");
   return (
-    <StepContainer>
+    <StepContainer data-test-id={dataTestId}>
       <StepLeftSide
         Header={<ProgressHeader title={title} {...stepsProps} />}
         stepTitle={stepTitle}
@@ -59,6 +60,9 @@ export default function ModalStepperBody({
         backDisabled={backDisabled}
         onClickContinue={onClickContinue}
         onClickBack={onClickBack}
+        dataTestId={
+          stepIndex !== stepCount - 1 ? "v3-modal-stepper-continue" : "v3-modal-stepper-end"
+        }
       />
       <StepRightSide AsideRight={AsideRight} rightSideBgColor={rightSideBgColor} />
       <ProgressBar {...stepsProps} />

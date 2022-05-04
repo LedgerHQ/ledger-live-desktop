@@ -29,7 +29,13 @@ const StartScreen = ({ onStart }: Props) => {
         <Text variant="body" fontWeight="medium">
           {t("v3.onboarding.quizz.descr")}
         </Text>
-        <Button variant="main" Icon={Icons.PlusMedium} iconPosition="left" onClick={onStart}>
+        <Button
+          data-test-id="v3-quiz-start-button"
+          variant="main"
+          Icon={Icons.PlusMedium}
+          iconPosition="left"
+          onClick={onStart}
+        >
           {t("v3.onboarding.quizz.buttons.start")}
         </Button>
       </Flex>

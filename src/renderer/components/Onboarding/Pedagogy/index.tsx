@@ -24,6 +24,7 @@ export function Pedagogy({ isOpen, onDone, onClose }: PedagogyProps) {
 
   return (
     <ModalStepper
+      dataTestId="v3-onboarding-pedagogy-modal"
       isOpen={isOpen}
       title={t("v3.onboarding.pedagogy.heading")}
       steps={[

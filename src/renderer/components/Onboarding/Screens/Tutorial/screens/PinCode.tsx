@@ -16,6 +16,7 @@ export function PinCode({ toggleUserChosePinCodeHimself, userChosePinCodeHimself
       <Title>{t("onboarding.screens.tutorial.screens.pinCode.title")}</Title>
       <SubTitle>{t("onboarding.screens.tutorial.screens.pinCode.paragraph")}</SubTitle>
       <CheckStep
+        data-test-id="v3-private-pin-code-checkbox"
         checked={userChosePinCodeHimself}
         onClick={toggleUserChosePinCodeHimself}
         label={t("onboarding.screens.tutorial.screens.pinCode.disclaimer")}

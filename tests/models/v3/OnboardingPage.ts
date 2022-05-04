@@ -13,16 +13,19 @@ export class OnboardingPage {
   readonly connectDeviceButton: Locator;
   readonly restoreDeviceButton: Locator;
   readonly pedagogyModal: Locator;
+  readonly stepperContinueButton: Locator;
+  readonly stepperEndButton: Locator;
   readonly checkMyNanoButton: Locator;
   readonly gotItButton: Locator;
   readonly continueButton: Locator;
   readonly leftArrowBasicsButton: Locator;
   readonly rightArrowBasicsButton: Locator;
+  readonly tutorialContinueButton: Locator;
   readonly setupWalletButton: Locator;
   readonly getStartedCtaButton: Locator;
   readonly beCarefulButton: Locator;
   readonly startSetupButton: Locator;
-  readonly pincodeCheckbox: Locator;
+  readonly pinCodeCheckbox: Locator;
   readonly setupPincodeButton: Locator;
   readonly confirmPincodeButton: Locator;
   readonly recoveryPhraseCheckbox: Locator;
@@ -60,26 +63,27 @@ export class OnboardingPage {
     this.connectDeviceButton = page.locator("data-test-id=v3-onboarding-initialized-device");
     this.restoreDeviceButton = page.locator("data-test-id=v3-onboarding-restore-device");
     this.pedagogyModal = page.locator("data-test-id=v3-onboarding-pedagogy-modal");
+    this.stepperContinueButton = page.locator("data-test-id=v3-modal-stepper-continue");
+    this.stepperEndButton = page.locator("data-test-id=v3-modal-stepper-end");
     this.leftArrowBasicsButton = page.locator("data-test-id=v3-pedagogy-left");
     this.rightArrowBasicsButton = page.locator("data-test-id=v3-pedagogy-right");
+    this.tutorialContinueButton = page.locator("data-test-id=v3-tutorial-continue");
     this.setupWalletButton = page.locator("data-test-id=v3-setup-nano-wallet-cta");
     this.getStartedCtaButton = page.locator("data-test-id=v3-get-started-cta");
     this.beCarefulButton = page.locator("data-test-id=v3-be-careful-cta");
     this.startSetupButton = page.locator("data-test-id=v3-device-howto-cta");
-    this.pincodeCheckbox = page.locator("data-test-id=v3-pincode-private-cb");
-    this.setupPincodeButton = page.locator("data-test-id=v3-device-pincode-cta");
-    this.confirmPincodeButton = page.locator("data-test-id=v3-pincode-howto-cta");
-    this.recoveryPhraseCheckbox = page.locator("data-test-id=v3-recoveryphrase-private-cb");
+    this.pinCodeCheckbox = page.locator("data-test-id=v3-private-pin-code-checkbox");
+    this.recoveryPhraseCheckbox = page.locator("data-test-id=v3-recovery-phrase-checkbox");
     this.recoverySetupButton = page.locator("data-test-id=v3-device-recoveryphrase-cta");
     this.writeRecoveryPhraseButton = page.locator("data-test-id=v3-use-recovery-sheet");
     this.confirmRecoveryPhraseButton = page.locator("data-test-id=v3-recovery-howto-3");
     this.hideRecoveryPhraseButton = page.locator("data-test-id=v3-hide-recovery-cta");
     this.quizContainer = page.locator("data-test-id=v3-quiz-container");
-    this.quizStartButton = page.locator("data-test-id=v3-quiz-start-cta");
+    this.quizStartButton = page.locator("data-test-id=v3-quiz-start-button");
     this.quizAnswerTopButton = page.locator("data-test-id=v3-quiz-answer-0");
     this.quizAnswerBottomButton = page.locator("data-test-id=v3-quiz-answer-1");
-    this.quizNextButton = page.locator("data-test-id=v3-quiz-next-cta");
-    this.quizSuccessButton = page.locator("data-test-id=v3-quiz-success-cta");
+    // this.quizNextButton = page.locator("data-test-id=v3-quiz-next-cta");
+    // this.quizSuccessButton = page.locator("data-test-id=v3-quiz-success-cta");
   }
 
   async getStarted() {
@@ -106,8 +110,16 @@ export class OnboardingPage {
     await this.newDeviceButton.click();
   }
 
-  async basicsCarrouselRight() {
-    await this.rightArrowBasicsButton.click();
+  // async basicsCarrouselContinue() {
+  //   await this.page.click('button:has-text("Continue")');
+  // }
+
+  async pedagogyContinue() {
+    await this.stepperContinueButton.click();
+  }
+
+  async pedagogyEnd() {
+    await this.stepperEndButton.click();
   }
 
   async startSetup() {
@@ -134,6 +146,18 @@ export class OnboardingPage {
     await this.setupWalletButton.click();
   }
 
+  async continueTutorial() {
+    await this.tutorialContinueButton.click();
+  }
+
+  async acceptPrivatePinCode() {
+    await this.pinCodeCheckbox.click();
+  }
+
+  async acceptRecoveryPhrase() {
+    await this.recoveryPhraseCheckbox.click();
+  }
+
   async startQuiz() {
     await this.quizStartButton.click();
   }
@@ -147,11 +171,11 @@ export class OnboardingPage {
   }
 
   async quizNextQuestion() {
-    await this.quizNextButton.click();
+    await this.stepperContinueButton.click();
   }
 
   async quizEnd() {
-    await this.quizSuccessButton.click();
+    await this.stepperEndButton.click();
   }
 
   async checkDevice() {
