@@ -1054,6 +1054,11 @@
     "desc": "Esta acción ocultará todas las cuentas de <1><0>{{tokenName}}</0></1>, puedes mostrarlas de nuevo mediante los <3>Ajustes</3>",
     "hideCTA": "Ocultar token"
   },
+  "hideNftCollection": {
+    "title": "Ocultar colección de NFTs",
+    "desc": "Esta acción ocultará todos los NFTs de la colección <1><0>{{collectionName}}</0></1>, puedes mostrarlos de nuevo usando <3>Configuración</3>",
+    "hideCTA": "Ocultar colección de NFTs"
+  },
   "banners": {
     "cleanCache": {
       "title": "La modificación de los ajustes experimentales requiere de una memoria caché vacía",
@@ -1136,9 +1141,9 @@
       },
       "confirm": {
         "title": "Conectar",
-        "details": "Desea conectarse a la siguiente cuenta de Ethereum mediante tu billetera:",
-        "deeplinkDetails": "Quiere conectarse a Ledger Live. Elige tu cuenta de Ethereum:",
-        "noEthAccount": "No tienes ninguna cuenta de Ethereum. Por favor, añade una cuenta de Ethereum para usar Wallet Connect.",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "Estás intentando conectarte a una dApp mientras estás conectado a otra. Por favor, desconéctate de la dApp conectada antes de volver a conectar Live con una nueva dApp."
       }
     },
@@ -2553,6 +2558,115 @@
       }
     }
   },
+  "solana": {
+    "common": {
+      "broadcastError": "Es posible que la transacción haya fallado. Espera un momento y comprueba el historial de transacciones antes de intentarlo de nuevo.",
+      "viewDetails": "Ver detalles",
+      "connectDevice": {
+        "title": "Dispositivo"
+      },
+      "confirmation": {
+        "title": "Confirmación"
+      }
+    },
+    "delegation": {
+      "totalStake": "Participación total",
+      "commission": "Comisión",
+      "delegate": "Agregar",
+      "listHeader": "Delegaciones",
+      "availableBalance": "Saldo disponible",
+      "active": "Activa",
+      "activeTooltip": "Cantidad activa genera recompensas",
+      "inactiveTooltip": "Cantidad inactiva no genera recompensas",
+      "delegatedInfoTooltip": "Cantidad total delegada a validadores.",
+      "withdrawableInfoTooltip": "Cantidad total que es posible retirar de las delegaciones.",
+      "withdrawableTitle": "Es posible retirar",
+      "statusUpdateNotice": "El estado de la delegación se actualizará cuando se confirme la transacción.",
+      "ledgerByFigmentTC": "Términos y condiciones de Ledger a través de Figment",
+      "emptyState": {
+        "description": "Puedes recibir recompensas de SOL delegando tu activos.",
+        "info": "Cómo funciona la delegación",
+        "delegation": "Recibir recompensas"
+      },
+      "earnRewards": {
+        "description": "Puedes recibir recompensas delegando tus activos SOL a un validador.",
+        "bullet": {
+          "0": "Conservas la propiedad de los activos delegados",
+          "1": "Delegar utilizando tu dispositivo Ledger",
+          "2": "Los activos estarán disponibles después de la desdelegación"
+        },
+        "warning": "Elige tu validador con cuidado: Puedes perder definitivamente parte de tus activos delegados si el validador no se comporta apropiadamente."
+      },
+      "flow": {
+        "title": "Delegar",
+        "steps": {
+          "validator": {
+            "title": "Validador"
+          },
+          "amount": {
+            "title": "Cantidad"
+          },
+          "confirmation": {
+            "success": {
+              "title": "Has delegado tus activos con éxito"
+            }
+          }
+        }
+      },
+      "withdraw": {
+        "flow": {
+          "title": "Retirar",
+          "steps": {
+            "amount": {
+              "title": "Importe"
+            },
+            "confirmation": {
+              "success": {
+                "title": "Has retirado con éxito tus activos.",
+                "text": "El saldo de tu cuenta se actualizará cuando se confirme la transacción."
+              }
+            }
+          }
+        }
+      },
+      "activate": {
+        "flow": {
+          "title": "Activar",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Has activado correctamente tu delegación."
+              }
+            }
+          }
+        }
+      },
+      "reactivate": {
+        "flow": {
+          "title": "Reactivar",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Has reactivado correctamente tu delegación."
+              }
+            }
+          }
+        }
+      },
+      "deactivate": {
+        "flow": {
+          "title": "Desactivar",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Has desactivado correctamente tu delegación."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "Recibir recompensas",
     "header": "Delegación",
@@ -2760,10 +2874,6 @@
           "title": "Usar TronGrid.io",
           "description": "Usar trongrid directamente sin el proxy de Ledger"
         },
-        "experimentalJSCurrencies": {
-          "title": "Implementaciones JS experimentales",
-          "description": "Usar implementaciones de JS experimentales para Tezos y Cosmos."
-        },
         "experimentalCurrencies": {
           "title": "Integraciones experimentales",
           "description": "Utilizar integraciones experimentales de actrivos cripto disponibles."
@@ -2847,6 +2957,12 @@
         "desc": "Puedes ocultar los tokens yendo a la cuenta principal y haciendo clic derecho en el token y seleccionando “Ocultar token”.",
         "count": "{{count}} token",
         "count_plural": "{{count}} tokens"
+      },
+      "hiddenNftCollections": {
+        "title": "Colecciones de NFTs ocultas",
+        "desc": "Puedes ocultar colecciones de NFTs haciendo clic derecho sobre el nombre de la colección y seleccionando 'Ocultar colección de NFTs'.",
+        "count": "Colección {{count}}",
+        "count_plural": "Colecciones {{count}}"
       },
       "fullNode": {
         "title": "Conectar nodo completo de Bitcoin",
@@ -4128,6 +4244,9 @@
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "Saldo insuficiente en la cuenta principal"
+    },
+    "quantityNeedsToBePositive": {
+      "title": "La cantidad debe ser de al menos 1"
     },
     "NotEnoughSpendableBalance": {
       "title": "El saldo no puede ser inferior a {{minimumAmount}}"

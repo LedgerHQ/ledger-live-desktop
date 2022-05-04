@@ -46,6 +46,7 @@ type Props = {
   selectCurrency: (currencyId: string) => void;
   availableOnBuy: boolean;
   availableOnSwap: boolean;
+  range?: string;
 };
 
 function MarketRowItem({
@@ -59,6 +60,7 @@ function MarketRowItem({
   selectCurrency,
   availableOnBuy,
   availableOnSwap,
+  range,
 }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -80,13 +82,13 @@ function MarketRowItem({
   const flattenedAccounts = flattenAccounts(allAccounts);
 
   const onCurrencyClick = useCallback(() => {
-    selectCurrency(currency.id);
+    selectCurrency(currency.id, currency, range);
     setTrackingSource("Page Market");
     history.push({
       pathname: `/market/${currency.id}`,
       state: currency,
     });
-  }, [currency, history, selectCurrency]);
+  }, [currency, history, range, selectCurrency]);
 
   const onBuy = useCallback(
     e => {

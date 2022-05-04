@@ -201,13 +201,13 @@ const Body = ({
     nextNft => {
       setAccount(account);
       const bridge = getAccountBridge(account);
-      const standard = nextNft.collection.standard.toLowerCase();
+      const standard = nextNft.standard.toLowerCase();
 
       setTransaction(
         bridge.updateTransaction(transaction, {
           tokenIds: [nextNft.tokenId],
           quantities: [BigNumber(1)],
-          collection: nextNft.collection.contract,
+          collection: nextNft.contract,
           mode: `${standard}.transfer`,
         }),
       );

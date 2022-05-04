@@ -8,7 +8,7 @@ import logger from "~/logger";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 import { accountsSelector } from "~/renderer/reducers/accounts";
 import { recentlyChangedExperimental } from "~/renderer/experimental";
-import { recentlyKilledInternalProcess, onUnusualInternalProcessError } from "~/renderer/reset";
+import { recentlyKilledInternalProcess } from "~/renderer/reset";
 import { track } from "~/renderer/analytics/segment";
 import { prepareCurrency, hydrateCurrency } from "./cache";
 import { hasOngoingSync } from "./proxy";
@@ -44,9 +44,6 @@ export const BridgeSyncProvider = ({ children }: { children: React$Node }) => {
     ) {
       // This error is normal because the thread was recently killed. we silent it for the user.
       return;
-    }
-    if (isInternalProcessError) {
-      onUnusualInternalProcessError();
     }
     logger.critical(error);
     return error;

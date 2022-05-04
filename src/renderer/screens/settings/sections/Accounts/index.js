@@ -8,6 +8,7 @@ import HideEmptyTokenAccountsToggle from "./HideEmptyTokenAccountsToggle";
 import SectionExport from "./Export";
 import Currencies from "./Currencies";
 import BlacklistedTokens from "./BlacklistedTokens";
+import HiddenNftCollections from "./HiddenNFTCollections";
 
 export default function SectionAccounts() {
   const { t } = useTranslation();
@@ -23,6 +24,7 @@ export default function SectionAccounts() {
         <HideEmptyTokenAccountsToggle />
       </Row>
       <BlacklistedTokens />
+      <HiddenNftCollections />
       <Currencies />
     </Body>
   );
