@@ -7,6 +7,7 @@ const TermOfUseUpdateModal = () => (
   <Modal
     name="MODAL_TERM_OF_USE_UPDATE"
     centered
+    preventBackdropClick={true}
     render={({ data, onClose }) => (
       <TermOfUseUpdateBody
         onClose={() => {

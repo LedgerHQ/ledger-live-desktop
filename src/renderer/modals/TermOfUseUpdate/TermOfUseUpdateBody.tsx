@@ -38,7 +38,6 @@ const TermOfUseUpdateBody = ({ onClose }: Props) => {
 
   return (
     <ModalBody
-      onClose={onClose}
       render={() => (
         <Flex data-test-id="terms-update-popup" flexDirection="column" alignItems="center">
           <Flex
