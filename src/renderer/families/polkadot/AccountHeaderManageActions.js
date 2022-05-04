@@ -11,9 +11,8 @@ import {
   hasPendingOperationType,
 } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 
-import IconChartLine from "~/renderer/icons/ChartLine";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { openModal } from "~/renderer/actions/modals";
+import IconCoins from "~/renderer/icons/Coins";
 
 type Props = {
   account: Account,
@@ -56,24 +55,22 @@ const AccountHeaderManageActions = ({ account }: Props) => {
 
   const disabledLabel = manageEnabled
     ? ""
-    : ` - ${t(
+    : `${t(
         _hasExternalController
           ? "polkadot.nomination.externalControllerTooltip"
           : _hasExternalStash
           ? "polkadot.nomination.externalStashTooltip"
           : "polkadot.nomination.hasPendingBondOperation",
       )}`;
-  const label = `${t(
-    hasBondedBalance || hasPendingBondOperation ? "polkadot.manage.title" : "delegation.title",
-  )}${disabledLabel}`;
 
   return [
     {
       key: "polkadot",
       onClick: onClick,
-      icon: hasBondedBalance ? CryptoCurrencyIcon : IconChartLine,
+      icon: IconCoins,
       disabled: !manageEnabled,
-      label,
+      label: t("account.stake"),
+      tooltip: disabledLabel,
     },
   ];
 };
