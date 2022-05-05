@@ -28,8 +28,6 @@ export class OnboardingPage {
   readonly beCarefulButton: Locator;
   readonly startSetupButton: Locator;
   readonly pinCodeCheckbox: Locator;
-  readonly setupPincodeButton: Locator;
-  readonly confirmPincodeButton: Locator;
   readonly recoveryPhraseCheckbox: Locator;
   readonly recoveryPhraseLossCheckbox: Locator;
   readonly recoverySetupButton: Locator;
@@ -40,8 +38,6 @@ export class OnboardingPage {
   readonly quizStartButton: Locator;
   readonly quizAnswerTopButton: Locator;
   readonly quizAnswerBottomButton: Locator;
-  readonly quizNextButton: Locator;
-  readonly quizSuccessButton: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -87,8 +83,6 @@ export class OnboardingPage {
     this.quizStartButton = page.locator("data-test-id=v3-quiz-start-button");
     this.quizAnswerTopButton = page.locator("data-test-id=v3-quiz-answer-0");
     this.quizAnswerBottomButton = page.locator("data-test-id=v3-quiz-answer-1");
-    // this.quizNextButton = page.locator("data-test-id=v3-quiz-next-cta");
-    // this.quizSuccessButton = page.locator("data-test-id=v3-quiz-success-cta");
   }
 
   async getStarted() {
@@ -124,7 +118,6 @@ export class OnboardingPage {
 
   async connectDevice() {
     await this.connectDeviceButton.click();
-    // await this.page.click("data-test-id=v3-onboarding-initialized-device");
   }
 
   async newDevice() {
@@ -134,10 +127,6 @@ export class OnboardingPage {
   async restoreDevice() {
     await this.restoreDeviceButton.click();
   }
-
-  // async basicsCarrouselContinue() {
-  //   await this.page.click('button:has-text("Continue")');
-  // }
 
   async pedagogyContinue() {
     await this.stepperContinueButton.click();
@@ -164,18 +153,6 @@ export class OnboardingPage {
 
     expect(await this.page.screenshot()).toMatchSnapshot([group, "pin-code-3.png"]);
     await this.continueTutorial();
-  }
-
-  async setPassphrase() {
-    await this.recoveryPhraseCheckbox.click();
-    await this.recoverySetupButton.click();
-    await this.writeRecoveryPhraseButton.click();
-    await this.confirmRecoveryPhraseButton.click();
-    await this.hideRecoveryPhraseButton.click();
-  }
-
-  async setupWallet() {
-    await this.setupWalletButton.click();
   }
 
   async continueTutorial() {
