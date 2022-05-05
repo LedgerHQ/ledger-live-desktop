@@ -155,10 +155,15 @@ export class OnboardingPage {
     await this.continueTutorial();
   }
 
-  async setPincode() {
-    await this.pincodeCheckbox.click();
-    await this.setupPincodeButton.click();
-    await this.confirmPincodeButton.click();
+  async setPinCode(group: string) {
+    expect(await this.page.screenshot()).toMatchSnapshot([group, "pin-code-1.png"]);
+    await this.acceptPrivatePinCode();
+
+    expect(await this.page.screenshot()).toMatchSnapshot([group, "pin-code-2.png"]);
+    await this.continueTutorial();
+
+    expect(await this.page.screenshot()).toMatchSnapshot([group, "pin-code-3.png"]);
+    await this.continueTutorial();
   }
 
   async setPassphrase() {

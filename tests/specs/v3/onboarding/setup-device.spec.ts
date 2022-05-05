@@ -77,23 +77,7 @@ test.describe.parallel("Onboarding", () => {
         if (nano !== Nano.nanoSP) {
           await onboardingPage.startTutorial("v3-setup-new-device");
 
-          expect(await page.screenshot()).toMatchSnapshot([
-            "v3-setup-new-device",
-            "setup-pin-code-1.png",
-          ]);
-          await onboardingPage.acceptPrivatePinCode();
-
-          expect(await page.screenshot()).toMatchSnapshot([
-            "v3-setup-new-device",
-            "setup-pin-code-2.png",
-          ]);
-          await onboardingPage.continueTutorial();
-
-          expect(await page.screenshot()).toMatchSnapshot([
-            "v3-setup-new-device",
-            "setup-pin-code-3.png",
-          ]);
-          await onboardingPage.continueTutorial();
+          await onboardingPage.setPinCode("v3-setup-new-device");
 
           expect(await page.screenshot()).toMatchSnapshot([
             "v3-setup-new-device",

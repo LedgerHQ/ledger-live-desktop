@@ -38,23 +38,7 @@ test.describe.parallel("Onboarding", () => {
 
           await onboardingPage.startTutorial("v3-restore-tutorial");
 
-          expect(await page.screenshot()).toMatchSnapshot([
-            "v3-restore-tutorial",
-            "pin-code-1.png",
-          ]);
-          await onboardingPage.acceptPrivatePinCode();
-
-          expect(await page.screenshot()).toMatchSnapshot([
-            "v3-restore-tutorial",
-            "pin-code-2.png",
-          ]);
-          await onboardingPage.continueTutorial();
-
-          expect(await page.screenshot()).toMatchSnapshot([
-            "v3-restore-tutorial",
-            "pin-code-3.png",
-          ]);
-          await onboardingPage.continueTutorial();
+          await onboardingPage.setPinCode("v3-restore-tutorial");
 
           expect(await page.screenshot()).toMatchSnapshot([
             "v3-restore-tutorial",
