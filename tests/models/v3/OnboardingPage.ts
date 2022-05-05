@@ -108,6 +108,17 @@ export class OnboardingPage {
     await this.selectDeviceButton(device).click();
   }
 
+  async beCareful() {
+    expect(await this.page.screenshot()).toMatchSnapshot("v3-be-careful.png");
+    await this.gotIt();
+  }
+
+  async warnings() {
+    await this.beCareful();
+    expect(await this.page.screenshot()).toMatchSnapshot("v3-recovery-warning.png");
+    await this.continue();
+  }
+
   async connectDevice() {
     await this.connectDeviceButton.click();
     // await this.page.click("data-test-id=v3-onboarding-initialized-device");

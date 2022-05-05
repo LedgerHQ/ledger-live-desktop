@@ -35,8 +35,7 @@ test.describe.parallel("Onboarding", () => {
         if (nano !== Nano.nanoSP) {
           expect(await page.screenshot()).toMatchSnapshot(`v3-device-setup-${nano}.png`);
           await onboardingPage.newDevice();
-          expect(await page.screenshot()).toMatchSnapshot("v3-be-careful.png");
-          await onboardingPage.gotIt();
+          await onboardingPage.beCareful();
         }
       });
 

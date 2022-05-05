@@ -35,15 +35,12 @@ test.describe.parallel("Onboarding", () => {
         if (nano !== Nano.nanoSP) {
           expect(await page.screenshot()).toMatchSnapshot(`v3-device-connection-${nano}.png`);
           await onboardingPage.connectDevice();
+          await onboardingPage.warnings();
         }
       });
 
       await test.step(`[${nano}] Device genuine check`, async () => {
         if (nano !== Nano.nanoSP) {
-          expect(await page.screenshot()).toMatchSnapshot("v3-be-careful.png");
-          await onboardingPage.gotIt();
-          expect(await page.screenshot()).toMatchSnapshot("v3-recovery-warning.png");
-          await onboardingPage.continue();
           expect(await page.screenshot()).toMatchSnapshot("v3-genuine-check.png");
           await onboardingPage.checkDevice();
         }
