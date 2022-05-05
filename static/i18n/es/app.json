@@ -2582,7 +2582,7 @@
       "withdrawableInfoTooltip": "Cantidad total que es posible retirar de las delegaciones.",
       "withdrawableTitle": "Es posible retirar",
       "statusUpdateNotice": "El estado de la delegación se actualizará cuando se confirme la transacción.",
-      "ledgerByFigmentTC": "Términos y condiciones de Ledger a través de Figment",
+      "ledgerByFigmentTC": "Términos y condiciones de Ledger by Figment",
       "emptyState": {
         "description": "Puedes recibir recompensas de SOL delegando tu activos.",
         "info": "Cómo funciona la delegación",
