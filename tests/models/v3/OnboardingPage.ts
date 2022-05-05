@@ -147,10 +147,12 @@ export class OnboardingPage {
     await this.stepperEndButton.click();
   }
 
-  async startSetup() {
-    await this.getStartedCtaButton.click();
-    await this.beCarefulButton.click();
-    await this.startSetupButton.click();
+  async startTutorial(group: string) {
+    expect(await this.page.screenshot()).toMatchSnapshot([group, "get-started-1.png"]);
+    await this.continueTutorial();
+
+    expect(await this.page.screenshot()).toMatchSnapshot([group, "get-started-2.png"]);
+    await this.continueTutorial();
   }
 
   async setPincode() {

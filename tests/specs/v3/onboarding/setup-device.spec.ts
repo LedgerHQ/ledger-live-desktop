@@ -75,17 +75,7 @@ test.describe.parallel("Onboarding", () => {
 
       await test.step("Set up new device", async () => {
         if (nano !== Nano.nanoSP) {
-          expect(await page.screenshot()).toMatchSnapshot([
-            "v3-setup-new-device",
-            "get-started-1.png",
-          ]);
-          await onboardingPage.continueTutorial();
-
-          expect(await page.screenshot()).toMatchSnapshot([
-            "v3-setup-new-device",
-            "get-started-2.png",
-          ]);
-          await onboardingPage.continueTutorial();
+          await onboardingPage.startTutorial("v3-setup-new-device");
 
           expect(await page.screenshot()).toMatchSnapshot([
             "v3-setup-new-device",

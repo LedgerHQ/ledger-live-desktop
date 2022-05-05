@@ -36,17 +36,7 @@ test.describe.parallel("Onboarding", () => {
 
           await onboardingPage.warnings();
 
-          expect(await page.screenshot()).toMatchSnapshot([
-            "v3-restore-tutorial",
-            "get-started-1.png",
-          ]);
-          await onboardingPage.continueTutorial();
-
-          expect(await page.screenshot()).toMatchSnapshot([
-            "v3-restore-tutorial",
-            "get-started-2.png",
-          ]);
-          await onboardingPage.continueTutorial();
+          await onboardingPage.startTutorial("v3-restore-tutorial");
 
           expect(await page.screenshot()).toMatchSnapshot([
             "v3-restore-tutorial",
