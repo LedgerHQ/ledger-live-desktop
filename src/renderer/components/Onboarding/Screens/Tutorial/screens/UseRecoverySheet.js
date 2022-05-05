@@ -36,8 +36,8 @@ const StepIndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(100, 144, 241, 0.1);
-  color: #6490f1;
+  background: rgba(138, 128, 219, 0.1);
+  color: #8a80db;
 `;
 
 const StepContainer = styled.div`
@@ -156,7 +156,7 @@ export function UseRecoverySheet({ sendEvent }: Props) {
             {t("onboarding.screens.tutorial.screens.useRecoverySheet.buttons.prev")}
           </Text>
         </Button>
-        <Button id="use-recovery-sheet" primary onClick={() => sendEvent("NEXT")}>
+        <Button data-test-id="use-recovery-sheet" primary onClick={() => sendEvent("NEXT")}>
           <Text mr="12px" ff="Inter|Bold" fontSize="12px" lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.useRecoverySheet.buttons.next")}
           </Text>

@@ -1,8 +1,8 @@
 // @flow
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import invariant from "invariant";
 import { useDispatch } from "react-redux";
-import { Trans } from "react-i18next";
+import { useTranslation } from "react-i18next";
 
 import type { Account } from "@ledgerhq/live-common/lib/types";
 import {
@@ -11,15 +11,15 @@ import {
   hasPendingOperationType,
 } from "@ledgerhq/live-common/lib/families/polkadot/logic";
 
-import IconChartLine from "~/renderer/icons/ChartLine";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import { openModal } from "~/renderer/actions/modals";
+import IconCoins from "~/renderer/icons/Coins";
 
 type Props = {
   account: Account,
 };
 
 const AccountHeaderManageActions = ({ account }: Props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const { polkadotResources } = account;
@@ -53,22 +53,24 @@ const AccountHeaderManageActions = ({ account }: Props) => {
     (!hasBondedBalance && hasPendingBondOperation)
   );
 
-  if (!manageEnabled) return null;
+  const disabledLabel = manageEnabled
+    ? ""
+    : `${t(
+        _hasExternalController
+          ? "polkadot.nomination.externalControllerTooltip"
+          : _hasExternalStash
+          ? "polkadot.nomination.externalStashTooltip"
+          : "polkadot.nomination.hasPendingBondOperation",
+      )}`;
 
   return [
     {
       key: "polkadot",
       onClick: onClick,
-      icon: hasBondedBalance ? CryptoCurrencyIcon : IconChartLine,
-      label: (
-        <Trans
-          i18nKey={
-            hasBondedBalance || hasPendingBondOperation
-              ? "polkadot.manage.title"
-              : "delegation.title"
-          }
-        />
-      ),
+      icon: IconCoins,
+      disabled: !manageEnabled,
+      label: t("account.stake"),
+      tooltip: disabledLabel,
     },
   ];
 };

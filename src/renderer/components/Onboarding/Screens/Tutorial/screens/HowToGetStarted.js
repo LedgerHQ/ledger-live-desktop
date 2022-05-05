@@ -71,7 +71,7 @@ export function HowToGetStarted({ sendEvent }: Props) {
         </Text>
         <Row>
           <IconContainer>
-            <Clock size={12} color="#6490F1" />
+            <Clock size={12} color="#8a80db" />
           </IconContainer>
           <Text
             ml="20px"
@@ -85,7 +85,7 @@ export function HowToGetStarted({ sendEvent }: Props) {
         </Row>
         <Row>
           <IconContainer>
-            <Pen size={12} color="#6490F1" />
+            <Pen size={12} color="#8a80db" />
           </IconContainer>
           <Text
             ml="20px"
@@ -99,7 +99,7 @@ export function HowToGetStarted({ sendEvent }: Props) {
         </Row>
         <Row>
           <IconContainer>
-            <Flower size={12} color="#6490F1" />
+            <Flower size={12} color="#8a80db" />
           </IconContainer>
           <Text
             ml="20px"
@@ -119,7 +119,7 @@ export function HowToGetStarted({ sendEvent }: Props) {
             {t("onboarding.screens.tutorial.screens.howToGetStarted.buttons.prev")}
           </Text>
         </Button>
-        <Button id="get-started-cta" inverted primary onClick={() => sendEvent("NEXT")}>
+        <Button data-test-id="get-started-cta" inverted primary onClick={() => sendEvent("NEXT")}>
           <Text ff="Inter|Bold" fontSize="12px" lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.howToGetStarted.buttons.next")}
           </Text>

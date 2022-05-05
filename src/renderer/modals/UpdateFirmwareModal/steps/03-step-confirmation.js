@@ -47,7 +47,7 @@ const StepConfirmation = ({ error, appsToBeReinstalled }: StepProps) => {
   }
 
   return (
-    <Container>
+    <Container data-test-id="firmware-update-done">
       <TrackPage category="Manager" name="FirmwareConfirmation" />
       <Box mx={7} color="positiveGreen" my={4}>
         <CheckCircle size={44} />

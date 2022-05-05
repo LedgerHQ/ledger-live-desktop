@@ -1,12 +1,14 @@
 // @flow
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { Trans } from "react-i18next";
 import { getAccountUnit, getMainAccount } from "@ledgerhq/live-common/lib/account";
 import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
-import IconChartLine from "~/renderer/icons/ChartLine";
-import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
+import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
+import { formatCurrencyUnit } from "@ledgerhq/live-common/lib/currencies";
+import IconCoins from "~/renderer/icons/Coins";
+import { localeSelector } from "~/renderer/reducers/settings";
+import { BigNumber } from "bignumber.js";
 
 type Props = {
   account: AccountLike,
@@ -14,7 +16,9 @@ type Props = {
 };
 
 const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
+  const locale = useSelector(localeSelector);
   const unit = getAccountUnit(account);
   const mainAccount = getMainAccount(account, parentAccount);
   const minAmount = 10 ** unit.magnitude;
@@ -41,14 +45,27 @@ const AccountHeaderManageActionsComponent = ({ account, parentAccount }: Props) 
     }
   }, [dispatch, tronPower, account, parentAccount]);
 
-  if (parentAccount || earnRewardDisabled) return null;
+  if (parentAccount) return null;
+
+  const formattedMinAmount = formatCurrencyUnit(unit, BigNumber(minAmount), {
+    disableRounding: true,
+    alwaysShowSign: false,
+    showCode: true,
+    locale,
+  });
+
+  const disabledLabel = earnRewardDisabled
+    ? `${t("tron.voting.warnEarnRewards", { amount: formattedMinAmount })}`
+    : undefined;
 
   return [
     {
-      key: "tron",
+      key: "Stake",
       onClick: onClick,
-      icon: tronPower > 0 ? CryptoCurrencyIcon : IconChartLine,
-      label: <Trans i18nKey={tronPower > 0 ? "tron.voting.manageTP" : "delegation.title"} />,
+      disabled: earnRewardDisabled,
+      icon: IconCoins,
+      label: t("account.stake"),
+      tooltip: disabledLabel,
     },
   ];
 };

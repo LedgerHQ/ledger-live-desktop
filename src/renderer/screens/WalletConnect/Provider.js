@@ -21,7 +21,7 @@ const Provider = ({ children }: { children: React$Node }) => {
 
   const rest = {};
 
-  if (process.env.SPECTRON_RUN) {
+  if (process.env.PLAYWRIGHT_RUN) {
     rest.WalletConnect = WalletConnectClientMock;
   }
 
@@ -34,6 +34,7 @@ const Provider = ({ children }: { children: React$Node }) => {
               openModal("MODAL_SEND", {
                 transaction: wcCallRequest.data,
                 recipient: wcCallRequest.data.recipient,
+                walletConnectProxy: true,
                 stepId: "amount",
                 account,
                 onConfirmationHandler: operation => {

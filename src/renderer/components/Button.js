@@ -280,6 +280,7 @@ export const Base: ThemedComponent<*> = styled.button.attrs(p => ({
   cursor: ${p => (p.disabled ? "not-allowed" : "pointer")};
   height: ${p => (p.small ? 34 : 40)}px;
   pointer-events: ${p => (p.disabled ? "none" : "")};
+  width: ${p => (p.fullWidth ? "100%" : "auto")};
   outline: none;
 
   ${p => getStyles(p, "default")};
@@ -305,6 +306,7 @@ export type Props = {
   lighterDanger?: boolean,
   disabled?: boolean,
   outline?: boolean,
+  fullWidth?: boolean,
   outlineGrey?: boolean,
   onClick?: Function,
   small?: boolean,
@@ -313,9 +315,10 @@ export type Props = {
   eventProperties?: Object,
   mr?: number,
   mx?: number,
+  innerRef?: any,
 };
 
-class Button extends PureComponent<
+class ButtonInner extends PureComponent<
   Props,
   {
     isFocused: boolean,
@@ -345,7 +348,7 @@ class Button extends PureComponent<
 
   render() {
     const { isFocused } = this.state;
-    const { disabled } = this.props;
+    const { disabled, innerRef } = this.props;
     const { onClick, children, isLoading, event, eventProperties, ...rest } = this.props;
     const isClickDisabled = disabled || isLoading;
     const onClickHandler = e => {
@@ -359,6 +362,7 @@ class Button extends PureComponent<
     return (
       <Base
         {...rest}
+        ref={innerRef}
         onClick={isClickDisabled ? undefined : onClickHandler}
         isFocused={isFocused}
         onFocus={this.handleFocus}
@@ -374,5 +378,9 @@ class Button extends PureComponent<
     );
   }
 }
+
+const Button: React$ComponentType<Props> = React.forwardRef((props, ref) => (
+  <ButtonInner {...props} innerRef={ref} />
+));
 
 export default Button;

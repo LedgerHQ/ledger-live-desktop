@@ -7,8 +7,6 @@ import flushDevice from "./flushDevice";
 import firmwareUpdating from "./firmwareUpdating";
 import getLatestFirmwareForDevice from "./getLatestFirmwareForDevice";
 import getSatStackStatus from "./getSatStackStatus";
-import libcoreGetVersion from "./libcoreGetVersion";
-import libcoreReset from "./libcoreReset";
 import listenDevices from "./listenDevices";
 import listApps from "./listApps";
 import signMessage from "./signMessage";
@@ -20,6 +18,8 @@ import testCrash from "./testCrash";
 import testInterval from "./testInterval";
 import appOpExec from "./appOpExec";
 import initSwap from "./initSwap";
+import startExchange from "./startExchange";
+import completeExchange from "./completeExchange";
 import websocketBridge from "./websocketBridge";
 import checkSignatureAndPrepare from "./checkSignatureAndPrepare";
 import getTransactionId from "./getTransactionId";
@@ -38,8 +38,6 @@ export const commandsById = {
   firmwareUpdating,
   getLatestFirmwareForDevice,
   getSatStackStatus,
-  libcoreGetVersion,
-  libcoreReset,
   listenDevices,
   connectApp,
   connectManager,
@@ -47,6 +45,8 @@ export const commandsById = {
   ping,
   testApdu,
   initSwap,
+  startExchange,
+  completeExchange,
   checkSignatureAndPrepare,
   getTransactionId,
   testCrash,

@@ -174,10 +174,9 @@ function ExportOperations({ accounts, closeModal, countervalueCurrency }: Props)
           <Box horizontal justifyContent="flex-end">
             <Button
               disabled={!success && !checkedIds.length}
-              data-e2e="continue_button"
               onClick={handleButtonClick}
               event={!success ? "Operation history" : undefined}
-              id="export-operations-save-button"
+              data-test-id="export-operations-save-button"
               primary
             >
               {success ? (
@@ -204,8 +203,8 @@ const IconWrapperCircle = styled(Box)`
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: ${props => (props.green ? "#66be5419" : "#6490f119")};
-  color: ${props => (props.green ? "#66be54" : "#6490f1")};
+  background: ${props => (props.green ? "#66be5419" : "#8a80db19")};
+  color: ${props => (props.green ? "#66be54" : "#8a80db")};
   align-items: center;
   justify-content: center;
   align-self: center;

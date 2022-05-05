@@ -42,6 +42,7 @@ type OwnProps = {|
     amount?: BigNumber,
     disableBacks?: string[],
     isNFTSend?: boolean,
+    walletConnectProxy?: boolean,
     nftId?: string,
     nftCollection?: string,
     transaction?: Transaction,
@@ -136,6 +137,7 @@ const Body = ({
 }: Props) => {
   const openedFromAccount = !!params.account;
   const isNFTSend = !!params.isNFTSend;
+  const walletConnectProxy = !!params.walletConnectProxy;
   const [steps] = useState(() => createSteps(params.disableBacks));
 
   // initial values might coming from deeplink
@@ -199,13 +201,13 @@ const Body = ({
     nextNft => {
       setAccount(account);
       const bridge = getAccountBridge(account);
-      const standard = nextNft.collection.standard.toLowerCase();
+      const standard = nextNft.standard.toLowerCase();
 
       setTransaction(
         bridge.updateTransaction(transaction, {
           tokenIds: [nextNft.tokenId],
           quantities: [BigNumber(1)],
-          collection: nextNft.collection.contract,
+          collection: nextNft.contract,
           mode: `${standard}.transfer`,
         }),
       );
@@ -304,6 +306,7 @@ const Body = ({
     maybeRecipient,
     onResetMaybeRecipient,
     updateTransaction,
+    walletConnectProxy,
     onConfirmationHandler: params.onConfirmationHandler,
     onFailHandler: params.onFailHandler,
     isNFTSend,

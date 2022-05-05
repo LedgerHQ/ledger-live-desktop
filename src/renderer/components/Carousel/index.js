@@ -226,7 +226,7 @@ const Carousel = ({
         <Trans i18nKey="carousel.hidden.disclaimer" />
       </Text>
       <Box horizontal mt={3}>
-        <Button mr={1} small primary id={"carousel-dismiss-confirm"} onClick={close}>
+        <Button mr={1} small primary data-test-id="carousel-dismiss-confirm-button" onClick={close}>
           <Trans i18nKey="carousel.hidden.close" />
         </Button>
         <Button ml={1} small secondary outlineGrey onClick={onUndo}>
@@ -236,7 +236,7 @@ const Carousel = ({
     </Disclaimer>
   ) : (
     <CarouselWrapper
-      id={"carousel"}
+      data-test-id="carousel"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -255,7 +255,7 @@ const Carousel = ({
           );
         })}
       </Slides>
-      <Close id={"carousel-dismiss"} onClick={onDismiss}>
+      <Close data-test-id="carousel-close-button" onClick={onDismiss}>
         <IconCross size={16} />
       </Close>
       {showControls ? (

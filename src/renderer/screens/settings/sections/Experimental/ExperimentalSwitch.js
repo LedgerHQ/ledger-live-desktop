@@ -1,6 +1,6 @@
 // @flow
 
-import React, { useState, useCallback } from "react";
+import React, { useCallback } from "react";
 import Track from "~/renderer/analytics/Track";
 import Switch from "~/renderer/components/Switch";
 
@@ -21,14 +21,13 @@ const ExperimentalSwitch = ({
   isDefault,
   readOnly,
 }: Props) => {
-  const [checked, setChecked] = useState(!isDefault);
+  const checked = !isDefault;
 
   const handleOnChange = useCallback(
     (evt: boolean) => {
       onChange(name, evt ? valueOn : valueOff);
-      setChecked(evt);
     },
-    [onChange, valueOn, valueOff, name, setChecked],
+    [onChange, valueOn, valueOff, name],
   );
 
   return (
@@ -38,7 +37,7 @@ const ExperimentalSwitch = ({
         disabled={readOnly}
         isChecked={checked}
         onChange={readOnly ? null : handleOnChange}
-        id={`${name}_button`}
+        data-test-id={`${name}-button`}
       />
     </>
   );

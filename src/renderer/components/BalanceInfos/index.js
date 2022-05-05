@@ -1,5 +1,5 @@
 // @flow
-import React from "react";
+import React, { useCallback } from "react";
 import styled from "styled-components";
 import { useTranslation } from "react-i18next";
 import type { Unit, AccountLike } from "@ledgerhq/live-common/lib/types";
@@ -9,6 +9,11 @@ import FormattedVal from "~/renderer/components/FormattedVal";
 import PillsDaysCount from "~/renderer/components/PillsDaysCount";
 import TransactionsPendingConfirmationWarning from "~/renderer/components/TransactionsPendingConfirmationWarning";
 import { PlaceholderLine } from "./Placeholder";
+
+// $FlowFixMe
+import Button from "~/renderer/components/Button.ui.tsx";
+import { setTrackingSource } from "~/renderer/analytics/TrackPage";
+import { useHistory } from "react-router-dom";
 
 type BalanceSinceProps = {
   valueChange: ValueChange,
@@ -84,7 +89,6 @@ export function BalanceTotal({
               color="palette.text.shade100"
               unit={unit}
               fontSize={8}
-              disableRounding
               showCode
               val={totalBalance}
               data-test-id="total-balance"
@@ -102,6 +106,22 @@ export function BalanceTotal({
 
 export default function BalanceInfos({ totalBalance, valueChange, isAvailable, unit }: Props) {
   const { t } = useTranslation();
+  const history = useHistory();
+
+  const onBuy = useCallback(() => {
+    setTrackingSource("Page Portfolio");
+    history.push({
+      pathname: "/exchange",
+    });
+  }, [history]);
+
+  const onSwap = useCallback(() => {
+    setTrackingSource("Page Market");
+
+    history.push({
+      pathname: "/swap",
+    });
+  }, [history]);
 
   return (
     <Box flow={5}>
@@ -114,6 +134,13 @@ export default function BalanceInfos({ totalBalance, valueChange, isAvailable, u
         >
           <Sub>{t("dashboard.totalBalance")}</Sub>
         </BalanceTotal>
+        <Button data-test-id="portfolio-buy-button" variant="color" mr={1} onClick={onBuy}>
+          {t("accounts.contextMenu.buy")}
+        </Button>
+
+        <Button data-test-id="portfolio-swap-button" variant="color" onClick={onSwap}>
+          {t("accounts.contextMenu.swap")}
+        </Button>
       </Box>
       <Box horizontal alignItems="center" justifyContent="space-between">
         <BalanceDiff

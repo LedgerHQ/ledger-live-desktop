@@ -13,8 +13,36 @@ import ChevronRight from "~/renderer/icons/ChevronRight";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 
 import { ContentContainer, HeaderContainer } from "../shared";
-import NanoSAnim from "../assets/animations/nanoS/recover.json";
-import NanoXAnim from "../assets/animations/nanoX/recover.json";
+import NanoSAnimLight from "../assets/animations/nanoS/recover/light.json";
+import NanoSAnimDark from "../assets/animations/nanoS/recover/dark.json";
+import NanoSPAnimLight from "../assets/animations/nanoSP/recover/light.json";
+import NanoSPAnimDark from "../assets/animations/nanoSP/recover/dark.json";
+import NanoXAnimLight from "../assets/animations/nanoX/recover/light.json";
+import NanoXAnimDark from "../assets/animations/nanoX/recover/dark.json";
+import useTheme from "~/renderer/hooks/useTheme";
+
+const animations = {
+  nanoX: {
+    light: NanoXAnimLight,
+    dark: NanoXAnimDark,
+  },
+  nanoS: {
+    light: NanoSAnimLight,
+    dark: NanoSAnimDark,
+  },
+  nanoSP: {
+    light: NanoSPAnimLight,
+    dark: NanoSPAnimDark,
+  },
+  nanoFTS: {
+    light: NanoSAnimLight,
+    dark: NanoSAnimDark,
+  },
+  blue: {
+    light: null,
+    dark: null,
+  },
+};
 
 const ScreenContainer: ThemedComponent<*> = styled.div`
   display: flex;
@@ -40,8 +68,8 @@ const StepIndexContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(100, 144, 241, 0.1);
-  color: #6490f1;
+  background: rgba(138, 128, 219, 0.1);
+  color: #8a80db;
 `;
 
 const StepContainer = styled.div`
@@ -127,6 +155,7 @@ type Props = {
 export function RecoveryHowTo3({ sendEvent, context }: Props) {
   const { t } = useTranslation();
   const { deviceId } = context;
+  const theme = useTheme("colors.palette.type");
 
   const onClickHelp = useCallback(() => sendEvent("HELP"), [sendEvent]);
   const onClickPrev = useCallback(() => sendEvent("PREV"), [sendEvent]);
@@ -145,7 +174,7 @@ export function RecoveryHowTo3({ sendEvent, context }: Props) {
         </HeaderContainer>
         <Animation
           loop
-          animation={deviceId === "nanoX" ? NanoXAnim : NanoSAnim}
+          animation={animations[deviceId][theme]}
           rendererSettings={{
             preserveAspectRatio: "xMidYMid slice",
           }}
@@ -169,7 +198,7 @@ export function RecoveryHowTo3({ sendEvent, context }: Props) {
             {t("onboarding.screens.tutorial.screens.recoveryHowTo3.buttons.prev")}
           </Text>
         </Button>
-        <Button id="recovery-howto-3" primary onClick={onClickNext}>
+        <Button data-test-id="recovery-howto-3" primary onClick={onClickNext}>
           <Text mr="12px" ff="Inter|Bold" fontSize={3} lineHeight="18px">
             {t("onboarding.screens.tutorial.screens.recoveryHowTo3.buttons.next")}
           </Text>

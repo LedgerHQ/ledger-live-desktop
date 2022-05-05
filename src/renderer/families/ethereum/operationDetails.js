@@ -4,8 +4,8 @@ import styled from "styled-components";
 import toPairs from "lodash/toPairs";
 import { Trans } from "react-i18next";
 import type { AccountLike, Operation } from "@ledgerhq/live-common/lib/types";
-import { nftsFromOperations } from "@ledgerhq/live-common/lib/nft/helpers";
-import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
+import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
+import { decodeAccountId } from "@ledgerhq/live-common/lib/account";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Box from "~/renderer/components/Box";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
@@ -58,9 +58,8 @@ const Cell: ThemedComponent<{}> = styled(Box).attrs(() => ({
 `;
 
 const NFTAmountField = ({ operation }: Props) => {
-  const operations = useMemo(() => [operation], [operation]);
-  const nfts = nftsFromOperations(operations);
-  const { status, metadata } = useNftMetadata(nfts[0]?.collection.contract, nfts[0]?.tokenId);
+  const { currencyId } = decodeAccountId(operation.accountId);
+  const { status, metadata } = useNftMetadata(operation.contract, operation.tokenId, currencyId);
   const show = useMemo(() => status === "loading", [status]);
 
   return (
@@ -72,7 +71,7 @@ const NFTAmountField = ({ operation }: Props) => {
       </Skeleton>
       <Skeleton show={show} width={200} minHeight={24} barHeight={6}>
         <Text ff="Inter|Regular" fontSize={3} color="palette.text.shade100">
-          {centerEllipsis(metadata?.tokenId)}
+          {centerEllipsis(operation?.tokenId)}
         </Text>
       </Skeleton>
     </Cell>

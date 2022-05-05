@@ -14,10 +14,9 @@ import type { CryptoCurrency, Currency } from "@ledgerhq/live-common/lib/types";
 import type { DeviceModelInfo } from "@ledgerhq/live-common/lib/types/manager";
 import type { PortfolioRange } from "@ledgerhq/live-common/lib/portfolio/v2/types";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import { getLanguages } from "~/config/languages";
+import { getLanguages, defaultLocaleForLanguage } from "~/config/languages";
 import type { State } from ".";
-import { osLangAndRegionSelector } from "~/renderer/reducers/application";
-
+import regionsByKey from "../screens/settings/sections/General/regions.json";
 export type CurrencySettings = {
   confirmationsNb: number,
 };
@@ -61,7 +60,6 @@ export const timeRangeDaysByKey = {
 };
 
 export type LangAndRegion = { language: string, region: ?string, useSystem: boolean };
-
 export type SettingsState = {
   loaded: boolean, // is the settings loaded from db (it not we don't save them)
   hasCompletedOnboarding: boolean,
@@ -72,7 +70,9 @@ export type SettingsState = {
   latestFirmware: any,
   language: ?string,
   theme: ?string,
+  /** DEPRECATED, use field `locale` instead */
   region: ?string,
+  locale: ?string,
   orderAccounts: string,
   countervalueFirst: boolean,
   autoLockTimeout: number,
@@ -98,6 +98,7 @@ export type SettingsState = {
   carouselVisibility: number,
   starredAccountIds?: string[],
   blacklistedTokenIds: string[],
+  hiddenNftCollections: string[],
   deepLinkUrl: ?string,
   firstTimeLend: boolean,
   showClearCacheBanner: boolean,
@@ -109,6 +110,7 @@ export type SettingsState = {
   enablePlatformDevTools: boolean,
   catalogProvider: string,
   USBTroubleshootingIndex?: number,
+  enableLearnPageStagingUrl?: boolean,
   swap: {
     hasAcceptedIPSharing: false,
     selectableCurrencies: string[],
@@ -120,6 +122,7 @@ export type SettingsState = {
       },
     },
   },
+  starredMarketCoins: string[],
 };
 
 const defaultsForCurrency: Currency => CurrencySettings = crypto => {
@@ -129,19 +132,25 @@ const defaultsForCurrency: Currency => CurrencySettings = crypto => {
   };
 };
 
-export const pushedLanguages = ["fr", "ru"];
-export const defaultLanguage: () => string = () => {
-  // Nb If the os language is in the list [fr, ru] (LL-7027) default to it
-  const detectedLanguage = window.navigator?.language || "en";
-  return pushedLanguages.find(lang => detectedLanguage.startsWith(lang)) || "en";
+const DEFAULT_LANGUAGE_LOCALE = "en";
+export const getInitialLanguageLocale = (fallbackLocale: string = DEFAULT_LANGUAGE_LOCALE) => {
+  const detectedLanguage = window.navigator?.language || fallbackLocale;
+  return getLanguages().find(lang => detectedLanguage.startsWith(lang)) || fallbackLocale;
+};
+
+const DEFAULT_LOCALE = "en-US";
+export const getInitialLocale = () => {
+  const initialLanguageLocale = getInitialLanguageLocale();
+  return defaultLocaleForLanguage[initialLanguageLocale] || DEFAULT_LOCALE;
 };
 
 const INITIAL_STATE: SettingsState = {
   hasCompletedOnboarding: false,
   counterValue: "USD",
-  language: defaultLanguage(),
+  language: getInitialLanguageLocale(),
   theme: null,
   region: null,
+  locale: getInitialLocale(),
   orderAccounts: "balance|desc",
   countervalueFirst: false,
   autoLockTimeout: 10,
@@ -167,6 +176,7 @@ const INITIAL_STATE: SettingsState = {
   lastSeenDevice: null,
   latestFirmware: null,
   blacklistedTokenIds: [],
+  hiddenNftCollections: [],
   deepLinkUrl: null,
   firstTimeLend: false,
   showClearCacheBanner: false,
@@ -177,6 +187,7 @@ const INITIAL_STATE: SettingsState = {
   allowExperimentalApps: false,
   enablePlatformDevTools: false,
   catalogProvider: "production",
+  enableLearnPageStagingUrl: false,
   USBTroubleshootingIndex: undefined,
   swap: {
     hasAcceptedIPSharing: false,
@@ -184,6 +195,7 @@ const INITIAL_STATE: SettingsState = {
     selectableCurrencies: [],
     KYC: {},
   },
+  starredMarketCoins: [],
 };
 
 const pairHash = (from, to) => `${from.ticker}_${to.ticker}`;
@@ -262,12 +274,26 @@ const handlers: Object = {
       blacklistedTokenIds: [...ids, tokenId],
     };
   },
+  UNHIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionId }) => {
+    const ids = state.hiddenNftCollections;
+    return {
+      ...state,
+      hiddenNftCollections: ids.filter(id => id !== collectionId),
+    };
+  },
+  HIDE_NFT_COLLECTION: (state: SettingsState, { payload: collectionId }) => {
+    const collections = state.hiddenNftCollections;
+    return {
+      ...state,
+      hiddenNftCollections: [...collections, collectionId],
+    };
+  },
   LAST_SEEN_DEVICE_INFO: (
     state: SettingsState,
     { payload }: { payload: { lastSeenDevice: DeviceModelInfo, latestFirmware: any } },
   ) => ({
     ...state,
-    lastSeenDevice: payload.lastSeenDevice,
+    lastSeenDevice: Object.assign({}, state.lastSeenDevice, payload.lastSeenDevice),
     latestFirmware: payload.latestFirmware,
   }),
   SET_DEEPLINK_URL: (state: SettingsState, { payload: deepLinkUrl }) => ({
@@ -319,6 +345,14 @@ const handlers: Object = {
   }),
   // used to debug performance of redux updates
   DEBUG_TICK: state => ({ ...state }),
+  ADD_STARRED_MARKET_COINS: (state: SettingsState, { payload }) => ({
+    ...state,
+    starredMarketCoins: [...state.starredMarketCoins, payload],
+  }),
+  REMOVE_STARRED_MARKET_COINS: (state: SettingsState, { payload }) => ({
+    ...state,
+    starredMarketCoins: state.starredMarketCoins.filter(id => id !== payload),
+  }),
 };
 
 // TODO refactor selectors to *Selector naming convention
@@ -350,37 +384,62 @@ export const developerModeSelector = (state: State): boolean => state.settings.d
 
 export const lastUsedVersionSelector = (state: State): string => state.settings.lastUsedVersion;
 
-export const userThemeSelector = (state: State): ?string => state.settings.theme;
+export const userThemeSelector = (state: State): ?string => {
+  const savedVal = state.settings.theme;
+  return ["dark", "light"].includes(savedVal) ? savedVal : "dark";
+};
 
-export const userLangAndRegionSelector = (
-  state: State,
-): ?{ language: string, region: ?string, useSystem: boolean } => {
-  const languages = getLanguages();
-  const { language, region } = state.settings;
-  if (language && languages.includes(language)) {
-    return { language, region, useSystem: false };
+type LanguageAndUseSystemLanguage = {
+  language: string,
+  useSystemLanguage: boolean,
+};
+
+const languageAndUseSystemLangSelector = (state: State): LanguageAndUseSystemLanguage => {
+  const { language } = state.settings;
+  if (language && getLanguages().includes(language)) {
+    return { language, useSystemLanguage: false };
+  } else {
+    return {
+      language: getInitialLanguageLocale(),
+      useSystemLanguage: true,
+    };
   }
 };
 
-export const langAndRegionSelector: OutputSelector<State, void, LangAndRegion> = createSelector(
-  userLangAndRegionSelector,
-  osLangAndRegionSelector,
-  (userLang, osLang) => {
-    return userLang || osLang;
-  },
-);
-
+/** Use this for translations */
 export const languageSelector: OutputSelector<State, void, string> = createSelector(
-  langAndRegionSelector,
+  languageAndUseSystemLangSelector,
   o => o.language,
 );
 
-export const localeSelector: OutputSelector<
-  State,
-  void,
-  string,
-> = createSelector(langAndRegionSelector, ({ language, region }) =>
-  region ? `${language}-${region}` : language,
+export const useSystemLanguageSelector: OutputSelector<State, void, boolean> = createSelector(
+  languageAndUseSystemLangSelector,
+  o => o.useSystemLanguage,
+);
+
+const isValidRegionLocale = (locale: string) => {
+  return regionsByKey.hasOwnProperty(locale);
+};
+
+const localeFallbackToLanguageSelector = (state: State): { locale: string } => {
+  const { language, locale, region } = state.settings;
+  if (!locale && language) {
+    /*
+      Handle settings data saved with the old logic, where the region settings'
+        entire locale was not being saved (the locale was split in 2 strings on
+        "-" and only the 2nd part was saved)
+        e.g: for "fr-BE" we would only save {region: "BE"}
+    */
+    const potentialLocale = region ? `${language}-${region}` : language;
+    if (isValidRegionLocale(potentialLocale)) return { locale: potentialLocale };
+  } else if (locale && isValidRegionLocale(locale)) return { locale };
+  return { locale: language || DEFAULT_LOCALE };
+};
+
+/** Use this for number and dates formatting. */
+export const localeSelector: OutputSelector<State, void, string> = createSelector(
+  localeFallbackToLanguageSelector,
+  o => o.locale || getInitialLocale(),
 );
 
 export const getOrderAccounts = (state: State) => state.settings.orderAccounts;
@@ -442,7 +501,11 @@ export const enablePlatformDevToolsSelector = (state: State) =>
   state.settings.enablePlatformDevTools;
 export const catalogProviderSelector = (state: State) => state.settings.catalogProvider;
 
+export const enableLearnPageStagingUrlSelector = (state: State) =>
+  state.settings.enableLearnPageStagingUrl;
+
 export const blacklistedTokenIdsSelector = (state: State) => state.settings.blacklistedTokenIds;
+export const hiddenNftCollectionsSelector = (state: State) => state.settings.hiddenNftCollections;
 export const hasCompletedOnboardingSelector = (state: State) =>
   state.settings.hasCompletedOnboarding;
 
@@ -494,5 +557,7 @@ export const exportSettingsSelector: OutputSelector<State, void, *> = createSele
     blacklistedTokenIds,
   }),
 );
+
+export const starredMarketCoinsSelector = (state: State) => state.settings.starredMarketCoins;
 
 export default handleActions(handlers, INITIAL_STATE);

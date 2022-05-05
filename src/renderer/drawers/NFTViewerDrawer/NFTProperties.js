@@ -1,6 +1,6 @@
 // @flow
 
-import React from "react";
+import React, { useMemo } from "react";
 import styled from "styled-components";
 import Text from "~/renderer/components/Text";
 import Skeleton from "~/renderer/screens/nft/Skeleton";
@@ -12,7 +12,7 @@ const NFTProperty = styled.div`
   display: inline-flex;
   flex-direction: column;
   padding: 8px 12px;
-  background: rgba(100, 144, 241, 0.1);
+  background: rgba(138, 128, 219, 0.1);
   border-radius: 4px;
 `;
 
@@ -37,9 +37,9 @@ type NFTPropertiesProps = {
   status: string,
 };
 
-export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
+export function NFTProperties({ nft, metadata, status }: NFTPropertiesProps) {
   const { t } = useTranslation();
-  const showSkeleton = status === "loading";
+  const showSkeleton = useMemo(() => status === "loading", [status]);
   if (!metadata?.properties?.length) return null;
 
   return (
@@ -49,7 +49,7 @@ export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
         lineHeight="17px"
         fontSize="14px"
         color="palette.text.shade50"
-        ff="Inter|Regular"
+        ff="Inter|SemiBold"
       >
         {t("NFT.viewer.attributes.properties")}
       </Text>
@@ -61,13 +61,13 @@ export function NFTProperties({ nft, metadata }: NFTPropertiesProps) {
                 mb="2px"
                 lineHeight="12.1px"
                 fontSize={2}
-                color="rgba(100, 144, 241, 0.5);"
+                color="rgba(138, 128, 219, 0.5);"
                 ff="Inter|SemiBold"
                 uppercase
               >
                 {key}
               </Text>
-              <Text mb="2px" lineHeight="16.94px" fontSize={4} color="#6490F1" ff="Inter|SemiBold">
+              <Text mb="2px" lineHeight="16.94px" fontSize={4} color="#8a80db" ff="Inter|Regular">
                 {value}
               </Text>
             </NFTProperty>

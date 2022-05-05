@@ -1,7 +1,5 @@
 // @flow
 import "~/live-common-setup";
-import "./implement-libcore";
-
 import { throwError } from "rxjs";
 import usbDetect from "usb-detection";
 import throttle from "lodash/throttle";
@@ -60,6 +58,9 @@ if (getEnv("DEVICE_PROXY_URL")) {
     id: "hid",
     open: devicePath => retry(() => TransportNodeHidSingleton.open(), { maxRetry: 4 }),
     disconnect: () => Promise.resolve(),
+    setAllowAutoDisconnect: (transport, _, allow) => {
+      transport.setAllowAutoDisconnect(allow);
+    },
   });
 }
 

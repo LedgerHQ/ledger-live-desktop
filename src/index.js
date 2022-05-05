@@ -1,4 +1,4 @@
-if (process.env.SPECTRON_RUN) {
+if (process.env.PLAYWRIGHT_RUN) {
   const timemachine = require("timemachine");
   timemachine.config({
     dateString: require("../tests/time").default,
@@ -9,6 +9,6 @@ if (!process.env.IS_INTERNAL_PROCESS) {
   // Main electron thread
   require("./main");
 } else {
-  // Internal thread (libcore, hardware)
+  // Internal thread (coins, hardware)
   require("./internal");
 }

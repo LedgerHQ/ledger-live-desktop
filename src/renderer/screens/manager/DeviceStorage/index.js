@@ -23,19 +23,44 @@ import Box from "~/renderer/components/Box";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import IconCheckFull from "~/renderer/icons/CheckFull";
 
-import nanoS from "./images/nanoS.png";
-import nanoX from "./images/nanoX.png";
-import blue from "./images/blue.png";
+import nanoS from "~/renderer/images/devices/nanoS.png";
+import nanoSDark from "~/renderer/images/devices/nanoS_dark.png";
+import nanoSP from "~/renderer/images/devices/nanoSP.png";
+import nanoSPDark from "~/renderer/images/devices/nanoSP_dark.png";
+import nanoX from "~/renderer/images/devices/nanoX.png";
+import nanoXDark from "~/renderer/images/devices/nanoX_dark.png";
+import blue from "~/renderer/images/devices/blue.png";
 
 const illustrations = {
-  nanoS,
-  nanoX,
-  blue,
+  nanoS: {
+    light: nanoS,
+    dark: nanoSDark,
+  },
+  nanoSP: {
+    light: nanoSP,
+    dark: nanoSPDark,
+  },
+  nanoX: {
+    light: nanoX,
+    dark: nanoXDark,
+  },
+  nanoFTS: {
+    light: nanoS,
+    dark: nanoSDark,
+  },
+  blue: {
+    light: blue,
+    dark: blue,
+  },
 };
 
 export const DeviceIllustration: ThemedComponent<{}> = styled.img.attrs(p => ({
-  src: illustrations[p.deviceModel.id],
+  src:
+    illustrations[process.env.OVERRIDE_MODEL_ID || p.deviceModel.id][
+      p.theme.colors.palette.type || "light"
+    ],
 }))`
+  ${p => (p.deviceModel.id === "nanoFTS" ? "border: 3px solid red;" : "")}
   position: absolute;
   top: 0;
   left: 50%;
@@ -179,7 +204,12 @@ const TooltipContent = ({
   <TooltipContentWrapper>
     <Text>{name}</Text>
     <Text>
-      <ByteSize value={bytes} deviceModel={deviceModel} firmwareVersion={deviceInfo.version} />
+      <ByteSize
+        value={bytes}
+        deviceModel={deviceModel}
+        firmwareVersion={deviceInfo.version}
+        formatFunction={Math.ceil}
+      />
     </Text>
   </TooltipContentWrapper>
 );
@@ -307,6 +337,7 @@ const DeviceStorage = ({
                 deviceModel={deviceModel}
                 value={distribution.totalAppsBytes}
                 firmwareVersion={deviceInfo.version}
+                formatFunction={Math.ceil}
               />
             </Text>
           </div>
@@ -319,6 +350,7 @@ const DeviceStorage = ({
                 deviceModel={deviceModel}
                 value={distribution.appsSpaceBytes}
                 firmwareVersion={deviceInfo.version}
+                formatFunction={Math.floor}
               />
             </Text>
           </div>
@@ -353,6 +385,7 @@ const DeviceStorage = ({
                       value={distribution.freeSpaceBytes}
                       deviceModel={deviceModel}
                       firmwareVersion={deviceInfo.version}
+                      formatFunction={Math.floor}
                     />
                     {"free"}
                   </Trans>

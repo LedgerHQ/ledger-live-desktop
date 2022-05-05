@@ -15,10 +15,14 @@ import { openModal, closeModal } from "~/renderer/actions/modals";
 type Props = {
   buttonProps?: *,
   onRepair?: boolean => void,
+  onClose?: ({ needHelp?: boolean }) => void,
   Component?: any,
 };
 
-const RepairDeviceButton = ({ onRepair, buttonProps, Component }: Props) => {
+const RepairDeviceButton: React$ComponentType<Props> = React.forwardRef(function RepairDevice(
+  { onRepair, onClose, buttonProps, Component }: Props,
+  ref: React$ElementRef<*>,
+) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const [opened, setOpened] = useState(false);
@@ -49,18 +53,24 @@ const RepairDeviceButton = ({ onRepair, buttonProps, Component }: Props) => {
     setOpened(true);
   }, [dispatch]);
 
-  const close = useCallback(() => {
-    if (sub && sub.current) sub.current.unsubscribe();
-    if (timeout && timeout.current) clearTimeout(timeout.current);
-    if (onRepair) {
-      onRepair(false);
-    }
-    setOpened(false);
-    dispatch(closeModal("MODAL_STUB"));
-    setIsLoading(false);
-    setError(null);
-    setProgress(0);
-  }, [onRepair, dispatch]);
+  const close = useCallback(
+    ({ needHelp }: { needHelp?: boolean }) => {
+      if (sub && sub.current) sub.current.unsubscribe();
+      if (timeout && timeout.current) clearTimeout(timeout.current);
+      if (onRepair) {
+        onRepair(false);
+      }
+      if (onClose) {
+        onClose({ needHelp });
+      }
+      setOpened(false);
+      dispatch(closeModal("MODAL_STUB"));
+      setIsLoading(false);
+      setError(null);
+      setProgress(0);
+    },
+    [onRepair, onClose, dispatch],
+  );
 
   const repair = useCallback(
     (version = null) => {
@@ -104,7 +114,7 @@ const RepairDeviceButton = ({ onRepair, buttonProps, Component }: Props) => {
       {Component ? (
         <Component onClick={open} />
       ) : (
-        <Button {...buttonProps} onClick={open} event="RepairDeviceButton">
+        <Button {...buttonProps} ref={ref} onClick={open} event="RepairDeviceButton">
           {t("settings.repairDevice.button")}
         </Button>
       )}
@@ -120,9 +130,10 @@ const RepairDeviceButton = ({ onRepair, buttonProps, Component }: Props) => {
         desc={t("settings.repairDevice.desc")}
         progress={progress}
         error={error}
+        enableSomethingElseChoice
       />
     </>
   );
-};
+});
 
 export default RepairDeviceButton;

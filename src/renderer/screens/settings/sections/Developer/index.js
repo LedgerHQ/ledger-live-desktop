@@ -9,6 +9,7 @@ import AllowDebugAppsToggle from "./AllowDebugAppsToggle";
 import EnablePlatformDevToolsToggle from "./EnablePlatformDevToolsToggle";
 import CatalogProviderSelect from "./CatalogProviderSelect";
 import RunLocalAppButton from "./RunLocalAppButton";
+import EnableLearnPageStagingUrlToggle from "./EnableLearnPageStagingUrlToggle";
 
 const SectionDeveloper = () => {
   const { t } = useTranslation();
@@ -42,6 +43,12 @@ const SectionDeveloper = () => {
           <EnablePlatformDevToolsToggle />
         </Row>
         <RunLocalAppButton />
+        <Row
+          title={t("settings.developer.enableLearnStagingUrl")}
+          desc={t("settings.developer.enableLearnStagingUrlDesc")}
+        >
+          <EnableLearnPageStagingUrlToggle />
+        </Row>
       </Body>
     </>
   );

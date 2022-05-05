@@ -65,7 +65,7 @@
     "reject": "رفض",
     "cancel": "إلغاء",
     "getSupport": "الحصول على الدعم",
-    "delete": "حذف",
+    "delete": "Remove account from portfolio",
     "launch": "بدء",
     "continue": "متابعة",
     "previous": "السابق",
@@ -126,6 +126,7 @@
   },
   "devices": {
     "nanoS": "Nano S",
+    "nanoSP": "Nano S Plus",
     "nanoX": "Nano X",
     "blue": "أزرق"
   },
@@ -191,6 +192,8 @@
     "feesAmount": "قيمة الرسوم"
   },
   "sidebar": {
+    "card": "بطاقة",
+    "learn": "تعلم",
     "menu": "القائمة",
     "stars": "الحسابات المفضلة",
     "accounts": "الحسابات",
@@ -198,7 +201,8 @@
     "exchange": "شراء/ بيع",
     "swap": "مبادلة",
     "lend": "إقراض",
-    "catalog": "اكتشف"
+    "catalog": "اكتشف",
+    "market": "سوق"
   },
   "stars": {
     "placeholder": "قم بتفضيل حسابًا لعرضه هنا.",
@@ -232,7 +236,7 @@
         "label": {
           "provider": "المزود",
           "rate": "مُعدل",
-          "fees": "الرسوم",
+          "fees": "رسوم الشبكة",
           "target": "الحساب المستهدف"
         },
         "tooltip": {
@@ -330,8 +334,8 @@
     "exchangeDrawer": {
       "title": "قم بتأكيد عملية التداول الخاصة بك.",
       "completed": {
-        "title": "عملية معلقة",
-        "description": "لقد تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. يمكن أن يستغرق الأمر مدة تصل إلى ساعة قبل أن تتلقى {{targetCurrency}}.",
+        "title": "تم بث المعاملة بنجاح",
+        "description": "تم إرسال عملية المبادلة الخاصة بك إلى الشبكة لتأكيدها. الرجاء الانتظار حتى يتم تأكيد معاملتك وحتى يقوم المزود بمعالجة وإرسال {{targetCurrency}} الخاص بك.",
         "disclaimer": "قم بحفظ معرّف المبادلة الخاص بك في حال كنت بحاجة إلى مساعدة من <0><0>{{provider}}</0>دعم</0>.",
         "seeDetails": "رؤية التفاصيل"
       }
@@ -544,6 +548,9 @@
       "creditedAmount": "المبلغ المضاف"
     }
   },
+  "lottieDebugger": {
+    "buttonTitle": "إختبر"
+  },
   "fullNode": {
     "status": "الحالة",
     "connect": "اتصال",
@@ -702,6 +709,7 @@
     "frozenAssets": "الأصول المجمدة",
     "bandwidth": "النطاق الترددي (Bandwidth)",
     "energy": "طاقة",
+    "stake": "تكديس",
     "delegatedAssets": "الأصول المفوضة",
     "undelegating": "إلغاء التفويض",
     "availableBalanceTooltip": "هذا المبلغ قابل للتصرف.",
@@ -712,30 +720,34 @@
     "undelegatingTooltip": "تكون الأصول غير المفوضة مقيدة في قفل زمني محدد بـ21 يومًا قبل أن تصبح متاحة."
   },
   "exchange": {
+    "chooseProvider": "Choose from {{providerCount}} provider",
+    "chooseProviders": "Choose from {{providerCount}} providers",
     "title": "شراء وبيع العملات المشفرة",
     "reset": "إعادة تعيين التدفق",
     "verifyAddress": "يُرجى تأكيد أن العنوان المعروض يتطابق تمامًا مع العنوان المعروض على جهازك",
     "buy": {
-      "header": "شراء العملات المشفرة باستخدام {{provider}}",
-      "title": "شراء العملات المشفرة من خلال <0>{{provider}}</0>",
+      "header": "Buy crypto with our partners",
+      "title": "اختار مزود لشراء الأصول المشفرة",
+      "buyFrom": "قم بالشراء من أي مكان",
+      "cryptoSupported": "الأصول المشفرة المدعومة",
+      "payWith": "الدفع بواسطة البطاقة أو SEPA",
       "tab": "شراء",
-      "selectCrypto": "اختار أصل مشفّر",
-      "selectAccount": "اختار حسابًا",
-      "continue": "متابعة",
-      "addAccount": "إضافة حساب"
+      "coinify": {
+        "header": "قم بشراء الأصول المشفرة باستخدام {{provider}}",
+        "title": "قم بشراء الأصول المشفرة من خلال <0>{{provider}}</0>",
+        "selectCrypto": "اختر أصل مشفّر",
+        "selectAccount": "اختر حساباً",
+        "continue": "متابعة",
+        "addAccount": "إضافة حساب"
+      }
     },
     "sell": {
-      "header": "بيع العملات المشفرة باستخدام {{provider}}",
+      "header": "Sell crypto with our partners",
       "title": "بيع العملات المشفرة من خلال <0>{{provider}}</0>",
       "tab": "بيع",
       "selectCrypto": "اختار أصل مشفّر",
       "selectAccount": "اختار حسابًا",
       "continue": "متابعة"
-    },
-    "history": {
-      "tab": "السجل",
-      "exporting": "جاري التصدير...",
-      "exportOperations": "تصدير العمليات"
     }
   },
   "lend": {
@@ -1042,6 +1054,11 @@
     "desc": "هذا الإجراء سيخفي جميع حسابات <1><0>{{tokenName}}</0></1> ، يمكنك إظهارها مرة أخرى باستخدام <3>الإعدادات</3>",
     "hideCTA": "إخفاء رمز التوكن"
   },
+  "hideNftCollection": {
+    "title": "Hide NFT Colection",
+    "desc": "This action will hide all NFTs from the <1><0>{{collectionName}}</0></1> collection, you can show them again using <3>Settings</3>",
+    "hideCTA": "Hide NFT Collection"
+  },
   "banners": {
     "cleanCache": {
       "title": "يتطلب تعديل الإعدادات التجريبية ذاكرة تخزين مؤقت خالية",
@@ -1124,12 +1141,14 @@
       },
       "confirm": {
         "title": "اتصال",
-        "details": "يريد الاتصال بحساب إيثريوم التالي من خلال محفظتك:",
-        "deeplinkDetails": "يريد الاتصال بـ Ledger Live. اختر حساب إيثيريوم الخاص بك:"
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
+        "alreadyConnected": "أنت تحاول الاتصال بـ dApp أثناء وجود تطبيق آخر متصل بالفعل. الرجاء قطع الاتصال من تطبيق dApp المتصل قبل إعادة اتصال Live مع تطبيق جديد."
       }
     },
     "connectedscreen": {
-      "info": "يمكنك الآن الوصول إلى تطبيق dApp على سطح المكتب.",
+      "info": "يمكنك الآن الوصول إلى {{name}} التطبيق اللامركزي (dApp) على متصفح الويب الخاص بك.",
       "warning": "إنه غير آمن مشاركة عناوين الاستقبال من dApp. دائمًا استخدم ليدجر لايف (Ledger Live) عند مشاركة عنوانك لاستقبال الأموال.",
       "disconnected": "هناك مشكلة في الاتصال بين dApp وWalletConnect وليدجر لايف (Ledger Live). الرجاء الانتظار بعض الوقت أو إعادة بدء الاتصال"
     }
@@ -1149,7 +1168,8 @@
     "for": "عنوان <1><0>{{name}}</0></1>",
     "messageIfUnverified": "قم بتأكيد أن العنوان المشترك يتطابق تماما مع العنوان الموجود على جهازك",
     "messageIfSkipped": "لم يتم تأكيد عنوانك {{name}} على جهاز ليدجر (Ledger) الخاص بك. يرجى التحقق منه حرصاً على الأمان.",
-    "showQrCode": "إظهار رمز QR"
+    "showQrCode": "إظهار رمز QR",
+    "taprootWarning": "تأكد من أن المُرسل يدعم taproot"
   },
   "emptyState": {
     "dashboard": {
@@ -1173,6 +1193,84 @@
   "genuinecheck": {
     "deviceInBootloader": "الجهاز في وضع Bootloader انقر على <1>متابعة</1> لتحديثه."
   },
+  "learn": {
+    "title": "تعلم",
+    "noConnection": "لايوجد اتصال",
+    "noConnectionDesc": "يبدو أنه ليس لديك اتصال بالإنترنت. الرجاء التحقق من اتصالك وحاول مرة أخرى.",
+    "sectionShows": "البرامج",
+    "sectionVideo": "فيديو",
+    "sectionPodcast": "بودكاست",
+    "sectionArticles": "مقالات"
+  },
+  "market": {
+    "title": "سوق",
+    "currency": "العملة",
+    "rangeLabel": "الوقت",
+    "goBack": "رجوع",
+    "filters": {
+      "title": "تصفيات",
+      "show": "عرض",
+      "all": "الكل",
+      "isLedgerCompatible": "متوافق مع Ledger Live",
+      "isFavorite": "الأصول المفضلة",
+      "applyFilters": "تطبيق التصفيات",
+      "clearAll": "ازالة الكل"
+    },
+    "marketList": {
+      "crypto": "الأصول المشفرة",
+      "price": "السعر",
+      "change": "تغيير",
+      "marketCap": "الحد الأقصى للسوق",
+      "last7d": "آخر 7 أيام"
+    },
+    "detailsPage": {
+      "priceStatistics": "إحصائيات الأسعار",
+      "tradingVolume": "حجم التداول",
+      "24hLowHight": "أقل معدل 24 ساعة / أعلى معدل 24 ساعة",
+      "7dLowHigh": "أقل معدل 7 أيام / أعلى معدل 7 أيام",
+      "allTimeHigh": "الحد الأقصى التاريخي",
+      "allTimeLow": "الحد الأدنى التاريخي",
+      "marketCapRank": "ترتيب الحد الأقصى للسوق",
+      "marketCapDominance": "هيمنة الحد الأقصى للسوق",
+      "supply": "توريد",
+      "circulatingSupply": "التوريد المتداول",
+      "totalSupply": "إجمالي التوريد",
+      "maxSupply": "الحد الاقصى للتوريد",
+      "assetNotSupportedOnLedgerLive": "هذا الأصل غير مدعوم على Ledger Live.",
+      "supportedCoinsAndTokens": "العملات و رموز التوكن المدعومة"
+    },
+    "range": {
+      "1H_label": "1 ساعة",
+      "1D_label": "1 يوم",
+      "1W_label": "1 أسبوع",
+      "1M_label": "1 شهر",
+      "1Y_label": "1 سنة",
+      "1h": "1 ساعة",
+      "24h": "24 ساعة",
+      "7d": "7 أيام",
+      "30d": "30 يوم",
+      "1y": "1 سنة",
+      "1H_selectorLabel": "أخر 1 ساعة‏",
+      "1D_selectorLabel": "آخر 24 ساعة",
+      "1W_selectorLabel": "الأسبوع الماضي",
+      "1M_selectorLabel": "الشهر الماضي",
+      "1Y_selectorLabel": "العام الماضي"
+    },
+    "warnings": {
+      "connectionError": "خطأ في الاتصال",
+      "ledgerUnableToRetrieveData": "Ledger Live غير قادر على استرداد البيانات.",
+      "checkInternetAndReload": "يُرجى التحقق من اتصالك بالإنترنت وإعادة تحميل هذه الصفحة.",
+      "reload": "إعادة تحميل",
+      "noCryptosFound": "لم يتم العثور على عملات",
+      "noSearchResultsFor": "عذراً، لم نجد أي عملات ل<0>{{search}}</0>. الرجاء إعادة محاولة البحث بكلمة رئيسية أخرى.",
+      "noSearchResults": "عذراً، لم نجد أي نتائج بحث.",
+      "retrySearchKeyword": "الرجاء إعادة محاولة البحث بكلمة رئيسية أخرى.",
+      "retrySearchParams": "الرجاء إعادة محاولة البحث مع معلمات أخرى.",
+      "trackFavAssets": "تتبع المفضلة لديك",
+      "clickOnStarIcon": "النقر على أيقونة النجمة بجوار أحد الأصول سيضفها تلقائياً إلى المفضلة لديك.",
+      "browseAssets": "تصفح الأصول"
+    }
+  },
   "NFT": {
     "viewer": {
       "actions": {
@@ -1182,7 +1280,7 @@
       "attributes": {
         "properties": "خصائص",
         "description": "الوصف",
-        "contract": "عنوان العَقد",
+        "tokenAddress": "عنوان رمز التوكن",
         "tokenId": "مُعرّف رمز التوكن",
         "quantity": "الكمية"
       }
@@ -1358,7 +1456,7 @@
       "name": "اسم رّمز التوكن",
       "contract": "عقد رّمز التوكن",
       "id": "مُعرّف (NFT) رمز التوكن",
-      "amount": "المبلغ"
+      "quantity": "الكمية"
     },
     "extra": {
       "frozenAmount": "المبلغ المجمد",
@@ -1402,6 +1500,7 @@
     "appNotInstalled": "التطبيق {{appName}} مطلوب لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيته على جهازك",
     "appNotInstalled_plural": "التطبيقات {{appName}} مطلوبة لإكمال هذا الإجراء. الرجاء الانتقال إلى المدير وتثبيتهم على جهازك",
     "openManager": "افتح المدير",
+    "openOnboarding": "إعداد الجهاز",
     "outdated": "إصدار التطبيق قديم",
     "outdatedDesc": "يوجد تحديث هام لتطبيق {{appName}} على جهازك. يُرجى الذهاب إلى المدير لتحديثه.",
     "installApp": "تثبيت تطبيق {{appName}}",
@@ -1430,6 +1529,10 @@
     "sell": {
       "notice": "تحقق من تفاصيل البيع على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها.",
       "confirm": "تأكيد معاملة البيع"
+    },
+    "fund": {
+      "notice": "تحقق من تفاصيل الأموال على جهازك قبل إرسالها. يتم تبادل العناوين بشكل آمن حتى لا تضطر إلى التحقق منها.",
+      "confirm": "قم بتأكيد معاملة الأموال"
     }
   },
   "manager": {
@@ -1503,6 +1606,7 @@
         "uninstall": "إلغاء التثبيت",
         "notEnoughSpace": "لا توجد مساحة تخزين كافية",
         "supported": "ليدجر لايف (Ledger Live) مدعوم",
+        "not_supported": "يتطلب محفظة طرف ثالث",
         "addAccount": "إضافة حساب",
         "addAccountTooltip": "إضافة حساب {{appName}}",
         "addAccountWarn": "يُرجى الانتظار حتى انتهاء تحديثات التطبيق",
@@ -1513,7 +1617,11 @@
         "tokenAppDisclaimer": "لإدارة رموز التوكن {{tokenName}} {{tokenType}}، <1>قم بتثبيت تطبيق {{appName}}</1> ويرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حساب {{appName}} الخاص بك </3>.",
         "tokenAppDisclaimerInstalled": "لإدارة <1>رموز التوكن {{tokenName}} {{tokenType}}</1>، يرجى التحقق من أن لديك بالفعل <1>نسخة من {{tokenType}}</1> قبل الإرسال <3>إلى حسابك {{appName}}</3>.",
         "goToAccounts": "الذهاب إلى الحسابات",
-        "intallParentApp": "تثبيت تطبيق {{appName}}"
+        "intallParentApp": "تثبيت تطبيق {{appName}}",
+        "plugin": "انتقل إلى التطبيق",
+        "swap": "مبادلة",
+        "tool": "معرفة المزيد",
+        "app": "معرفة المزيد"
       },
       "uninstall": {
         "title": "إلغاء تثبيت الكل",
@@ -2450,6 +2558,115 @@
       }
     }
   },
+  "solana": {
+    "common": {
+      "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
+      "viewDetails": "View details",
+      "connectDevice": {
+        "title": "Device"
+      },
+      "confirmation": {
+        "title": "Confirmation"
+      }
+    },
+    "delegation": {
+      "totalStake": "Total Stake",
+      "commission": "Commission",
+      "delegate": "Add",
+      "listHeader": "Delegations",
+      "availableBalance": "Available balance",
+      "active": "Active",
+      "activeTooltip": "Active amount generate rewards",
+      "inactiveTooltip": "Inactive amount does not generate rewards",
+      "delegatedInfoTooltip": "Total amount that is delegated to validators.",
+      "withdrawableInfoTooltip": "Total amount that is withdrawable from delegations.",
+      "withdrawableTitle": "Withdrawable",
+      "statusUpdateNotice": "The status of the delegation will be updated when the transaction is confirmed.",
+      "ledgerByFigmentTC": "Ledger by Figment T&Cs",
+      "emptyState": {
+        "description": "You can earn SOL rewards by delegating your assets.",
+        "info": "How Delegation works",
+        "delegation": "Earn rewards"
+      },
+      "earnRewards": {
+        "description": "You may earn rewards by delegating your SOL assets to a validator.",
+        "bullet": {
+          "0": "You keep ownership of delegated assets",
+          "1": "Delegate using your Ledger device",
+          "2": "Assets will be available after undelegation"
+        },
+        "warning": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
+      },
+      "flow": {
+        "title": "Delegate",
+        "steps": {
+          "validator": {
+            "title": "Validator"
+          },
+          "amount": {
+            "title": "Amount"
+          },
+          "confirmation": {
+            "success": {
+              "title": "You have successfully delegated your assets"
+            }
+          }
+        }
+      },
+      "withdraw": {
+        "flow": {
+          "title": "Withdraw",
+          "steps": {
+            "amount": {
+              "title": "Amount"
+            },
+            "confirmation": {
+              "success": {
+                "title": "You have successfully withdrawn your assets.",
+                "text": "Your account balance will be updated when the transaction is confirmed."
+              }
+            }
+          }
+        }
+      },
+      "activate": {
+        "flow": {
+          "title": "Activate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully activated you delegation."
+              }
+            }
+          }
+        }
+      },
+      "reactivate": {
+        "flow": {
+          "title": "Reactivate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully reactivated you delegation."
+              }
+            }
+          }
+        }
+      },
+      "deactivate": {
+        "flow": {
+          "title": "Deactivate",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "You have successfully deactivated your delegation."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "اكسب المكافآت",
     "header": "التفويض",
@@ -2584,7 +2801,7 @@
       "counterValue": "العملة المفضلة",
       "counterValueDesc": "اختر العملة المعروضة بجانب رصيدك وعملياتك.",
       "region": "المنطقة",
-      "regionDesc": "اختر منطقتك لتعيين منطقة التوقيت لتطبيق ليدجر لايف (Ledger Live).",
+      "regionDesc": "اختر منطقتك لتحديث صِيغ التواريخ والوقت والعملات.",
       "stock": "مؤشر السوق الإقليمي",
       "stockDesc": "اختر \"غربي\" لعرض زيادات السوق باللون الأزرق أو \"شرقي\" لعرضها باللون الأحمر.",
       "carouselVisibility": "مشاهدة كشريط دوّار",
@@ -2607,7 +2824,9 @@
       "addLocalAppDesc": "تصفح الملفات المحلية وقم بإضافة تطبيق محلي باستخدام بيان محلي",
       "addLocalAppButton": "تصفح",
       "runLocalAppDeleteButton": "حذف",
-      "runLocalAppOpenButton": "فتح"
+      "runLocalAppOpenButton": "فتح",
+      "enableLearnStagingUrl": "الرابط المرحلي (staging URL) للصفحة التعليمية",
+      "enableLearnStagingUrlDesc": "تمكين الرابط المرحلي (staging URL) للصفحة التعليمية."
     },
     "currencies": {
       "selectPlaceholder": "اختار الأصل المشفر",
@@ -2656,8 +2875,8 @@
           "description": "استخدم TronGrid مباشرة بدون وكيل Ledger"
         },
         "experimentalCurrencies": {
-          "title": "عمليات تنفيذ JS التجريبية",
-          "description": "استخدام عمليات تنفيذ JS التجريبية لبيتكوين (Taproot) و Tezos"
+          "title": "تكاملات تجريبية",
+          "description": "استخدم عمليات تكامل الأصول المشفرة التجريبية المتاحة."
         },
         "experimentalLanguages": {
           "title": "اختبار الترجمة",
@@ -2682,6 +2901,10 @@
         "forceProvider": {
           "title": "مزود المدير",
           "description": "تغيير مزود التطبيقات في المدير قد يجعله من المستحيل تثبيت أو إلغاء تثبيت التطبيقات على جهاز Ledger الخاص بك."
+        },
+        "testAnimations": {
+          "title": "اختبر الرسوم المتحركة Lottie",
+          "description": "اختبر جميع الرسوم المتحركة المستخدمة في Ledger Live"
         }
       }
     },
@@ -2705,7 +2928,8 @@
     "removeAccountModal": {
       "title": "إزالة حساب",
       "desc": "لن يؤثر ذلك على الأصول المشفرة الخاصة بك. من الممكن دائمًا إضافة الحسابات الموجودة فيما بعد.",
-      "warning": "سيؤدي حذف هذا الحساب إلى محو سجل معاملات المبادلة المرتبطة به."
+      "delete": "Remove from Portfolio",
+      "warning": "Removing this account will erase your swap transaction history associated to it."
     },
     "openUserDataDirectory": {
       "title": "عرض بيانات المستخدم",
@@ -2733,6 +2957,12 @@
         "desc": "يمكنك إخفاء رموز التوكن بالانتقال إلى الحساب الرئيسي ثم النقر بالزر الأيمن على رمز التوكن واختيار \"إخفاء رمز التوكن\".",
         "count": "{{count}} رمز توكن",
         "count_plural": "{{count}} من رموز التوكن"
+      },
+      "hiddenNftCollections": {
+        "title": "Hidden NFT Collections",
+        "desc": "You can hide NFT Collections by right-clicking on the collection name and selecting 'Hide NFT Collection'.",
+        "count": "{{count}} collection",
+        "count_plural": "{{count}} collections"
       },
       "fullNode": {
         "title": "توصيل عقدة بيتكوين الكاملة",
@@ -3483,9 +3713,17 @@
       "memo": "ملاحظة",
       "memoPlaceholder": "اختياري",
       "memoWarningText": "عند استخدام الملاحظة، تحقق بعناية من المعلومات مع المستلم"
+    },
+    "solana": {
+      "memo": "ملاحظة",
+      "memoPlaceholder": "اختياري"
     }
   },
   "errors": {
+    "NoSuchAppOnProvider": {
+      "title": "لا يمكن العثور على التطبيق {{appName}} للتهيئة الخاصة بك.",
+      "description": "حاول إعادة تثبيت التطبيق من المدير"
+    },
     "countervaluesUnavailable": {
       "title": "نحن غير قادرين على توفير قيمة مقابلة لهذا الأصل في الوقت الحالي"
     },
@@ -3614,6 +3852,10 @@
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
       "description": "حدث خطأ غير متوقع. يرجى إعادة المحاولة مرة أخرى."
     },
+    "DeviceNotOnboarded": {
+      "title": "جهازك غير جاهز للاستخدام بعد",
+      "description": "قم بإعداد جهازك قبل استخدامه مع Ledger Live."
+    },
     "DeviceSocketFail": {
       "title": "يرجى إعادة تشغيل جهاز ليدجر الخاص بك وإعادة المحاولة",
       "description": "حدث خطأ غير متوقع. يرجى إعادة المحاولة مرة أخرى. ({{message}})"
@@ -3732,7 +3974,7 @@
       "title": "عنوان المستلم غير نشط. أرسل على الأقل {{minimalAmount}} لتنشيطه"
     },
     "NotEnoughGas": {
-      "title": "رصيد ETH في الحساب الرئيسي غير كافٍ لتغطية رسوم الشبكة"
+      "title": "رصيد الحساب الأصلي غير كاف لرسوم الشبكة"
     },
     "PasswordsDontMatch": {
       "title": "كلمتين المرور غير متطابقتين",
@@ -3741,6 +3983,9 @@
     "PasswordIncorrect": {
       "title": "كلمة المرور التي تم إدخالها غير صحيحة",
       "description": "يرجى إعادة المحاولة"
+    },
+    "QuantityNeedsToBePositive": {
+      "title": "يجب أن تكون الكمية أكبر من 0"
     },
     "RPCHostRequired": {
       "title": "المضيف مطلوب."
@@ -3848,6 +4093,9 @@
     "InvalidAddress": {
       "title": "هذا ليس عنوان {{currencyName}} صحيح"
     },
+    "InvalidAddressBecauseAlreadyDelegated": {
+      "title": "تم تفويض حسابك بالفعل إلى هذا المدقق"
+    },
     "InvalidAddressBecauseDestinationIsAlsoSource": {
       "title": "عنوان المستلم هو نفسه عنوان المرسل"
     },
@@ -3858,6 +4106,10 @@
     "ETHAddressNonEIP": {
       "title": "التحقق التلقائي غير متاح: تحقق بعناية من العنوان",
       "description": null
+    },
+    "EthAppNftNotSupported": {
+      "title": "العملية غير متوفرة لهذا الجهاز",
+      "description": "خاصية إرسال NFT متوفرة فقط لـ Nano X. الرجاء زيارة منصة دعم العملاء لدينا لمعرفة كيفية إرسال NFT باستخدام Nano S."
     },
     "CantScanQRCode": {
       "title": "تعذر فحص رمز الاستجابة السريعة (QR) هذا: التحقق التلقائي غير مدعوم من قبل هذا العنوان"
@@ -3993,6 +4245,9 @@
     "NotEnoughBalanceInParentAccount": {
       "title": "رصيد غير كافٍ في الحساب الرئيسي"
     },
+    "quantityNeedsToBePositive": {
+      "title": "Quantity needs to be at least 1"
+    },
     "NotEnoughSpendableBalance": {
       "title": "لا يمكن للرصيد أن يقل عن {{minimumAmount}}"
     },
@@ -4057,8 +4312,33 @@
     "TaprootNotActivated": {
       "title": "الإرسال إلى عنوان taproot غير آمن قبل تنشيط الشبكة الرئيسية (mainnet)"
     },
+    "SolanaAccountNotFunded": {
+      "title": "الحساب غير ممول"
+    },
+    "SolanaMemoIsTooLong": {
+      "title": "الملاحظة طويلة جداً. الطول الأقصى هو {{maxLength}}"
+    },
+    "SolanaAddressOfEd25519": {
+      "title": "العنوان خارج المنحنى ed25519"
+    },
     "NotEnoughNftOwned": {
       "title": "لقد تجاوزت عدد رموز التوكن المتاحة"
     }
+  },
+  "cryptoOrg": {
+    "account": {
+      "subHeader": {
+        "cardTitle": "مدعوم من Crypto.org",
+        "moreInfo": "مزيد من المعلومات",
+        "drawerTitle": "تكامل Crypto.org",
+        "title": "رمز Crypto.org (CRO) متاح الآن على Ledger Live",
+        "description": "يمكنك الآن بدء إدارة رموزك Crypto.org (CRO) وتأمينها من خلال Ledger Live.",
+        "description2": "رمز Crypto.org (CRO) هو رمز أصلي لسلسلة Crypto.org ويستخدم لكل شيء من المعاملات، إلى التكديس و العديد من الميزات القادمة.",
+        "website": "العملات المشفرة في كل محفظة"
+      }
+    },
+    "memo": "ملاحظة",
+    "memoPlaceholder": "اختياري",
+    "memoWarningText": "عند استخدام الملاحظة، تحقق بعناية من المعلومات مع المستلم"
   }
 }

@@ -10,9 +10,12 @@ import { Trans } from "react-i18next";
 
 import ByteSize from "~/renderer/components/ByteSize";
 import Text from "~/renderer/components/Text";
+import Ellipsis from "~/renderer/components/Ellipsis";
 import Box from "~/renderer/components/Box";
 
 import IconCheckFull from "~/renderer/icons/CheckFull";
+import IconInfoCircleFull from "~/renderer/icons/InfoCircleFull";
+
 import AppActions from "./AppActions";
 
 import AppIcon from "./AppIcon";
@@ -31,15 +34,10 @@ const AppName = styled.div`
   flex-direction: column;
   padding-left: 15px;
   max-height: 40px;
+  min-width: 160px;
   & > * {
     display: block;
   }
-`;
-
-const AppSize = styled.div`
-  flex: 0 0 50px;
-  text-align: center;
-  color: ${p => p.theme.colors.palette.text.shade60};
 `;
 
 type Props = {
@@ -72,7 +70,7 @@ const Item: React$ComponentType<Props> = ({
   setAppUninstallDep,
   addAccount,
 }: Props) => {
-  const { name } = app;
+  const { name, type } = app;
   const { deviceModel, deviceInfo } = state;
 
   const notEnoughMemoryToInstall = useNotEnoughMemoryToInstall(optimisticState, name);
@@ -81,7 +79,8 @@ const Item: React$ComponentType<Props> = ({
     app.currencyId,
   ]);
 
-  const isLiveSupported = !!currency && isCurrencySupported(currency);
+  const currencySupported = !!currency && isCurrencySupported(currency);
+  const isLiveSupported = currencySupported || ["swap", "plugin"].includes(type);
 
   const onAddAccount = useCallback(() => {
     if (addAccount) addAccount(currency);
@@ -89,6 +88,20 @@ const Item: React$ComponentType<Props> = ({
 
   const version = (installed && installed.version) || app.version;
   const newVersion = installed && installed.availableVersion;
+
+  const availableApp = useMemo(() => state.apps.find(({ name }) => name === app.name), [
+    app.name,
+    state.apps,
+  ]);
+
+  const bytes = useMemo(
+    () =>
+      (onlyUpdate && availableApp?.bytes) ||
+      ((installed && installed.blocks) || 0) * deviceModel.getBlockSize(deviceInfo.version) ||
+      app.bytes ||
+      0,
+    [app.bytes, availableApp.bytes, deviceInfo.version, deviceModel, installed, onlyUpdate],
+  );
 
   return (
     <AppRow id={`managerAppsList-${name}`}>
@@ -104,32 +117,37 @@ const Item: React$ComponentType<Props> = ({
               values={{
                 version: onlyUpdate && newVersion && newVersion !== version ? newVersion : version,
               }}
+            />{" "}
+            •{" "}
+            <ByteSize
+              value={bytes}
+              formatFunction={Math.ceil}
+              deviceModel={deviceModel}
+              firmwareVersion={deviceInfo.version}
             />
           </Text>
         </AppName>
       </Box>
-      <AppSize>
-        <ByteSize
-          value={
-            ((installed && installed.blocks) || 0) * deviceModel.getBlockSize(deviceInfo.version) ||
-            app.bytes ||
-            0
-          }
-          deviceModel={deviceModel}
-          firmwareVersion={deviceInfo.version}
-        />
-      </AppSize>
-      <Box flex="0.6" horizontal alignContent="center" justifyContent="center">
-        {isLiveSupported && (
+      <Box flex="0.7" horizontal alignContent="center" justifyContent="flex-start" ml={5}>
+        {isLiveSupported ? (
           <>
-            <Box pr={2}>
+            <Box>
               <IconCheckFull size={16} />
             </Box>
-            <Text ml={1} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+            <Ellipsis ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
               <Trans i18nKey="manager.applist.item.supported" />
-            </Text>
+            </Ellipsis>
           </>
-        )}
+        ) : currency ? (
+          <>
+            <Box>
+              <IconInfoCircleFull size={16} />
+            </Box>
+            <Ellipsis ml={2} ff="Inter|Regular" color="palette.text.shade60" fontSize={3}>
+              <Trans i18nKey="manager.applist.item.not_supported" />
+            </Ellipsis>
+          </>
+        ) : null}
       </Box>
       <AppActions
         state={state}

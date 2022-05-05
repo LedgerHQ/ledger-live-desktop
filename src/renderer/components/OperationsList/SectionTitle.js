@@ -14,11 +14,11 @@ const SectionTitle = (props: Props) => {
   const { t } = useTranslation();
 
   const calendarOpts = {
-    sameDay: `LL – [${t("calendar.today")}]`,
-    nextDay: `LL – [${t("calendar.tomorrow")}]`,
-    lastDay: `LL – [${t("calendar.yesterday")}]`,
-    lastWeek: "LL",
-    sameElse: "LL",
+    sameDay: `L – [${t("calendar.today")}]`,
+    nextDay: `L – [${t("calendar.tomorrow")}]`,
+    lastDay: `L – [${t("calendar.yesterday")}]`,
+    lastWeek: "L",
+    sameElse: "L",
   };
   const { day } = props;
   const d = moment(day);

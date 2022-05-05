@@ -228,11 +228,15 @@ export const StepSummaryFooter = ({
   const canNext = !bridgePending && !anyError;
   return (
     <Box horizontal alignItems="center" flow={2} grow>
-      <AccountFooter parentAccount={parentAccount} account={account} status={status} />
-
-      <Text fontSize={13} color="alertRed">
-        <TranslatedError error={anyError} field="title" />
-      </Text>
+      {!anyError ? (
+        <AccountFooter parentAccount={parentAccount} account={account} status={status} />
+      ) : (
+        <Box grow>
+          <Text fontSize={13} color="alertRed">
+            <TranslatedError error={anyError} field="title" />
+          </Text>
+        </Box>
+      )}
       <Button
         id={"delegate-summary-continue-button"}
         primary

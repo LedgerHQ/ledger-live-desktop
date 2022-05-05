@@ -8,3 +8,4 @@ src/renderer/families                  @ledgerhq/live-blockchain-support
 src/live-common-set-supported-currencies.js  @ledgerhq/live-blockchain-support
 src/renderer/components/DeviceAction   @ledgerhq/live-devices
 src/renderer/screens/exchange          @ledgerhq/live-platform-and-services
+tests/**/*-snapshots                   @ledgerhq/live-qa
