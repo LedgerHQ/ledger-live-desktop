@@ -15,7 +15,6 @@ import IconAngleUp from "~/renderer/icons/AngleUp";
 import { Separator, Item, TextLink, AngleDown, Check } from "./common";
 import { setTrackingSource } from "~/renderer/analytics/TrackPage";
 import CollectionName from "~/renderer/screens/nft/CollectionName";
-import type { ProtoNFT } from "@ledgerhq/live-common/lib/nft";
 
 const LabelWithMeta = ({
   item,
@@ -44,11 +43,7 @@ const NFTCrumb = () => {
 
   const items: DropDownItemType<ProtoNFT>[] = useMemo(
     () =>
-<<<<<<< HEAD
-      Object.entries(collections).map(([contract, nfts]: any) => ({
-=======
       Object.entries(collections).map(([contract, nfts]: [string, any]) => ({
->>>>>>> ledgerhq/develop
         key: contract,
         label: contract,
         content: nfts[0],
@@ -56,13 +51,8 @@ const NFTCrumb = () => {
     [collections],
   );
 
-<<<<<<< HEAD
-  const activeItem = useMemo(
-    () => items.find((item: any) => item.nft?.contract === collectionAddress) || items[0],
-=======
   const activeItem: ?DropDownItemType<ProtoNFT> = useMemo(
     () => items.find(item => item.key === collectionAddress) || items[0],
->>>>>>> ledgerhq/develop
     [collectionAddress, items],
   );
 
@@ -106,11 +96,7 @@ const NFTCrumb = () => {
               <TextLink>
                 <Button>
                   <CollectionName
-<<<<<<< HEAD
-                    nft={activeItem.content}
-=======
                     nft={activeItem?.content}
->>>>>>> ledgerhq/develop
                     fallback={activeItem?.content?.contract}
                   />
                 </Button>
