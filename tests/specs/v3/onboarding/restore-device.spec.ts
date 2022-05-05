@@ -96,7 +96,6 @@ test.describe.parallel("Onboarding", () => {
 
       await test.step(`[${nano}] Device genuine check`, async () => {
         if (nano !== Nano.nanoSP) {
-          expect(await page.screenshot()).toMatchSnapshot("v3-genuine-check.png");
           await onboardingPage.checkDevice();
         }
       });

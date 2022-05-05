@@ -205,7 +205,9 @@ export class OnboardingPage {
   }
 
   async checkDevice() {
+    expect(await this.page.screenshot()).toMatchSnapshot("v3-genuine-check.png");
     await this.checkMyNanoButton.click();
+    expect(await this.page.screenshot()).toMatchSnapshot("v3-before-genuine-check.png");
   }
 
   async continue() {
