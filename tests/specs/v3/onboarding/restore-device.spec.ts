@@ -22,7 +22,6 @@ test.describe.parallel("Onboarding", () => {
       });
 
       await test.step("Terms of service", async () => {
-        expect(await page.screenshot()).toMatchSnapshot("v3-terms.png");
         await onboardingPage.acceptTermsAndConditions();
       });
 

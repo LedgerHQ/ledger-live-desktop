@@ -95,8 +95,10 @@ export class OnboardingPage {
   }
 
   async acceptTermsAndConditions() {
+    expect(await this.page.screenshot()).toMatchSnapshot("v3-terms-1.png");
     await this.page.check('input[name="termsOfUseCheckbox"]');
     await this.page.check('input[name="privacyPolicyCheckbox"]');
+    expect(await this.page.screenshot()).toMatchSnapshot("v3-terms-2.png");
     await this.termsAndConditionsButton.click();
   }
 
