@@ -10,7 +10,7 @@ import test from "../fixtures/common";
 process.env.PWDEBUG = "1";
 
 // Use specific userdata
-test.use({ userdata: "skip-onboarding" });
+// test.use({ userdata: "skip-onboarding" });
 
 // app env
 test.use({ env: { DEV_TOOLS: true, HIDE_DEBUG_MOCK: undefined, DEBUG_UPDATE: true } });

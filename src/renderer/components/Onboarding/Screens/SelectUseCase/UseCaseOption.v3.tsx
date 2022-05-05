@@ -69,11 +69,19 @@ interface UseCaseOptionProps {
   Illu: React.ReactNode;
   onClick: () => void;
   id?: string;
+  dataTestId: string;
 }
 
-export function UseCaseOption({ title, description, Illu, onClick, id }: UseCaseOptionProps) {
+export function UseCaseOption({
+  title,
+  description,
+  Illu,
+  onClick,
+  id,
+  dataTestId,
+}: UseCaseOptionProps) {
   return (
-    <UseCaseOptionContainer id={id} onClick={onClick}>
+    <UseCaseOptionContainer data-test-id={dataTestId} id={id} onClick={onClick}>
       <Container>
         <IllustrationContainer>{Illu}</IllustrationContainer>
         <TitleText>{title}</TitleText>

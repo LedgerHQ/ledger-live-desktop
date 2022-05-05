@@ -31,7 +31,13 @@ const TermsAndConditionsModal: React.FC<{
   }, [dispatch, setOpenedTermsModal, history]);
 
   return (
-    <Popin isOpen={isOpen} onClose={onClose} width={622} height={220}>
+    <Popin
+      data-test-id="v3-onboarding-terms-and-conditions-popin"
+      isOpen={isOpen}
+      onClose={onClose}
+      width={622}
+      height={220}
+    >
       <Flex justifyContent="center" mt={4} mb={3}>
         <Text variant="h2" textTransform="uppercase">
           {t("Terms.title")}
@@ -39,6 +45,7 @@ const TermsAndConditionsModal: React.FC<{
       </Flex>
       <Flex mt={5} ml={5}>
         <Checkbox
+          data-test-id="v3-onboarding-terms-checkbox"
           name="termsOfUseCheckbox"
           onChange={e => setAcceptedTermsOfUse(e.target.checked)}
           isChecked={acceptedTermsOfUse}
@@ -52,6 +59,7 @@ const TermsAndConditionsModal: React.FC<{
       </Flex>
       <Flex mt={2} ml={5}>
         <Checkbox
+          data-test-id="v3-onboarding-privacy-checkbox"
           name="privacyPolicyCheckbox"
           onChange={e => setAcceptedPrivacyPolicy(e.target.checked)}
           isChecked={acceptedPrivacyPolicy}
@@ -65,7 +73,7 @@ const TermsAndConditionsModal: React.FC<{
       </Flex>
       <Flex justifyContent="center" mt={8}>
         <Button
-          data-testid="onboarding-cta-done"
+          data-test-id="v3-onboarding-terms-and-conditions-button"
           onClick={handleAcceptTermsOfUse}
           variant="main"
           color="palette.neutral.c100"

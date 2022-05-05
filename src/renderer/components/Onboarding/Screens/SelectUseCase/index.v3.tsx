@@ -109,6 +109,7 @@ export function SelectUseCase({ setUseCase, setOpenedPedagogyModal }: Props) {
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
+              dataTestId="v3-onboarding-new-device"
               id="first-use"
               title={
                 <Trans
@@ -136,6 +137,7 @@ export function SelectUseCase({ setUseCase, setOpenedPedagogyModal }: Props) {
           </LeftColumn>
           <RightColumn>
             <UseCaseOption
+              dataTestId="v3-onboarding-initialized-device"
               id="initialized-device"
               title={
                 <Trans
@@ -155,6 +157,7 @@ export function SelectUseCase({ setUseCase, setOpenedPedagogyModal }: Props) {
               }}
             />
             <UseCaseOption
+              dataTestId="v3-onboarding-restore-device"
               id="restore-device"
               title={t("v3.onboarding.screens.selectUseCase.options.3.title")}
               description={
