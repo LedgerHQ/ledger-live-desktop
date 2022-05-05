@@ -3511,7 +3511,7 @@
         "MEMO_RETURN": "Memo Return"
       },
       "memoWarningText": "When using a Memo, carefully verify the type used with the recipient",
-      "fee": "Fee",
+      "fee": "Fees",
       "feeInfoText": "Transaction on the Stellar network require a minimum transaction fee of 0.00001 XLM",
       "suggested": "Suggested",
       "recommendedFee": "Recommended fee",
@@ -4128,6 +4128,12 @@
     "StellarNotEnoughNativeBalanceToAddTrustline": {
       "title": "Sorry, insufficient funds",
       "description": "Please make sure the account has enough funds to cover the new trustline"
+    },
+    "StellarMuxedAccountNotExist": {
+      "title": "Stellar account does not exist"
+    },
+    "StellarSourceHasMultiSign": {
+      "title": "Please disable multisign to make Stellar transactions"
     }
   }
 }

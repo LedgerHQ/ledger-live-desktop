@@ -14,6 +14,7 @@ import Button from "~/renderer/components/Button";
 import ErrorBanner from "~/renderer/components/ErrorBanner";
 import AccountFooter from "~/renderer/modals/Send/AccountFooter";
 import Alert from "~/renderer/components/Alert";
+import TranslatedError from "~/renderer/components/TranslatedError";
 
 import AssetSelector from "../fields/AssetSelector";
 
@@ -55,6 +56,11 @@ export default function StepAsset({
       <Alert type="primary">
         <Trans i18nKey="stellar.addAsset.steps.assets.info" />
       </Alert>
+      {status?.errors?.recipient ? (
+        <Alert type="error">
+          <TranslatedError error={status.errors.recipient} />
+        </Alert>
+      ) : null}
     </Box>
   );
 }
