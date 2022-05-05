@@ -23,6 +23,7 @@ export function ExistingRecoveryPhrase({
         {t("onboarding.screens.tutorial.screens.existingRecoveryPhrase.paragraph2")}
       </SubTitle>
       <CheckStep
+        data-test-id="v3-recovery-phrase-loss-checkbox"
         checked={userUnderstandConsequences}
         onClick={toggleUserUnderstandConsequences}
         label={t("onboarding.screens.tutorial.screens.existingRecoveryPhrase.disclaimer")}

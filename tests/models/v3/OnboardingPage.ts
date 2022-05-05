@@ -29,6 +29,7 @@ export class OnboardingPage {
   readonly setupPincodeButton: Locator;
   readonly confirmPincodeButton: Locator;
   readonly recoveryPhraseCheckbox: Locator;
+  readonly recoveryPhraseLossCheckbox: Locator;
   readonly recoverySetupButton: Locator;
   readonly writeRecoveryPhraseButton: Locator;
   readonly confirmRecoveryPhraseButton: Locator;
@@ -74,6 +75,7 @@ export class OnboardingPage {
     this.startSetupButton = page.locator("data-test-id=v3-device-howto-cta");
     this.pinCodeCheckbox = page.locator("data-test-id=v3-private-pin-code-checkbox");
     this.recoveryPhraseCheckbox = page.locator("data-test-id=v3-recovery-phrase-checkbox");
+    this.recoveryPhraseLossCheckbox = page.locator("data-test-id=v3-recovery-phrase-loss-checkbox");
     this.recoverySetupButton = page.locator("data-test-id=v3-device-recoveryphrase-cta");
     this.writeRecoveryPhraseButton = page.locator("data-test-id=v3-use-recovery-sheet");
     this.confirmRecoveryPhraseButton = page.locator("data-test-id=v3-recovery-howto-3");
@@ -108,6 +110,10 @@ export class OnboardingPage {
 
   async newDevice() {
     await this.newDeviceButton.click();
+  }
+
+  async restoreDevice() {
+    await this.restoreDeviceButton.click();
   }
 
   // async basicsCarrouselContinue() {
@@ -156,6 +162,10 @@ export class OnboardingPage {
 
   async acceptRecoveryPhrase() {
     await this.recoveryPhraseCheckbox.click();
+  }
+
+  async acceptRecoveryPhraseLoss() {
+    await this.recoveryPhraseLossCheckbox.click();
   }
 
   async startQuiz() {
