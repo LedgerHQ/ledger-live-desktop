@@ -102,7 +102,8 @@ export class OnboardingPage {
     await this.termsAndConditionsButton.click();
   }
 
-  async selectDevice(device: "nanoS" | "nanoX" | string) {
+  async selectDevice(device: "nanoS" | "nanoX" | "nanoSPlus") {
+    expect(await this.page.screenshot()).toMatchSnapshot("v3-device-selection.png");
     await this.page.hover(`[data-test-id=v3-container-device-${device}]`);
     await this.selectDeviceButton(device).click();
   }

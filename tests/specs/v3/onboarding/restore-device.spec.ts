@@ -27,7 +27,6 @@ test.describe.parallel("Onboarding", () => {
 
       await test.step(`[${nano}] Select Device`, async () => {
         if (nano !== Nano.nanoSP) {
-          expect(await page.screenshot()).toMatchSnapshot("v3-device-selection.png");
           await onboardingPage.selectDevice(nano);
         }
       });
