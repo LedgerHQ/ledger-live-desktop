@@ -1141,9 +1141,9 @@
       },
       "confirm": {
         "title": "Bağlan",
-        "details": "Wants to connect to the following account through your wallet :",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
-        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
+        "details": "Cüzdanınız üzerinden bu hesaba bağlanmak istiyor:",
+        "deeplinkDetails": "Ledger Live'a bağlanmak istiyor. Hesabınızı seçin:",
+        "noAccount": "Uyumlu bir hesabınız yok. WalletConnect kullanabilmek için lütfen uyumlu bir hesap ekleyin.",
         "alreadyConnected": "Başka bir dApp bağlıyken yeni bir dApp'e bağlanmaya çalışıyorsunuz. Live'ı yeni bir dApp'e bağlamadan önce lütfen bağlı olduğunuz dApp'in bağlantısını kesin."
       }
     },
@@ -1609,7 +1609,7 @@
         "not_supported": "3. taraf cüzdan gerektirir",
         "addAccount": "Hesap ekle",
         "addAccountTooltip": "{{appName}} hesabı ekle",
-        "addAccountWarn": "Please wait for processing to finish",
+        "addAccountWarn": "Lütfen işlemin bitmesini bekleyin",
         "learnMore": "Daha fazla bilgi",
         "learnMoreTooltip": "{{appName}} uygulaması hakkında daha fazla bilgi edinin",
         "removeTooltip": "{{appName}} Uygulamasını Kaldır",
