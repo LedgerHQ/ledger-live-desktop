@@ -170,7 +170,7 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  const nft = useSelector(state => getNFTById(state, { nftId }));
+  const nft = useSelector(state => getNFTById(state, { nftId })) || {};
   const { status: collectionStatus, metadata: collectionMetadata } = useNftCollectionMetadata(
     nft.contract,
     nft.currencyId,

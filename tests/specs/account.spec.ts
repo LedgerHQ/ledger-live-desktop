@@ -20,12 +20,12 @@ test.describe.parallel("Accounts", () => {
       await test.step(`[${currency}] Open modal`, async () => {
         await portfolioPage.openAddAccountModal();
         expect(await addAccountModal.title.textContent()).toBe("Add accounts");
-        expect(await addAccountModal.container.screenshot()).toMatchSnapshot(`open-modal.png`);
+        expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot(`open-modal.png`);
       });
 
       await test.step(`[${currency}] Select currency`, async () => {
         await addAccountModal.select(currency);
-        expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+        expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot(
           `${currency}-select.png`,
         );
         await addAccountModal.continue();
@@ -34,14 +34,14 @@ test.describe.parallel("Accounts", () => {
       await test.step(`[${currency}] Open device app`, async () => {
         await deviceAction.openApp();
         await addAccountModal.waitForSync();
-        expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+        expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot(
           `${currency}-accounts-list.png`,
         );
       });
 
       await test.step(`[${currency}] Scan and add accounts`, async () => {
         await addAccountModal.addAccounts();
-        expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+        expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot(
           `${currency}-success.png`,
         );
       });
@@ -49,7 +49,7 @@ test.describe.parallel("Accounts", () => {
       await test.step(`[${currency}] Done`, async () => {
         await addAccountModal.done();
         await layout.totalBalance.waitFor({ state: "visible" });
-        expect(await page.screenshot()).toMatchSnapshot(`${currency}-complete.png`);
+        expect.soft(await page.screenshot()).toMatchSnapshot(`${currency}-complete.png`);
       });
     });
   }

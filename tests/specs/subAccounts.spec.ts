@@ -21,7 +21,7 @@ test("subAccounts", async ({ page }) => {
   await test.step("should find token in the currencies list", async () => {
     await portfolioPage.openAddAccountModal();
     await addAccountModal.select("chainlink");
-    expect(await addAccountModal.container.screenshot()).toMatchSnapshot("subAccount-noParent.png");
+    expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot("subAccount-noParent.png");
   });
 
   await test.step("should scan parent", async () => {
@@ -32,7 +32,7 @@ test("subAccounts", async ({ page }) => {
   });
 
   await test.step("should add parent", async () => {
-    expect(await addAccountModal.container.screenshot()).toMatchSnapshot(
+    expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot(
       "parent-addAccount-result.png",
     );
     await addAccountModal.addAccounts();
@@ -44,18 +44,18 @@ test("subAccounts", async ({ page }) => {
     await layout.goToAccounts();
     await accountsPage.openAddAccountModal();
     await addAccountModal.select("must");
-    expect(await addAccountModal.container.screenshot()).toMatchSnapshot("parent-exists.png");
+    expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot("parent-exists.png");
   });
 
   await test.step("should receive on parent", async () => {
     await receiveModal.continue();
-    expect(await addAccountModal.container.screenshot()).toMatchSnapshot("select-parent.png");
+    expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot("select-parent.png");
     await receiveModal.continue();
   });
 
   await test.step("should show parent address", async () => {
     await receiveModal.skipDevice();
-    expect(await addAccountModal.container.screenshot()).toMatchSnapshot("parent-address.png");
+    expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot("parent-address.png");
     await receiveModal.continue();
     await receiveModal.continue();
   });
@@ -65,18 +65,18 @@ test("subAccounts", async ({ page }) => {
     await layout.goToAccounts();
     await accountsPage.openAddAccountModal();
     await addAccountModal.select("usd coin");
-    expect(await addAccountModal.container.screenshot()).toMatchSnapshot("subAccount-exist.png");
+    expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot("subAccount-exist.png");
   });
 
   await test.step("should receive on subAccount", async () => {
     await receiveModal.continue();
-    expect(await addAccountModal.container.screenshot()).toMatchSnapshot("select-account.png");
+    expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot("select-account.png");
   });
 
   await test.step("should show subAccount address", async () => {
     await receiveModal.continue();
     await receiveModal.skipDevice();
-    expect(await addAccountModal.container.screenshot()).toMatchSnapshot("subAccount-address.png");
+    expect.soft(await addAccountModal.container.screenshot()).toMatchSnapshot("subAccount-address.png");
     await receiveModal.continue();
     await receiveModal.continue();
   });

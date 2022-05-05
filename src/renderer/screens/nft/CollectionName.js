@@ -26,7 +26,7 @@ const Container: ThemedComponent<{}> = styled.div`
 `;
 
 type Props = {
-  nft: ProtoNFT,
+  nft?: ProtoNFT,
   fallback?: string,
   account?: Account,
   showHideMenu?: boolean,
@@ -34,7 +34,7 @@ type Props = {
 
 // TODO Make me pretty
 const CollectionName = ({ nft, fallback, account, showHideMenu }: Props) => {
-  const { status, metadata } = useNftCollectionMetadata(nft.contract, nft.currencyId);
+  const { status, metadata } = useNftCollectionMetadata(nft?.contract, nft?.currencyId);
   const { tokenName } = metadata || {};
   const loading = useMemo(() => status === "loading", [status]);
 
@@ -42,10 +42,10 @@ const CollectionName = ({ nft, fallback, account, showHideMenu }: Props) => {
     <Skeleton width={80} minHeight={24} barHeight={10} show={loading}>
       <Container>
         {tokenName || fallback || "-"}
-        {account && showHideMenu && (
+        {account && showHideMenu && nft && (
           <NFTCollectionContextMenu
             collectionName={tokenName || fallback || "-"}
-            collectionAddress={nft.contract}
+            collectionAddress={nft.contract || ""}
             account={account}
             leftClick={true}
           >
