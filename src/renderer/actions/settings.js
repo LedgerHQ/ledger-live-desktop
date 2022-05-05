@@ -115,6 +115,11 @@ export const blacklistToken = (tokenId: string) => ({
   payload: tokenId,
 });
 
+export const hideNftCollection = (collectionId: string) => ({
+  type: "HIDE_NFT_COLLECTION",
+  payload: collectionId,
+});
+
 export const swapAcceptProvider = (providerId: string) => ({
   type: "ACCEPT_SWAP_PROVIDER",
   payload: providerId,
@@ -123,6 +128,11 @@ export const swapAcceptProvider = (providerId: string) => ({
 export const showToken = (tokenId: string) => ({
   type: "SHOW_TOKEN",
   payload: tokenId,
+});
+
+export const unhideNftCollection = (collectionId: string) => ({
+  type: "UNHIDE_NFT_COLLECTION",
+  payload: collectionId,
 });
 
 type FetchSettings = (*) => (Dispatch<*>) => void;

@@ -16,39 +16,47 @@ test("Updater", async ({ page }) => {
 
   await test.step("[idle] state should not be visible", async () => {
     expect(await layout.appUpdateBanner.isHidden()).toBe(true);
+
+
+    await page.evaluate(() => {
+      document.body.style.overflow = "hidden";
+    });
+
+    expect.soft(await page.screenshot()).toMatchSnapshot("app-updater-idle.png");
+
   });
 
   await test.step("[checking] state should be visible", async () => {
     await appUpdater.setStatus("checking");
-    expect(await page.screenshot()).toMatchSnapshot("app-updater-layout.png");
-    expect(await layout.appUpdateBanner.screenshot()).toMatchSnapshot("app-updater-checking.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("app-updater-layout.png");
+    expect.soft(await layout.appUpdateBanner.screenshot()).toMatchSnapshot("app-updater-checking.png");
   });
 
   await test.step("[check-success] state should be visible", async () => {
     await appUpdater.setStatus("check-success");
-    expect(await layout.appUpdateBanner.screenshot()).toMatchSnapshot(
+    expect.soft(await layout.appUpdateBanner.screenshot()).toMatchSnapshot(
       "app-updater-check-success.png",
     );
   });
 
   await test.step("[update-available] state should be visible", async () => {
     await appUpdater.setStatus("update-available");
-    expect(await layout.appUpdateBanner.screenshot()).toMatchSnapshot(
+    expect.soft(await layout.appUpdateBanner.screenshot()).toMatchSnapshot(
       "app-updater-update-available.png",
     );
   });
 
   await test.step("[download-progress] state should be visible", async () => {
     await appUpdater.setStatus("download-progress");
-    expect(await layout.appUpdateBanner.screenshot()).toMatchSnapshot(
+    expect.soft(await layout.appUpdateBanner.screenshot()).toMatchSnapshot(
       "app-updater-download-progress.png",
     );
   });
 
   await test.step("[error] state should be visible", async () => {
     await appUpdater.setStatus("error");
-    expect(await layout.appUpdateBanner.screenshot()).toMatchSnapshot("app-updater-error.png");
-    expect(await page.screenshot()).toMatchSnapshot("app-updater-error-with-carousel.png");
+    expect.soft(await layout.appUpdateBanner.screenshot()).toMatchSnapshot("app-updater-error.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("app-updater-error-with-carousel.png");
   });
 
   await test.step("[error] state (any) should be visible, without the carousel", async () => {
@@ -57,6 +65,6 @@ test("Updater", async ({ page }) => {
     expect(await settingsPage.carouselSwitchButton.locator("input").isChecked()).toBe(false);
     await layout.goToPortfolio();
     expect(await layout.appUpdateBanner.isVisible()).toBe(true);
-    expect(await page.screenshot()).toMatchSnapshot("app-updater-error-without-carousel.png");
+    expect.soft(await page.screenshot()).toMatchSnapshot("app-updater-error-without-carousel.png");
   });
 });

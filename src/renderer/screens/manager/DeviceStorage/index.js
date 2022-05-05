@@ -44,6 +44,10 @@ const illustrations = {
     light: nanoX,
     dark: nanoXDark,
   },
+  nanoFTS: {
+    light: nanoS,
+    dark: nanoSDark,
+  },
   blue: {
     light: blue,
     dark: blue,
@@ -56,6 +60,7 @@ export const DeviceIllustration: ThemedComponent<{}> = styled.img.attrs(p => ({
       p.theme.colors.palette.type || "light"
     ],
 }))`
+  ${p => (p.deviceModel.id === "nanoFTS" ? "border: 3px solid red;" : "")}
   position: absolute;
   top: 0;
   left: 50%;

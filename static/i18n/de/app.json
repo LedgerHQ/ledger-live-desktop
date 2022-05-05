@@ -1054,6 +1054,11 @@
     "desc": "Diese Aktion blendet alle <1><0>{{tokenName}}</0></1> Konten aus, Sie können sie unter <3>Einstellungen</3> wieder einblenden",
     "hideCTA": "Token ausblenden"
   },
+  "hideNftCollection": {
+    "title": "NFT-Sammlung ausblenden",
+    "desc": "Diese Aktion wird alle NFTs aus der <1><0>{{collectionName}}</0></1> Sammlung ausblenden. Sie können sie erneut mit <3>Einstellungen</3> anzeigen",
+    "hideCTA": "NFT-Sammlung ausblenden"
+  },
   "banners": {
     "cleanCache": {
       "title": "Das Ändern von experimentellen Einstellungen erfordert einen leeren Cache",
@@ -1136,9 +1141,9 @@
       },
       "confirm": {
         "title": "Verbinden",
-        "details": "Will sich mit dem folgenden Ethereum-Konto über Ihren Wallet verbinden:",
-        "deeplinkDetails": "Mit Ledger Live verbinden. Wählen Sie Ihr Ethereum-Konto",
-        "noEthAccount": "Sie haben kein Ethereum-Konto. Bitte fügen Sie ein Ethereum-Konto hinzu, um Wallet Connect zu nutzen.",
+        "details": "Wants to connect to the following account through your wallet :",
+        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
+        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
         "alreadyConnected": "Sie versuchen sich mit einer dApp zu verbinden, während eine andere bereits verbunden ist. Bitte trennen Sie die Verbindung von der angeschlossenen dApp, bevor Sie Live mit einer neuen dApp verbinden."
       }
     },
@@ -2553,6 +2558,115 @@
       }
     }
   },
+  "solana": {
+    "common": {
+      "broadcastError": "Ihre Transaktion ist möglicherweise fehlgeschlagen. Bitte warten Sie einen Moment und prüfen Sie den Transaktionsverlauf, bevor Sie es erneut versuchen.",
+      "viewDetails": "Details anzeigen",
+      "connectDevice": {
+        "title": "Gerät"
+      },
+      "confirmation": {
+        "title": "Bestätigung"
+      }
+    },
+    "delegation": {
+      "totalStake": "Summe Stake",
+      "commission": "Kommission",
+      "delegate": "Hinzufügen",
+      "listHeader": "Delegierungen",
+      "availableBalance": "Verfügbares Guthaben",
+      "active": "Aktiv",
+      "activeTooltip": "Aktive Beträge generieren Belohnungen",
+      "inactiveTooltip": "Inaktive Beträge generieren keine Belohnungen",
+      "delegatedInfoTooltip": "Gesamtbetrag, der an Validatoren delegiert ist.",
+      "withdrawableInfoTooltip": "Gesamtbetrag, der von Delegationen entnommen werden kann.",
+      "withdrawableTitle": "Entnehmbar",
+      "statusUpdateNotice": "Der Status der Delegation wird aktualisiert, wenn die Transaktion bestätigt wird.",
+      "ledgerByFigmentTC": "Ledger laut Figment AGBs",
+      "emptyState": {
+        "description": "Sie können SOL-Belohnungen erhalten, indem Sie Ihre Vermögenswerte delegieren.",
+        "info": "Wie die Delegierung/Übertragung funktioniert",
+        "delegation": "Belohnungen verdienen"
+      },
+      "earnRewards": {
+        "description": "Sie können Belohnungen verdienen, indem Sie Ihre SOL-Werte an einen Validator delegieren.",
+        "bullet": {
+          "0": "Sie behalten das Eigentum an delegierten Vermögenswerten",
+          "1": "Delegieren Sie mit Ihrem Ledger-Gerät",
+          "2": "Vermögenswerte sind nach nach Aufhebung der Delegierung verfügbar"
+        },
+        "warning": "Wählen Sie Ihren Validator mit Bedacht: Ein Teil Ihrer delegierten Vermögenswerte kann unwiderruflich verloren gehen, wenn sich der Validator nicht angemessen verhält."
+      },
+      "flow": {
+        "title": "Delegieren",
+        "steps": {
+          "validator": {
+            "title": "Validator"
+          },
+          "amount": {
+            "title": "Betrag"
+          },
+          "confirmation": {
+            "success": {
+              "title": "Sie haben Ihre Vermögenswerte erfolgreich delegiert"
+            }
+          }
+        }
+      },
+      "withdraw": {
+        "flow": {
+          "title": "Abheben",
+          "steps": {
+            "amount": {
+              "title": "Betrag"
+            },
+            "confirmation": {
+              "success": {
+                "title": "Sie haben Ihre Vermögenswerte erfolgreich zurückgezogen.",
+                "text": "Ihr Kontostand wird aktualisiert, sobald die Transaktion bestätigt wurde."
+              }
+            }
+          }
+        }
+      },
+      "activate": {
+        "flow": {
+          "title": "Aktivieren",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Sie haben Ihre Delegation erfolgreich aktiviert."
+              }
+            }
+          }
+        }
+      },
+      "reactivate": {
+        "flow": {
+          "title": "Reaktivieren",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Sie haben Ihre Delegierung erfolgreich reaktiviert."
+              }
+            }
+          }
+        }
+      },
+      "deactivate": {
+        "flow": {
+          "title": "Deaktivieren",
+          "steps": {
+            "confirmation": {
+              "success": {
+                "title": "Sie haben Ihre Delegierung erfolgreich deaktiviert."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
   "delegation": {
     "title": "Prämien verdienen",
     "header": "Übertragung",
@@ -2760,10 +2874,6 @@
           "title": "TronGrid.io verwenden",
           "description": "Verwenden Sie TronGrid direkt ohne Ledger-Proxy"
         },
-        "experimentalJSCurrencies": {
-          "title": "Experimentelle JS-Implementierungen",
-          "description": "Verwenden Sie experimentelle JS-Implementierungen für Tezos und Kosmos."
-        },
         "experimentalCurrencies": {
           "title": "Experimentelle Integrationen",
           "description": "Verwenden Sie verfügbare experimentelle Integrationen für Krypto-Werte."
@@ -2847,6 +2957,12 @@
         "desc": "Sie können Token ausblenden, indem Sie zum übergeordneten Konto gehen, dann mit der rechten Maustaste auf das Token klicken und „Token ausblenden“ wählen.",
         "count": "{{count}} Token",
         "count_plural": "{{count}} Token"
+      },
+      "hiddenNftCollections": {
+        "title": "Ausgeblendete NFT-Sammlungen",
+        "desc": "Sie können NFT-Sammlungen ausblenden, indem Sie mit der rechten Maustaste auf den Namen der Sammlung klicken und \"NFT-Sammlung ausblenden\" auswählen.",
+        "count": "{{count}} Sammlung",
+        "count_plural": "{{count}} Sammlungen"
       },
       "fullNode": {
         "title": "Bitcoin-Knoten (Full Node) verbinden",
@@ -4128,6 +4244,9 @@
     },
     "NotEnoughBalanceInParentAccount": {
       "title": "Unzureichender Saldo auf dem übergeordneten Konto"
+    },
+    "quantityNeedsToBePositive": {
+      "title": "Menge muss mindestens 1 sein"
     },
     "NotEnoughSpendableBalance": {
       "title": "Saldo kann nicht unter {{minimumAmount}} liegen"

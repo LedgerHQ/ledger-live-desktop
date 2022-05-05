@@ -110,6 +110,7 @@ class RepairDeviceButton extends PureComponent<Props, State> {
           desc={t("settings.repairDevice.desc")}
           progress={progress}
           error={error}
+          enableSomethingElseChoice={false}
         />
       </>
     );
