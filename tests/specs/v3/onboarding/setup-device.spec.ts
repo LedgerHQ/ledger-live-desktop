@@ -18,9 +18,6 @@ test.describe.parallel("Onboarding", () => {
       const deviceAction = new DeviceAction(page);
 
       await test.step("Get started", async () => {
-        await onboardingPage.getStartedButton.waitFor({ state: "visible" });
-
-        expect(await page.screenshot()).toMatchSnapshot("v3-get-started.png");
         await onboardingPage.getStarted();
       });
 
