@@ -1,7 +1,9 @@
 import { Page, Locator, expect } from "@playwright/test";
+import { DeviceAction } from "../DeviceAction";
 
 export class OnboardingPage {
   readonly page: Page;
+  readonly deviceAction: DeviceAction;
   readonly getStartedButton: Locator;
   readonly termsAndConditionsPopin: Locator;
   readonly termsOfUseCheckbox: Locator;
@@ -43,6 +45,7 @@ export class OnboardingPage {
 
   constructor(page: Page) {
     this.page = page;
+    this.deviceAction = new DeviceAction(page);
     this.getStartedButton = page.locator("data-test-id=v3-onboarding-get-started-button");
     this.termsAndConditionsPopin = page.locator(
       "data-test-id=v3-onboarding-terms-and-conditions-popin",
@@ -208,6 +211,12 @@ export class OnboardingPage {
     expect(await this.page.screenshot()).toMatchSnapshot("v3-genuine-check.png");
     await this.checkMyNanoButton.click();
     expect(await this.page.screenshot()).toMatchSnapshot("v3-before-genuine-check.png");
+  }
+
+  async genuineCheck() {
+    expect(await this.page.screenshot()).toMatchSnapshot("v3-genuine-checking.png");
+    await this.deviceAction.genuineCheck();
+    expect(await this.page.screenshot()).toMatchSnapshot("v3-genuine-check-done.png");
   }
 
   async continue() {

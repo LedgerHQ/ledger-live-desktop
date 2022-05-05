@@ -1,7 +1,6 @@
 import test from "../../../fixtures/common";
 import { expect } from "@playwright/test";
 import { OnboardingPage } from "../../../models/v3/OnboardingPage";
-import { DeviceAction } from "../../../models/DeviceAction";
 
 enum Nano {
   nanoX = "nanoX",
@@ -15,7 +14,6 @@ test.describe.parallel("Onboarding", () => {
   for (const nano of nanos) {
     test(`[${nano}] Onboarding flow new device`, async ({ page }) => {
       const onboardingPage = new OnboardingPage(page);
-      const deviceAction = new DeviceAction(page);
 
       await test.step("Get started", async () => {
         await onboardingPage.getStarted();
@@ -194,8 +192,7 @@ test.describe.parallel("Onboarding", () => {
 
       await test.step("Pass genuine check", async () => {
         if (nano !== Nano.nanoSP) {
-          await deviceAction.genuineCheck();
-          expect(await page.screenshot()).toMatchSnapshot("v3-genuine-check-done.png");
+          await onboardingPage.genuineCheck();
         }
       });
 
