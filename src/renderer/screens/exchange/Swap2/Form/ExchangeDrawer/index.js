@@ -166,7 +166,7 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
   return (
     <Box height="100%">
       <DrawerTitle i18nKey="swap2.exchangeDrawer.title" />
-      <ContentBox flex={1} justifyContent="center">
+      <ContentBox flex={1}>
         <SwapAction
           swapTransaction={swapTransaction}
           exchangeRate={exchangeRate}

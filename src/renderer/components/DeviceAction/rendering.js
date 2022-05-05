@@ -52,6 +52,7 @@ import { SWAP_VERSION } from "~/renderer/screens/exchange/Swap2/utils/index";
 import { context } from "~/renderer/drawers/Provider";
 import { track } from "~/renderer/analytics/segment";
 import { relaunchOnboarding } from "~/renderer/actions/onboarding";
+import { DrawerFooter } from "~/renderer/screens/exchange/Swap2/Form/DrawerFooter";
 
 export const AnimationWrapper: ThemedComponent<{ modelId?: DeviceModelId }> = styled.div`
   width: 600px;
@@ -76,6 +77,15 @@ export const Wrapper: ThemedComponent<{}> = styled.div`
   flex-direction: column;
   flex: 1;
   align-items: center;
+  justify-content: center;
+  min-height: 260px;
+  max-width: 100%;
+`;
+
+export const ConfirmWrapper: ThemedComponent<{}> = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   justify-content: center;
   min-height: 260px;
   max-width: 100%;
@@ -601,77 +611,6 @@ export const renderSwapDeviceConfirmation = ({
   amountExpectedTo?: string,
   estimatedFees?: string,
 }) => {
-  return (
-    <>
-      <Alert type="primary" learnMoreUrl={urls.swap.learnMore} mb={3}>
-        <Trans i18nKey="DeviceAction.swap.notice" />
-      </Alert>
-      {map(
-        {
-          amountSent: (
-            <CurrencyUnitValue
-              unit={getAccountUnit(exchange.fromAccount)}
-              value={transaction.amount}
-              disableRounding
-              showCode
-            />
-          ),
-          fees: (
-            <CurrencyUnitValue
-              unit={getAccountUnit(
-                getMainAccount(exchange.fromAccount, exchange.fromParentAccount),
-              )}
-              value={BigNumber(estimatedFees || 0)}
-              disableRounding
-              showCode
-            />
-          ),
-          amountReceived: (
-            <CurrencyUnitValue
-              unit={getAccountUnit(exchange.toAccount)}
-              value={amountExpectedTo ? BigNumber(amountExpectedTo) : exchangeRate.toAmount}
-              disableRounding
-              showCode
-            />
-          ),
-        },
-        (value, key) => {
-          return (
-            <Box horizontal justifyContent="space-between" key={key} mb={2} ml="12px" mr="12px">
-              <Text fontWeight="500" color="palette.text.shade40" fontSize={3}>
-                <Trans i18nKey={`DeviceAction.swap.${key}`} />
-              </Text>
-              <Text color="palette.text.shade80" fontWeight="500" fontSize={3}>
-                {value}
-              </Text>
-            </Box>
-          );
-        },
-      )}
-      {renderVerifyUnwrapped({ modelId, type })}
-    </>
-  );
-};
-
-export const renderSwapDeviceConfirmationV2 = ({
-  modelId,
-  type,
-  transaction,
-  status,
-  exchangeRate,
-  exchange,
-  amountExpectedTo,
-  estimatedFees,
-}: {
-  modelId: DeviceModelId,
-  type: "light" | "dark",
-  transaction: Transaction,
-  status: TransactionStatus,
-  exchangeRate: ExchangeRate,
-  exchange: Exchange,
-  amountExpectedTo?: string,
-  estimatedFees?: string,
-}) => {
   const ProviderIcon = getProviderIcon(exchangeRate);
   const [sourceAccountName, sourceAccountCurrency] = [
     getAccountName(exchange.fromAccount),
@@ -683,86 +622,89 @@ export const renderSwapDeviceConfirmationV2 = ({
   ];
   return (
     <>
-      <TrackPage
-        category="Swap"
-        name={`ModalStep-summary`}
-        sourcecurrency={sourceAccountCurrency?.name}
-        targetcurrency={targetAccountCurrency?.name}
-        provider={exchangeRate.provider}
-        swapVersion={SWAP_VERSION}
-      />
-      <Box flex={0}>
-        <Alert type="primary" learnMoreUrl={urls.swap.learnMore} mb={7} mx={4}>
-          <Trans i18nKey="DeviceAction.swap.notice" />
-        </Alert>
-      </Box>
-      <Box mx={6} data-test-id="device-confirm-swap">
-        {map(
-          {
-            amountSent: (
-              <CurrencyUnitValue
-                unit={getAccountUnit(exchange.fromAccount)}
-                value={transaction.amount}
-                disableRounding
-                showCode
-              />
-            ),
-            amountReceived: (
-              <CurrencyUnitValue
-                unit={getAccountUnit(exchange.toAccount)}
-                value={amountExpectedTo ? BigNumber(amountExpectedTo) : exchangeRate.toAmount}
-                disableRounding
-                showCode
-              />
-            ),
-            provider: (
-              <Box horizontal alignItems="center" style={{ gap: "6px" }}>
-                <ProviderIcon size={18} />
-                <Text style={{ textTransform: "capitalize" }}>{exchangeRate.provider}</Text>
-              </Box>
-            ),
-            fees: (
-              <CurrencyUnitValue
-                unit={getAccountUnit(
-                  getMainAccount(exchange.fromAccount, exchange.fromParentAccount),
-                )}
-                value={BigNumber(estimatedFees || 0)}
-                disableRounding
-                showCode
-              />
-            ),
-            sourceAccount: (
-              <Box horizontal alignItems="center" style={{ gap: "6px" }}>
-                {sourceAccountCurrency && (
-                  <CryptoCurrencyIcon circle currency={sourceAccountCurrency} size={18} />
-                )}
-                <Text style={{ textTransform: "capitalize" }}>{sourceAccountName}</Text>
-              </Box>
-            ),
-            targetAccount: (
-              <Box horizontal alignItems="center" style={{ gap: "6px" }}>
-                {targetAccountCurrency && (
-                  <CryptoCurrencyIcon circle currency={targetAccountCurrency} size={18} />
-                )}
-                <Text style={{ textTransform: "capitalize" }}>{targetAccountName}</Text>
-              </Box>
-            ),
-          },
-          (value, key) => {
-            return (
-              <Box horizontal justifyContent="space-between" key={key} mb={4}>
-                <Text ff="Inter|Medium" color="palette.text.shade40" fontSize="14px">
-                  <Trans i18nKey={`DeviceAction.swap2.${key}`} />
-                </Text>
-                <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize="14px">
-                  {value}
-                </Text>
-              </Box>
-            );
-          },
-        )}
-      </Box>
-      {renderVerifyUnwrapped({ modelId, type })}
+      <ConfirmWrapper>
+        <TrackPage
+          category="Swap"
+          name={`ModalStep-summary`}
+          sourcecurrency={sourceAccountCurrency?.name}
+          targetcurrency={targetAccountCurrency?.name}
+          provider={exchangeRate.provider}
+          swapVersion={SWAP_VERSION}
+        />
+        <Box flex={0}>
+          <Alert type="primary" learnMoreUrl={urls.swap.learnMore} mb={7} mx={4}>
+            <Trans i18nKey="DeviceAction.swap.notice" />
+          </Alert>
+        </Box>
+        <Box mx={6} data-test-id="device-confirm-swap">
+          {map(
+            {
+              amountSent: (
+                <CurrencyUnitValue
+                  unit={getAccountUnit(exchange.fromAccount)}
+                  value={transaction.amount}
+                  disableRounding
+                  showCode
+                />
+              ),
+              amountReceived: (
+                <CurrencyUnitValue
+                  unit={getAccountUnit(exchange.toAccount)}
+                  value={amountExpectedTo ? BigNumber(amountExpectedTo) : exchangeRate.toAmount}
+                  disableRounding
+                  showCode
+                />
+              ),
+              provider: (
+                <Box horizontal alignItems="center" style={{ gap: "6px" }}>
+                  <ProviderIcon size={18} />
+                  <Text style={{ textTransform: "capitalize" }}>{exchangeRate.provider}</Text>
+                </Box>
+              ),
+              fees: (
+                <CurrencyUnitValue
+                  unit={getAccountUnit(
+                    getMainAccount(exchange.fromAccount, exchange.fromParentAccount),
+                  )}
+                  value={BigNumber(estimatedFees || 0)}
+                  disableRounding
+                  showCode
+                />
+              ),
+              sourceAccount: (
+                <Box horizontal alignItems="center" style={{ gap: "6px" }}>
+                  {sourceAccountCurrency && (
+                    <CryptoCurrencyIcon circle currency={sourceAccountCurrency} size={18} />
+                  )}
+                  <Text style={{ textTransform: "capitalize" }}>{sourceAccountName}</Text>
+                </Box>
+              ),
+              targetAccount: (
+                <Box horizontal alignItems="center" style={{ gap: "6px" }}>
+                  {targetAccountCurrency && (
+                    <CryptoCurrencyIcon circle currency={targetAccountCurrency} size={18} />
+                  )}
+                  <Text style={{ textTransform: "capitalize" }}>{targetAccountName}</Text>
+                </Box>
+              ),
+            },
+            (value, key) => {
+              return (
+                <Box horizontal justifyContent="space-between" key={key} mb={4}>
+                  <Text ff="Inter|Medium" color="palette.text.shade40" fontSize="14px">
+                    <Trans i18nKey={`DeviceAction.swap2.${key}`} />
+                  </Text>
+                  <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize="14px">
+                    {value}
+                  </Text>
+                </Box>
+              );
+            },
+          )}
+        </Box>
+        {renderVerifyUnwrapped({ modelId, type })}
+      </ConfirmWrapper>
+      <DrawerFooter provider={exchangeRate.provider} />
     </>
   );
 };
