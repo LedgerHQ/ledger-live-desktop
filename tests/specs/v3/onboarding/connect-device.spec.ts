@@ -51,9 +51,7 @@ test.describe.parallel("Onboarding", () => {
 
       await test.step("Reach app", async () => {
         if (nano !== Nano.nanoSP) {
-          expect(await page.screenshot()).toMatchSnapshot("v3-onboarding-last-action.png");
-          await onboardingPage.continue();
-          expect(await page.screenshot()).toMatchSnapshot("v3-onboarding-complete.png");
+          await onboardingPage.reachApp();
         }
       });
     });

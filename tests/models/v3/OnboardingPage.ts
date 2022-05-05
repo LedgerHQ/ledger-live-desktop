@@ -226,4 +226,9 @@ export class OnboardingPage {
   async gotIt() {
     await this.gotItButton.click();
   }
+
+  async reachApp() {
+    await this.continue();
+    expect(await this.page.screenshot()).toMatchSnapshot("v3-onboarding-complete.png");
+  }
 }

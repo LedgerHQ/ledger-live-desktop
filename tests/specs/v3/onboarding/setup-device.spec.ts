@@ -198,8 +198,7 @@ test.describe.parallel("Onboarding", () => {
 
       await test.step("Reach app", async () => {
         if (nano !== Nano.nanoSP) {
-          await onboardingPage.continue();
-          expect(await page.screenshot()).toMatchSnapshot("v3-onboarding-complete.png");
+          await onboardingPage.reachApp();
         }
       });
     });
