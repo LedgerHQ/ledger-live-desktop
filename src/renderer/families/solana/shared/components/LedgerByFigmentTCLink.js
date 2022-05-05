@@ -12,11 +12,11 @@ type Props = {
 };
 
 export default function LedgerByFigmentTC({ transaction }: Props) {
+  const { t } = useTranslation();
   if (!shouldShowTC(transaction)) {
     return null;
   }
 
-  const { t } = useTranslation();
   const openLedgerByFigmentTC = () => openURL(urls.solana.ledgerByFigmentTC);
 
   return (

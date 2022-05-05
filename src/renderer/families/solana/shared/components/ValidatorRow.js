@@ -6,7 +6,7 @@ import type { CryptoCurrency, Unit } from "@ledgerhq/live-common/lib/types";
 import { BigNumber } from "bignumber.js";
 import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import Box from "~/renderer/components/Box";
 import type { ValidatorRowProps } from "~/renderer/components/Delegation/ValidatorRow";
 import ValidatorRow, { IconContainer } from "~/renderer/components/Delegation/ValidatorRow";
