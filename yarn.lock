@@ -3443,9 +3443,9 @@
     bignumber.js "^9.0.2"
     json-rpc-2.0 "^1.0.0"
 
-"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#73a9e6961d9e145eaff8573d328c81feeb4501c6":
+"@ledgerhq/live-common@https://github.com/LedgerHQ/ledger-live-common.git#447a1f7c9ac58dec33a2da75e7ed301c3974874e":
   version "22.0.3"
-  resolved "https://github.com/LedgerHQ/ledger-live-common.git#73a9e6961d9e145eaff8573d328c81feeb4501c6"
+  resolved "https://github.com/LedgerHQ/ledger-live-common.git#447a1f7c9ac58dec33a2da75e7ed301c3974874e"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
