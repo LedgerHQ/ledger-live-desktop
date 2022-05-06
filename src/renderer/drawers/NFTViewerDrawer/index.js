@@ -2,7 +2,7 @@
 
 import React, { useMemo, useCallback, useState, memo } from "react";
 import {
-  useNft,
+  useNftMetadata,
   useNftCollectionMetadata,
 } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import styled from "styled-components";
@@ -23,7 +23,8 @@ import { CopiableField } from "./CopiableField";
 import NftPanAndZoom from "./NftPanAndZoom";
 import ExternalViewerButton from "./ExternalViewerButton";
 import Skeleton from "~/renderer/components/nft/Skeleton";
-import Image from "~/renderer/components/nft/Image";
+import { getMetadataMediaType } from "~/helpers/nft";
+import Media from "~/renderer/components/nft/Media";
 import { openModal } from "~/renderer/actions/modals";
 import { setDrawer } from "~/renderer/drawers/Provider";
 import { SplitAddress } from "~/renderer/components/OperationsList/AddressCell";
@@ -91,7 +92,7 @@ const NFTAttributes = styled.div`
 
 const NFTImageContainer = styled.div`
   position: relative;
-  cursor: pointer;
+  cursor: ${({ contentType }) => (contentType === "image" ? "pointer" : "initial")};
 `;
 
 const NFTImageOverlay = styled.div`
@@ -175,12 +176,17 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
     protoNft.contract,
     protoNft.currencyId,
   );
-  const { status: nftStatus, nft } = useNft(protoNft);
+  const { status: nftStatus, metadata } = useNftMetadata(
+    protoNft.contract,
+    protoNft.tokenId,
+    protoNft.currencyId,
+  );
   const loading = useMemo(() => nftStatus === "loading" || collectionStatus === "loading", [
     collectionStatus,
     nftStatus,
   ]);
-  const name = nft?.metadata?.nftName || nft.tokenId;
+  const contentType = useMemo(() => getMetadataMediaType(metadata, "big"), [metadata]);
+  const name = metadata?.nftName || protoNft.tokenId;
 
   const onNFTSend = useCallback(() => {
     setDrawer();
@@ -199,7 +205,13 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
 
   return (
     <Box height={height}>
-      {isPanAndZoomOpen && <NftPanAndZoom nft={nft} onClose={closeNftPanAndZoom} />}
+      {isPanAndZoomOpen && (
+        <NftPanAndZoom
+          metadata={metadata}
+          tokenId={protoNft.tokenId}
+          onClose={closeNftPanAndZoom}
+        />
+      )}
       <NFTViewerDrawerContainer>
         <NFTViewerDrawerContent>
           <StickyWrapper top={0} pb={3} pt="24px">
@@ -233,18 +245,23 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
             </Text>
           </StickyWrapper>
           <Skeleton show={loading} width={393}>
-            <NFTImageContainer onClick={openNftPanAndZoom}>
-              <Image
-                metadata={nft.metadata}
-                tokenId={nft.tokenId}
-                mediaType="big"
+            <NFTImageContainer
+              contentType={contentType}
+              onClick={contentType === "image" ? openNftPanAndZoom : null}
+            >
+              <Media
+                metadata={metadata}
+                tokenId={protoNft.tokenId}
+                mediaFormat="big"
                 full
                 square={false}
                 maxHeight={700}
               />
-              <NFTImageOverlay>
-                <ZoomInIcon color="white" />
-              </NFTImageOverlay>
+              {contentType === "image" ? (
+                <NFTImageOverlay>
+                  <ZoomInIcon color="white" />
+                </NFTImageOverlay>
+              ) : null}
             </NFTImageContainer>
           </Skeleton>
           <NFTActions>
@@ -261,14 +278,14 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
               </Text>
             </Button>
 
-            <ExternalViewerButton nft={nft} account={account} metadata={nft.metadata} />
+            <ExternalViewerButton nft={protoNft} account={account} metadata={metadata} />
           </NFTActions>
           <NFTAttributes>
-            <NFTProperties nft={nft} status={status} />
+            <NFTProperties metadata={metadata} status={status} />
             <NFTAttribute
               skeleton={loading}
               title={t("NFT.viewer.attributes.description")}
-              value={nft.metadata?.description}
+              value={metadata?.description}
               separatorBottom
             />
             <Text
@@ -281,9 +298,9 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
               {t("NFT.viewer.attributes.tokenAddress")}
             </Text>
             <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100" fontWeight="600">
-              <CopiableField value={nft.contract}>
+              <CopiableField value={protoNft.contract}>
                 <HashContainer>
-                  <SplitAddress value={nft.contract} ff="Inter|Regular" />
+                  <SplitAddress value={protoNft.contract} ff="Inter|Regular" />
                 </HashContainer>
               </CopiableField>
             </Text>
@@ -298,24 +315,24 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
               {t("NFT.viewer.attributes.tokenId")}
             </Text>
             <Text lineHeight="15.73px" fontSize={4} color="palette.text.shade100">
-              <CopiableField value={nft.tokenId}>
+              <CopiableField value={protoNft.tokenId}>
                 {// only needed for very long tokenIds but works with any length > 4
-                nft.tokenId?.length >= 4 ? (
+                protoNft.tokenId?.length >= 4 ? (
                   <HashContainer>
-                    <SplitAddress value={nft.tokenId} />
+                    <SplitAddress value={protoNft.tokenId} />
                   </HashContainer>
                 ) : (
-                  nft.tokenId
+                  protoNft.tokenId
                 )}
               </CopiableField>
             </Text>
-            {nft.standard === "ERC1155" ? (
+            {protoNft.standard === "ERC1155" ? (
               <React.Fragment>
                 <NFTAttribute
                   separatorTop
                   skeleton={loading}
                   title={t("NFT.viewer.attributes.quantity")}
-                  value={nft.amount.toString()}
+                  value={protoNft.amount.toString()}
                 />
               </React.Fragment>
             ) : null}

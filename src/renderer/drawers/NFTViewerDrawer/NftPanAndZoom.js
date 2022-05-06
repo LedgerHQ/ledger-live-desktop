@@ -3,7 +3,7 @@
 import React, { memo } from "react";
 import { createPortal } from "react-dom";
 
-import type { NFT } from "@ledgerhq/live-common/lib/types";
+import type { NFTMetadata } from "@ledgerhq/live-common/lib/types";
 import IconCross from "~/renderer/icons/Cross";
 import Image from "~/renderer/components/nft/Image";
 
@@ -49,12 +49,13 @@ const domNode = document.getElementById("modals");
 
 type NftPanAndZoomProps = {
   onClose: () => void,
-  nft: NFT,
+  metadata: NFTMetadata,
+  tokenId: string,
 };
 
-type BodyProps = { nft: NFT };
+type BodyProps = { metadata: NFTMetadata, tokenId: string };
 
-const NftPanAndZoomBody = ({ nft }: BodyProps) => (
+const NftPanAndZoomBody = ({ metadata, tokenId }: BodyProps) => (
   <NFTImageContainer>
     <PrismaZoom
       style={{
@@ -66,9 +67,9 @@ const NftPanAndZoomBody = ({ nft }: BodyProps) => (
       }}
     >
       <Image
-        metadata={nft.metadata}
-        tokenId={nft.tokenId}
-        mediaType="original"
+        metadata={metadata}
+        tokenId={tokenId}
+        mediaFormat="original"
         full
         square={false}
         objectFit="scale-down"
@@ -81,13 +82,13 @@ const NftPanAndZoomBody = ({ nft }: BodyProps) => (
   </NFTImageContainer>
 );
 
-const NftPanAndZoom = ({ onClose, nft }: NftPanAndZoomProps) => {
+const NftPanAndZoom = ({ onClose, metadata, tokenId }: NftPanAndZoomProps) => {
   const modal = (
     <Container onClick={onClose}>
       <CloseButton onClick={onClose} className="sidedrawer-close">
         <IconCross size={32} />
       </CloseButton>
-      <NftPanAndZoomBody nft={nft} />
+      <NftPanAndZoomBody metadata={metadata} tokenId={tokenId} />
     </Container>
   );
 
