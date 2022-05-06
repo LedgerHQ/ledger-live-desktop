@@ -7,14 +7,6 @@ import { centerEllipsis } from "~/renderer/styles/helpers";
 import Fallback from "~/renderer/images/nftFallback.jpg";
 import Skeleton from "./Skeleton";
 
-/**
- * Nb: This image component can be used for small listings, large gallery rendering,
- * and even tokens without an image where it will fallback to a generative image
- * based on the token metadata and some hue changes.
- *
- * The text in the fallback image is only visible if we are in `full` mode, since list
- * mode is not large enough for the text to be readable.
- */
 const Wrapper: ThemedComponent<{
   full?: boolean,
   size?: number,
@@ -26,7 +18,7 @@ const Wrapper: ThemedComponent<{
 }> = styled.div`
   width: ${({ full, size }) => (full ? "100%" : `${size}px`)};
   height: ${({ full }) => full && "100%"};
-  aspect-ratio: ${({ square }) => (square ? "1 / 1" : "initial")};
+  aspect-ratio: ${({ square, error }) => (square || error ? "1 / 1" : "initial")};
   max-width: ${({ maxWidth }) => maxWidth && `${maxWidth}px`};
   max-height: ${({ maxHeight }) => maxHeight && `${maxHeight}px`};
   border-radius: 4px;
@@ -41,7 +33,7 @@ const Wrapper: ThemedComponent<{
     display: ${({ loaded, error }) => (loaded || error ? "none" : "block")};
   }
 
-  & > img {
+  & > video {
     display: ${({ loaded, error }) => (loaded || error ? "block" : "none")};
     ${({ objectFit }) =>
       objectFit === "cover"
@@ -49,9 +41,11 @@ const Wrapper: ThemedComponent<{
          height: 100%;`
         : `max-width: 100%;
         max-height: 100%;`}
-    object-fit: ${p => p.objectFit ?? "cover"};
+    object-fit: ${p => p.objectFit ?? "contain"};
     border-radius: 4px;
     user-select: none;
+    position: relative;
+    z-index: 10;
   }
 `;
 
@@ -94,7 +88,6 @@ type Props = {
   maxWidth?: number,
   objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down",
   square?: boolean,
-  onClick?: (e: Event) => void,
 };
 
 type State = {
@@ -102,11 +95,10 @@ type State = {
   error: boolean,
 };
 
-class Image extends React.PureComponent<Props, State> {
+class Video extends React.PureComponent<Props, State> {
   static defaultProps = {
     full: false,
     size: 32,
-    mediaFormat: "preview",
   };
 
   state = {
@@ -116,37 +108,43 @@ class Image extends React.PureComponent<Props, State> {
 
   render() {
     const {
-      full,
-      mediaFormat = "preview",
-      size,
+      mediaFormat = "big",
       metadata,
       tokenId,
+      full,
+      size,
       maxHeight,
-      onClick,
       square = true,
-      objectFit = "cover",
+      objectFit = "contain",
     } = this.props;
     const { loaded, error } = this.state;
-    const { uri } = metadata?.medias?.[mediaFormat] || {};
+    const { uri, mediaType } = metadata?.medias?.[mediaFormat] || {};
+
+    if (!uri) {
+      this.setState({ error: true });
+    }
 
     return (
       <Wrapper
         full={full}
         size={size}
         loaded={loaded}
-        error={error || !uri}
+        error={error}
         square={square}
         maxHeight={maxHeight}
         objectFit={objectFit}
       >
         <Skeleton full />
         {uri && !error ? (
-          <img
-            onClick={onClick}
-            onLoad={() => this.setState({ loaded: true })}
+          <video
             onError={() => this.setState({ error: true })}
-            src={uri}
-          />
+            onLoadedData={() => this.setState({ loaded: true })}
+            autoPlay
+            loop
+            controls
+          >
+            <source src={uri} type={mediaType} />
+          </video>
         ) : (
           <Gen tokenId={tokenId} metadata={metadata} />
         )}
@@ -155,4 +153,4 @@ class Image extends React.PureComponent<Props, State> {
   }
 }
 
-export default Image;
+export default Video;
