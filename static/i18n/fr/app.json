@@ -2318,7 +2318,7 @@
       "header": "Nominations",
       "nominate": "Nommer",
       "setController": "Changer Contrôleur",
-      "chill": "Enlever les nominations",
+      "chill": "Retirer les nominations",
       "totalStake": "Stake total",
       "amount": "Montant lié",
       "commission": "Commission",
@@ -2376,7 +2376,7 @@
         "description": "Choisissez jusqu'à 16 validateurs. Pour gagner des récompenses, assurez-vous que vos nominations ont toutes le statut Actif."
       },
       "chill": {
-        "title": "Enlever les nominations",
+        "title": "Retirer les nominations",
         "description": "Supprimez toutes vos nominations. Vous ne gagnerez plus de récompenses. Votre montant lié reste lié."
       }
     },
@@ -2386,7 +2386,7 @@
         "validators": {
           "title": "Validateurs",
           "notValidatorsRemoved": "Vous avez proposé {{count}} adresses qui ne sont plus des validateurs. Elles seront automatiquement supprimées de votre transaction de nomination.",
-          "maybeChill": "Supprimer les nominations à la place"
+          "maybeChill": "Retirer les nominations à la place"
         },
         "connectDevice": {
           "title": "Appareil"
@@ -2525,8 +2525,8 @@
           "info": "Vous pouvez ensuite retirer vos actifs déliés et les verser sur votre solde disponible."
         },
         "chill": {
-          "title": "Enlever les nominations",
-          "description": "Efface toutes les nominations et met fin au gain de récompenses.",
+          "title": "Retirer les nominations",
+          "description": "Retire toutes les nominations et met fin au gain de récompenses.",
           "info": "Les actifs liés restent liés. Si vous les déliez, ils seront disponibles après 28 jours."
         },
         "setController": {
