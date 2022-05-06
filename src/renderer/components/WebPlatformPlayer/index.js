@@ -15,7 +15,6 @@ import {
   flattenAccounts,
   getMainAccount,
 } from "@ledgerhq/live-common/lib/account";
-import { listSupportedCurrencies, listTokens } from "@ledgerhq/live-common/lib/currencies";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
@@ -23,28 +22,23 @@ import { useJSONRPCServer } from "@ledgerhq/live-common/lib/platform/JSONRPCServ
 
 import {
   accountToPlatformAccount,
-  currencyToPlatformCurrency,
   getPlatformTransactionSignFlowInfos,
 } from "@ledgerhq/live-common/lib/platform/converters";
-
 import type {
   RawPlatformTransaction,
   RawPlatformSignedTransaction,
 } from "@ledgerhq/live-common/lib/platform/rawTypes";
-
-import {
-  filterPlatformAccounts,
-  AccountFilters,
-  filterPlatformCurrencies,
-  CurrencyFilters,
-} from "@ledgerhq/live-common/lib/platform/filters";
-
 import {
   serializePlatformAccount,
   deserializePlatformTransaction,
   serializePlatformSignedTransaction,
   deserializePlatformSignedTransaction,
 } from "@ledgerhq/live-common/lib/platform/serializers";
+import {
+  useListPlatformAccounts,
+  useListPlatformCurrencies,
+  usePlatformUrl,
+} from "@ledgerhq/live-common/lib/platform/react";
 
 import useTheme from "~/renderer/hooks/useTheme";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
@@ -108,61 +102,22 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
   const targetRef: { current: null | WebviewTag } = useRef(null);
   const dispatch = useDispatch();
   const accounts = flattenAccounts(useSelector(accountsSelector));
-  const currencies = useMemo(() => {
-    const allTokens = listTokens().filter(
-      token => token.tokenType === "erc20" || token.tokenType === "bep20",
-    );
-    return [...listSupportedCurrencies(), ...allTokens];
-  }, []);
   const { pushToast } = useToasts();
   const { t } = useTranslation();
 
   const [widgetLoaded, setWidgetLoaded] = useState(false);
 
-  const url = useMemo(() => {
-    const urlObj = new URL(manifest.url.toString());
-
-    if (inputs) {
-      for (const key in inputs) {
-        if (Object.prototype.hasOwnProperty.call(inputs, key)) {
-          urlObj.searchParams.set(key, inputs[key]);
-        }
-      }
-    }
-
-    urlObj.searchParams.set("backgroundColor", theme.background.paper);
-    urlObj.searchParams.set("textColor", theme.text.shade100);
-    if (manifest.params) {
-      urlObj.searchParams.set("params", JSON.stringify(manifest.params));
-    }
-
-    return urlObj;
-  }, [manifest.url, theme, inputs, manifest.params]);
-
-  const listAccounts = useCallback(
-    (filters?: AccountFilters) => {
-      const platformAccounts = accounts.map(account =>
-        accountToPlatformAccount(
-          account,
-          account.type === "TokenAccount"
-            ? accounts.find(a => a.id === account.parentId)
-            : undefined,
-        ),
-      );
-
-      return filterPlatformAccounts(platformAccounts, filters || {});
+  const url = usePlatformUrl(
+    manifest,
+    {
+      background: theme.background.paper,
+      text: theme.text.shade100,
     },
-    [accounts],
+    inputs,
   );
 
-  const listCurrencies = useCallback(
-    (filters?: CurrencyFilters) => {
-      const platformCurrencies = currencies.map(currencyToPlatformCurrency);
-
-      return filterPlatformCurrencies(platformCurrencies, filters || {});
-    },
-    [currencies],
-  );
+  const listAccounts = useListPlatformAccounts(accounts);
+  const listCurrencies = useListPlatformCurrencies();
 
   const receiveOnAccount = useCallback(
     ({ accountId }: { accountId: string }) => {
@@ -277,16 +232,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
                *
                * FIXME: this overall handling of created accounts could be improved and might not handle "onCancel"
                */
-              resolve(
-                serializePlatformAccount(
-                  accountToPlatformAccount(
-                    account,
-                    account.type === "TokenAccount"
-                      ? accounts.find(a => a.id === account.parentId)
-                      : undefined,
-                  ),
-                ),
-              );
+              resolve(serializePlatformAccount(accountToPlatformAccount(account, accounts)));
             },
             onCancel: error => {
               tracking.platformRequestAccountFail(manifest);

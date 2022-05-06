@@ -3424,16 +3424,16 @@
   dependencies:
     bignumber.js "^9.0.1"
 
-"@ledgerhq/live-app-sdk@git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#60c347d810d1b83cbaa8a14120d175393d40b09e":
+"@ledgerhq/live-app-sdk@git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#78d3579":
   version "0.5.0"
-  resolved "git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#60c347d810d1b83cbaa8a14120d175393d40b09e"
+  resolved "git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#78d35797cd79183cc5a018a86a99d93b6e59c05c"
   dependencies:
     bignumber.js "^9.0.1"
     json-rpc-2.0 "^0.2.16"
 
-"@ledgerhq/live-common@git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#1ea254c":
+"@ledgerhq/live-common@git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#b252e4a":
   version "22.0.3"
-  resolved "git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#1ea254c3119fbc11cfb5ec3ac4c269f0b63793c1"
+  resolved "git+ssh://git@github.com:LedgerHQ/ledger-live-common.git#b252e4aa1a7baf4284d7b50673fd18e0e9155996"
   dependencies:
     "@celo/contractkit" "^1.5.2"
     "@celo/wallet-base" "^1.5.2"
@@ -3463,7 +3463,7 @@
     "@ledgerhq/hw-transport-mocker" "6.27.1"
     "@ledgerhq/hw-transport-node-speculos" "6.27.1"
     "@ledgerhq/json-bignumber" "^1.1.0"
-    "@ledgerhq/live-app-sdk" "git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#60c347d810d1b83cbaa8a14120d175393d40b09e"
+    "@ledgerhq/live-app-sdk" "git+ssh://git@github.com:LedgerHQ/live-app-sdk.git#78d3579"
     "@ledgerhq/logs" "6.10.0"
     "@polkadot/types" "8.1.1"
     "@polkadot/types-known" "8.1.1"
