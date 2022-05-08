@@ -1055,7 +1055,7 @@
     "hideCTA": "隐藏代币"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Collection",
+    "title": "隐藏 NFT 收藏",
     "desc": "此操作将隐藏 <1><0>{{collectionName}}</0></1> 收藏中的所有 NFT，您可以使用 <3>设置</3> 再次显示它们。",
     "hideCTA": "隐藏 NFT 收藏"
   },
@@ -1609,7 +1609,7 @@
         "not_supported": "需要第三方钱包",
         "addAccount": "添加账户",
         "addAccountTooltip": "添加 {{appName}} 账户",
-        "addAccountWarn": "Please wait for processing to finish",
+        "addAccountWarn": "请等待处理完毕",
         "learnMore": "了解更多",
         "learnMoreTooltip": "了解关于 {{appName}} 的更多信息...",
         "removeTooltip": "卸载 {{appName}}",
