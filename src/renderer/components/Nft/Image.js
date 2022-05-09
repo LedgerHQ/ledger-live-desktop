@@ -96,6 +96,8 @@ type Props = {
   objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down",
   square?: boolean,
   onClick?: (e: Event) => void,
+  setUseFallback: boolean => void,
+  isFallback: boolean,
 };
 
 type State = {
@@ -126,9 +128,11 @@ class Image extends React.PureComponent<Props, State> {
       onClick,
       square = true,
       objectFit = "cover",
+      setUseFallback,
+      isFallback,
     } = this.props;
     const { loaded, error } = this.state;
-    const { uri } = metadata?.medias?.[mediaFormat] || {};
+    const { uri } = metadata?.medias?.[isFallback ? "preview" : mediaFormat] || {};
 
     return (
       <Wrapper
@@ -141,11 +145,14 @@ class Image extends React.PureComponent<Props, State> {
         objectFit={objectFit}
       >
         <Skeleton full />
-        {uri && !error ? (
+        {(uri && !error) || isFallback ? (
           <img
             onClick={onClick}
             onLoad={() => this.setState({ loaded: true })}
-            onError={() => this.setState({ error: true })}
+            onError={() => {
+              this.setState({ error: true });
+              setUseFallback(true);
+            }}
             src={uri}
           />
         ) : (

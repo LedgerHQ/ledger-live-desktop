@@ -1,5 +1,5 @@
 // @flow
-import React, { useMemo, memo } from "react";
+import React, { useMemo, useState, memo } from "react";
 import type { NFTMetadata, NFTMediaSizes } from "@ledgerhq/live-common/lib/types";
 import { getMetadataMediaType } from "~/helpers/nft";
 import Image from "./Image";
@@ -34,8 +34,12 @@ const Media = ({
     metadata,
     mediaFormat,
   ]);
+  const [useFallback, setUseFallback] = useState(false);
+  const Component = useMemo(() => (contentType === "video" && !useFallback ? Video : Image), [
+    contentType,
+    useFallback,
+  ]);
 
-  const Component = contentType === "video" ? Video : Image;
   const squareWithDefault = (() => {
     if (typeof square !== "undefined") {
       return square;
@@ -43,6 +47,8 @@ const Media = ({
 
     return contentType !== "video";
   })();
+
+  console.log({ useFallback, contentType, mediaFormat });
 
   return (
     <Component
@@ -56,6 +62,8 @@ const Media = ({
       onClick={onClick}
       square={squareWithDefault}
       objectFit={objectFit}
+      setUseFallback={setUseFallback}
+      isFallback={useFallback}
     />
   );
 };
