@@ -1055,7 +1055,7 @@
     "hideCTA": "Token ausblenden"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Collection",
+    "title": "NFT-Sammlung ausblenden",
     "desc": "Diese Aktion wird alle NFTs aus der <1><0>{{collectionName}}</0></1> Sammlung ausblenden. Sie können sie erneut mit <3>Einstellungen</3> anzeigen",
     "hideCTA": "NFT-Sammlung ausblenden"
   },
@@ -1609,7 +1609,7 @@
         "not_supported": "Wallet von Drittanbietern erforderlich",
         "addAccount": "Konto hinzufügen",
         "addAccountTooltip": "Konto {{appName}} hinzufügen",
-        "addAccountWarn": "Please wait for processing to finish",
+        "addAccountWarn": "Bitte warten Sie, bis die Verarbeitung beendet ist",
         "learnMore": "Mehr erfahren",
         "learnMoreTooltip": "Erfahren Sie mehr über {{appName}}",
         "removeTooltip": "{{appName}} deinstallieren",
