@@ -7,7 +7,7 @@ import type { Account, AccountLike } from "@ledgerhq/live-common/lib/types";
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account/helpers";
 
 import { openModal } from "~/renderer/actions/modals";
-import IconChartLine from "~/renderer/icons/ChartLine";
+import IconCoins from "~/renderer/icons/Coins";
 
 type Props = {
   account: AccountLike,
@@ -35,8 +35,8 @@ const AccountHeaderActions = ({ account, parentAccount }: Props) => {
     {
       key: "algorand",
       onClick: onClick,
-      icon: IconChartLine,
-      label: <Trans i18nKey="delegation.title" />,
+      icon: IconCoins,
+      label: <Trans i18nKey="account.stake" />,
     },
   ];
 };
