@@ -60,6 +60,7 @@ const Gen = styled.div`
   position: relative;
   background-color: hsla(var(--hue), 55%, 66%, 1);
   background-blend-mode: hard-light;
+  aspect-ratio: 1;
 
   &:after {
     display: ${p => (p.full ? "flex" : "none")}
