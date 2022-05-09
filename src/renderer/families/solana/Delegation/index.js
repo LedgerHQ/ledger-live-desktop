@@ -43,7 +43,7 @@ const Delegation = ({ account }: Props) => {
 
   const onEarnRewards = useCallback(() => {
     dispatch(
-      openModal("MODAL_SOLANA_DELEGATE", {
+      openModal("MODAL_SOLANA_REWARDS_INFO", {
         account,
       }),
     );
@@ -90,68 +90,82 @@ const Delegation = ({ account }: Props) => {
 
   return (
     <>
-      <TableContainer mb={6}>
-        <TableHeader title={<Trans i18nKey="solana.delegation.listHeader" />}>
-          <Button
-            id={"account-delegate-button"}
-            mr={2}
-            color="palette.primary.main"
-            small
-            onClick={onDelegate}
-          >
-            <Box horizontal flow={1} alignItems="center">
-              <DelegateIcon size={12} />
-              <Box>
-                <Trans i18nKey="solana.delegation.delegate" />
-              </Box>
-            </Box>
-          </Button>
-        </TableHeader>
-        {hasStakes ? (
-          <>
-            <Header />
-            {stakesWithMeta.map(stakeWithMeta => (
-              <Row
-                stakeWithMeta={stakeWithMeta}
-                key={stakeWithMeta.stake.stakeAccAddr}
-                account={account}
-                onManageAction={onRedirect}
-                onExternalLink={onExternalLink}
-              />
-            ))}
-          </>
-        ) : (
-          <Wrapper horizontal>
-            <Box style={{ maxWidth: "65%" }}>
-              <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
-                <Trans
-                  i18nKey="solana.delegation.emptyState.description"
-                  values={{ name: account.currency.name }}
-                />
-              </Text>
-              <Box mt={2}>
-                <LinkWithExternalIcon
-                  label={<Trans i18nKey="solana.delegation.emptyState.info" />}
-                  onClick={() => openURL(urls.solana.staking)}
-                />
-              </Box>
-            </Box>
-            <Box>
-              <Button primary small onClick={onEarnRewards}>
-                <Box horizontal flow={1} alignItems="center">
-                  <IconChartLine size={12} />
-                  <Box>
-                    <Trans i18nKey="solana.delegation.emptyState.delegation" />
-                  </Box>
+      {hasStakes ? (
+        <TableContainer mb={6}>
+          <TableHeader title={<Trans i18nKey="solana.delegation.listHeader" />}>
+            <Button
+              id={"account-delegate-button"}
+              mr={2}
+              color="palette.primary.main"
+              small
+              onClick={onDelegate}
+            >
+              <Box horizontal flow={1} alignItems="center">
+                <DelegateIcon size={12} />
+                <Box>
+                  <Trans i18nKey="solana.delegation.delegate" />
                 </Box>
-              </Button>
-            </Box>
-          </Wrapper>
-        )}
-      </TableContainer>
+              </Box>
+            </Button>
+          </TableHeader>
+
+          <Header />
+          {stakesWithMeta.map(stakeWithMeta => (
+            <Row
+              stakeWithMeta={stakeWithMeta}
+              key={stakeWithMeta.stake.stakeAccAddr}
+              account={account}
+              onManageAction={onRedirect}
+              onExternalLink={onExternalLink}
+            />
+          ))}
+        </TableContainer>
+      ) : null}
+
+      {!hasStakes && account.spendableBalance.gt(0) ? (
+        <TableContainer mb={6}>
+          <EarnRewardsCTA account={account} onEarnRewards={onEarnRewards} />
+        </TableContainer>
+      ) : null}
     </>
   );
 };
+
+type EarnRewardsCTAProps = {
+  account: Account,
+  onEarnRewards: () => void,
+};
+
+function EarnRewardsCTA({ account, onEarnRewards }: EarnRewardsCTAProps) {
+  return (
+    <Wrapper horizontal>
+      <Box style={{ maxWidth: "65%" }}>
+        <Text ff="Inter|Medium|SemiBold" color="palette.text.shade60" fontSize={4}>
+          <Trans
+            i18nKey="solana.delegation.emptyState.description"
+            values={{ name: account.currency.name }}
+          />
+        </Text>
+        <Box mt={2}>
+          <LinkWithExternalIcon
+            label={<Trans i18nKey="solana.delegation.emptyState.info" />}
+            onClick={() => openURL(urls.solana.staking)}
+          />
+        </Box>
+      </Box>
+      <Box>
+        <Button primary small onClick={onEarnRewards}>
+          <Box horizontal flow={1} alignItems="center">
+            <IconChartLine size={12} />
+            <Box>
+              <Trans i18nKey="solana.delegation.emptyState.delegation" />
+            </Box>
+          </Box>
+        </Button>
+      </Box>
+    </Wrapper>
+  );
+}
 
 const Delegations = ({ account }: Props) => {
   if (!account.solanaResources) return null;
