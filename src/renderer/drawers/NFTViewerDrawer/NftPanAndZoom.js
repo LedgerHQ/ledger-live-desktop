@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 
 import type { NFTMetadata } from "@ledgerhq/live-common/lib/types";
 import IconCross from "~/renderer/icons/Cross";
-import Image from "~/renderer/components/nft/Image";
+import Media from "~/renderer/components/nft/Media";
 
 import PrismaZoom from "react-prismazoom";
 
@@ -66,7 +66,7 @@ const NftPanAndZoomBody = ({ metadata, tokenId }: BodyProps) => (
         justifyContent: "center",
       }}
     >
-      <Image
+      <Media
         metadata={metadata}
         tokenId={tokenId}
         mediaFormat="original"
