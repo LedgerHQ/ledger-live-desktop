@@ -210,7 +210,7 @@
   },
   "bridge": {
     "modalTitle": "Ouvrir pont de connexion (\"bridge\").",
-    "openHeader": "Exposer les comptes de son appareil via WebSocket",
+    "openHeader": "Exposer les comptes de votre appareil via WebSocket",
     "openDescription": "Ouvrir un pont de connexion (\"bridge\") expose tous vos comptes à des applications tierces.",
     "openedHeader": "Pont de connexion (\"bridge\") {{appName}} ouvert",
     "openedDescription": "Vous pouvez maintenant accéder à votre compte {{appName}} sur une application web tierce via WebSocket.",
@@ -2937,7 +2937,7 @@
       "btn": "Afficher"
     },
     "repairDevice": {
-      "title": "Réparer son appareil Ledger",
+      "title": "Réparer votre appareil Ledger",
       "descSettings": "Restaurez votre appareil Ledger s'il s'est bloqué lors de la mise à jour du micrologiciel.",
       "desc": "Pour les utilisateurs de Nano S, merci de sélectionner l'état affiché sur votre appareil. Pour les utilisateurs de Nano X et Blue, merci de consulter notre centre d'aide.",
       "button": "Réparer"
@@ -3145,7 +3145,7 @@
     },
     "screens": {
       "welcome": {
-        "title": "Bienvenue chez Ledger",
+        "title": "Bienvenue sur Ledger",
         "description": "Gérez vos cryptos en toute sécurité depuis votre ordinateur.",
         "cta": "Commencer",
         "noDevice": "Pas encore de wallet Ledger ? <0>Achetez un Ledger Nano X</0>.",
@@ -3629,7 +3629,7 @@
           "cta": "Contacter l'Assistance"
         },
         "repair": {
-          "title": "Réparer son Nano S",
+          "title": "Réparer votre Nano S",
           "desc": "Quel message s'affiche sur votre appareil ?",
           "mcuOutdated": "MCU firmware is outdated",
           "mcuNotGenuine": "MCU firmware is not genuine",
