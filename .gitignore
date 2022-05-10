@@ -129,3 +129,4 @@ ui-lib/storybook-static/*
 
 # IDE
 .vscode/*
+.idea

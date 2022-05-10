@@ -641,16 +641,19 @@ type OperationDetailsExtraProps = {
 };
 
 const OperationDetailsExtra = ({ extra }: OperationDetailsExtraProps) => {
-  return Object.entries(extra).map(([key, value]) => (
-    <OpDetailsSection key={key}>
-      <OpDetailsTitle>
-        <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
-      </OpDetailsTitle>
-      <OpDetailsData>
-        <Ellipsis>{value}</Ellipsis>
-      </OpDetailsData>
-    </OpDetailsSection>
-  ));
+  return Object.entries(extra).map(([key, value]) => {
+    if( typeof value == "object" || typeof value == "function") return null;
+    return (
+      <OpDetailsSection key={key}>
+        <OpDetailsTitle>
+          <Trans i18nKey={`operationDetails.extra.${key}`} defaults={key} />
+        </OpDetailsTitle>
+        <OpDetailsData>
+          <Ellipsis>{value}</Ellipsis>
+        </OpDetailsData>
+      </OpDetailsSection>
+    );
+  });
 };
 
 const More = styled(Text).attrs(p => ({
