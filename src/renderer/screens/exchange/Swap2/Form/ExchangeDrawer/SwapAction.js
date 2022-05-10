@@ -120,9 +120,9 @@ export default function SwapAction({
         device: deviceRef,
         userId: providerKYC?.id,
       }}
-      onResult={({ initSwapResult, initSwapErrorResult, ...rest }) => {
-        if (initSwapErrorResult) {
-          onError(initSwapErrorResult);
+      onResult={({ initSwapResult, initSwapError, swapId, ...rest }) => {
+        if (initSwapError) {
+          onError({ error: initSwapError, swapId });
         } else {
           setInitData(initSwapResult);
         }

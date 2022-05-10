@@ -1,24 +1,24 @@
 // @flow
-import React, { useEffect, Component } from "react";
-import { createStructuredSelector } from "reselect";
+import type { DeviceModelId } from "@ledgerhq/devices";
+import { ManagerNotEnoughSpaceError, TransportStatusError, UpdateYourApp } from "@ledgerhq/errors";
+import {
+  DeviceNotOnboarded,
+  LatestFirmwareVersionRequired,
+  NoSuchAppOnProvider,
+  OutdatedApp,
+} from "@ledgerhq/live-common/lib/errors";
+import type { Action, Device } from "@ledgerhq/live-common/lib/hw/actions/types";
+import React, { Component, useEffect } from "react";
 import { Trans } from "react-i18next";
 import { connect } from "react-redux";
-import type { Device, Action } from "@ledgerhq/live-common/lib/hw/actions/types";
-import {
-  OutdatedApp,
-  LatestFirmwareVersionRequired,
-  DeviceNotOnboarded,
-  NoSuchAppOnProvider,
-} from "@ledgerhq/live-common/lib/errors";
-import { getCurrentDevice } from "~/renderer/reducers/devices";
-import { setPreferredDeviceModel, setLastSeenDeviceInfo } from "~/renderer/actions/settings";
-import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
-import type { DeviceModelId } from "@ledgerhq/devices";
+import { createStructuredSelector } from "reselect";
+import { setLastSeenDeviceInfo, setPreferredDeviceModel } from "~/renderer/actions/settings";
 import AutoRepair from "~/renderer/components/AutoRepair";
-import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import SignMessageConfirm from "~/renderer/components/SignMessageConfirm";
+import TransactionConfirm from "~/renderer/components/TransactionConfirm";
 import useTheme from "~/renderer/hooks/useTheme";
-import { ManagerNotEnoughSpaceError, UpdateYourApp, TransportStatusError } from "@ledgerhq/errors";
+import { getCurrentDevice } from "~/renderer/reducers/devices";
+import { preferredDeviceModelSelector } from "~/renderer/reducers/settings";
 import {
   InstallingApp,
   renderAllowManager,
@@ -27,13 +27,13 @@ import {
   renderConnectYourDevice,
   renderError,
   renderInWrongAppForAccount,
+  renderListingApps,
   renderLoading,
   renderRequestQuitApp,
   renderRequiresAppInstallation,
-  renderListingApps,
-  renderWarningOutdated,
-  renderSwapDeviceConfirmationV2,
   renderSecureTransferDeviceConfirmation,
+  renderSwapDeviceConfirmationV2,
+  renderWarningOutdated,
 } from "./rendering";
 
 type OwnProps<R, H, P> = {
@@ -111,7 +111,7 @@ const DeviceAction = <R, H, P>({
     displayUpgradeWarning,
     passWarning,
     initSwapRequested,
-    initSwapErrorResult,
+    initSwapError,
     initSwapResult,
     completeExchangeStarted,
     completeExchangeResult,
@@ -201,7 +201,7 @@ const DeviceAction = <R, H, P>({
     }
   }
 
-  if (initSwapRequested && !initSwapResult && !initSwapErrorResult) {
+  if (initSwapRequested && !initSwapResult && !initSwapError) {
     const { transaction, exchange, exchangeRate, status } = request;
     const { amountExpectedTo, estimatedFees } = hookState;
     const renderFn = renderSwapDeviceConfirmationV2;
