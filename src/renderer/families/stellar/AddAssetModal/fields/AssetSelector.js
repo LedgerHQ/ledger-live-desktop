@@ -14,13 +14,31 @@ import Text from "~/renderer/components/Text";
 import ToolTip from "~/renderer/components/Tooltip";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
 
-const Container = styled(Box)`
-  white-space: break-spaces;
-`;
+const EllipsisMiddle = ({ children }: { children: string }) => {
+  const Start = styled(Box)`
+    width: 50%;
+    overflow: hidden;
+  `;
 
-const WrappedAssetId = styled(Box)`
-  word-break: break-all;
-`;
+  const End = styled(Box)`
+    width: 50%;
+    overflow: hidden;
+    direction: rtl;
+    display: block;
+    text-overflow: ellipsis;
+  `;
+
+  const size = children.length;
+  const startString = children.substring(0, Math.floor(size / 2));
+  const endString = children.substring(startString.length, size);
+
+  return (
+    <>
+      <Start>{startString}</Start>
+      <End>{endString}</End>
+    </>
+  );
+};
 
 const renderItem = ({
   data: { id, name },
@@ -31,6 +49,7 @@ const renderItem = ({
   isDisabled: boolean,
 }) => {
   const tokenId = id.split("/")[2];
+  const assetIssuer = tokenId.split(":")[1];
   return (
     <Box
       key={id}
@@ -39,28 +58,29 @@ const renderItem = ({
       color={isDisabled ? "palette.text.shade40" : "palette.text.shade100"}
       justifyContent="space-between"
     >
-      <Container horizontal alignItems="center" justifyContent="flex-start" width="100%">
+      <Box horizontal alignItems="center" justifyContent="flex-start" width="100%">
         <Box horizontal alignItems="center">
           <FirstLetterIcon
             color={isDisabled ? "palette.text.shade40" : "palette.text.shade100"}
             label={name}
-            mr={2}
+            mr={1}
           />
           <Text ff="Inter|Medium">{name}</Text>
           <Text fontSize={3} color="palette.text.shade40" mr="4px">
             - ID
           </Text>
         </Box>
-        <WrappedAssetId
+        <Box
           horizontal
           alignItems="center"
           flex="1"
           fontSize={3}
           color="palette.text.shade40"
+          mr={2}
         >
-          {tokenId}
-        </WrappedAssetId>
-      </Container>
+          <EllipsisMiddle>{assetIssuer}</EllipsisMiddle>
+        </Box>
+      </Box>
       {isDisabled && (
         <ToolTip content={<Trans i18nKey="stellar.addAsset.steps.assets.disabledTooltip" />}>
           <Box color="warning">
