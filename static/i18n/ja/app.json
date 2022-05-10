@@ -1055,7 +1055,7 @@
     "hideCTA": "トークンを非表示"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Collection",
+    "title": "NFTコレクションを非表示",
     "desc": "この操作により、<1><0>{{collectionName}}</0></1>コレクションの全NFTが非表示になります。<3>設定 </3>から再度表示することが可能です。",
     "hideCTA": "NFTコレクションを非表示"
   },
@@ -1609,7 +1609,7 @@
         "not_supported": "サードパーティのウォレットが必要です",
         "addAccount": "アカウント追加",
         "addAccountTooltip": "{{appName}} アカウントを追加",
-        "addAccountWarn": "Please wait for processing to finish",
+        "addAccountWarn": "処理が完了するまでお待ちください",
         "learnMore": "詳細はこちら",
         "learnMoreTooltip": "{{appName}} についての詳細",
         "removeTooltip": "{{appName}} をアンインストール",
