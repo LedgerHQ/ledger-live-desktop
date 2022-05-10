@@ -123,6 +123,7 @@ const SwapForm = () => {
   useEffect(() => {
     setCurrentBanner(null);
     setCurrentFlow(null);
+    setError(undefined);
   }, [provider]);
 
   useEffect(() => {
@@ -268,8 +269,8 @@ const SwapForm = () => {
               status: updatedKycStatus,
             }),
           );
-          return;
         }
+        return;
       }
 
       // If user is unauthenticated, reset login and KYC state
