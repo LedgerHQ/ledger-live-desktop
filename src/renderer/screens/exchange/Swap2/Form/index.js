@@ -129,6 +129,8 @@ const SwapForm = () => {
   useEffect(() => {
     // In case of error, don't show  login, kyc or mfa banner
     if (error) {
+      // Don't show any flow banner on error to avoid double banner display
+      setCurrentBanner(null);
       return;
     }
 
