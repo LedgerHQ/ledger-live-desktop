@@ -10,7 +10,6 @@ contextBridge.exposeInMainWorld("ledger", {
       type: "setToken",
       token,
     });
-    console.log({ message });
     postMessage(message);
   },
 
@@ -18,7 +17,6 @@ contextBridge.exposeInMainWorld("ledger", {
     const message = JSON.stringify({
       type: "closeWidget",
     });
-    console.log({ message });
     postMessage(message);
   },
 });
