@@ -1055,7 +1055,7 @@
     "hideCTA": "토큰 숨기기"
   },
   "hideNftCollection": {
-    "title": "Hide NFT Collection",
+    "title": "NFT 컬렉션 숨기기",
     "desc": "이 작업은 <1><0>{{collectionName}}</0></1> 컬렉션에서 모든 NFT를 숨기며 <3>설정</3>을 사용하여 다시 표시할 수 있습니다",
     "hideCTA": "NFT 컬렉션 숨기기"
   },
@@ -1609,7 +1609,7 @@
         "not_supported": "타사 지갑 필요",
         "addAccount": "계정 추가",
         "addAccountTooltip": "{{appName}} 계정 추가",
-        "addAccountWarn": "Please wait for processing to finish",
+        "addAccountWarn": "처리가 완료될 때까지 기다려 주세요",
         "learnMore": "자세히 알아보기",
         "learnMoreTooltip": "{{appName}}에 대해 자세히 알아보기",
         "removeTooltip": "{{appName}} 제거",
