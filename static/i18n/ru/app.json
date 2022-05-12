@@ -1291,7 +1291,8 @@
       "galleryCTA": "Посмотреть галерею",
       "seeMore": "Посмотреть другие коллекции",
       "seeAll": "Посмотреть все",
-      "seeLess": "Свернуть"
+      "seeLess": "Свернуть",
+      "placeholder": "To add NFTs, simply send them to your {{currency}} address."
     },
     "gallery": {
       "title": "Все NFT",
