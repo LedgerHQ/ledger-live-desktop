@@ -1,7 +1,8 @@
 // @flow
 
-import React, { memo } from "react";
+import React, { useCallback, memo } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
@@ -9,6 +10,7 @@ import DropDownSelector, { DropDownItem } from "~/renderer/components/DropDownSe
 import IconDots from "~/renderer/icons/Dots";
 import IconExternal from "~/renderer/icons/ExternalLink";
 import useNftLinks from "~/renderer/hooks/useNftLinks";
+import { setDrawer } from "~/renderer/drawers/Provider";
 
 import type { Account, ProtoNFT, NFTMetadata } from "@ledgerhq/live-common/lib/types";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
@@ -66,7 +68,12 @@ type ExternalViewerButtonProps = {
 };
 
 const ExternalViewerButton = ({ nft, account, metadata }: ExternalViewerButtonProps) => {
-  const items = useNftLinks(account, nft, metadata);
+  const history = useHistory();
+  const onHideCollection = useCallback(() => {
+    setDrawer();
+    history.replace(`/account/${account.id}/`);
+  }, [account.id, history]);
+  const items = useNftLinks(account, nft, metadata, onHideCollection);
 
   return (
     <DropDownSelector
