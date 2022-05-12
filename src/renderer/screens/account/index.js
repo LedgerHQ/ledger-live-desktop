@@ -1,14 +1,15 @@
 // @flow
 
-import React from "react";
+import React, { useCallback } from "react";
 import { compose } from "redux";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { withTranslation } from "react-i18next";
 import type { TFunction } from "react-i18next";
 import { Redirect } from "react-router";
 import type { AccountLike, Account } from "@ledgerhq/live-common/lib/types";
 import { SyncOneAccountOnMount } from "@ledgerhq/live-common/lib/bridge/react";
 import { findCompoundToken } from "@ledgerhq/live-common/lib/currencies";
+import { isNFTActive } from "@ledgerhq/live-common/lib/nft/support";
 import { getCurrencyColor } from "~/renderer/getCurrencyColor";
 import { accountSelector } from "~/renderer/reducers/accounts";
 import {
@@ -18,7 +19,10 @@ import {
   findSubAccountById,
 } from "@ledgerhq/live-common/lib/account";
 import { setCountervalueFirst } from "~/renderer/actions/settings";
-import { countervalueFirstSelector } from "~/renderer/reducers/settings";
+import {
+  hiddenNftCollectionsSelector,
+  countervalueFirstSelector,
+} from "~/renderer/reducers/settings";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
 import perFamilyAccountBodyHeader from "~/renderer/generated/AccountBodyHeader";
@@ -88,6 +92,16 @@ const AccountPage = ({
 
   const isCompoundEnabled = useCompoundAccountEnabled(account, parentAccount);
 
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
+  const filterOperations = useCallback(
+    (operation, account) => {
+      return !operation?.nftOperations?.find(op =>
+        hiddenNftCollections.includes(`${account.id}|${op?.contract}`),
+      );
+    },
+    [hiddenNftCollections],
+  );
+
   if (!account || !mainAccount) {
     return <Redirect to="/accounts" />;
   }
@@ -149,12 +163,13 @@ const AccountPage = ({
           {isCompoundEnabled && account.type === "TokenAccount" && parentAccount ? (
             <CompoundBodyHeader account={account} parentAccount={parentAccount} />
           ) : null}
-          {account?.nfts?.length ? <Collections account={account} /> : null}
+          {isNFTActive(account.currency) ? <Collections account={account} /> : null}
           {account.type === "Account" ? <TokensList account={account} /> : null}
           <OperationsList
             account={account}
             parentAccount={parentAccount}
             title={t("account.lastOperations")}
+            filterOperation={filterOperations}
           />
         </>
       ) : (
