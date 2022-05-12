@@ -1291,7 +1291,8 @@
       "galleryCTA": "갤러리 보기",
       "seeMore": "더 많은 컬렉션 보기",
       "seeAll": "모든 컬렉션 보기",
-      "seeLess": "간략히 보기"
+      "seeLess": "간략히 보기",
+      "placeholder": "To add NFTs, simply send them to your {{currency}} address."
     },
     "gallery": {
       "title": "모든 NFT",
