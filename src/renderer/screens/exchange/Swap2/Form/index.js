@@ -202,10 +202,10 @@ const SwapForm = () => {
 
   // close login widget once we get a bearer token (i.e: the user is logged in)
   useEffect(() => {
-    if (providerKYC?.id) {
+    if (providerKYC?.id && currentFlow === "LOGIN") {
       setCurrentFlow(null);
     }
-  }, [providerKYC?.id]);
+  }, [providerKYC?.id, currentFlow]);
 
   /**
    * FIXME
@@ -324,7 +324,19 @@ const SwapForm = () => {
       return <Login provider={provider} onClose={() => setCurrentFlow(null)} />;
 
     case "KYC":
-      return <KYC provider={provider} onClose={() => setCurrentFlow(null)} />;
+      return (
+        <KYC
+          provider={provider}
+          onClose={() => {
+            setCurrentFlow(null);
+            /**
+             * Need to reset current banner in order to not display a KYC
+             * banner after completion of Wyre KYC
+             */
+            setCurrentBanner(null);
+          }}
+        />
+      );
 
     case "MFA":
       return <MFA provider={provider} onClose={() => setCurrentFlow(null)} />;
