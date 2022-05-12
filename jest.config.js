@@ -8,4 +8,6 @@ module.exports = {
     __APP_VERSION__: "2.0.0",
   },
   globalSetup: "<rootDir>/tests/setup.js",
+  setupFiles: ["<rootDir>/tests/jestSetup.js"],
+  transformIgnorePatterns: ["/node_modules/(?!(@polkadot|@babel/runtime)/)"],
 };
