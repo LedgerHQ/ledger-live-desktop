@@ -1,12 +1,9 @@
 // @flow
 
-import React, { useEffect, useRef, useCallback, useState } from "react";
+import React, { useRef, useCallback, useState } from "react";
 import { Trans } from "react-i18next";
 import invariant from "invariant";
-import { getAccountBridge } from "@ledgerhq/live-common/lib/bridge";
-import { getEnv } from "@ledgerhq/live-common/lib/env";
 import { getMainAccount, getAccountName } from "@ledgerhq/live-common/lib/account";
-import { DisconnectedDevice } from "@ledgerhq/errors";
 import styled from "styled-components";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
@@ -14,14 +11,11 @@ import useTheme from "~/renderer/hooks/useTheme";
 import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
-import Button from "~/renderer/components/Button";
 import Text from "~/renderer/components/Text";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import ReadOnlyAddressField from "~/renderer/components/ReadOnlyAddressField";
 import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import LinkShowQRCode from "~/renderer/components/LinkShowQRCode";
-import SuccessDisplay from "~/renderer/components/SuccessDisplay";
-import Receive2NoDevice from "~/renderer/components/Receive2NoDevice";
 import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
@@ -143,8 +137,7 @@ const StepReceiveFunds = ({
   invariant(account && mainAccount, "No account given");
   const name = token ? token.name : getAccountName(account);
   const initialDevice = useRef(device);
-  const address = mainAccount.hederaResources?.accountId?.toString() 
-    ?? mainAccount.freshAddress;
+  const address = mainAccount.hederaResources?.accountId?.toString() ?? mainAccount.freshAddress;
   const [modalVisible, setModalVisible] = useState(false);
 
   const hideQRCodeModal = useCallback(() => setModalVisible(false), [setModalVisible]);
@@ -181,7 +174,7 @@ const StepReceiveFunds = ({
 
             {/* show warning for unverified address */}
             <Alert type="security" mt={4}>
-                <Trans i18nKey="hedera.currentAddress.messageIfVirtual" values={{ name }} />
+              <Trans i18nKey="hedera.currentAddress.messageIfVirtual" values={{ name }} />
             </Alert>
           </>
         ) : null // should not happen

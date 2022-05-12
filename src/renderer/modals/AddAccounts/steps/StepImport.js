@@ -30,7 +30,7 @@ import Switch from "~/renderer/components/Switch";
 import type { StepProps } from "..";
 import InfoCircle from "~/renderer/icons/InfoCircle";
 import ToolTip from "~/renderer/components/Tooltip";
-import byFamily from "~/renderer/generated/NoAssociatedAccounts"
+import byFamily from "~/renderer/generated/NoAssociatedAccounts";
 
 // $FlowFixMe
 const remapTransportError = (err: mixed, appName: string): Error => {
@@ -291,7 +291,7 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
       );
     } else if (NoAssociatedAccounts) {
       // custom family UI for "no associated accounts"
-      creatable = (<NoAssociatedAccounts {...this.props} />);
+      creatable = <NoAssociatedAccounts {...this.props} />;
     } else {
       creatable = (
         <Trans i18nKey="addAccounts.createNewAccount.noAccountToCreate" parent="div">
@@ -305,7 +305,7 @@ class StepImport extends PureComponent<StepProps, { showAllCreatedAccounts: bool
 
     const emptyTexts = {
       importable: t("addAccounts.noAccountToImport", { currencyName }),
-      creatable
+      creatable,
     };
 
     return (
