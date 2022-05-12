@@ -1291,7 +1291,8 @@
       "galleryCTA": "Galeriyi Göster",
       "seeMore": "Daha fazla koleksiyon göster",
       "seeAll": "Tüm koleksiyonları göster",
-      "seeLess": "Daha az göster"
+      "seeLess": "Daha az göster",
+      "placeholder": "To add NFTs, simply send them to your {{currency}} address."
     },
     "gallery": {
       "title": "Tüm NFT'ler",
