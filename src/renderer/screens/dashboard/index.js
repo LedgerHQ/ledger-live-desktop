@@ -8,6 +8,7 @@ import {
   counterValueCurrencySelector,
   hasInstalledAppsSelector,
   selectedTimeRangeSelector,
+  hiddenNftCollectionsSelector,
 } from "~/renderer/reducers/settings";
 import { useTranslation } from "react-i18next";
 import styled from "styled-components";
@@ -67,6 +68,16 @@ export default function DashboardPage() {
 
   useRefreshAccountsOrderingEffect({ onMount: true });
 
+  const hiddenNftCollections = useSelector(hiddenNftCollectionsSelector);
+  const filterOperations = useCallback(
+    (operation, account) => {
+      return !operation?.nftOperations?.find(op =>
+        hiddenNftCollections.includes(`${account.id}|${op?.contract}`),
+      );
+    },
+    [hiddenNftCollections],
+  );
+
   return (
     <>
       <TopBannerContainer>
@@ -102,6 +113,7 @@ export default function DashboardPage() {
                 title={t("dashboard.recentActivity")}
                 withAccount
                 withSubAccounts
+                filterOperation={filterOperations}
               />
             )}
           </>
