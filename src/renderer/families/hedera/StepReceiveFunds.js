@@ -7,44 +7,26 @@ import { getMainAccount, getAccountName } from "@ledgerhq/live-common/lib/accoun
 import styled from "styled-components";
 
 import TrackPage from "~/renderer/analytics/TrackPage";
-import useTheme from "~/renderer/hooks/useTheme";
-import { openURL } from "~/renderer/linking";
 import Box from "~/renderer/components/Box";
 import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import Text from "~/renderer/components/Text";
 import Ellipsis from "~/renderer/components/Ellipsis";
 import ReadOnlyAddressField from "~/renderer/components/ReadOnlyAddressField";
-import LinkWithExternalIcon from "~/renderer/components/LinkWithExternalIcon";
 import LinkShowQRCode from "~/renderer/components/LinkShowQRCode";
-import { renderVerifyUnwrapped } from "~/renderer/components/DeviceAction/rendering";
 import Modal from "~/renderer/components/Modal";
 import ModalBody from "~/renderer/components/Modal/ModalBody";
 import Alert from "~/renderer/components/Alert";
 import QRCode from "~/renderer/components/QRCode";
 import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
-import { urls } from "~/config/urls";
 
 import type { StepProps } from "~/renderer/modals/Receive/Body";
 import type { AccountLike } from "@ledgerhq/live-common/lib/types";
-
-const Separator = styled.div`
-  border-top: 1px solid #99999933;
-  margin: 50px 0;
-`;
-const Separator2 = styled.div`
-  border-top: 1px solid #99999933;
-  margin-top: 50px;
-`;
 
 const QRCodeWrapper = styled.div`
   border: 24px solid white;
   height: 208px;
   width: 208px;
   background: white;
-`;
-
-const AlertBoxContainer = styled.div`
-  margin-top: 20px;
 `;
 
 const Receive1ShareAddress = ({
@@ -79,42 +61,6 @@ const Receive1ShareAddress = ({
         <LinkShowQRCode onClick={showQRCodeModal} address={address} />
       </Box>
       <ReadOnlyAddressField address={address} />
-    </>
-  );
-};
-
-const Receive2Device = ({
-  onVerify,
-  name,
-  device,
-}: {
-  onVerify: () => void,
-  name: string,
-  device: *,
-}) => {
-  const type = useTheme("colors.palette.type");
-
-  return (
-    <>
-      <Box horizontal alignItems="center" flow={2}>
-        <Text
-          style={{ flexShrink: "unset" }}
-          ff="Inter|SemiBold"
-          color="palette.text.shade100"
-          fontSize={4}
-        >
-          <span style={{ marginRight: 10 }}>
-            <Trans i18nKey="currentAddress.messageIfUnverified" value={{ name }} />
-          </span>
-          <LinkWithExternalIcon
-            style={{ display: "inline-flex" }}
-            onClick={() => openURL(urls.recipientAddressInfo)}
-            label={<Trans i18nKey="common.learnMore" />}
-          />
-        </Text>
-      </Box>
-
-      {renderVerifyUnwrapped({ modelId: device.modelId, type })}
     </>
   );
 };
