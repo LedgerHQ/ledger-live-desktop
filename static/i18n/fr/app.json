@@ -1292,7 +1292,7 @@
       "seeMore": "Voir plus de collections",
       "seeAll": "Voir toutes les collections",
       "seeLess": "Voir moins",
-      "placeholder": "To add NFTs, simply send them to your {{currency}} address."
+      "placeholder": "Pour ajouter des NFT, il vous suffit de les recevoir sur votre adresse {{currency}}."
     },
     "gallery": {
       "title": "Tous les NFT",
