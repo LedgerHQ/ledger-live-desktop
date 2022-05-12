@@ -1291,7 +1291,8 @@
       "galleryCTA": "查看图库",
       "seeMore": "查看更多收藏",
       "seeAll": "查看所有收藏",
-      "seeLess": "查看更少"
+      "seeLess": "查看更少",
+      "placeholder": "To add NFTs, simply send them to your {{currency}} address."
     },
     "gallery": {
       "title": "所有 NFT",
