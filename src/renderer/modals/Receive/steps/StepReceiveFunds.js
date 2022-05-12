@@ -143,12 +143,6 @@ const StepReceiveFunds = (props: StepProps) => {
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   invariant(account && mainAccount, "No account given");
 
-  // custom family UI for StepReceiveFunds
-  const CustomStepReceiveFunds = byFamily[mainAccount.currency.family];
-  if (CustomStepReceiveFunds) {
-    return <CustomStepReceiveFunds {...props} />;
-  }
-
   const name = token ? token.name : getAccountName(account);
   const initialDevice = useRef(device);
   const address = mainAccount.freshAddress;
@@ -199,6 +193,12 @@ const StepReceiveFunds = (props: StepProps) => {
       confirmAddress();
     }
   }, [isAddressVerified, confirmAddress]);
+
+  // custom family UI for StepReceiveFunds
+  const CustomStepReceiveFunds = byFamily[mainAccount.currency.family];
+  if (CustomStepReceiveFunds) {
+    return <CustomStepReceiveFunds {...props} />;
+  }
 
   return (
     <>
