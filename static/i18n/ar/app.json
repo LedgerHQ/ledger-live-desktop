@@ -1291,7 +1291,8 @@
       "galleryCTA": "شاهد المعرض",
       "seeMore": "شاهد المزيد من المجموعات",
       "seeAll": "شاهد جميع المجموعات",
-      "seeLess": "شاهد أقل"
+      "seeLess": "شاهد أقل",
+      "placeholder": "To add NFTs, simply send them to your {{currency}} address."
     },
     "gallery": {
       "title": "جميع NFT (رموز غير قابلة للاستبدال)",
