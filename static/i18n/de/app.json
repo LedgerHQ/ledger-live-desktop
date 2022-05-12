@@ -1291,7 +1291,8 @@
       "galleryCTA": "Galerie ansehen",
       "seeMore": "Weitere Sammlungen ansehen",
       "seeAll": "Alle Sammlungen anzeigen",
-      "seeLess": "Weniger anzeigen"
+      "seeLess": "Weniger anzeigen",
+      "placeholder": "To add NFTs, simply send them to your {{currency}} address."
     },
     "gallery": {
       "title": "Alle NFT",
