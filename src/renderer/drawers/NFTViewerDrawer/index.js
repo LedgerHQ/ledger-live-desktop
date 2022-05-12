@@ -228,6 +228,8 @@ const NFTViewerDrawer = ({ account, nftId, height }: NFTViewerDrawerProps) => {
                 WebkitBoxOrient: "vertical",
                 overflow: "hidden",
                 display: "-webkit-box",
+                wordWrap: "break-word",
+                hyphens: "auto",
               }}
               uppercase
             >

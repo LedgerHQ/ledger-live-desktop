@@ -13,6 +13,7 @@ type Props = {
   account: Account,
   isLoading?: boolean,
   nfts: NFT[],
+  onHideCollection?: () => void,
 };
 
 const Container: ThemedComponent<{ mode?: "grid" | "list" }> = styled(Box)`
@@ -21,13 +22,19 @@ const Container: ThemedComponent<{ mode?: "grid" | "list" }> = styled(Box)`
   grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
 `;
 
-const TokensList = ({ account, isLoading, nfts }: Props) => {
+const TokensList = ({ account, isLoading, nfts, onHideCollection }: Props) => {
   const nftsViewMode = useSelector(nftsViewModeSelector);
 
   return (
     <Container mb={20} mode={nftsViewMode}>
       {nfts.map(nft => (
-        <Item key={nft.id} mode={nftsViewMode} id={nft.id} account={account} />
+        <Item
+          key={nft.id}
+          mode={nftsViewMode}
+          id={nft.id}
+          account={account}
+          onHideCollection={onHideCollection}
+        />
       ))}
     </Container>
   );
