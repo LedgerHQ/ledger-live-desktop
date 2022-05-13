@@ -2,7 +2,7 @@
 import React from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { NFTMetadata, NFTMediaSizes } from "@ledgerhq/live-common/lib/types";
+import type { NFTMetadata } from "@ledgerhq/live-common/lib/types";
 import { centerEllipsis } from "~/renderer/styles/helpers";
 import Fallback from "~/renderer/images/nftFallback.jpg";
 import Skeleton from "./Skeleton";
@@ -86,9 +86,10 @@ const Gen = styled.div`
 `;
 
 type Props = {
+  uri: string,
+  mediaType: string,
   metadata: NFTMetadata,
   tokenId: string,
-  mediaFormat?: NFTMediaSizes,
   full?: boolean,
   size?: number,
   maxHeight?: number,
@@ -119,10 +120,10 @@ class Image extends React.PureComponent<Props, State> {
 
   render() {
     const {
-      full,
-      mediaFormat = "preview",
-      size,
+      uri,
       metadata,
+      full,
+      size,
       tokenId,
       maxHeight,
       onClick,
@@ -132,7 +133,6 @@ class Image extends React.PureComponent<Props, State> {
       isFallback,
     } = this.props;
     const { loaded, error } = this.state;
-    const { uri } = metadata?.medias?.[isFallback ? "preview" : mediaFormat] || {};
 
     return (
       <Wrapper

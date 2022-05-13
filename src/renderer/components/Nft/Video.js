@@ -2,7 +2,6 @@
 import React from "react";
 import styled from "styled-components";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import type { NFTMetadata, NFTMediaSizes } from "@ledgerhq/live-common/lib/types";
 import Skeleton from "./Skeleton";
 
 const Wrapper: ThemedComponent<{
@@ -48,9 +47,8 @@ const Wrapper: ThemedComponent<{
 `;
 
 type Props = {
-  metadata: NFTMetadata,
-  tokenId: string,
-  mediaFormat?: NFTMediaSizes,
+  uri: string,
+  mediaType: string,
   full?: boolean,
   size?: number,
   maxHeight?: number,
@@ -76,8 +74,8 @@ class Video extends React.PureComponent<Props, State> {
 
   render() {
     const {
-      mediaFormat = "big",
-      metadata,
+      uri,
+      mediaType,
       full,
       size,
       maxHeight,
@@ -86,12 +84,6 @@ class Video extends React.PureComponent<Props, State> {
       setUseFallback,
     } = this.props;
     const { loaded } = this.state;
-    const { uri, mediaType } = metadata?.medias?.[mediaFormat] || {};
-
-    if (!uri) {
-      setUseFallback(true);
-      return null;
-    }
 
     return (
       <Wrapper
