@@ -25,7 +25,7 @@ const osLangSupported = languages.includes(language);
 const state: ApplicationState = {
   osDarkMode: window.matchMedia("(prefers-color-scheme: dark)").matches,
   osLanguage: {
-    language: osLangSupported ? language : "en",
+    language: osLangSupported && language != null ? language : "en",
     region: osLangSupported ? region : "US",
     useSystem: true,
   },
