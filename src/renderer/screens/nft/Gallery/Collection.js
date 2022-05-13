@@ -68,6 +68,10 @@ const Collection = () => {
     );
   }, [collectionAddress, dispatch, account]);
 
+  const onCollectionHide = useCallback(() => {
+    history.replace(`/account/${account.id}/`);
+  }, [account.id, history]);
+
   // NB To be determined if this filter is good enough for what we expect.
   const filterOperation = op =>
     !!op.nftOperations?.length &&
@@ -120,7 +124,7 @@ const Collection = () => {
         </Button>
       </Box>
       <GridListToggle />
-      <TokensList account={account} nfts={slicedNfts} />
+      <TokensList account={account} nfts={slicedNfts} onHideCollection={onCollectionHide} />
       {nfts.length > maxVisibleNTFs && (
         <SpinnerContainer>
           <SpinnerBackground>
