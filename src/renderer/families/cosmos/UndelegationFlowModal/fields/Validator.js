@@ -7,7 +7,7 @@ import type {
   CosmosMappedDelegation,
 } from "@ledgerhq/live-common/lib/families/cosmos/types";
 import type { Account } from "@ledgerhq/live-common/lib/types";
-import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
+import CosmosLedgerValidatorIcon from "~/renderer/families/cosmos/shared/components/CosmosLedgerValidatorIcon";
 import Box from "~/renderer/components/Box";
 import Label from "~/renderer/components/Label";
 import Select from "~/renderer/components/Select";
@@ -51,8 +51,10 @@ function OptionRow({ data: { validatorAddress, validator, formattedAmount } }: O
   return (
     <Box key={validatorAddress} horizontal alignItems="center" justifyContent="space-between">
       <Box horizontal alignItems="center">
-        <FirstLetterIcon label={name} mr={2} />
-        <Text ff="Inter|Medium">{name}</Text>
+        <CosmosLedgerValidatorIcon validator={validator} />
+        <Text ml={2} ff="Inter|Medium">
+          {name}
+        </Text>
       </Box>
       <Text ff="Inter|Regular">{formattedAmount}</Text>
     </Box>

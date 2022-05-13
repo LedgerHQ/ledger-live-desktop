@@ -2085,6 +2085,8 @@
         "info": "How Delegation works",
         "delegation": "Earn rewards"
       },
+      "commission": "Commission",
+      "totalStake": "Total Stake",
       "claimRewards": "Claim rewards",
       "header": "Delegation(s)",
       "noRewards": "No rewards available",
@@ -2113,6 +2115,9 @@
             "warning": {
               "description": "Choose your validator wisely: Part of your delegated assets may be irrevocably lost if the validator does not behave appropriately."
             }
+          },
+          "amount": {
+            "title": "Amount"
           },
           "validator": {
             "title": "Validators"
@@ -2183,7 +2188,8 @@
             "currentDelegation": "Current delegation",
             "newDelegation": "New delegation",
             "chooseValidator": "Choose a validator",
-            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again"
+            "warning": "You will have to wait <0>21 days</0> to redelegate from the new validator, if you change your mind again",
+            "amountLabel": "Amount to redelegate"
           },
           "device": {
             "title": "Device"
@@ -3832,6 +3838,9 @@
     "CosmosBroadcastCodeNoSignatures": {
       "title": "Something went wrong (Error #17)",
       "description": "Please contact Ledger Support"
+    },
+    "CosmosDelegateAllFundsWarning": {
+      "title": "Ensure you have enough balance left for future transactions fees"
     },
     "CurrencyNotSupported": {
       "title": "{{currencyName}} is not supported",
