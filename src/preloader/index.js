@@ -36,6 +36,10 @@ window.api = {
   reloadRenderer,
 };
 
+/**
+ * This param "theme" that we are using is set in the main thread,
+ * in the main/window-lifecycle.js function loadWindow()
+ */
 const theme = new URLSearchParams(window.location.search).get("theme");
 const osTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 const palette = palettes[theme !== "null" ? theme : osTheme] || palettes.dark;

@@ -4,7 +4,7 @@ import { v4 as uuid } from "uuid";
 import invariant from "invariant";
 import { ReplaySubject } from "rxjs";
 import logger from "~/logger";
-import { getSystemLocale } from "~/helpers/systemLocale";
+import { getParsedSystemLocale } from "~/helpers/systemLocale";
 import user from "~/helpers/user";
 import {
   sidebarCollapsedSelector,
@@ -41,7 +41,7 @@ const extraProperties = store => {
   const state: State = store.getState();
   const language = languageSelector(state);
   const region = (localeSelector(state).split("-")[1] || "").toUpperCase() || null;
-  const systemLocale = getSystemLocale();
+  const systemLocale = getParsedSystemLocale();
   const device = lastSeenDeviceSelector(state);
   const deviceInfo = device
     ? {

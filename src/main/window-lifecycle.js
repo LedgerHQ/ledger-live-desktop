@@ -1,6 +1,6 @@
 // @flow
 import "./setup";
-import { BrowserWindow, screen, shell } from "electron";
+import { BrowserWindow, screen, shell, app } from "electron";
 import path from "path";
 import { delay } from "@ledgerhq/live-common/lib/promise";
 import { URL } from "url";
@@ -67,7 +67,14 @@ export const loadWindow = async () => {
     url = url.replace("localhost", "host.docker.internal");
   }
   if (mainWindow) {
-    await mainWindow.loadURL(`${url}?theme=${theme}`);
+    /** Making the following variables easily accessible to the renderer thread:
+     * - theme
+     * - appLocale, cf. https://www.electronjs.org/fr/docs/latest/api/app#appgetlocale
+     * */
+    const fullUrl = new URL(url);
+    fullUrl.searchParams.append("theme", theme);
+    fullUrl.searchParams.append("appLocale", app.getLocale());
+    await mainWindow.loadURL(fullUrl.href);
   }
 };
 
