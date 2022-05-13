@@ -12,7 +12,7 @@ import {
   HashContainer,
 } from "~/renderer/drawers/OperationDetails/styledComponents";
 import type { Operation } from "@ledgerhq/live-common/lib/types";
-import Image from "~/renderer/components/nft/Image";
+import Media from "~/renderer/components/nft/Media";
 import Box from "~/renderer/components/Box";
 import {
   useNftMetadata,
@@ -46,7 +46,12 @@ const NFTOperationDetails = ({ operation }: { operation: Operation }) => {
         <OpDetailsData>
           <Box horizontal alignItems="center">
             <Skeleton width={24} minHeight={24} show={show}>
-              <Image metadata={nftMetadata} tokenId={operation.tokenId} size={24} />
+              <Media
+                metadata={nftMetadata}
+                tokenId={operation.tokenId}
+                size={24}
+                mediaFormat="preview"
+              />
             </Skeleton>
             <Box ml={2}>
               <Skeleton width={200} barHeight={10} minHeight={32} show={show}>

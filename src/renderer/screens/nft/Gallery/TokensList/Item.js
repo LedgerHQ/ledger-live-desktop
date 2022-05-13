@@ -10,7 +10,7 @@ import { getNFTById } from "~/renderer/reducers/accounts";
 import Box, { Card } from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import { centerEllipsis } from "~/renderer/styles/helpers";
-import Image from "~/renderer/components/nft/Image";
+import Media from "~/renderer/components/nft/Media";
 import Skeleton from "~/renderer/components/nft/Skeleton";
 import IconDots from "~/renderer/icons/Dots";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft";
@@ -97,7 +97,13 @@ const NftCard = ({ id, mode, account, withContextMenu = false, onHideCollection 
         onClick={onItemClick}
       >
         <Skeleton width={40} minHeight={40} full={isGrid} show={show}>
-          <Image metadata={metadata} tokenId={nft.tokenId} size={40} full={isGrid} />
+          <Media
+            metadata={metadata}
+            tokenId={nft.tokenId}
+            size={40}
+            full={isGrid}
+            mediaFormat="preview"
+          />
         </Skeleton>
         <Box ml={isGrid ? 0 : 3} flex={1} mt={isGrid ? 2 : 0}>
           <Skeleton width={142} minHeight={24} barHeight={10} show={show}>

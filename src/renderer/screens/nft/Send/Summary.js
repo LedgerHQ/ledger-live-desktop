@@ -7,7 +7,7 @@ import { getAllNFTs } from "~/renderer/reducers/accounts";
 import Box from "~/renderer/components/Box";
 import Text from "~/renderer/components/Text";
 import type { Transaction } from "@ledgerhq/live-common/lib/types";
-import Image from "~/renderer/components/nft/Image";
+import Media from "~/renderer/components/nft/Media";
 import Skeleton from "~/renderer/components/nft/Skeleton";
 import { useNftMetadata } from "@ledgerhq/live-common/lib/nft/NftMetadataProvider";
 import { centerEllipsis } from "~/renderer/styles/helpers";
@@ -47,7 +47,7 @@ const Summary = ({ transaction }: Props) => {
             </Skeleton>
           </Box>
           <Skeleton width={48} minHeight={48} show={show}>
-            <Image metadata={metadata} tokenId={tokenId} size={48} />
+            <Media metadata={metadata} tokenId={tokenId} size={48} mediaFormat="preview" />
           </Skeleton>
         </Box>
       </Box>

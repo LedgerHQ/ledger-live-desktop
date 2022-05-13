@@ -12,7 +12,7 @@ import { rgba } from "~/renderer/styles/helpers";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import type { Account, NFTWithMetadata } from "@ledgerhq/live-common/lib/types";
 import NFTCollectionContextMenu from "~/renderer/components/ContextMenu/NFTCollectionContextMenu";
-import Image from "~/renderer/components/nft/Image";
+import Media from "~/renderer/components/nft/Media";
 import Skeleton from "~/renderer/components/nft/Skeleton";
 
 const Container: ThemedComponent<{}> = styled(Box)`
@@ -69,7 +69,7 @@ const Row = ({ nfts, contract, account, onClick }: Props) => {
         onClick={onClick}
       >
         <Skeleton width={32} minHeight={32} show={loading}>
-          <Image metadata={nftMetadata} tokenId={nft?.tokenId} />
+          <Media metadata={nftMetadata} tokenId={nft?.tokenId} mediaFormat="preview" />
         </Skeleton>
         <Box ml={3} flex={1}>
           <Skeleton width={136} minHeight={24} barHeight={10} show={loading}>

@@ -12,7 +12,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
 import IconCross from "~/renderer/icons/Cross";
-import Image from "~/renderer/components/nft/Image";
+import Media from "~/renderer/components/nft/Media";
 import Skeleton from "~/renderer/components/nft/Skeleton";
 import { unhideNftCollection } from "~/renderer/actions/settings";
 import { hiddenNftCollectionsSelector } from "~/renderer/reducers/settings";
@@ -50,7 +50,7 @@ const HiddenNftCollectionRow = ({
   return (
     <HiddenNftCollectionRowContainer>
       <Skeleton width={32} minHeight={32} show={loading}>
-        <Image metadata={nftMetadata} tokenId={firstNft?.tokenId} />
+        <Media metadata={nftMetadata} tokenId={firstNft?.tokenId} mediaFormat="preview" />
       </Skeleton>
       <Text
         style={{ marginLeft: 10, flex: 1 }}

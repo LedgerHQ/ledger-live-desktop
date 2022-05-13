@@ -11,7 +11,7 @@ import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import { openModal } from "~/renderer/actions/modals";
 import styled from "styled-components";
 import useOnScreen from "../useOnScreen";
-import Image from "~/renderer/components/nft/Image";
+import Media from "~/renderer/components/nft/Media";
 import IconSend from "~/renderer/icons/Send";
 import TokensList from "./TokensList";
 import Spinner from "~/renderer/components/Spinner";
@@ -96,7 +96,7 @@ const Collection = () => {
     <>
       <Box horizontal alignItems="center" mb={6}>
         <Skeleton width={40} minHeight={40} show={show}>
-          <Image size={40} metadata={metadata} tokenId={nft?.tokenId} />
+          <Media size={40} metadata={metadata} tokenId={nft?.tokenId} mediaFormat="preview" />
         </Skeleton>
         <Box flex={1} ml={3}>
           <Skeleton width={93} barHeight={6} minHeight={24} show={show}>
