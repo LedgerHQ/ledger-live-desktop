@@ -2,9 +2,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useHistory } from "react-router-dom";
 import IconBan from "~/renderer/icons/Ban";
 import { openModal } from "~/renderer/actions/modals";
 import ContextMenuItem from "./ContextMenuItem";
+import { setDrawer } from "~/renderer/drawers/Provider";
+
 import type { Account } from "@ledgerhq/live-common/lib/types";
 
 type Props = {
@@ -13,6 +16,7 @@ type Props = {
   collectionName?: string,
   children: any,
   leftClick?: boolean,
+  goBackToAccount?: boolean,
 };
 
 export default function NFTCollectionContextMenu({
@@ -21,9 +25,11 @@ export default function NFTCollectionContextMenu({
   collectionAddress,
   collectionName,
   leftClick,
+  goBackToAccount = false,
 }: Props) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const menuItems = [
     {
@@ -35,6 +41,12 @@ export default function NFTCollectionContextMenu({
           openModal("MODAL_HIDE_NFT_COLLECTION", {
             collectionName: collectionName ?? collectionAddress,
             collectionId: `${account.id}|${collectionAddress}`,
+            onClose: () => {
+              if (goBackToAccount) {
+                setDrawer();
+                history.replace(`account/${account.id}`);
+              }
+            },
           }),
         ),
     },
