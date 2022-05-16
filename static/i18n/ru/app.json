@@ -77,6 +77,7 @@
     "selectAccountNoOption": "Счета с \"{{accountName}}\" в названии не найдены.",
     "selectCurrency": "Выберите криптоактив",
     "selectCurrencyNoOption": "Криптоактив \"{{currencyName}}\" не найден",
+    "selectCurrencyEmptyOption": "No crypto asset",
     "selectValidatorNoOption": "Валидатор с \"{{accountName}}\" в названии не найден",
     "selectNoResults": "Ничего не найдено по запросу \"{{query}}\"",
     "sortBy": "Сортировка",
