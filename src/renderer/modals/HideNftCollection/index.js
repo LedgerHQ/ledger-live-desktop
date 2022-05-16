@@ -12,7 +12,10 @@ const HideNftCollectionModal = () => (
       <Body
         collectionName={data.collectionName}
         collectionId={data.collectionId}
-        onClose={onClose}
+        onClose={() => {
+          onClose();
+          data?.onClose?.();
+        }}
       />
     )}
   />
