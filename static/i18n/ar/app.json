@@ -77,6 +77,7 @@
     "selectAccountNoOption": "لا يوجد حساب مطابق \"{{accountName}}\"",
     "selectCurrency": "اختار أصل مشفّر",
     "selectCurrencyNoOption": "لا يوجد أصل مشفّر \"{{currencyName}}\"",
+    "selectCurrencyEmptyOption": "No crypto asset",
     "selectValidatorNoOption": "لا يوجد مدقق مطابق\"{{accountName}}\"",
     "selectNoResults": "لم يتم العثور على نتائج مطابقة \"{{query}}\"",
     "sortBy": "ترتيب النتائج",
