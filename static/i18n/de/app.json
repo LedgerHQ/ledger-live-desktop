@@ -77,6 +77,7 @@
     "selectAccountNoOption": "Kein passendes Konto zu \"{{accountName}}\" gefunden",
     "selectCurrency": "Wählen Sie einen Krypto-Wert",
     "selectCurrencyNoOption": "Kein Krypto-Wert \"{{currencyName}}\"",
+    "selectCurrencyEmptyOption": "No crypto asset",
     "selectValidatorNoOption": "Kein passendes Konto zu \"{{accountName}}\" gefunden",
     "selectNoResults": "Keine Ergebnisse für „${ query}”",
     "sortBy": "Sortieren nach",
