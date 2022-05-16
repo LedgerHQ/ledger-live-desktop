@@ -77,6 +77,7 @@
     "selectAccountNoOption": "不存在与 \"{{accountName}}\" 匹配的账户",
     "selectCurrency": "选择加密资产",
     "selectCurrencyNoOption": "不存在加密资产 {{currencyName}}",
+    "selectCurrencyEmptyOption": "No crypto asset",
     "selectValidatorNoOption": "不存在与 \"{{accountName}}\" 匹配的账户",
     "selectNoResults": "未找到与 \"{{query}} \" 匹配的结果",
     "sortBy": "排序方式",
