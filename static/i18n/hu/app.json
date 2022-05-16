@@ -77,6 +77,7 @@
     "selectAccountNoOption": "Nincs megfelelő számla \"{{accountName}}\"",
     "selectCurrency": "Válassz egy Kriptovalutát",
     "selectCurrencyNoOption": "Nincsenek kriptovaluták {{currencyName}}",
+    "selectCurrencyEmptyOption": "No crypto asset",
     "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
     "selectNoResults": "No results found matching \"{{query}}\"",
     "sortBy": "Rendezési szempont",
