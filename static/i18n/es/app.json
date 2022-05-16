@@ -77,6 +77,7 @@
     "selectAccountNoOption": "No hay ninguna cuenta que coincida con \"{{accountName}}\"",
     "selectCurrency": "Elige un activo cripto",
     "selectCurrencyNoOption": "No existe el activo cripto \"{{currencyName}}\"",
+    "selectCurrencyEmptyOption": "No hay activos cripto",
     "selectValidatorNoOption": "Ningún validador coincide con \"{{accountName}}\"",
     "selectNoResults": "No se encontraron valores que coincidan con «{{query}}»",
     "sortBy": "Ordenar por",
