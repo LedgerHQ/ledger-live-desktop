@@ -77,6 +77,7 @@
     "selectAccountNoOption": "\"{{accountName}}\"와(과) 일치하는 계정 없음",
     "selectCurrency": "암호화폐 선택",
     "selectCurrencyNoOption": "암호화폐 \"{{currencyName}}\" 없음",
+    "selectCurrencyEmptyOption": "No crypto asset",
     "selectValidatorNoOption": "'{{accountName}}'와/과 일치하는 검증인이 없습니다",
     "selectNoResults": "'{{query}}'와/과 일치하는 결과가 없습니다",
     "sortBy": "정렬 기준",
