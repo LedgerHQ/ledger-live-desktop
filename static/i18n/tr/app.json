@@ -77,6 +77,7 @@
     "selectAccountNoOption": "\"{{accountName}}\" isimli bir hesap bulunmuyor",
     "selectCurrency": "Bir kripto varlık seçin",
     "selectCurrencyNoOption": "\"{{currencyName}}\" isimli bir kripto varlık yok",
+    "selectCurrencyEmptyOption": "No crypto asset",
     "selectValidatorNoOption": "\"{{accountName}}\" isimli bir doğrulayıcı yok",
     "selectNoResults": "\"{{query}}\" ile eşleşen herhangi bir sonuç bulunamadı",
     "sortBy": "Sıralama türü",
