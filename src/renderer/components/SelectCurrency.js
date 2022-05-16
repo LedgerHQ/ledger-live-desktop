@@ -62,7 +62,9 @@ const SelectCurrency = <C: Currency>({
   const onChangeCallback = useCallback(item => onChange(item ? item.currency : null), [onChange]);
   const noOptionsMessage = useCallback(
     ({ inputValue }: { inputValue: string }) =>
-      t("common.selectCurrencyNoOption", { currencyName: inputValue }),
+      inputValue
+        ? t("common.selectCurrencyNoOption", { currencyName: inputValue })
+        : t("common.selectCurrencyEmptyOption"),
     [t],
   );
 
