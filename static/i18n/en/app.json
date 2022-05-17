@@ -77,6 +77,7 @@
     "selectAccountNoOption": "No account matching \"{{accountName}}\"",
     "selectCurrency": "Choose a crypto asset",
     "selectCurrencyNoOption": "No crypto asset \"{{currencyName}}\"",
+    "selectCurrencyEmptyOption": "No crypto asset",
     "selectValidatorNoOption": "No validator matching \"{{accountName}}\"",
     "selectNoResults": "No results found matching \"{{query}}\"",
     "sortBy": "Sort by",
