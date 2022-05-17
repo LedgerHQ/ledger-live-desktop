@@ -70,10 +70,11 @@ const AmountField = ({
   if (!status) return null;
   const { useAllAmount } = transaction;
   const { amount, errors, warnings } = status;
-  let { amount: amountError } = errors;
+  let { amount: amountError, gasPrice: messageGas } = errors;
   let { amount: amountWarning } = warnings;
 
   // we ignore zero case for displaying field error because field is empty.
+
   if (amount.eq(0) && (bridgePending || !useAllAmount)) {
     amountError = null;
     amountWarning = null;
@@ -115,7 +116,7 @@ const AmountField = ({
       <RequestAmount
         disabled={!!useAllAmount || walletConnectProxy}
         account={account}
-        validTransactionError={amountError}
+        validTransactionError={amountError || messageGas}
         validTransactionWarning={amountWarning}
         onChange={onChange}
         value={walletConnectProxy ? transaction.amount : amount}
