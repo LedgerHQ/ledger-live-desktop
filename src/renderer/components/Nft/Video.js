@@ -103,6 +103,7 @@ class Video extends React.PureComponent<Props, State> {
           autoPlay
           loop
           controls
+          disablePictureInPicture
         >
           <source src={uri} type={mediaType} />
         </video>
