@@ -5,7 +5,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { openModal } from "~/renderer/actions/modals";
-import IconChartLine from "~/renderer/icons/ChartLine";
+import IconCoins from "~/renderer/icons/Coins";
 
 type Props = {
   account: AccountLike,
@@ -15,28 +15,28 @@ type Props = {
 const AccountHeaderActions = ({ account, parentAccount }: Props) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
-
-  const onClick = useCallback(() => {
-    dispatch(
-      openModal("MODAL_SOLANA_REWARDS_INFO", {
-        account,
-      }),
-    );
-  }, [dispatch, account]);
-
   const mainAccount = getMainAccount(account, parentAccount);
   const { solanaResources } = mainAccount;
 
-  if (!solanaResources || solanaResources.stakes.length > 0) {
-    return null;
-  }
+  const onClick = useCallback(() => {
+    dispatch(
+      openModal(
+        solanaResources && solanaResources.stakes.length > 0
+          ? "MODAL_SOLANA_DELEGATE"
+          : "MODAL_SOLANA_REWARDS_INFO",
+        {
+          account,
+        },
+      ),
+    );
+  }, [dispatch, account, solanaResources]);
 
   return [
     {
       key: "solana",
       onClick: onClick,
-      icon: IconChartLine,
-      label: t("delegation.title"),
+      icon: IconCoins,
+      label: t("account.stake"),
     },
   ];
 };
