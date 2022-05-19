@@ -10,10 +10,18 @@ type Props = {
   metadata: NFTMetadata,
   leftClick?: boolean,
   children: any,
+  onHideCollection?: () => void,
 };
 
-const NFTContextMenu = ({ leftClick, children, account, nft, metadata }: Props) => {
-  const links = useNftLinks(account, nft, metadata);
+const NFTContextMenu = ({
+  leftClick,
+  children,
+  account,
+  nft,
+  metadata,
+  onHideCollection,
+}: Props) => {
+  const links = useNftLinks(account, nft, metadata, onHideCollection);
 
   return (
     <ContextMenuItem leftClick={leftClick} items={links}>

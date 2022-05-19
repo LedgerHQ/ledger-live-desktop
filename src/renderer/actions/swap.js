@@ -1,15 +1,17 @@
 // @flow
-import { createAction } from "redux-actions";
-import { createSelector } from "reselect";
-import type { OutputSelector } from "reselect";
-import type { State } from "~/renderer/reducers";
-import type { SwapStateType, UPDATE_PROVIDERS_TYPE } from "~/renderer/reducers/swap";
-import type { Transaction } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import memoize from "lodash/memoize";
-
-import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
 import { getAccountCurrency } from "@ledgerhq/live-common/lib/account";
 import { flattenAccounts } from "@ledgerhq/live-common/lib/account/helpers";
+import type {
+  Transaction,
+  UPDATE_PROVIDERS_TYPE,
+} from "@ledgerhq/live-common/lib/exchange/swap/types";
+import type { Account, TokenAccount } from "@ledgerhq/live-common/lib/types";
+import memoize from "lodash/memoize";
+import { createAction } from "redux-actions";
+import type { OutputSelector } from "reselect";
+import { createSelector } from "reselect";
+import type { State } from "~/renderer/reducers";
+import type { SwapStateType } from "~/renderer/reducers/swap";
 
 /* ACTIONS */
 export const updateProvidersAction = createAction<$PropertyType<UPDATE_PROVIDERS_TYPE, "payload">>(
@@ -65,23 +67,40 @@ export const toSelector: OutputSelector<State, void, *> = createSelector(
 );
 
 // Put disabled accounts and subaccounts at the bottom of the list while preserving the parent/children position.
-function sortAccountsByStatus(accounts) {
-  const [top, bottom, childrenStack] = accounts.reduce(
-    ([enabled, disabled, childrenStack], account) => {
-      if (account.type === "Account") {
-        if (account.disabled) {
-          return [[...enabled, ...childrenStack], [...disabled, account], []];
-        }
-        return [[...enabled, ...childrenStack, account], disabled, []];
+export function sortAccountsByStatus(accounts: Account[]) {
+  let activeAccounts = [];
+  let disabledAccounts = [];
+  let subAccounts = [];
+  let disabledSubAccounts = [];
+
+  // Traverse the accounts in reverse to check disabled accounts with active subAccounts
+  for (let i = accounts.length - 1; i >= 0; i--) {
+    const account = accounts[i];
+
+    // Handle Account type first
+    if (account.type === "Account") {
+      if (account.disabled && !subAccounts.length) {
+        // When a disabled account has no active subAccount, add it to the disabledAccounts
+        disabledAccounts = [account, ...disabledSubAccounts, ...disabledAccounts];
+      } else {
+        // When an account has at least an active subAccount, add it to the activeAccounts
+        activeAccounts = [account, ...subAccounts, ...disabledSubAccounts, ...activeAccounts];
       }
+
+      // Clear subAccounts
+      subAccounts = [];
+      disabledSubAccounts = [];
+    } else {
+      // Add TokenAccount and ChildAccount to the subAccounts arrays
       if (account.disabled) {
-        return [enabled, disabled, [...childrenStack, account]];
+        disabledSubAccounts.unshift(account);
+      } else {
+        subAccounts.unshift(account);
       }
-      return [[...enabled, account], disabled, childrenStack];
-    },
-    [[], [], []],
-  );
-  return [...top, ...bottom, ...childrenStack];
+    }
+  }
+
+  return [...activeAccounts, ...disabledAccounts];
 }
 
 export const fromSelector: OutputSelector<State, void, *> = createSelector(

@@ -42,6 +42,12 @@ const SpinnerBackground: ThemedComponent<{}> = styled.div`
   border: 2px solid ${p => p.theme.colors.palette.background.paper};
 `;
 
+const ClickableCollectionName: ThemedComponent<{}> = styled(Box)`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 const Gallery = () => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
@@ -95,11 +101,11 @@ const Gallery = () => {
       if (displayedNFTs > maxVisibleNFTs) return;
       collectionsRender.push(
         <div key={contract}>
-          <Box mb={2} onClick={() => onSelectCollection(contract)}>
+          <ClickableCollectionName mb={2} onClick={() => onSelectCollection(contract)}>
             <Text ff="Inter|Medium" fontSize={6} color="palette.text.shade100">
               <CollectionName nft={nfts[0]} fallback={contract} account={account} showHideMenu />
             </Text>
-          </Box>
+          </ClickableCollectionName>
           <TokensList account={account} nfts={nfts.slice(0, maxVisibleNFTs - displayedNFTs)} />
         </div>,
       );
@@ -131,7 +137,15 @@ const Gallery = () => {
         </Button>
       </Box>
       <GridListToggle />
-      {collectionsRender}
+      {collectionsRender?.length ? (
+        collectionsRender
+      ) : (
+        <Box p={3} alignItems="center">
+          <Text ff="Inter" fontSize={3}>
+            {t("operationList.noMoreOperations")}
+          </Text>
+        </Box>
+      )}
       {isLoading && (
         <SpinnerContainer>
           <SpinnerBackground>
