@@ -40,6 +40,7 @@ import {
   SendActionDefault,
   SwapActionDefault,
 } from "./AccountActionsDefault";
+import useEnv from "~/renderer/hooks/useEnv";
 
 const ButtonSettings: ThemedComponent<{ disabled?: boolean }> = styled(Tabbable).attrs(() => ({
   alignItems: "center",
@@ -87,6 +88,10 @@ type Props = {
 const AccountHeaderSettingsButtonComponent = ({ account, parentAccount, openModal, t }: Props) => {
   const currency = getAccountCurrency(account);
 
+  const devModeEnabled = useEnv("MANAGER_DEV_MODE");
+  const walletConnectBaseNetworks = ["ethereum", "bsc", "polygon"];
+  const walletConnectNetworks = devModeEnabled ? [...walletConnectBaseNetworks, "ethereum_ropsten", "ethereum_goerli"] : walletConnectBaseNetworks;
+
   const onWalletConnect = useCallback(() => {
     setTrackingSource("account header actions");
     openModal("MODAL_WALLETCONNECT_PASTE_LINK", { account });
@@ -102,7 +107,7 @@ const AccountHeaderSettingsButtonComponent = ({ account, parentAccount, openModa
           rounded
         />
       </Tooltip>
-      {["ethereum", "bsc", "polygon"].includes(currency.id) ? (
+      {walletConnectNetworks.includes(currency.id) ? (
         <Tooltip content={t("walletconnect.titleAccount")}>
           <ButtonSettings onClick={onWalletConnect}>
             <Box justifyContent="center">
