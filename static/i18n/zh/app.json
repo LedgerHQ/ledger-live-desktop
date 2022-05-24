@@ -77,6 +77,7 @@
     "selectAccountNoOption": "不存在与 \"{{accountName}}\" 匹配的账户",
     "selectCurrency": "选择加密资产",
     "selectCurrencyNoOption": "不存在加密资产 {{currencyName}}",
+    "selectCurrencyEmptyOption": "没有加密资产",
     "selectValidatorNoOption": "不存在与 \"{{accountName}}\" 匹配的账户",
     "selectNoResults": "未找到与 \"{{query}} \" 匹配的结果",
     "sortBy": "排序方式",
@@ -1141,9 +1142,9 @@
       },
       "confirm": {
         "title": "连接",
-        "details": "Wants to connect to the following account through your wallet :",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
-        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
+        "details": "想要通过您的钱包连接到以下账户：",
+        "deeplinkDetails": "想要连接到 Ledger Live。请选择您的账户：",
+        "noAccount": "您没有任何兼容的账户。请添加一个兼容的账户来使用 Wallet Connect（钱包连接）。",
         "alreadyConnected": "您正在尝试连接到一个 dApp（去中心化应用），然而您已连接到了另一个。 请先断开已连接的 dApp 后，再重新将 Live 连接到新的 dApp。"
       }
     },
@@ -1291,7 +1292,8 @@
       "galleryCTA": "查看图库",
       "seeMore": "查看更多收藏",
       "seeAll": "查看所有收藏",
-      "seeLess": "查看更少"
+      "seeLess": "查看更少",
+      "placeholder": "要添加 NFT，只需将其发送到您的 {{currency}} 地址。"
     },
     "gallery": {
       "title": "所有 NFT",
@@ -1609,7 +1611,7 @@
         "not_supported": "需要第三方钱包",
         "addAccount": "添加账户",
         "addAccountTooltip": "添加 {{appName}} 账户",
-        "addAccountWarn": "请等待应用程序完成更新",
+        "addAccountWarn": "请等待处理完毕",
         "learnMore": "了解更多",
         "learnMoreTooltip": "了解关于 {{appName}} 的更多信息...",
         "removeTooltip": "卸载 {{appName}}",
