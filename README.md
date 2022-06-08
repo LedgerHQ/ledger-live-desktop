@@ -1,3 +1,8 @@
+# ⛔️ DEPRECATED
+
+This repository is now deprecated. We moved to a new mono repository architecture containing all of Ledger Live JavaScript Ecosystem that you can find [here](https://github.com/ledgerhq/ledger-live). 
+You can follow the [migration guide](https://github.com/LedgerHQ/ledger-live/wiki/Migrate-from-previous-repositories#migration) to help you make the transition.
+
 **[We are hiring, join us! 👨‍💻👩‍💻](https://jobs.lever.co/ledger/?department=Engineering)**
 
 # Ledger Live (desktop) [![Crowdin](https://d322cqt584bo4o.cloudfront.net/ledger-wallet/localized.svg)](https://crowdin.com/project/ledger-wallet)
