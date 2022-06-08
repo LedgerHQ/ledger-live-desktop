@@ -41,4 +41,5 @@ setSupportedCurrencies([
   "ethereum_ropsten",
   "ethereum_goerli",
   "cosmos_testnet",
+  "hedera",
 ]);

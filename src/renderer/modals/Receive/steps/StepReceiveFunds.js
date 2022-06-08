@@ -30,6 +30,7 @@ import ModalBody from "~/renderer/components/Modal/ModalBody";
 import QRCode from "~/renderer/components/QRCode";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
 import AccountTagDerivationMode from "~/renderer/components/AccountTagDerivationMode";
+import byFamily from "~/renderer/generated/StepReceiveFunds";
 
 const Separator = styled.div`
   border-top: 1px solid #99999933;
@@ -123,22 +124,25 @@ const Receive2Device = ({
   );
 };
 
-const StepReceiveFunds = ({
-  isAddressVerified,
-  account,
-  parentAccount,
-  device,
-  onChangeAddressVerified,
-  transitionTo,
-  onResetSkip,
-  verifyAddressError,
-  token,
-  onClose,
-  eventType,
-  currencyName,
-}: StepProps) => {
+const StepReceiveFunds = (props: StepProps) => {
+  const {
+    isAddressVerified,
+    account,
+    parentAccount,
+    device,
+    onChangeAddressVerified,
+    transitionTo,
+    onResetSkip,
+    verifyAddressError,
+    token,
+    onClose,
+    eventType,
+    currencyName,
+  } = props;
+
   const mainAccount = account ? getMainAccount(account, parentAccount) : null;
   invariant(account && mainAccount, "No account given");
+
   const name = token ? token.name : getAccountName(account);
   const initialDevice = useRef(device);
   const address = mainAccount.freshAddress;
@@ -189,6 +193,12 @@ const StepReceiveFunds = ({
       confirmAddress();
     }
   }, [isAddressVerified, confirmAddress]);
+
+  // custom family UI for StepReceiveFunds
+  const CustomStepReceiveFunds = byFamily[mainAccount.currency.family];
+  if (CustomStepReceiveFunds) {
+    return <CustomStepReceiveFunds {...props} />;
+  }
 
   return (
     <>

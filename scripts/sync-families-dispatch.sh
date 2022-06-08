@@ -15,7 +15,9 @@ SendWarning.js \
 ReceiveWarning.js \
 AccountBalanceSummaryFooter.js \
 TokenList.js \
-AccountHeaderManageActions.js
+AccountHeaderManageActions.js \
+StepReceiveFunds.js \
+NoAssociatedAccounts.js
 "
 
 cd ../src/renderer
