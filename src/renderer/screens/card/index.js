@@ -1,8 +1,8 @@
 // @flow
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { usePlatformApp } from "@ledgerhq/live-common/lib/platform/PlatformAppProvider";
 import useTheme from "~/renderer/hooks/useTheme";
+import { useRemoteLiveAppManifest } from "@ledgerhq/live-common/lib/platform/providers/RemoteLiveAppProvider";
 
 import { Card } from "~/renderer/components/Box";
 import WebPlatformPlayer from "~/renderer/components/WebPlatformPlayer";
@@ -16,8 +16,7 @@ export const CARD_APP_ID = "cl-card";
 
 export default function CardPlatformApp() {
   const { state: urlParams } = useLocation();
-  const { manifests } = usePlatformApp();
-  const manifest = manifests.get(CARD_APP_ID);
+  const manifest = useRemoteLiveAppManifest(CARD_APP_ID);
 
   const themeType = useTheme("colors.palette.type");
 
