@@ -1,27 +1,27 @@
 // @flow
 
-import Box from "~/renderer/components/Box";
-import Text from "~/renderer/components/Text";
-import FormattedVal from "~/renderer/components/FormattedVal";
 import {
   getAccountCurrency,
-  getAccountUnit,
   getAccountName,
+  getAccountUnit,
 } from "@ledgerhq/live-common/lib/account";
+import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
+import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import { getProviderName } from "@ledgerhq/live-common/lib/exchange/swap/utils";
 import React from "react";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import styled from "styled-components";
+import Box from "~/renderer/components/Box";
 import CryptoCurrencyIcon from "~/renderer/components/CryptoCurrencyIcon";
 import Ellipsis from "~/renderer/components/Ellipsis";
-import IconArrowRight from "~/renderer/icons/ArrowRight";
-import IconSwap from "~/renderer/icons/Swap";
-
-import { rgba } from "~/renderer/styles/helpers";
-import type { MappedSwapOperation } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import { operationStatusList } from "@ledgerhq/live-common/lib/exchange/swap";
-import Tooltip from "~/renderer/components/Tooltip";
-import IconClock from "~/renderer/icons/Clock";
 import FormattedDate from "~/renderer/components/FormattedDate";
+import FormattedVal from "~/renderer/components/FormattedVal";
+import Text from "~/renderer/components/Text";
+import Tooltip from "~/renderer/components/Tooltip";
+import IconArrowRight from "~/renderer/icons/ArrowRight";
+import IconClock from "~/renderer/icons/Clock";
+import IconSwap from "~/renderer/icons/Swap";
+import { rgba } from "~/renderer/styles/helpers";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 
 export const getStatusColor = (status: string, theme: any) => {
   if (operationStatusList.pending.includes(status)) {
@@ -124,13 +124,8 @@ const OperationRow = ({
         </Status>
       </Tooltip>
       <Box ml={24}>
-        <Text
-          ff={"Inter|SemiBold"}
-          color={"palette.text.shade100"}
-          style={{ textTransform: "capitalize" }}
-          fontSize={3}
-        >
-          {provider}
+        <Text ff={"Inter|SemiBold"} color={"palette.text.shade100"} fontSize={3}>
+          {getProviderName(provider)}
         </Text>
         <Text ff={"Inter|Regular"} color={"palette.text.shade50"} fontSize={3}>
           <FormattedDate date={operation.date} format="LT" />

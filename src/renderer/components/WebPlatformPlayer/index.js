@@ -1,5 +1,5 @@
 // @flow
-import { remote, WebviewTag, shell } from "electron";
+import { remote, WebviewTag } from "electron";
 import React, { useState, useCallback, useEffect, useRef, useMemo } from "react";
 import styled from "styled-components";
 import { JSONRPCRequest } from "json-rpc-2.0";
@@ -47,6 +47,7 @@ import * as tracking from "./tracking";
 import TopBar from "./TopBar";
 
 import type { TopBarConfig } from "./type";
+import { handleMessageEvent, handleNewWindowEvent } from "./utils";
 
 const Container: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -446,14 +447,9 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
 
   const [receive] = useJSONRPCServer(handlers, handleSend);
 
-  const handleMessage = useCallback(
-    event => {
-      if (event.channel === "webviewToParent") {
-        receive(JSON.parse(event.args[0]));
-      }
-    },
-    [receive],
-  );
+  const handleMessage = useCallback(event => handleMessageEvent({ event, handler: receive }), [
+    receive,
+  ]);
 
   useEffect(() => {
     tracking.platformLoad(manifest);
@@ -483,12 +479,7 @@ const WebPlatformPlayer = ({ manifest, onClose, inputs, config }: Props) => {
     }
   }, [manifest]);
 
-  const handleNewWindow = useCallback(async e => {
-    const protocol = new URL(e.url).protocol;
-    if (protocol === "http:" || protocol === "https:") {
-      await shell.openExternal(e.url);
-    }
-  }, []);
+  const handleNewWindow = useCallback(handleNewWindowEvent, []);
 
   useEffect(() => {
     const webview = targetRef.current;

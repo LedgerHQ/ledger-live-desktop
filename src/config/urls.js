@@ -178,6 +178,18 @@ export const urls = {
         support: "https://support.sendwyre.com/hc/en-us/requests/new",
         kyc: "https://support.ledger.com/hc/en-us/articles/4404422869265",
       },
+      ftx: {
+        main: "https://ftx.com",
+        tos: "",
+        support: "https://ftx.com/eu/support",
+        kyc: "",
+      },
+      ftxus: {
+        main: "https://ftx.us/",
+        tos: "",
+        support: "https://help.ftx.us/hc/en-us/articles/360043063474-Contact-Info",
+        kyc: "",
+      },
     },
   },
   exchange: {

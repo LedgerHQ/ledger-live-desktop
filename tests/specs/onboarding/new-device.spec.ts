@@ -1,7 +1,7 @@
-import test from "../../fixtures/common";
 import { expect } from "@playwright/test";
-import { OnboardingPage } from "../../models/OnboardingPage";
+import test from "../../fixtures/common";
 import { DeviceAction } from "../../models/DeviceAction";
+import { OnboardingPage } from "../../models/OnboardingPage";
 
 const nanos = ["nanoS", "nanoSP", "nanoX"];
 

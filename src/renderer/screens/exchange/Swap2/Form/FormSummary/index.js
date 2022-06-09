@@ -1,13 +1,13 @@
 // @flow
+import type { SwapTransactionType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
+import SectionFees from "./SectionFees";
+import type { SectionProviderProps } from "./SectionProvider";
 import SectionProvider from "./SectionProvider";
 import SectionRate from "./SectionRate";
-import SectionFees from "./SectionFees";
 import SectionTarget from "./SectionTarget";
-import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
-import styled from "styled-components";
-import type { SwapTransactionType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
-import type { SectionProviderProps } from "./SectionProvider";
 
 const Form: ThemedComponent<{}> = styled.section.attrs(({ ready }) => ({
   style: ready ? { opacity: 1, maxHeight: "100vh", overflow: "auto" } : {},
@@ -54,7 +54,13 @@ const SwapFormSummary = ({ swapTransaction, kycStatus, provider }: SwapFormSumma
 
   return (
     <Form ready={hasFetchedRates}>
-      <SectionProvider provider={provider} status={kycStatus} />
+      <SectionProvider
+        provider={provider}
+        status={kycStatus}
+        fromCurrency={fromCurrency}
+        toCurrency={toCurrency}
+        ratesState={ratesState}
+      />
       <SectionRate
         fromCurrency={fromCurrency}
         toCurrency={toCurrency}

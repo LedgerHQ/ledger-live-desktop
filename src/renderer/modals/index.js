@@ -146,8 +146,8 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_LEND_NO_ETHEREUM_ACCOUNT,
   MODAL_LEND_EMPTY_ACCOUNT_DEPOSIT,
   // Swap
-  MODAL_SWAP,
-  MODAL_SWAP_UNAUTHORIZED_RATES,
+  MODAL_SWAP, // FIXME: This modal is never opened, seems like dead code
+  MODAL_SWAP_UNAUTHORIZED_RATES, // FIXME: This modal is never opened, seems like dead code
   MODAL_SWAP_RESET_KYC,
   // Platform
   MODAL_PLATFORM_EXCHANGE_START,

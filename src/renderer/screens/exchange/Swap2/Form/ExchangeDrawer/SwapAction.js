@@ -1,27 +1,27 @@
 // @flow
-import React, { useRef, useMemo, useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { Trans } from "react-i18next";
-import type { Operation, SignedOperation } from "@ledgerhq/live-common/lib/types";
-import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import { createAction as transactionCreateAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
-import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
 import { getEnv } from "@ledgerhq/live-common/lib/env";
-import {
-  toExchangeRaw,
-  toExchangeRateRaw,
-} from "@ledgerhq/live-common/lib/exchange/swap/serialization";
-import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
-import DeviceAction from "~/renderer/components/DeviceAction";
-import { command } from "~/renderer/commands";
-import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
-import { getCurrentDevice } from "~/renderer/reducers/devices";
 import type { SwapTransactionType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
-import { swapKYCSelector } from "~/renderer/reducers/settings";
+import {
+  toExchangeRateRaw,
+  toExchangeRaw,
+} from "@ledgerhq/live-common/lib/exchange/swap/serialization";
+import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
+import { createAction as initSwapCreateAction } from "@ledgerhq/live-common/lib/hw/actions/initSwap";
+import { createAction as transactionCreateAction } from "@ledgerhq/live-common/lib/hw/actions/transaction";
+import { toTransactionRaw } from "@ledgerhq/live-common/lib/transaction";
+import type { SignedOperation } from "@ledgerhq/live-common/lib/types";
+import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Trans } from "react-i18next";
+import { useSelector } from "react-redux";
+import { command } from "~/renderer/commands";
 import BigSpinner from "~/renderer/components/BigSpinner";
-import Text from "~/renderer/components/Text";
 import Box from "~/renderer/components/Box";
+import { mockedEventEmitter } from "~/renderer/components/debug/DebugMock";
+import DeviceAction from "~/renderer/components/DeviceAction";
+import Text from "~/renderer/components/Text";
 import { useBroadcast } from "~/renderer/hooks/useBroadcast";
+import { getCurrentDevice } from "~/renderer/reducers/devices";
+import { swapKYCSelector } from "~/renderer/reducers/settings";
 
 const connectAppExec = command("connectApp");
 const initSwapExec = command("initSwap");
@@ -59,7 +59,7 @@ type Props = {
   swapTransaction: SwapTransactionType,
   exchangeRate: ExchangeRate,
   onCompletion: ({ operation: Operation, swapId: string }) => void,
-  onError: Error => void,
+  onError: ({ error: Error, swapId: string }) => void,
 };
 export default function SwapAction({
   swapTransaction,
@@ -102,7 +102,7 @@ export default function SwapAction({
           });
         },
         error => {
-          onError(error);
+          onError({ error, swapId });
         },
       );
     }
@@ -120,9 +120,9 @@ export default function SwapAction({
         device: deviceRef,
         userId: providerKYC?.id,
       }}
-      onResult={({ initSwapResult, initSwapError, ...rest }) => {
+      onResult={({ initSwapResult, initSwapError, swapId, ...rest }) => {
         if (initSwapError) {
-          onError(initSwapError);
+          onError({ error: initSwapError, swapId });
         } else {
           setInitData(initSwapResult);
         }
@@ -143,7 +143,7 @@ export default function SwapAction({
       Result={TransactionResult}
       onResult={({ signedOperation, transactionSignError }) => {
         if (transactionSignError) {
-          onError(transactionSignError);
+          onError({ error: transactionSignError, swapId: initData.swapId });
         } else {
           setSignedOperation(signedOperation);
         }

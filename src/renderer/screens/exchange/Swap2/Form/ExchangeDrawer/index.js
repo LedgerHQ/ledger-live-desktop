@@ -1,28 +1,30 @@
 // @flow
-import React, { useState, useMemo, useCallback } from "react";
-import { Trans } from "react-i18next";
-import styled from "styled-components";
-import { useDispatch } from "react-redux";
-import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
 import { addPendingOperation } from "@ledgerhq/live-common/lib/account";
+import { getMainAccount } from "@ledgerhq/live-common/lib/account/helpers";
+import { getEnv } from "@ledgerhq/live-common/lib/env";
+import { postSwapAccepted, postSwapCancelled } from "@ledgerhq/live-common/lib/exchange/swap";
 import addToSwapHistory from "@ledgerhq/live-common/lib/exchange/swap/addToSwapHistory";
-import Box from "~/renderer/components/Box";
-import SwapAction from "./SwapAction";
 import type { SwapTransactionType } from "@ledgerhq/live-common/lib/exchange/swap/hooks";
 import type { ExchangeRate } from "@ledgerhq/live-common/lib/exchange/swap/types";
-import ErrorDisplay from "~/renderer/components/ErrorDisplay";
-import {
-  Header as DeviceActionHeader,
-  Footer as DeviceActionFooter,
-} from "~/renderer/components/DeviceAction/rendering";
+import React, { useCallback, useMemo, useState } from "react";
+import { Trans } from "react-i18next";
+import { useDispatch } from "react-redux";
+import styled from "styled-components";
 import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
-import SwapCompleted from "./SwapCompleted";
+import TrackPage from "~/renderer/analytics/TrackPage";
+import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
+import {
+  Footer as DeviceActionFooter,
+  Header as DeviceActionHeader,
+} from "~/renderer/components/DeviceAction/rendering";
+import ErrorDisplay from "~/renderer/components/ErrorDisplay";
 import { setDrawer } from "~/renderer/drawers/Provider";
 import { SWAP_VERSION, useRedirectToSwapHistory } from "../../utils/index";
-import { Separator } from "../Separator";
 import { DrawerTitle } from "../DrawerTitle";
-import TrackPage from "~/renderer/analytics/TrackPage";
+import { Separator } from "../Separator";
+import SwapAction from "./SwapAction";
+import SwapCompleted from "./SwapCompleted";
 
 const ContentBox = styled(Box)`
   ${DeviceActionHeader} {
@@ -60,9 +62,36 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
     [fromAccount, fromParentAccount, toAccount, toParentAccount],
   );
 
+  const onError = useCallback(
+    errorResult => {
+      const { error, swapId } = errorResult;
+
+      // Consider the swap as cancelled (on provider perspective) in case of error
+      postSwapCancelled({ provider: exchangeRate.provider, swapId });
+
+      setError(error);
+    },
+    [exchangeRate],
+  );
+
   const onCompletion = useCallback(
     result => {
       const { operation, swapId } = result;
+
+      /**
+       * If transaction broadcast are disabled, consider the swap as cancelled
+       * since the partner will never receive the funds
+       */
+      if (getEnv("DISABLE_TRANSACTION_BROADCAST")) {
+        postSwapCancelled({ provider: exchangeRate.provider, swapId });
+      } else {
+        postSwapAccepted({
+          provider: exchangeRate.provider,
+          swapId,
+          transactionId: operation.hash,
+        });
+      }
+
       const mainAccount = getMainAccount(exchange.fromAccount, exchange.fromParentAccount);
 
       if (!mainAccount) return;
@@ -171,7 +200,7 @@ export default function ExchangeDrawer({ swapTransaction, exchangeRate, onComple
           swapTransaction={swapTransaction}
           exchangeRate={exchangeRate}
           onCompletion={onCompletion}
-          onError={setError}
+          onError={onError}
         />
       </ContentBox>
     </Box>

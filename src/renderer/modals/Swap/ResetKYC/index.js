@@ -4,7 +4,7 @@ import React, { useCallback } from "react";
 import { Trans } from "react-i18next";
 import styled from "styled-components";
 import { useDispatch } from "react-redux";
-import { setSwapKYCStatus } from "~/renderer/actions/settings";
+import { resetSwapLoginAndKYCData } from "~/renderer/actions/settings";
 import { closeModal } from "~/renderer/actions/modals";
 import type { ThemedComponent } from "~/renderer/styles/StyleProvider";
 import Modal, { ModalBody } from "~/renderer/components/Modal";
@@ -14,6 +14,7 @@ import Box from "~/renderer/components/Box";
 import Button from "~/renderer/components/Button";
 import IconTriangleWarning from "~/renderer/icons/TriangleWarning";
 import { rgba } from "~/renderer/styles/helpers";
+import { clearStorageData } from "~/renderer/storage";
 
 const Logo: ThemedComponent<{}> = styled.div`
   display: flex;
@@ -28,6 +29,13 @@ const Logo: ThemedComponent<{}> = styled.div`
   border-radius: 50px;
 `;
 
+/**
+ * FIXME: update wording for this modal
+ * not limited to KYC anymore (and might not need to resend KYC info depending
+ * on provider)
+ * Need more generic message
+ */
+
 const SwapResetKYC = () => {
   const dispatch = useDispatch();
 
@@ -35,8 +43,11 @@ const SwapResetKYC = () => {
     dispatch(closeModal("MODAL_SWAP_RESET_KYC"));
   }, [dispatch]);
 
-  const onResetKYC = useCallback(() => {
-    dispatch(setSwapKYCStatus({ provider: "wyre" }));
+  const onResetKYC = useCallback(async () => {
+    dispatch(resetSwapLoginAndKYCData());
+
+    await clearStorageData();
+
     onClose();
   }, [dispatch, onClose]);
 
@@ -55,7 +66,7 @@ const SwapResetKYC = () => {
                   <IconTriangleWarning size={23} />
                 </Logo>
                 <Text ff="Inter|SemiBold" color="palette.text.shade100" fontSize={6} mb={2}>
-                  {<Trans i18nKey={"swap.resetKYCModal.title"} />}
+                  {<Trans i18nKey={"swap.resetThirdPartyDataModal.title"} />}
                 </Text>
                 <Text
                   ff="Inter|Regular"
@@ -63,7 +74,7 @@ const SwapResetKYC = () => {
                   textAlign={"center"}
                   fontSize={4}
                 >
-                  {<Trans i18nKey={"swap.resetKYCModal.subtitle"} />}
+                  {<Trans i18nKey={"swap.resetThirdPartyDataModal.subtitle"} />}
                 </Text>
               </Box>
             </>
@@ -74,7 +85,7 @@ const SwapResetKYC = () => {
                 {<Trans i18nKey={"common.close"} />}
               </Button>
               <Button primary onClick={onResetKYC}>
-                {<Trans i18nKey={"swap.resetKYCModal.cta"} />}
+                {<Trans i18nKey={"swap.resetThirdPartyDataModal.cta"} />}
               </Button>
             </Box>
           )}
