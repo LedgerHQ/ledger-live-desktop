@@ -61,6 +61,8 @@ import MODAL_POLKADOT_BOND from "../families/polkadot/BondFlowModal";
 import MODAL_POLKADOT_UNBOND from "../families/polkadot/UnbondFlowModal";
 import MODAL_POLKADOT_REBOND from "../families/polkadot/RebondFlowModal";
 
+import MODAL_STELLAR_ADD_ASSET from "../families/stellar/AddAssetModal";
+
 import MODAL_SOLANA_REWARDS_INFO from "../families/solana/DelegationFlowModal/Info";
 import MODAL_SOLANA_DELEGATE from "../families/solana/DelegationFlowModal";
 import MODAL_SOLANA_DELEGATION_ACTIVATE from "../families/solana/DelegationActivateFlowModal";
@@ -127,6 +129,7 @@ const modals: { [_: string]: React$ComponentType<any> } = {
   MODAL_POLKADOT_BOND,
   MODAL_POLKADOT_UNBOND,
   MODAL_POLKADOT_REBOND,
+  MODAL_STELLAR_ADD_ASSET,
   MODAL_SOLANA_REWARDS_INFO,
   MODAL_SOLANA_DELEGATE,
   MODAL_SOLANA_DELEGATION_ACTIVATE,

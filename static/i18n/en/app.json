@@ -1331,6 +1331,14 @@
       "link": "How Assets (ASA) works?",
       "seeTokens": "Show ASA ({{tokenCount}})",
       "hideTokens": "Hide ASA ({{tokenCount}})"
+    },
+    "stellar": {
+      "title": "Assets",
+      "cta": "Add asset",
+      "placeholder": "You can add assets to your {{currencyName}} account.",
+      "link": "Learn more about Stellar assets",
+      "seeTokens": "Show assets ({{tokenCount}})",
+      "hideTokens": "Hide assets ({{tokenCount}})"
     }
   },
   "subAccounts": {
@@ -2560,6 +2568,31 @@
       }
     }
   },
+  "stellar": {
+    "addAsset": {
+      "title": "Add asset",
+      "steps": {
+        "assets": {
+          "title": "Asset",
+          "info": "Adding an asset requires sending a transaction with minimum fees. This will appear in your transaction history",
+          "selectLabel": "Choose an asset",
+          "disabledTooltip": "You already have this asset on your Stellar account"
+        },
+        "connectDevice": {
+          "title": "Device"
+        },
+        "confirmation": {
+          "title": "Confirmation",
+          "success": {
+            "title": "{{token}} asset successfully added",
+            "text": "You can now receive and send <0>{{token}}</0> assets on your Stellar account.",
+            "cta": "View details"
+          },
+          "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
+        }
+      }
+    }
+  },
   "solana": {
     "common": {
       "broadcastError": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again.",
@@ -3709,7 +3742,20 @@
         "MEMO_HASH": "Memo Hash",
         "MEMO_RETURN": "Memo Return"
       },
-      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient"
+      "memoWarningText": "When using a Memo, carefully verify the type used with the recipient",
+      "fee": "Fees",
+      "feeInfoText": "Transaction on the Stellar network require a minimum transaction fee of 0.00001 XLM",
+      "suggested": "Suggested",
+      "recommendedFee": "Recommended fee",
+      "recommenndedFeeInfo": "You can still submit this transaction with lower fee than recommended but it may not be completed",
+      "networkCongestion": "network congestion",
+      "networkCongestionLevel": {
+        "LOW": "Low",
+        "MEDIUM": "Medium",
+        "HIGH": "High"
+      },
+      "assetCode": "Asset code",
+      "assetIssuer": "Asset issuer"
     },
     "cosmos": {
       "memo": "Memo",
@@ -4259,14 +4305,8 @@
     "FeeTooHigh": {
       "title": "Network fees are above 10% of the amount"
     },
-    "StellarWrongMemoFormat": {
-      "title": "Memo format is wrong"
-    },
     "SourceHasMultiSign": {
       "title": "Please disable multisign to send {{currencyName}}"
-    },
-    "StellarMemoRecommended": {
-      "title": "A memo may be required when sending to this recipient"
     },
     "SwapExchangeRateAmountTooLow": {
       "title": "Amount must be at least {{minAmountFromFormatted}}"
@@ -4325,6 +4365,41 @@
     },
     "NotEnoughNftOwned": {
       "title": "You have exceeded the number of available tokens"
+    },
+    "StellarWrongMemoFormat": {
+      "title": "Memo format is wrong"
+    },
+    "StellarMemoRecommended": {
+      "title": "A memo may be required when sending to this recipient"
+    },
+    "StellarAssetNotAccepted": {
+      "title": "This recipient doesn't have a trustline to {{assetCode}} yet"
+    },
+    "StellarAssetRequired": {
+      "title": "A Stellar asset should be selected before adding a trustline"
+    },
+    "StellarAssetNotFound": {
+      "title": "Selected Stellar asset could not be found"
+    },
+    "StellarNotEnoughNativeBalance": {
+      "title": "Sorry, insufficient funds",
+      "description": "Please make sure the account has enough funds to cover the transaction fee"
+    },
+    "StellarFeeSmallerThanRecommended": {
+      "title": "The selected fee is lower than the recommended fee"
+    },
+    "StellarFeeSmallerThanBase": {
+      "title": "The minimum transaction fee is 0.00001 XLM"
+    },
+    "StellarNotEnoughNativeBalanceToAddTrustline": {
+      "title": "Sorry, insufficient funds",
+      "description": "Please make sure the account has enough funds to cover the new trustline"
+    },
+    "StellarMuxedAccountNotExist": {
+      "title": "Stellar account does not exist"
+    },
+    "StellarSourceHasMultiSign": {
+      "title": "Please disable multisign to make Stellar transactions"
     }
   },
   "cryptoOrg": {
