@@ -120,6 +120,7 @@ export default function IsUnlocked({ children }: { children: any }) {
                   onChange={handleChangeInput("password")}
                   value={inputValue.password}
                   error={incorrectPassword}
+                  id="lockscreen-password-input"
                   data-test-id="lockscreen-password-input"
                 />
               </Box>
