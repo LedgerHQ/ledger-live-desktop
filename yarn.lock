@@ -13073,7 +13073,7 @@ inherits@2, inherits@2.0.4, inherits@^2.0.0, inherits@^2.0.1, inherits@^2.0.3, i
 
 inherits@2.0.1:
   version "2.0.1"
-  resolved "https://registry.npmjs.org/inherits/-/inherits-2.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/inherits/-/inherits-2.0.1.tgz#b17d08d326b4423e568eff719f91b0b1cbdf69f1"
   integrity sha1-sX0I0ya0Qj5Wjv9xn5GwscvfafE=
 
 inherits@2.0.3:

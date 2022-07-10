@@ -132,6 +132,7 @@ export const urls = {
     "https://support.ledger.com/hc/en-us/articles/360015897740?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=algorand",
   polkadotFeesInfo:
     "https://support.ledger.com/hc/en-us/articles/360016289919?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=polkadot",
+  elrondStaking: "https://everstake.one/elrond",
   xpubLearnMore:
     "https://support.ledger.com/hc/en-us/articles/360011069619?utm_source=ledger_live_desktop&utm_medium=self_referral&utm_content=edit_account",
 
