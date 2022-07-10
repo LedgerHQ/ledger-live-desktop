@@ -77,6 +77,7 @@
     "selectAccountNoOption": "\"{{accountName}}\"와(과) 일치하는 계정 없음",
     "selectCurrency": "암호화폐 선택",
     "selectCurrencyNoOption": "암호화폐 \"{{currencyName}}\" 없음",
+    "selectCurrencyEmptyOption": "암호화폐 없음",
     "selectValidatorNoOption": "'{{accountName}}'와/과 일치하는 검증인이 없습니다",
     "selectNoResults": "'{{query}}'와/과 일치하는 결과가 없습니다",
     "sortBy": "정렬 기준",
@@ -1141,9 +1142,9 @@
       },
       "confirm": {
         "title": "연결",
-        "details": "Wants to connect to the following account through your wallet :",
-        "deeplinkDetails": "Wants to connect to Ledger Live. Choose your account:",
-        "noAccount": "You don't have any compatible account. Please add an compatible account to use Wallet Connect.",
+        "details": "귀하의 지갑을 통해 다음 계정에 연결하고 싶다면:",
+        "deeplinkDetails": "Ledger Live에 연결하고 싶습니다. 귀하의 계정을 선택하세요:",
+        "noAccount": "호환되는 계정이 없습니다. Wallet Connect를 사용하려면 호환되는 계정을 추가하세요.",
         "alreadyConnected": "다른 dApp이 이미 연결된 상태에서 dApp에 연결하려고 합니다. Live를 새로운 dApp으로 다시 연결하기 전에 연결된 dApp에서 연결을 끊으세요."
       }
     },
@@ -1291,7 +1292,8 @@
       "galleryCTA": "갤러리 보기",
       "seeMore": "더 많은 컬렉션 보기",
       "seeAll": "모든 컬렉션 보기",
-      "seeLess": "간략히 보기"
+      "seeLess": "간략히 보기",
+      "placeholder": "NFT를 추가하려면 귀하의 {{currency}} 주소로 전송하세요."
     },
     "gallery": {
       "title": "모든 NFT",
@@ -1609,7 +1611,7 @@
         "not_supported": "타사 지갑 필요",
         "addAccount": "계정 추가",
         "addAccountTooltip": "{{appName}} 계정 추가",
-        "addAccountWarn": "앱 업데이트가 완료될 때까지 기다려 주세요",
+        "addAccountWarn": "처리가 완료될 때까지 기다려 주세요",
         "learnMore": "자세히 알아보기",
         "learnMoreTooltip": "{{appName}}에 대해 자세히 알아보기",
         "removeTooltip": "{{appName}} 제거",
