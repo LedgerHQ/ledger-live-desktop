@@ -2576,7 +2576,7 @@
       "commission": "Commission",
       "delegate": "Add",
       "listHeader": "Delegations",
-      "availableBalance": "Available balance",
+      "availableBalance": "Withdrawable",
       "active": "Active",
       "activeTooltip": "Active amount generate rewards",
       "inactiveTooltip": "Inactive amount does not generate rewards",
