@@ -11,7 +11,6 @@ import LoadingScreen from "./LoadingScreen";
 import NoConnectionScreen from "./NoConnectionScreen";
 import ErrorScreen from "./ErrorScreen";
 import { getPagePaddingLeft, getPagePaddingRight } from "~/renderer/components/Page";
-import palettes from "~/renderer/styles/palettes";
 
 const Container = styled(Flex).attrs({
   flex: 1,
@@ -28,7 +27,7 @@ const Iframe = styled.iframe`
 `;
 
 const learnProdURL = "https://www.ledger.com/ledger-live-learn";
-const learnStagingURL = "https://ecommerce-website.aws.stg.ldg-tech.com/ledger-live-learn";
+const learnStagingURL = "https://www-ppr.ledger.com/ledger-live-learn";
 const TIMEOUT = 60 * 1000;
 
 /** TODO: once design & wording are ready, implement properly */
@@ -46,16 +45,11 @@ const TimeoutScreen = () => (
 
 export default function LearnScreen() {
   const { i18n } = useTranslation();
-  const theme = useTheme();
   const themeType: string = useTheme("colors.palette.type");
   const useStagingUrl = useSelector(enableLearnPageStagingUrlSelector);
   const params = new URLSearchParams({
     theme: themeType,
     lang: i18n.languages[0],
-    pagePaddingLeft: `${getPagePaddingLeft({ theme })}px`,
-    pagePaddingRight: `${getPagePaddingRight({ theme })}px`,
-    darkBackgroundColor: `${palettes.dark.background.default}`,
-    lightBackgroundColor: `${palettes.light.background.default}`,
   });
   const uri = `${useStagingUrl ? learnStagingURL : learnProdURL}?${params.toString()}`;
 
