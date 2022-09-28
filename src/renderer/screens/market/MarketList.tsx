@@ -211,6 +211,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
   locale,
   swapAvailableIds,
   onRampAvailableTickers,
+  range,
   style,
 }: any) {
   const currency = data ? data[index] : null;
@@ -230,6 +231,7 @@ const CurrencyRow = memo(function CurrencyRowItem({
       selectCurrency={selectCurrency}
       availableOnBuy={availableOnBuy}
       availableOnSwap={availableOnSwap}
+      range={range}
       style={{ ...style }}
     />
   );
@@ -276,7 +278,7 @@ function MarketList({
   } = useMarketData();
   const dispatch = useDispatch();
 
-  const { orderBy, order, starred, search } = requestParams;
+  const { orderBy, order, starred, search, range } = requestParams;
   const currenciesLength = marketData.length;
   const freshLoading = loading && !currenciesLength;
 
@@ -368,6 +370,7 @@ function MarketList({
                         locale={locale}
                         swapAvailableIds={swapAvailableIds}
                         onRampAvailableTickers={onRampAvailableTickers}
+                        range={range}
                       />
                     )}
                   </List>
@@ -400,6 +403,7 @@ function MarketList({
                             locale={locale}
                             swapAvailableIds={swapAvailableIds}
                             onRampAvailableTickers={onRampAvailableTickers}
+                            range={range}
                           />
                         )}
                       </List>

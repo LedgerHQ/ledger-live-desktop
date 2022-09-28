@@ -45,7 +45,7 @@ const Breadcrumb = () => (
 
     <Route path="/asset/:assetId+" component={AssetCrumb} />
     <Route path="/account/:id/nft-collection/:collectionAddress?" component={NFTCrumb} />
-    <Route path="/market" component={MarketCrumb} />
+
     <Route path="/market/:currencyId/" component={MarketCrumb} />
   </Wrapper>
 );
