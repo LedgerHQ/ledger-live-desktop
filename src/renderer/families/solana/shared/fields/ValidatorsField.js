@@ -33,7 +33,6 @@ const ValidatorField = ({ t, account, onChangeValidator, chosenVoteAccAddr, stat
   const unit = getAccountUnit(account);
 
   const validators = useLedgerFirstShuffledValidators(account.currency);
-
   const chosenValidator = useMemo(() => {
     if (chosenVoteAccAddr !== null) {
       return validators.find(v => v.voteAccount === chosenVoteAccAddr);

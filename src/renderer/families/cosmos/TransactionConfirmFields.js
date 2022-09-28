@@ -88,7 +88,7 @@ const CosmosDelegateValidatorsField = ({
   const { validators } = transaction;
   const { validators: cosmosValidators } = useCosmosPreloadData();
 
-  const mappedValidators = mapDelegationInfo(validators || [], cosmosValidators, unit);
+  const mappedValidators = mapDelegationInfo(validators || [], cosmosValidators, unit, transaction);
 
   return mappedValidators && mappedValidators.length > 0 ? (
     <Box vertical justifyContent="space-between" mb={2}>

@@ -24,6 +24,7 @@ import IconChartLine from "~/renderer/icons/ChartLine";
 import { Header, UnbondingHeader } from "./Header";
 import { Row, UnbondingRow } from "./Row";
 
+import { LEDGER_VALIDATOR_ADDRESS } from "@ledgerhq/live-common/lib/families/cosmos/utils";
 import ToolTip from "~/renderer/components/Tooltip";
 import ClaimRewards from "~/renderer/icons/ClaimReward";
 import DelegateIcon from "~/renderer/icons/Delegate";
@@ -102,9 +103,13 @@ const Delegation = ({ account }: Props) => {
 
   const onExternalLink = useCallback(
     (address: string) => {
-      const URL = explorerView && getAddressExplorer(explorerView, address);
+      if (address === LEDGER_VALIDATOR_ADDRESS) {
+        openURL(urls.ledgerValidator);
+      } else {
+        const srURL = explorerView && getAddressExplorer(explorerView, address);
 
-      if (URL) openURL(URL);
+        if (srURL) openURL(srURL);
+      }
     },
     [explorerView],
   );

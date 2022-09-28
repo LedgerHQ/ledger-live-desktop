@@ -23,6 +23,9 @@ import { updateAccountWithUpdater } from "~/renderer/actions/accounts";
 
 import { getCurrentDevice } from "~/renderer/reducers/devices";
 import { closeModal, openModal } from "~/renderer/actions/modals";
+import StepAmount, { StepAmountFooter } from "./steps/StepAmount";
+import { LEDGER_VALIDATOR_ADDRESS } from "@ledgerhq/live-common/lib/families/cosmos/utils";
+import { BigNumber } from "bignumber.js";
 
 import Stepper from "~/renderer/components/Stepper";
 import StepDelegation, { StepDelegationFooter } from "./steps/StepDelegation";
@@ -54,17 +57,25 @@ type Props = OwnProps & StateProps;
 
 const steps: Array<St> = [
   {
-    id: "castDelegations",
+    id: "validator",
     label: <Trans i18nKey="cosmos.delegation.flow.steps.validator.title" />,
     component: StepDelegation,
     noScroll: true,
     footer: StepDelegationFooter,
   },
   {
+    id: "amount",
+    label: <Trans i18nKey="cosmos.delegation.flow.steps.amount.title" />,
+    component: StepAmount,
+    onBack: ({ transitionTo }: StepProps) => transitionTo("validator"),
+    noScroll: true,
+    footer: StepAmountFooter,
+  },
+  {
     id: "connectDevice",
     label: <Trans i18nKey="cosmos.delegation.flow.steps.connectDevice.title" />,
     component: GenericStepConnectDevice,
-    onBack: ({ transitionTo }: StepProps) => transitionTo("castDelegations"),
+    onBack: ({ transitionTo }: StepProps) => transitionTo("amount"),
   },
   {
     id: "confirmation",
@@ -118,7 +129,7 @@ const Body = ({
 
     const transaction = bridge.updateTransaction(t, {
       mode: "delegate",
-      validators: [],
+      validators: [{ address: LEDGER_VALIDATOR_ADDRESS, amount: BigNumber(0) }],
       recipient: account.freshAddress,
     });
 
@@ -133,7 +144,7 @@ const Body = ({
 
   const handleRetry = useCallback(() => {
     setTransactionError(null);
-    onChangeStepId("castDelegations");
+    onChangeStepId("validator");
   }, [onChangeStepId]);
 
   const handleTransactionError = useCallback((error: Error) => {
@@ -178,7 +189,7 @@ const Body = ({
     steps,
     errorSteps,
     disabledSteps: [],
-    hideBreadcrumb: !!error && ["castDelegations"].includes(stepId),
+    hideBreadcrumb: !!error && ["validator"].includes(stepId),
     onRetry: handleRetry,
     onStepChange: handleStepChange,
     onClose: handleCloseModal,

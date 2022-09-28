@@ -25,7 +25,7 @@ import ChevronRight from "~/renderer/icons/ChevronRight";
 import CheckCircle from "~/renderer/icons/CheckCircle";
 import ExclamationCircleThin from "~/renderer/icons/ExclamationCircleThin";
 import ToolTip from "~/renderer/components/Tooltip";
-import FirstLetterIcon from "~/renderer/components/FirstLetterIcon";
+import CosmosLedgerValidatorIcon from "~/renderer/families/cosmos/shared/components/CosmosLedgerValidatorIcon";
 import Text from "~/renderer/components/Text";
 
 const Wrapper: ThemedComponent<*> = styled.div`
@@ -178,7 +178,9 @@ export function Row({
     <Wrapper>
       <Column strong clickable onClick={onExternalLinkClick}>
         <Box mr={2}>
-          <FirstLetterIcon label={name} />
+          <CosmosLedgerValidatorIcon
+            validator={validator ?? { validatorAddress, name: validatorAddress }}
+          />
         </Box>
         <Ellipsis>{name}</Ellipsis>
       </Column>
@@ -233,11 +235,14 @@ export function UnbondingRow({
     onExternalLink,
     validatorAddress,
   ]);
+
   return (
     <Wrapper>
       <Column strong clickable onClick={onExternalLinkClick}>
         <Box mr={2}>
-          <FirstLetterIcon label={name} />
+          <CosmosLedgerValidatorIcon
+            validator={validator ?? { validatorAddress, name: validatorAddress }}
+          />
         </Box>
         <Ellipsis>{name}</Ellipsis>
       </Column>
