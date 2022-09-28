@@ -79,7 +79,7 @@ export function StepValidatorFooter({
 
   return (
     <>
-      <LedgerByFigmentTC />
+      <LedgerByFigmentTC transaction={transaction} />
       <Box horizontal>
         <Button mr={1} secondary onClick={onClose}>
           <Trans i18nKey="common.cancel" />

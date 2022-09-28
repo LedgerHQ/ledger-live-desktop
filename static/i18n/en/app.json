@@ -2572,7 +2572,7 @@
       }
     },
     "delegation": {
-      "totalStake": "Total Stake",
+      "totalStake": "Total stake",
       "commission": "Commission",
       "delegate": "Add",
       "listHeader": "Delegations",
@@ -4322,6 +4322,15 @@
     },
     "SolanaAddressOfEd25519": {
       "title": "Address off ed25519 curve"
+    },
+    "SolanaUseAllAmountStakeWarning": {
+      "title": "Ensure you have enough balance left for future transactions fees"
+    },
+    "SolanaTxSimulationFailedPendingOp": {
+      "title": "Your previous transaction hasn't been processed yet. Please wait a moment then check the transaction history before trying again."
+    },
+    "SolanaTxConfirmationTimeout": {
+      "title": "Your transaction may have failed. Please wait a moment then check the transaction history before trying again."
     },
     "NotEnoughNftOwned": {
       "title": "You have exceeded the number of available tokens"

@@ -1,7 +1,7 @@
 // @flow
 import { getAccountUnit } from "@ledgerhq/live-common/lib/account";
 import {
-  useLedgerFirstShuffledValidators,
+  useValidators,
   useSolanaStakesWithMeta,
 } from "@ledgerhq/live-common/lib/families/solana/react";
 import invariant from "invariant";
@@ -49,7 +49,7 @@ export default function StepValidator({
 
   const unit = getAccountUnit(account);
 
-  const validators = useLedgerFirstShuffledValidators(account.currency);
+  const validators = useValidators(account.currency);
   const validator = validators.find(v => v.voteAccount === stake.delegation?.voteAccAddr);
 
   if (validator === undefined) {
@@ -61,6 +61,7 @@ export default function StepValidator({
       <TrackPage category="Solana Delegation Deactivate" name="Step Validator" />
       {error && <ErrorBanner error={error} />}
       <ValidatorRow
+        disableHover
         active
         currency={account.currency}
         validator={validator}
